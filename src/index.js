@@ -1,17 +1,12 @@
-
 import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {configureStore} from './store';
-import './static/css/bootstrap3_3_7.min.css';
-import './static/fonts/font-awesome-4.7.0/css/font-awesome.min.css';
-import './static/fonts/iconic/css/material-design-iconic-font.min.css';
-import './static/css/sweet-alert.css';
-import './static/css/modal.css';
-import './static/css/theme_styles.css';
-import './static/css/datepicker.css';
-import './static/css/bootstrap-timepicker.min.css';
-import './static/css/my-customization.css';
+import './static/css/bootstrap.min.css';
+import "../node_modules/slick-carousel/slick/slick.css";
+import "../node_modules/slick-carousel/slick/slick-theme.css";
+import './static/Scss/common.scss';
+import './static/Scss/styles.scss';
 import Root from './modules/app/container/AppImpl';
 import * as serviceWorker from './serviceWorker';
 
