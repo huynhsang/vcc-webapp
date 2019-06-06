@@ -1,0 +1,28 @@
+
+.btn-more {
+  padding: 3px 35px 5px;
+  border: 2px solid #29487d;
+  font-size: 20px;
+  background: #29487d;
+  color: #fff;
+  font-weight: 600;
+  outline: none !important;
+  transition: all 0.4s ease;
+  &:hover{
+    background: transparent;
+    color: #29487d;
+  }
+}
+.btn-sign-up {
+  padding: 3px 25px 5px;
+  border: 1px solid #fff;
+  font-size: 16px;
+  background: #29487d;
+  color: #fff;
+  outline: none !important;
+  transition: all 0.4s ease;
+  &:hover{
+    background: transparent;
+    color: #fff;
+  }
+}

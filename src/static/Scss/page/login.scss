@@ -1,0 +1,49 @@
+.card{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding-top: 15px;
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.social_icon {
+  position: absolute;
+  right: 20px;
+  top: -45px;
+  span {
+    font-size: 60px;
+    margin-left: 10px;
+    color: #FFC312;
+
+    &:hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
+}
+
+.input-group-prepend span{
+  width: 50px;
+  background-color: #FFC312;
+  border:0;
+}
+
+.remember input
+{
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  margin-right: 5px;
+}
+
+.login_btn{
+  background-color: #FFC312;
+  width: 100px;
+  &:hover {
+    color: #000;
+    background-color: white;
+  }
+}
