@@ -2,31 +2,37 @@ import React from 'react';
 import BasicComponent from "../../../common/abstract/component/BasicComponent";
 import Slider from "react-slick";
 import $ from "jquery";
+
 $(function () {
     $('.menu-mb').click(function () {
         $('.menu-mb').toggleClass('active');
         $('.show-menu-dk').toggle( "slow" );
     })
 });
+
 export default class Index extends BasicComponent {
-    constructor(props, pros1) {
-        super(props, pros1);
-        this.next = this.next.bind(this);
-        this.previous = this.previous.bind(this);
-        this.next1 = this.next1.bind(this);
-        this.previous1 = this.previous1.bind(this);
+    constructor() {
+        super();
+        this.nextAtMainBackground = this.nextAtMainBackground.bind(this);
+        this.previousAtMainBackground = this.previousAtMainBackground.bind(this);
+        this.nextAtPeopleReview = this.nextAtPeopleReview.bind(this);
+        this.previousAtPeopleReview = this.previousAtPeopleReview.bind(this);
     }
-    next() {
-        this.slider.slickNext();
+
+    nextAtMainBackground() {
+        this.sliderAtMainBackground.slickNext();
     }
-    previous() {
-        this.slider.slickPrev();
+
+    previousAtMainBackground() {
+        this.sliderAtMainBackground.slickPrev();
     }
-    next1() {
-        this.slider1.slickNext();
+
+    nextAtPeopleReview() {
+        this.sliderAtPeopleReview.slickNext();
     }
-    previous1() {
-        this.slider1.slickPrev();
+
+    previousAtPeopleReview() {
+        this.sliderAtPeopleReview.slickPrev();
     }
 render() {
     const singleItem = {
@@ -68,25 +74,25 @@ render() {
        <div>
            <nav className="navbar menu-bar">
                <div className="menu-item">
-                   <a href="javascript:;"><h3>VC&C</h3></a>
+                   <a href="/"><h3>VC&C</h3></a>
                </div>
                <div className="show-menu-dk">
                    <div className="menu-dk">
-                       <a href="javascript:;">About us</a>
-                       <a href="javascript:;">Login</a>
-                       <a href="javascript:;">Contact us</a>
-                       <a href="javascript:;">Language</a>
-                       <a href="javascript:;"><i className="fa fa-search"></i> Search</a>
+                       <a href="/">About us</a>
+                       <a href="/">Login</a>
+                       <a href="/">Contact us</a>
+                       <a href="/">Language</a>
+                       <a href="/"><i className="fa fa-search"/> Search</a>
                    </div>
                </div>
                <div className="menu-mb">
-                   <span></span>
-                   <span></span>
-                   <span></span>
+                   <span/>
+                   <span/>
+                   <span/>
                </div>
            </nav>
 
-           <Slider ref={c => (this.slider = c)} {...singleItem} className="single-item">
+           <Slider ref={c => (this.sliderAtMainBackground = c)} {...singleItem} className="single-item">
                <section key={1}>
                    <div style = {{
                        backgroundImage: "url("+require(`../../../static/resources/img/bg-1.jpg`)+")",
@@ -94,7 +100,7 @@ render() {
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
                    }}>
-                       <div className="arrow-left arrow" onClick={this.previous}>
+                       <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
                            <img src={require("../../../static/resources/img/bg-1.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
@@ -102,7 +108,7 @@ render() {
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
                        </div>
-                       <div className="arrow-right arrow" onClick={this.next}>
+                       <div className="arrow-right arrow" onClick={this.nextAtMainBackground}>
                        </div>
                    </div>
                </section>
@@ -113,7 +119,7 @@ render() {
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
                    }}>
-                       <div className="arrow-left arrow" onClick={this.previous}>
+                       <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
                            <img src={require("../../../static/resources/img/bg-2.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
@@ -121,7 +127,7 @@ render() {
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
                        </div>
-                       <div className="arrow-right arrow" onClick={this.next}>
+                       <div className="arrow-right arrow" onClick={this.nextAtMainBackground}>
                        </div>
                    </div>
                </section>
@@ -132,7 +138,7 @@ render() {
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
                    }}>
-                       <div className="arrow-left arrow" onClick={this.previous}>
+                       <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
                            <img src={require("../../../static/resources/img/bg-3.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
@@ -140,7 +146,7 @@ render() {
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
                        </div>
-                       <div className="arrow-right arrow" onClick={this.next}>
+                       <div className="arrow-right arrow" onClick={this.nextAtMainBackground}>
                        </div>
                    </div>
                </section>
@@ -166,10 +172,10 @@ render() {
                    <div className="col-md-8 card-1">
                        <div className="mb-3 c-image">
                            <div className="pics">
-                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-bg-tile-floor.jpg")} alt="Responsive image" />
+                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-bg-tile-floor.jpg")} alt="floor" />
                            </div>
                            <div className="pics">
-                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-avatar-1.jpg")} alt="Responsive image" />
+                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-avatar-1.jpg")} alt="avatar" />
                            </div>
                        </div>
                        <div className="mb-3 picture">
@@ -180,7 +186,7 @@ render() {
                                <div className="mb-3 middle-content">
                                    <div>
                                        <h1 className="text-center">Where our story begins</h1>
-                                       <a href="javascript:;">
+                                       <a href="/">
                                            <img className="img-responsive" width="50" src={require("../../../static/resources/img/arrow-circle.svg")} alt="" />
                                        </a>
                                    </div>
@@ -215,9 +221,9 @@ render() {
                     backgroundRepeat: 'no-repeat'
                 }}
            >
-               <div className="arrow-left-1 arrow-1" onClick={this.previous1}>
+               <div className="arrow-left-1 arrow-1" onClick={this.previousAtPeopleReview}>
                </div>
-               <Slider ref={c => (this.slider1 = c)} {...doubleItem} className="double-item">
+               <Slider ref={c => (this.sliderAtPeopleReview = c)} {...doubleItem} className="double-item">
                    <div>
                        <div className="content-item text-white">
                            <img height="150" src={require("../../../static/resources/img/avatar-1.jpg")} alt="" />
@@ -243,7 +249,7 @@ render() {
                        </div>
                    </div>
                </Slider>
-               <div className="arrow-right-1 arrow-1" onClick={this.next1}>
+               <div className="arrow-right-1 arrow-1" onClick={this.nextAtPeopleReview}>
                </div>
            </section>
            <section className="container content-bottom">
@@ -271,10 +277,10 @@ render() {
                        </div>
                        <div className="mt-3 text-center">
                            <h5 className="text-white ">OR SIGN UP WITH</h5>
-                           <a href="javascript:;">
+                           <a href="/">
                                <img className="img-fluid img-social" width="50" src={require("../../../static/resources/img/facebook.png")} alt="" />
                            </a>
-                           <a href="javascript:;">
+                           <a href="/">
                                <img className="img-fluid img-social" width="50" src={require("../../../static/resources/img/google.png")} alt="" />
                            </a>
                        </div>
