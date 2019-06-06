@@ -21,95 +21,49 @@ export default class Login extends BasicComponent {
 
 	render() {
 		return (
-			<div id="login-page-full">
-				<div id="login-full-wrapper">
-					<div className="container">
-						<div className="row">
-							<div className="col-xs-12">
-								<div id="login-box">
-									<div id="login-box-holder">
-										<div className="row">
-											<div className="col-xs-12">
-												<header id="login-header">
-													<div id="login-logo">
-														<img src={logo} alt=""/>
-													</div>
-												</header>
-												<div id="login-box-inner">
-													<form onSubmit={(e) => this.onSubmit(e)}>
-														<div className="input-group">
-															<span className="input-group-addon"><i
-																className="fa fa-user"/></span>
-															<input className="form-control" type="text" ref="email"
-																   placeholder="Email address"/>
-														</div>
-														<div className="input-group">
-															<span className="input-group-addon"><i
-																className="fa fa-key"/></span>
-															<input type="password" className="form-control"
-																   ref="password" placeholder="Password"/>
-														</div>
-														<div id="remember-me-wrapper">
-															<div className="row">
-																<div className="col-xs-6">
-																	<div className="checkbox-nice">
-																		<input type="checkbox" id="remember-me"
-																			   ref="rememberMe" defaultChecked/>
-																		<label htmlFor="remember-me">
-																			&nbsp;Remember me
-																		</label>
-																	</div>
-																</div>
-																<Link to="/forgot-password" id="login-forget-link"
-																	  className="col-xs-6">
-																	Forgot password?
-																</Link>
-															</div>
-														</div>
-														<div className="row">
-															<div className="col-xs-12">
-																<button type="submit"
-																		className="btn btn-success col-xs-12">Login
-																</button>
-															</div>
-														</div>
-														<div className="row">
-															<div className="col-xs-12">
-																<p className="social-text">Or login with</p>
-															</div>
-														</div>
-														<div className="row">
-															<div className="col-xs-12 col-sm-6">
-																<button type="submit"
-																		className="btn btn-primary col-xs-12 btn-facebook">
-																	<i className="fa fa-facebook"/> facebook
-																</button>
-															</div>
-															<div className="col-xs-12 col-sm-6">
-																<button type="submit"
-																		className="btn btn-primary col-xs-12 btn-twitter">
-																	<i className="fa fa-twitter"/> Twitter
-																</button>
-															</div>
-														</div>
-													</form>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div id="login-box-footer">
-										<div className="row">
-											<div className="col-xs-12">
-												Do not have an account?&nbsp;
-												<Link to="/registration">
-													Register now
-												</Link>
-											</div>
-										</div>
-									</div>
+			<div>
+				<div className="card">
+					<div className="card-header">
+						<h3 className="text-white">Sign In</h3>
+						<div className="d-flex justify-content-end social_icon">
+							<span><i className="fa fa-facebook-square"></i></span>
+							<span><i className="fa fa-google-plus-square"></i></span>
+							<span><i className="fa fa-twitter-square"></i></span>
+						</div>
+					</div>
+					<div className="card-body">
+						<form>
+							<div className="input-group form-group">
+								<div className="input-group-prepend">
+									<span className="input-group-text d-flex justify-content-center align-items-center">
+										<i className="fa fa-user"></i>
+									</span>
 								</div>
+								<input type="text" className="form-control" placeholder="username" />
 							</div>
+							<div className="input-group form-group">
+								<div className="input-group-prepend">
+									<span className="input-group-text d-flex justify-content-center align-items-center">
+										<i className="fa fa-key">
+										</i>
+									</span>
+								</div>
+								<input type="password" className="form-control" placeholder="password" />
+							</div>
+							<div className="row align-items-center remember text-white">
+								<input type="checkbox" />Remember Me
+							</div>
+							<div className="form-group">
+								<input type="submit" value="Login" className="btn float-right login_btn" />
+							</div>
+						</form>
+					</div>
+					<div className="card-footer">
+						<div className="d-flex justify-content-center links text-white">
+							Don't have an account?  <a className="ml-1" href="#">Sign Up</a>
+						</div>
+						<div className="d-flex justify-content-center">
+							<a href="#">Forgot your password?</a>
 						</div>
 					</div>
 				</div>
