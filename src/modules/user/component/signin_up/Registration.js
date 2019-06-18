@@ -23,88 +23,37 @@ export default class Registration extends BasicComponent {
 	render() {
 		return (
 			<div id="login-page-full">
-				<div id="login-full-wrapper">
-					<div className="container">
-						<div className="row">
-							<div className="col-xs-12">
-								<div id="login-box">
-									<div className="row">
-										<div className="col-xs-12">
-											<header id="login-header">
-												<div id="login-logo">
-													<img src={logo} alt=""/>
-												</div>
-											</header>
-											<div id="login-box-inner">
-												<form onSubmit={(e) => this.onSubmit(e)}>
-													<div className="input-group">
-														<span className="input-group-addon"><i className="fa fa-user"/></span>
-														<input className="form-control" type="text" ref="firstName"
-															   placeholder="First name"/>
-													</div>
-													<div className="input-group">
-														<span className="input-group-addon"><i className="fa fa-user"/></span>
-														<input className="form-control" type="text" ref="lastName"
-															   placeholder="Last name"/>
-													</div>
-													<div className="input-group">
-														<span className="input-group-addon"><i
-															className="fa fa-address-book"/></span>
-														<input className="form-control" type="text" ref="username"
-															   placeholder="Username"/>
-													</div>
-													<div className="input-group">
-														<span className="input-group-addon"><i
-															className="fa fa-envelope"/></span>
-														<input className="form-control" type="text" ref="email"
-															   placeholder="Email address"/>
-													</div>
-													<div className="input-group">
-														<span className="input-group-addon"><i className="fa fa-lock"/></span>
-														<input type="password" className="form-control" ref="password"
-															   placeholder="Enter password"/>
-													</div>
-													<div className="input-group">
-														<span className="input-group-addon"><i
-															className="fa fa-calendar"/></span>
-														<input type="date" className="form-control" ref="born"
-															   id="datepickerDate"/>
-													</div>
-													<div className="form-group">
-														<select className="form-control" ref="gender">
-															<option value="Male">Male</option>
-															<option value="Female">Female</option>
-														</select>
-													</div>
-													<div id="remember-me-wrapper">
-														<div className="row">
-															<div className="col-xs-12">
-																<div className="checkbox-nice">
-																	<input type="checkbox" id="terms-cond"
-																		   defaultChecked/>
-																	<label htmlFor="terms-cond">
-																		I accept terms and conditions
-																	</label>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div className="row">
-														<div className="col-xs-12">
-															<button type="submit"
-																	className="btn btn-success col-xs-12">Register
-															</button>
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<form className="register" onSubmit={(e) => this.onSubmit(e)} method="post">
+					<h2 className="text-white">Sign Up</h2>
+					<p>
+						<label htmlFor="Firstname" className="floatLabel font-size-16 text-white">First Name</label>
+						<input id="Username" className="font-size-14" name="First name" type="text" ref="firstname"
+							   placeholder="Enter first name"/>
+					</p>
+					<p>
+						<label htmlFor="Lastname" className="floatLabel font-size-16 text-white">Last Name</label>
+						<input id="Username" className="font-size-14" name="Last name" type="text" ref="lastname"
+							   placeholder="Enter last name"/>
+					</p>
+					<p>
+						<label htmlFor="Email" className="floatLabel font-size-16 text-white">Email</label>
+						<input id="Email" className="font-size-14" name="Email" ref="email"
+							   type="text" placeholder="Email address" />
+					</p>
+					<p>
+						<label htmlFor="password" className="floatLabel font-size-16 text-white">Password</label>
+						<input id="password" className="font-size-14" name="password" ref="password"
+							   type="password" placeholder="Password" />
+							{/*<span className="text-white font-italic font-size-12">Enter a password longer than 8 characters</span>*/}
+					</p>
+					<p>
+						<label htmlFor="confirm_password" className="floatLabel font-size-16 text-white">Confirm Password</label>
+						<input id="confirm_password" className="font-size-14" name="confirm_password" ref="confirm_password"
+							   type="password" placeholder="Enter the password" />
+							{/*<span className="text-white font-italic font-size-12">Your passwords do not match</span>*/}
+					</p>
+					<a className="btn create-account font-weight-bold" id="submit">Create Account</a>
+				</form>
 			</div>
 		);
 	}
