@@ -28,7 +28,9 @@ body {
   background: url('../../static/resources/img/bg-0.jpg') center center / 100% 100% no-repeat;
   min-height: 100vh;
 }
-
+* {
+  box-sizing: border-box;
+}
 .img-responsive {
   display: block;
   max-width: 100%;
@@ -49,10 +51,20 @@ body {
   box-shadow:         inset 0 0 10px #000000;
 }
 a {
+  cursor: pointer;
   text-decoration: none;
   &:hover {
     text-decoration: none;
   }
+}
+.font-size-12 {
+  font-size: 12px;
+}
+.font-size-14 {
+  font-size: 14px;
+}
+.font-size-16 {
+  font-size: 16px;
 }
 ul {
   padding: 0;
@@ -70,6 +82,14 @@ ul li a {
   &:hover {
     text-decoration: none;
   }
+}
+input {
+  border-radius: 5px;
+  border: 1px solid #dbdbdb;
+  padding: 8px 13px;
+  width: 100%;
+  outline: none;
+  margin: 0;
 }
 input:focus{
   outline: 0 !important;
