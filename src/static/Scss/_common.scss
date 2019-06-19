@@ -25,6 +25,7 @@ body {
   font-family: 'OpenSans', sans-serif;
   font-weight: normal;
   line-height: 1.5;
+  font-size: 14px;
   background: url('../../static/resources/img/bg-0.jpg') center center / 100% 100% no-repeat;
   min-height: 100vh;
 }
@@ -95,5 +96,8 @@ input:focus{
   outline: 0 !important;
   box-shadow: 0 0 0 0 !important;
 }
-
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 

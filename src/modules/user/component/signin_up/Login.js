@@ -21,8 +21,8 @@ export default class Login extends BasicComponent {
 
 	render() {
 		return (
-			<div>
-				<div className="card">
+			<div className="login-page">
+				<div className="card mr-3 ml-3">
 					<div className="card-header">
 						<h3 className="text-white">Sign In</h3>
 						<div className="d-flex justify-content-end social_icon">
@@ -54,13 +54,13 @@ export default class Login extends BasicComponent {
 								<input type="checkbox" />Remember Me
 							</div>
 							<div className="form-group">
-								<input type="submit" value="Login" className="btn float-right login_btn" />
+								<input type="submit" value="Login" className="btn float-right login_btn font-weight-bold" />
 							</div>
 						</form>
 					</div>
 					<div className="card-footer">
 						<div className="d-flex justify-content-center links text-white">
-							Don't have an account?  <a className="ml-1" href="#">Sign Up</a>
+							Don't have an account?  <a className="ml-1" href="/registration">Sign Up</a>
 						</div>
 						<div className="d-flex justify-content-center">
 							<a href="#">Forgot your password?</a>

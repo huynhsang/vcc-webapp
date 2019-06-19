@@ -2,7 +2,7 @@ import type {User} from "../domain/User";
 import AxiosConfig from "./AxiosConfig";
 import PropTypes from "prop-types";
 
-const APP_BACKEND_URL: string = process.env.REACT_APP_BACKEND_URL;
+const APP_BACKEND_URL: string = 'http://150.95.114.243:8081/api/users';
 const APP_API_URL: string = process.env.REACT_APP_API_URL;
 const APP_STATIC_URL: string = process.env.REACT_APP_STATIC_URL;
 const CONTEXT_TYPES_DEFAULT: Object = {

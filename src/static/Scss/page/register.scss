@@ -1,8 +1,11 @@
+.register-page {
+  padding: 50px 15px 30px;
+}
 .register {
   background: rgba(0,0,0,0.5);
-  padding: 15px;
+  padding: 15px 15px 30px;
   max-width: 500px;
-  margin: 50px auto 0;
+  margin: 0 auto;
   box-shadow: 0 0 1em #222;
   border-radius: 2px;
   h2 {
@@ -16,7 +19,8 @@
     display: block;
     background: #FFC312;
     transition: all 0.3s;
-    &:active {
+    margin-top: 30px;
+    &:hover {
       background: rgba(255, 255, 255, 0.9);
       box-shadow: none;
     }

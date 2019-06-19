@@ -1,23 +1,25 @@
-.card{
+.login-page {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-top: 15px;
   max-width: 400px;
   width: 100%;
+}
+.card{
+  padding-top: 15px;
   background-color: rgba(0,0,0,0.5);
 }
 
 .social_icon {
   position: absolute;
   right: 20px;
-  top: -45px;
+  top: -50px;
   span {
     font-size: 60px;
     margin-left: 10px;
     color: #FFC312;
-
+    transition: all 0.3s;
     &:hover {
       color: white;
       cursor: pointer;
@@ -26,7 +28,7 @@
 }
 
 .input-group-prepend span{
-  width: 50px;
+  width: 40px;
   background-color: #FFC312;
   border:0;
 }
@@ -42,6 +44,7 @@
 .login_btn{
   background-color: #FFC312;
   width: 100px;
+  transition: all 0.3s;
   &:hover {
     color: #000;
     background-color: white;
