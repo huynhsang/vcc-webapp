@@ -4,6 +4,7 @@ import Login from '../../../user/container/signin_up/LoginImpl';
 import Registration from '../../../user/container/signin_up/RegistrationImpl';
 //Import for AuthLink
 import IndexImpl from "../../../landing_page/container/IndexImpl";
+import Home from "../../../home/component/Home";
 
 export const UnAuthLink = [
 	{
@@ -19,11 +20,11 @@ export const UnAuthLink = [
 ];
 
 export const AuthLink = [
-	// {
-	// 	path: '/',
-	// 	exact: true,
-	// 	component: Home
-	// },
+	{
+		path: '/',
+		exact: true,
+		component: Home
+	},
 ];
 
 export const PublicLink = [

@@ -9,7 +9,7 @@ const accountService = CoreService.accountService;
 export default class AccountUtil {
 
 	static getCurrentUser(): User {
-		return AccountJWTService.getAccount(RootScope.token).then((res: Result) => {
+		return AccountJWTService.getAccount(RootScope.token, RootScope.userId).then((res: Result) => {
 			if (res.isSuccess()) {
 				RootScope.currentUser = res.data;
 				return RootScope.currentUser;

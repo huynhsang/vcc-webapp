@@ -71,7 +71,7 @@ render() {
         ]
     };
     return (
-       <div>
+       <div className="bg-unauthenticated">
            <nav className="navbar menu-bar">
                <div className="menu-item">
                    <a href="/"><h3>VC&C</h3></a>

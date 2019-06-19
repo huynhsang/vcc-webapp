@@ -21,7 +21,8 @@ export default class App extends BasicComponent {
 
 	handleBeforeTheFirstRender(): void {
 		RootScope.token = CookieHelper.getCookie(CookieConstant.jwtTokenName);
-		if (RootScope.token) {
+		RootScope.userId = CookieHelper.getCookie(CookieConstant.userIdKey);
+		if (RootScope.token && RootScope.userId) {
 			this.changeStateValue("auth", {isAuthenticated: true});
 			this.props.verifyToken();
 		}

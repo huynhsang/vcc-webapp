@@ -1,18 +1,16 @@
 import React from 'react';
 import BasicComponent from '../../../../common/abstract/component/BasicComponent';
-import PropTypes from 'prop-types';
 import ErrorImageV2 from '../../../../static/resources/images/error-404-v2.png';
 import ErrorImageV3 from '../../../../static/resources/images/error-404-v3.png';
 import RootScope from "../../../../global/RootScope";
 
 export default class RouteNotFound extends BasicComponent {
-	static contextTypes = {
-		router: PropTypes.object.isRequired,
-	};
 
 	handleAfterTheFirstRender() {
 		this._interval = setInterval(() => {
-			this.context.router.history.push('/');
+			console.log(this.context);
+            this.props.history.push('/');
+            console.log(this.props);
 		}, 3000);
 	}
 

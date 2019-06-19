@@ -16,6 +16,7 @@ export default class BasicService {
 
 	static
 	post(url: string, data: any, config: AxiosConfig): Result {
+		console.log(data);
 		return axios.post(url, data, config)
 			.then((result) => {
 				return Result.builder(result.data, true);

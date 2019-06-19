@@ -12,9 +12,11 @@ function doLogin(loginData: LoginRequest, redirect: any): void {
 	return (dispatch) => {
 		return AccountJWTService.doAuthenticate(loginData).then((result: Result) => {
 			if (result.isSuccess()) {
-				RootScope.token = result.data.id_token;
-				CookieHelper.setCookie(CookieConstant.jwtTokenName, RootScope.token,
-					(loginData.rememberMe ? CookieConstant.maxExDay : CookieConstant.minExDay));
+				RootScope.token = result.data.id;
+				RootScope.userId = result.data.userId;
+				const exdays = loginData.rememberMe ? CookieConstant.maxExDay : CookieConstant.minExDay;
+				CookieHelper.setCookie(CookieConstant.jwtTokenName, RootScope.token, exdays);
+                CookieHelper.setCookie(CookieConstant.userIdKey, RootScope.userId, exdays);
 				AccountUtil.getCurrentUser().then(() => {
 					AccountUtil.updateApplicationAfterAuthenticated(dispatch);
 					redirect.push('/');

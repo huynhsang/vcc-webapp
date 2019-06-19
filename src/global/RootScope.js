@@ -12,6 +12,7 @@ const CONTEXT_TYPES_DEFAULT: Object = {
 export default class RootScope {
 	static currentUser: User;
 	static token: string;
+	static userId: number;
 	static axiosConfigWithAuth: AxiosConfig;
 
 	static

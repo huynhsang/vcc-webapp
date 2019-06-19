@@ -1,10 +1,8 @@
 import React from 'react';
 import BasicComponent from '../../../../common/abstract/component/BasicComponent';
-import logo from './../../../../static/resources/images/logo.png';
 import PropTypes from "prop-types";
 import type {RegisterRequest} from "../../request/RegisterRequest";
 import RegisterRequestBuilder from "../../request/RegisterRequest";
-import RootScope from "../../../../global/RootScope";
 
 const propTypes = {
 	doRegister: PropTypes.func.isRequired
@@ -17,7 +15,7 @@ export default class Registration extends BasicComponent {
 		const gender = (this.refs.gender.value === "Male");
 		this.registerRequest = RegisterRequestBuilder.build(this.refs.username.value, this.refs.password.value, this.refs.email.value,
 			this.refs.firstName.value, this.refs.lastName.value, new Date(this.refs.born.value), gender);
-		this.props.doRegister(this.registerRequest, this.context.router.history);
+		this.props.doRegister(this.registerRequest, this.props.history);
 	}
 
 	render() {
@@ -58,5 +56,4 @@ export default class Registration extends BasicComponent {
 		);
 	}
 }
-Registration.contextTypes = RootScope.contextTypesDefault;
 Registration.propTypes = propTypes;
