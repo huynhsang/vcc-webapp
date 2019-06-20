@@ -1,12 +1,14 @@
-.card{
+.login-page {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding-top: 15px;
   max-width: 400px;
   width: 100%;
-  background-color: rgba(0,0,0,0.5);
+}
+.card{
+  padding-top: 15px;
+  background-color: $background-dark-5;
 }
 
 .social_icon {
@@ -16,18 +18,18 @@
   span {
     font-size: 60px;
     margin-left: 10px;
-    color: #FFC312;
-
+    color: $color-yellow;
+    transition: all 0.3s;
     &:hover {
-      color: white;
+      color: $color-dark-9;
       cursor: pointer;
     }
   }
 }
 
 .input-group-prepend span{
-  width: 50px;
-  background-color: #FFC312;
+  width: 40px;
+  background-color: $background-yellow;
   border:0;
 }
 
@@ -40,10 +42,11 @@
 }
 
 .login_btn{
-  background-color: #FFC312;
+  background-color: $background-yellow;
   width: 100px;
+  transition: all 0.3s;
   &:hover {
     color: #000;
-    background-color: white;
+    background-color: $background-white-9;
   }
 }
