@@ -53,7 +53,7 @@ export default class Login extends BasicComponent {
 									<input type="checkbox" ref="rememberMe" />Remember Me
 								</div>
 								<div className="form-group">
-									<button className="btn float-right login_btn font-weight-bold">Login</button>
+									<button type="submit" className="btn float-right login_btn font-weight-bold">Login</button>
 								</div>
 							</form>
 						</div>

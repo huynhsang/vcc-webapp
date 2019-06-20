@@ -13,9 +13,8 @@ export default class Registration extends BasicComponent {
 
 	onSubmit(event) {
 		event.preventDefault();
-		const gender = (this.refs.gender.value === "Male");
-		this.registerRequest = RegisterRequestBuilder.build(this.refs.username.value, this.refs.password.value, this.refs.email.value,
-			this.refs.firstName.value, this.refs.lastName.value, new Date(this.refs.born.value), gender);
+		this.registerRequest = RegisterRequestBuilder.build(this.refs.password.value, this.refs.email.value,
+			this.refs.firstName.value, this.refs.lastName.value, null);
 		this.props.doRegister(this.registerRequest, this.props.history);
 	}
 
@@ -27,12 +26,12 @@ export default class Registration extends BasicComponent {
 					<div className="form-group row">
 						<div className="col-6">
 							<label htmlFor="Firstname" className="floatLabel font-size-16 text-white">First Name</label>
-							<input id="firstname" className="font-size-14" name="First name" type="text" ref="firstname"
+							<input id="firstname" className="font-size-14" name="First name" type="text" ref="firstName"
 								   placeholder="Enter first name"/>
 						</div>
 						<div className="col-6">
 							<label htmlFor="Lastname" className="floatLabel font-size-16 text-white">Last Name</label>
-							<input id="lastname" className="font-size-14" name="Last name" type="text" ref="lastname"
+							<input id="lastname" className="font-size-14" name="Last name" type="text" ref="lastName"
 								   placeholder="Enter last name"/>
 						</div>
 					</div>

@@ -1,3 +1,5 @@
+import ApplicationConstant from "../../../common/constant/ApplicationConstant";
+
 export interface LoginRequest {
 	realm: string,
 	email: string;
@@ -9,7 +11,7 @@ export default class LoginRequestBuilder {
 	static
 	build(username: string, password: string, rememberMe: boolean): LoginRequest {
 		let loginRequest: LoginRequest = {};
-		loginRequest.realm = "user_app";
+		loginRequest.realm = ApplicationConstant.realm.user;
 		loginRequest.email = username;
 		loginRequest.password = password;
 		loginRequest.rememberMe = rememberMe;
