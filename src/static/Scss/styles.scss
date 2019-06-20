@@ -1,6 +1,3 @@
-// import elements default global
-@import "common";
-
 /*
 ++++++++++++++++++++++++++++++++
     import base
@@ -8,11 +5,15 @@
 */
 @import "base/varilable";
 
+// import elements default global
+@import "common";
+
 /*
     import components
 */
 @import "components/button";
 @import "components/menu";
+@import "components/color";
 
 /*
     import page
@@ -20,3 +21,4 @@
 @import "page/index";
 @import "page/login";
 @import "page/register";
+@import "page/forgot-password";

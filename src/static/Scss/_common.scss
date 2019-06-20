@@ -21,11 +21,16 @@
   src: url('../fonts/OpenSans-SemiBold.ttf') format('truetype');
   /* Safari, Android, iOS */
 }
-.bg-unauthenticated {
+body {
   font-family: 'OpenSans', sans-serif;
   font-weight: normal;
   line-height: 1.5;
+  font-size: 14px;
+  min-height: 100vh;
+}
+.bg-unauthenticated {
   background: url('../../static/resources/img/bg-0.jpg') center center / 100% 100% no-repeat;
+  width: 100%;
   min-height: 100vh;
 }
 * {
@@ -39,7 +44,6 @@
 .opacity {
   opacity: 0;
 }
-
 .note {
   font-size: 12px;
 }
@@ -95,5 +99,8 @@ input:focus{
   outline: 0 !important;
   box-shadow: 0 0 0 0 !important;
 }
-
+button:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
 
