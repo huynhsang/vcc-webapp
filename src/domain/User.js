@@ -13,4 +13,9 @@ export interface User extends AuditingEntity {
     nationality: string;
 	phone: string;
     summary: string;
+    realm: string;
+    created: Date;
+    createdBy: string;
+    updated: Date;
+    updatedBy: string;
 }

@@ -9,6 +9,11 @@ const ROLE: Object = {
 	GUEST: "ROLE_GUEST",
 };
 
+const REALM: Object = {
+    admin: "admin_app",
+    user: "user_app",
+};
+
 export default class ApplicationConstant {
 	static
 	get langKeyDefault(): string {
@@ -29,4 +34,9 @@ export default class ApplicationConstant {
 	get role(): Object {
 		return ROLE;
 	}
+
+    static
+    get realm(): Object {
+        return REALM;
+    }
 }

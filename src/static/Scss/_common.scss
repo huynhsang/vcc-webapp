@@ -57,6 +57,7 @@ body {
 a {
   cursor: pointer;
   text-decoration: none;
+  line-height: 0;
   &:hover {
     text-decoration: none;
   }
