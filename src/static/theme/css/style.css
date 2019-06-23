@@ -216,7 +216,7 @@
 }
 
 @media (min-width:782px) {
-    .wp-block-column:not(: first-child) {
+    .wp-block-column:not(:first-child) {
         margin-left: 32px
     }
 }
@@ -1423,8 +1423,8 @@ pre.wp-block-verse {
 
 @font-face {
     font-family: 'wings-shape';
-    src: url('/demo/themes/Discy/Main/wp-content/plugins/WPQA/assets/css/icon/wings-shape.eot?qm1pg1');
-    src: url('/demo/themes/Discy/Main/wp-content/plugins/WPQA/assets/css/icon/wings-shape.eot?qm1pg1#iefix') format('embedded-opentype'), url('/demo/themes/Discy/Main/wp-content/plugins/WPQA/assets/css/icon/wings-shape.ttf?qm1pg1') format('truetype'), url('/demo/themes/Discy/Main/wp-content/plugins/WPQA/assets/css/icon/wings-shape.woff?qm1pg1') format('woff'), url('/demo/themes/Discy/Main/wp-content/plugins/WPQA/assets/css/icon/wings-shape.svg?qm1pg1#icomoon') format('svg');
+    src: url('../assets/fonts/wings-shape.eot');
+    src: url('../assets/fonts/wings-shape-iefix.eot') format('embedded-opentype'), url('../assets/fonts/wings-shape.ttf') format('truetype'), url('../assets/fonts/wings-shape.woff') format('woff'), url('../assets/fonts/wings-shape.svg') format('svg');
     font-weight: normal;
     font-style: normal
 }
@@ -2716,15 +2716,15 @@ div.pp_default .pp_bottom .pp_right {
 }
 
 div.pp_default .pp_top .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -78px -93px no-repeat
+    background: url(../assets/images/pretty_photo/default/sprite.png) -78px -93px no-repeat
 }
 
 div.pp_default .pp_top .pp_middle {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_x.png) top left repeat-x
+    background: url(../assets/images/pretty_photo/default/sprite_x.png) top left repeat-x
 }
 
 div.pp_default .pp_top .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -112px -93px no-repeat
+    background: url(../assets/images/pretty_photo/default/sprite.png) -112px -93px no-repeat
 }
 
 div.pp_default .pp_content .ppt {
@@ -2732,58 +2732,58 @@ div.pp_default .pp_content .ppt {
 }
 
 div.pp_default .pp_content_container .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_y.png) -7px 0 repeat-y;
+    background: url(../assets/images/pretty_photo/default/sprite_y.png) -7px 0 repeat-y;
     padding-left: 13px
 }
 
 div.pp_default .pp_content_container .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_y.png) top right repeat-y;
+    background: url(../assets/images/pretty_photo/default/sprite_y.png) top right repeat-y;
     padding-right: 13px
 }
 
 div.pp_default .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_next.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite_next.png) center right no-repeat;
     cursor: pointer
 }
 
 div.pp_default .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_prev.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite_prev.png) center left no-repeat;
     cursor: pointer
 }
 
 div.pp_default .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) 0 -29px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) 0 -29px no-repeat;
     cursor: pointer;
     width: 28px;
     height: 28px
 }
 
 div.pp_default .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) 0 -56px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) 0 -56px no-repeat;
     cursor: pointer
 }
 
 div.pp_default .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) 0 -84px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) 0 -84px no-repeat;
     cursor: pointer;
     width: 28px;
     height: 28px
 }
 
 div.pp_default .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) 0 -113px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) 0 -113px no-repeat;
     cursor: pointer
 }
 
 div.pp_default .pp_close {
     width: 30px;
     height: 30px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) 2px 1px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) 2px 1px no-repeat;
     cursor: pointer
 }
 
 div.pp_default .pp_gallery ul li a {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/default_thumb.png) center center #f8f8f8;
+    background: url(../assets/images/pretty_photo/default/default_thumb.png) center center #f8f8f8;
     border: 1px solid #aaa
 }
 
@@ -2799,7 +2799,7 @@ div.pp_default .pp_gallery a.pp_arrow_next {
 
 div.pp_default .pp_nav .pp_play,
 div.pp_default .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -51px 1px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) -51px 1px no-repeat;
     height: 30px;
     width: 30px
 }
@@ -2810,7 +2810,7 @@ div.pp_default .pp_nav .pp_pause {
 
 div.pp_default a.pp_arrow_previous,
 div.pp_default a.pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -31px -3px no-repeat;
+    background: url(../assets/images/pretty_photo/default/sprite.png) -31px -3px no-repeat;
     height: 20px;
     width: 20px;
     margin: 4px 0 0
@@ -2861,144 +2861,144 @@ div.pp_default .pp_description {
 }
 
 div.pp_default .pp_bottom .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -78px -127px no-repeat
+    background: url(../assets/images/pretty_photo/default/sprite.png) -78px -127px no-repeat
 }
 
 div.pp_default .pp_bottom .pp_middle {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite_x.png) bottom left repeat-x
+    background: url(../assets/images/pretty_photo/default/sprite_x.png) bottom left repeat-x
 }
 
 div.pp_default .pp_bottom .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/sprite.png) -112px -127px no-repeat
+    background: url(../assets/images/pretty_photo/default/sprite.png) -112px -127px no-repeat
 }
 
 div.pp_default .pp_loaderIcon {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/default/loader.gif) center center no-repeat
+    background: url(../assets/images/pretty_photo/default/loader.gif) center center no-repeat
 }
 
 div.light_rounded .pp_top .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -88px -53px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -88px -53px no-repeat
 }
 
 div.light_rounded .pp_top .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -110px -53px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -110px -53px no-repeat
 }
 
 div.light_rounded .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/btnNext.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/btnNext.png) center right no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/btnPrevious.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/btnPrevious.png) center left no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -31px -26px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -31px -26px no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -31px -47px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -31px -47px no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) 0 -26px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) 0 -26px no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) 0 -47px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) 0 -47px no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_close {
     width: 75px;
     height: 22px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -1px -1px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -1px -1px no-repeat;
     cursor: pointer
 }
 
 div.light_rounded .pp_nav .pp_play {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -1px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -1px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.light_rounded .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -24px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -24px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.light_rounded .pp_arrow_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) 0 -71px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) 0 -71px no-repeat
 }
 
 div.light_rounded .pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -22px -71px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -22px -71px no-repeat
 }
 
 div.light_rounded .pp_bottom .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -88px -80px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -88px -80px no-repeat
 }
 
 div.light_rounded .pp_bottom .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/sprite.png) -110px -80px no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/sprite.png) -110px -80px no-repeat
 }
 
 div.dark_rounded .pp_top .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -88px -53px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -88px -53px no-repeat
 }
 
 div.dark_rounded .pp_top .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -110px -53px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -110px -53px no-repeat
 }
 
 div.dark_rounded .pp_content_container .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat-y
+    background: url(../assets/images/pretty_photo/dark_rounded/contentPattern.png) top left repeat-y
 }
 
 div.dark_rounded .pp_content_container .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/contentPattern.png) top right repeat-y
+    background: url(../assets/images/pretty_photo/dark_rounded/contentPattern.png) top right repeat-y
 }
 
 div.dark_rounded .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/btnNext.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/btnNext.png) center right no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/btnPrevious.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/btnPrevious.png) center left no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -31px -26px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -31px -26px no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -31px -47px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -31px -47px no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) 0 -26px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) 0 -26px no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) 0 -47px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) 0 -47px no-repeat;
     cursor: pointer
 }
 
 div.dark_rounded .pp_close {
     width: 75px;
     height: 22px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -1px -1px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -1px -1px no-repeat;
     cursor: pointer
 }
 
@@ -3008,35 +3008,35 @@ div.dark_rounded .pp_description {
 }
 
 div.dark_rounded .pp_nav .pp_play {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -1px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -1px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.dark_rounded .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -24px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -24px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.dark_rounded .pp_arrow_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) 0 -71px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) 0 -71px no-repeat
 }
 
 div.dark_rounded .pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -22px -71px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -22px -71px no-repeat
 }
 
 div.dark_rounded .pp_bottom .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -88px -80px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -88px -80px no-repeat
 }
 
 div.dark_rounded .pp_bottom .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/sprite.png) -110px -80px no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/sprite.png) -110px -80px no-repeat
 }
 
 div.dark_rounded .pp_loaderIcon {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/loader.gif) center center no-repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/loader.gif) center center no-repeat
 }
 
 div.dark_square .pp_left,
@@ -3052,33 +3052,33 @@ div.dark_square .pp_description {
 }
 
 div.dark_square .pp_loaderIcon {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/loader.gif) center center no-repeat
+    background: url(../assets/images/pretty_photo/dark_square/loader.gif) center center no-repeat
 }
 
 div.dark_square .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -31px -26px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -31px -26px no-repeat;
     cursor: pointer
 }
 
 div.dark_square .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -31px -47px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -31px -47px no-repeat;
     cursor: pointer
 }
 
 div.dark_square .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) 0 -26px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) 0 -26px no-repeat;
     cursor: pointer
 }
 
 div.dark_square .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) 0 -47px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) 0 -47px no-repeat;
     cursor: pointer
 }
 
 div.dark_square .pp_close {
     width: 75px;
     height: 22px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -1px -1px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -1px -1px no-repeat;
     cursor: pointer
 }
 
@@ -3087,136 +3087,136 @@ div.dark_square .pp_nav {
 }
 
 div.dark_square .pp_nav .pp_play {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -1px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -1px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.dark_square .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -24px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -24px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.dark_square .pp_arrow_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) 0 -71px no-repeat
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) 0 -71px no-repeat
 }
 
 div.dark_square .pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/sprite.png) -22px -71px no-repeat
+    background: url(../assets/images/pretty_photo/dark_square/sprite.png) -22px -71px no-repeat
 }
 
 div.dark_square .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/btnNext.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/btnNext.png) center right no-repeat;
     cursor: pointer
 }
 
 div.dark_square .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_square/btnPrevious.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/dark_square/btnPrevious.png) center left no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -31px -26px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -31px -26px no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -31px -47px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -31px -47px no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) 0 -26px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) 0 -26px no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) 0 -47px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) 0 -47px no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_close {
     width: 75px;
     height: 22px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -1px -1px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -1px -1px no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_nav .pp_play {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -1px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -1px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.light_square .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -24px -100px no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -24px -100px no-repeat;
     height: 15px;
     width: 14px
 }
 
 div.light_square .pp_arrow_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) 0 -71px no-repeat
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) 0 -71px no-repeat
 }
 
 div.light_square .pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/sprite.png) -22px -71px no-repeat
+    background: url(../assets/images/pretty_photo/light_square/sprite.png) -22px -71px no-repeat
 }
 
 div.light_square .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/btnNext.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/btnNext.png) center right no-repeat;
     cursor: pointer
 }
 
 div.light_square .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_square/btnPrevious.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/light_square/btnPrevious.png) center left no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_top .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -88px -53px no-repeat
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -88px -53px no-repeat
 }
 
 div.facebook .pp_top .pp_middle {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/contentPatternTop.png) top left repeat-x
+    background: url(../assets/images/pretty_photo/facebook/contentPatternTop.png) top left repeat-x
 }
 
 div.facebook .pp_top .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -110px -53px no-repeat
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -110px -53px no-repeat
 }
 
 div.facebook .pp_content_container .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/contentPatternLeft.png) top left repeat-y
+    background: url(../assets/images/pretty_photo/facebook/contentPatternLeft.png) top left repeat-y
 }
 
 div.facebook .pp_content_container .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/contentPatternRight.png) top right repeat-y
+    background: url(../assets/images/pretty_photo/facebook/contentPatternRight.png) top right repeat-y
 }
 
 div.facebook .pp_expand {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -31px -26px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -31px -26px no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_expand:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -31px -47px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -31px -47px no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_contract {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) 0 -26px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) 0 -26px no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_contract:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) 0 -47px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) 0 -47px no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_close {
     width: 22px;
     height: 22px;
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -1px -1px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -1px -1px no-repeat;
     cursor: pointer
 }
 
@@ -3225,11 +3225,11 @@ div.facebook .pp_description {
 }
 
 div.facebook .pp_loaderIcon {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/loader.gif) center center no-repeat
+    background: url(../assets/images/pretty_photo/facebook/loader.gif) center center no-repeat
 }
 
 div.facebook .pp_arrow_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) 0 -71px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) 0 -71px no-repeat;
     height: 22px;
     margin-top: 0;
     width: 22px
@@ -3241,7 +3241,7 @@ div.facebook .pp_arrow_previous.disabled {
 }
 
 div.facebook .pp_arrow_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -32px -71px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -32px -71px no-repeat;
     height: 22px;
     margin-top: 0;
     width: 22px
@@ -3262,37 +3262,37 @@ div.facebook .pp_nav p {
 }
 
 div.facebook .pp_nav .pp_play {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -1px -123px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -1px -123px no-repeat;
     height: 22px;
     width: 22px
 }
 
 div.facebook .pp_nav .pp_pause {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -32px -123px no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -32px -123px no-repeat;
     height: 22px;
     width: 22px
 }
 
 div.facebook .pp_next:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/btnNext.png) center right no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/btnNext.png) center right no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_previous:hover {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/btnPrevious.png) center left no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/btnPrevious.png) center left no-repeat;
     cursor: pointer
 }
 
 div.facebook .pp_bottom .pp_left {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -88px -80px no-repeat
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -88px -80px no-repeat
 }
 
 div.facebook .pp_bottom .pp_middle {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/contentPatternBottom.png) top left repeat-x
+    background: url(../assets/images/pretty_photo/facebook/contentPatternBottom.png) top left repeat-x
 }
 
 div.facebook .pp_bottom .pp_right {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/sprite.png) -110px -80px no-repeat
+    background: url(../assets/images/pretty_photo/facebook/sprite.png) -110px -80px no-repeat
 }
 
 div.pp_pic_holder a:focus {
@@ -3445,7 +3445,7 @@ a.pp_arrow_next {
 }
 
 .pp_gallery li.default a {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/facebook/default_thumbnail.gif) 0 0 no-repeat;
+    background: url(../assets/images/pretty_photo/facebook/default_thumbnail.gif) 0 0 no-repeat;
     display: block;
     height: 33px;
     width: 50px
@@ -3457,7 +3457,7 @@ a.pp_arrow_next {
 }
 
 a.pp_next {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/btnNext.png) 10000px 10000px no-repeat;
     display: block;
     float: right;
     height: 100%;
@@ -3466,7 +3466,7 @@ a.pp_next {
 }
 
 a.pp_previous {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/btnNext.png) 10000px 10000px no-repeat;
+    background: url(../assets/images/pretty_photo/light_rounded/btnNext.png) 10000px 10000px no-repeat;
     display: block;
     float: left;
     height: 100%;
@@ -3603,13 +3603,13 @@ div.light_square .pp_arrow_next.disabled {
 
 div.light_rounded .pp_loaderIcon,
 div.light_square .pp_loaderIcon {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/light_rounded/loader.gif) center center no-repeat
+    background: url(../assets/images/pretty_photo/light_rounded/loader.gif) center center no-repeat
 }
 
 div.dark_rounded .pp_top .pp_middle,
 div.dark_rounded .pp_content,
 div.dark_rounded .pp_bottom .pp_middle {
-    background: url(/demo/themes/Discy/Main/wp-content/themes/discy/images/prettyPhoto/dark_rounded/contentPattern.png) top left repeat
+    background: url(../assets/images/pretty_photo/dark_rounded/contentPattern.png) top left repeat
 }
 
 div.dark_rounded .currentTextHolder,
@@ -9313,8 +9313,8 @@ div.dark_square #pp_full_res .pp_inline {
     font-style: normal;
     font-weight: normal;
     font-display: auto;
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.eot);
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.woff2) format("woff2"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.woff) format("woff"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.ttf) format("truetype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-brands-400.svg#fontawesome) format("svg")
+    src: url(../assets/fontawesome/webfonts/fa-brands-400.eot);
+    src: url(../assets/fontawesome/webfonts/fa-brands-400.eot?#iefix) format("embedded-opentype"), url(../assets/fontawesome/webfonts/fa-brands-400.woff2) format("woff2"), url(../assets/fontawesome/webfonts/fa-brands-400.woff) format("woff"), url(../assets/fontawesome/webfonts/fa-brands-400.ttf) format("truetype"), url(../assets/fontawesome/webfonts/fa-brands-400.svg#fontawesome) format("svg")
 }
 
 .fab {
@@ -9326,8 +9326,8 @@ div.dark_square #pp_full_res .pp_inline {
     font-style: normal;
     font-weight: 400;
     font-display: auto;
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.eot);
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.woff2) format("woff2"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.woff) format("woff"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.ttf) format("truetype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-regular-400.svg#fontawesome) format("svg")
+    src: url(../assets/fontawesome/webfonts/fa-regular-400.eot);
+    src: url(../assets/fontawesome/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"), url(../assets/fontawesome/webfonts/fa-regular-400.woff2) format("woff2"), url(../assets/fontawesome/webfonts/fa-regular-400.woff) format("woff"), url(../assets/fontawesome/webfonts/fa-regular-400.ttf) format("truetype"), url(../assets/fontawesome/webfonts/fa-regular-400.svg#fontawesome) format("svg")
 }
 
 .far {
@@ -9339,8 +9339,8 @@ div.dark_square #pp_full_res .pp_inline {
     font-style: normal;
     font-weight: 900;
     font-display: auto;
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.eot);
-    src: url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.woff2) format("woff2"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.woff) format("woff"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.ttf) format("truetype"), url(/demo/themes/Discy/Main/wp-content/themes/discy/css/fontawesome/webfonts/fa-solid-900.svg#fontawesome) format("svg")
+    src: url(../assets/fontawesome/webfonts/fa-solid-900.eot);
+    src: url(../assets/fontawesome/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"), url(../assets/fontawesome/webfonts/fa-solid-900.woff2) format("woff2"), url(../assets/fontawesome/webfonts/fa-solid-900.woff) format("woff"), url(../assets/fontawesome/webfonts/fa-solid-900.ttf) format("truetype"), url(../assets/fontawesome/webfonts/fa-solid-900.svg#fontawesome) format("svg")
 }
 
 .fa,
@@ -13089,11 +13089,11 @@ article.post .post-img.post-img-0 {
     display: -webkit-flex;
     display: flex;
     background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, #373940), color-stop(0.5, #494B52));
-    background-image: -webkit-linear-gradient(center bottom, #373940 0%, #494B52 50%);
-    background-image: -moz-linear-gradient(center bottom, #373940 0%, #494B52 50%);
+    /*background-image: -webkit-linear-gradient(center bottom, #373940 0%, #494B52 50%);*/
+    /*background-image: -moz-linear-gradient(center bottom, #373940 0%, #494B52 50%);*/
     background-image: -o-linear-gradient(bottom, #373940 0%, #494B52 50%);
     background-image: -ms-linear-gradient(top, #373940 0%, #494B52 50%);
-    filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#373940', endColorstr='#494B52', GradientType=0);
+    /*filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#373940', endColorstr='#494B52', GradientType=0);*/
     background-image: linear-gradient(top, #373940 0%, #494B52 50%)
 }
 
@@ -14845,7 +14845,7 @@ blockquote.alignleft {
 }
 
 blockquote.alignright {
-    margin: 0.316em 0 1.474 1.474em;
+    margin: 0.316em 0 1.474em 1.474em;
     width: 50%
 }
 
