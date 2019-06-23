@@ -37,19 +37,17 @@ export default class App extends BasicComponent {
 	render() {
 		return (
 			<Router>
-				<div>
-					{this.state.auth.isAuthenticated ?
-						<div id="theme-wrapper">
-							<Header/>
-							<div id="page-wrapper" className="container">
-								<AppRouter auth={this.state.auth}/>
-							</div>
+				{this.state.auth.isAuthenticated ?
+					<div id="wrap" className="wrap-not-login">
+						<Header/>
+						<div id="page-wrapper" className="container">
+							<AppRouter auth={this.state.auth}/>
 						</div>
-						:
-						<AppRouter auth={this.state.auth}/>
-					}
-					<SweetAlert/>
-				</div>
+					</div>
+					:
+					<AppRouter auth={this.state.auth}/>
+				}
+				<SweetAlert/>
 			</Router>
 		);
 	}

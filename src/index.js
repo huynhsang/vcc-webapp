@@ -2,11 +2,11 @@ import React from 'react';
 import {render} from 'react-dom';
 import {Provider} from 'react-redux';
 import {configureStore} from './store';
-import './static/css/bootstrap.min.css';
-import '../node_modules/font-awesome/css/font-awesome.min.css';
-import "../node_modules/slick-carousel/slick/slick.css";
-import "../node_modules/slick-carousel/slick/slick-theme.css";
-import './static/Scss/styles.scss';
+import '../node_modules/slick-carousel/slick/slick.css';
+import '../node_modules/slick-carousel/slick/slick-theme.css';
+// import './static/Scss/styles.scss';
+import './static/theme/css/style.css';
+import './static/theme/css/media-element.css';
 import Root from './modules/app/container/AppImpl';
 import * as serviceWorker from './serviceWorker';
 
