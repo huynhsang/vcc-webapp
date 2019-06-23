@@ -9,7 +9,7 @@ export default class Header extends BasicComponent {
 	render() {
 		// const currentUser: User = RootScope.currentUser;
 		return (
-			<header className="menu-bar">
+			<header className="menu-bar" style={{position: "sticky"}}>
 				<div className="bg-header d-flex align-items-center">
 					<div className="menu-item">
 						<a href="/"><h3>VC&C</h3></a>
