@@ -13094,7 +13094,7 @@ article.post .post-img.post-img-0 {
     background-image: -o-linear-gradient(bottom, #373940 0%, #494B52 50%);
     background-image: -ms-linear-gradient(top, #373940 0%, #494B52 50%);
     /*filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#373940', endColorstr='#494B52', GradientType=0);*/
-    background-image: linear-gradient(top, #373940 0%, #494B52 50%)
+    background-image: linear-gradient(to left, #373940 0%, #494B52 50%)
 }
 
 .wpqa-cover-inner {

@@ -21,30 +21,29 @@ export default class Login extends BasicComponent {
 		return (
 			<div className="bg-unauthenticated">
 				<div className="login-page">
-					<div className="card ml-3 mr-3">
+					<div className="card">
 						<div className="card-header">
-							<h3 className="text-white">Sign In</h3>
-							<div className="d-flex justify-content-end social_icon">
-								<span><i className="fa fa-facebook-square"/></span>
-								<span><i className="fa fa-google-plus-square"/></span>
-								<span><i className="fa fa-twitter-square"/></span>
+							<h3 className="text-color-white">Sign In</h3>
+							<div className="social_icon">
+								<span><i className="fab fa-facebook-square"/></span>
+								<span><i className="fab fa-google-plus-square"/></span>
+								<span><i className="fab fa-twitter-square"/></span>
 							</div>
 						</div>
 						<div className="card-body">
 							<form onSubmit={(e) => this.onSubmit(e)}>
-								<div className="input-group form-group">
-									<div className="input-group-prepend">
-										<span className="input-group-text d-flex justify-content-center align-items-center">
+								<div className="form-group-login flex-center mb2">
+									<div className="input-group-prepend flex-center">
+										<span className="text-color-white">
 											<i className="fa fa-user"/>
 										</span>
 									</div>
 									<input type="text" className="form-control" ref="email" placeholder="email" />
 								</div>
-								<div className="input-group form-group">
-									<div className="input-group-prepend">
-										<span className="input-group-text d-flex justify-content-center align-items-center">
-											<i className="fa fa-key">
-											</i>
+								<div className="form-group-login flex-center mb2">
+									<div className="input-group-prepend flex-center">
+										<span className="text-color-white">
+											<i className="fa fa-key"/>
 										</span>
 									</div>
 									<input type="password" className="form-control" ref="password" placeholder="password" />
@@ -53,7 +52,7 @@ export default class Login extends BasicComponent {
 									<input type="checkbox" ref="rememberMe" />Remember Me
 								</div>
 								<div className="form-group">
-									<button type="submit" className="btn float-right login_btn font-weight-bold">Login</button>
+									<button type="submit" className="login_btn">Login</button>
 								</div>
 							</form>
 						</div>

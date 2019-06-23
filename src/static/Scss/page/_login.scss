@@ -7,30 +7,41 @@
   width: 100%;
 }
 .card{
-  padding-top: 15px;
+  padding: 30px;
   background-color: $background-dark-5;
+  @include borderRadius(5px);
 }
 
 .social_icon {
   position: absolute;
   right: 20px;
-  top: -45px;
+  top: -32px;
   span {
     font-size: 60px;
     margin-left: 10px;
-    color: $color-yellow;
+    color: $color-main;
     transition: all 0.3s;
     &:hover {
-      color: $color-dark-9;
+      color: $color-white;
       cursor: pointer;
     }
   }
 }
-
-.input-group-prepend span{
+.form-group-login {
+  input {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+.input-group-prepend {
+  height: 40px;
   width: 40px;
-  background-color: $background-yellow;
-  border:0;
+  background-color: $background-main;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  span {
+    border:0;
+  }
 }
 
 .remember input
@@ -41,8 +52,8 @@
   margin-right: 5px;
 }
 
-.login_btn{
-  background-color: $background-yellow;
+.login_btn {
+  background-color: $background-main;
   width: 100px;
   transition: all 0.3s;
   &:hover {
