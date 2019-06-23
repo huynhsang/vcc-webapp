@@ -7,6 +7,7 @@ import RootScope from "../../../global/RootScope";
 import CookieHelper from "../../../common/util/CookieHelper";
 import CookieConstant from "../../../common/constant/CookieConstant";
 import SweetAlert from "../../../component/sweet_alert/container/SweetAlertImpl";
+import MobileAside from "./aside/MobileAside";
 
 export default class App extends BasicComponent {
 
@@ -37,16 +38,11 @@ export default class App extends BasicComponent {
 	render() {
 		return (
 			<Router>
-				{this.state.auth.isAuthenticated ?
-					<div id="wrap" className="wrap-not-login">
-						<Header/>
-						<div id="page-wrapper" className="container">
-							<AppRouter auth={this.state.auth}/>
-						</div>
-					</div>
-					:
-					<AppRouter auth={this.state.auth}/>
-				}
+                <div id="wrap" className="wrap-not-login">
+                    <Header/>
+                    <MobileAside/>
+                    <AppRouter auth={this.state.auth}/>
+                </div>
 				<SweetAlert/>
 			</Router>
 		);

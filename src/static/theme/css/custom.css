@@ -1,0 +1,19 @@
+.call-action-unlogged {
+    background-image: url("../assets/images/action.png");
+    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src="../assets/images/action.png", sizingMethod="scale");
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../assets/images/action.png',sizingMethod='scale')";
+    background-size: cover
+}
+
+.slider-wrap,
+.slider-inner {
+    min-height: 500px
+}
+
+@font-face {
+    font-family: "entypo";
+    src: url("../assets/fonts/entypo/entypo.eot");
+    src: url("../assets/fonts/entypo/entypo-iefix.eot") format("embedded-opentype"), url("../assets/fonts/entypo/entypo.woff") format("woff"), url("../assets/fonts/entypo/entypo.ttf") format("truetype"), url("../assets/fonts/entypo/entypo.svg") format("svg");
+    font-weight: normal;
+    font-style: normal
+}

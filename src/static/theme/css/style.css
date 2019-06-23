@@ -1423,8 +1423,8 @@ pre.wp-block-verse {
 
 @font-face {
     font-family: 'wings-shape';
-    src: url('../assets/fonts/wings-shape.eot');
-    src: url('../assets/fonts/wings-shape-iefix.eot') format('embedded-opentype'), url('../assets/fonts/wings-shape.ttf') format('truetype'), url('../assets/fonts/wings-shape.woff') format('woff'), url('../assets/fonts/wings-shape.svg') format('svg');
+    src: url('../assets/fonts/wings_shape/wings-shape.eot');
+    src: url('../assets/fonts/wings_shape/wings-shape-iefix.eot') format('embedded-opentype'), url('../assets/fonts/wings_shape/wings-shape.ttf') format('truetype'), url('../assets/fonts/wings_shape/wings-shape.woff') format('woff'), url('../assets/fonts/wings_shape/wings-shape.svg') format('svg');
     font-weight: normal;
     font-style: normal
 }
