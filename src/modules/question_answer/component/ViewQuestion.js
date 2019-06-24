@@ -1,7 +1,7 @@
 import React from 'react';
-import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import BasicComponent from "../../../common/abstract/component/BasicComponent";
 
-export default class DetailPage extends BasicComponent {
+export default class ViewQuestion extends BasicComponent {
     render() {
         return (
             <div className="discy-main-inner float_l">
@@ -438,10 +438,10 @@ export default class DetailPage extends BasicComponent {
                                         <label htmlFor="featured_image">Featured image</label>
                                         <div className="fileinputs">
                                             <input type="file" name="featured_image" id="featured_image"/>
-                                                <div className="fakefile">
-                                                    <button type="button">Select file</button>
-                                                    <span>Browse</span></div>
-                                                <i className="icon-camera"></i></div>
+                                            <div className="fakefile">
+                                                <button type="button">Select file</button>
+                                                <span>Browse</span></div>
+                                            <i className="icon-camera"></i></div>
                                     </div>
                                     <div className="wpqa_error"></div>
                                     <div className="form-input form-textarea form-comment-editor">
@@ -900,16 +900,16 @@ export default class DetailPage extends BasicComponent {
                                     </div>
                                     <div className="form-input form-input-full">
                                         <input type="url" name="url" value="" id="comment_url" placeholder="URL"/><i
-                                            className="icon-link"></i></div>
+                                        className="icon-link"></i></div>
                                     <p className="form-submit">
                                         <input name="submit" type="submit" id="submit"
                                                className="button-default button-hide-click" value="Submit"/><span
-                                            className="clearfix"></span><span className="load_span"><span
-                                            className="loader_2"></span></span>
+                                        className="clearfix"></span><span className="load_span"><span
+                                        className="loader_2"></span></span>
                                         <input type="hidden" name="comment_post_ID" value="118"
-                                                   id="comment_post_ID"/>
+                                               id="comment_post_ID"/>
                                         <input type="hidden" name="comment_parent" id="comment_parent"
-                                                       value="0"/>
+                                               value="0"/>
                                     </p>
                                     <p style={{display: "none"}}>
                                         <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce"

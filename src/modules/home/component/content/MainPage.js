@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import {Link} from "react-router-dom";
 
 export default class MainPage extends BasicComponent {
     render() {
@@ -40,36 +41,37 @@ export default class MainPage extends BasicComponent {
                 <section>
                     <h2 className="screen-reader-text">VC&C Latest Questions</h2>
                     <div className="post-articles question-articles">
-                        <article id="post-118"
-                                 className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
+                        <article id="post-118" className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
                             <div className="question-sticky-ribbon">
                                 <div>Pinned</div>
                             </div>
                             <div className="single-inner-content">
                                 <div className="question-inner">
                                     <div className="question-image-vote">
-                                        <div className="author-image author-image-42"><a
-                                            href="https://2code.info/demo/themes/Discy/Main/profile/martin/"><span
-                                            className="author-image-span"><img className="avatar avatar-42 photo"
-                                                                               alt="Martin Hope" title="Martin Hope"
-                                                                               width="42" height="42"
-                                                                               src="./Discy – Social Questions and Answers_files/team-2-42x42.jpg"/></span></a>
+                                        <div className="author-image author-image-42">
+                                            <Link to="/question/who-am-i/view">
+                                                <span className="author-image-span">
+                                                    <img className="avatar avatar-42 photo" alt="Martin Hope" title="Martin Hope" width="42" height="42" src="https://2code.info/demo/themes/Discy/Main/wp-content/uploads/2018/04/team-2-42x42.jpg"/>
+                                                </span>
+                                            </Link>
                                             <div className="author-image-pop-2">
                                                 <div className="post-section user-area user-area-columns_pop">
                                                     <div className="post-inner">
-                                                        <div className="author-image author-image-70"><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/profile/martin/"><span
-                                                            className="author-image-span"><img
-                                                            className="avatar avatar-70 photo" alt="" title=""
-                                                            width="70" height="70"
-                                                            src="./Discy – Social Questions and Answers_files/team-2-70x70.jpg"/></span></a>
+                                                        <div className="author-image author-image-70">
+                                                            <Link to="/question/who-am-i/view">
+                                                                <span className="author-image-span">
+                                                                    <img className="avatar avatar-70 photo" alt="" title="" width="70" height="70" src="https://2code.info/demo/themes/Discy/Main/wp-content/uploads/2018/04/team-2-42x42.jpg"/>
+                                                                </span>
+                                                            </Link>
                                                         </div>
                                                         <div className="user-content">
                                                             <div className="user-inner">
                                                                 <div className="user-data-columns">
-                                                                    <h4><a
-                                                                        href="https://2code.info/demo/themes/Discy/Main/profile/martin/">Martin
-                                                                        Hope</a></h4>
+                                                                    <h4>
+                                                                        <Link to="/question/who-am-i/view">
+                                                                            Martin Hope
+                                                                        </Link>
+                                                                    </h4>
                                                                     <div className="user-data">
                                                                         <ul>
                                                                             <li className="city-country"><i
@@ -123,10 +125,11 @@ export default class MainPage extends BasicComponent {
                                     </div>
                                     <div className="question-content question-content-first">
                                         <header className="article-header">
-                                            <div className="question-header"><a className="post-author" itemProp="url"
-                                                                                href="https://2code.info/demo/themes/Discy/Main/profile/martin/">Martin
-                                                Hope</a><span className="badge-span"
-                                                              style={{backgroundColor: "#30a96f"}}>Explainer</span>
+                                            <div className="question-header">
+                                                <Link to="/question/who-am-i/view" className="post-author" itemProp="url">
+                                                    Martin Hope
+                                                </Link>
+                                                <span className="badge-span" style={{backgroundColor: "#30a96f"}}>Explainer</span>
                                                 <div className="post-meta"><span className="post-date"
                                                                                  itemProp="dateCreated"
                                                                                  dateTime="April 19, 2018">Asked<span

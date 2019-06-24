@@ -6,7 +6,8 @@ import Registration from '../../../user/container/signin_up/RegistrationImpl';
 import IndexImpl from "../../../landing_page/container/IndexImpl";
 import Home from "../../../home/container/HomeImpl";
 import MainPage from "../../../home/container/MainPageImpl";
-import DetailPage from "../../../home/container/DetailPageImpl";
+import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
+import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
 
 export const UnAuthLink = [
 	{
@@ -22,33 +23,9 @@ export const UnAuthLink = [
 ];
 
 export const AuthLink = [
-	{
-		path: '/',
-        exact: true,
-		component: Home,
-        subRoutes: [
-            {
-                path: '',
-                exact: true,
-                component: MainPage
-            },
-            {
-                path: '/question/:name',
-                exact: true,
-                component: DetailPage
-            }
-        ]
-	},
     {
-        path: '/question/:name',
-        component: Home,
-        subRoutes: [
-            {
-                path: '',
-                exact: true,
-                component: DetailPage
-            }
-        ]
+        path: '/question/add',
+        component: AddQuestion,
     }
 ];
 
@@ -56,5 +33,33 @@ export const PublicLink = [
     {
         path: '/index',
         component: IndexImpl
+    },
+    {
+        path: '/',
+        exact: true,
+        component: Home,
+        subRoutes: [
+            {
+                path: '',
+                exact: true,
+                component: MainPage
+            },
+            {
+                path: '/question/:name/view',
+                exact: true,
+                component: ViewQuestion
+            }
+        ]
+    },
+    {
+        path: '/question/:name/view',
+        component: Home,
+        subRoutes: [
+            {
+                path: '',
+                exact: true,
+                component: ViewQuestion
+            }
+        ]
     },
 ];
