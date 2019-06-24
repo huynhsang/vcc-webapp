@@ -1,7 +1,7 @@
 import React from 'react';
 import BasicComponent from '../../../../common/abstract/component/BasicComponent';
-import ErrorImageV2 from '../../../../static/resources/images/error-404-v2.png';
-import ErrorImageV3 from '../../../../static/resources/images/error-404-v3.png';
+import ErrorImageV2 from '../../../../static/resources/img/errors/error-404-v2.png';
+import ErrorImageV3 from '../../../../static/resources/img/errors/error-404-v3.png';
 import RootScope from "../../../../global/RootScope";
 
 export default class RouteNotFound extends BasicComponent {

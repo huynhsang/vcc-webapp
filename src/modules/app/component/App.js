@@ -39,7 +39,7 @@ export default class App extends BasicComponent {
 		return (
 			<Router>
                 <div id="wrap" className="wrap-not-login">
-                    <Header/>
+                    <Header isAuthenticated={this.state.auth.isAuthenticated}/>
                     <MobileAside/>
                     <AppRouter auth={this.state.auth}/>
                 </div>

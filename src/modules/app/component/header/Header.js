@@ -1,14 +1,21 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 import BasicComponent from '../../../../common/abstract/component/BasicComponent';
-import logo from '../../../../static/resources/images/logo.png';
-import logo2x from '../../../../static/resources/images/logo-2x.png';
-// import RootScope from "../../../../global/RootScope";
-// import type {User} from "../../../../domain/User";
+import logo from '../../../../static/resources/img/logo/logo.png';
+import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
+import PropTypes from "prop-types";
+import RootScope from "../../../../global/RootScope";
+import type {User} from "../../../../domain/User";
 
+const propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+};
 export default class Header extends BasicComponent {
     render() {
-        // const currentUser: User = RootScope.currentUser;
+        const currentUser: User = RootScope.currentUser;
+        const fullName: string = currentUser ?
+            ApplicationUtil.formatString('{0} {1}', [currentUser.firstName, currentUser.lastName]) : '';
         return (
             <div className="hidden-header header-dark mobile_bar_active">
                 <header className="header">
@@ -18,13 +25,79 @@ export default class Header extends BasicComponent {
                                 <i className="icon-menu"/>
                             </div>
                         </div>
-                        <div className="right-header float_r">
-                            <Link className="sign-in-lock mob-sign-in" to="/login">
-                                <i className="icon-lock"/>
-                            </Link>
-                            <Link className="button-default button-sign-in" to="/login">Sign In</Link>
-                            <Link className="button-default-2 button-sign-up" to="/registration">Sign Up</Link>
-                        </div>
+                        {
+                            this.props.isAuthenticated ?
+                                <div className="right-header float_r">
+                                    <div className="user-login-area">
+                                        <div className="notifications-area user-notifications float_r">
+                                            <span className="notifications-click"/>
+                                            <i className="icon-bell"/>
+                                            <div>
+                                                <ul>
+                                                    <li>
+                                                        <i className="icon-bucket"/>
+                                                        <div>
+                                                            Gift of the site - 20 Points.
+                                                            <span className="notifications-date">June 23, 2019 at 4:19 pm</span>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/notifications/">
+                                                    Show all notifications.
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div className="user-login-click float_r">
+                                            <span className="user-click"/>
+                                            <div className="user-image float_l">
+                                                <img className="avatar avatar-29 photo" alt={{fullName}} title={{fullName}} width="29" height="29" src="https://secure.gravatar.com/avatar/eda01b9e40edbfd790a5a8cc69e0791e?s=96&d=mm&r=g"/>
+                                            </div>
+                                            <div className="user-login float_l" style={{marginTop: "22px"}}>
+                                                <span>Welcome</span>
+                                                <br/>
+                                                <div className="float_l">{fullName}</div>
+                                            </div>
+                                            <i className="icon-down-open-mini"/>
+                                            <ul style={{display: "none"}}>
+                                                <li>
+                                                    <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/">
+                                                    <i className="icon-user"/>User Profile</a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/edit/">
+                                                        <i className="icon-cog"/>Edit Profile
+                                                    </a>
+                                                </li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/messages/"><i
+                                                    className="icon-mail"/>Messages</a></li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/asked-questions/"><i
+                                                    className="icon-sound"/>Asked Questions</a></li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/best-answers/"><i
+                                                    className="icon-graduation-cap"/>Best Answers</a></li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/points/"><i
+                                                    className="icon-bucket"/>Points</a></li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/activities/"><i
+                                                    className="icon-cog"/>Activity Log</a></li>
+                                                <li><a
+                                                    href="https://2code.info/demo/themes/Discy/Main/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2F2code.info%2Fdemo%2Fthemes%2FDiscy%2FMain%2F&amp;_wpnonce=6459ceff4f"><i
+                                                    className="icon-logout"/>Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> :
+                                <div className="right-header float_r">
+                                    <Link className="sign-in-lock mob-sign-in" to="/login">
+                                        <i className="icon-lock"/>
+                                    </Link>
+                                    <Link className="button-default button-sign-in" to="/login">Sign In</Link>
+                                    <Link className="button-default-2 button-sign-up" to="/registration">Sign Up</Link>
+                                </div>
+                        }
                         <div className="left-header float_l">
                             <h2 className="screen-reader-text site_logo">VC&C</h2>
                             <Link className="logo float_l logo-img" to="/home" title="Home">
@@ -103,3 +176,4 @@ export default class Header extends BasicComponent {
         )
     }
 }
+Header.propTypes = propTypes;

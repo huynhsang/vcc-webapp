@@ -95,8 +95,6 @@ export default class MobileAside extends BasicComponent {
                                             <a
                                                href="https://2code.info/demo/themes/Discy/Main/contact-us/">Contact
                                                 Us</a></li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-166">
-                                            <a href="https://1.envato.market/drV57">Buy Theme</a></li>
                                     </ul>
                                 </div>
                                 <div className="mobile--top post-search">
