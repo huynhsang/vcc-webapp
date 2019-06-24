@@ -95,7 +95,7 @@ render() {
            <Slider ref={c => (this.sliderAtMainBackground = c)} {...singleItem} className="single-item">
                <section key={1}>
                    <div style = {{
-                       backgroundImage: "url("+require(`../../../static/resources/img/bg-1.jpg`)+")",
+                       backgroundImage: "url("+require(`../../../static/resources/images/bg-1.jpg`)+")",
                        backgroundPosition: 'center center',
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
@@ -103,7 +103,7 @@ render() {
                        <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
-                           <img src={require("../../../static/resources/img/bg-1.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
+                           <img src={require("../../../static/resources/images/bg-1.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
                        </div>
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
@@ -114,7 +114,7 @@ render() {
                </section>
                <section key={2}>
                    <div style = {{
-                       backgroundImage: "url("+require('../../../static/resources/img/bg-2.jpg')+")",
+                       backgroundImage: "url("+require('../../../static/resources/images/bg-2.jpg')+")",
                        backgroundPosition: 'center center',
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
@@ -122,7 +122,7 @@ render() {
                        <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
-                           <img src={require("../../../static/resources/img/bg-2.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
+                           <img src={require("../../../static/resources/images/bg-2.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
                        </div>
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
@@ -133,7 +133,7 @@ render() {
                </section>
                <section key={3}>
                    <div style = {{
-                       backgroundImage: "url("+require('../../../static/resources/img/bg-3.jpg')+")",
+                       backgroundImage: "url("+require('../../../static/resources/images/bg-3.jpg')+")",
                        backgroundPosition: 'center center',
                        backgroundSize: 'cover',
                        backgroundRepeat: 'no-repeat'
@@ -141,7 +141,7 @@ render() {
                        <div className="arrow-left arrow" onClick={this.previousAtMainBackground}>
                        </div>
                        <div className="opacity">
-                           <img src={require("../../../static/resources/img/bg-3.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
+                           <img src={require("../../../static/resources/images/bg-3.jpg")} alt="" className="img-responsive" style={{maxHeight: "600px"}} />
                        </div>
                        <div className="text-content text-white text-center">
                            <h1>VIETNAMESE<br />COUNSELING & CONNECTING</h1>
@@ -172,35 +172,35 @@ render() {
                    <div className="col-md-8 card-1">
                        <div className="mb-3 c-image">
                            <div className="pics">
-                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-bg-tile-floor.jpg")} alt="floor" />
+                               <img className="img-fluid" src={require("../../../static/resources/images/garelly-bg-tile-floor.jpg")} alt="floor" />
                            </div>
                            <div className="pics">
-                               <img className="img-fluid" src={require("../../../static/resources/img/garelly-avatar-1.jpg")} alt="avatar" />
+                               <img className="img-fluid" src={require("../../../static/resources/images/garelly-avatar-1.jpg")} alt="avatar" />
                            </div>
                        </div>
                        <div className="mb-3 picture">
                            <div className="item-1">
-                               <img className="mb-3 img-fluid" src={require("../../../static/resources/img/garelly-camera.jpg")} alt="" />
+                               <img className="mb-3 img-fluid" src={require("../../../static/resources/images/garelly-camera.jpg")} alt="" />
                            </div>
                            <div className="item-2">
                                <div className="mb-3 middle-content">
                                    <div>
                                        <h1 className="text-center">Where our story begins</h1>
                                        <a href="/">
-                                           <img className="img-responsive" width="50" src={require("../../../static/resources/img/arrow-circle.svg")} alt="" />
+                                           <img className="img-responsive" width="50" src={require("../../../static/resources/images/arrow-circle.svg")} alt="" />
                                        </a>
                                    </div>
                                </div>
-                               <img className="mb-3 img-fluid" src={require("../../../static/resources/img/garelly-tree.jpg")} alt="" />
+                               <img className="mb-3 img-fluid" src={require("../../../static/resources/images/garelly-tree.jpg")} alt="" />
                            </div>
                        </div>
                    </div>
                    <div className="col-md-4 card-2">
                        <div className="mb-3 content-card-2">
-                           <img className="img-fluid" src={require("../../../static/resources/img/garelly-avatar-2.jpg")} alt="" />
-                           <img className="img-fluid" src={require("../../../static/resources/img/bg-bottom.jpg")} alt=""/>
+                           <img className="img-fluid" src={require("../../../static/resources/images/garelly-avatar-2.jpg")} alt="" />
+                           <img className="img-fluid" src={require("../../../static/resources/images/bg-bottom.jpg")} alt=""/>
                        </div>
-                       <img className="mb-3 content-card-2 img-fluid" src={require("../../../static/resources/img/garelly-avatar-3.jpg")} alt="" />
+                       <img className="mb-3 content-card-2 img-fluid" src={require("../../../static/resources/images/garelly-avatar-3.jpg")} alt="" />
                    </div>
                </div>
            </section>
@@ -215,7 +215,7 @@ render() {
 
            <section className="middle-content-3"
                 style={{
-                    backgroundImage: "url("+require('../../../static/resources/img/bg-4.jpg')+")",
+                    backgroundImage: "url("+require('../../../static/resources/images/bg-4.jpg')+")",
                     backgroundPosition: 'center center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat'
@@ -226,25 +226,25 @@ render() {
                <Slider ref={c => (this.sliderAtPeopleReview = c)} {...doubleItem} className="double-item">
                    <div>
                        <div className="content-item text-white">
-                           <img height="150" src={require("../../../static/resources/img/avatar-1.jpg")} alt="" />
+                           <img height="150" src={require("../../../static/resources/images/avatar-1.jpg")} alt="" />
                            <span className="text-content">Hello, My name is Julia</span>
                        </div>
                    </div>
                    <div>
                        <div className="content-item text-white">
-                           <img height="150" src={require("../../../static/resources/img/avatar-2.jpg")} alt="" />
+                           <img height="150" src={require("../../../static/resources/images/avatar-2.jpg")} alt="" />
                            <span className="text-content">Hello, My name is Adam</span>
                        </div>
                    </div>
                    <div>
                        <div className="content-item text-white">
-                           <img height="150" src={require("../../../static/resources/img/avatar-1.jpg")} alt="" />
+                           <img height="150" src={require("../../../static/resources/images/avatar-1.jpg")} alt="" />
                            <span className="text-content">Hello, My name is Julia</span>
                        </div>
                    </div>
                    <div>
                        <div className="content-item text-white">
-                           <img height="150" src={require("../../../static/resources/img/avatar-2.jpg")} alt="" />
+                           <img height="150" src={require("../../../static/resources/images/avatar-2.jpg")} alt="" />
                            <span className="text-content">Hello, My name is Adam</span>
                        </div>
                    </div>
@@ -264,11 +264,11 @@ render() {
                        <input type="text" placeholder="Password" />
                        <input type="text" placeholder="Phone number" />
                        <div className="mt-3">
-                           <img src={require("../../../static/resources/img/check-circle.svg")} alt="" />
+                           <img src={require("../../../static/resources/images/check-circle.svg")} alt="" />
                                <span className="text-white">I accept the Terms and Conditions of Xinchao</span>
                        </div>
                        <div>
-                           <img src={require("../../../static/resources/img/check-circle.svg")} alt="" />
+                           <img src={require("../../../static/resources/images/check-circle.svg")} alt="" />
                            <span className="text-white">I acknowledge that my information will be used in
                                 accordance with the Privacy Policy and Cookie Policy</span>
                        </div>
@@ -278,10 +278,10 @@ render() {
                        <div className="mt-3 text-center">
                            <h5 className="text-white ">OR SIGN UP WITH</h5>
                            <a href="/">
-                               <img className="img-fluid img-social" width="50" src={require("../../../static/resources/img/facebook.png")} alt="" />
+                               <img className="img-fluid img-social" width="50" src={require("../../../static/resources/images/facebook.png")} alt="" />
                            </a>
                            <a href="/">
-                               <img className="img-fluid img-social" width="50" src={require("../../../static/resources/img/google.png")} alt="" />
+                               <img className="img-fluid img-social" width="50" src={require("../../../static/resources/images/google.png")} alt="" />
                            </a>
                        </div>
                    </div>
