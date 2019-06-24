@@ -2,25 +2,14 @@
   padding: 30px 15px;
 }
 .register {
-  background: $background-dark-5;
+  background: $color-dark-5;
   padding: 15px;
   max-width: 500px;
   margin: 0 auto;
-  box-shadow: 0 0 1em #222;
-  border-radius: 2px;
+  @include borderRadius(2px);
   h2 {
-    margin:0 0 50px 0;
-    padding:10px;
-    text-align:center;
-    font-size:30px;
-    border-bottom:solid 1px #e5e5e5;
-  }
-  .create-account {
-    background: $background-main;
-    transition: all 0.3s;
-    &:hover {
-      background: $background-white-9;
-      box-shadow: none;
-    }
+    padding: 10px;
+    font-size: 30px;
+    border-bottom:solid 1px $color-white-9;
   }
 }

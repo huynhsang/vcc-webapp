@@ -1,28 +1,35 @@
 .login-page {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin: 0 auto;
+  padding: 80px 0 30px;
   max-width: 400px;
   width: 100%;
 }
-.card{
+.card {
+  margin: 0 15px;
   padding: 30px;
-  background-color: $background-dark-5;
-  @include borderRadius(5px);
+  background-color: $color-dark-5;
+  @include borderRadius(2px);
 }
-
+.card-header {
+  border-bottom: 1px solid $color-white-7;
+  margin-bottom: 15px;
+}
+.card-footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid $color-white-7;
+}
 .social_icon {
   position: absolute;
-  right: 20px;
-  top: -32px;
+  right: -5px;
+  top: -60px;
   span {
     font-size: 60px;
     margin-left: 10px;
-    color: $color-main;
+    color: $text-btn-default;
     transition: all 0.3s;
     &:hover {
-      color: $color-white;
+      color: $color-hover-default;
       cursor: pointer;
     }
   }
@@ -35,7 +42,7 @@
 }
 .input-group-prepend {
   height: 40px;
-  width: 40px;
+  width: 50px;
   background-color: $background-main;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
@@ -44,20 +51,3 @@
   }
 }
 
-.remember input
-{
-  width: 20px;
-  height: 20px;
-  margin-left: 15px;
-  margin-right: 5px;
-}
-
-.login_btn {
-  background-color: $background-main;
-  width: 100px;
-  transition: all 0.3s;
-  &:hover {
-    color: #000;
-    background-color: $background-white-9;
-  }
-}

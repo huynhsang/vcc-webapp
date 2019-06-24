@@ -21,8 +21,8 @@ export default class Login extends BasicComponent {
 		return (
 			<div className="bg-unauthenticated">
 				<div className="login-page">
-					<div className="card">
-						<div className="card-header">
+					<div className="card box-shadow">
+						<div className="card-header position-relative">
 							<h3 className="text-color-white">Sign In</h3>
 							<div className="social_icon">
 								<span><i className="fab fa-facebook-square"/></span>
@@ -38,7 +38,7 @@ export default class Login extends BasicComponent {
 											<i className="fa fa-user"/>
 										</span>
 									</div>
-									<input type="text" className="form-control" ref="email" placeholder="email" />
+									<input type="text" ref="email" placeholder="email" />
 								</div>
 								<div className="form-group-login flex-center mb2">
 									<div className="input-group-prepend flex-center">
@@ -46,22 +46,23 @@ export default class Login extends BasicComponent {
 											<i className="fa fa-key"/>
 										</span>
 									</div>
-									<input type="password" className="form-control" ref="password" placeholder="password" />
+									<input type="password" ref="password" placeholder="password" />
 								</div>
-								<div className="row align-items-center remember text-white">
-									<input type="checkbox" ref="rememberMe" />Remember Me
+								<div className="remember text-color-white display-flex align-items-center">
+									<input type="checkbox" id="checkbox1" ref="rememberMe"/>
+									<label htmlFor="checkbox1">Remember Me</label>
 								</div>
-								<div className="form-group">
-									<button type="submit" className="login_btn">Login</button>
+								<div className="text-right">
+									<button type="submit" className="btn btn-primary">Login</button>
 								</div>
 							</form>
 						</div>
 						<div className="card-footer">
-							<div className="d-flex justify-content-center links text-white">
-								Don't have an account?  <Link to="/registration" className="ml-1">Sign Up</Link>
+							<div className="text-center">
+								Don't have an account?  <Link to="/registration" className="ml-1 text-color-white">Sign Up</Link>
 							</div>
-							<div className="d-flex justify-content-center">
-								<Link to="/forgot-password">Forgot your password?</Link>
+							<div className="text-center">
+								<Link to="/forgot-password" className="text-color-white">Forgot your password?</Link>
 							</div>
 						</div>
 					</div>
