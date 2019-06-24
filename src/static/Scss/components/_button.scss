@@ -1,4 +1,17 @@
-
+.btn {
+  padding: 10px;
+  transition: all 0.4s ease-in-out;
+  min-width: 100px;
+}
+.btn-primary {
+  background-color: $background-main;
+  @include borderRadius(2px);
+  color: $text-btn-default;
+  &:hover {
+    color: $text-btn-hover;
+    background-color: $color-hover-default;
+  }
+}
 .btn-more {
   padding: 3px 35px 5px;
   border: 2px solid #29487d;

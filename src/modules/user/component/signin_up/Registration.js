@@ -20,42 +20,42 @@ export default class Registration extends BasicComponent {
 
 	render() {
 		return (
-			<div className="bg-unauthenticated register-page">
-				<form className="register" onSubmit={(e) => this.onSubmit(e)} method="post">
-					<h2 className="text-white">Sign Up</h2>
-					<div className="form-group row">
+			<div className="bg-unauthenticated register-page text-color-white">
+				<form className="register box-shadow" onSubmit={(e) => this.onSubmit(e)} method="post">
+					<h2 className="text-center">Sign Up</h2>
+					<div className="row mb3">
 						<div className="col-6">
-							<label htmlFor="Firstname" className="floatLabel font-size-16 text-white">First Name</label>
+							<label htmlFor="Firstname" className="floatLabel font-size-16">First Name</label>
 							<input id="firstname" className="font-size-14" name="First name" type="text" ref="firstName"
 								   placeholder="Enter first name"/>
 						</div>
 						<div className="col-6">
-							<label htmlFor="Lastname" className="floatLabel font-size-16 text-white">Last Name</label>
+							<label htmlFor="Lastname" className="font-size-16">Last Name</label>
 							<input id="lastname" className="font-size-14" name="Last name" type="text" ref="lastName"
 								   placeholder="Enter last name"/>
 						</div>
 					</div>
-					<div className="form-group">
-						<label htmlFor="Email" className="floatLabel font-size-16 text-white">Email</label>
+					<div className="mb3">
+						<label htmlFor="Email" className="font-size-16">Email</label>
 						<input id="Email" className="font-size-14" name="Email" ref="email"
 							   type="text" placeholder="Email address" />
 					</div>
-					<div className="form-group">
-						<label htmlFor="password" className="floatLabel font-size-16 text-white">Password</label>
+					<div className="mb3">
+						<label htmlFor="password" className="font-size-16">Password</label>
 						<input id="password" className="font-size-14" name="password" ref="password"
 							   type="password" placeholder="Password" />
 							{/*<span className="text-white font-italic font-size-12">Enter a password longer than 8 characters</span>*/}
 					</div>
-					<div className="form-group">
-						<label htmlFor="confirm_password" className="floatLabel font-size-16 text-white">Confirm Password</label>
+					<div className="mb4">
+						<label htmlFor="confirm_password" className="font-size-16">Confirm Password</label>
 						<input id="confirm_password" className="font-size-14" name="confirm_password" ref="confirm_password"
 							   type="password" placeholder="Enter the password" />
 							{/*<span className="text-white font-italic font-size-12">Your passwords do not match</span>*/}
 					</div>
-					<div className="form-group">
-						<button className="btn btn-block create-account mt-4 font-weight-bold" id="submit">Create Account</button>
-						<Link to="/login" className="d-inline-block mt-3">
-							Back to login
+					<div>
+						<button className="btn btn-primary width-100 mb3" id="submit">Create Account</button>
+						<Link to="/login" className="text-color-white">
+							<i className="fas fa-arrow-left"/> Back to login
 						</Link>
 					</div>
 				</form>

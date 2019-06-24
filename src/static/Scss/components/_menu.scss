@@ -7,7 +7,7 @@
   max-width: 800px;
   transition: all 0.3s ease;
   &:hover {
-    background-color: $background-dark-5;
+    background-color: $color-dark-5;
     color: #fff;
   }
 }
@@ -19,7 +19,7 @@
   min-height: 41px;
   z-index: 1;
   align-items: center;
-  background: $background-dark-6;
+  background: $color-dark-6;
   .menu-item {
     text-align: center;
     flex-basis: 10%;

@@ -1,0 +1,30 @@
+@import "main/margin-padding";
+@import "main/flex";
+@import "main/font";
+@import "main/text";
+@import "main/width-height";
+@import "main/position";
+@import "main/border";
+@import "main/input";
+// css main use one class
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}
+.display-block {
+  display: block;
+}
+.opacity {
+  opacity: 0;
+}
+.note {
+  font-size: 12px;
+}
+.box-shadow {
+  box-shadow: 0 0 1em #222;
+}
+.shadow-inset {
+  -webkit-box-shadow: inset 0 0 10px #000000;
+  box-shadow:         inset 0 0 10px #000000;
+}

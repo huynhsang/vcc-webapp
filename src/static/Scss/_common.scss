@@ -25,15 +25,17 @@ body {
   min-height: 100vh;
 }
 .bg-unauthenticated {
-  background: url('../../static/resources/img/bg-0.jpg') center center / 100% 100% no-repeat;
+  background: url('../../static/resources/img/bg.jpg') center center / 100% 100% no-repeat;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 85px);
 }
 
 .flex-center {
   @include center-align-flex();
 }
-
+.p-absolute-center {
+  @include center-align-absolute();
+}
 a {
   cursor: pointer;
   text-decoration: none;
@@ -51,7 +53,10 @@ ul {
 input {
   width: 100%;
   outline: none;
-  margin: 0 !important;
+  margin: 0;
+  &[type="text"], &[type="password"]{
+   margin: 0;
+  }
 }
 input:focus{
   outline: 0 !important;
@@ -66,4 +71,8 @@ button:focus {
   outline: none !important;
   box-shadow: none !important;
 }
-
+@media screen and (max-width: $screen-lg) {
+  .bg-unauthenticated {
+    min-height: calc(100vh - 145px);
+  }
+}
