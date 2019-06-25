@@ -31,7 +31,8 @@ export default class AppRouter extends Component {
 					/>
 				))}
 				{PublicLink.map((route, index) => (
-					<Route key={index} path={route.path} exact={route.exact} render={() => (<route.component isAuthenticated={auth.isAuthenticated} subRoutes={route.subRoutes}/>)}/>
+					<Route key={index} path={route.path} exact={route.exact} render={() => (<route.component
+						isAuthenticated={auth.isAuthenticated} subRoutes={route.subRoutes}/>)}/>
 				))}
 				<Route component={RouteNotFound}/>
 			</Switch>
