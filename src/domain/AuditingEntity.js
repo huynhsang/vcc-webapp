@@ -1,6 +1,8 @@
+import type {User} from "./User";
+
 export interface AuditingEntity {
-	createdBy: string;
+	createdBy: User;
 	created: Date;
-	updatedBy: string;
+	updatedBy: User;
 	updated: Date;
 }

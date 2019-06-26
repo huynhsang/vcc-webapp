@@ -22,11 +22,11 @@ function getQuestions(filter: Filter, show: String, _this: MainPage): void {
         if (show === 'no-answers') filter.where.numberOfAnswers = 0;
         filter.where = JSON.stringify(filter.where);
         if (show) filter.order = orderMaps[show];
-        let questions = _this.getDataFromState("data");
+        let questions = _this.getDataFromState("questions");
         questionService.findAll(filter).then((result: Result) => {
             if (result.success) {
                 questions = questions.concat(result.data);
-                _this.changeStateValue("data", questions);
+                _this.changeStateValue("questions", questions);
 
             }
         });

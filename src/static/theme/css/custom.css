@@ -17,3 +17,8 @@
     font-weight: normal;
     font-style: normal
 }
+
+.question-vote li button {
+    font-size: 26px;
+    color: #677075;
+}

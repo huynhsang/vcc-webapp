@@ -1,6 +1,4 @@
-import type {AuditingEntity} from "./AuditingEntity";
-
-export interface User extends AuditingEntity {
+export interface User {
 	id: number;
     avatar: string;
 	username: string;
@@ -18,4 +16,9 @@ export interface User extends AuditingEntity {
     createdBy: string;
     updated: Date;
     updatedBy: string;
+    numberOfQuestions: number;
+    numberOfAnswers: number;
+    numberOfBestAnswers: number;
+    points: number;
+    level: string;
 }
