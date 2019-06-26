@@ -13,7 +13,7 @@ export default class RootScope {
 	static currentUser: User;
 	static token: string;
 	static userId: number;
-	static axiosConfigWithAuth: AxiosConfig;
+	static axiosDefaultConfig: AxiosConfig = AxiosConfig.getDefaultConfig();
 
 	static
 	get appBackendUrl(): string {

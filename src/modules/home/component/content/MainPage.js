@@ -1,8 +1,25 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import type {Filter} from "../../../../global/Filter";
+import FilterBuilder from "../../../../global/Filter";
 
+const propTypes = {
+    getQuestions: PropTypes.func.isRequired
+};
 export default class MainPage extends BasicComponent {
+    filter: Filter = FilterBuilder.buildPaginationFilter('updated DESC', 0, 10);
+
+    constructor(props) {
+        super(props);
+        this.state = {data: []};
+    }
+    handleBeforeTheFirstRender(): void {
+        const params = new URLSearchParams(this.props.location.search);
+        this.props.getQuestions(this.filter, params.get('show'), this);
+    }
+
     render() {
         return (
             <div className="discy-main-inner float_l">
@@ -12,25 +29,22 @@ export default class MainPage extends BasicComponent {
                         <div className="wrap-tabs">
                             <div className="menu-tabs active-menu">
                                 <ul className="menu flex">
-                                    <li className="active-tab"><a
-                                        href="https://2code.info/demo/themes/Discy/Main/?show=recent-questions">Recent
-                                        Questions</a></li>
-                                    <li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-answered">Most
-                                        Answered</a></li>
-                                    <li><a href="https://2code.info/demo/themes/Discy/Main/?show=question-bump">Question
-                                        Bump</a></li>
-                                    <li><a href="https://2code.info/demo/themes/Discy/Main/?show=answers">Answers</a>
+                                    <li className="active-tab">
+                                        <Link to="?show=recent-questions">Recent Questions</Link>
                                     </li>
-                                    <li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-visited">Most
-                                        Visited</a></li>
-                                    <li className="flexMenu-viewMore"><a
-                                        href="https://2code.info/demo/themes/Discy/Main/#" title="">
-                                        <i className="icon-dot-3"/></a>
+                                    <li>
+                                        <Link to="?show=most-answered">Most Answered</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="?show=most-visited">Most Visited</Link>
+                                    </li>
+                                    <li className="flexMenu-viewMore">
+                                        <a title="">
+                                            <i className="icon-dot-3"/>
+                                        </a>
                                         <ul className="flexMenu-popup" style={{display: "none", position: "absolute"}}>
-                                            <li><a href="https://2code.info/demo/themes/Discy/Main/?show=most-voted">Most
-                                                Voted</a></li>
-                                            <li><a href="https://2code.info/demo/themes/Discy/Main/?show=no-answers">No
-                                                Answers</a></li>
+                                            <Link to="?show=most-voted">Most Voted</Link>
+                                            <Link to="?show=no-answers">No Answers</Link>
                                         </ul>
                                     </li>
                                 </ul>
@@ -385,3 +399,4 @@ export default class MainPage extends BasicComponent {
         )
     }
 }
+MainPage.prototypes = propTypes;

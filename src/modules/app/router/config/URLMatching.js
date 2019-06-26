@@ -45,14 +45,14 @@ export const PublicLink = [
                 component: MainPage
             },
             {
-                path: '/question/:name/view',
+                path: '/question/:identity/view',
                 exact: true,
                 component: ViewQuestion
             }
         ]
     },
     {
-        path: '/question/:name/view',
+        path: '/question/:identity/view',
         component: Home,
         subRoutes: [
             {

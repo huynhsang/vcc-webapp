@@ -43,4 +43,9 @@ export default class BasicService {
 				return Result.builder(err.response, false);
 			})
 	}
+
+	static
+	buildURLWithToken(url: string, token): string {
+		return `${url}?access_token=${token}`
+	}
 }

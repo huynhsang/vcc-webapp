@@ -1,10 +1,11 @@
-import Result from './../../../global/Result';
 import BasicService from "../../../common/abstract/services/BasicService";
-import type {Pageable} from "../../../global/Pageable";
+import Result from './../../../global/Result';
 import RootScope from "../../../global/RootScope";
+import FilterBuilder from "../../../global/Filter";
 import type {IQuestionService} from "../../../common/abstract/services/IQuestionService";
+import type {Filter} from "../../../global/Filter";
 
-const QUESTION_API = RootScope.appApiUrl + 'question';
+const QUESTION_API = RootScope.appApiUrl + 'questions';
 
 export default class QuestionService extends BasicService implements IQuestionService {
 
@@ -12,12 +13,14 @@ export default class QuestionService extends BasicService implements IQuestionSe
         return super.save(data);
     }
 
-    findAll(pageable: Pageable): Result {
-        return super.findAll(pageable);
+    findAll(filter: Filter): Result {
+        const fullUrl: string = FilterBuilder.buildUrlWithFilter(`${QUESTION_API}/find-all`, filter);
+        return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
     findOne(id: number): Result {
-        return super.findOne(id);
+        const fullUrl: string = `${QUESTION_API}/get-detail?id=${id}`;
+        return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
     delete(id: number): Result {

@@ -1,5 +1,4 @@
 import Result from "./../../../global/Result";
-import AxiosConfig from "./../../../global/AxiosConfig";
 import RootScope from "../../../global/RootScope";
 import BasicService from "../../../common/abstract/services/BasicService";
 import ApplicationUtil from "../../../common/util/ApplicationUtil";
@@ -11,23 +10,20 @@ const ACCOUNT_REGISTRATION_API: string = RootScope.appApiUrl + 'users';
 const CURRENT_USER_API: string = RootScope.appApiUrl + 'users/{0}?access_token={1}';
 
 export default class AccountJWTService extends BasicService {
-	static
-	config: AxiosConfig = AxiosConfig.getDefaultConfig();
 
 	static
 	doAuthenticate(loginRequest: LoginRequest): Result {
-		return this.post(AUTHENTICATE_API, loginRequest, AccountJWTService.config);
+		return this.post(AUTHENTICATE_API, loginRequest, RootScope.axiosDefaultConfig);
 	};
 
 	static
 	createAccount(registerRequest: RegisterRequest): Result {
-		return this.post(ACCOUNT_REGISTRATION_API, registerRequest, AccountJWTService.config);
+		return this.post(ACCOUNT_REGISTRATION_API, registerRequest,RootScope.axiosDefaultConfig);
 	}
 
 	static
 	getAccount(token: string, userId: number): Result {
-		RootScope.axiosConfigWithAuth = AxiosConfig.getDefaultConfigWithAuth(token);
 		const full_api = ApplicationUtil.formatString(CURRENT_USER_API, [userId, token]);
-		return this.get(full_api, RootScope.axiosConfigWithAuth);
+		return this.get(full_api, RootScope.axiosDefaultConfig);
 	}
 }

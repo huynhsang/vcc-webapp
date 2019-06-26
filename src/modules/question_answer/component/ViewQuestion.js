@@ -1,7 +1,25 @@
 import React from 'react';
 import BasicComponent from "../../../common/abstract/component/BasicComponent";
+import PropTypes from "prop-types";
 
+const propTypes = {
+    getQuestionDetail: PropTypes.func.isRequired,
+    loadMoreAnswers: PropTypes.func.isRequired,
+};
 export default class ViewQuestion extends BasicComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {question: {}, answers: []};
+    }
+    handleBeforeTheFirstRender(): void {
+        if (!this.props.match.params || !this.props.match.params.identity) {
+            this.props.history.push('/')
+        } else {
+            this.props.getQuestionDetail(this.props.match.params.identity, this, this.props.history)
+        }
+    }
+
     render() {
         return (
             <div className="discy-main-inner float_l">
@@ -118,7 +136,7 @@ export default class ViewQuestion extends BasicComponent {
                                                                          style={{backgroundColor: "#30a96f"}}>Explainer</span>
                                             <div className="post-meta"><span className="post-date"
                                                                              itemProp="dateCreated"
-                                                                             datetime="April 19, 2018">Asked<span
+                                                                             dateTime="April 19, 2018">Asked<span
                                                 className="date-separator">:</span>
                                                                 <a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/"
                                                                    itemProp="url">
@@ -327,7 +345,7 @@ export default class ViewQuestion extends BasicComponent {
                                                             </div>
                                                             <a href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/#comment-63"
                                                                className="comment-date" itemProp="url"> <span
-                                                                itemProp="dateCreated" datetime="April 19, 2018">Added an answer on April 19, 2018 at 2:01 am</span>
+                                                                itemProp="dateCreated" dateTime="April 19, 2018">Added an answer on April 19, 2018 at 2:01 am</span>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -863,7 +881,7 @@ export default class ViewQuestion extends BasicComponent {
                                                              hidefocus="1" tabIndex="-1" role="group"
                                                              style={{borderWidth: "1px 0px 0px"}}>
                                                             <iframe id="comment_ifr" frameBorder="0"
-                                                                    allowTransparency="true"
+                                                                    allowtransparency="true"
                                                                     title="Rich Text Area. Press Control-Option-H for help."
                                                                     style={{width: "100%", height: "150px", display: "block"}}
                                                                     src="./Is this statement, “i see him last night” can be understood as “I saw him last night”_ – Discy_files/saved_resource.html"></iframe>
@@ -892,31 +910,31 @@ export default class ViewQuestion extends BasicComponent {
                                         </div>
                                     </div>
                                     <div className="form-input">
-                                        <input type="text" name="author" value="" id="comment_name" aria-required="true"
+                                        <input type="text" name="author" defaultValue="" id="comment_name" aria-required="true"
                                                placeholder="Your Name"/><i className="icon-user"></i></div>
                                     <div className="form-input form-input-last">
-                                        <input type="email" name="email" value="" id="comment_email"
+                                        <input type="email" name="email" defaultValue="" id="comment_email"
                                                aria-required="true" placeholder="Email"/><i className="icon-mail"></i>
                                     </div>
                                     <div className="form-input form-input-full">
-                                        <input type="url" name="url" value="" id="comment_url" placeholder="URL"/><i
+                                        <input type="url" name="url" defaultValue="" id="comment_url" placeholder="URL"/><i
                                         className="icon-link"></i></div>
                                     <p className="form-submit">
                                         <input name="submit" type="submit" id="submit"
-                                               className="button-default button-hide-click" value="Submit"/><span
+                                               className="button-default button-hide-click" defaultValue="Submit"/><span
                                         className="clearfix"></span><span className="load_span"><span
                                         className="loader_2"></span></span>
-                                        <input type="hidden" name="comment_post_ID" value="118"
+                                        <input type="hidden" name="comment_post_ID" defaultValue="118"
                                                id="comment_post_ID"/>
                                         <input type="hidden" name="comment_parent" id="comment_parent"
-                                               value="0"/>
+                                               defaultValue="0"/>
                                     </p>
                                     <p style={{display: "none"}}>
                                         <input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce"
-                                               value="ebcde7f3b8"/>
+                                               defaultValue="ebcde7f3b8"/>
                                     </p>
                                     <p style={{display: "none"}}></p>
-                                    <input type="hidden" id="ak_js" name="ak_js" value="1561294316574"/>
+                                    <input type="hidden" id="ak_js" name="ak_js" defaultValue="1561294316574"/>
                                 </form>
                             </div>
                         </div>
@@ -926,3 +944,4 @@ export default class ViewQuestion extends BasicComponent {
         )
     }
 }
+ViewQuestion.prototypes = propTypes;

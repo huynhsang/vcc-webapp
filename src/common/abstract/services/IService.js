@@ -1,12 +1,12 @@
 import Result from "../../../global/Result";
-import type {Pageable} from "../../../global/Pageable";
+import type {Filter} from "../../../global/Filter";
 
 export interface IService {
 	create(data: any): Result;
 
 	update(data: any): Result;
 
-	findAll(pageable: Pageable): Result;
+	findAll(filter: Filter): Result;
 
 	findOneById(id: number): Result;
 

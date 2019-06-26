@@ -12,7 +12,7 @@ export default class MobileAside extends BasicComponent {
                         <div id="mCSB_1_container" className="mCSB_container mCS_y_hidden mCS_no_scrollbar_y"
                              style={{position: "relative", top:0, left:0}} dir="ltr">
                             <div className="mobile-aside-inner-inner">
-                                <a href="#" className="mobile-aside-close">
+                                <a href="/" className="mobile-aside-close">
                                     <i className="icon-cancel"/>
                                     <span className="screen-reader-text">Close</span>
                                 </a>
