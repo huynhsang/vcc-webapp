@@ -1,0 +1,18 @@
+.module {
+  background: rgb(250, 250, 251);
+  margin: 0 auto;
+  @include borderRadius(2px);
+}
+.content-review {
+  .title-textarea {
+    height: 42px;
+    width: 100%;
+    border: 1px solid $color-border;
+    border-bottom: 0;
+    background-color: $background-content;
+  }
+  textarea {
+    @include borderRadiusBottom(2px);
+  }
+}
+

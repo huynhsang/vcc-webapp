@@ -5,11 +5,13 @@
   $screen-big-lg: 1280px;
 // background-color
   $background-main: #2d6ff7;
-
+  $background-content: #fff;
 //color
   $color-main: #2d6ff7;
   $color-default: #707885;
-  $color-hover-default: #FFD700;
+  $color-disable: #ccc;
+  $color-hover-default: rgb(48, 169, 111);
+  $color-border: #ddd;
   $color-dark-3: rgba(0,0,0,0.3);
   $color-dark-5: rgba(0,0,0,0.5);
   $color-dark-6: rgba(0,0,0,0.6);
@@ -20,7 +22,9 @@
   $color-white-6: rgba(255,255,255,0.6);
   $color-white-7: rgba(255,255,255,0.7);
   $color-white-9: rgba(255,255,255,0.9);
-
+  $color-shadow: #66bfff;
 // button
+  $color-back: #f1f1f1;
+  $color-hover-back: #ddd;
   $text-btn-default: #fff;
   $text-btn-hover: #000;
