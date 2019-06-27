@@ -2,16 +2,28 @@
   padding: 10px;
   transition: all 0.4s ease-in-out;
   min-width: 100px;
+  @include borderRadius(2px);
 }
 .btn-primary {
   background-color: $background-main;
-  @include borderRadius(2px);
   color: $text-btn-default;
   &:hover {
-    color: $text-btn-hover;
     background-color: $color-hover-default;
   }
 }
+.btn-light {
+  background-color: $color-back;
+  color: $color-main;
+  &:hover {
+    background-color: $color-hover-back;
+  }
+}
+button:disabled, button[disabled] {
+  background-color: $color-disable !important;
+  color: $text-btn-default !important;
+  cursor: initial;
+}
+
 .btn-more {
   padding: 3px 35px 5px;
   border: 2px solid #29487d;
