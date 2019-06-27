@@ -122,7 +122,7 @@ export default class MainPage extends BasicComponent {
                                                         <div className="user-follow-profile"><a
                                                             href="https://2code.info/demo/themes/Discy/Main/profile/martin/">View
                                                             Profile</a></div>
-                                                        <div className="clearfix"></div>
+                                                        <div className="clearfix"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -134,7 +134,7 @@ export default class MainPage extends BasicComponent {
                                                 className="wpqa_vote question_vote_up vote_allow" title="Like"><i
                                                 className="icon-up-dir"/></a></li>
                                             <li className="vote_result" itemProp="upvoteCount">68</li>
-                                            <li className="li_loader"><span className="loader_3 fa-spin"></span></li>
+                                            <li className="li_loader"><span className="loader_3 fa-spin"/></li>
                                             <li className="question-vote-down"><a
                                                 href="https://2code.info/demo/themes/Discy/Main/#"
                                                 id="question_vote_down-118" data-type="question" data-vote-type="down"
@@ -180,7 +180,7 @@ export default class MainPage extends BasicComponent {
                                                     className="wpqa_vote question_vote_up vote_allow" title="Like"><i
                                                     className="icon-up-dir"/></a></li>
                                                 <li className="vote_result" itemProp="upvoteCount">68</li>
-                                                <li className="li_loader"><span className="loader_3 fa-spin"></span>
+                                                <li className="li_loader"><span className="loader_3 fa-spin"/>
                                                 </li>
                                                 <li className="question-vote-down"><a
                                                     href="https://2code.info/demo/themes/Discy/Main/#"
@@ -208,7 +208,7 @@ export default class MainPage extends BasicComponent {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="wpqa_error"></div>
+                                        <div className="wpqa_error"/>
                                         <footer className="question-footer">
                                             <ul className="footer-meta">
                                                 <li className="best-answer-meta"><i className="icon-comment"/><a
@@ -223,14 +223,14 @@ export default class MainPage extends BasicComponent {
                                                href="https://2code.info/demo/themes/Discy/Main/question/is-this-statement-i-see-him-last-night-can-be-understood-as-i-saw-him-last-night/#respond">Answer</a>
                                         </footer>
                                     </div>
-                                    <div className="clearfix"></div>
+                                    <div className="clearfix"/>
                                 </div>
                             </div>
                         </article>
 
                         {
                             questions.map((question: Question, index) => {
-                                const askedBy: User = question.createdBy;
+                                const askedBy: User = question.askedBy;
                                 const category: Category = question.category;
                                 const subCategories: Array<SubCategory> = JSON.parse(question.tags);
                                 const bestAnswerClassName = question.hasAcceptedAnswer ? "best-answer-meta meta-best-answer" : "best-answer-meta";

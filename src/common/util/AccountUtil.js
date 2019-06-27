@@ -30,7 +30,6 @@ export default class AccountUtil {
 	static searchUserByEmail(email: string): User {
 		return accountService.findOneByEmail(email).then((res: Result) => {
 			if (res.isSuccess()) {
-				console.log(res.data);
 				return res.data;
 			} else {
 				return null;

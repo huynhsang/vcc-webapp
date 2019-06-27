@@ -1,5 +1,6 @@
 import type {AuditingEntity} from "./AuditingEntity";
 import type {Category} from "./Category";
+import type {User} from "./User";
 
 export interface Question extends AuditingEntity {
     id: number;
@@ -18,4 +19,5 @@ export interface Question extends AuditingEntity {
     expectPeopleAnswer: string;
     slug: string;
     category: Category;
+    askedBy: User;
 }

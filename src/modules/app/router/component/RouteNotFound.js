@@ -8,9 +8,7 @@ export default class RouteNotFound extends BasicComponent {
 
 	handleAfterTheFirstRender() {
 		this._interval = setInterval(() => {
-			console.log(this.context);
             this.props.history.push('/');
-            console.log(this.props);
 		}, 3000);
 	}
 
