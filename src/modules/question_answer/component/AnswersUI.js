@@ -5,6 +5,7 @@ import type {Answer} from "../../../domain/Answer";
 import {Link} from "react-router-dom";
 import type {Question} from "../../../domain/Question";
 import type {User} from "../../../domain/User";
+import ReactMarkdown from "react-markdown";
 import SimpleMDEReact from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
 
@@ -158,17 +159,7 @@ export default class AnswersUI extends BasicComponent {
                                                     </div>
                                                     <div className="text">
                                                         <div itemProp="text">
-                                                            <p>{answer.body}</p>
-                                                            <p>No, ‘I see him last night’ is always incorrect and will
-                                                                be only just barely understandable. It is a very serious
-                                                                and basic error, and it will be tiring for a native
-                                                                speaker to converse with someone who speaks like this,
-                                                                because they will constantly have to be remembering what
-                                                                the person really means. It will not be ‘immediately
-                                                                obvious without thinking about it’.</p>
-                                                            <p>Someone just asked this question recently, and I replied,
-                                                                saying that ‘I see him last night’ is never correct.
-                                                                That is exactly what i meant.</p>
+                                                            <ReactMarkdown source={answer.body}/>
                                                         </div>
                                                         <div className="clearfix"/>
                                                         <div className="clearfix"/>

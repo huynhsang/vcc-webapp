@@ -8,6 +8,7 @@ import type {User} from "../../../domain/User";
 import type {SubCategory} from "../../../domain/SubCategory";
 import AnswersUI from "../container/AnswersImpl";
 import type {Category} from "../../../domain/Category";
+import ReactMarkdown from "react-markdown";
 
 
 const propTypes = {
@@ -34,6 +35,7 @@ export default class ViewQuestion extends BasicComponent {
         const askedBy: User = question.askedBy ? question.askedBy : {};
         const category: Category = question.category ? question.category : {};
         const subCategories: Array<SubCategory> = question.tags ? JSON.parse(question.tags) : [];
+        const currentPath: string = this.props.history.location.pathname;
         return (
             <div className="discy-main-inner float_l">
                 <div className="breadcrumbs">
@@ -166,10 +168,10 @@ export default class ViewQuestion extends BasicComponent {
                                         <div className="question-header">
                                             <span>
                                                 <Link to={`/user/${askedBy.id}`} className="post-author">
-                                                    <span itemProp="name">Martin Hope</span>
+                                                    <span itemProp="name">{`${askedBy.firstName} ${askedBy.lastName}`}</span>
                                                 </Link>
                                             </span>
-                                            <span className="badge-span" style={{backgroundColor: "#30a96f"}}>Explainer</span>
+                                            <span className="badge-span" style={{backgroundColor: "#30a96f"}}>{askedBy.level}</span>
                                             <div className="post-meta">
                                                 <span className="post-date">
                                                     Asked
@@ -221,14 +223,7 @@ export default class ViewQuestion extends BasicComponent {
                                         <div className="question-content-text">
                                             <div className="all_signle_question_content">
                                                 <div className="content-text" itemProp="text">
-                                                    {question.body}
-                                                    <p>In my local language (Bahasa Indonesia) there are no verb-2 or
-                                                        past tense form as time tracker. So, I often forget to use the
-                                                        past form of verb when speaking english.</p>
-                                                    <p>I saw him last night (correct)</p>
-                                                    <p>I see him last night (incorrect)</p>
-                                                    <p>But i think both has the same meaning and are understandable,</p>
-                                                    <p>Isn’t it?</p>
+                                                    <ReactMarkdown source={question.body}/>
                                                 </div>
                                             </div>
                                         </div>
@@ -270,7 +265,7 @@ export default class ViewQuestion extends BasicComponent {
                                                 <i className="icon-star"/><span>8</span>
                                             </li>
                                         </ul>
-                                        <a className="meta-answer" href="#respond">Answer</a>
+                                        <a className="meta-answer" href={`${currentPath}/#respond`}>Answer</a>
                                     </footer>
                                 </div>
                                 <div className="clearfix"/>
