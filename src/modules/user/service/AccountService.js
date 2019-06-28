@@ -8,7 +8,7 @@ const ACCOUNT_API = RootScope.appApiUrl + 'account';
 
 export default class AccountService extends BasicService implements IAccountService {
 
-	save(data: any): Result {
+    create(data: any): Result {
 		return super.save(data);
 	}
 
@@ -16,12 +16,8 @@ export default class AccountService extends BasicService implements IAccountServ
 		return super.findAll(filter);
 	}
 
-	findOne(id: number): Result {
-		return super.findOne(id);
-	}
-
-	delete(id: number): Result {
-		return super.delete(id);
+    deleteById(id: number): Result {
+		return super.deleteById(id);
 	}
 
 	findOneByEmail(email: string): Result {

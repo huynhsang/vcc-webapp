@@ -6,9 +6,16 @@ import CoreService from "../../../global/CoreService";
 const questionService = CoreService.questionService;
 const answerService = CoreService.answerService;
 
-function getQuestionDetail(questionId: number, _this: ViewQuestion, redirect: any): void {
+/**
+ * The method handles to get question detail by Id
+ * @param questionId: {Number} The question Id
+ * @param _this: {ViewQuestion} The question detail UI
+ * @param redirect: {any} The router redirect
+ * @return {Function}
+ */
+function getQuestionDetail(questionId: number, _this: ViewQuestion, redirect: any) {
     return () => {
-        questionService.findOne(questionId).then((result: Result) => {
+        questionService.findOneById(questionId).then((result: Result) => {
             if (result.success && Object.keys(result.data).length > 0) {
                 _this.changeStateValues(new Map([['question', result.data], ['answers', result.data.answers]]));
             } else {
@@ -18,7 +25,13 @@ function getQuestionDetail(questionId: number, _this: ViewQuestion, redirect: an
     }
 }
 
-function loadMoreAnswers(questionId: number, _this: ViewQuestion): void {
+/**
+ * The method handles to load more answers for the question
+ * @param questionId: {Number} The question Id
+ * @param _this: {ViewQuestion} The question detail UI
+ * @return {Function}
+ */
+function loadMoreAnswers(questionId: number, _this: ViewQuestion) {
     return () => {
         let answers = _this.getDataFromState("answers") || [];
         const filter = {skip: answers.length};

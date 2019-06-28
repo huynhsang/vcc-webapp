@@ -309,7 +309,7 @@ export default class ViewQuestion extends BasicComponent {
                                 <div className="clearfix"/>
                             </div>
                         </div>
-                        <AnswersUI answers={answers} question={question}/>
+                        <AnswersUI answers={answers} question={question} redirect={this.props.history}/>
                     </article>
                 </div>
             </div>

@@ -4,6 +4,12 @@ import AccountJWTService from "../../service/AccountJWTService";
 import Result from "../../../../global/Result";
 import type {RegisterRequest} from "../../request/RegisterRequest";
 
+/**
+ * The method handles to register new account
+ * @param registerData: {RegisterRequest} The register request
+ * @param redirect: {any} The router redirect
+ * @return {function(): *}
+ */
 function doRegister(registerData: RegisterRequest, redirect: any): void {
 	return () => {
 		return AccountJWTService.createAccount(registerData).then((result: Result) => {

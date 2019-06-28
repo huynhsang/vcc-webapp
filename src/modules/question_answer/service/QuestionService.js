@@ -9,7 +9,7 @@ const QUESTION_API = RootScope.appApiUrl + 'questions';
 
 export default class QuestionService extends BasicService implements IQuestionService {
 
-    save(data: any): Result {
+    create(data: any): Result {
         return super.save(data);
     }
 
@@ -18,13 +18,13 @@ export default class QuestionService extends BasicService implements IQuestionSe
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
-    findOne(id: number): Result {
+    findOneById(id: number): Result {
         const fullUrl: string = `${QUESTION_API}/get-detail?id=${id}`;
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
-    delete(id: number): Result {
-        return super.delete(id);
+    deleteById(id: number): Result {
+        return super.deleteById(id);
     }
 
     static builder(): IQuestionService {

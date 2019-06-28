@@ -9,20 +9,17 @@ const ANSWER_API = RootScope.appApiUrl + 'answers';
 
 export default class AnswerService extends BasicService implements IAnswerService {
 
-    save(data: any): Result {
-        return super.save(data);
+    create(data: any): Result {
+        const fullUrl = AnswerService.buildURLWithToken(ANSWER_API, RootScope.token);
+        return AnswerService.post(fullUrl, data, RootScope.axiosDefaultConfig);
     }
 
     findAll(filter: Filter): Result {
         return super.findAll(filter);
     }
 
-    findOne(id: number): Result {
-        return super.findOne(id);
-    }
-
-    delete(id: number): Result {
-        return super.delete(id);
+    deleteById(id: number): Result {
+        return super.deleteById(id);
     }
 
     getAnswersByQuestionId(id: number, filter: Filter): Result {

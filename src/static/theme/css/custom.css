@@ -22,3 +22,9 @@
     font-size: 26px;
     color: #677075;
 }
+
+.custom-comment-list {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+}

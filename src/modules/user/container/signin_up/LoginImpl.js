@@ -8,6 +8,12 @@ import AccountUtil from './../../../../common/util/AccountUtil';
 import CookieHelper from './../../../../common/util/CookieHelper';
 import CookieConstant from './../../../../common/constant/CookieConstant';
 
+/**
+ * The method handles logic to authenticate login request
+ * @param loginData: {LoginRequest} The login request
+ * @param redirect: {any} The router redirect
+ * @return {function(*=): *}
+ */
 function doLogin(loginData: LoginRequest, redirect: any): void {
 	return (dispatch) => {
 		return AccountJWTService.doAuthenticate(loginData).then((result: Result) => {
