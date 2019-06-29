@@ -1,8 +1,29 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import PropTypes from "prop-types";
 
+const propTypes = {
+    next: PropTypes.func.isRequired,
+    previous: PropTypes.func.isRequired,
+    setTitle: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+};
 export default class TitleQuestion extends BasicComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            title: props.title,
+        };
+    }
+
+    onBlurHandler = () => {
+        this.props.setTitle(this.refs.title.value);
+    };
+
     render() {
+        const { title } = this.state;
+        const { next, previous } = this.props;
         return (
             <section className="mt5 mb3">
                 <h3 className="font-size-18 m0">What’s your question title?</h3>
@@ -21,14 +42,15 @@ export default class TitleQuestion extends BasicComponent {
 
                 </div>
                 <div className="mt3">
-                    <p className="font-weight-700">Tags</p>
-                    <input type="text"/>
+                    <p className="font-weight-700">Title</p>
+                    <input type="text" autoFocus={true} defaultValue={title} ref="title" onBlur={this.onBlurHandler}/>
                 </div>
                 <div className="mt3 text-right">
-                    <button className="btn btn-light mr3">Previous</button>
-                    <button className="btn btn-primary">Next</button>
+                    <button className="btn btn-light mr3" onClick={() => previous("Tags")}>Previous</button>
+                    <button className="btn btn-primary" onClick={() => next("Description")}>Next</button>
                 </div>
             </section>
         )
     }
 }
+TitleQuestion.propTypes = propTypes;

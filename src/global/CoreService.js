@@ -5,10 +5,13 @@ import type {IQuestionService} from "../common/abstract/services/IQuestionServic
 import QuestionService from "../modules/question_answer/service/QuestionService";
 import type {IAnswerService} from "../common/abstract/services/IAnswerService";
 import AnswerService from "../modules/question_answer/service/AnswerService";
+import type {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
+import SubCategoryService from "../modules/question_answer/service/SubCategoryService";
 
 const ACCOUNT_SERVICE: IAccountService = AccountService.builder();
 const QUESTION_SERVICE: IQuestionService = QuestionService.builder();
 const ANSWER_SERVICE: IAnswerService = AnswerService.builder();
+const SUBCATEGORY_SERVICE: ISubCategoryService = SubCategoryService.builder();
 
 export default class CoreService {
 	static get accountService(): IAccountService {
@@ -21,5 +24,9 @@ export default class CoreService {
 
     static get answerService(): IAnswerService {
         return ANSWER_SERVICE;
+    }
+
+    static get subCategoryService(): ISubCategoryService {
+        return SUBCATEGORY_SERVICE;
     }
 }

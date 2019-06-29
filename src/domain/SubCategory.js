@@ -8,6 +8,6 @@ export interface SubCategory extends AuditingEntity {
     nameVi: string;
     numberOfQuestions: number;
     type: string;
-    categoryId: number;
+    categorySlug: string;
     category: Category;
 }

@@ -14,6 +14,12 @@ const REALM: Object = {
     user: "user_app",
 };
 
+const CATEGORY: Object = {
+    studying: "studying",
+    working: "working",
+    immigration: "immigration",
+};
+
 export default class ApplicationConstant {
 	static
 	get langKeyDefault(): string {
@@ -38,5 +44,10 @@ export default class ApplicationConstant {
     static
     get realm(): Object {
         return REALM;
+    }
+
+    static
+    get category(): Object {
+        return CATEGORY;
     }
 }

@@ -10,7 +10,8 @@ const QUESTION_API = RootScope.appApiUrl + 'questions';
 export default class QuestionService extends BasicService implements IQuestionService {
 
     create(data: any): Result {
-        return super.save(data);
+        const fullUrl: string = QuestionService.buildURLWithToken(QUESTION_API, RootScope.token);
+        return QuestionService.post(fullUrl, data, RootScope.axiosDefaultConfig);
     }
 
     findAll(filter: Filter): Result {

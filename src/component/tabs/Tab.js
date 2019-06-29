@@ -6,12 +6,15 @@ const propTypes = {
     activeTab: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool.isRequired,
 };
 export default class Tab extends BasicComponent {
 
     onClick = () => {
-        const { label, onClick } = this.props;
-        onClick(label);
+        const { label, onClick, isDisabled } = this.props;
+        if (!isDisabled) {
+            onClick(label);
+        }
     };
 
     render() {

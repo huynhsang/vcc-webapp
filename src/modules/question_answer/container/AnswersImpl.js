@@ -16,7 +16,6 @@ const answerService = CoreService.answerService;
 function leaveAnswerValidation(isAuthenticated: boolean, _this: AnswersUI, redirect: any) {
     return () => {
         if (!isAuthenticated) {
-            console.log(isAuthenticated);
             return redirect.push('/login');
         }
         _this.changeStateValue('leaveAnswer', true);
@@ -35,7 +34,7 @@ function createNewAnswer(answerBody: string, questionId: number, _this: AnswersU
             if (result.success) {
                 let answers = _this.getDataFromState("answers") || [];
                 answers.unshift(result.data);
-                _this.changeStateValue("answers", answers);
+                _this.changeStateValues(new Map([["answers", answers], ["answerBody", ""]]));
             }
         }).catch((err) => {
             // To do: handle error

@@ -5,7 +5,7 @@ import type {User} from "./User";
 export interface Question extends AuditingEntity {
     id: number;
     body: string;
-    categoryId: string;
+    categorySlug: string;
     isHidden: boolean;
     isVerified: boolean;
     numberOfAndroidViews: number;

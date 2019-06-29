@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-
+import BasicComponent from "../../common/abstract/component/BasicComponent";
 import Tab from './Tab';
+import './tabs.css';
 
 const propTypes = {
     children: PropTypes.instanceOf(Array).isRequired,
 };
-export default class Tabs extends Component {
+export default class Tabs extends BasicComponent {
 
     constructor(props) {
         super(props);
@@ -16,8 +17,14 @@ export default class Tabs extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeTab) {
+            this.changeStateValue('activeTab', nextProps.activeTab)
+        }
+    }
+
     onClickTabItem = (tab) => {
-        this.setState({ activeTab: tab });
+        this.changeStateValue('activeTab', tab);
     };
 
     render() {
@@ -35,7 +42,7 @@ export default class Tabs extends Component {
             <div className="tabs">
                 <ol className="tab-list">
                     {children.map((child) => {
-                        const { label } = child.props;
+                        const { label, isDisabled } = child.props;
 
                         return (
                             <Tab
@@ -43,6 +50,7 @@ export default class Tabs extends Component {
                                 key={label}
                                 label={label}
                                 onClick={onClickTabItem}
+                                isDisabled={!!isDisabled}
                             />
                         );
                     })}

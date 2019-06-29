@@ -1,0 +1,26 @@
+.tab-list {
+    margin-bottom: 48px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.tab-list-item {
+    display: inline-block;
+    list-style: none;
+    padding: 8px 16px;
+    margin-right: 5px;
+    cursor: pointer;
+    color: #07C;
+}
+
+.tab-list-item:hover {
+    border-radius: 1000px;
+    background-color: #E1F0FC;
+}
+
+.tab-list-active {
+    background-color: #2d6ff7 !important;
+    color: #fff !important;
+    border-radius: 1000px;
+}

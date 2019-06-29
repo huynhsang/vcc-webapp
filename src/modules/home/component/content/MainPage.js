@@ -202,7 +202,7 @@ export default class MainPage extends BasicComponent {
                                                 </div>
                                             </div>
                                             <div className="tagcloud">
-                                                <div className="question-tags"><i className="icon-tags"/><a
+                                                <div className="question-tags"><i className="fas fa-tags"/><a
                                                     href="https://2code.info/demo/themes/Discy/Main/question-tag/english/">english</a><a
                                                     href="https://2code.info/demo/themes/Discy/Main/question-tag/language/">language</a>
                                                 </div>
@@ -401,7 +401,7 @@ export default class MainPage extends BasicComponent {
                                                         </div>
                                                         <div className="tagcloud">
                                                             <div className="question-tags">
-                                                                <i className="icon-tags"/>
+                                                                <i className="fas fa-tags"/>
                                                                 {
                                                                     subCategories.map((subCategory, count) => {
                                                                         return (

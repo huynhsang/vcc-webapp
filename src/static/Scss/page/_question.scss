@@ -11,6 +11,13 @@
     border-bottom: 0;
     background-color: $background-content;
   }
+  .question-body {
+    border: 1px solid $color-border;
+    background-color: $background-content;
+    max-height: 500px;
+    padding: 5px 11px;
+    overflow: scroll;
+  }
   textarea {
     @include borderRadiusBottom(2px);
   }

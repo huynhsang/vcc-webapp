@@ -229,7 +229,7 @@ export default class ViewQuestion extends BasicComponent {
                                         </div>
                                         <div className="tagcloud">
                                             <div className="question-tags">
-                                                <i className="icon-tags"/>
+                                                <i className="fas fa-tags"/>
                                                 {
                                                     subCategories.map((subCategory, count) => {
                                                         return (

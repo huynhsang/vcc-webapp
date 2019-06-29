@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import {Link} from "react-router-dom";
 
 export default class RightSidebar extends BasicComponent{
     render() {
@@ -11,9 +12,9 @@ export default class RightSidebar extends BasicComponent{
                     <h3 className="screen-reader-text">Sidebar</h3>
                     <div className="inner-sidebar">
                         <div className="widget widget_ask">
-                            <a target="_self" href="/" className="button-default wpqa-question">
+                            <Link to="/question/add" className="button-default wpqa-question">
                                 Ask A Question
-                            </a>
+                            </Link>
                         </div>
                         <section id="stats-widget-2" className="widget-no-divider widget stats-widget">
                             <h3 className="screen-reader-text">Stats</h3>

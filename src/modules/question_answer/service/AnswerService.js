@@ -10,8 +10,7 @@ const ANSWER_API = RootScope.appApiUrl + 'answers';
 export default class AnswerService extends BasicService implements IAnswerService {
 
     create(data: any): Result {
-        const api: string = AnswerService.buildURLWithToken(ANSWER_API, RootScope.token);
-        const fullUrl: string = `${api}&${FilterBuilder.toString({include: 'answerBy'})}`;
+        const fullUrl = AnswerService.buildURLWithToken(ANSWER_API, RootScope.token);
         return AnswerService.post(fullUrl, data, RootScope.axiosDefaultConfig);
     }
 
