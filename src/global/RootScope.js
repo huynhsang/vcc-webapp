@@ -34,4 +34,8 @@ export default class RootScope {
 	get contextTypesDefault(): Object {
 		return CONTEXT_TYPES_DEFAULT;
 	}
+
+	static resetAuthValues(): void {
+        RootScope.token = RootScope.userId = RootScope.currentUser = null;
+    }
 }

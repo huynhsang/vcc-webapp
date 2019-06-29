@@ -28,8 +28,12 @@ function doLogin(loginData: LoginRequest, redirect: any): void {
 					redirect.push('/');
 				});
 			} else {
-				//show error here
+                RootScope.resetAuthValues();
+                // Todo: show error here
 			}
+		}).catch((err) => {
+            RootScope.resetAuthValues();
+            // Todo: show error here
 		});
 	}
 }

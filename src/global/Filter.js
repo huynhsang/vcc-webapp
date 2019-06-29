@@ -22,12 +22,9 @@ export default class FilterBuilder {
 
     static buildPaginationFilter(order: string, skip: number, limit: number): Filter {
         let filter: Filter = {};
-        filter.fields = null;
-        filter.include = null;
         filter.order = order;
         filter.skip = skip;
         filter.limit = limit;
-        filter.where = null;
         return filter;
     }
 

@@ -23,6 +23,11 @@
     color: #677075;
 }
 
+.question-vote li button:disabled, .question-vote li button[disabled] {
+    background-color: unset !important;
+    color: #2d6ff7 !important;
+}
+
 .custom-comment-list {
     margin: 0 !important;
     padding: 0 !important;

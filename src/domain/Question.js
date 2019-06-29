@@ -1,6 +1,7 @@
 import type {AuditingEntity} from "./AuditingEntity";
 import type {Category} from "./Category";
 import type {User} from "./User";
+import type {UsersVoteQuestions} from "./UsersVoteQuestions";
 
 export interface Question extends AuditingEntity {
     id: number;
@@ -20,4 +21,5 @@ export interface Question extends AuditingEntity {
     slug: string;
     category: Category;
     askedBy: User;
+    votes: Array<UsersVoteQuestions>;
 }

@@ -15,7 +15,12 @@ export default class QuestionService extends BasicService implements IQuestionSe
     }
 
     findAll(filter: Filter): Result {
-        const fullUrl: string = FilterBuilder.buildUrlWithFilter(`${QUESTION_API}/find-all`, filter);
+        let fullUrl: string = FilterBuilder.buildUrlWithFilter(`${QUESTION_API}/find-all`, filter);
+        if (RootScope.userId) {
+            console.log(filter);
+            const api: string = QuestionService.buildURLWithToken(`${QUESTION_API}/find-all`, RootScope.token);
+            fullUrl = `${api}&${FilterBuilder.toString(filter)}`;
+        }
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 

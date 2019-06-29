@@ -63,6 +63,10 @@ export default class BasicComponent extends Component {
 	}
 
 	redirectTo(path: string): void {
-		this.context.router.history.push(path);
+		this.props.history.push(path);
+	}
+
+	forceUpdate(): void {
+		this.forceUpdate();
 	}
 }
