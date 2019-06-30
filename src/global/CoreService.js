@@ -5,7 +5,7 @@ import QuestionService from "../modules/question_answer/service/QuestionService"
 import type {IAnswerService} from "../common/abstract/services/IAnswerService";
 import AnswerService from "../modules/question_answer/service/AnswerService";
 import type {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
-import SubCategoryService from "../modules/question_answer/service/SubCategoryService";
+import SubCategoryService from "../modules/sub_category/service/SubCategoryService";
 import type {IUsersVoteService} from "../common/abstract/services/IUsersVoteService";
 import UsersVoteService from "../modules/user/service/UsersVoteService";
 

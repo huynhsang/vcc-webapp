@@ -8,6 +8,7 @@ import Home from "../../../home/container/HomeImpl";
 import MainPage from "../../../home/container/MainPageImpl";
 import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
 import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
+import SubCategory from "../../../sub_category/container/subCategoryImpl";
 
 export const UnAuthLink = [
 	{
@@ -48,6 +49,11 @@ export const PublicLink = [
                 path: '/question/:identity/view',
                 exact: true,
                 component: ViewQuestion
+            },
+            {
+                path: '/tags',
+                exact: true,
+                component: SubCategory
             }
         ]
     },
@@ -62,4 +68,16 @@ export const PublicLink = [
             }
         ]
     },
+    {
+        path: '/tags',
+        component: Home,
+        subRoutes: [
+            {
+                path: '',
+                exact: true,
+                component: SubCategory
+            }
+        ]
+    }
+
 ];
