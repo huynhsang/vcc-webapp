@@ -10,22 +10,24 @@ const QUESTION_API = RootScope.appApiUrl + 'questions';
 export default class QuestionService extends BasicService implements IQuestionService {
 
     create(data: any): Result {
-        const fullUrl: string = QuestionService.buildURLWithToken(QUESTION_API, RootScope.token);
+        const fullUrl: string = QuestionService.buildURLWithToken(QUESTION_API);
         return QuestionService.post(fullUrl, data, RootScope.axiosDefaultConfig);
     }
 
     findAll(filter: Filter): Result {
         let fullUrl: string = FilterBuilder.buildUrlWithFilter(`${QUESTION_API}/find-all`, filter);
         if (RootScope.userId) {
-            console.log(filter);
-            const api: string = QuestionService.buildURLWithToken(`${QUESTION_API}/find-all`, RootScope.token);
+            const api: string = QuestionService.buildURLWithToken(`${QUESTION_API}/find-all`);
             fullUrl = `${api}&${FilterBuilder.toString(filter)}`;
         }
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
     findOneById(id: number): Result {
-        const fullUrl: string = `${QUESTION_API}/get-detail?id=${id}`;
+        let fullUrl: string = `${QUESTION_API}/get-detail?id=${id}`;
+        if (RootScope.userId) {
+            fullUrl = `${fullUrl}&${QuestionService.getTokenString()}`
+        }
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 

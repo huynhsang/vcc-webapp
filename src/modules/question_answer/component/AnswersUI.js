@@ -3,7 +3,6 @@ import BasicComponent from "../../../common/abstract/component/BasicComponent";
 import PropTypes from "prop-types";
 import type {Answer} from "../../../domain/Answer";
 import {Link} from "react-router-dom";
-import type {Question} from "../../../domain/Question";
 import type {User} from "../../../domain/User";
 import ReactMarkdown from "react-markdown";
 import SimpleMDEReact from "react-simplemde-editor";
@@ -12,6 +11,7 @@ import "easymde/dist/easymde.min.css";
 const propTypes = {
     createNewAnswer: PropTypes.func.isRequired,
     leaveAnswerValidation: PropTypes.func.isRequired,
+    handleVoteAnswer: PropTypes.func.isRequired,
     question: PropTypes.object.isRequired,
     answers: PropTypes.array.isRequired,
     isAuthenticated: PropTypes.bool.isRequired,
@@ -41,8 +41,8 @@ export default class AnswersUI extends BasicComponent {
     };
 
     render() {
-        const question: Question = this.props.question;
-        const answers: Array<Answer> = this.state.answers;
+        const { answers, loader } = this.state;
+        const { question, handleVoteAnswer } = this.props;
         const _this = this;
         return (
             <div className="question-adv-comments question-has-comments question-has-tabs">
@@ -67,8 +67,13 @@ export default class AnswersUI extends BasicComponent {
                         </div>
                         <ol className="commentlist clearfix custom-comment-list">
                             {
-                                answers.map((answer, index) => {
+                                answers.map((answer: Answer, index: number) => {
                                     const answerBy: User = answer.answerBy;
+
+                                    const isVoted: boolean = answer.votes && answer.votes.length > 0;
+                                    const disableUp: boolean = isVoted && answer.votes[0].isPositiveVote;
+                                    const disableDown: boolean = isVoted && !answer.votes[0].isPositiveVote;
+                                    const showLoader: boolean = loader && loader.answerId === answer.id;
                                     return (
                                         <li key={index} className="comment byuser comment-author-james even thread-even depth-1">
                                             <div className="comment-body clearfix">
@@ -166,18 +171,25 @@ export default class AnswersUI extends BasicComponent {
                                                         <div className="wpqa_error"/>
                                                         <ul className="question-vote answer-vote answer-vote-dislike">
                                                             <li>
-                                                                <a href={null} className="wpqa_vote comment_vote_up vote_allow" title="Like">
+                                                                <button className="wpqa_vote comment_vote_up vote_allow" disabled={disableUp}
+                                                                   onClick={() => handleVoteAnswer(answer, true, isVoted, _this)}>
                                                                     <i className="icon-up-dir"/>
-                                                                </a>
+                                                                </button>
                                                             </li>
-                                                            <li className="vote_result" itemProp="upvoteCount">{answer.numberOfVotes}</li>
-                                                            <li className="li_loader">
-                                                                <span className="loader_3 fa-spin"/>
-                                                            </li>
+                                                            {
+                                                                showLoader ?
+                                                                    <li className="li_loader" style={{display: "block"}}>
+                                                                        <span className="loader_3 fa-spin"/>
+                                                                    </li> :
+                                                                    <li className="vote_result" itemProp="upvoteCount">
+                                                                        {answer.numberOfVotes}
+                                                                    </li>
+                                                            }
                                                             <li className="dislike_answers">
-                                                                <a className="wpqa_vote comment_vote_down vote_allow" title="Dislike">
+                                                                <button className="wpqa_vote comment_vote_down vote_allow" disabled={disableDown}
+                                                                   onClick={() => handleVoteAnswer(answer, false, isVoted, _this)}>
                                                                     <i className="icon-down-dir"/>
-                                                                </a>
+                                                                </button>
                                                             </li>
                                                         </ul>
                                                         <ul className="comment-reply comment-reply-main">

@@ -9,7 +9,6 @@ import type {Question} from "../../../../domain/Question";
 import type {Category} from "../../../../domain/Category";
 import type {SubCategory} from "../../../../domain/SubCategory";
 import ReactMarkdown from "react-markdown";
-import type {UsersVoteQuestions} from "../../../../domain/UsersVoteQuestions";
 
 const propTypes = {
     getQuestions: PropTypes.func.isRequired,
@@ -29,7 +28,7 @@ export default class MainPage extends BasicComponent {
 
     render() {
         const _this = this;
-        const questions = _this.state.questions;
+        const { questions, loader } = _this.state;
         const { handleVoteQuestion } = _this.props;
         return (
             <div className="discy-main-inner float_l">
@@ -75,6 +74,7 @@ export default class MainPage extends BasicComponent {
                                 const isVoted: boolean = question.votes.length > 0;
                                 const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
                                 const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
+                                const showLoader: boolean = loader && loader.questionId === question.id;
                                 return (
                                     <article key={index} className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
                                         <div className="question-sticky-ribbon">
@@ -163,12 +163,15 @@ export default class MainPage extends BasicComponent {
                                                                 <i className="icon-up-dir"/>
                                                             </button>
                                                         </li>
-                                                        <li className="vote_result" itemProp="upvoteCount">
-                                                            {question.numberOfVotes}
-                                                        </li>
-                                                        <li className="li_loader">
-                                                            <span className="loader_3 fa-spin"/>
-                                                        </li>
+                                                        {
+                                                            showLoader ?
+                                                                <li className="li_loader" style={{display: "block"}}>
+                                                                    <span className="loader_3 fa-spin"/>
+                                                                </li> :
+                                                                <li className="vote_result" itemProp="upvoteCount">
+                                                                    {question.numberOfVotes}
+                                                                </li>
+                                                        }
                                                         <li className="question-vote-down">
                                                             <button className="wpqa_vote question_vote_down vote_allow" disabled={disableDown}
                                                                     onClick={() => handleVoteQuestion(question, false, isVoted, _this)}>
@@ -224,10 +227,15 @@ export default class MainPage extends BasicComponent {
                                                                     <i className="icon-up-dir"/>
                                                                 </button>
                                                             </li>
-                                                            <li className="vote_result" itemProp="upvoteCount">{` ${question.numberOfVotes}`}</li>
-                                                            <li className="li_loader">
-                                                                <span className="loader_3 fa-spin"/>
-                                                            </li>
+                                                            {
+                                                                showLoader ?
+                                                                    <li className="li_loader" style={{display: "block"}}>
+                                                                        <span className="loader_3 fa-spin"/>
+                                                                    </li> :
+                                                                    <li className="vote_result" itemProp="upvoteCount">
+                                                                        {question.numberOfVotes}
+                                                                    </li>
+                                                            }
                                                             <li className="question-vote-down">
                                                                 <button className="wpqa_vote question_vote_down vote_allow" disabled={disableDown}
                                                                         onClick={() => handleVoteQuestion(question, false, isVoted, _this)}>

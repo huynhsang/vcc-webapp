@@ -28,6 +28,10 @@
     color: #2d6ff7 !important;
 }
 
+.answer-vote li button i{
+    vertical-align: text-top;
+}
+
 .custom-comment-list {
     margin: 0 !important;
     padding: 0 !important;

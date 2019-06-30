@@ -1,6 +1,7 @@
 import type {AuditingEntity} from "./AuditingEntity";
 import type {Question} from "./Question";
 import type {User} from "./User";
+import type {UsersVoteAnswers} from "./UsersVoteAnswers";
 
 export interface Answer extends AuditingEntity {
     id: number;
@@ -11,4 +12,5 @@ export interface Answer extends AuditingEntity {
     questionId: number;
     question: Question;
     answerBy: User;
+    votes: Array<UsersVoteAnswers>;
 }

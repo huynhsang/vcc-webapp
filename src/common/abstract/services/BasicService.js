@@ -1,6 +1,7 @@
 import AxiosConfig from "../../../global/AxiosConfig";
 import axios from "axios";
 import Result from "./../../../global/Result";
+import RootScope from "../../../global/RootScope";
 
 export default class BasicService {
 
@@ -45,7 +46,12 @@ export default class BasicService {
 	}
 
 	static
-	buildURLWithToken(url: string, token): string {
-		return `${url}?access_token=${token}`
+	buildURLWithToken(url: string): string {
+		return `${url}?access_token=${RootScope.token}`;
 	}
+
+    static
+    getTokenString(): string {
+        return `access_token=${RootScope.token}`;
+    }
 }

@@ -54,7 +54,7 @@ function getQuestions(filter: Filter, show: String, _this: MainPage) {
 function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVotedBefore: boolean, _this: MainPage) {
     return () => {
         if (!RootScope.userId) return _this.redirectTo('/login');
-        _this.changeStateValue('loader', true);
+        _this.changeStateValue('loader', {questionId: question.id});
         const data: UsersVoteQuestions = {
             questionId: question.id,
             isPositiveVote: isPositiveVote,
@@ -67,6 +67,9 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                     question.votes[0].isPositiveVote = isPositiveVote;
                     updateUIAfterVote(question, isPositiveVote, isVotedBefore, _this);
                 }
+            }).catch(err => {
+                // Todo: Show error here
+                _this.changeStateValue('loader', false);
             })
         } else {
             usersVoteService.voteQuestion(data).then((result: Result) => {
@@ -74,16 +77,20 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                     question.votes = [result.data];
                     updateUIAfterVote(question, isPositiveVote, isVotedBefore, _this);
                 }
+            }).catch(err => {
+                // Todo: Show error here
+                _this.changeStateValue('loader', false);
             })
         }
     }
 }
 
 function updateUIAfterVote(question: Question, isPositiveVote: boolean, isVotedBefore: boolean, _this: MainPage): void {
+    const times: number = isVotedBefore ? 2 : 1;
     if (isPositiveVote) {
-        question.numberOfVotes += 1;
+        question.numberOfVotes += times;
     } else {
-        question.numberOfVotes -= 1;
+        question.numberOfVotes -= times;
     }
     _this.changeStateValue('loader', false);
 }

@@ -3,8 +3,12 @@ import AnswersUI from "../component/AnswersUI";
 import type {Answer} from "../../../domain/Answer";
 import CoreService from "../../../global/CoreService";
 import Result from "../../../global/Result";
+import MainPage from "../../home/component/content/MainPage";
+import RootScope from "../../../global/RootScope";
+import type {UsersVoteAnswers} from "../../../domain/UsersVoteAnswers";
 
 const answerService = CoreService.answerService;
+const usersVoteService = CoreService.usersVoteService;
 
 /**
  * The method ensure every user should login before continue answer the question
@@ -42,6 +46,58 @@ function createNewAnswer(answerBody: string, questionId: number, _this: AnswersU
     }
 }
 
+/**
+ * The method handle when user vote on answer.
+ * @param answer: {Answer} The answer instance
+ * @param isPositiveVote: {boolean} The value to check It's positive vote or not?
+ * @param isVotedBefore: {boolean} The value to check It's voted before or not?
+ * @param _this: {MainPage} The MainPage UI
+ * @return {Function}
+ */
+function handleVoteAnswer(answer: Answer, isPositiveVote: boolean, isVotedBefore: boolean, _this: MainPage) {
+    return () => {
+        if (!RootScope.userId) return _this.redirectTo('/login');
+        _this.changeStateValue('loader', {answerId: answer.id});
+        const data: UsersVoteAnswers = {
+            answerId: answer.id,
+            isPositiveVote: isPositiveVote,
+        };
+        if (isVotedBefore) {
+            data.id = answer.votes[0].id;
+            data.userId = answer.votes[0].userId;
+            usersVoteService.reVoteAnswer(data).then((result: Result) => {
+                if (result.success) {
+                    answer.votes[0].isPositiveVote = isPositiveVote;
+                    updateUIAfterVote(answer, isPositiveVote, isVotedBefore, _this);
+                }
+            }).catch(err => {
+                // Todo: Show error here
+                _this.changeStateValue('loader', false);
+            })
+        } else {
+            usersVoteService.voteAnswer(data).then((result: Result) => {
+                if (result.success) {
+                    answer.votes = [result.data];
+                    updateUIAfterVote(answer, isPositiveVote, isVotedBefore, _this);
+                }
+            }).catch(err => {
+                // Todo: Show error here
+                _this.changeStateValue('loader', false);
+            })
+        }
+    }
+}
+
+function updateUIAfterVote(answer: Answer, isPositiveVote: boolean, isVotedBefore: boolean, _this: MainPage): void {
+    const times: number = isVotedBefore ? 2 : 1;
+    if (isPositiveVote) {
+        answer.numberOfVotes += times;
+    } else {
+        answer.numberOfVotes -= times;
+    }
+    _this.changeStateValue('loader', false);
+}
+
 const mapStateToProps = (store, ownProps) => {
     return {
         answers: ownProps.answers,
@@ -53,6 +109,6 @@ const mapStateToProps = (store, ownProps) => {
 
 const AnswersImpl = connect(
     mapStateToProps,
-    {leaveAnswerValidation, createNewAnswer}
+    { leaveAnswerValidation, createNewAnswer, handleVoteAnswer }
 )(AnswersUI);
 export default AnswersImpl;

@@ -11,5 +11,4 @@ export interface UsersVoteQuestions extends AuditingEntity {
     reason: string;
     owner: User,
     question: Question,
-
 }

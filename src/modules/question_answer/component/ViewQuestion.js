@@ -14,6 +14,7 @@ import ReactMarkdown from "react-markdown";
 const propTypes = {
     getQuestionDetail: PropTypes.func.isRequired,
     loadMoreAnswers: PropTypes.func.isRequired,
+    handleVoteQuestion: PropTypes.func.isRequired,
 };
 export default class ViewQuestion extends BasicComponent {
 
@@ -30,12 +31,20 @@ export default class ViewQuestion extends BasicComponent {
     }
 
     render() {
-        const question: Question = this.state.question;
-        const answers: Array<Answer> = this.state.answers;
+        const _this = this;
+        const { question, loader } = _this.state;
+        const answers: Array<Answer> = _this.state.answers;
+        const { handleVoteQuestion } = _this.props;
+
         const askedBy: User = question.askedBy ? question.askedBy : {};
         const category: Category = question.category ? question.category : {};
         const subCategories: Array<SubCategory> = question.tags ? JSON.parse(question.tags) : [];
-        const currentPath: string = this.props.history.location.pathname;
+        const currentPath: string = _this.props.history.location.pathname;
+
+        const isVoted: boolean = question && question.votes && question.votes.length > 0;
+        const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
+        const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
+        const showLoader: boolean = loader && loader.questionId === question.id;
         return (
             <div className="discy-main-inner float_l">
                 <div className="breadcrumbs">
@@ -148,16 +157,23 @@ export default class ViewQuestion extends BasicComponent {
                                     </div>
                                     <ul className="question-vote question-mobile">
                                         <li className="question-vote-up">
-                                            <button className="wpqa_vote question_vote_up vote_allow" title="Like">
+                                            <button className="wpqa_vote question_vote_up vote_allow" disabled={disableUp}
+                                                    onClick={() => handleVoteQuestion(question, true, isVoted, _this)}>
                                                 <i className="icon-up-dir"/>
                                             </button>
                                         </li>
-                                        <li className="vote_result" itemProp="upvoteCount">{question.numberOfVotes}</li>
-                                        <li className="li_loader">
-                                            <span className="loader_3 fa-spin"/>
-                                        </li>
+                                        {
+                                            showLoader ?
+                                                <li className="li_loader" style={{display: "block"}}>
+                                                    <span className="loader_3 fa-spin"/>
+                                                </li> :
+                                                <li className="vote_result" itemProp="upvoteCount">
+                                                    {question.numberOfVotes}
+                                                </li>
+                                        }
                                         <li className="question-vote-down">
-                                            <button className="wpqa_vote question_vote_down vote_allow" title="Dislike">
+                                            <button className="wpqa_vote question_vote_down vote_allow" disabled={disableDown}
+                                                    onClick={() => handleVoteQuestion(question, false, isVoted, _this)}>
                                                 <i className="icon-down-dir"/>
                                             </button>
                                         </li>
@@ -201,16 +217,23 @@ export default class ViewQuestion extends BasicComponent {
                                     <div className="">
                                         <ul className="question-vote">
                                             <li className="question-vote-up">
-                                                <button className="wpqa_vote question_vote_up vote_allow" title="Like">
+                                                <button className="wpqa_vote question_vote_up vote_allow"  disabled={disableUp}
+                                                        onClick={() => handleVoteQuestion(question, true, isVoted, _this)}>
                                                     <i className="icon-up-dir"/>
                                                 </button>
                                             </li>
-                                            <li className="vote_result" itemProp="upvoteCount">{question.numberOfVotes}</li>
-                                            <li className="li_loader">
-                                                <span className="loader_3 fa-spin"/>
-                                            </li>
+                                            {
+                                                showLoader ?
+                                                    <li className="li_loader" style={{display: "block"}}>
+                                                        <span className="loader_3 fa-spin"/>
+                                                    </li> :
+                                                    <li className="vote_result" itemProp="upvoteCount">
+                                                        {question.numberOfVotes}
+                                                    </li>
+                                            }
                                             <li className="question-vote-down">
-                                                <button className="wpqa_vote question_vote_down vote_allow" title="Dislike">
+                                                <button className="wpqa_vote question_vote_down vote_allow" disabled={disableDown}
+                                                        onClick={() => handleVoteQuestion(question, false, isVoted, _this)}>
                                                     <i className="icon-down-dir"/>
                                                 </button>
                                             </li>
@@ -256,14 +279,14 @@ export default class ViewQuestion extends BasicComponent {
                                                 {question.numberOfViews}
                                                 <span className="question-span">Views</span>
                                             </li>
-                                            <li className="question-followers">
-                                                <i className="icon-users"/>
-                                                <span>9</span> Followers
-                                            </li>
-                                            <li className="question-favorites question-favorites-no-link">
-                                                <div className="small_loader loader_2"/>
-                                                <i className="icon-star"/><span>8</span>
-                                            </li>
+                                            {/*<li className="question-followers">*/}
+                                                {/*<i className="icon-users"/>*/}
+                                                {/*<span>9</span> Followers*/}
+                                            {/*</li>*/}
+                                            {/*<li className="question-favorites question-favorites-no-link">*/}
+                                                {/*<div className="small_loader loader_2"/>*/}
+                                                {/*<i className="icon-star"/><span>8</span>*/}
+                                            {/*</li>*/}
                                         </ul>
                                         <a className="meta-answer" href={`${currentPath}/#respond`}>Answer</a>
                                     </footer>
