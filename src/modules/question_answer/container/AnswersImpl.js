@@ -6,9 +6,11 @@ import Result from "../../../global/Result";
 import MainPage from "../../home/component/content/MainPage";
 import RootScope from "../../../global/RootScope";
 import type {UsersVoteAnswers} from "../../../domain/UsersVoteAnswers";
+import type {Question} from "../../../domain/Question";
 
 const answerService = CoreService.answerService;
 const usersVoteService = CoreService.usersVoteService;
+const questionService = CoreService.questionService;
 
 /**
  * The method ensure every user should login before continue answer the question
@@ -26,6 +28,13 @@ function leaveAnswerValidation(isAuthenticated: boolean, _this: AnswersUI, redir
     }
 }
 
+/**
+ * The method handles logic to create new answer
+ * @param answerBody: {String} The answer body
+ * @param questionId: {Number} The question Id
+ * @param _this: {AnswersUI} The Answers UI
+ * @return {Function}
+ */
 function createNewAnswer(answerBody: string, questionId: number, _this: AnswersUI) {
     return () => {
         const descrLength: number = answerBody.length / 3;
@@ -42,6 +51,19 @@ function createNewAnswer(answerBody: string, questionId: number, _this: AnswersU
             }
         }).catch((err) => {
             // To do: handle error
+        })
+    }
+}
+
+function approveAnswer(question: Question, answer: Answer, _this: AnswersUI) {
+    return () => {
+        _this.changeStateValue('disableApproveBtn', true);
+        questionService.doApproveAnswer(question.id, answer.id).then((result: Result) => {
+            if (result.success) {
+                question.hasAcceptedAnswer = answer.isTheBest = true;
+                _this.changeStateValue('disableApproveBtn', false);
+                _this.triggerUpdateQuestion(question);
+            }
         })
     }
 }
@@ -98,17 +120,14 @@ function updateUIAfterVote(answer: Answer, isPositiveVote: boolean, isVotedBefor
     _this.changeStateValue('loader', false);
 }
 
-const mapStateToProps = (store, ownProps) => {
+const mapStateToProps = (store) => {
     return {
-        answers: ownProps.answers,
-        question: ownProps.question,
-        redirect: ownProps.redirect,
         isAuthenticated: store.AppAuth.isAuthenticated,
     }
 };
 
 const AnswersImpl = connect(
     mapStateToProps,
-    { leaveAnswerValidation, createNewAnswer, handleVoteAnswer }
+    { leaveAnswerValidation, createNewAnswer, handleVoteAnswer, approveAnswer }
 )(AnswersUI);
 export default AnswersImpl;

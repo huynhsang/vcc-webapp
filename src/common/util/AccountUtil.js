@@ -14,9 +14,11 @@ export default class AccountUtil {
 				RootScope.currentUser = res.data;
 				return RootScope.currentUser;
 			} else {
-				return RootScope.currentUser = null;
+				return RootScope.resetAuthValues();
 			}
-		})
+		}).catch(() => {
+            return RootScope.resetAuthValues();
+        })
 	}
 
 	static updateApplicationAfterAuthenticated(dispatch: Function) {

@@ -20,8 +20,11 @@ export default class ViewQuestion extends BasicComponent {
 
     constructor(props) {
         super(props);
-        this.state = {question: {}, answers: []};
+        const question: Question = {};
+        const answers: Array<Answer> = [];
+        this.state = {question: question, answers: answers};
     }
+
     handleBeforeTheFirstRender(): void {
         if (!this.props.match.params || !this.props.match.params.identity) {
             this.props.history.push('/')
@@ -30,11 +33,15 @@ export default class ViewQuestion extends BasicComponent {
         }
     }
 
+    updateQuestion = (question) => {
+        this.changeStateValue('question', question);
+    };
+
     render() {
         const _this = this;
         const { question, loader } = _this.state;
         const answers: Array<Answer> = _this.state.answers;
-        const { handleVoteQuestion } = _this.props;
+        const { handleVoteQuestion, history } = _this.props;
 
         const askedBy: User = question.askedBy ? question.askedBy : {};
         const category: Category = question.category ? question.category : {};
@@ -45,6 +52,8 @@ export default class ViewQuestion extends BasicComponent {
         const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
         const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
         const showLoader: boolean = loader && loader.questionId === question.id;
+
+        const bestAnswerClassName = question.hasAcceptedAnswer ? "best-answer-meta meta-best-answer" : "best-answer-meta";
         return (
             <div className="discy-main-inner float_l">
                 <div className="breadcrumbs">
@@ -66,16 +75,20 @@ export default class ViewQuestion extends BasicComponent {
                     </span>
                     <div className="breadcrumb-right">
                         <div className="question-navigation">
-                            <Link className="nav-next" to={`/question/${question.id + 1}/view`}>
-                                Next
-                                <i className="icon-right-open"/>
-                            </Link>
-                            <Link className="nav-previous" to={`/question/${question.id - 1}/view`}>
+                            <Link className="nav-previous" to="/">
                                 <i className="icon-left-open"/>
                             </Link>
                         </div>
                         <div className="question-stats">
-                            <span><i className="icon-flash"/>In Process</span>
+                            {
+                                question.hasAcceptedAnswer ?
+                                    <span className="question-answered-done">
+                                        <i className="icon-check"/>Answered
+                                    </span> :
+                                    <span>
+                                        <i className="icon-flash"/>In Process
+                                    </span>
+                            }
                         </div>
                         <div className="clearfix"/>
                     </div>
@@ -83,9 +96,9 @@ export default class ViewQuestion extends BasicComponent {
                 <div className="clearfix"/>
                 <div className="post-articles question-articles">
                     <article className="article-question article-post clearfix question-vote-image question-type-normal question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
-                        <div className="question-sticky-ribbon">
-                            <div>Pinned</div>
-                        </div>
+                        {/*<div className="question-sticky-ribbon">*/}
+                            {/*<div>Pinned</div>*/}
+                        {/*</div>*/}
                         <div className="single-inner-content">
                             <div className="question-inner">
                                 <div className="question-image-vote">
@@ -265,7 +278,7 @@ export default class ViewQuestion extends BasicComponent {
                                     </div>
                                     <footer className="question-footer">
                                         <ul className="footer-meta">
-                                            <li className="best-answer-meta">
+                                            <li className={bestAnswerClassName}>
                                                 <i className="icon-comment"/>
                                                 <span itemProp="answerCount" className="number">
                                                     <a href="#answers">{question.numberOfAnswers} </a>
@@ -327,7 +340,7 @@ export default class ViewQuestion extends BasicComponent {
                                 <div className="clearfix"/>
                             </div>
                         </div>
-                        <AnswersUI answers={answers} question={question} redirect={this.props.history}/>
+                        <AnswersUI answers={answers} question={question} redirect={history} updateQuestion={_this.updateQuestion}/>
                     </article>
                 </div>
             </div>

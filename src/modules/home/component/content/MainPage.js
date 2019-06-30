@@ -15,7 +15,7 @@ const propTypes = {
     handleVoteQuestion: PropTypes.func.isRequired,
 };
 export default class MainPage extends BasicComponent {
-    filter: Filter = FilterBuilder.buildPaginationFilter('updated DESC', 0, 10);
+    filter: Filter = FilterBuilder.buildPaginationFilter('created DESC', 0, 10);
 
     constructor(props) {
         super(props);
@@ -77,9 +77,9 @@ export default class MainPage extends BasicComponent {
                                 const showLoader: boolean = loader && loader.questionId === question.id;
                                 return (
                                     <article key={index} className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
-                                        <div className="question-sticky-ribbon">
-                                            <div>Pinned</div>
-                                        </div>
+                                        {/*<div className="question-sticky-ribbon">*/}
+                                            {/*<div>Pinned</div>*/}
+                                        {/*</div>*/}
                                         <div className="single-inner-content">
                                             <div className="question-inner">
                                                 <div className="question-image-vote">

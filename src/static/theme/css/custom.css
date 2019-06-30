@@ -48,3 +48,13 @@
     color: #7c7f85;
     border: 1px solid #e1e3e3;
 }
+
+.btn-approve {
+    float: right;
+    margin-top: 3px;
+    margin-left: 20px;
+    font-size: 14px;
+    line-height: 14px;
+    border: 1px solid;
+    padding: 0 3px;
+}

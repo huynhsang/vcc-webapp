@@ -35,6 +35,15 @@ export default class QuestionService extends BasicService implements IQuestionSe
         return super.deleteById(id);
     }
 
+    doApproveAnswer(questionId: Number, answerId: Number): Result {
+        const fullUrl: string = QuestionService.buildURLWithToken(`${QUESTION_API}/approve-answer`);
+        const data: Object = {
+            id: questionId,
+            answerId: answerId,
+        };
+        return QuestionService.post(fullUrl, data, RootScope.axiosDefaultConfig);
+    }
+
     static builder(): IQuestionService {
         return new QuestionService();
     }

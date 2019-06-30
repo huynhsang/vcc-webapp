@@ -10,7 +10,7 @@ const ANSWER_API = RootScope.appApiUrl + 'answers';
 export default class AnswerService extends BasicService implements IAnswerService {
 
     create(data: any): Result {
-        const fullUrl = AnswerService.buildURLWithToken(ANSWER_API);
+        const fullUrl: string = AnswerService.buildURLWithToken(ANSWER_API);
         return AnswerService.post(fullUrl, data, RootScope.axiosDefaultConfig);
     }
 
@@ -23,8 +23,8 @@ export default class AnswerService extends BasicService implements IAnswerServic
     }
 
     getAnswersByQuestionId(id: number, filter: Filter): Result {
-        const api = `${ANSWER_API}/find-all-by-question-id?id=${id}`;
-        const fullUrl = `${api}&${FilterBuilder.toString(filter)}`;
+        const api: string = `${ANSWER_API}/find-all-by-question-id?id=${id}`;
+        const fullUrl: string = `${api}&${FilterBuilder.toString(filter)}`;
         return AnswerService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 

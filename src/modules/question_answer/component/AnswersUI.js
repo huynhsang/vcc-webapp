@@ -7,8 +7,11 @@ import type {User} from "../../../domain/User";
 import ReactMarkdown from "react-markdown";
 import SimpleMDEReact from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
+import RootScope from "../../../global/RootScope";
 
 const propTypes = {
+    approveAnswer: PropTypes.func.isRequired,
+    updateQuestion: PropTypes.func.isRequired,
     createNewAnswer: PropTypes.func.isRequired,
     leaveAnswerValidation: PropTypes.func.isRequired,
     handleVoteAnswer: PropTypes.func.isRequired,
@@ -20,7 +23,12 @@ export default class AnswersUI extends BasicComponent {
 
     constructor(props) {
         super(props);
-        this.state = {answers: props.answers, leaveAnswer: false, answerBody: ''};
+        this.state = {
+            answers: props.answers,
+            leaveAnswer: false,
+            answerBody: '',
+            disableApproveBtn: false,
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -34,6 +42,10 @@ export default class AnswersUI extends BasicComponent {
         this.props.createNewAnswer(this.state.answerBody, this.props.question.id, this);
     }
 
+    triggerUpdateQuestion(question) {
+        this.props.updateQuestion(question);
+    }
+
     handleChangeAnswerBody = value => {
         if (value.length < 10000) {
             this.changeStateValue('answerBody', value);
@@ -41,9 +53,11 @@ export default class AnswersUI extends BasicComponent {
     };
 
     render() {
-        const { answers, loader } = this.state;
-        const { question, handleVoteAnswer } = this.props;
         const _this = this;
+        console.log(_this.props);
+        const { answers, loader, disableApproveBtn } = _this.state;
+        const { question, handleVoteAnswer, approveAnswer } = _this.props;
+        const isOwner: boolean = question.askedBy ? question.askedBy.id === RootScope.userId : false;
         return (
             <div className="question-adv-comments question-has-comments question-has-tabs">
                 <div id="comments" className="post-section">
@@ -148,6 +162,17 @@ export default class AnswersUI extends BasicComponent {
                                                         </div>
                                                     </div>
                                                     <div className="author clearfix">
+                                                        {
+                                                            question.hasAcceptedAnswer && answer.isTheBest ?
+                                                                <div className="best-answer">Best Answer</div> : ''
+                                                        }
+                                                        {
+                                                            isOwner && !question.hasAcceptedAnswer ?
+                                                                <button className="btn btn-approve" disabled={disableApproveBtn}
+                                                                    onClick={() => approveAnswer(question, answer, _this)}>
+                                                                    <i className="fas fa-check"/> Approve
+                                                                </button> : ''
+                                                        }
                                                         <div className="comment-meta">
                                                             <div className="comment-author">
                                                                 <span>
