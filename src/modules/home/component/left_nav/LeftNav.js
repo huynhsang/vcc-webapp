@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import {Link} from "react-router-dom";
 
 export default class LeftNav extends BasicComponent {
     render() {
@@ -42,9 +43,11 @@ export default class LeftNav extends BasicComponent {
                         <li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom menu-item-135 li-poll">
                             <a href="https://2code.info/demo/themes/Discy/Main/questions/?type=poll"><i
                                 className="icon-megaphone"/>Polls</a></li>
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-136"><a
-                            href="https://2code.info/demo/themes/Discy/Main/tags/"><i
-                            className="icon-tag"/>Tags</a></li>
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-136">
+                            <Link to="/tags">
+                                <i className="icon-tag"/>Tags
+                            </Link>
+                        </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-138"><a
                             href="https://2code.info/demo/themes/Discy/Main/badges/"><i
                             className="icon-trophy"/>Badges</a></li>

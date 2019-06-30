@@ -1,4 +1,4 @@
-import Result from './../../../global/Result';
+import Result from '../../../global/Result';
 import BasicService from "../../../common/abstract/services/BasicService";
 import type {Filter} from "../../../global/Filter";
 import RootScope from "../../../global/RootScope";
@@ -10,7 +10,8 @@ const SUBCATEGORY_API = RootScope.appApiUrl + 'SubCategories';
 export default class SubCategoryService extends BasicService implements ISubCategoryService {
 
     findAll(filter: Filter): Result {
-        return super.findAll(filter);
+        let fullUrl: string = FilterBuilder.buildUrlWithFilter(SUBCATEGORY_API, filter);
+        return SubCategoryService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
     getSubCategoriesByCategory(category: string): Result {
