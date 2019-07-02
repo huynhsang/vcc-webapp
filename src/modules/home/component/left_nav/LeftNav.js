@@ -38,33 +38,33 @@ export default class LeftNav extends BasicComponent {
                                 isShowQuestionTabs ?
                                     <ul className="sub-menu">
                                         <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-131">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/?show=recent-questions">
+                                            <a href="/?show=recent-questions">
                                                 New Questions
                                             </a>
                                         </li>
                                         <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-132">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/?show=most-voted">
+                                            <a href="/?show=most-voted">
                                                 Trending Questions
                                             </a>
                                         </li>
                                         <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-133">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/?show=most-visited">
+                                            <a href="/?show=most-visited">
                                                 Must read Questions
                                             </a>
                                         </li>
                                         <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-134">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/?show=most-answered">
+                                            <a href="/?show=most-answered">
                                                 Hot Questions
                                             </a>
                                         </li>
                                     </ul> : ''
                             }
                         </li>
-                        <li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom menu-item-135 li-poll">
-                            <a href="https://2code.info/demo/themes/Discy/Main/questions/?type=poll">
-                                <i className="icon-megaphone"/>Polls
-                            </a>
-                        </li>
+                        {/*<li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom menu-item-135 li-poll">*/}
+                            {/*<a href="/questions/?type=poll">*/}
+                                {/*<i className="icon-megaphone"/>Polls*/}
+                            {/*</a>*/}
+                        {/*</li>*/}
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-136">
                             <Link to="/tags">
                                 <i className="icon-tag"/>Tags
@@ -76,12 +76,12 @@ export default class LeftNav extends BasicComponent {
                             </Link>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
-                            <a href="https://2code.info/demo/themes/Discy/Main/users/">
+                            <a href="/">
                                 <i className="icon-users"/>Users
                             </a>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-139">
-                            <a href="https://2code.info/demo/themes/Discy/Main/faqs/">
+                            <a href="/faqs/">
                                 <i className="icon-lifebuoy"/>Help
                             </a>
                         </li>

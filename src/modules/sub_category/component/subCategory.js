@@ -22,7 +22,7 @@ export default class SubCategory extends BasicComponent {
                 <div className="breadcrumbs">
                     <span className="crumbs">
                         <span>
-                            <a href="https://2code.info/demo/themes/Discy/Main/">
+                            <a href="/">
                                 <i className="icon-home"/>
                                 Home
                             </a>

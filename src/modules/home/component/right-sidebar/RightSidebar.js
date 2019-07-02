@@ -134,38 +134,38 @@ export default class RightSidebar extends BasicComponent{
                                         <div>
                                             <ul>
                                                 <li><span className="span-icon"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/martin/"><img
+                                                    href="/profile/martin/"><img
                                                     className="avatar avatar-25 photo" alt="Martin Hope"
                                                     title="Martin Hope" width="25" height="25"
                                                     src="./Discy – Social Questions and Answers_files/team-2-25x25.jpg"/></a></span>
                                                     <div><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/profile/martin/">Martin
+                                                        href="/profile/martin/">Martin
                                                         Hope</a> added an answer <span className="question-title"><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-72">They might be as confused as t</a></span><span
+                                                        href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-72">They might be as confused as t</a></span><span
                                                         className="notifications-date">April 19, 2018 at 2:07 am</span>
                                                     </div>
                                                 </li>
                                                 <li><span className="span-icon"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/marko/"><img
+                                                    href="/profile/marko/"><img
                                                     className="avatar avatar-25 photo" alt="Marko Smith"
                                                     title="Marko Smith" width="25" height="25"
                                                     src="./Discy – Social Questions and Answers_files/team-4-25x25.jpg"/></a></span>
                                                     <div><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/profile/marko/">Marko
+                                                        href="/profile/marko/">Marko
                                                         Smith</a> added an answer <span className="question-title"><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-71">I have never heard a British p</a></span><span
+                                                        href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-71">I have never heard a British p</a></span><span
                                                         className="notifications-date">April 19, 2018 at 2:07 am</span>
                                                     </div>
                                                 </li>
                                                 <li><span className="span-icon"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/john/"><img
+                                                    href="/profile/john/"><img
                                                     className="avatar avatar-25 photo" alt="John Peter"
                                                     title="John Peter" width="25" height="25"
                                                     src="./Discy – Social Questions and Answers_files/team-9-25x25.jpg"/></a></span>
                                                     <div><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/profile/john/">John
+                                                        href="/profile/john/">John
                                                         Peter</a> added an answer <span className="question-title"><a
-                                                        href="https://2code.info/demo/themes/Discy/Main/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-69">Most British people understand</a></span><span
+                                                        href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-69">Most British people understand</a></span><span
                                                         className="notifications-date">April 19, 2018 at 2:07 am</span>
                                                     </div>
                                                 </li>
@@ -204,12 +204,12 @@ export default class RightSidebar extends BasicComponent{
                                                                     <div className="user-data">
                                                                         <ul>
                                                                             <li className="user-questions">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/marko/questions/">
+                                                                                <a href="/profile/marko/questions/">
                                                                                     {user.numberOfQuestions} Questions
                                                                                 </a>
                                                                             </li>
                                                                             <li className="user-points">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/marko/points/">
+                                                                                <a href="/profile/marko/points/">
                                                                                     {user.points} Points
                                                                                 </a>
                                                                             </li>

@@ -68,38 +68,38 @@ export default class MobileAside extends BasicComponent {
                                         </li>
                                         <li id="menu-item-138"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-138">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/badges/"><i
+                                            <a href="/badges/"><i
                                                 className="icon-trophy"/>Badges</a></li>
                                         <li id="menu-item-137"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/users/"><i
+                                            <a href="/users/"><i
                                                 className="icon-users"/>Users</a></li>
                                         <li id="menu-item-139"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-139">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/faqs/"><i
+                                            <a href="/faqs/"><i
                                                 className="icon-lifebuoy"/>Help</a></li>
                                     </ul>
                                 </div>
                                 <div className="mobile--top">
                                     <ul id="menu-header-1" className="menu">
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-64 current_page_item menu-item-75">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/">Home</a>
+                                            <a href="/">Home</a>
                                         </li>
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-76">
-                                            <a href="https://2code.info/demo/themes/Discy/Main/about-us/">About
+                                            <a href="/about-us/">About
                                                 Us</a></li>
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-77">
                                             <a
-                                               href="https://2code.info/demo/themes/Discy/Main/blog/">Blog</a></li>
+                                               href="/blog/">Blog</a></li>
                                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-78">
                                             <a
-                                               href="https://2code.info/demo/themes/Discy/Main/contact-us/">Contact
+                                               href="/contact-us/">Contact
                                                 Us</a></li>
                                     </ul>
                                 </div>
                                 <div className="mobile--top post-search">
                                     <form role="search" method="get" className="searchform main-search-form"
-                                          action="https://2code.info/demo/themes/Discy/Main/search/">
+                                          action="/search/">
                                         <div className="row">
                                             <div className="col col10">
                                                 <input type="search" className="live-search" autoComplete="off"

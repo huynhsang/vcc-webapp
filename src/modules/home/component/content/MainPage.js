@@ -121,25 +121,25 @@ export default class MainPage extends BasicComponent {
                                                                     <div className="user-columns-data">
                                                                         <ul>
                                                                             <li className="user-columns-questions">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/martin/questions/">
+                                                                                <a href="/profile/martin/questions/">
                                                                                     <i className="icon-book-open"/>
                                                                                     {askedBy.numberOfQuestions} Questions
                                                                                 </a>
                                                                             </li>
                                                                             <li className="user-columns-answers">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/martin/answers/">
+                                                                                <a href="/profile/martin/answers/">
                                                                                     <i className="icon-comment"/>
                                                                                     {askedBy.numberOfAnswers} Answers
                                                                                 </a>
                                                                             </li>
                                                                             <li className="user-columns-best-answers">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/martin/best-answers/">
+                                                                                <a href="/profile/martin/best-answers/">
                                                                                     <i className="icon-graduation-cap"/>
                                                                                     {askedBy.numberOfBestAnswers} Best Answers
                                                                                 </a>
                                                                             </li>
                                                                             <li className="user-columns-points">
-                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/martin/points/">
+                                                                                <a href="/profile/martin/points/">
                                                                                     <i className="icon-bucket"/>
                                                                                     {askedBy.points} Points
                                                                                 </a>

@@ -61,7 +61,7 @@ export default class Header extends BasicComponent {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/notifications/">
+                                                <a href="/profile/sanght/notifications/">
                                                     Show all notifications.
                                                 </a>
                                             </div>
@@ -88,7 +88,7 @@ export default class Header extends BasicComponent {
                                                     </a>
                                                 </li>
                                                 <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/best-answers/"><i
+                                                    href="/profile/sanght/best-answers/"><i
                                                     className="icon-graduation-cap"/>Best Answers</a></li>
                                                 <li>
                                                     <Link to="/login" onClick={this.logout}>
