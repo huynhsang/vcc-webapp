@@ -3,7 +3,39 @@ import BasicComponent from "../../../../common/abstract/component/BasicComponent
 import {Link} from "react-router-dom";
 
 export default class LeftNav extends BasicComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isShowOutline: false,
+        }
+        this.handleToggleQuestion = this.handleToggleQuestion.bind(this);
+    }
+    handleToggleQuestion() {
+        this.setState({
+            isShowOutline: !this.state.isShowOutline,
+        })
+    }
+
     render() {
+        let elOutline = null;
+        if (this.state.isShowOutline) {
+            elOutline =
+                <ul className="sub-menu">
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-131"><a
+                        className=""
+                        href="https://2code.info/demo/themes/Discy/Main/?show=recent-questions">New
+                        Questions</a></li>
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-132"><a
+                        href="https://2code.info/demo/themes/Discy/Main/?show=most-voted">Trending
+                        Questions</a></li>
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a
+                        href="https://2code.info/demo/themes/Discy/Main/?show=most-visited">Must
+                        read Questions</a></li>
+                    <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-134"><a
+                        href="https://2code.info/demo/themes/Discy/Main/?show=most-answered">Hot
+                        Questions</a></li>
+                </ul>
+        }
         return (
             <nav className="nav_menu float_r fixed_nav_menu"
                  style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "1px"}}>
@@ -22,23 +54,8 @@ export default class LeftNav extends BasicComponent {
                             </a>
                         </li>
                         <li className="nav_menu_open menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-130">
-                            <a href="https://2code.info/demo/themes/Discy/Main/questions/"><i
-                                className="icon-book-open"/>Questions</a>
-                            <ul className="sub-menu">
-                                <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-131"><a
-                                    className=""
-                                    href="https://2code.info/demo/themes/Discy/Main/?show=recent-questions">New
-                                    Questions</a></li>
-                                <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-132"><a
-                                    href="https://2code.info/demo/themes/Discy/Main/?show=most-voted">Trending
-                                    Questions</a></li>
-                                <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-133"><a
-                                    href="https://2code.info/demo/themes/Discy/Main/?show=most-visited">Must
-                                    read Questions</a></li>
-                                <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-134"><a
-                                    href="https://2code.info/demo/themes/Discy/Main/?show=most-answered">Hot
-                                    Questions</a></li>
-                            </ul>
+                            <a onClick={this.handleToggleQuestion}><i className="icon-book-open"/>Questions</a>
+                            { elOutline }
                         </li>
                         <li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom menu-item-135 li-poll">
                             <a href="https://2code.info/demo/themes/Discy/Main/questions/?type=poll"><i
