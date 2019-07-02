@@ -7,15 +7,34 @@ import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
 import PropTypes from "prop-types";
 import RootScope from "../../../../global/RootScope";
 import type {User} from "../../../../domain/User";
+import CookieHelper from "../../../../common/util/CookieHelper";
 
 const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
 };
 export default class Header extends BasicComponent {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            showUserMenu: false
+        }
+    }
+
+    toggleUserMenu() {
+        this.changeStateValue('showUserMenu', !this.state.showUserMenu);
+    };
+
+    logout = () => {
+       CookieHelper.deleteCookie('token');
+       CookieHelper.deleteCookie('userId');
+    };
+
     render() {
         const currentUser: User = RootScope.currentUser;
         const fullName: string = currentUser ?
             ApplicationUtil.formatString('{0} {1}', [currentUser.firstName, currentUser.lastName]) : '';
+        const userMenuStyle = this.state.showUserMenu ? {display: 'block'} : {display: 'none'};
         return (
             <div className="hidden-header header-dark mobile_bar_active">
                 <header className="header">
@@ -47,8 +66,8 @@ export default class Header extends BasicComponent {
                                                 </a>
                                             </div>
                                         </div>
-                                        <div className="user-login-click float_r">
-                                            <span className="user-click"/>
+                                        <div className="user-login-click float_r user-click-open">
+                                            <span className="user-click" onClick={() => this.toggleUserMenu()}/>
                                             <div className="user-image float_l">
                                                 <img className="avatar avatar-29 photo" alt={{fullName}} title={{fullName}} width="29" height="29" src="https://secure.gravatar.com/avatar/eda01b9e40edbfd790a5a8cc69e0791e?s=96&d=mm&r=g"/>
                                             </div>
@@ -58,34 +77,24 @@ export default class Header extends BasicComponent {
                                                 <div className="float_l">{fullName}</div>
                                             </div>
                                             <i className="icon-down-open-mini"/>
-                                            <ul style={{display: "none"}}>
+                                            <ul style={userMenuStyle}>
                                                 <li>
-                                                    <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/">
+                                                    <a href="/">
                                                     <i className="icon-user"/>User Profile</a>
                                                 </li>
                                                 <li>
-                                                    <a href="https://2code.info/demo/themes/Discy/Main/profile/sanght/edit/">
+                                                    <a href="/">
                                                         <i className="icon-cog"/>Edit Profile
                                                     </a>
                                                 </li>
                                                 <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/messages/"><i
-                                                    className="icon-mail"/>Messages</a></li>
-                                                <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/asked-questions/"><i
-                                                    className="icon-sound"/>Asked Questions</a></li>
-                                                <li><a
                                                     href="https://2code.info/demo/themes/Discy/Main/profile/sanght/best-answers/"><i
                                                     className="icon-graduation-cap"/>Best Answers</a></li>
-                                                <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/points/"><i
-                                                    className="icon-bucket"/>Points</a></li>
-                                                <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/sanght/activities/"><i
-                                                    className="icon-cog"/>Activity Log</a></li>
-                                                <li><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/wp-login.php?action=logout&amp;redirect_to=https%3A%2F%2F2code.info%2Fdemo%2Fthemes%2FDiscy%2FMain%2F&amp;_wpnonce=6459ceff4f"><i
-                                                    className="icon-logout"/>Logout</a></li>
+                                                <li>
+                                                    <Link to="/login" onClick={this.logout}>
+                                                        <i className="icon-logout"/> Logout
+                                                    </Link>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
@@ -100,7 +109,7 @@ export default class Header extends BasicComponent {
                         }
                         <div className="left-header float_l">
                             <h2 className="screen-reader-text site_logo">VC&C</h2>
-                            <Link className="logo float_l logo-img" to="/home" title="Home">
+                            <Link className="logo float_l logo-img" to="/" title="Home">
                                 <img title="VC&C" height="45" width="137" className="default_screen" alt="VC&C Logo" src={logo}/>
                                 <img title="VC&C" height="45" width="137" className="retina_screen" alt="VC&C Logo" src={logo2x}/>
                             </Link>
@@ -118,8 +127,7 @@ export default class Header extends BasicComponent {
                                         </div>
                                     </form>
                                 </div>
-                                <nav className="nav float_l" itemScope=""
-                                     itemType="https://schema.org/SiteNavigationElement">
+                                <nav className="nav float_l">
                                     <h3 className="screen-reader-text">Discy Navigation</h3>
                                     <ul id="menu-header" className="menu">
                                         <li id="menu-item-75"

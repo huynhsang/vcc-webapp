@@ -3,8 +3,9 @@ import BasicService from "../../../common/abstract/services/BasicService";
 import type {IAccountService} from "../../../common/abstract/services/IAccountService";
 import type {Filter} from "../../../global/Filter";
 import RootScope from "../../../global/RootScope";
+import FilterBuilder from "../../../global/Filter";
 
-const ACCOUNT_API = RootScope.appApiUrl + 'account';
+const ACCOUNT_API = RootScope.appApiUrl + 'users';
 
 export default class AccountService extends BasicService implements IAccountService {
 
@@ -23,6 +24,12 @@ export default class AccountService extends BasicService implements IAccountServ
 	findOneByEmail(email: string): Result {
 		const fullUrl: string = `${ACCOUNT_API}/search`;
 		return AccountService.post(fullUrl, email, RootScope.axiosDefaultConfig);
+	}
+
+    getTopUsersWithTheHighestPoints(filter: Filter): Result {
+        filter.order = "points DESC";
+    	const fullUrl: string = FilterBuilder.buildUrlWithFilter(ACCOUNT_API, filter);
+    	return AccountService.get(fullUrl, RootScope.axiosDefaultConfig)
 	}
 
 	static builder(): IAccountService {

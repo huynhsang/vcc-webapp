@@ -2,10 +2,11 @@ import React from 'react';
 import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import LeftNav from "./left_nav/LeftNav";
 import {Link, Route} from "react-router-dom";
-import RightSidebar from "./right-sidebar/RightSidebar";
+import RightSidebar from "../container/RightSidebarImpl";
 
 export default class Home extends BasicComponent {
 	render() {
+	    const { isAuthenticated } = this.props;
 		return (
             <section>
                 <div className="call-action-unlogged call-action-dark call-action-style_1">
@@ -18,8 +19,12 @@ export default class Home extends BasicComponent {
                                 and to empower everyone to share their knowledge.</p>
                         </div>
                         <div className="col3">
-                            <Link to="/registration" className="signup-panel button-default call-action-button"
-                                  style={{marginTop: "47.5px"}}>Create A New Account</Link>
+                            {
+                                !isAuthenticated ?
+                                    <Link to="/registration" className="signup-panel button-default call-action-button" style={{marginTop: "47.5px"}}>
+                                        Create A New Account
+                                    </Link> : ''
+                            }
                         </div>
                     </div>
                 </div>

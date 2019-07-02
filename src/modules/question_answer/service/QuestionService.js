@@ -6,6 +6,7 @@ import type {IQuestionService} from "../../../common/abstract/services/IQuestion
 import type {Filter} from "../../../global/Filter";
 
 const QUESTION_API = RootScope.appApiUrl + 'questions';
+const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;
 
 export default class QuestionService extends BasicService implements IQuestionService {
 
@@ -42,6 +43,42 @@ export default class QuestionService extends BasicService implements IQuestionSe
             answerId: answerId,
         };
         return QuestionService.post(fullUrl, data, RootScope.axiosDefaultConfig);
+    }
+
+    getPopularQuestionsInMonth(filter: Filter): Result {
+        filter.include = [{
+            relation: 'askedBy',
+            scope: {
+                fields: ['id', 'avatar', 'firstName', 'lastName', 'numberOfQuestions',
+                    'numberOfAnswers', 'numberOfBestAnswers', 'points', 'level'],
+            }
+        }];
+        filter.where = {
+            created: {
+                gt: new Date(Date.now() - ONE_MONTH)
+            }
+        };
+        filter.order = "numberOfViews DESC";
+        const fullUrl: string = FilterBuilder.buildUrlWithFilter(QUESTION_API, filter);
+        return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
+    }
+
+    getQuestionsWithTopAnswerInMonth(filter: Filter): Result {
+        filter.include = [{
+            relation: 'askedBy',
+            scope: {
+                fields: ['id', 'avatar', 'firstName', 'lastName', 'numberOfQuestions',
+                    'numberOfAnswers', 'numberOfBestAnswers', 'points', 'level'],
+            }
+        }];
+        filter.where = {
+            created: {
+                gt: new Date(Date.now() - ONE_MONTH)
+            }
+        };
+        filter.order = "numberOfAnswers DESC";
+        const fullUrl: string = FilterBuilder.buildUrlWithFilter(QUESTION_API, filter);
+        return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
     static builder(): IQuestionService {

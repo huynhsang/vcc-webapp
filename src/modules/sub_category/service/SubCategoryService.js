@@ -24,6 +24,12 @@ export default class SubCategoryService extends BasicService implements ISubCate
         return SubCategoryService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
+    getTrendingTags(filter: Filter): Result {
+        filter.order = "numberOfQuestions DESC";
+        const fullUrl = FilterBuilder.buildUrlWithFilter(SUBCATEGORY_API, filter);
+        return SubCategoryService.get(fullUrl, RootScope.axiosDefaultConfig);
+    }
+
     static builder(): ISubCategoryService {
         return new SubCategoryService();
     }

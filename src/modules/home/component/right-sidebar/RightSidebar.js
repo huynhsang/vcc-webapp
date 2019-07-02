@@ -1,9 +1,49 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
 import {Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import type {Filter} from "../../../../global/Filter";
+import FilterBuilder from "../../../../global/Filter";
+import type {User} from "../../../../domain/User";
+import type {Question} from "../../../../domain/Question";
+import type {SubCategory} from "../../../../domain/SubCategory";
 
+const propTypes = {
+    getTopUsers: PropTypes.func.isRequired,
+    getTopPopularQuestions: PropTypes.func.isRequired,
+    getQuestionsWithTopAnswers: PropTypes.func.isRequired,
+    getTopTrendingTags: PropTypes.func.isRequired,
+};
 export default class RightSidebar extends BasicComponent{
+    topUsersFilter: Filter = FilterBuilder.buildPaginationFilter(null, 0, 5);
+    popularQuestionsFilter: Filter = FilterBuilder.buildPaginationFilter(null, 0, 5);
+    qaFilter: Filter = FilterBuilder.buildPaginationFilter(null, 0, 5);
+    trendingTagsFilter: Filter = FilterBuilder.buildPaginationFilter(null, 0, 5);
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            topUsers: [],
+            popularQuestions: [],
+            questionsWithTopAnswers: [],
+            trendingTags: [],
+            isPopularTab: true,
+        };
+        props.getTopUsers(this.topUsersFilter, this);
+        props.getTopPopularQuestions(this.popularQuestionsFilter, this);
+        props.getQuestionsWithTopAnswers(this.qaFilter, this);
+        props.getTopTrendingTags(this.trendingTagsFilter, this);
+    }
+
+    toggleQuestionTabs(value) {
+      this.changeStateValue("isPopularTab", value);
+    }
+
     render() {
+        const { topUsers, popularQuestions, questionsWithTopAnswers, trendingTags } = this.state;
+        const popularClassName = this.state.isPopularTab ? "tab current" : "tab";
+        const answerClassName = this.state.isPopularTab ? "tab" : "tab current";
+        const questions: Array<Question> = this.state.isPopularTab ? popularQuestions : questionsWithTopAnswers;
         return (
             <aside className="sidebar sidebar-width float_l fixed-sidebar"
                    style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "1px"}}>
@@ -42,12 +82,14 @@ export default class RightSidebar extends BasicComponent{
                         <div className="widget tabs-wrap widget-tabs">
                             <div className="widget-title widget-title-tabs">
                                 <ul className="tabs tabstabs-widget-2">
-                                    <li className="tab current"><a href="https://2code.info/demo/themes/Discy/Main/#"
-                                                                   className="">Popular</a></li>
-                                    <li className="tab"><a
-                                        href="https://2code.info/demo/themes/Discy/Main/#">Answers</a></li>
+                                    <li className={popularClassName}>
+                                        <a onClick={() => this.toggleQuestionTabs(true)}>Popular</a>
+                                    </li>
+                                    <li className={answerClassName}>
+                                        <a onClick={() => this.toggleQuestionTabs(false)}>Answers</a>
+                                    </li>
                                 </ul>
-                                <div className="clearfix"></div>
+                                <div className="clearfix"/>
                             </div>
                             <div className="widget-wrap">
                                 <div className="widget-posts tab-inner-wrap tab-inner-wraptabs-widget-2 active-tab"
@@ -55,62 +97,34 @@ export default class RightSidebar extends BasicComponent{
                                     <div className="user-notifications user-profile-area">
                                         <div>
                                             <ul>
-                                                <li className="widget-posts-text widget-no-img">
-                                                    <span className="span-icon">
-                                                        <a href="/">
-                                                            <img className="avatar avatar-20 photo" alt="Marko Smith" title="Marko Smith" width="20" height="20" src="./Discy – Social Questions and Answers_files/team-4-20x20.jpg"/>
-                                                        </a>
-                                                    </span>
-                                                    <div>
-                                                        <h3><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/question/how-to-approach-applying-for-a-job-at-a-company-owned-by-a-friend/"
-                                                            title="How to approach applying for a job at a company owned by a friend?"
-                                                            rel="bookmark">How to approach applying for a job at a
-                                                            company </a></h3>
-                                                        <ul className="widget-post-meta">
-                                                            <li><a className="post-meta-comment"
-                                                                   href="https://2code.info/demo/themes/Discy/Main/question/how-to-approach-applying-for-a-job-at-a-company-owned-by-a-friend/#comments"><i
-                                                                className="icon-comment"/>7 Answers</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li className="widget-posts-text widget-no-img"><span
-                                                    className="span-icon"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/james/"><img
-                                                    className="avatar avatar-20 photo" alt="James Wane"
-                                                    title="James Wane" width="20" height="20"
-                                                    src="./Discy – Social Questions and Answers_files/team-6-20x20.jpg"/></a></span>
-                                                    <div>
-                                                        <h3><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/question/how-to-handle-personal-stress-caused-by-utterly-incompetent-and-lazy-co-workers/"
-                                                            title="How to handle personal stress caused by utterly incompetent and lazy co-workers?"
-                                                            rel="bookmark">How to handle personal stress caused by
-                                                            utterly incompetent and </a></h3>
-                                                        <ul className="widget-post-meta">
-                                                            <li><a className="post-meta-comment"
-                                                                   href="https://2code.info/demo/themes/Discy/Main/question/how-to-handle-personal-stress-caused-by-utterly-incompetent-and-lazy-co-workers/#comments"><i
-                                                                className="icon-comment"/>5 Answers</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
-                                                <li className="widget-posts-text widget-no-img"><span
-                                                    className="span-icon"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/marko/"><img
-                                                    className="avatar avatar-20 photo" alt="Marko Smith"
-                                                    title="Marko Smith" width="20" height="20"
-                                                    src="./Discy – Social Questions and Answers_files/team-4-20x20.jpg"/></a></span>
-                                                    <div>
-                                                        <h3><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/question/what-is-a-programmers-life-like/"
-                                                            title="What is a programmer’s life like?" rel="bookmark">What
-                                                            is a programmer’s life like?</a></h3>
-                                                        <ul className="widget-post-meta">
-                                                            <li><a className="post-meta-comment"
-                                                                   href="https://2code.info/demo/themes/Discy/Main/question/what-is-a-programmers-life-like/#comments"><i
-                                                                className="icon-comment"/>5 Answers</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </li>
+                                                {
+                                                    questions.map((question: Question, index) => {
+                                                        const askedBy: User = question.askedBy;
+                                                        return (
+                                                            <li key={index} className="widget-posts-text widget-no-img">
+                                                                <span className="span-icon">
+                                                                    <Link to={`/user/${askedBy.id}`}>
+                                                                        <img className="avatar avatar-20 photo" alt={`${askedBy.firstName} ${askedBy.lastName}`} width="20" height="20" src={askedBy.avatar}/>
+                                                                    </Link>
+                                                                </span>
+                                                                <div>
+                                                                    <h3>
+                                                                        <Link to={`/question/${question.id}/view`} title={question.title}>
+                                                                            {question.title}
+                                                                        </Link>
+                                                                    </h3>
+                                                                    <ul className="widget-post-meta">
+                                                                        <li>
+                                                                            <Link to={`/question/${question.id}/view`} className="post-meta-comment">
+                                                                                <i className="icon-comment"/>{question.numberOfAnswers} Answers
+                                                                            </Link>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        )
+                                                    })
+                                                }
                                             </ul>
                                         </div>
                                     </div>
@@ -162,183 +176,80 @@ export default class RightSidebar extends BasicComponent{
                             </div>
                         </div>
                         <section id="users-widget-2" className="widget users-widget">
-                            <h2 className="widget-title"><i className="icon-folder"/>Top Members</h2>
+                            <h2 className="widget-title">
+                                <i className="icon-folder"/>Top Members
+                            </h2>
                             <div className="widget-wrap">
                                 <div className="user-section user-section-small row user-not-normal">
-                                    <div className="col col12">
-                                        <div className="post-section user-area user-area-small">
-                                            <div className="post-inner">
-                                                <div className="author-image author-image-42"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/marko/"><span
-                                                    className="author-image-span"><img
-                                                    className="avatar avatar-42 photo" alt="" title="" width="42"
-                                                    height="42"
-                                                    src="./Discy – Social Questions and Answers_files/team-4-42x42.jpg"/></span></a>
-                                                </div>
-                                                <div className="user-content">
-                                                    <div className="user-inner">
-                                                        <h4><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/profile/marko/">Marko
-                                                            Smith</a></h4>
-                                                        <div className="user-data">
-                                                            <ul>
-                                                                <li className="user-questions"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/marko/questions/">3
-                                                                    Questions</a></li>
-                                                                <li className="user-points"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/marko/points/">283
-                                                                    Points</a></li>
-                                                            </ul>
+                                    {
+                                        topUsers.map((user: User, index) => {
+                                            return (
+                                                <div key={index} className="col col12">
+                                                    <div className="post-section user-area user-area-small">
+                                                        <div className="post-inner">
+                                                            <div className="author-image author-image-42">
+                                                                <Link to={`/user/${user.id}`}>
+                                                                    <span className="author-image-span">
+                                                                        <img className="avatar avatar-42 photo" alt="" title="" width="42" height="42" src={user.avatar}/>
+                                                                    </span>
+                                                                </Link>
+                                                            </div>
+                                                            <div className="user-content">
+                                                                <div className="user-inner">
+                                                                    <h4>
+                                                                        <Link to={`/user/${user.id}`}>
+                                                                            {user.firstName} {user.lastName}
+                                                                        </Link>
+                                                                    </h4>
+                                                                    <div className="user-data">
+                                                                        <ul>
+                                                                            <li className="user-questions">
+                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/marko/questions/">
+                                                                                    {user.numberOfQuestions} Questions
+                                                                                </a>
+                                                                            </li>
+                                                                            <li className="user-points">
+                                                                                <a href="https://2code.info/demo/themes/Discy/Main/profile/marko/points/">
+                                                                                    {user.points} Points
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <span className="badge-span" style={{backgroundColor: "#d9a34a"}}>
+                                                                        {user.level}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <div className="clearfix"/>
                                                         </div>
-                                                        <span className="badge-span"
-                                                              style={{backgroundColor: "#d9a34a"}}>Enlightened</span></div>
-                                                </div>
-                                                <div className="clearfix"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col col12">
-                                        <div className="post-section user-area user-area-small">
-                                            <div className="post-inner">
-                                                <div className="author-image author-image-42"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/aaron/"><span
-                                                    className="author-image-span"><img
-                                                    className="avatar avatar-42 photo" alt="" title="" width="42"
-                                                    height="42"
-                                                    src="./Discy – Social Questions and Answers_files/team-1-42x42.jpg"/></span></a>
-                                                </div>
-                                                <div className="user-content">
-                                                    <div className="user-inner">
-                                                        <h4><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/profile/aaron/">Aaron
-                                                            Aiken</a></h4>
-                                                        <div className="user-data">
-                                                            <ul>
-                                                                <li className="user-questions"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/aaron/questions/">3
-                                                                    Questions</a></li>
-                                                                <li className="user-points"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/aaron/points/">243
-                                                                    Points</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <span className="badge-span"
-                                                              style={{backgroundColor: "#6b3de4"}}>Professional</span>
                                                     </div>
                                                 </div>
-                                                <div className="clearfix"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col col12">
-                                        <div className="post-section user-area user-area-small">
-                                            <div className="post-inner">
-                                                <div className="author-image author-image-42"><a
-                                                    href="https://2code.info/demo/themes/Discy/Main/profile/ahmed/"><span
-                                                    className="author-image-span"><img
-                                                    className="avatar avatar-42 photo" alt="" title="" width="42"
-                                                    height="42"
-                                                    src="./Discy – Social Questions and Answers_files/team-7-42x42.jpg"/></span></a>
-                                                </div>
-                                                <div className="user-content">
-                                                    <div className="user-inner">
-                                                        <h4><a
-                                                            href="https://2code.info/demo/themes/Discy/Main/profile/ahmed/">Ahmed
-                                                            Hassan</a><span className="verified_user tooltip-n"
-                                                                            original-title="Verified"><i
-                                                            className="icon-check"/></span></h4>
-                                                        <div className="user-data">
-                                                            <ul>
-                                                                <li className="user-questions"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/ahmed/questions/">3
-                                                                    Questions</a></li>
-                                                                <li className="user-points"><a
-                                                                    href="https://2code.info/demo/themes/Discy/Main/profile/ahmed/points/">225
-                                                                    Points</a></li>
-                                                            </ul>
-                                                        </div>
-                                                        <span className="badge-span"
-                                                              style={{backgroundColor: "#6b3de4"}}>Professional</span>
-                                                    </div>
-                                                </div>
-                                                <div className="clearfix"></div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            )
+                                        })
+                                    }
                                 </div>
                             </div>
                         </section>
                         <section id="tag_cloud-2" className="widget widget_tag_cloud">
-                            <h2 className="widget-title"><i className="icon-folder"/>Trending Tags</h2>
-                            <div className="tagcloud"><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/analytics/"
-                                className="tag-cloud-link tag-link-11 tag-link-position-1" style={{fontSize: "22pt"}}
-                                aria-label="analytics (3 items)">analytics</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/british/"
-                                className="tag-cloud-link tag-link-37 tag-link-position-2" style={{fontSize: "8pt"}}
-                                aria-label="british (1 item)">british</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/company/"
-                                className="tag-cloud-link tag-link-32 tag-link-position-3" style={{fontSize: "16.4pt"}}
-                                aria-label="company (2 items)">company</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/computer/"
-                                className="tag-cloud-link tag-link-28 tag-link-position-4" style={{fontSize: "8pt"}}
-                                aria-label="computer (1 item)">computer</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/developers/"
-                                className="tag-cloud-link tag-link-16 tag-link-position-5" style={{fontSize: "8pt"}}
-                                aria-label="developers (1 item)">developers</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/django/"
-                                className="tag-cloud-link tag-link-26 tag-link-position-6" style={{fontSize: "8pt"}}
-                                aria-label="django (1 item)">django</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/employee/"
-                                className="tag-cloud-link tag-link-30 tag-link-position-7" style={{fontSize: "8pt"}}
-                                aria-label="employee (1 item)">employee</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/employer/"
-                                className="tag-cloud-link tag-link-29 tag-link-position-8" style={{fontSize: "8pt"}}
-                                aria-label="employer (1 item)">employer</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/english/"
-                                className="tag-cloud-link tag-link-36 tag-link-position-9" style={{fontSize: "22pt"}}
-                                aria-label="english (3 items)">english</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/facebook/"
-                                className="tag-cloud-link tag-link-33 tag-link-position-10" style={{fontSize: "8pt"}}
-                                aria-label="facebook (1 item)">facebook</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/french/"
-                                className="tag-cloud-link tag-link-31 tag-link-position-11" style={{fontSize: "8pt"}}
-                                aria-label="french (1 item)">french</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/google/"
-                                className="tag-cloud-link tag-link-35 tag-link-position-12" style={{fontSize: "16.4pt"}}
-                                aria-label="google (2 items)">google</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/interview/"
-                                className="tag-cloud-link tag-link-34 tag-link-position-13" style={{fontSize: "8pt"}}
-                                aria-label="interview (1 item)">interview</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/javascript/"
-                                className="tag-cloud-link tag-link-27 tag-link-position-14" style={{fontSize: "8pt"}}
-                                aria-label="javascript (1 item)">javascript</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/language/"
-                                className="tag-cloud-link tag-link-25 tag-link-position-15" style={{fontSize: "22pt"}}
-                                aria-label="language (3 items)">language</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/life/"
-                                className="tag-cloud-link tag-link-14 tag-link-position-16" style={{fontSize: "8pt"}}
-                                aria-label="life (1 item)">life</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/php/"
-                                className="tag-cloud-link tag-link-24 tag-link-position-17" style={{fontSize: "8pt"}}
-                                aria-label="php (1 item)">php</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/programmer/"
-                                className="tag-cloud-link tag-link-15 tag-link-position-18" style={{fontSize: "8pt"}}
-                                aria-label="programmer (1 item)">programmer</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/programs/"
-                                className="tag-cloud-link tag-link-12 tag-link-position-19" style={{fontSize: "16.4pt"}}
-                                aria-label="programs (2 items)">programs</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/salary/"
-                                className="tag-cloud-link tag-link-17 tag-link-position-20" style={{fontSize: "8pt"}}
-                                aria-label="salary (1 item)">salary</a><a
-                                href="https://2code.info/demo/themes/Discy/Main/question-tag/university/"
-                                className="tag-cloud-link tag-link-13 tag-link-position-21" style={{fontSize: "8pt"}}
-                                aria-label="university (1 item)">university</a></div>
+                            <h2 className="widget-title">
+                                <i className="icon-folder"/>Trending Tags
+                            </h2>
+                            <div className="tagcloud">
+                                {
+                                    trendingTags.map((tag: SubCategory, index) => {
+                                        return (
+                                            <Link key={index} to={`/questions?tags=${tag.slug}`} className="tag-cloud-link tag-link-11 tag-link-position-1">
+                                                analytics
+                                            </Link>
+                                        )
+                                    })
+                                }
+                            </div>
                         </section>
                     </div>
                 </div>
             </aside>
         )
     }
-
 }
+RightSidebar.propTypes = propTypes;
