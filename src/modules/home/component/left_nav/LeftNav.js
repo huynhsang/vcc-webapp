@@ -71,9 +71,9 @@ export default class LeftNav extends BasicComponent {
                             </Link>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-138">
-                            <a href="https://2code.info/demo/themes/Discy/Main/badges/">
+                            <Link to="/badges">
                                 <i className="icon-trophy"/>Badges
-                            </a>
+                            </Link>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
                             <a href="https://2code.info/demo/themes/Discy/Main/users/">

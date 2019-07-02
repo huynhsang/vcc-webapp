@@ -9,6 +9,7 @@ import MainPage from "../../../home/container/MainPageImpl";
 import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
 import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
 import SubCategory from "../../../sub_category/container/subCategoryImpl";
+import Badges from "../../../badges/container/BadgesImpl"
 
 export const UnAuthLink = [
 	{
@@ -76,6 +77,17 @@ export const PublicLink = [
                 path: '',
                 exact: true,
                 component: SubCategory
+            }
+        ]
+    },
+    {
+        path: '/badges',
+        component: Home,
+        subRoutes: [
+            {
+                path: '',
+                exact: true,
+                component: Badges
             }
         ]
     }
