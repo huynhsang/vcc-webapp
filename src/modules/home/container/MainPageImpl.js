@@ -38,6 +38,8 @@ function getQuestions(filter: Filter, show: String, _this: MainPage) {
                 questions = questions.concat(result.data);
                 _this.changeStateValue("questions", questions);
 
+            } else {
+                // Todo: Handle error here
             }
         });
     }
@@ -66,20 +68,20 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                 if (result.success) {
                     question.votes[0].isPositiveVote = isPositiveVote;
                     updateUIAfterVote(question, isPositiveVote, isVotedBefore, _this);
+                } else {
+                    // Todo: Show error here
+                    _this.changeStateValue('loader', false);
                 }
-            }).catch(err => {
-                // Todo: Show error here
-                _this.changeStateValue('loader', false);
             })
         } else {
             usersVoteService.voteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     question.votes = [result.data];
                     updateUIAfterVote(question, isPositiveVote, isVotedBefore, _this);
+                } else {
+                    // Todo: Show error here
+                    _this.changeStateValue('loader', false);
                 }
-            }).catch(err => {
-                // Todo: Show error here
-                _this.changeStateValue('loader', false);
             })
         }
     }

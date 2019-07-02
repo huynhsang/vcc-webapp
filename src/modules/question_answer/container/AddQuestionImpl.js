@@ -13,10 +13,9 @@ function getSubCategoriesByCategory(category, _this: AddQuestion) {
             .then((result: Result) => {
                 if (result.success) {
                     _this.changeStateValue('subCategories', result.data);
+                } else {
+                    // Todo: handle error here
                 }
-            })
-            .catch(err => {
-            //    to do: handle error here
             })
     }
 }

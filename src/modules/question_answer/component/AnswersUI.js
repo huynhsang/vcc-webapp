@@ -54,7 +54,6 @@ export default class AnswersUI extends BasicComponent {
 
     render() {
         const _this = this;
-        console.log(_this.props);
         const { answers, loader, disableApproveBtn } = _this.state;
         const { question, handleVoteAnswer, approveAnswer } = _this.props;
         const isOwner: boolean = question.askedBy ? question.askedBy.id === RootScope.userId : false;

@@ -48,9 +48,9 @@ function createNewAnswer(answerBody: string, questionId: number, _this: AnswersU
                 let answers = _this.getDataFromState("answers") || [];
                 answers.unshift(result.data);
                 _this.changeStateValues(new Map([["answers", answers], ["answerBody", ""]]));
+            } else {
+                // To do: handle error
             }
-        }).catch((err) => {
-            // To do: handle error
         })
     }
 }
@@ -91,20 +91,20 @@ function handleVoteAnswer(answer: Answer, isPositiveVote: boolean, isVotedBefore
                 if (result.success) {
                     answer.votes[0].isPositiveVote = isPositiveVote;
                     updateUIAfterVote(answer, isPositiveVote, isVotedBefore, _this);
+                } else {
+                    // Todo: Show error here
+                    _this.changeStateValue('loader', false);
                 }
-            }).catch(err => {
-                // Todo: Show error here
-                _this.changeStateValue('loader', false);
             })
         } else {
             usersVoteService.voteAnswer(data).then((result: Result) => {
                 if (result.success) {
                     answer.votes = [result.data];
                     updateUIAfterVote(answer, isPositiveVote, isVotedBefore, _this);
+                } else {
+                    // Todo: Show error here
+                    _this.changeStateValue('loader', false);
                 }
-            }).catch(err => {
-                // Todo: Show error here
-                _this.changeStateValue('loader', false);
             })
         }
     }

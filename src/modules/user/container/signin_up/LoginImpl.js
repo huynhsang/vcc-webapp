@@ -31,9 +31,6 @@ function doLogin(loginData: LoginRequest, redirect: any): void {
                 RootScope.resetAuthValues();
                 // Todo: show error here
 			}
-		}).catch((err) => {
-            RootScope.resetAuthValues();
-            // Todo: show error here
 		});
 	}
 }

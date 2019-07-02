@@ -71,7 +71,7 @@ export default class MainPage extends BasicComponent {
                                 const subCategories: Array<SubCategory> = question.tags ? JSON.parse(question.tags) : [];
                                 const bestAnswerClassName = question.hasAcceptedAnswer ? "best-answer-meta meta-best-answer" : "best-answer-meta";
 
-                                const isVoted: boolean = question.votes.length > 0;
+                                const isVoted: boolean = question.votes && question.votes.length > 0;
                                 const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
                                 const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
                                 const showLoader: boolean = loader && loader.questionId === question.id;
