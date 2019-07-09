@@ -58,3 +58,7 @@
     border: 1px solid;
     padding: 0 3px;
 }
+
+li.flexMenu-viewMore:hover ul{
+    display: block !important;
+}

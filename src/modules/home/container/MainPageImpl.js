@@ -30,13 +30,19 @@ function getQuestions(filter: Filter, show: String, _this: MainPage) {
             isHidden: false,
             isVerified: true,
         };
-        if (show === 'no-answers') filter.where.numberOfAnswers = 0;
-        if (show) filter.order = orderMaps[show];
+        if (show === "no-answers") filter.where.numberOfAnswers = 0;
+        else if (!orderMaps[show]) {
+            show = "recent-questions";
+            window.location.search = "?show=recent-questions"
+        }
+        filter.order = orderMaps[show];
         let questions = _this.getDataFromState("questions");
         questionService.findAll(filter).then((result: Result) => {
             if (result.success) {
-                questions = questions.concat(result.data);
-                _this.changeStateValue("questions", questions);
+                const currentShow = _this.getDataFromState("show");
+                questions = currentShow === show ? questions.concat(result.data) : result.data;
+                console.log(questions);
+                _this.changeStateValues(new Map([["questions", questions], ["show", show]]));
 
             } else {
                 // Todo: Handle error here

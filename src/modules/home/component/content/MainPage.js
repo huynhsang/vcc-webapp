@@ -19,16 +19,25 @@ export default class MainPage extends BasicComponent {
 
     constructor(props) {
         super(props);
-        this.state = {questions: []};
+        this.state = {questions: [], show: null};
     }
-    handleBeforeTheFirstRender(): void {
+
+    handleAfterTheFirstRender(): void {
         const params = new URLSearchParams(this.props.location.search);
         this.props.getQuestions(this.filter, params.get('show'), this);
     }
 
+    handleAfterRendering(): void {
+        const {show} = this.state;
+        const params = new URLSearchParams(this.props.location.search);
+        if (show != null && params.get('show') !== show) {
+            this.props.getQuestions(this.filter, params.get('show'), this);
+        }
+    }
+
     render() {
         const _this = this;
-        const { questions, loader } = _this.state;
+        const { questions, show, loader } = _this.state;
         const { handleVoteQuestion } = _this.props;
         return (
             <div className="discy-main-inner float_l">
@@ -38,22 +47,22 @@ export default class MainPage extends BasicComponent {
                         <div className="wrap-tabs">
                             <div className="menu-tabs active-menu">
                                 <ul className="menu flex">
-                                    <li className="active-tab">
+                                    <li className={show === "recent-questions" ? "active-tab" : ""}>
                                         <Link to="?show=recent-questions">Recent Questions</Link>
                                     </li>
-                                    <li>
+                                    <li className={show === "most-answered" ? "active-tab" : ""}>
                                         <Link to="?show=most-answered">Most Answered</Link>
                                     </li>
-                                    <li>
+                                    <li className={show === "most-visited" ? "active-tab" : ""}>
                                         <Link to="?show=most-visited">Most Visited</Link>
                                     </li>
-                                    <li className="flexMenu-viewMore">
+                                    <li className="flexMenu-viewMore active">
                                         <a title="">
                                             <i className="icon-dot-3"/>
                                         </a>
                                         <ul className="flexMenu-popup" style={{display: "none", position: "absolute"}}>
-                                            <Link to="?show=most-voted">Most Voted</Link>
-                                            <Link to="?show=no-answers">No Answers</Link>
+                                            <li><Link to="?show=most-voted">Most Voted</Link></li>
+                                            <li><Link to="?show=no-answers">No Answers</Link></li>
                                         </ul>
                                     </li>
                                 </ul>
