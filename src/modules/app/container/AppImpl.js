@@ -1,6 +1,9 @@
 import {connect} from 'react-redux';
 import App from './../component/App';
 import AccountUtil from "../../../common/util/AccountUtil";
+import CookieHelper from "../../../common/util/CookieHelper";
+import CookieConstant from "../../../common/constant/CookieConstant";
+import {failedAuthentication} from "../action/App";
 
 function verifyToken() {
 	return (dispatch) => {
@@ -10,6 +13,14 @@ function verifyToken() {
 	}
 }
 
+function logout() {
+    return (dispatch) => {
+        CookieHelper.deleteCookie(CookieConstant.jwtTokenName);
+        CookieHelper.deleteCookie(CookieConstant.userIdKey);
+        dispatch(failedAuthentication());
+    }
+}
+
 // Retrieve data from store as props
 const mapStateToProps = (store) => ({
 	auth: store.AppAuth
@@ -17,5 +28,5 @@ const mapStateToProps = (store) => ({
 
 export default connect(
 	mapStateToProps,
-	{verifyToken}
+	{verifyToken, logout}
 )(App);

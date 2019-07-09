@@ -1,5 +1,5 @@
 import connect from "react-redux/es/connect/connect";
-import SubCategory from "../component/subCategory";
+import SubCategory from "../component/SubCategory";
 import Result from "../../../global/Result";
 import CoreService from "../../../global/CoreService";
 

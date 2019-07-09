@@ -1,5 +1,6 @@
 import React from 'react';
 import BasicComponent from "../../../../common/abstract/component/BasicComponent";
+import {Link} from "react-router-dom";
 
 export default class MobileAside extends BasicComponent {
     render() {
@@ -18,7 +19,7 @@ export default class MobileAside extends BasicComponent {
                                 </a>
                                 <div className="mobile-menu-top mobile--top">
                                     <div className="widget widget_ask">
-                                        <a href="/" className="button-default wpqa-question">Ask a Question</a>
+                                        <Link to="/question/add" className="button-default wpqa-question">Ask a Question</Link>
                                     </div>
                                 </div>
                                 <div className="mobile-menu-left">

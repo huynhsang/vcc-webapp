@@ -20,6 +20,11 @@ const CATEGORY: Object = {
     immigration: "immigration",
 };
 
+const COOKIE_KEYS: Object = {
+    token: "xs",
+    userId: "c_user",
+};
+
 export default class ApplicationConstant {
 	static
 	get langKeyDefault(): string {
@@ -49,5 +54,10 @@ export default class ApplicationConstant {
     static
     get category(): Object {
         return CATEGORY;
+    }
+
+    static
+    get cookieKeys(): Object {
+        return COOKIE_KEYS;
     }
 }

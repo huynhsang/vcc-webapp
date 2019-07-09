@@ -13,6 +13,8 @@ import './static/theme/css/custom.css';
 
 // Our custom css
 import './static/Scss/styles.scss';
+
+// Component
 import Root from './modules/app/container/AppImpl';
 import * as serviceWorker from './serviceWorker';
 

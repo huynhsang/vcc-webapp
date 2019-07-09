@@ -7,10 +7,10 @@ import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
 import PropTypes from "prop-types";
 import RootScope from "../../../../global/RootScope";
 import type {User} from "../../../../domain/User";
-import CookieHelper from "../../../../common/util/CookieHelper";
 
 const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
+    doLogOut: PropTypes.func.isRequired,
 };
 export default class Header extends BasicComponent {
 
@@ -22,12 +22,12 @@ export default class Header extends BasicComponent {
     }
 
     toggleUserMenu() {
-        this.changeStateValue('showUserMenu', !this.state.showUserMenu);
+        this.changeStateValue("showUserMenu", !this.state.showUserMenu);
     };
 
     logout = () => {
-       CookieHelper.deleteCookie('token');
-       CookieHelper.deleteCookie('userId');
+       this.props.doLogOut();
+       window.location = "/login";
     };
 
     render() {
@@ -91,9 +91,9 @@ export default class Header extends BasicComponent {
                                                     href="/profile/sanght/best-answers/"><i
                                                     className="icon-graduation-cap"/>Best Answers</a></li>
                                                 <li>
-                                                    <Link to="/login" onClick={this.logout}>
+                                                    <a onClick={this.logout}>
                                                         <i className="icon-logout"/> Logout
-                                                    </Link>
+                                                    </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -171,9 +171,9 @@ export default class Header extends BasicComponent {
                                     </form>
                                 </div>
                                 <div className="mobile-bar-ask">
-                                    <a href="/" className="wpqa-question">
+                                    <Link to="/question/add" className="wpqa-question">
                                         <i className="icon-help-circled"/>Ask a Question
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

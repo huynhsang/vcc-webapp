@@ -8,7 +8,7 @@ import Home from "../../../home/container/HomeImpl";
 import MainPage from "../../../home/container/MainPageImpl";
 import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
 import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
-import SubCategory from "../../../sub_category/container/subCategoryImpl";
+import SubCategory from "../../../sub_category/container/SubCategoryImpl";
 import Badges from "../../../badges/container/BadgesImpl"
 
 export const UnAuthLink = [

@@ -8,11 +8,16 @@ import CookieHelper from "../../../common/util/CookieHelper";
 import CookieConstant from "../../../common/constant/CookieConstant";
 import SweetAlert from "../../../component/sweet_alert/container/SweetAlertImpl";
 import MobileAside from "./aside/MobileAside";
+import PropTypes from "prop-types";
 
+const propTypes = {
+    verifyToken: PropTypes.func.isRequired,
+    logout: PropTypes.func.isRequired,
+};
 export default class App extends BasicComponent {
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 		this.state = {
 			auth: {
 				isAuthenticated: false
@@ -36,15 +41,20 @@ export default class App extends BasicComponent {
 	}
 
 	render() {
+	    const _this = this;
+	    const { auth } = _this.state;
+	    const { logout } = _this.props;
+		const classWrapper: string = auth.isAuthenticated ? "wrap-login" : "wrap-not-login";
 		return (
 			<Router>
-                <div id="wrap" className="wrap-not-login">
-                    <Header isAuthenticated={this.state.auth.isAuthenticated}/>
+                <div id="wrap" className={classWrapper}>
+                    <Header isAuthenticated={auth.isAuthenticated} doLogOut={logout}/>
                     <MobileAside/>
-                    <AppRouter auth={this.state.auth}/>
+                    <AppRouter auth={auth}/>
                 </div>
 				<SweetAlert/>
 			</Router>
 		);
 	}
 }
+App.propTypes = propTypes;
