@@ -10,6 +10,7 @@ import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
 import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
 import SubCategory from "../../../sub_category/container/SubCategoryImpl";
 import Badges from "../../../badges/container/BadgesImpl"
+import UserProfile from "../../../user/container/UserProfileImpl";
 
 export const UnAuthLink = [
 	{
@@ -90,6 +91,10 @@ export const PublicLink = [
                 component: Badges
             }
         ]
+    },
+    {
+        path: '/user-profile',
+        component: UserProfile
     }
 
 ];
