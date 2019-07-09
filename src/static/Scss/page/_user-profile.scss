@@ -1,0 +1,101 @@
+// only custom component UserProfile
+.user-container {
+  max-width: 800px;
+  color: $color-dark-9;
+
+  p {
+    margin-bottom: 0;
+  }
+}
+
+.box-content {
+  &--user {
+    background: $background-content;
+    @include borderRadius(2px);
+  }
+
+  &--info {
+    display: flex;
+    display: -webkit-flex;
+
+    .logo-company {
+      flex-basis: 20%;
+      -webkit-flex-basis: 20%;
+      width: 80%;
+    }
+
+    .content-info {
+      flex-basis: 80%;
+      -webkit-flex-basis: 80%;
+      width: 80%;
+      border-top: 1px solid $color-default;
+    }
+
+    &:first-of-type {
+      .content-info {
+        border: none;
+      }
+    }
+  }
+
+  &--education {
+    @include borderRadiusBottom(2px);
+  }
+}
+
+.header-user {
+  .profile-background-image {
+    height: 200px;
+    width: 100%;
+  }
+
+  .avatar-user {
+    position: absolute;
+    top: -75px;
+    left: 25px;
+    border: 5px solid $color-border-avatar;
+    box-shadow: inset 0 1.5px 3px 0 rgba(0, 0, 0, .15), 0 1.5px 3px 0 rgba(0, 0, 0, .15);
+    width: 152px;
+    height: 152px;
+    @include borderRadius(50%);
+
+    img {
+      @include borderRadius(50%);
+    }
+  }
+
+  .connect-user {
+    text-align: right;
+  }
+
+  .link-contact {
+    color: $color-main;
+  }
+}
+
+@media screen and (max-width: 678px) {
+  .header-user {
+    .avatar-user {
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+    }
+
+    .info-user {
+      padding-top: 90px;
+      text-align: center;
+    }
+
+    .connect-user {
+      text-align: center;
+      @include rem(margin, 0, 0, 10, 0);
+    }
+  }
+  .box-content {
+    &--info {
+      .content-info:not(:first-of-type) {
+        @include rem(padding-top, 10);
+      }
+    }
+  }
+}

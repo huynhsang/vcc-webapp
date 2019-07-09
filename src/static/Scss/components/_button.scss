@@ -18,6 +18,14 @@
     background-color: $color-hover-back;
   }
 }
+.btn-border {
+  padding: 9px;
+  border: 1px solid $color-dark-5;
+  &:hover {
+    border: 1px solid $color-dark-9;
+    background-color: $color-white-5;
+  }
+}
 button:disabled, button[disabled] {
   background-color: $color-disable !important;
   color: $text-btn-default !important;

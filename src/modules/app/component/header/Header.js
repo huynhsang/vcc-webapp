@@ -79,8 +79,8 @@ export default class Header extends BasicComponent {
                                             <i className="icon-down-open-mini"/>
                                             <ul style={userMenuStyle}>
                                                 <li>
-                                                    <a href="/">
-                                                    <i className="icon-user"/>User Profile</a>
+                                                    <Link to="/user-profile">
+                                                    <i className="icon-user"/>User Profile</Link>
                                                 </li>
                                                 <li>
                                                     <a href="/">
