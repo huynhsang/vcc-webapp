@@ -33,7 +33,7 @@ function getQuestions(filter: Filter, show: String, _this: MainPage) {
         if (show === "no-answers") filter.where.numberOfAnswers = 0;
         else if (!orderMaps[show]) {
             show = "recent-questions";
-            window.location.search = "?show=recent-questions"
+            _this.redirectTo("/?show=recent-questions");
         }
         filter.order = orderMaps[show];
         let questions = _this.getDataFromState("questions");
@@ -41,7 +41,6 @@ function getQuestions(filter: Filter, show: String, _this: MainPage) {
             if (result.success) {
                 const currentShow = _this.getDataFromState("show");
                 questions = currentShow === show ? questions.concat(result.data) : result.data;
-                console.log(questions);
                 _this.changeStateValues(new Map([["questions", questions], ["show", show]]));
 
             } else {

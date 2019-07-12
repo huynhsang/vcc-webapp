@@ -14,7 +14,10 @@ export default class LeftNav extends BasicComponent {
     };
 
     render() {
+        const params = new URLSearchParams(window.location.search);
+        const currentShow: string = params.get('show');
         const isShowQuestionTabs: boolean = this.state.isShowQuestionTabs;
+        const subMenuDefaultClassName: string = "menu-item menu-item-type-custom menu-item-object-custom";
         return (
             <nav className="nav_menu float_r fixed_nav_menu"
                  style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "1px"}}>
@@ -22,68 +25,68 @@ export default class LeftNav extends BasicComponent {
                      style={{paddingTop: "0px", paddingBottom: "1px", position: "static", top: "30px", left: "135px"}}>
                     <h3 className="screen-reader-text">Explore</h3>
                     <ul id="menu-explore-not-login" className="menu">
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-64 current_page_item menu-item-128">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item current_page_item">
                             <a href="/">
                                 <i className="icon-home"/>Home
                             </a>
                         </li>
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-129">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page">
                             <a href="/">
                                 <i className="icon-folder"/>Communities
                             </a>
                         </li>
-                        <li className="nav_menu_open menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-130">
+                        <li className="nav_menu_open menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
                             <a onClick={this.handleToggleQuestion}><i className="icon-book-open"/>Questions</a>
                             {
                                 isShowQuestionTabs ?
                                     <ul className="sub-menu">
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-131">
-                                            <a href="/?show=recent-questions">
+                                        <li className={currentShow === "recent-questions" ? `${subMenuDefaultClassName} current-menu-item` : subMenuDefaultClassName}>
+                                            <Link to="/?show=recent-questions" onClick={()=>this.changeStateValue()}>
                                                 New Questions
-                                            </a>
+                                            </Link>
                                         </li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-132">
-                                            <a href="/?show=most-voted">
+                                        <li className={currentShow === "most-voted" ? `${subMenuDefaultClassName} current-menu-item` : subMenuDefaultClassName}>
+                                            <Link to="/?show=most-voted" onClick={()=>this.changeStateValue()}>
                                                 Trending Questions
-                                            </a>
+                                            </Link>
                                         </li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-133">
-                                            <a href="/?show=most-visited">
+                                        <li className={currentShow === "most-visited" ? `${subMenuDefaultClassName} current-menu-item` : subMenuDefaultClassName}>
+                                            <Link to="/?show=most-visited" onClick={()=>this.changeStateValue()}>
                                                 Must read Questions
-                                            </a>
+                                            </Link>
                                         </li>
-                                        <li className="menu-item menu-item-type-custom menu-item-object-custom menu-item-134">
-                                            <a href="/?show=most-answered">
+                                        <li className={currentShow === "most-answered" ? `${subMenuDefaultClassName} current-menu-item` : subMenuDefaultClassName}>
+                                            <Link to="/?show=most-answered" onClick={()=>this.changeStateValue()}>
                                                 Hot Questions
-                                            </a>
+                                            </Link>
                                         </li>
                                     </ul> : ''
                             }
                         </li>
-                        {/*<li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom menu-item-135 li-poll">*/}
-                            {/*<a href="/questions/?type=poll">*/}
+                        {/*<li className="wpqa-menu wpqa-poll-nav menu-item menu-item-type-custom menu-item-object-custom li-poll">*/}
+                            {/*<Link to="/questions/?type=poll">*/}
                                 {/*<i className="icon-megaphone"/>Polls*/}
-                            {/*</a>*/}
+                            {/*</Link>*/}
                         {/*</li>*/}
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-136">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page">
                             <Link to="/tags">
                                 <i className="icon-tag"/>Tags
                             </Link>
                         </li>
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-138">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page">
                             <Link to="/badges">
                                 <i className="icon-trophy"/>Badges
                             </Link>
                         </li>
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-137">
-                            <a href="/">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page">
+                            <Link href="/">
                                 <i className="icon-users"/>Users
-                            </a>
+                            </Link>
                         </li>
-                        <li className="menu-item menu-item-type-post_type menu-item-object-page menu-item-139">
-                            <a href="/faqs/">
+                        <li className="menu-item menu-item-type-post_type menu-item-object-page">
+                            <Link href="/">
                                 <i className="icon-lifebuoy"/>Help
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
