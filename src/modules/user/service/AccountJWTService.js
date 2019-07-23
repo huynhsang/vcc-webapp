@@ -7,6 +7,7 @@ import type {LoginRequest} from "../request/LoginRequest";
 
 const AUTHENTICATE_API: string = RootScope.appApiUrl + 'users/login';
 const ACCOUNT_REGISTRATION_API: string = RootScope.appApiUrl + 'users';
+const EMAIL_VERIFICATION_API: string = RootScope.appApiUrl + 'users/confirm?uid={0}&token={1}';
 const CURRENT_USER_API: string = RootScope.appApiUrl + 'users/{0}?access_token={1}';
 
 export default class AccountJWTService extends BasicService {
@@ -14,7 +15,13 @@ export default class AccountJWTService extends BasicService {
 	static
 	doAuthenticate(loginRequest: LoginRequest): Result {
 		return this.post(AUTHENTICATE_API, loginRequest, RootScope.axiosDefaultConfig);
-	};
+	}
+
+	static
+	doVerifyEmail(uid: number, token: string): Result {
+		const fullUrl: string = ApplicationUtil.formatString(EMAIL_VERIFICATION_API, [uid, token]);
+		return this.get(fullUrl, RootScope.axiosDefaultConfig);
+	}
 
 	static
 	createAccount(registerRequest: RegisterRequest): Result {

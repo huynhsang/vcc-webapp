@@ -2,6 +2,7 @@
 import ForgotPassword from '../../../user/container/forgot_password/ForgotPasswordImpl';
 import Login from '../../../user/container/signin_up/LoginImpl';
 import Registration from '../../../user/container/signin_up/RegistrationImpl';
+import EmailVerification from '../../../user/container/email_verification/EmailVerificationImpl';
 //Import for AuthLink
 import IndexImpl from "../../../landing_page/container/IndexImpl";
 import Home from "../../../home/container/HomeImpl";
@@ -21,7 +22,10 @@ export const UnAuthLink = [
 	}, {
 		path: '/forgot-password',
 		component: ForgotPassword
-	}
+	}, {
+        path: '/confirm',
+        component: EmailVerification
+    }
 ];
 
 export const AuthLink = [
