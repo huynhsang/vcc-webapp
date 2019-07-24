@@ -7,6 +7,8 @@ import MainPage from "../../home/component/content/MainPage";
 import RootScope from "../../../global/RootScope";
 import type {UsersVoteAnswers} from "../../../domain/UsersVoteAnswers";
 import type {Question} from "../../../domain/Question";
+import SweetAlert from "../../../global/SweetAlert";
+import ApplicationUtil from "../../../common/util/ApplicationUtil";
 
 const answerService = CoreService.answerService;
 const usersVoteService = CoreService.usersVoteService;
@@ -47,9 +49,11 @@ function createNewAnswer(answerBody: string, questionId: number, _this: AnswersU
             if (result.success) {
                 let answers = _this.getDataFromState("answers") || [];
                 answers.unshift(result.data);
+                SweetAlert.show(SweetAlert.successAlertBuilder("Success!", "Leaved an answer"));
                 _this.changeStateValues(new Map([["answers", answers], ["answerBody", ""]]));
             } else {
                 // To do: handle error
+                SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
             }
         })
     }
@@ -63,6 +67,9 @@ function approveAnswer(question: Question, answer: Answer, _this: AnswersUI) {
                 question.hasAcceptedAnswer = answer.isTheBest = true;
                 _this.changeStateValue('disableApproveBtn', false);
                 _this.triggerUpdateQuestion(question);
+            } else {
+                // Todo: handle error
+                SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
             }
         })
     }
@@ -94,6 +101,7 @@ function handleVoteAnswer(answer: Answer, isPositiveVote: boolean, isVotedBefore
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         } else {
@@ -104,6 +112,7 @@ function handleVoteAnswer(answer: Answer, isPositiveVote: boolean, isVotedBefore
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         }

@@ -31,14 +31,22 @@ export default class MainPage extends BasicComponent {
         const {show} = this.state;
         const params = new URLSearchParams(this.props.location.search);
         if (show != null && params.get('show') !== show) {
+            this.filter.skip = 0;
             this.props.getQuestions(this.filter, params.get('show'), this);
         }
     }
+
+    handleLoadMore = () => {
+        const {show} = this.state;
+        this.filter.skip++;
+        this.props.getQuestions(this.filter, show, this);
+    };
 
     render() {
         const _this = this;
         const { questions, show, loader } = _this.state;
         const { handleVoteQuestion } = _this.props;
+        const showLoadMore: boolean = questions.length >= (_this.filter.skip + 1)*_this.filter.limit;
         return (
             <div className="discy-main-inner float_l">
                 <div className="clearfix"/>
@@ -93,7 +101,7 @@ export default class MainPage extends BasicComponent {
                                             <div className="question-inner">
                                                 <div className="question-image-vote">
                                                     <div className="author-image author-image-42">
-                                                        <Link to={`/user/${askedBy.id}`}>
+                                                        <Link to={`/profile/${askedBy.id}`}>
                                                             <span className="author-image-span">
                                                                 <img className="avatar avatar-42 photo" alt="Martin Hope" title="Martin Hope" width="42" height="42" src={askedBy.avatar}/>
                                                             </span>
@@ -102,7 +110,7 @@ export default class MainPage extends BasicComponent {
                                                             <div className="post-section user-area user-area-columns_pop">
                                                                 <div className="post-inner">
                                                                     <div className="author-image author-image-70">
-                                                                        <Link to={`/user/${askedBy.id}`}>
+                                                                        <Link to={`/profile/${askedBy.id}`}>
                                                                             <span className="author-image-span">
                                                                                 <img className="avatar avatar-70 photo" alt="" title="" width="70" height="70" src={askedBy.avatar}/>
                                                                             </span>
@@ -112,7 +120,7 @@ export default class MainPage extends BasicComponent {
                                                                         <div className="user-inner">
                                                                             <div className="user-data-columns">
                                                                                 <h4>
-                                                                                    <Link to={`/user/${askedBy.id}`}>
+                                                                                    <Link to={`/profile/${askedBy.id}`}>
                                                                                         {`${askedBy.firstName} ${askedBy.lastName}`}
                                                                                     </Link>
                                                                                 </h4>
@@ -156,7 +164,7 @@ export default class MainPage extends BasicComponent {
                                                                         </ul>
                                                                     </div>
                                                                     <div className="user-follow-profile">
-                                                                        <Link to={`/user/${askedBy.id}`}>
+                                                                        <Link to={`/profile/${askedBy.id}`}>
                                                                             View Profile
                                                                         </Link>
                                                                     </div>
@@ -192,17 +200,17 @@ export default class MainPage extends BasicComponent {
                                                 <div className="question-content question-content-first">
                                                     <header className="article-header">
                                                         <div className="question-header">
-                                                            <Link to={`/user/${askedBy.id}`} className="post-author" itemProp="url">
+                                                            <Link to={`/profile/${askedBy.id}`} className="post-author" itemProp="url">
                                                                 {`${askedBy.firstName} ${askedBy.lastName}`}
                                                             </Link>
                                                             <span className="badge-span" style={{backgroundColor: "#30a96f"}}>
-                                                                Explainer
+                                                                {askedBy.level}
                                                             </span>
                                                             <div className="post-meta">
                                                                 <span className="post-date">
                                                                     Asked
                                                                     <span className="date-separator">:</span>
-                                                                    <Link to={`/question/${question.id}/view`} itemProp="url">
+                                                                    <Link to={`/question/${question.slug}/view`} itemProp="url">
                                                                         <time className="entry-date published" dateTime={question.created}>
                                                                             {` ${new Date(question.created).toDateString()}`}
                                                                         </time>
@@ -221,7 +229,7 @@ export default class MainPage extends BasicComponent {
                                                     </header>
                                                     <div>
                                                         <h2 className="post-title">
-                                                            <Link to={`/question/${question.id}/view`} className="post-title">
+                                                            <Link to={`/question/${question.slug}/view`} className="post-title">
                                                                 {question.title}
                                                             </Link>
                                                         </h2>
@@ -283,9 +291,9 @@ export default class MainPage extends BasicComponent {
                                                         <ul className="footer-meta">
                                                             <li className={bestAnswerClassName}>
                                                                 <i className="icon-comment"/>
-                                                                <Link to={`/question/${question.id}/view/#answers`}>{`${question.numberOfAnswers} `}</Link>
+                                                                <Link to={`/question/${question.slug}/view/#answers`}>{`${question.numberOfAnswers} `}</Link>
                                                                 <span className="question-span">
-                                                                    <Link to={`/question/${question.id}/view/#answers`}>Answers</Link>
+                                                                    <Link to={`/question/${question.slug}/view/#answers`}>Answers</Link>
                                                                 </span>
                                                             </li>
                                                             <li className="view-stats-meta">
@@ -293,7 +301,7 @@ export default class MainPage extends BasicComponent {
                                                                 <span className="question-span">Views</span>
                                                             </li>
                                                         </ul>
-                                                        <Link to={`/question/${question.id}/view`} className="meta-answer">Answer</Link>
+                                                        <Link to={`/question/${question.slug}/view`} className="meta-answer">Answer</Link>
                                                     </footer>
                                                 </div>
                                                 <div className="clearfix"/>
@@ -309,9 +317,13 @@ export default class MainPage extends BasicComponent {
                             <span className="load_span">
                                 <span className="loader_2"/>
                             </span>
-                            <div className="load-more">
-                                <a>Load More Questions</a>
-                            </div>
+                            {
+                                showLoadMore ?
+                                    <div className="load-more">
+                                        <a onClick={_this.handleLoadMore}>Load More Questions</a>
+                                    </div> : ''
+                            }
+
                         </div>
                     </div>
                 </section>

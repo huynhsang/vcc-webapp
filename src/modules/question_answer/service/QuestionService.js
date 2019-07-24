@@ -24,8 +24,8 @@ export default class QuestionService extends BasicService implements IQuestionSe
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
-    findOneById(id: number): Result {
-        let fullUrl: string = `${QUESTION_API}/get-detail?id=${id}`;
+    findOneBySlug(slug: string): Result {
+        let fullUrl: string = `${QUESTION_API}/get-detail?slug=${slug}`;
         if (RootScope.userId) {
             fullUrl = `${fullUrl}&${QuestionService.getTokenString()}`
         }

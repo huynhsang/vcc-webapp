@@ -26,10 +26,12 @@ export default class ViewQuestion extends BasicComponent {
     }
 
     handleBeforeTheFirstRender(): void {
-        if (!this.props.match.params || !this.props.match.params.identity) {
-            this.props.history.push('/')
+        const {match} = this.props;
+        const slug: string = match && match.params && match.params.slug;
+        if (slug) {
+            this.props.getQuestionDetail(this.props.match.params.slug, this)
         } else {
-            this.props.getQuestionDetail(this.props.match.params.identity, this, this.props.history)
+            this.props.history.push('/')
         }
     }
 
@@ -103,7 +105,7 @@ export default class ViewQuestion extends BasicComponent {
                             <div className="question-inner">
                                 <div className="question-image-vote">
                                     <div className="author-image author-image-42">
-                                        <Link to={`/user/${askedBy.id}`}>
+                                        <Link to={`/profile/${askedBy.id}`}>
                                             <span className="author-image-span">
                                                 <img className="avatar avatar-42 photo" alt={`${askedBy.firstName} ${askedBy.lastName}`} title={`${askedBy.firstName} ${askedBy.lastName}`} width="42" height="42" src={askedBy.avatar}/>
                                             </span>
@@ -112,7 +114,7 @@ export default class ViewQuestion extends BasicComponent {
                                             <div className="post-section user-area user-area-columns_pop">
                                                 <div className="post-inner">
                                                     <div className="author-image author-image-70">
-                                                        <Link to={`/user/${askedBy.id}`}>
+                                                        <Link to={`/profile/${askedBy.id}`}>
                                                             <span className="author-image-span">
                                                                 <img className="avatar avatar-70 photo" alt="" title="" width="70" height="70" src={askedBy.avatar}/>
                                                             </span>
@@ -122,7 +124,7 @@ export default class ViewQuestion extends BasicComponent {
                                                         <div className="user-inner">
                                                             <div className="user-data-columns">
                                                                 <h4>
-                                                                    <Link to={`/user/${askedBy.id}`}>{`${askedBy.firstName} ${askedBy.lastName}`}</Link>
+                                                                    <Link to={`/profile/${askedBy.id}`}>{`${askedBy.firstName} ${askedBy.lastName}`}</Link>
                                                                 </h4>
                                                                 <div className="user-data">
                                                                     <ul>
@@ -137,29 +139,29 @@ export default class ViewQuestion extends BasicComponent {
                                                     <div className="user-columns-data">
                                                         <ul>
                                                             <li className="user-columns-questions">
-                                                                <Link to={`/user/${askedBy.id}/questions`}>
+                                                                <Link to={`/profile/${askedBy.id}/questions`}>
                                                                     <i className="icon-book-open"/>{askedBy.numberOfQuestions} Questions
                                                                 </Link>
                                                             </li>
                                                             <li className="user-columns-answers">
-                                                                <Link to={`/user/${askedBy.id}/answers`}>
+                                                                <Link to={`/profile/${askedBy.id}/answers`}>
                                                                     <i className="icon-comment"/>{askedBy.numberOfAnswers} Answers
                                                                 </Link>
                                                             </li>
                                                             <li className="user-columns-best-answers">
-                                                                <Link to={`/user/${askedBy.id}/answers?show=best-answers`}>
+                                                                <Link to={`/profile/${askedBy.id}/answers?show=best-answers`}>
                                                                     <i className="icon-graduation-cap"/>{askedBy.numberOfBestAnswers} Best Answers
                                                                 </Link>
                                                             </li>
                                                             <li className="user-columns-points">
-                                                                <Link to={`/user/${askedBy.id}`}>
+                                                                <Link to={`/profile/${askedBy.id}`}>
                                                                     <i className="icon-bucket"/>{askedBy.points} Points
                                                                 </Link>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                     <div className="user-follow-profile">
-                                                        <Link to={`/user/${askedBy.id}`}>
+                                                        <Link to={`/profile/${askedBy.id}`}>
                                                             View Profile
                                                         </Link>
                                                     </div>
@@ -196,7 +198,7 @@ export default class ViewQuestion extends BasicComponent {
                                     <header className="article-header">
                                         <div className="question-header">
                                             <span>
-                                                <Link to={`/user/${askedBy.id}`} className="post-author">
+                                                <Link to={`/profile/${askedBy.id}`} className="post-author">
                                                     <span itemProp="name">{`${askedBy.firstName} ${askedBy.lastName}`}</span>
                                                 </Link>
                                             </span>

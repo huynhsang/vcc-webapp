@@ -103,19 +103,19 @@ export default class RightSidebar extends BasicComponent{
                                                         return (
                                                             <li key={index} className="widget-posts-text widget-no-img">
                                                                 <span className="span-icon">
-                                                                    <Link to={`/user/${askedBy.id}`}>
+                                                                    <Link to={`/profile/${askedBy.id}`}>
                                                                         <img className="avatar avatar-20 photo" alt={`${askedBy.firstName} ${askedBy.lastName}`} width="20" height="20" src={askedBy.avatar}/>
                                                                     </Link>
                                                                 </span>
                                                                 <div>
                                                                     <h3>
-                                                                        <Link to={`/question/${question.id}/view`} title={question.title}>
+                                                                        <Link to={`/question/${question.slug}/view`} title={question.title}>
                                                                             {question.title}
                                                                         </Link>
                                                                     </h3>
                                                                     <ul className="widget-post-meta">
                                                                         <li>
-                                                                            <Link to={`/question/${question.id}/view`} className="post-meta-comment">
+                                                                            <Link to={`/question/${question.slug}/view`} className="post-meta-comment">
                                                                                 <i className="icon-comment"/>{question.numberOfAnswers} Answers
                                                                             </Link>
                                                                         </li>
@@ -188,7 +188,7 @@ export default class RightSidebar extends BasicComponent{
                                                     <div className="post-section user-area user-area-small">
                                                         <div className="post-inner">
                                                             <div className="author-image author-image-42">
-                                                                <Link to={`/user/${user.id}`}>
+                                                                <Link to={`/profile/${user.id}`}>
                                                                     <span className="author-image-span">
                                                                         <img className="avatar avatar-42 photo" alt="" title="" width="42" height="42" src={user.avatar}/>
                                                                     </span>
@@ -197,7 +197,7 @@ export default class RightSidebar extends BasicComponent{
                                                             <div className="user-content">
                                                                 <div className="user-inner">
                                                                     <h4>
-                                                                        <Link to={`/user/${user.id}`}>
+                                                                        <Link to={`/profile/${user.id}`}>
                                                                             {user.firstName} {user.lastName}
                                                                         </Link>
                                                                     </h4>

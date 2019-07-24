@@ -3,10 +3,32 @@ import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import avatar from '../../../static/resources/img/avatar-sang.jpg';
 import logoCompany from '../../../static/resources/img/logo/est-rouge.png';
 import logoFram from '../../../static/resources/img/logo/fram.png';
+import type {User} from "../../../domain/User";
+import PropTypes from "prop-types";
 
+const propTypes = {
+    getProfileById: PropTypes.func.isRequired,
+};
 export default class UserProfile extends BasicComponent {
 
+    constructor(props) {
+        super(props);
+        const profile: User = {};
+        this.state = {profile: profile};
+    }
+
+    handleBeforeTheFirstRender(): void {
+        const userId: number = parseInt(window.location.pathname.split('/')[2]);
+        console.log(userId);
+        if (userId) {
+            this.props.getProfileById(userId, this)
+        } else {
+            window.location = '/'
+        }
+    }
+
     render() {
+        const { profile } = this.state || {};
         return (
             <div className="discy-container user-container">
                 <section className="box-content--user header-user box-shadow--blur position-relative">
@@ -19,7 +41,7 @@ export default class UserProfile extends BasicComponent {
                     </div>
                     <div className="info-user position-relative pt10 pb4">
                         <div className="avatar-user">
-                            <img src={avatar} width="150" alt="" className="img-responsive"/>
+                            <img src={profile.avatar} width="150" alt="" className="img-responsive"/>
                         </div>
                         <div className="connect-user mr5">
                             <button className="btn btn-primary mr3">Connect</button>
@@ -27,28 +49,28 @@ export default class UserProfile extends BasicComponent {
                         </div>
                         <div className="row ml3 mr3">
                             <div className="col-md-7 info-left">
-                                <h4 className="m0">Sang Huynh</h4>
-                                <p>Student at Trường Đại học Bách Khoa Đà Nẵng</p>
+                                <h4 className="m0">{`${profile.firstName} ${profile.lastName}`}</h4>
+                                {/*<p>Student at Trường Đại học Bách Khoa Đà Nẵng</p>*/}
                                 <p>
                                     <span>Vietnam</span> &nbsp; . &nbsp;
-                                    <span>98 connections</span> &nbsp; . &nbsp;
+                                    {/*<span>98 connections</span> &nbsp; . &nbsp;*/}
                                     <span><a className="link-contact" href="javascript:void(0);">Contact info</a></span>
                                 </p>
                             </div>
                             <div className="col-md-5 info-right">
-                                <p>
+                                {/*<p>
                                     <img src={logoCompany} width="30" alt=""/> &nbsp;
                                     Est rouge, inc
                                 </p>
                                 <p>
                                     <img src={logoCompany} width="30" alt=""/> &nbsp;
                                     Da Nang University of Technology
-                                </p>
+                                </p>*/}
                             </div>
                         </div>
                     </div>
                 </section>
-                <section className="box-content--user p5 mt3 box-shadow--blur about-user">
+                {/*<section className="box-content--user p5 mt3 box-shadow--blur about-user">
                     <h5 className="title-user m0">About</h5>
                     <p>
                         Until now 30/9/2018, I have more than 2 years experience on the job developer
@@ -57,8 +79,8 @@ export default class UserProfile extends BasicComponent {
                         I'm a interesting, funny, sportive person and have a passion on researching AI and new
                         technologies.
                     </p>
-                </section>
-                <section className="box-content--user p5 mt3 box-shadow--blur">
+                </section>*/}
+                {/*<section className="box-content--user p5 mt3 box-shadow--blur">
                     <h5 className="title-user m0">Experience</h5>
                     <div className="box-content--info mt2">
                         <div className="logo-company">
@@ -84,8 +106,8 @@ export default class UserProfile extends BasicComponent {
                             <p>Related technologies: Java (Spring), Javascript, Python, etc.</p>
                         </div>
                     </div>
-                </section>
-                <section className="box-content--user p5 box-shadow--blur box-content--education">
+                </section>*/}
+               {/* <section className="box-content--user p5 box-shadow--blur box-content--education">
                     <h5 className="title-user m0">Education</h5>
                     <div className="box-content--info mt2">
                         <div className="logo-company">
@@ -99,11 +121,11 @@ export default class UserProfile extends BasicComponent {
                                 Nam</p>
                         </div>
                     </div>
-                </section>
+                </section>*/}
                 <section className="box-content--user p5 mt3 mb3 box-shadow--blur">
                     <h5 className="title-user m0">Interests</h5>
                     <div className="row mt2">
-                        <div className="col-md-6">
+                        {/*<div className="col-md-6">
                             <div className="box-content--info mb2">
                                 <div className="logo-company">
                                     <img src={logoFram} alt="" width="50" className="img-responsive"/>
@@ -124,10 +146,11 @@ export default class UserProfile extends BasicComponent {
                                     <p className="note">41 followers</p>
                                 </div>
                             </div>
-                        </div>
+                        </div>*/}
                     </div>
                 </section>
             </div>
         );
     }
 }
+UserProfile.proptypes = propTypes;

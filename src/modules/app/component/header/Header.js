@@ -34,9 +34,8 @@ export default class Header extends BasicComponent {
     };
 
     render() {
-        const currentUser: User = RootScope.currentUser;
-        const fullName: string = currentUser ?
-            ApplicationUtil.formatString('{0} {1}', [currentUser.firstName, currentUser.lastName]) : '';
+        const currentUser: User = RootScope.currentUser || {};
+        const fullName: string = ApplicationUtil.formatString('{0} {1}', [currentUser.firstName, currentUser.lastName]);
         const userMenuStyle = this.state.showUserMenu ? { display: 'block' } : { display: 'none' };
         const searchInput = this.state.showSearch ? { display: 'block' } : { display: 'none' };
         const buttonSearch = this.state.showSearch ? { display: 'none' } : { display: 'block' };
@@ -66,15 +65,15 @@ export default class Header extends BasicComponent {
                                                         </div>
                                                     </li>
                                                 </ul>
-                                                <a href="/profile/sanght/notifications/">
+                                                <Link to="/profile/sanght/notifications/">
                                                     Show all notifications.
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                         <div className="user-login-click float_r user-click-open">
                                             <span className="user-click" onClick={() => this.toggleUserMenu()} />
                                             <div className="user-image float_l">
-                                                <img className="avatar avatar-29 photo" alt={{ fullName }} title={{ fullName }} width="29" height="29" src="https://secure.gravatar.com/avatar/eda01b9e40edbfd790a5a8cc69e0791e?s=96&d=mm&r=g" />
+                                                <img className="avatar avatar-29 photo" alt={{ fullName }} title={{ fullName }} width="29" height="29" src={currentUser.avatar} />
                                             </div>
                                             <div className="user-login float_l" style={{ marginTop: "22px" }}>
                                                 <span>Welcome</span>
@@ -88,13 +87,13 @@ export default class Header extends BasicComponent {
                                                         <i className="icon-user" />User Profile</Link>
                                                 </li>
                                                 <li>
-                                                    <a href="/">
+                                                    <Link to="/">
                                                         <i className="icon-cog" />Edit Profile
-                                                    </a>
+                                                    </Link>
                                                 </li>
-                                                <li><a
-                                                    href="/profile/sanght/best-answers/"><i
-                                                        className="icon-graduation-cap" />Best Answers</a></li>
+                                                <li>
+                                                    <Link to="/profile/best-answers/"><i
+                                                        className="icon-graduation-cap" />Best Answers</Link></li>
                                                 <li>
                                                     <a onClick={this.logout}>
                                                         <i className="icon-logout" /> Logout
@@ -133,24 +132,23 @@ export default class Header extends BasicComponent {
                                     </form>
                                 </div>
                                 <nav className="nav float_l">
-                                    <h3 className="screen-reader-text">Discy Navigation</h3>
+                                    <h3 className="screen-reader-text">VC&C Navigation</h3>
                                     <ul id="menu-header" className="menu">
                                         <li id="menu-item-75"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-64 current_page_item menu-item-75">
-                                            <Link className="" to="/home">Home</Link>
+                                            <Link className="" to="/">Home</Link>
                                         </li>
                                         <li id="menu-item-76"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-76">
-                                            <Link className="" to="/home">About Us</Link>
+                                            <Link className="" to="/about-us">About Us</Link>
                                         </li>
                                         <li id="menu-item-77"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-77">
-                                            <Link className="" to="/">Blog</Link>
+                                            <a className="" href="https://lqdalumni.site/">Blog</a>
                                         </li>
                                         <li id="menu-item-78"
                                             className="menu-item menu-item-type-post_type menu-item-object-page menu-item-78">
-                                            <Link className="" to="/contact-us">Contact
-                                                Us</Link>
+                                            <Link className="" to="/contact-us">Contact Us</Link>
                                         </li>
                                     </ul>
                                 </nav>

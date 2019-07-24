@@ -8,4 +8,6 @@ export interface IQuestionService extends IService {
     getPopularQuestionsInMonth(filter: Filter): Result;
 
     getQuestionsWithTopAnswerInMonth(filter: Filter): Result;
+
+    findOneBySlug(slug: string): Result;
 }

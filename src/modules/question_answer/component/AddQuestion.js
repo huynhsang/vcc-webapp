@@ -50,12 +50,13 @@ export default class AddQuestion extends BasicComponent {
 
     postQuestion = () => {
         const { title, body, categorySlug, selectedTags } = this.state;
+        let slug = title.toLowerCase().replace(/[^a-z0-9 ]/g, "");
         const question: Question = {
             title: title,
             body: body,
             categorySlug: categorySlug,
             tags: JSON.stringify(selectedTags),
-            slug: title.toLowerCase().replace(/ /g, '-'),
+            slug: slug.replace(/ /g, '-'),
         };
         this.props.createQuestion(question, this.props.history)
     };

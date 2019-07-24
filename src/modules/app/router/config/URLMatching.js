@@ -64,7 +64,7 @@ export const PublicLink = [
         ]
     },
     {
-        path: '/question/:identity/view',
+        path: '/question/:slug/view',
         component: Home,
         subRoutes: [
             {
@@ -97,8 +97,8 @@ export const PublicLink = [
         ]
     },
     {
-        path: '/user-profile',
-        component: UserProfile
+        path: '/profile/:id',
+        component: UserProfile,
     }
 
 ];

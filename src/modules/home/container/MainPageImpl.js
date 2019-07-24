@@ -6,6 +6,8 @@ import Result from "../../../global/Result";
 import RootScope from "../../../global/RootScope";
 import type {UsersVoteQuestions} from "../../../domain/UsersVoteQuestions";
 import type {Question} from "../../../domain/Question";
+import SweetAlert from "../../../global/SweetAlert";
+import ApplicationUtil from "../../../common/util/ApplicationUtil";
 
 const questionService = CoreService.questionService;
 const usersVoteService = CoreService.usersVoteService;
@@ -76,6 +78,7 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         } else {
@@ -86,6 +89,7 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         }

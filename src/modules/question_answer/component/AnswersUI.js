@@ -57,6 +57,7 @@ export default class AnswersUI extends BasicComponent {
         const { answers, loader, disableApproveBtn } = _this.state;
         const { question, handleVoteAnswer, approveAnswer } = _this.props;
         const isOwner: boolean = question.askedBy ? question.askedBy.id === RootScope.userId : false;
+        console.log(isOwner);
         return (
             <div className="question-adv-comments question-has-comments question-has-tabs">
                 <div id="comments" className="post-section">
@@ -87,12 +88,13 @@ export default class AnswersUI extends BasicComponent {
                                     const disableUp: boolean = isVoted && answer.votes[0].isPositiveVote;
                                     const disableDown: boolean = isVoted && !answer.votes[0].isPositiveVote;
                                     const showLoader: boolean = loader && loader.answerId === answer.id;
+                                    console.log(question.hasAcceptedAnswer);
                                     return (
                                         <li key={index} className="comment byuser comment-author-james even thread-even depth-1">
                                             <div className="comment-body clearfix">
                                                 <div className="comment-text">
                                                     <div className="author-image author-image-42">
-                                                        <Link to={`/user/${answerBy.id}`}>
+                                                        <Link to={`/profile/${answerBy.id}`}>
                                                             <span className="author-image-span">
                                                                 <img className="avatar avatar-42 photo" alt="" title="" width="42" height="42" src={answerBy.avatar}/>
                                                             </span>
@@ -102,7 +104,7 @@ export default class AnswersUI extends BasicComponent {
                                                                 className="post-section user-area user-area-columns_pop">
                                                                 <div className="post-inner">
                                                                     <div className="author-image author-image-70">
-                                                                        <Link to={`/user/${answerBy.id}`}>
+                                                                        <Link to={`/profile/${answerBy.id}`}>
                                                                             <span className="author-image-span">
                                                                                 <img className="avatar avatar-70 photo" alt="" title="" width="70" height="70" src={answerBy.avatar}/>
                                                                             </span>
@@ -112,7 +114,7 @@ export default class AnswersUI extends BasicComponent {
                                                                         <div className="user-inner">
                                                                             <div className="user-data-columns">
                                                                                 <h4>
-                                                                                    <Link to={`/user/${answerBy.id}`}>{`${answerBy.firstName} ${answerBy.lastName}`}</Link>
+                                                                                    <Link to={`/profile/${answerBy.id}`}>{`${answerBy.firstName} ${answerBy.lastName}`}</Link>
                                                                                 </h4>
                                                                                 <div className="user-data">
                                                                                     <ul>
@@ -128,24 +130,24 @@ export default class AnswersUI extends BasicComponent {
                                                                     <div className="user-columns-data">
                                                                         <ul>
                                                                             <li className="user-columns-questions">
-                                                                                <Link to={`/user/${answerBy.id}/questions`}>
+                                                                                <Link to={`/profile/${answerBy.id}/questions`}>
                                                                                     <i className="icon-book-open"/>
                                                                                     {answerBy.numberOfQuestions} Questions
                                                                                 </Link>
                                                                             </li>
                                                                             <li className="user-columns-answers">
-                                                                                <Link to={`/user/${answerBy.id}/answers`}>
+                                                                                <Link to={`/profile/${answerBy.id}/answers`}>
                                                                                     <i className="icon-comment"/>{answerBy.numberOfAnswers} Answers
                                                                                 </Link>
                                                                             </li>
                                                                             <li className="user-columns-best-answers">
-                                                                                <Link to={`/user/${answerBy.id}/answers/?show=best`}>
+                                                                                <Link to={`/profile/${answerBy.id}/answers/?show=best`}>
                                                                                     <i className="icon-graduation-cap"/>
                                                                                     {answerBy.numberOfBestAnswers} Best Answers
                                                                                 </Link>
                                                                             </li>
                                                                             <li className="user-columns-points">
-                                                                                <Link to={`/user/${answerBy.id}`}>
+                                                                                <Link to={`/profile/${answerBy.id}`}>
                                                                                     <i className="icon-bucket"/>
                                                                                     {answerBy.points} Points
                                                                                 </Link>
@@ -153,7 +155,7 @@ export default class AnswersUI extends BasicComponent {
                                                                         </ul>
                                                                     </div>
                                                                     <div className="user-follow-profile">
-                                                                        <Link to={`/user/${answerBy.id}`}>View Profile</Link>
+                                                                        <Link to={`/profile/${answerBy.id}`}>View Profile</Link>
                                                                     </div>
                                                                     <div className="clearfix"/>
                                                                 </div>
@@ -166,7 +168,7 @@ export default class AnswersUI extends BasicComponent {
                                                                 <div className="best-answer">Best Answer</div> : ''
                                                         }
                                                         {
-                                                            isOwner && !question.hasAcceptedAnswer ?
+                                                            !isOwner && !question.hasAcceptedAnswer ?
                                                                 <button className="btn btn-approve" disabled={disableApproveBtn}
                                                                     onClick={() => approveAnswer(question, answer, _this)}>
                                                                     <i className="fas fa-check"/> Approve
@@ -175,7 +177,7 @@ export default class AnswersUI extends BasicComponent {
                                                         <div className="comment-meta">
                                                             <div className="comment-author">
                                                                 <span>
-                                                                    <Link to={`/user/${answerBy.id}`}>
+                                                                    <Link to={`/profile/${answerBy.id}`}>
                                                                         <span>{`${answerBy.firstName} ${answerBy.lastName}`}</span>
                                                                     </Link>
                                                                 </span>

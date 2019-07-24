@@ -26,6 +26,11 @@ export default class AccountService extends BasicService implements IAccountServ
 		return AccountService.post(fullUrl, email, RootScope.axiosDefaultConfig);
 	}
 
+	findOneById(id: number): Result {
+    	const fullUrl: string = `${ACCOUNT_API}/profile?id=${id}`;
+		return AccountService.get(fullUrl, RootScope.axiosDefaultConfig);
+	}
+
     getTopUsersWithTheHighestPoints(filter: Filter): Result {
         filter.order = "points DESC";
     	const fullUrl: string = FilterBuilder.buildUrlWithFilter(ACCOUNT_API, filter);

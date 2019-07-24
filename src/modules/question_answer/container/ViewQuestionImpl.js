@@ -6,6 +6,8 @@ import type {Question} from "../../../domain/Question";
 import MainPage from "../../home/component/content/MainPage";
 import RootScope from "../../../global/RootScope";
 import type {UsersVoteQuestions} from "../../../domain/UsersVoteQuestions";
+import SweetAlert from "../../../global/SweetAlert";
+import ApplicationUtil from "../../../common/util/ApplicationUtil";
 
 const questionService = CoreService.questionService;
 const answerService = CoreService.answerService;
@@ -13,20 +15,19 @@ const usersVoteService = CoreService.usersVoteService;
 
 /**
  * The method handles to get question detail by Id
- * @param questionId: {Number} The question Id
+ * @param slug: {String} The question slug
  * @param _this: {ViewQuestion} The question detail UI
- * @param redirect: {any} The router redirect
  * @return {Function}
  */
-function getQuestionDetail(questionId: number, _this: ViewQuestion, redirect: any) {
+function getQuestionDetail(slug: string, _this: ViewQuestion) {
     return () => {
-        questionService.findOneById(questionId).then((result: Result) => {
-            if (result.success && Object.keys(result.data).length > 0) {
+        questionService.findOneBySlug(slug).then((result: Result) => {
+            if (result.success && result.data && Object.keys(result.data).length > 0) {
                 _this.changeStateValues(new Map([['question', result.data], ['answers', result.data.answers]]));
             } else {
-                redirect.push('/');
+                _this.redirectTo('/');
             }
-        }).catch(() => redirect.push('/'));
+        })
     }
 }
 
@@ -75,6 +76,7 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         } else {
@@ -85,6 +87,7 @@ function handleVoteQuestion(question: Question, isPositiveVote: boolean, isVoted
                 } else {
                     // Todo: Show error here
                     _this.changeStateValue('loader', false);
+                    SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 }
             })
         }

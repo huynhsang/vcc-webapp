@@ -3,6 +3,8 @@ import AddQuestion from "../component/AddQuestion";
 import CoreService from "../../../global/CoreService";
 import Result from "../../../global/Result";
 import type {Question} from "../../../domain/Question";
+import SweetAlert from "../../../global/SweetAlert";
+import ApplicationUtil from "../../../common/util/ApplicationUtil";
 
 const questionService = CoreService.questionService;
 const subCategoryService = CoreService.subCategoryService;
@@ -24,7 +26,10 @@ function createQuestion(question: Question, redirect: any) {
     return () => {
         questionService.create(question).then((result: Result) => {
             if (result.success) {
-                redirect.push(`/question/${result.data.id}/view`);
+                SweetAlert.show(SweetAlert.successAlertBuilder("Success!", "Created a Question"));
+                redirect.push(`/question/${result.data.slug}/view`);
+            } else {
+                SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
             }
         })
     }
