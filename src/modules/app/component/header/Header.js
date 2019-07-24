@@ -1,12 +1,12 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 import BasicComponent from '../../../../common/abstract/component/BasicComponent';
 import logo from '../../../../static/resources/img/logo/logo.png';
 import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
 import PropTypes from "prop-types";
 import RootScope from "../../../../global/RootScope";
-import type {User} from "../../../../domain/User";
+import type { User } from "../../../../domain/User";
 
 const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
@@ -17,31 +17,36 @@ export default class Header extends BasicComponent {
     constructor(props) {
         super(props);
         this.state = {
-            showUserMenu: false
+            showUserMenu: false,
+            showSearch: false
         }
     }
 
     toggleUserMenu() {
         this.changeStateValue("showUserMenu", !this.state.showUserMenu);
     };
-
+    showHideSearch() {
+        this.changeStateValue("showSearch", !this.state.showSearch);
+    }
     logout = () => {
-       this.props.doLogOut();
-       window.location = "/login";
+        this.props.doLogOut();
+        window.location = "/login";
     };
 
     render() {
         const currentUser: User = RootScope.currentUser;
         const fullName: string = currentUser ?
             ApplicationUtil.formatString('{0} {1}', [currentUser.firstName, currentUser.lastName]) : '';
-        const userMenuStyle = this.state.showUserMenu ? {display: 'block'} : {display: 'none'};
+        const userMenuStyle = this.state.showUserMenu ? { display: 'block' } : { display: 'none' };
+        const searchInput = this.state.showSearch ? { display: 'block' } : { display: 'none' };
+        const buttonSearch = this.state.showSearch ? { display: 'none' } : { display: 'block' };
         return (
             <div className="hidden-header header-dark mobile_bar_active">
                 <header className="header">
                     <div className="discy-container">
                         <div className="mobile-menu">
                             <div className="mobile-menu-click">
-                                <i className="icon-menu"/>
+                                <i className="icon-menu" />
                             </div>
                         </div>
                         {
@@ -49,12 +54,12 @@ export default class Header extends BasicComponent {
                                 <div className="right-header float_r">
                                     <div className="user-login-area">
                                         <div className="notifications-area user-notifications float_r">
-                                            <span className="notifications-click"/>
-                                            <i className="icon-bell"/>
+                                            <span className="notifications-click" />
+                                            <i className="icon-bell" />
                                             <div>
                                                 <ul>
                                                     <li>
-                                                        <i className="icon-bucket"/>
+                                                        <i className="icon-bucket" />
                                                         <div>
                                                             Gift of the site - 20 Points.
                                                             <span className="notifications-date">June 23, 2019 at 4:19 pm</span>
@@ -67,32 +72,32 @@ export default class Header extends BasicComponent {
                                             </div>
                                         </div>
                                         <div className="user-login-click float_r user-click-open">
-                                            <span className="user-click" onClick={() => this.toggleUserMenu()}/>
+                                            <span className="user-click" onClick={() => this.toggleUserMenu()} />
                                             <div className="user-image float_l">
-                                                <img className="avatar avatar-29 photo" alt={{fullName}} title={{fullName}} width="29" height="29" src="https://secure.gravatar.com/avatar/eda01b9e40edbfd790a5a8cc69e0791e?s=96&d=mm&r=g"/>
+                                                <img className="avatar avatar-29 photo" alt={{ fullName }} title={{ fullName }} width="29" height="29" src="https://secure.gravatar.com/avatar/eda01b9e40edbfd790a5a8cc69e0791e?s=96&d=mm&r=g" />
                                             </div>
-                                            <div className="user-login float_l" style={{marginTop: "22px"}}>
+                                            <div className="user-login float_l" style={{ marginTop: "22px" }}>
                                                 <span>Welcome</span>
-                                                <br/>
+                                                <br />
                                                 <div className="float_l">{fullName}</div>
                                             </div>
-                                            <i className="icon-down-open-mini"/>
+                                            <i className="icon-down-open-mini" />
                                             <ul style={userMenuStyle}>
                                                 <li>
                                                     <Link to="/user-profile">
-                                                    <i className="icon-user"/>User Profile</Link>
+                                                        <i className="icon-user" />User Profile</Link>
                                                 </li>
                                                 <li>
                                                     <a href="/">
-                                                        <i className="icon-cog"/>Edit Profile
+                                                        <i className="icon-cog" />Edit Profile
                                                     </a>
                                                 </li>
                                                 <li><a
                                                     href="/profile/sanght/best-answers/"><i
-                                                    className="icon-graduation-cap"/>Best Answers</a></li>
+                                                        className="icon-graduation-cap" />Best Answers</a></li>
                                                 <li>
                                                     <a onClick={this.logout}>
-                                                        <i className="icon-logout"/> Logout
+                                                        <i className="icon-logout" /> Logout
                                                     </a>
                                                 </li>
                                             </ul>
@@ -101,7 +106,7 @@ export default class Header extends BasicComponent {
                                 </div> :
                                 <div className="right-header float_r">
                                     <Link className="sign-in-lock mob-sign-in" to="/login">
-                                        <i className="icon-lock"/>
+                                        <i className="icon-lock" />
                                     </Link>
                                     <Link className="button-default button-sign-in" to="/login">Sign In</Link>
                                     <Link className="button-default-2 button-sign-up" to="/registration">Sign Up</Link>
@@ -118,12 +123,12 @@ export default class Header extends BasicComponent {
                                     <form role="search" className="searchform main-search-form" method="get" action="#">
                                         <div className="search-wrapper">
                                             <input type="search" className="live-search live-search-icon"
-                                                   autoComplete="off" placeholder="Type Search Words" name="search"/>
-                                            <div className="loader_2 search_loader"/>
-                                            <div className="search-results results-empty"/>
-                                            <input type="hidden" name="search_type" className="search_type"/>
-                                            <div className="search-click"/>
-                                            <button type="submit"><i className="icon-search"/></button>
+                                                autoComplete="off" placeholder="Type Search Words" name="search" />
+                                            <div className="loader_2 search_loader" />
+                                            <div className="search-results results-empty" />
+                                            <input type="hidden" name="search_type" className="search_type" />
+                                            <div className="search-click" />
+                                            <button type="submit"><i className="icon-search" /></button>
                                         </div>
                                     </form>
                                 </div>
@@ -158,21 +163,22 @@ export default class Header extends BasicComponent {
                         <div className="mobile-bar-content">
                             <div className="discy-container">
                                 <div className="mobile-bar-search">
-                                    <a href="/">
-                                        <i className="icon-search"/>Search
-                                    </a>
-                                    <form role="search" method="get" className="searchform main-search-form" action="/">
-                                        <i className="icon-left-open"/>
-                                        <input type="search" className="live-search" autoComplete="off" name="search"/>
-                                        <div className="loader_2 search_loader"/>
-                                        <div className="search-results results-empty"/>
+                                    <Link style={buttonSearch} to="/" onClick={() => this.showHideSearch()}>
+                                        <i className="icon-search" />Search
+                                    </Link>
+                                    <form style={searchInput}
+                                        role="search" method="get" className="searchform main-search-form" action="/">
+                                        <i className="icon-left-open" onClick={() => this.showHideSearch()}/>
+                                        <input type="search" className="live-search" autoComplete="off" name="search" placeholder="Hit enter to search" />
+                                        <div className="loader_2 search_loader" />
+                                        <div className="search-results results-empty" />
                                         <input type="hidden" name="search_type" className="search_type"
-                                               value="questions"/>
+                                            value="questions" />
                                     </form>
                                 </div>
                                 <div className="mobile-bar-ask">
                                     <Link to="/question/add" className="wpqa-question">
-                                        <i className="icon-help-circled"/>Ask a Question
+                                        <i className="icon-help-circled" />Ask a Question
                                     </Link>
                                 </div>
                             </div>

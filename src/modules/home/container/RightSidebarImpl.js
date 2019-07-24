@@ -11,6 +11,12 @@ const subCategoryService = CoreService.subCategoryService;
 
 function getTopUsers(filter: Filter, _this: RightSidebar) {
     return () => {
+        filter.where = {
+            realm: {
+                neq: "admin_app"
+            },
+            emailVerified: true
+        };
         accountService.getTopUsersWithTheHighestPoints(filter).then((result: Result) => {
             if (result.success) {
                 _this.changeStateValue('topUsers', result.data);

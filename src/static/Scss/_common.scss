@@ -88,6 +88,11 @@ textarea {
     box-shadow: 0 0 1em $color-shadow;
   }
 }
+.sider-left {
+  position: sticky !important;
+  top: 0;
+  overflow: visible;
+}
 @media screen and (max-width: $screen-lg) {
   .bg-unauthenticated {
     min-height: calc(100vh - 145px);

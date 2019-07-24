@@ -19,8 +19,7 @@ export default class LeftNav extends BasicComponent {
         const isShowQuestionTabs: boolean = this.state.isShowQuestionTabs;
         const subMenuDefaultClassName: string = "menu-item menu-item-type-custom menu-item-object-custom";
         return (
-            <nav className="nav_menu float_r fixed_nav_menu"
-                 style={{position: "relative", overflow: "visible", boxSizing: "border-box", minHeight: "1px"}}>
+            <nav className="nav_menu float_r fixed_nav_menu sider-left">
                 <div className="theiaStickySidebar"
                      style={{paddingTop: "0px", paddingBottom: "1px", position: "static", top: "30px", left: "135px"}}>
                     <h3 className="screen-reader-text">Explore</h3>
