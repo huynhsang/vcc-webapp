@@ -79,12 +79,12 @@ export default class LeftNav extends BasicComponent {
                             </Link>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page">
-                            <Link href="/">
+                            <Link to="/">
                                 <i className="icon-users"/>Users
                             </Link>
                         </li>
                         <li className="menu-item menu-item-type-post_type menu-item-object-page">
-                            <Link href="/">
+                            <Link to="/">
                                 <i className="icon-lifebuoy"/>Help
                             </Link>
                         </li>

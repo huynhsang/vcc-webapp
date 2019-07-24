@@ -10,6 +10,7 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 import './static/theme/css/style.css';
 import './static/theme/css/media-element.css';
 import './static/theme/css/custom.css';
+import './static/theme/css/sweet-alert.css';
 
 // Our custom css
 import './static/Scss/styles.scss';

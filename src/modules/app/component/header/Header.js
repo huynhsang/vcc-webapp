@@ -110,8 +110,8 @@ export default class Header extends BasicComponent {
                         <div className="left-header float_l">
                             <h2 className="screen-reader-text site_logo">VC&C</h2>
                             <Link className="logo float_l logo-img" to="/" title="Home">
-                                <img title="VC&C" height="45" width="137" className="default_screen" alt="VC&C Logo" src={logo}/>
-                                <img title="VC&C" height="45" width="137" className="retina_screen" alt="VC&C Logo" src={logo2x}/>
+                                <img title="VC&C" width="60" className="default_screen" alt="VC&C Logo" src={logo}/>
+                                <img title="VC&C" width="60" className="retina_screen" alt="VC&C Logo" src={logo2x}/>
                             </Link>
                             <div className="mid-header float_l">
                                 <div className="header-search float_r">

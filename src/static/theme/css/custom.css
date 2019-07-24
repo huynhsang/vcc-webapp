@@ -62,3 +62,7 @@
 li.flexMenu-viewMore:hover ul{
     display: block !important;
 }
+
+.sweet-alert {
+    visibility: initial !important;
+}

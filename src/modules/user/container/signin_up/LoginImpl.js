@@ -1,10 +1,12 @@
 import {connect} from 'react-redux';
 import Login from '../../component/signin_up/Login';
-import type {LoginRequest} from "../../request/LoginRequest";
+import type {LoginRequest} from '../../request/LoginRequest';
 import AccountJWTService from './../../service/AccountJWTService';
 import RootScope from './../../../../global/RootScope';
 import Result from './../../../../global/Result';
+import SweetAlert from '../../../../global/SweetAlert';
 import AccountUtil from './../../../../common/util/AccountUtil';
+import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 import CookieHelper from './../../../../common/util/CookieHelper';
 import CookieConstant from './../../../../common/constant/CookieConstant';
 
@@ -25,10 +27,12 @@ function doLogin(loginData: LoginRequest, redirect: any): void {
                 CookieHelper.setCookie(CookieConstant.userIdKey, RootScope.userId, exdays);
 				AccountUtil.getCurrentUser().then(() => {
 					AccountUtil.updateApplicationAfterAuthenticated(dispatch);
+					SweetAlert.show(SweetAlert.successAlertBuilder("Success!", "Logged in"));
 					redirect.push('/');
 				});
 			} else {
-                RootScope.resetAuthValues();
+				RootScope.resetAuthValues();
+				SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
                 // Todo: show error here
 			}
 		});

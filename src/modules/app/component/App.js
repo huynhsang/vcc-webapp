@@ -51,8 +51,8 @@ export default class App extends BasicComponent {
                     <Header isAuthenticated={auth.isAuthenticated} doLogOut={logout}/>
                     <MobileAside/>
                     <AppRouter auth={auth}/>
+					<SweetAlert/>
                 </div>
-				<SweetAlert/>
 			</Router>
 		);
 	}

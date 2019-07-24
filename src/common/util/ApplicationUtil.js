@@ -13,9 +13,9 @@ export default class ApplicationUtil {
 	}
 
 	static
-	getErrorMsg(error: any): string {
-		if (error.data && error.data.length > 0) {
-			return error.data;
+	getErrorMsg(fail: any): string {
+		if (fail.data && fail.data.error) {
+			return fail.data.error.message;
 		}
 		return "Something went wrong!";
 	}
