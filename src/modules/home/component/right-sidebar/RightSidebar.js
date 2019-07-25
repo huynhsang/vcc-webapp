@@ -239,7 +239,7 @@ export default class RightSidebar extends BasicComponent{
                                     trendingTags.map((tag: SubCategory, index) => {
                                         return (
                                             <Link key={index} to={`/questions?tags=${tag.slug}`} className="tag-cloud-link tag-link-11 tag-link-position-1">
-                                                analytics
+                                                {tag.nameEn}
                                             </Link>
                                         )
                                     })

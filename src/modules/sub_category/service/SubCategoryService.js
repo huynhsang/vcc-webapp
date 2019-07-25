@@ -10,7 +10,7 @@ const SUBCATEGORY_API = RootScope.appApiUrl + 'SubCategories';
 export default class SubCategoryService extends BasicService implements ISubCategoryService {
 
     findAll(filter: Filter): Result {
-        let fullUrl: string = FilterBuilder.buildUrlWithFilter(SUBCATEGORY_API, filter);
+        let fullUrl: string = FilterBuilder.buildUrlWithFilter(`${SUBCATEGORY_API}/all`, filter);
         return SubCategoryService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 
@@ -26,7 +26,7 @@ export default class SubCategoryService extends BasicService implements ISubCate
 
     getTrendingTags(filter: Filter): Result {
         filter.order = "numberOfQuestions DESC";
-        const fullUrl = FilterBuilder.buildUrlWithFilter(SUBCATEGORY_API, filter);
+        const fullUrl = FilterBuilder.buildUrlWithFilter(`${SUBCATEGORY_API}/trending-tags`, filter);
         return SubCategoryService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 

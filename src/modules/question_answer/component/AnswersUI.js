@@ -57,7 +57,7 @@ export default class AnswersUI extends BasicComponent {
         const { answers, loader, disableApproveBtn } = _this.state;
         const { question, handleVoteAnswer, approveAnswer } = _this.props;
         const isOwner: boolean = question.askedBy ? question.askedBy.id === RootScope.userId : false;
-        console.log(isOwner);
+
         return (
             <div className="question-adv-comments question-has-comments question-has-tabs">
                 <div id="comments" className="post-section">
@@ -88,7 +88,7 @@ export default class AnswersUI extends BasicComponent {
                                     const disableUp: boolean = isVoted && answer.votes[0].isPositiveVote;
                                     const disableDown: boolean = isVoted && !answer.votes[0].isPositiveVote;
                                     const showLoader: boolean = loader && loader.answerId === answer.id;
-                                    console.log(question.hasAcceptedAnswer);
+                                    const hideApprove: boolean = answer.answerBy === question.askedBy;
                                     return (
                                         <li key={index} className="comment byuser comment-author-james even thread-even depth-1">
                                             <div className="comment-body clearfix">
@@ -168,7 +168,7 @@ export default class AnswersUI extends BasicComponent {
                                                                 <div className="best-answer">Best Answer</div> : ''
                                                         }
                                                         {
-                                                            !isOwner && !question.hasAcceptedAnswer ?
+                                                            isOwner && !question.hasAcceptedAnswer && hideApprove ?
                                                                 <button className="btn btn-approve" disabled={disableApproveBtn}
                                                                     onClick={() => approveAnswer(question, answer, _this)}>
                                                                     <i className="fas fa-check"/> Approve

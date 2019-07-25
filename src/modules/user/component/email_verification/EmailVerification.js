@@ -19,12 +19,12 @@ export default class EmailVerification extends BasicComponent {
         if (!uid || !token) {
         	this.props.history.push('/');
         } else {
-        	this.props.doVerifyEmail(uid, token, this.props.history, this);
+        	this.props.doVerifyEmail(uid, token, this);
         }
     }
 
 	render() {
-		const {message} = this.state
+		const {message} = this.state;
 		return (
 			<div className="bg-unauthenticated">
 				<div className="login-page">

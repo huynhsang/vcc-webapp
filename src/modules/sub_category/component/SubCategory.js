@@ -68,17 +68,17 @@ export default class SubCategory extends BasicComponent {
                                 <div className="post-content-text"/>
                                 <div className="row cats-sections tags-sections">
                                     {
-                                        subCategories.map((category: SubCategory, index) => {
+                                        subCategories.map((item: SubCategory, index) => {
                                             return (
                                                 <div key={index} className="col col6">
                                                     <div className="cat-sections-follow">
                                                         <div className="cat-sections">
-                                                            <Link to="/"><i className="icon-tag"/>{category.nameEn}</Link>
+                                                            <Link to="/"><i className="icon-tag"/>{item.nameEn}</Link>
                                                         </div>
                                                         <div className="cat-section-follow">
                                                             <div className="cat-follow-button">
                                                                 <i className="icon-users"/>
-                                                                <span className="follow-cat-count"> {category.numberOfQuestions}</span>
+                                                                <span className="follow-cat-count"> {item.amount}</span>
                                                                 questions
                                                             </div>
                                                             <div className="clearfix"/>
