@@ -1,6 +1,6 @@
 // only custom component UserProfile
 .user-container {
-  max-width: 800px;
+  max-width: 768px;
   color: $color-dark-9;
 
   p {
@@ -12,8 +12,33 @@
   &--user {
     background: $background-content;
     @include borderRadius(2px);
+    .experience {
+      &--icon {
+        font-size: 30px;
+        fill: $color-icon;
+        transition: background-color 0.4s ease;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        &:hover {
+          background-color: rgba(152,216,244,.25);
+        }
+        svg {
+          @include center-align-absolute();
+        }
+      }
+      &--add {
+        position: absolute;
+        top: 16px;
+        right: 20px;
+      }
+      &--edit {
+        position: absolute;
+        right: -5px;
+        top: 0;
+      }
+    }
   }
-
   &--info {
     display: flex;
     display: -webkit-flex;

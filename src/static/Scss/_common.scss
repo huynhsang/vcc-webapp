@@ -57,17 +57,22 @@ input {
   width: 100%;
   outline: none;
   margin: 0;
+  border: 1px solid $color-dark-6 !important;
   @include borderRadius(2px);
   &[type="text"], &[type="password"]{
    margin: 0;
   }
 }
-input:focus{
+input:focus {
   outline: 0 !important;
-  box-shadow: 0 0 1em $color-shadow;
+  // box-shadow: 0 0 1em $color-shadow;
+  border: 1px solid  $color-main;
 }
 ::placeholder {
   opacity: 0.6;
+}
+.required {
+  color: $color-required;
 }
 button {
   outline: none;
@@ -83,9 +88,10 @@ textarea {
   width: 100%;
   height: initial;
   line-height: initial;
+  border: 1px solid $color-dark-6 !important;
   @include borderRadius(2px);
   &:focus {
-    box-shadow: 0 0 1em $color-shadow;
+    border: 1px solid  $color-main;
   }
 }
 .sider-left {
