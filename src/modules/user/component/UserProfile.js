@@ -4,7 +4,12 @@ import Modal from '../../../component/modal/modal';
 import avatar from '../../../static/resources/img/avatar-sang.jpg';
 import logoCompany from '../../../static/resources/img/logo/est-rouge.png';
 import logoFram from '../../../static/resources/img/logo/fram.png';
+import type {User} from "../../../domain/User";
+import PropTypes from "prop-types";
 
+const propTypes = {
+    getProfileById: PropTypes.func.isRequired,
+};
 export default class UserProfile extends BasicComponent {
     constructor(props) {
         super(props);
@@ -18,16 +23,16 @@ export default class UserProfile extends BasicComponent {
             isShowing: true
         });
         document.body.style.overflow = 'hidden';
-    };
+    }
 
     closeModalHandler = () => {
         this.setState({
             isShowing: false
         });
         document.body.style.overflow = 'unset';
-    };
-
+    }
     render() {
+        const { profile } = this.state || {};
         return (
             <div>
                 {this.state.isShowing ? <div onClick={this.closeModalHandler} className="back-drop"></div> : null}
@@ -74,7 +79,7 @@ export default class UserProfile extends BasicComponent {
                             <label>Description </label>
                             <textarea rows="6" />
                         </div>
-
+                        
                     </div>
                     <div className="modal-footer">
                         <button className="btn btn-primary">Save</button>
@@ -220,3 +225,4 @@ export default class UserProfile extends BasicComponent {
         );
     }
 }
+UserProfile.proptypes = propTypes;
