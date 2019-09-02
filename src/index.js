@@ -1,7 +1,7 @@
 import React from 'react';
-import {render} from 'react-dom';
-import {Provider} from 'react-redux';
-import {configureStore} from './store';
+import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { configureStore } from './store';
 import '../node_modules/slick-carousel/slick/slick.css';
 import '../node_modules/slick-carousel/slick/slick-theme.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
@@ -19,13 +19,16 @@ import './static/Scss/styles.scss';
 import Root from './modules/app/container/AppImpl';
 import * as serviceWorker from './serviceWorker';
 
+// Link and init language manager
+import './services/localize';
+
 const store = configureStore();
 
 render(
-    <Provider store={store}>
-      <Root/>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <Root />
+  </Provider>,
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change
