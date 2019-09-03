@@ -35,13 +35,13 @@ i18n
   .init({
     resources,
     detection: detectionOptions,
-    load: 'languageOnly',
     fallbackLng: {
       default: ['en', 'vi'],
     },
+    load: 'languageOnly',
     whitelist: ['en', 'vi'],
     nonExplicitWhitelist: true,
-    // debug: process.env.NODE_ENV === 'development',
+    debug: true,
 
     keySeparator: false, // we do not use keys in form messages.welcome
 
@@ -50,7 +50,7 @@ i18n
     },
   });
 
-async function changePlayerLanguage(language: string) {
+async function changeLanguage(language: string) {
   if (isEmpty(language)) {
     return;
   }
@@ -58,4 +58,4 @@ async function changePlayerLanguage(language: string) {
   await i18n.changeLanguage(language);
 }
 
-export { i18n, changePlayerLanguage };
+export { i18n, changeLanguage };

@@ -10300,7 +10300,7 @@ aside.sidebar {
 .logo {
     border-right: 1px solid #33353c;
     padding-right: 30px;
-    width: 201px
+    width: 120px
 }
 
 .logo img {
@@ -10417,8 +10417,7 @@ nav.nav ul > li ul li .menu-nav-arrow {
 }
 
 .mid-header {
-    width: 77%;
-    width: 685px;
+    width: calc(100% - 120px);
     position: relative
 }
 
