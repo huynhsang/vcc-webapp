@@ -8,8 +8,12 @@ import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
 import PropTypes from 'prop-types';
 import RootScope from '../../../../global/RootScope';
 import { User } from '../../../../domain/User';
+import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 import { LanguageSelector } from '../../../LanguageSelector';
+
+import { headerTabs, userMenuTabs } from './headerConstant';
 
 const propTypes = {
   isAuthenticated: PropTypes.bool.isRequired,
@@ -21,7 +25,16 @@ const LanguageSelectorWapper = styled.div`
   margin: 3px 0px 0px 15px;
 `;
 
-const Header = ({ doLogOut, isAuthenticated }) => {
+const Header = ({ doLogOut, isAuthenticated, history }) => {
+  const { t } = useTranslation();
+
+  const {
+    location: { pathname },
+  } = history;
+
+  const paths = pathname.match(/\/[\w-]+/g);
+  const tabSelected = paths && paths[0] ? paths[0].substring(1) : '';
+
   const [showUserMenu, setShowUserMenu] = React.useState(false);
   const [showSearch, setShowSearch] = React.useState(false);
 
@@ -35,11 +48,46 @@ const Header = ({ doLogOut, isAuthenticated }) => {
     currentUser.firstName,
     currentUser.lastName,
   ]);
+
   const userMenuStyle = showUserMenu
     ? { display: 'block' }
     : { display: 'none' };
   const searchInput = showSearch ? { display: 'block' } : { display: 'none' };
   const buttonSearch = showSearch ? { display: 'none' } : { display: 'block' };
+
+  const PrincipalMenu = (
+    <ul id="menu-header" className="menu">
+      {headerTabs.map(val => (
+        <li
+          className={tabSelected === val.path ? 'current-menu-item' : ''}
+          key={val.label}
+        >
+          <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
+        </li>
+      ))}
+      <li key={''}>
+        <a href="https://lqdalumni.site/">{t('header_blog')}</a>
+      </li>
+    </ul>
+  );
+
+  const UserMenu = (
+    <ul style={userMenuStyle}>
+      {userMenuTabs.map(val => (
+        <li key={val.path}>
+          <Link to={`/${val.path}`}>
+            <i className={val.iconClassName} />
+            {t(val.label)}
+          </Link>
+        </li>
+      ))}
+      <li key="logout">
+        <a onClick={logout}>
+          <i className="icon-logout" /> {t('header_logout')}
+        </a>
+      </li>
+    </ul>
+  );
 
   return (
     <div className="hidden-header header-dark mobile_bar_active">
@@ -97,31 +145,7 @@ const Header = ({ doLogOut, isAuthenticated }) => {
                     <div className="float_l">{fullName}</div>
                   </div>
                   <i className="icon-down-open-mini" />
-                  <ul style={userMenuStyle}>
-                    <li>
-                      <Link to="/user-profile">
-                        <i className="icon-user" />
-                        User Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/">
-                        <i className="icon-cog" />
-                        Edit Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <Link to="/profile/best-answers/">
-                        <i className="icon-graduation-cap" />
-                        Best Answers
-                      </Link>
-                    </li>
-                    <li>
-                      <a onClick={logout}>
-                        <i className="icon-logout" /> Logout
-                      </a>
-                    </li>
-                  </ul>
+                  {UserMenu}
                 </div>
               </div>
             </div>
@@ -194,40 +218,7 @@ const Header = ({ doLogOut, isAuthenticated }) => {
               </div>
               <nav className="nav float_l">
                 <h3 className="screen-reader-text">VC&C Navigation</h3>
-                <ul id="menu-header" className="menu">
-                  <li
-                    id="menu-item-75"
-                    className="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-64 current_page_item menu-item-75"
-                  >
-                    <Link className="" to="/">
-                      Home
-                    </Link>
-                  </li>
-                  <li
-                    id="menu-item-76"
-                    className="menu-item menu-item-type-post_type menu-item-object-page menu-item-76"
-                  >
-                    <Link className="" to="/about-us">
-                      About Us
-                    </Link>
-                  </li>
-                  <li
-                    id="menu-item-77"
-                    className="menu-item menu-item-type-post_type menu-item-object-page menu-item-77"
-                  >
-                    <a className="" href="https://lqdalumni.site/">
-                      Blog
-                    </a>
-                  </li>
-                  <li
-                    id="menu-item-78"
-                    className="menu-item menu-item-type-post_type menu-item-object-page menu-item-78"
-                  >
-                    <Link className="" to="/contact-us">
-                      Contact Us
-                    </Link>
-                  </li>
-                </ul>
+                {PrincipalMenu}
               </nav>
             </div>
           </div>
@@ -277,7 +268,7 @@ const Header = ({ doLogOut, isAuthenticated }) => {
               <div className="mobile-bar-ask">
                 <Link to="/question/add" className="wpqa-question">
                   <i className="icon-help-circled" />
-                  Ask a Question
+                  {t('home_ask_a_question')}
                 </Link>
               </div>
             </div>
@@ -290,4 +281,4 @@ const Header = ({ doLogOut, isAuthenticated }) => {
 
 Header.propTypes = propTypes;
 
-export default Header;
+export default withRouter(Header);

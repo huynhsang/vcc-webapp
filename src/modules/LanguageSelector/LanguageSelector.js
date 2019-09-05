@@ -12,6 +12,7 @@ const useStyles = makeStyles(theme => ({
   select: {
     color: 'white',
     fontSize: '12px',
+    minWidth: '80px',
     '& svg': {
       color: 'white',
     },
@@ -51,7 +52,7 @@ const LanguageSelector = ({}) => {
     >
       {items.map(val => (
         <MenuItem
-          key={val.key}
+          key={val.value}
           value={val.value}
           disabled={val.disable || false}
         >
