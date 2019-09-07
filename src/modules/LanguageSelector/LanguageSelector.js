@@ -12,31 +12,31 @@ const useStyles = makeStyles(theme => ({
   select: {
     color: 'white',
     fontSize: '12px',
-    minWidth: '80px',
+    minWidth: '90px',
     '& svg': {
       color: 'white',
     },
     '&:before': {
       borderColor: 'white',
     },
+    '&:after': {
+      borderColor: '#535252',
+    },
   },
 }));
 
 const items = [
   {
-    label: 'Language',
-    value: '',
-    disable: true,
-  },
-  {
     label: 'English',
     value: 'en',
   },
   {
-    label: 'Tiếng Việt',
+    label: 'Vietnamese',
     value: 'vi',
   },
 ];
+
+const supportLanguges = ['en', 'vi'];
 
 const LanguageSelector = ({}) => {
   const classes = useStyles();
@@ -45,17 +45,18 @@ const LanguageSelector = ({}) => {
 
   return (
     <Select
-      value={i18n.language}
+      value={
+        supportLanguges.includes(i18n.language) ? i18n.language : 'language'
+      }
       onChange={ev => changeLanguage(ev.target.value)}
       autoWidth
       className={classes.select}
     >
+      <MenuItem key="language" value="language" disabled>
+        <em style={{ color: '#a8a8a8' }}>Language</em>
+      </MenuItem>
       {items.map(val => (
-        <MenuItem
-          key={val.value}
-          value={val.value}
-          disabled={val.disable || false}
-        >
+        <MenuItem key={val.value} value={val.value}>
           {val.label}
         </MenuItem>
       ))}
