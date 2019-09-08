@@ -1,5 +1,4 @@
 import React from 'react';
-import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import LeftNav from './left_nav/LeftNav';
 import { Link, Route } from 'react-router-dom';
 import RightSidebar from '../container/RightSidebarImpl';
@@ -18,8 +17,8 @@ const Home = ({ isAuthenticated, subRoutes }) => {
             <h3>{t('home_share_and_grow')}</h3>
             <p>{t('home_description')}</p>
           </div>
-          <div className="col3">
-            {!isAuthenticated && (
+          {!isAuthenticated && (
+            <div className="col3">
               <Link
                 to="/registration"
                 className="signup-panel button-default call-action-button"
@@ -27,8 +26,8 @@ const Home = ({ isAuthenticated, subRoutes }) => {
               >
                 {t('home_create_a_new_account')}
               </Link>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
       <div className="discy-content">

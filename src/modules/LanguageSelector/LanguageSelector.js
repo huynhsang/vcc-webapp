@@ -1,10 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import { changeLanguage, i18n } from '../../services/localize';
 import { useTranslation } from 'react-i18next';
 
@@ -38,10 +35,10 @@ const items = [
 
 const supportLanguges = ['en', 'vi'];
 
-const LanguageSelector = ({}) => {
+const LanguageSelector = () => {
   const classes = useStyles();
 
-  const { t } = useTranslation();
+  useTranslation();
 
   return (
     <Select

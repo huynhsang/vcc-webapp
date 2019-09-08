@@ -1,5 +1,4 @@
 import React from 'react';
-import BasicComponent from '../../../../common/abstract/component/BasicComponent';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
