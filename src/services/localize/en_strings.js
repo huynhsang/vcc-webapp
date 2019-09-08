@@ -1,4 +1,13 @@
 export default {
+
+  common_questions:"Questions",
+  common_answers:"Answers",
+  common_stats: "Stats",
+  common_users:"Users",
+  common_popular:"Popular",
+  common_slidebar:"Slidebar",
+  common_points:"Points",
+  
   header_home : "Home",
   header_about_us: "About Us",
   header_contact_us: "Contact Us",
@@ -24,4 +33,7 @@ export default {
   nav_badges: 'Badges',
   nav_users:'Users',
   nav_help:'Help',
+  nav_ask_a_question : "Ask a question",
+  nav_best_answers: "Best Answers",
+  nav_top_members : "Top Members"
 }

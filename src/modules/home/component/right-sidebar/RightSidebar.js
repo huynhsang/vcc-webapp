@@ -1,5 +1,5 @@
 import React from 'react';
-import BasicComponent from '../../../../common/abstract/component/BasicComponent';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import type { Filter } from '../../../../global/Filter';
@@ -8,19 +8,16 @@ import type { User } from '../../../../domain/User';
 import type { Question } from '../../../../domain/Question';
 import type { SubCategory } from '../../../../domain/SubCategory';
 
-const propTypes = {
-  getTopUsers: PropTypes.func.isRequired,
-  getTopPopularQuestions: PropTypes.func.isRequired,
-  getQuestionsWithTopAnswers: PropTypes.func.isRequired,
-  getTopTrendingTags: PropTypes.func.isRequired,
-};
-
+//TO DO: List popular, list Answers
 const RightSidebar = ({
   getTopUsers,
   getTopPopularQuestions,
   getQuestionsWithTopAnswers,
   getTopTrendingTags,
 }) => {
+
+  const { t } = useTranslation();
+
   const [topUsers, setTopUsers] = React.useState([]);
   const [popularQuestions, setPopularQuestions] = React.useState([]);
   const [questionsWithTopAnswers, setQuestionsWithTopAnswers] = React.useState(
@@ -59,13 +56,13 @@ const RightSidebar = ({
   const questions: Array<Question> = isPopularTab
     ? popularQuestions
     : questionsWithTopAnswers;
+
   return (
     <aside
       className="sidebar sidebar-width float_l fixed-sidebar"
       style={{
         position: 'relative',
         overflow: 'visible',
-        boxSizing: 'border-box',
         minHeight: '1px',
       }}
     >
@@ -79,41 +76,41 @@ const RightSidebar = ({
           left: '1026px',
         }}
       >
-        <h3 className="screen-reader-text">Sidebar</h3>
+        <h3 className="screen-reader-text">{t('common_slidebar')}</h3>
         <div className="inner-sidebar">
           <div className="widget widget_ask">
             <Link to="/question/add" className="button-default wpqa-question">
-              Ask A Question
+              {t('home_ask_a_question')}
             </Link>
           </div>
           <section
             id="stats-widget-2"
             className="widget-no-divider widget stats-widget"
           >
-            <h3 className="screen-reader-text">Stats</h3>
+            <h3 className="screen-reader-text">{t('common_stats')}</h3>
             <div className="widget-wrap">
               <ul className="stats-inner">
                 <li className="stats-questions">
                   <div>
-                    <span className="stats-text">Questions</span>
+                    <span className="stats-text">{t('common_questions')}</span>
                     <span className="stats-value">21</span>
                   </div>
                 </li>
                 <li className="stats-answers">
                   <div>
-                    <span className="stats-text">Answers</span>
+                    <span className="stats-text">{t('common_answers')}</span>
                     <span className="stats-value">69</span>
                   </div>
                 </li>
                 <li className="stats-best_answers">
                   <div>
-                    <span className="stats-text">Best Answers</span>
+                    <span className="stats-text">{t('nav_best_answers')}</span>
                     <span className="stats-value">10</span>
                   </div>
                 </li>
                 <li className="stats-users">
                   <div>
-                    <span className="stats-text">Users</span>
+                    <span className="stats-text">{t('common_users')}</span>
                     <span className="stats-value">118</span>
                   </div>
                 </li>
@@ -124,10 +121,10 @@ const RightSidebar = ({
             <div className="widget-title widget-title-tabs">
               <ul className="tabs tabstabs-widget-2">
                 <li className={popularClassName}>
-                  <a onClick={() => setIsPopularTab(true)}>Popular</a>
+                  <a onClick={() => setIsPopularTab(true)}>{t('common_popular')}</a>
                 </li>
                 <li className={answerClassName}>
-                  <a onClick={() => setIsPopularTab(false)}>Answers</a>
+                  <a onClick={() => setIsPopularTab(false)}>{t('common_answers')}</a>
                 </li>
               </ul>
               <div className="clearfix" />
@@ -174,7 +171,7 @@ const RightSidebar = ({
                                     className="post-meta-comment"
                                   >
                                     <i className="icon-comment" />
-                                    {question.numberOfAnswers} Answers
+                                    {question.numberOfAnswers} {t('common_answers')}
                                   </Link>
                                 </li>
                               </ul>
@@ -280,7 +277,7 @@ const RightSidebar = ({
           <section id="users-widget-2" className="widget users-widget">
             <h2 className="widget-title">
               <i className="icon-folder" />
-              Top Members
+              {t('top_members')}
             </h2>
             <div className="widget-wrap">
               <div className="user-section user-section-small row user-not-normal">
@@ -314,12 +311,12 @@ const RightSidebar = ({
                                 <ul>
                                   <li className="user-questions">
                                     <a href="/profile/marko/questions/">
-                                      {user.numberOfQuestions} Questions
+                                      {user.numberOfQuestions} {t('common_questions')}
                                     </a>
                                   </li>
                                   <li className="user-points">
                                     <a href="/profile/marko/points/">
-                                      {user.points} Points
+                                      {user.points} {t('common_points')}
                                     </a>
                                   </li>
                                 </ul>
@@ -366,6 +363,11 @@ const RightSidebar = ({
   );
 };
 
-RightSidebar.propTypes = propTypes;
+RightSidebar.propTypes = {
+  getTopUsers: PropTypes.func.isRequired,
+  getTopPopularQuestions: PropTypes.func.isRequired,
+  getQuestionsWithTopAnswers: PropTypes.func.isRequired,
+  getTopTrendingTags: PropTypes.func.isRequired,
+};
 
 export default RightSidebar;

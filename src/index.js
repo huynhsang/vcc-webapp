@@ -22,6 +22,8 @@ import * as serviceWorker from './serviceWorker';
 // Link and init language manager
 import './services/localize';
 
+import './static/Scss/default.scss';
+
 const store = configureStore();
 
 render(
