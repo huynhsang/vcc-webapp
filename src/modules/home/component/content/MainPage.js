@@ -15,7 +15,7 @@ const propTypes = {
     handleVoteQuestion: PropTypes.func.isRequired,
 };
 export default class MainPage extends BasicComponent {
-    filter: Filter = FilterBuilder.buildPaginationFilter('created DESC', 0, 10);
+    filter: Filter = FilterBuilder.buildPaginationFilter('createdOn DESC', 0, 10);
 
     constructor(props) {
         super(props);
@@ -211,8 +211,8 @@ export default class MainPage extends BasicComponent {
                                                                     Asked
                                                                     <span className="date-separator">:</span>
                                                                     <Link to={`/question/${question.slug}/view`} itemProp="url">
-                                                                        <time className="entry-date published" dateTime={question.created}>
-                                                                            {` ${new Date(question.created).toDateString()}`}
+                                                                        <time className="entry-date published" dateTime={question.createdOn}>
+                                                                            {` ${new Date(question.createdOn).toDateString()}`}
                                                                         </time>
                                                                     </Link>
                                                                 </span>

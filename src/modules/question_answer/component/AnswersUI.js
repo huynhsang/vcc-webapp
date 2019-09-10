@@ -240,7 +240,7 @@ const AnswersUI = ({
                           <a href="" className="comment-date" itemProp="url">
                             <span itemProp="dateCreated">
                               Added an answer on{' '}
-                              {new Date(answer.created).toDateString()}
+                              {new Date(answer.createdOn).toDateString()}
                             </span>
                           </a>
                         </div>

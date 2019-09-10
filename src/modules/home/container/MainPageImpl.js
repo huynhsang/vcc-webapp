@@ -13,7 +13,7 @@ const questionService = CoreService.questionService;
 const usersVoteService = CoreService.usersVoteService;
 
 const orderMaps = {
-    'recent-questions': 'created DESC',
+    'recent-questions': 'createdOn DESC',
     'most-answered': 'numberOfAnswers DESC',
     'most-visited': 'numberOfViews DESC',
     'most-voted': 'numberOfVotes DESC',

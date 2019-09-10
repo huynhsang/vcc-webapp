@@ -12,10 +12,8 @@ export interface User {
 	phone: string;
     summary: string;
     realm: string;
-    created: Date;
-    createdBy: string;
-    updated: Date;
-    updatedBy: string;
+    createdOn: Date;
+    updatedOn: Date;
     numberOfQuestions: number;
     numberOfAnswers: number;
     numberOfBestAnswers: number;

@@ -264,7 +264,7 @@ const ViewQuestion = ({
                             className="entry-date published"
                             dateTime={question.created}
                           >
-                            {new Date(question.created).toDateString()}
+                            {new Date(question.createdOn).toDateString()}
                           </time>
                         </Link>
                       </span>
