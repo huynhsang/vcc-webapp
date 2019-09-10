@@ -53,11 +53,11 @@ ul {
   list-style: none;
 }
 
-input {
+input[type="text"], input {
   width: 100%;
   outline: none;
   margin: 0;
-  border: 1px solid $color-dark-6 !important;
+  border: 1px solid $color-dark-6;
   @include borderRadius(2px);
   &[type="text"], &[type="password"]{
    margin: 0;
@@ -79,16 +79,12 @@ button {
   border: none;
   cursor: pointer;
 }
-button:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
 textarea {
   resize: none;
   width: 100%;
   height: initial;
   line-height: initial;
-  border: 1px solid $color-dark-6 !important;
+  border: 1px solid $color-dark-6;
   @include borderRadius(2px);
   &:focus {
     border: 1px solid  $color-main;

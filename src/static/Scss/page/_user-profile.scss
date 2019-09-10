@@ -1,10 +1,9 @@
 // only custom component UserProfile
 .user-container {
-  max-width: 768px;
   color: $color-dark-9;
 
   p {
-    margin-bottom: 0;
+    @include rem(margin-bottom, 0);
   }
 }
 
@@ -21,7 +20,7 @@
         width: 40px;
         height: 40px;
         &:hover {
-          background-color: rgba(152,216,244,.25);
+          background-color: rgba(152, 216, 244, 0.25);
         }
         svg {
           @include center-align-absolute();
@@ -68,54 +67,55 @@
   }
 }
 
-.header-user {
-  .profile-background-image {
-    height: 200px;
-    width: 100%;
-  }
+.profile-background-image {
+  @include rem(height, 300);
+  width: 100%;
+}
 
+.info-user {
+  background: $background-content;
   .avatar-user {
-    position: absolute;
-    top: -75px;
-    left: 25px;
-    border: 5px solid $color-border-avatar;
-    box-shadow: inset 0 1.5px 3px 0 rgba(0, 0, 0, .15), 0 1.5px 3px 0 rgba(0, 0, 0, .15);
-    width: 152px;
-    height: 152px;
+    box-shadow: inset 0 1.5px 3px 0 rgba(0, 0, 0, 0.15), 0 1.5px 3px 0 rgba(0, 0, 0, 0.15);
+    @include rem(width, 180);
+    @include rem(height, 180);
+    @include rem(margin, 0, auto);
     @include borderRadius(50%);
-
+    position: absolute;
+    @include rem(top, -90);
+    left: 50%;
+    transform: translateX(-50%);
     img {
       @include borderRadius(50%);
     }
   }
-
-  .connect-user {
-    text-align: right;
+  .title-user-info {
+    @include rem(padding-top, 100);
   }
-
-  .link-contact {
-    color: $color-main;
+  .follow {
+    @include rem(margin, 15, -15, 0, -15);
+    @include rem(padding-bottom, 10);
+    .follow-number {
+      @include rem(font-size, 20);
+      color: $color-main;
+    }
+  }
+  .shell-info {
+    @include rem(margin, 0, -15, 0, -15);
+    .title-info {
+      border-top: 1px solid $color-border;
+      @include rem(padding, 8, 16);
+      font-weight: 700;
+      @include flexbox();
+      @include justify-content(space-between);
+      @include align-items(center);
+    }
+    i {
+      
+    }
   }
 }
 
 @media screen and (max-width: 678px) {
-  .header-user {
-    .avatar-user {
-      left: 50%;
-      transform: translateX(-50%);
-      -webkit-transform: translateX(-50%);
-    }
-
-    .info-user {
-      padding-top: 90px;
-      text-align: center;
-    }
-
-    .connect-user {
-      text-align: center;
-      @include rem(margin, 0, 0, 10, 0);
-    }
-  }
   .box-content {
     &--info {
       .content-info:not(:first-of-type) {
