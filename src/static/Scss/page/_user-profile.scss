@@ -6,6 +6,9 @@
     @include rem(margin-bottom, 0);
   }
 }
+.responsive-user {
+  @include rem(padding-right, 0);
+}
 
 .box-content {
   &--user {
@@ -115,12 +118,8 @@
   }
 }
 
-@media screen and (max-width: 678px) {
-  .box-content {
-    &--info {
-      .content-info:not(:first-of-type) {
-        @include rem(padding-top, 10);
-      }
-    }
+@media screen and (max-width: 768px) {
+  .responsive-user {
+    @include rem(padding-right, 15);
   }
 }
