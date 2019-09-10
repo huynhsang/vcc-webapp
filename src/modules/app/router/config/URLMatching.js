@@ -12,6 +12,7 @@ import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
 import SubCategory from "../../../sub_category/container/SubCategoryImpl";
 import Badges from "../../../badges/container/BadgesImpl"
 import UserProfile from "../../../user/container/UserProfileImpl";
+import UserAbout from "../../../user/container/UserAboutlmpl";
 
 export const UnAuthLink = [
 	{
@@ -97,8 +98,15 @@ export const PublicLink = [
         ]
     },
     {
-        path: '/profile/:id',
+        path: '/user-profile',
         component: UserProfile,
-    }
+        subRoutes: [
+            {
+                path: '',
+                exact: true,
+                component: UserAbout
+            },
+        ]
+    },
 
 ];
