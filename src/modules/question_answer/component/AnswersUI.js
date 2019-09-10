@@ -184,7 +184,7 @@ export default class AnswersUI extends BasicComponent {
                                                                 <span className="badge-span" style={{backgroundColor: "#ffbf00"}}>{answerBy.level}</span>
                                                             </div>
                                                             <a href="" className="comment-date" itemProp="url">
-                                                                <span itemProp="dateCreated">Added an answer on {new Date(answer.created).toDateString()}</span>
+                                                                <span itemProp="dateCreated">Added an answer on {new Date(answer.createdOn).toDateString()}</span>
                                                             </a>
                                                         </div>
                                                     </div>

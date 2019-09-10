@@ -208,8 +208,8 @@ export default class ViewQuestion extends BasicComponent {
                                                     Asked
                                                     <span className="date-separator">:</span>
                                                         <Link to='/' itemProp="url">
-                                                            <time className="entry-date published" dateTime={question.created}>
-                                                                {new Date(question.created).toDateString()}
+                                                            <time className="entry-date published" dateTime={question.createdOn}>
+                                                                {new Date(question.createdOn).toDateString()}
                                                             </time>
                                                         </Link>
                                                     </span>

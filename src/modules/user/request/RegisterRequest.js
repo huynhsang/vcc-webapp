@@ -22,7 +22,6 @@ export default class RegisterRequestBuilder {
 		registerRequest.firstName = firstName;
 		registerRequest.lastName = lastName;
 		registerRequest.dateOfBirth = dateOfBirth;
-		registerRequest.createdBy = registerRequest.updatedBy = 'System';
 		return registerRequest;
 	}
 }

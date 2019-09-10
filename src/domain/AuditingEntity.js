@@ -2,7 +2,7 @@ import type {User} from "./User";
 
 export interface AuditingEntity {
 	createdBy: User;
-	created: Date;
+	createdOn: Date;
 	updatedBy: User;
-	updated: Date;
+	updatedOn: Date;
 }
