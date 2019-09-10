@@ -31,6 +31,9 @@ export default {
   common_views: 'Views',
   common_followers: 'Followers',
   common_name: 'Name',
+  common_badges: 'Badges',
+  common_beginner: 'Beginner',
+  common_teacher: 'Teacher',
 
   header_home: 'Home',
   header_about_us: 'About Us',
@@ -107,4 +110,23 @@ export default {
   share_on_facebook: 'Share on Facebook',
   share_on_twitter: 'Share on Twitter',
   share_on_linkedIn: 'Share on LinkedIn',
+
+  badges_point_system: 'Points System',
+  badges_beside_gaining_reputation:
+    'Besides gaining reputation with your questions and answers, you receive badges for being especially helpful. Badges appears on your profile page, questions & answers.',
+  badges_points_for_a_new: 'Points for a new user in the community.',
+  badges_choosing_the_best: 'Choosing the best answer for a question.',
+  badges_add_an_answer: 'Add an answer in the community.',
+  badges_voting_a_question: 'Voting a question in the community.',
+  badges_following_a_user: 'Following a user in the community.',
+  badges_voting_an_answer: 'Voting an answer in the community.',
+  badges_badges_system: 'Badges System',
+  badges_pundit: 'Pundit',
+  badges_explainer: 'Explainer',
+  badges_professional: 'Professional',
+  badges_enlightened: 'Enlightened',
+  badges_you_must_have: 'You must have a total score of',
+  badges_in_at_least: 'in at least',
+  badges_non_community_wiki:
+    'non-community wiki answers to achieve this badge. Highest scoring answer that outscored an accepted answer with score of more than',
 };
