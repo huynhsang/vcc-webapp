@@ -9,12 +9,16 @@ import AnswersUI from '../container/AnswersImpl';
 import type { Category } from '../../../domain/Category';
 import ReactMarkdown from 'react-markdown';
 
+import { useTranslation } from 'react-i18next';
+
 const ViewQuestion = ({
   match,
   history,
   getQuestionDetail,
   handleVoteQuestion,
 }) => {
+  const { t } = useTranslation();
+
   const [question, setQuestion] = React.useState({});
   const [answers, setAnswers] = React.useState([]);
 
@@ -24,14 +28,14 @@ const ViewQuestion = ({
     history.push(path);
   };
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     const slug: string = match && match.params && match.params.slug;
     if (slug) {
       getQuestionDetail(match.params.slug, setQuestion, setAnswers, redirectTo);
     } else {
       history.push('/');
     }
-  },[]);
+  }, []);
 
   const updateQuestion = question => {
     setQuestion(question);
@@ -60,12 +64,12 @@ const ViewQuestion = ({
           <span typeof="v:Breadcrumb">
             <Link to="/">
               <i className="icon-home" />
-              Home
+              {t('common_home')}
             </Link>
             <span rel="v:child" typeof="v:Breadcrumb">
               <span className="crumbs-span"> / </span>
               <span className="current">
-                <a href="/?show=recent-questions">Questions</a>
+                <a href="/?show=recent-questions">{t('common_questions')}</a>
               </span>
               <span className="crumbs-span"> / </span>
               <span className="current">Q {question.id}</span>
@@ -157,13 +161,14 @@ const ViewQuestion = ({
                             <li className="user-columns-questions">
                               <Link to={`/profile/${askedBy.id}/questions`}>
                                 <i className="icon-book-open" />
-                                {askedBy.numberOfQuestions} Questions
+                                {askedBy.numberOfQuestions}{' '}
+                                {t('common_questions')}
                               </Link>
                             </li>
                             <li className="user-columns-answers">
                               <Link to={`/profile/${askedBy.id}/answers`}>
                                 <i className="icon-comment" />
-                                {askedBy.numberOfAnswers} Answers
+                                {askedBy.numberOfAnswers} {t('common_answers')}
                               </Link>
                             </li>
                             <li className="user-columns-best-answers">
@@ -171,20 +176,21 @@ const ViewQuestion = ({
                                 to={`/profile/${askedBy.id}/answers?show=best-answers`}
                               >
                                 <i className="icon-graduation-cap" />
-                                {askedBy.numberOfBestAnswers} Best Answers
+                                {askedBy.numberOfBestAnswers}{' '}
+                                {t('answer_best_answers')}
                               </Link>
                             </li>
                             <li className="user-columns-points">
                               <Link to={`/profile/${askedBy.id}`}>
                                 <i className="icon-bucket" />
-                                {askedBy.points} Points
+                                {askedBy.points} {t('common_points')}
                               </Link>
                             </li>
                           </ul>
                         </div>
                         <div className="user-follow-profile">
                           <Link to={`/profile/${askedBy.id}`}>
-                            View Profile
+                            {t('common_view_profile')}
                           </Link>
                         </div>
                         <div className="clearfix" />
@@ -257,7 +263,7 @@ const ViewQuestion = ({
                     </span>
                     <div className="post-meta">
                       <span className="post-date">
-                        Asked
+                        {t('common_asked')}
                         <span className="date-separator">:</span>
                         <Link to="/" itemProp="url">
                           <time
@@ -270,9 +276,9 @@ const ViewQuestion = ({
                       </span>
                       <span className="byline">
                         <span className="post-cat">
-                          In:
+                          {t('common_in')}:
                           <Link to={`/comunity/${category.slug}`} rel="tag">
-                            Language
+                            {t('common_language')}
                           </Link>
                         </span>
                       </span>
@@ -372,7 +378,7 @@ const ViewQuestion = ({
                     <li className="view-stats-meta">
                       <i className="icon-eye" />
                       {question.numberOfViews}
-                      <span className="question-span">Views</span>
+                      <span className="question-span">{t('common_views')}</span>
                     </li>
                     {/*<li className="question-followers">*/}
                     {/*<i className="icon-users"/>*/}
@@ -384,7 +390,7 @@ const ViewQuestion = ({
                     {/*</li>*/}
                   </ul>
                   <a className="meta-answer" href={`${currentPath}/#respond`}>
-                    Answer
+                    {t('common_answer')}
                   </a>
                 </footer>
               </div>
@@ -394,7 +400,7 @@ const ViewQuestion = ({
               <div className="post-share">
                 <span>
                   <i className="icon-share" />
-                  <span>Share</span>
+                  <span>{t('common_share')}</span>
                 </span>
                 <ul style={{ right: '-207px' }}>
                   <li className="share-facebook">
@@ -431,7 +437,7 @@ const ViewQuestion = ({
                 <li className="report_activated">
                   <a className="report_q" href="">
                     <i className="icon-attention" />
-                    Report
+                    {t('common_report')}
                   </a>
                 </li>
               </ul>

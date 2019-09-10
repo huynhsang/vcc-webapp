@@ -1,5 +1,6 @@
 export default {
   common_questions: 'Questions',
+  common_answer: 'Answer',
   common_answers: 'Answers',
   common_stats: 'Stats',
   common_users: 'Users',
@@ -15,6 +16,21 @@ export default {
   common_title: 'Title',
   common_tags: 'Tags',
   common_for_exemple: 'For example',
+  common_voted: 'Voted',
+  common_oldest: 'Oldest',
+  common_rencent: 'Recent',
+  common_view_profile: 'View Profile',
+  common_approve: 'Approve',
+  common_reply: 'Reply',
+  common_share: 'Share',
+  common_report: 'Report',
+  common_home: 'Home',
+  common_asked: 'Asked',
+  common_in: 'In',
+  common_language: 'Language',
+  common_views: 'Views',
+  common_followers: 'Followers',
+  common_name: 'Name',
 
   header_home: 'Home',
   header_about_us: 'About Us',
@@ -33,7 +49,7 @@ export default {
 
   nav_home: 'Home',
   nav_communities: 'Communities',
-  nav_questions: 'Question',
+  nav_questions: 'Questions',
   nav_new_question: 'New Questions',
   nav_trending_question: 'Trending Questions',
   nav_must_read_question: 'Must read Questions',
@@ -71,15 +87,24 @@ export default {
   question_include_tags_that:
     'Include tags that are crucial to your question only, like europe, us,...',
   question_only_included_in: 'Only included in the proposed scope',
-  question_your_title_help:'Your title helps people quickly understand what your question is about so they can answer it.',
-  question_imagine_you:`Imagine you’re asking a question to another developer.`,
-  question_is_there_an_R : `“Is there an R function for finding the index of an element in a vector?”`,
-  question_please_help_with_R : `“Please help with R”`,
-  quetion_what_is_your_title : "What’s your question title?",
-  question_what_category_of_questions : "What category of questions do you want to ask?",
-  question_we_will_help_you:"We'll help you find the best way to get your answer.",
-  question_i_have_a_question_about: "I have a question about studying",
-  question_i_nedd_help_with:"I need help with a working problem",
-  question_i_nedd_to_troubleshoot:"I need to troubleshoot some immigration",
-  
+  question_your_title_help:
+    'Your title helps people quickly understand what your question is about so they can answer it.',
+  question_imagine_you: `Imagine you’re asking a question to another developer.`,
+  question_is_there_an_R: `“Is there an R function for finding the index of an element in a vector?”`,
+  question_please_help_with_R: `“Please help with R”`,
+  quetion_what_is_your_title: 'What’s your question title?',
+  question_what_category_of_questions:
+    'What category of questions do you want to ask?',
+  question_we_will_help_you:
+    "We'll help you find the best way to get your answer.",
+  question_i_have_a_question_about: 'I have a question about studying',
+  question_i_nedd_help_with: 'I need help with a working problem',
+  question_i_nedd_to_troubleshoot: 'I need to troubleshoot some immigration',
+
+  answer_best_answers: 'Best Answers',
+  answer_leave_answer: 'Leave an answer',
+
+  share_on_facebook: 'Share on Facebook',
+  share_on_twitter: 'Share on Twitter',
+  share_on_linkedIn: 'Share on LinkedIn',
 };

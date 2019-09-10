@@ -1,5 +1,4 @@
 import React from 'react';
-import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import PropTypes from 'prop-types';
 import type { Answer } from '../../../domain/Answer';
 import { Link } from 'react-router-dom';
@@ -8,6 +7,8 @@ import ReactMarkdown from 'react-markdown';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import RootScope from '../../../global/RootScope';
+
+import { useTranslation } from 'react-i18next';
 
 const AnswersUI = ({
   history,
@@ -20,6 +21,8 @@ const AnswersUI = ({
   isAuthenticated,
   leaveAnswerValidation,
 }) => {
+  const { t } = useTranslation();
+
   const [answersEditted, setAnswersEditted] = React.useState(answers);
   const [leaveAnswer, setLeaveAnswer] = React.useState(false);
   const [answerBody, setAnswerBody] = React.useState('');
@@ -67,18 +70,19 @@ const AnswersUI = ({
         <div className="post-inner">
           <div className="answers-tabs">
             <h3 className="section-title">
-              <span>{question.numberOfAnswers} </span>Answers
+              <span>{question.numberOfAnswers} </span>
+              {t('common_answers')}
             </h3>
             <div className="answers-tabs-inner">
               <ul>
                 <li className="active-tab">
-                  <Link to="?show=voted">Voted</Link>
+                  <Link to="?show=voted">{t('common_voted')}</Link>
                 </li>
                 <li>
-                  <Link to="?show=oldest">Oldest</Link>
+                  <Link to="?show=oldest">{t('common_oldest')}</Link>
                 </li>
                 <li>
-                  <Link to="?show=recent">Recent</Link>
+                  <Link to="?show=recent">{t('common_rencent')}</Link>
                 </li>
               </ul>
             </div>
@@ -175,21 +179,21 @@ const AnswersUI = ({
                                       to={`/profile/${answerBy.id}/answers/?show=best`}
                                     >
                                       <i className="icon-graduation-cap" />
-                                      {answerBy.numberOfBestAnswers} Best
-                                      Answers
+                                      {answerBy.numberOfBestAnswers}{' '}
+                                      {t('answer_best_answers')}
                                     </Link>
                                   </li>
                                   <li className="user-columns-points">
                                     <Link to={`/profile/${answerBy.id}`}>
                                       <i className="icon-bucket" />
-                                      {answerBy.points} Points
+                                      {answerBy.points} {t('common_points')}
                                     </Link>
                                   </li>
                                 </ul>
                               </div>
                               <div className="user-follow-profile">
                                 <Link to={`/profile/${answerBy.id}`}>
-                                  View Profile
+                                  {t('common_view_profile')}
                                 </Link>
                               </div>
                               <div className="clearfix" />
@@ -199,7 +203,9 @@ const AnswersUI = ({
                       </div>
                       <div className="author clearfix">
                         {question.hasAcceptedAnswer && answer.isTheBest ? (
-                          <div className="best-answer">Best Answer</div>
+                          <div className="best-answer">
+                            {t('answer_best_answers')}
+                          </div>
                         ) : (
                           ''
                         )}
@@ -218,7 +224,7 @@ const AnswersUI = ({
                               )
                             }
                           >
-                            <i className="fas fa-check" /> Approve
+                            <i className="fas fa-check" /> {t('Approve')}
                           </button>
                         ) : (
                           ''
@@ -308,15 +314,15 @@ const AnswersUI = ({
                               aria-label={`Reply to ${answerBy.firstName} ${answerBy.lastName}`}
                             >
                               <i className="icon-reply" />
-                              Reply
+                              {t('common_reply')}
                             </button>
                           </li>
                           <li className="comment-share question-share question-share-2">
-                            <i className="icon-share" /> Share
+                            <i className="icon-share" /> {t('common_share')}
                             <div className="post-share">
                               <span>
                                 <i className="icon-share" />
-                                <span>Share</span>
+                                <span>{t('common_share')}</span>
                               </span>
                               <ul style={{ right: '-180px' }}>
                                 <li className="share-facebook">
@@ -326,7 +332,7 @@ const AnswersUI = ({
                                     href="http://www.facebook.com/sharer.php?"
                                   >
                                     <i className="icon-facebook" />
-                                    Share on Facebook
+                                    {t('share_on_facebook')}
                                   </a>
                                 </li>
                                 <li className="share-twitter">
@@ -336,7 +342,7 @@ const AnswersUI = ({
                                     href="http://twitter.com/share?"
                                   >
                                     <i className="icon-twitter" />
-                                    Share on Twitter
+                                    {t('share_on_twitter')}
                                   </a>
                                 </li>
                                 <li className="share-linkedin">
@@ -346,7 +352,7 @@ const AnswersUI = ({
                                     href="http://www.linkedin.com/shareArticle?"
                                   >
                                     <i className="icon-linkedin" />
-                                    Share on LinkedIn
+                                    {t('share_on_linkedIn')}
                                   </a>
                                 </li>
                               </ul>
@@ -361,7 +367,7 @@ const AnswersUI = ({
                               <li className="report_activated">
                                 <button className="report_c">
                                   <i className="icon-attention" />
-                                  Report
+                                  {t('common_report')}
                                 </button>
                               </li>
                             </ul>
@@ -387,10 +393,10 @@ const AnswersUI = ({
               leaveAnswerValidation(isAuthenticated, setLeaveAnswer, redirectTo)
             }
           >
-            Leave an answer
+            {t('answer_leave_answer')}
           </div>
         ) : (
-          <h3 className="section-title">Leave an answer</h3>
+          <h3 className="section-title">{t('answer_leave_answer')}</h3>
         )}
         {leaveAnswer ? (
           <form
