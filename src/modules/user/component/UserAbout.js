@@ -1,11 +1,11 @@
 import React from 'react';
 import BasicComponent from '../../../common/abstract/component/BasicComponent';
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import logoCompany from '../../../static/resources/img/logo/est-rouge.png';
 import logoFram from '../../../static/resources/img/logo/fram.png';
 
 const propTypes = {
-    doAbout: PropTypes.func.isRequired
+    // doAbout: PropTypes.func.isRequired
 };
 export default class UserAbout extends BasicComponent {
 

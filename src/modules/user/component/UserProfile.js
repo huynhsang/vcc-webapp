@@ -2,7 +2,7 @@ import React from 'react';
 import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import Modal from '../../../component/modal/modal';
 import avatar from '../../../static/resources/img/avatar-sang.jpg';
-
+import PropTypes from "prop-types";
 import { Link, Route } from "react-router-dom";
 
 const propTypes = {
@@ -118,7 +118,7 @@ export default class UserProfile extends BasicComponent {
                             </div>
                         </div>
                     </section>
-                    <div className="user-container col-md-9 pr0">
+                    <div className="user-container col-md-9 responsive-user">
 
                         {this.props.subRoutes.map((route, index) => {
                             return (
