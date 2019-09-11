@@ -129,4 +129,12 @@ export default {
   badges_in_at_least: 'in at least',
   badges_non_community_wiki:
     'non-community wiki answers to achieve this badge. Highest scoring answer that outscored an accepted answer with score of more than',
+
+  mainpage_recent_question : 'Recent Questions',
+  mainpage_most_answerd: 'Most Answered',
+  mainpage_most_visited:'Most Visited',
+  mainpage_most_voted: 'Most Voted',
+  mainpage_no_answers: 'No Answers',
+  mainpage_danang_vietnam : 'Da nang, Viet Nam',
+  mainpage_load_more_questions: 'Load More Questions',
 };

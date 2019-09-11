@@ -1,5 +1,4 @@
 import React from 'react';
-import BasicComponent from '../../../../common/abstract/component/BasicComponent';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import type { Filter } from '../../../../global/Filter';
@@ -10,7 +9,12 @@ import type { Category } from '../../../../domain/Category';
 import type { SubCategory } from '../../../../domain/SubCategory';
 import ReactMarkdown from 'react-markdown';
 
+import { useTranslation } from 'react-i18next';
+
 const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
+
+  const {t} = useTranslation();
+
   const [questions, setQuestions] = React.useState([]);
   const [show, setShow] = React.useState(null);
   const [loader, setLoader] = React.useState(null);
@@ -74,13 +78,13 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
             <div className="menu-tabs active-menu">
               <ul className="menu flex">
                 <li className={show === 'recent-questions' ? 'active-tab' : ''}>
-                  <Link to="?show=recent-questions">Recent Questions</Link>
+                  <Link to="?show=recent-questions">{t('mainpage_recent_question')}</Link>
                 </li>
                 <li className={show === 'most-answered' ? 'active-tab' : ''}>
-                  <Link to="?show=most-answered">Most Answered</Link>
+                  <Link to="?show=most-answered">{t('mainpage_most_answerd')}</Link>
                 </li>
                 <li className={show === 'most-visited' ? 'active-tab' : ''}>
-                  <Link to="?show=most-visited">Most Visited</Link>
+                  <Link to="?show=most-visited">{t('mainpage_most_visited')}</Link>
                 </li>
                 <li className="flexMenu-viewMore active">
                   <a title="">
@@ -91,10 +95,10 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                     style={{ display: 'none', position: 'absolute' }}
                   >
                     <li>
-                      <Link to="?show=most-voted">Most Voted</Link>
+                      <Link to="?show=most-voted">{t('mainpage_most_voted')}</Link>
                     </li>
                     <li>
-                      <Link to="?show=no-answers">No Answers</Link>
+                      <Link to="?show=no-answers">{t('mainpage_no_answers')}</Link>
                     </li>
                   </ul>
                 </li>
@@ -177,7 +181,7 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                                       <ul>
                                         <li className="city-country">
                                           <i className="icon-location" />
-                                          Da nang, Viet Nam
+                                          {t('mainpage_danang_vietnam')}
                                         </li>
                                       </ul>
                                     </div>
@@ -189,32 +193,32 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                                   <li className="user-columns-questions">
                                     <a href="/profile/martin/questions/">
                                       <i className="icon-book-open" />
-                                      {askedBy.numberOfQuestions} Questions
+                                      {askedBy.numberOfQuestions} {t('common_questions')}
                                     </a>
                                   </li>
                                   <li className="user-columns-answers">
                                     <a href="/profile/martin/answers/">
                                       <i className="icon-comment" />
-                                      {askedBy.numberOfAnswers} Answers
+                                      {askedBy.numberOfAnswers} {t('common_answers')}
                                     </a>
                                   </li>
                                   <li className="user-columns-best-answers">
                                     <a href="/profile/martin/best-answers/">
                                       <i className="icon-graduation-cap" />
-                                      {askedBy.numberOfBestAnswers} Best Answers
+                                      {askedBy.numberOfBestAnswers} {t('answer_best_answers')}
                                     </a>
                                   </li>
                                   <li className="user-columns-points">
                                     <a href="/profile/martin/points/">
                                       <i className="icon-bucket" />
-                                      {askedBy.points} Points
+                                      {askedBy.points} {t('common_points')}
                                     </a>
                                   </li>
                                 </ul>
                               </div>
                               <div className="user-follow-profile">
                                 <Link to={`/profile/${askedBy.id}`}>
-                                  View Profile
+                                  {t('common_view_profile')}
                                 </Link>
                               </div>
                               <div className="clearfix" />
@@ -289,7 +293,7 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                           </span>
                           <div className="post-meta">
                             <span className="post-date">
-                              Asked
+                              {t('common_asked')}
                               <span className="date-separator">:</span>
                               <Link
                                 to={`/question/${question.slug}/view`}
@@ -307,7 +311,7 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                             </span>
                             <span className="byline">
                               <span className="post-cat">
-                                In:
+                                {t('common_in')}:
                                 <Link
                                   to={`/community/${category.slug}`}
                                   rel="tag"
@@ -428,14 +432,14 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
                           <li className="view-stats-meta">
                             <i className="icon-eye" />
                             {`${question.numberOfViews} `}
-                            <span className="question-span">Views</span>
+                            <span className="question-span">{t('common_views')}</span>
                           </li>
                         </ul>
                         <Link
                           to={`/question/${question.slug}/view`}
                           className="meta-answer"
                         >
-                          Answer
+                          {t('common_answer')}
                         </Link>
                       </footer>
                     </div>
@@ -453,7 +457,7 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
             </span>
             {showLoadMore ? (
               <div className="load-more">
-                <a onClick={handleLoadMore}>Load More Questions</a>
+                <a onClick={handleLoadMore}>{t('mainpage_load_more_questions')}</a>
               </div>
             ) : (
               ''
@@ -464,6 +468,7 @@ const MainPage = ({ location, history, getQuestions, handleVoteQuestion }) => {
     </div>
   );
 };
+
 MainPage.prototypes = {
   getQuestions: PropTypes.func.isRequired,
   handleVoteQuestion: PropTypes.func.isRequired,

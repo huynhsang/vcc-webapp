@@ -126,5 +126,13 @@ export default {
   badges_you_must_have: 'Tổng điểm của bạn ít nhất là',
   badges_in_at_least: 'ít nhất',
   badges_non_community_wiki: 'câu trả lời wiki ngoài cộng đồng để đạt được huy hiệu này. Câu trả lời cho điểm cao nhất vượt qua câu trả lời được chấp nhận với số điểm cao hơn',
+
+  mainpage_recent_question : 'Câu hỏi gần đây',
+  mainpage_most_answerd: 'Trả lời nhiều nhất',
+  mainpage_most_visited:'Xem nhiều nhất',
+  mainpage_most_voted: 'Vote nhiều nhất',
+  mainpage_no_answers: 'Không có câu trả lời',
+  mainpage_danang_vietnam : 'Đà Nẵng, Việt Nam',
+  mainpage_load_more_questions: 'Xem thêm câu trả lời',
  };
  
