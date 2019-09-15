@@ -3,7 +3,7 @@ import App from './../component/App';
 import AccountUtil from "../../../common/util/AccountUtil";
 import CookieHelper from "../../../common/util/CookieHelper";
 import CookieConstant from "../../../common/constant/CookieConstant";
-import {failedAuthentication} from "../action/App";
+import {failedAuthentication} from "../../../actions/appAuth";
 
 function verifyToken() {
 	return (dispatch) => {
