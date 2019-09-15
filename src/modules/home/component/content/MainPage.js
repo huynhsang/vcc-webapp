@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import type { Filter } from '../../../../global/Filter';
 import FilterBuilder from '../../../../global/Filter';
@@ -474,4 +474,4 @@ MainPage.prototypes = {
   handleVoteQuestion: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+export default withRouter(MainPage);
