@@ -1,10 +1,11 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Registration from '../../component/signin_up/Registration';
 import AccountJWTService from '../../service/AccountJWTService';
 import Result from '../../../../global/Result';
-import type {RegisterRequest} from '../../request/RegisterRequest';
-import SweetAlert from '../../../../global/SweetAlert';
+import { RegisterRequest } from '../../request/RegisterRequest';
 import ApplicationUtil from '../../../../common/util/ApplicationUtil';
+
+import { showSuccessAlertFn } from '../../../../actions/sweetAlert';
 
 /**
  * The method handles to register new account
@@ -13,21 +14,37 @@ import ApplicationUtil from '../../../../common/util/ApplicationUtil';
  * @return {function(): *}
  */
 function doRegister(registerData: RegisterRequest, redirect: any): void {
-	return () => {
-		return AccountJWTService.createAccount(registerData).then((result: Result) => {
-			if (result.isSuccess()) {
-				SweetAlert.show(SweetAlert.successAlertBuilder("Success!", "Check your email to complete the registration!"));
-				redirect.push('/login');
-			} else {
-				SweetAlert.show(SweetAlert.errorAlertBuilder('Error!',  ApplicationUtil.getErrorMsg(result.data)));
-				//show err here
-			}
-		})
-	}
+    return dispatch => {
+        return AccountJWTService.createAccount(registerData).then(
+            (result: Result) => {
+                if (result.isSuccess()) {
+                    dispatch(
+                        showSuccessAlertFn(
+                            'Success!',
+                            'Check your email to complete the registration!'
+                        )
+                    );
+                    redirect.push('/login');
+                } else {
+                    dispatch(
+                        showSuccessAlertFn(
+                            'Error!',
+                            ApplicationUtil.getErrorMsg(result.data)
+                        )
+                    );
+                }
+            }
+        );
+    };
 }
 
+const mapDispatchToProps = dispatch => ({
+    doRegister: (registerData, redirect) =>
+        dispatch(doRegister(registerData, redirect)),
+});
+
 const RegistrationImpl = connect(
-	null,
-	{doRegister}
+    null,
+    mapDispatchToProps
 )(Registration);
 export default RegistrationImpl;

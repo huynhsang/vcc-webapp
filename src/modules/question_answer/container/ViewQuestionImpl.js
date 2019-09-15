@@ -6,8 +6,12 @@ import type { Question } from '../../../domain/Question';
 import MainPage from '../../home/component/content/MainPage';
 import RootScope from '../../../global/RootScope';
 import type { UsersVoteQuestions } from '../../../domain/UsersVoteQuestions';
-import SweetAlert from '../../../global/SweetAlert';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
+
+import {
+  showSuccessAlertFn,
+  showErrorAlertFn,
+} from '../../../actions/sweetAlert';
 
 const questionService = CoreService.questionService;
 const answerService = CoreService.answerService;
@@ -19,20 +23,20 @@ const usersVoteService = CoreService.usersVoteService;
  * @return {Function}
  */
 function getQuestionDetail(slug: string, setQuestion, setAnswers, redirectTo) {
-  return () => {
-    questionService.findOneBySlug(slug).then((result: Result) => {
-      if (
-        result.success &&
-        result.data &&
-        Object.keys(result.data).length > 0
-      ) {
-        setQuestion(result.data);
-        setAnswers(result.data.answers);
-      } else {
-        redirectTo('/');
-      }
-    });
-  };
+    return () => {
+        questionService.findOneBySlug(slug).then((result: Result) => {
+            if (
+                result.success &&
+                result.data &&
+                Object.keys(result.data).length > 0
+            ) {
+                setQuestion(result.data);
+                setAnswers(result.data.answers);
+            } else {
+                redirectTo('/');
+            }
+        });
+    };
 }
 
 /**
@@ -42,18 +46,18 @@ function getQuestionDetail(slug: string, setQuestion, setAnswers, redirectTo) {
  * @return {Function}
  */
 function loadMoreAnswers(questionId: number, _this: ViewQuestion) {
-  return () => {
-    let answers = _this.getDataFromState('answers') || [];
-    const filter = { skip: answers.length };
-    answerService
-      .getAnswersByQuestionId(questionId, filter)
-      .then((result: Result) => {
-        if (result.success) {
-          answers = answers.concat(result.data);
-          _this.changeStateValue('answers', answers);
-        }
-      });
-  };
+    return () => {
+        let answers = _this.getDataFromState('answers') || [];
+        const filter = { skip: answers.length };
+        answerService
+            .getAnswersByQuestionId(questionId, filter)
+            .then((result: Result) => {
+                if (result.success) {
+                    answers = answers.concat(result.data);
+                    _this.changeStateValue('answers', answers);
+                }
+            });
+    };
 }
 
 /**
@@ -64,74 +68,106 @@ function loadMoreAnswers(questionId: number, _this: ViewQuestion) {
  * @return {Function}
  */
 function handleVoteQuestion(
-  question: Question,
-  isPositiveVote: boolean,
-  isVotedBefore: boolean,
-  redirectTo,
-  setLoader
+    question: Question,
+    isPositiveVote: boolean,
+    isVotedBefore: boolean,
+    redirectTo,
+    setLoader
 ) {
-  return () => {
-    if (!RootScope.userId) return redirectTo('/login');
-    setLoader({ questionId: question.id });
-    const data: UsersVoteQuestions = {
-      questionId: question.id,
-      isPositiveVote: isPositiveVote,
+    return dispatch => {
+        if (!RootScope.userId) return redirectTo('/login');
+        setLoader({ questionId: question.id });
+        const data: UsersVoteQuestions = {
+            questionId: question.id,
+            isPositiveVote: isPositiveVote,
+        };
+        if (isVotedBefore) {
+            data.id = question.votes[0].id;
+            data.userId = question.votes[0].userId;
+            usersVoteService.reVoteQuestion(data).then((result: Result) => {
+                if (result.success) {
+                    question.votes[0].isPositiveVote = isPositiveVote;
+                    updateUIAfterVote(
+                        question,
+                        isPositiveVote,
+                        isVotedBefore,
+                        setLoader
+                    );
+                } else {
+                    // Todo: Show error here
+                    setLoader(false);
+                    dispatch(
+                      showSuccessAlertFn(
+                          'Error!',
+                          ApplicationUtil.getErrorMsg(result.data)
+                      )
+                  );
+                }
+            });
+        } else {
+            usersVoteService.voteQuestion(data).then((result: Result) => {
+                if (result.success) {
+                    question.votes = [result.data];
+                    updateUIAfterVote(
+                        question,
+                        isPositiveVote,
+                        isVotedBefore,
+                        setLoader
+                    );
+                } else {
+                    // Todo: Show error here
+                    setLoader(false);
+                    dispatch(
+                      showSuccessAlertFn(
+                          'Error!',
+                          ApplicationUtil.getErrorMsg(result.data)
+                      )
+                  );
+                }
+            });
+        }
     };
-    if (isVotedBefore) {
-      data.id = question.votes[0].id;
-      data.userId = question.votes[0].userId;
-      usersVoteService.reVoteQuestion(data).then((result: Result) => {
-        if (result.success) {
-          question.votes[0].isPositiveVote = isPositiveVote;
-          updateUIAfterVote(question, isPositiveVote, isVotedBefore, setLoader);
-        } else {
-          // Todo: Show error here
-          setLoader(false);
-          SweetAlert.show(
-            SweetAlert.errorAlertBuilder(
-              'Error!',
-              ApplicationUtil.getErrorMsg(result.data)
-            )
-          );
-        }
-      });
-    } else {
-      usersVoteService.voteQuestion(data).then((result: Result) => {
-        if (result.success) {
-          question.votes = [result.data];
-          updateUIAfterVote(question, isPositiveVote, isVotedBefore, setLoader);
-        } else {
-          // Todo: Show error here
-          setLoader(false);
-          SweetAlert.show(
-            SweetAlert.errorAlertBuilder(
-              'Error!',
-              ApplicationUtil.getErrorMsg(result.data)
-            )
-          );
-        }
-      });
-    }
-  };
 }
 
 function updateUIAfterVote(
-  question: Question,
-  isPositiveVote: boolean,
-  isVotedBefore: boolean,
-  setLoader
+    question: Question,
+    isPositiveVote: boolean,
+    isVotedBefore: boolean,
+    setLoader
 ): void {
-  const times: number = isVotedBefore ? 2 : 1;
-  if (isPositiveVote) {
-    question.numberOfVotes += times;
-  } else {
-    question.numberOfVotes -= times;
-  }
-  setLoader(false);
+    const times: number = isVotedBefore ? 2 : 1;
+    if (isPositiveVote) {
+        question.numberOfVotes += times;
+    } else {
+        question.numberOfVotes -= times;
+    }
+    setLoader(false);
 }
 
+const mapDispatchToProps = dispatch => ({
+    getQuestionDetail,
+    loadMoreAnswers,
+    handleVoteQuestion: (
+        question,
+        isPositiveVote,
+        isVotedBefore,
+        redirectTo,
+        setLoader
+    ) =>
+        dispatch(
+            handleVoteQuestion(
+                question,
+                isPositiveVote,
+                isVotedBefore,
+                redirectTo,
+                setLoader
+            )
+        ),
+});
+
 const ViewQuestionImpl = connect(
-  null,
-  { getQuestionDetail, loadMoreAnswers, handleVoteQuestion }
+    null,
+    mapDispatchToProps
 )(ViewQuestion);
+
 export default ViewQuestionImpl;
