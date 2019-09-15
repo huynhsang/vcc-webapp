@@ -40,7 +40,7 @@ const Header = ({ doLogOut, isAuthenticated, history }) => {
 
   const logout = () => {
     doLogOut();
-    window.location = '/login';
+    history.push('/login');
   };
 
   const currentUser: User = RootScope.currentUser || {};

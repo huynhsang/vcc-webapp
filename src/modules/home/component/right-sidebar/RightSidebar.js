@@ -277,7 +277,7 @@ const RightSidebar = ({
           <section id="users-widget-2" className="widget users-widget">
             <h2 className="widget-title">
               <i className="icon-folder" />
-              {t('top_members')}
+              {t('common_top_members')}
             </h2>
             <div className="widget-wrap">
               <div className="user-section user-section-small row user-not-normal">

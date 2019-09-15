@@ -66,7 +66,7 @@ function createNewAnswer(
                 setAnswerBody('');
             } else {
                 dispatch(
-                    showSuccessAlertFn(
+                    showErrorAlertFn(
                         'Error!',
                         ApplicationUtil.getErrorMsg(result.data)
                     )
@@ -93,7 +93,7 @@ function approveAnswer(
                     triggerUpdateQuestion(question);
                 } else {
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )
@@ -117,7 +117,7 @@ function handleVoteAnswer(
     setLoader,
     redirectTo
 ) {
-    return (dispatch) => {
+    return dispatch => {
         if (!RootScope.userId) return redirectTo('/login');
         setLoader({ answerId: answer.id });
         const data: UsersVoteAnswers = {
@@ -140,7 +140,7 @@ function handleVoteAnswer(
                     // Todo: Show error here
                     setLoader(false);
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )
@@ -161,7 +161,7 @@ function handleVoteAnswer(
                     // Todo: Show error here
                     setLoader(false);
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )

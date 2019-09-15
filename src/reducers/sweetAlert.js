@@ -21,7 +21,7 @@ const alertReducer = createReducer(defaultState, {
         Object.assign(state, { ...sweetAlertDefault });
     },
     [showAlertAction]: (state, action) => {
-        Object.assign(state, action.payload.alert);
+        Object.assign(state, action.payload);
     },
 });
 

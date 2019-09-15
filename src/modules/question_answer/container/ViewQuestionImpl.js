@@ -97,7 +97,7 @@ function handleVoteQuestion(
                     // Todo: Show error here
                     setLoader(false);
                     dispatch(
-                      showSuccessAlertFn(
+                      showErrorAlertFn(
                           'Error!',
                           ApplicationUtil.getErrorMsg(result.data)
                       )
@@ -118,7 +118,7 @@ function handleVoteQuestion(
                     // Todo: Show error here
                     setLoader(false);
                     dispatch(
-                      showSuccessAlertFn(
+                      showErrorAlertFn(
                           'Error!',
                           ApplicationUtil.getErrorMsg(result.data)
                       )
