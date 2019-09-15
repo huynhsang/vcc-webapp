@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit';
-import actionsNames from '../constants/action-names.constant';
+import actionsNames from './actionNames';
 
 const {
 	IS_AUTHENTICATED,
@@ -7,5 +7,5 @@ const {
 } = actionsNames;
 
 // Export Actions
-export const isAuthenticatedFn = createAction(IS_AUTHENTICATED);
-export const failedAuthenticationFn = createAction(FAILED_AUTHENTICATION);
+export const isAuthenticated = createAction(IS_AUTHENTICATED);
+export const failedAuthentication = createAction(FAILED_AUTHENTICATION);
