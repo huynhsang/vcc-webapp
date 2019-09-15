@@ -10,8 +10,8 @@ const ROLE: Object = {
 };
 
 const REALM: Object = {
-    admin: "admin_app",
-    user: "user_app",
+    admin: "admin_realm",
+    user: "user_realm",
 };
 
 const CATEGORY: Object = {
