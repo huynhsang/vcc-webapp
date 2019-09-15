@@ -1,7 +1,7 @@
 import AccountJWTService from "../../modules/user/service/AccountJWTService";
 import Result from "../../global/Result";
 import RootScope from "../../global/RootScope";
-import {failedAuthentication, isAuthenticated} from "../../modules/app/action/App";
+import {failedAuthentication, isAuthenticated} from "../../actions/appAuth";
 import type {User} from "../../domain/User";
 import CoreService from "../../global/CoreService";
 
