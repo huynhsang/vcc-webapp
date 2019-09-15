@@ -40,7 +40,7 @@ export const AuthLink = [
 export const PublicLink = [
     // {
     //     path: '/index',
-    //     component: IndexImpl
+    //     component: IndexImpls
     // },
     {
         path: '/home',
