@@ -6,10 +6,11 @@ import RootScope from "../../../../global/RootScope";
 
 export default class RouteNotFound extends BasicComponent {
 
+	//TODO: add button comback instead
 	handleAfterTheFirstRender() {
-		this._interval = setInterval(() => {
-            this.props.history.push('/');
-		}, 3000);
+		// this._interval = setInterval(() => {
+        //     this.props.history.push('/');
+		// }, 3000);
 	}
 
 	handleAfterComponentIsUnmounted() {

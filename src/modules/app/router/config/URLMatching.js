@@ -5,36 +5,40 @@ import Registration from '../../../user/container/signin_up/RegistrationImpl';
 import EmailVerification from '../../../user/container/email_verification/EmailVerificationImpl';
 //Import for AuthLink
 // import IndexImpl from "../../../landing_page/container/IndexImpl";
-import Home from "../../../home/container/HomeImpl";
-import MainPage from "../../../home/container/MainPageImpl";
-import ViewQuestion from "../../../question_answer/container/ViewQuestionImpl";
-import AddQuestion from "../../../question_answer/container/AddQuestionImpl";
-import SubCategory from "../../../sub_category/container/SubCategoryImpl";
-import Badges from "../../../badges/container/BadgesImpl"
-import UserProfile from "../../../user/container/UserProfileImpl";
+import Home from '../../../home/container/HomeImpl';
+import MainPage from '../../../home/container/MainPageImpl';
+import ViewQuestion from '../../../question_answer/container/ViewQuestionImpl';
+import AddQuestion from '../../../question_answer/container/AddQuestionImpl';
+import SubCategory from '../../../sub_category/container/SubCategoryImpl';
+import Badges from '../../../badges/container/BadgesImpl';
+import UserProfile from '../../../user/container/UserProfileImpl';
 import UserAbout from "../../../user/container/UserAboutlmpl";
 
+
 export const UnAuthLink = [
-	{
-		path: '/login',
-		component: Login
-	}, {
-		path: '/registration',
-		component: Registration
-	}, {
-		path: '/forgot-password',
-		component: ForgotPassword
-	}, {
+    {
+        path: '/login',
+        component: Login,
+    },
+    {
+        path: '/registration',
+        component: Registration,
+    },
+    {
+        path: '/forgot-password',
+        component: ForgotPassword,
+    },
+    {
         path: '/confirm',
-        component: EmailVerification
-    }
+        component: EmailVerification,
+    },
 ];
 
 export const AuthLink = [
     {
         path: '/question/add',
         component: AddQuestion,
-    }
+    },
 ];
 
 export const PublicLink = [
@@ -43,59 +47,40 @@ export const PublicLink = [
     //     component: IndexImpl
     // },
     {
-        path: '/',
-        exact: true,
+        path: '',
         component: Home,
         subRoutes: [
             {
-                path: '',
+                path: '/',
                 exact: true,
-                component: MainPage
+                component: MainPage,
+            },
+            {
+                path: '/home',
+                exact: true,
+                component: MainPage,
             },
             {
                 path: '/question/:identity/view',
                 exact: true,
-                component: ViewQuestion
+                component: ViewQuestion,
+            },
+            {
+                path: '/question/:slug/view',
+                exact: true,
+                component: ViewQuestion,
             },
             {
                 path: '/tags',
                 exact: true,
-                component: SubCategory
-            }
-        ]
-    },
-    {
-        path: '/question/:slug/view',
-        component: Home,
-        subRoutes: [
+                component: SubCategory,
+            },
             {
-                path: '',
+                path: '/badges',
                 exact: true,
-                component: ViewQuestion
-            }
-        ]
-    },
-    {
-        path: '/tags',
-        component: Home,
-        subRoutes: [
-            {
-                path: '',
-                exact: true,
-                component: SubCategory
-            }
-        ]
-    },
-    {
-        path: '/badges',
-        component: Home,
-        subRoutes: [
-            {
-                path: '',
-                exact: true,
-                component: Badges
-            }
-        ]
+                component: Badges,
+            },
+        ],
     },
     {
         path: '/user-profile',

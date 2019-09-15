@@ -11,7 +11,7 @@ const MySweetAlert = ({ alertInfo, hideAlert }) => {
 
     const onConfirm = alertInfo.onConfirm || hideAlert;
 
-    return <SweetAlertUI {...{...alertInfo, onConfirm, onCancel:onConfirm}} />;
+    return <SweetAlertUI {...{...alertInfo, onConfirm, onCancel:hideAlert}} />;
 };
 
 const mapStateToProps = ({ AlertState }) => ({
