@@ -76,7 +76,7 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
         <ul style={userMenuStyle}>
             {userMenuTabs.map(val => (
                 <li key={val.path}>
-                    <Link to={`/${val.path}`}>
+                    <Link to={`/${val.path}/${currentUser.id}`}>
                         <i className={val.iconClassName} />
                         {t(val.label)}
                     </Link>

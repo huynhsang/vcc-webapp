@@ -11,8 +11,10 @@ const propTypes = {
 export default class UserProfile extends BasicComponent {
     constructor(props) {
         super(props);
+        const profile: User = {};
         this.state = {
-            isShowing: false
+            isShowing: false,
+            profile: profile
         }
     }
 
@@ -29,6 +31,15 @@ export default class UserProfile extends BasicComponent {
         });
         document.body.style.overflow = 'unset';
     }
+    handleBeforeTheFirstRender(): void {
+        const userId: number = parseInt(window.location.pathname.split('/')[2]);
+        if (userId) {
+            this.props.getProfileById(userId, this)
+        } 
+        else {
+            window.location = '/'
+        }
+    }
     render() {
         const _this = this;
         return (
@@ -39,7 +50,7 @@ export default class UserProfile extends BasicComponent {
                     close={this.closeModalHandler}
                 >
                     <div className="modal-header">
-                        <h4>Modal Header</h4>
+                        <h4>Experience</h4>
                         <span className="close-modal-btn" onClick={this.closeModalHandler}>
                             <svg viewBox="0 0 24 24" width="24px" height="24px" x="0" y="0">
                                 <path d="M20,5.32L13.32,12,20,18.68,18.66,20,12,13.33,5.34,20,4,18.68,10.68,12,4,5.32,5.32,4,12,10.69,18.68,4Z" />
@@ -83,7 +94,9 @@ export default class UserProfile extends BasicComponent {
                         <button className="btn btn-primary">Save</button>
                     </div>
                 </Modal>
-                <div className="row">
+                <div className="row"
+
+                >
                     <section className="profile-background-image box-shadow--blur" style={{
                         backgroundImage: "url(" + require(`../../../static/resources/img/bg-user.jpg`) + ")",
                         backgroundPosition: 'center center',
@@ -93,7 +106,7 @@ export default class UserProfile extends BasicComponent {
                     </section>
                     <section className="user-container info-user box-shadow--blur position-relative col-md-3">
                         <div className="avatar-user">
-                            <img src={avatar} width="200" alt="" className="img-responsive" />
+                            <img src={ this.state.profile.avatar } width="200" alt="" className="img-responsive" />
                         </div>
                         <div className="title-user-info">
                             <div className="text-center">

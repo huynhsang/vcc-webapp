@@ -46,7 +46,7 @@ export const PublicLink = [
         component: Home
     },
     {
-        path: '/user-profile',
+        path: '/user-profile/:id',
         component: UserProfile,
         subRoutes: [
             {
