@@ -5,7 +5,10 @@ import Result from '../../../global/Result';
 import { Question } from '../../../domain/Question';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
 
-import { showSuccessAlertFn } from '../../../actions/sweetAlert';
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn,
+} from '../../../actions/sweetAlert';
 
 const questionService = CoreService.questionService;
 const subCategoryService = CoreService.subCategoryService;
@@ -32,7 +35,7 @@ function createQuestion(question: Question, redirect: any) {
                 redirect.push(`/question/${result.data.slug}/view`);
             } else {
                 dispatch(
-                    showSuccessAlertFn(
+                    showErrorAlertFn(
                         'Error!',
                         ApplicationUtil.getErrorMsg(result.data)
                     )

@@ -34,6 +34,7 @@ export default {
   common_badges: 'Badges',
   common_beginner: 'Beginner',
   common_teacher: 'Teacher',
+  common_top_members: 'Top members',
 
   header_home: 'Home',
   header_about_us: 'About Us',
