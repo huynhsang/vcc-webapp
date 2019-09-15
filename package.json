@@ -32,6 +32,7 @@
   },
   "scripts": {
     "start": "sh -ac '. ./.env.local; PORT=8080 react-scripts start'",
+    "start:staging": "sh -ac '. ./.env.staging; PORT=8080 react-scripts start'",
     "build": "sh -ac '. ./.env.local; react-scripts build'",
     "build:prod": "sh -ac '. ./.env.prod; react-scripts build'",
     "build:staging": "sh -ac '. ./.env.staging; react-scripts build'",
