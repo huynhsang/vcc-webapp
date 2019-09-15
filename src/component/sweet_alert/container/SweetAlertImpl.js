@@ -1,26 +1,19 @@
 import {connect} from 'react-redux';
 import MySweetAlert from '../SweetAlertUI';
-import SweetAlert from "../../../global/SweetAlert";
-import {hideAlert, showAlert} from "../reducer/SweetAlert";
 
-function show(alert: SweetAlert) {
-	return (dispatch) => {
-		dispatch(showAlert(alert));
-	}
-}
+import {showAlert, hideAlert} from '../../../actions/sweetAlert';
 
-function hide() {
-	return (dispatch) => {
-		dispatch(hideAlert());
-	}
-}
-
-const mapStateToProps = (store) => ({
-	alertInfo: store.AlertState
+const mapStateToProps = ({AlertState}) => ({
+	alertInfo: AlertState
 });
+
+const mapDispatchToProps = (dispatch) =>({
+	show: alert => dispatch(showAlert(alert)),
+	hide: () => dispatch(hideAlert(alert))
+})
 
 const MySweetAlertImpl = connect(
 	mapStateToProps,
-	{show, hide}
+	mapDispatchToProps
 )(MySweetAlert);
 export default MySweetAlertImpl;

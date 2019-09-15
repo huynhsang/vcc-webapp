@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from './store';
+import store from './configureStore';
 import '../node_modules/slick-carousel/slick/slick.css';
 import '../node_modules/slick-carousel/slick/slick-theme.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
@@ -23,8 +23,6 @@ import * as serviceWorker from './serviceWorker';
 import './services/localize';
 
 import './static/Scss/default.scss';
-
-const store = configureStore();
 
 render(
   <Provider store={store}>
