@@ -30,7 +30,7 @@ const LeftNav = ({}) => {
       >
         <h3 className="screen-reader-text">Explore</h3>
         <ul id="menu-explore-not-login" className="menu">
-          {leftNavTabs.map(tab => {
+          {leftNavTabs.map((tab) => {
             if (!tab.children) {
               return (
                 <li key={tab.path} className={false ? 'current_page_item' : ''}>
@@ -43,7 +43,7 @@ const LeftNav = ({}) => {
             }
 
             return (
-              <li className="nav_menu_open">
+              <li key={tab.path} className="nav_menu_open">
                 <a onClick={() => setIsShowQuestionTabs(state => !state)}>
                   <i className={tab.iconClassName} />
                   {t(tab.label)}

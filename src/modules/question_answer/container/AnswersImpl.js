@@ -7,8 +7,12 @@ import MainPage from '../../home/component/content/MainPage';
 import RootScope from '../../../global/RootScope';
 import type { UsersVoteAnswers } from '../../../domain/UsersVoteAnswers';
 import type { Question } from '../../../domain/Question';
-import SweetAlert from '../../../global/SweetAlert';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
+
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn,
+} from '../../../actions/sweetAlert';
 
 const answerService = CoreService.answerService;
 const usersVoteService = CoreService.usersVoteService;
@@ -21,16 +25,16 @@ const questionService = CoreService.questionService;
  * @return {Function}
  */
 function leaveAnswerValidation(
-  isAuthenticated: boolean,
-  setLeaveAnswer,
-  redirectTo
+    isAuthenticated: boolean,
+    setLeaveAnswer,
+    redirectTo
 ) {
-  return () => {
-    if (!isAuthenticated) {
-      return redirectTo('/login');
-    }
-    setLeaveAnswer(true);
-  };
+    return () => {
+        if (!isAuthenticated) {
+            return redirectTo('/login');
+        }
+        setLeaveAnswer(true);
+    };
 }
 
 /**
@@ -40,67 +44,63 @@ function leaveAnswerValidation(
  * @return {Function}
  */
 function createNewAnswer(
-  answerBody: string,
-  questionId: number,
-  answersEditted,
-  setAnswersEditted,
-  setAnswerBody
+    answerBody: string,
+    questionId: number,
+    answersEditted,
+    setAnswersEditted,
+    setAnswerBody
 ) {
-  return () => {
-    const descrLength: number = answerBody.length / 3;
-    const answerRequest: Answer = {
-      body: answerBody,
-      description: answerBody.substring(0, descrLength),
-      questionId: questionId,
+    return dispatch => {
+        const descrLength: number = answerBody.length / 3;
+        const answerRequest: Answer = {
+            body: answerBody,
+            description: answerBody.substring(0, descrLength),
+            questionId: questionId,
+        };
+        answerService.create(answerRequest).then((result: Result) => {
+            if (result.success) {
+                const answers = answersEditted || [];
+                answers.unshift(result.data);
+                dispatch(showSuccessAlertFn('Success!', 'Leaved an answer'));
+                setAnswersEditted(answers);
+                setAnswerBody('');
+            } else {
+                dispatch(
+                    showSuccessAlertFn(
+                        'Error!',
+                        ApplicationUtil.getErrorMsg(result.data)
+                    )
+                );
+            }
+        });
     };
-    answerService.create(answerRequest).then((result: Result) => {
-      if (result.success) {
-        const answers = answersEditted || [];
-        answers.unshift(result.data);
-        SweetAlert.show(
-          SweetAlert.successAlertBuilder('Success!', 'Leaved an answer')
-        );
-        setAnswersEditted(answers);
-        setAnswerBody('');
-      } else {
-        // To do: handle error
-        SweetAlert.show(
-          SweetAlert.errorAlertBuilder(
-            'Error!',
-            ApplicationUtil.getErrorMsg(result.data)
-          )
-        );
-      }
-    });
-  };
 }
 
 function approveAnswer(
-  question: Question,
-  answer: Answer,
-  setDisableApproveBtn,
-  triggerUpdateQuestion
+    question: Question,
+    answer: Answer,
+    setDisableApproveBtn,
+    triggerUpdateQuestion
 ) {
-  return () => {
-    setDisableApproveBtn(true);
-    questionService
-      .doApproveAnswer(question.id, answer.id)
-      .then((result: Result) => {
-        if (result.success) {
-          question.hasAcceptedAnswer = answer.isTheBest = true;
-          setDisableApproveBtn(false);
-          triggerUpdateQuestion(question);
-        } else {
-          // Todo: handle error
-          SweetAlert.show(
-            SweetAlert.errorAlertBuilder(
-              'Error!',
-              ApplicationUtil.getErrorMsg(result.data)
-            )
-          );
-        }
-      });
-  };
+    return dispatch => {
+        setDisableApproveBtn(true);
+        questionService
+            .doApproveAnswer(question.id, answer.id)
+            .then((result: Result) => {
+                if (result.success) {
+                    question.hasAcceptedAnswer = answer.isTheBest = true;
+                    setDisableApproveBtn(false);
+                    triggerUpdateQuestion(question);
+                } else {
+                    dispatch(
+                        showSuccessAlertFn(
+                            'Error!',
+                            ApplicationUtil.getErrorMsg(result.data)
+                        )
+                    );
+                }
+            });
+    };
 }
 
 /**
@@ -111,80 +111,139 @@ function approveAnswer(
  * @return {Function}
  */
 function handleVoteAnswer(
-  answer: Answer,
-  isPositiveVote: boolean,
-  isVotedBefore: boolean,
-  setLoader,
-  redirectTo
+    answer: Answer,
+    isPositiveVote: boolean,
+    isVotedBefore: boolean,
+    setLoader,
+    redirectTo
 ) {
-  return () => {
-    if (!RootScope.userId) return redirectTo('/login');
-    setLoader({ answerId: answer.id });
-    const data: UsersVoteAnswers = {
-      answerId: answer.id,
-      isPositiveVote: isPositiveVote,
+    return (dispatch) => {
+        if (!RootScope.userId) return redirectTo('/login');
+        setLoader({ answerId: answer.id });
+        const data: UsersVoteAnswers = {
+            answerId: answer.id,
+            isPositiveVote: isPositiveVote,
+        };
+        if (isVotedBefore) {
+            data.id = answer.votes[0].id;
+            data.userId = answer.votes[0].userId;
+            usersVoteService.reVoteAnswer(data).then((result: Result) => {
+                if (result.success) {
+                    answer.votes[0].isPositiveVote = isPositiveVote;
+                    updateUIAfterVote(
+                        answer,
+                        isPositiveVote,
+                        isVotedBefore,
+                        setLoader
+                    );
+                } else {
+                    // Todo: Show error here
+                    setLoader(false);
+                    dispatch(
+                        showSuccessAlertFn(
+                            'Error!',
+                            ApplicationUtil.getErrorMsg(result.data)
+                        )
+                    );
+                }
+            });
+        } else {
+            usersVoteService.voteAnswer(data).then((result: Result) => {
+                if (result.success) {
+                    answer.votes = [result.data];
+                    updateUIAfterVote(
+                        answer,
+                        isPositiveVote,
+                        isVotedBefore,
+                        setLoader
+                    );
+                } else {
+                    // Todo: Show error here
+                    setLoader(false);
+                    dispatch(
+                        showSuccessAlertFn(
+                            'Error!',
+                            ApplicationUtil.getErrorMsg(result.data)
+                        )
+                    );
+                }
+            });
+        }
     };
-    if (isVotedBefore) {
-      data.id = answer.votes[0].id;
-      data.userId = answer.votes[0].userId;
-      usersVoteService.reVoteAnswer(data).then((result: Result) => {
-        if (result.success) {
-          answer.votes[0].isPositiveVote = isPositiveVote;
-          updateUIAfterVote(answer, isPositiveVote, isVotedBefore, setLoader);
-        } else {
-          // Todo: Show error here
-          setLoader(false);
-          SweetAlert.show(
-            SweetAlert.errorAlertBuilder(
-              'Error!',
-              ApplicationUtil.getErrorMsg(result.data)
-            )
-          );
-        }
-      });
-    } else {
-      usersVoteService.voteAnswer(data).then((result: Result) => {
-        if (result.success) {
-          answer.votes = [result.data];
-          updateUIAfterVote(answer, isPositiveVote, isVotedBefore, setLoader);
-        } else {
-          // Todo: Show error here
-          setLoader(false);
-          SweetAlert.show(
-            SweetAlert.errorAlertBuilder(
-              'Error!',
-              ApplicationUtil.getErrorMsg(result.data)
-            )
-          );
-        }
-      });
-    }
-  };
 }
 
 function updateUIAfterVote(
-  answer: Answer,
-  isPositiveVote: boolean,
-  isVotedBefore: boolean,
-  setLoader
+    answer: Answer,
+    isPositiveVote: boolean,
+    isVotedBefore: boolean,
+    setLoader
 ): void {
-  const times: number = isVotedBefore ? 2 : 1;
-  if (isPositiveVote) {
-    answer.numberOfVotes += times;
-  } else {
-    answer.numberOfVotes -= times;
-  }
-  setLoader(false);
+    const times: number = isVotedBefore ? 2 : 1;
+    if (isPositiveVote) {
+        answer.numberOfVotes += times;
+    } else {
+        answer.numberOfVotes -= times;
+    }
+    setLoader(false);
 }
 
-const mapStateToProps = store => {
-  return {
-    isAuthenticated: store.AppAuth.isAuthenticated,
-  };
-};
+const mapStateToProps = ({ AppAuth: { isAuthenticated } }) => ({
+    isAuthenticated,
+});
+
+//TOTO: Integrate to Component
+const mapDispatchToProps = dispatch => ({
+    leaveAnswerValidation,
+    createNewAnswer: (
+        answerBody,
+        questionId,
+        answersEditted,
+        setAnswersEditted,
+        setAnswerBody
+    ) =>
+        dispatch(
+            createNewAnswer(
+                answerBody,
+                questionId,
+                answersEditted,
+                setAnswersEditted,
+                setAnswerBody
+            )
+        ),
+    handleVoteAnswer: (
+        answer,
+        isPositiveVote,
+        isVotedBefore,
+        setLoader,
+        redirectTo
+    ) =>
+        dispatch(
+            handleVoteAnswer(
+                answer,
+                isPositiveVote,
+                isVotedBefore,
+                setLoader,
+                redirectTo
+            )
+        ),
+    approveAnswer: (
+        question,
+        answer,
+        setDisableApproveBtn,
+        triggerUpdateQuestion
+    ) =>
+        dispatch(
+            approveAnswer(
+                question,
+                answer,
+                setDisableApproveBtn,
+                triggerUpdateQuestion
+            )
+        ),
+});
 
 const AnswersImpl = connect(
-  mapStateToProps,
-  { leaveAnswerValidation, createNewAnswer, handleVoteAnswer, approveAnswer }
+    mapStateToProps,
+    mapDispatchToProps
 )(AnswersUI);
 export default AnswersImpl;
