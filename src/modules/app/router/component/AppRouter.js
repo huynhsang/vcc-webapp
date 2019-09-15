@@ -26,16 +26,13 @@ const AppRouter = ({ auth }) => (
                 component={route.component}
             />
         ))}
-        {PublicLink.reduce((route, index) => (
+        {PublicLink.map((route, index) => (
             <Route
                 key={index}
                 path={route.path}
                 exact={route.exact}
-                render={props => (
-                    <route.component
-                        isAuthenticated={auth.isAuthenticated}
-                        {...props}
-                    />
+                render={() => (
+                    <route.component isAuthenticated={auth.isAuthenticated} />
                 )}
             />
         ))}
