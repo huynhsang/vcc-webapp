@@ -26,19 +26,40 @@ const AppRouter = ({ auth }) => (
                 component={route.component}
             />
         ))}
-        {PublicLink.map((route, index) => (
-            <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                render={() => (
-                    <route.component
-                        isAuthenticated={auth.isAuthenticated}
-                        subRoutes={route.subRoutes}
-                    />
-                )}
-            />
-        ))}
+        {PublicLink.reduce((acc, route) => {
+            if (!route.subRoutes) {
+                return [
+                    ...acc,
+                    <Route
+                        key={`parent${acc.length}`}
+                        path={route.path}
+                        exact={route.exact}
+                        render={props => (
+                            <route.component
+                                isAuthenticated={auth.isAuthenticated}
+                                {...props}
+                            />
+                        )}
+                    />,
+                ];
+            }
+
+            const childRoutes = route.subRoutes.map((childRoute, index) => (
+                <Route
+                    key={`child${acc.length}`}
+                    path={`${route.path}${childRoute.path}`}
+                    exact={childRoute.exact}
+                    render={props => (
+                        <route.component
+                            isAuthenticated={auth.isAuthenticated}
+                            ChildComponent={childRoute.component}
+                            {...props}
+                        />
+                    )}
+                />
+            ));
+            return [...acc, ...childRoutes];
+        }, []).map((routeComponent, index) => routeComponent)}
         <Route component={RouteNotFound} />
     </Switch>
 );
