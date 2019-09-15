@@ -10,7 +10,6 @@ const alertBuilder = (
     type: string,
     text: string,
     confirmButtonText: string,
-    onConfirm: void
 ) => ({
     show: true,
     title,
@@ -19,7 +18,7 @@ const alertBuilder = (
     showCanceltButton: false,
     confirmButtonText,
     cancelButtonText: null,
-    onConfirm,
+    onConfirm: null, //Set into sweet alert component
     onCancel: null,
 });
 
@@ -30,7 +29,6 @@ const confirmAlertBuilder = (
     confirmButtonText: string,
     cancelButtonText: string,
     onConfirm: void,
-    onCancel: void
 ) => ({
     show: true,
     title,
@@ -40,17 +38,11 @@ const confirmAlertBuilder = (
     confirmButtonText,
     cancelButtonText,
     onConfirm,
-    onCancel,
+    onCancel:null,
 });
 
 export const showAlertAction = createAction(SHOW_ALERT);
 export const hideAlertAction = createAction(HIDE_ALERT);
-
-export function showAlert(alert: SweetAlert) {
-    return dispatch => {
-        dispatch(showAlertAction(alert));
-    };
-}
 
 const showGeneralAlert = (type: string) => (title: string, text: string) => {
     return dispatch => {
@@ -59,7 +51,6 @@ const showGeneralAlert = (type: string) => (title: string, text: string) => {
             type,
             text,
             'OK',
-            dispatch(hideAlertAction())
         );
         dispatch(showAlertAction(alert));
     };
@@ -70,6 +61,7 @@ export const showErrorAlertFn = showGeneralAlert(SweetType.ERROR);
 export const showWarningAlertFn = showGeneralAlert(SweetType.WARNING);
 export const showInfoAlertFn = showGeneralAlert(SweetType.INFO);
 
+//Atenttion for callback: onconfirm, oncancel, error immutable in redux
 const showGeneralConfirmAlert = (type: string) => (
     title: string,
     text: string,
@@ -84,7 +76,6 @@ const showGeneralConfirmAlert = (type: string) => (
             confirmButtonText,
             'Cancel',
             onConfirm,
-            dispatch(hideAlertAction())
         );
         dispatch(showAlertAction(alert));
     };

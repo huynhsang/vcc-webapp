@@ -12,7 +12,10 @@ import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 import CookieHelper from './../../../../common/util/CookieHelper';
 import CookieConstant from './../../../../common/constant/CookieConstant';
 
-import { showSuccessAlertFn } from '../../../../actions/sweetAlert';
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn,
+} from '../../../../actions/sweetAlert';
 
 /**
  * The method handles logic to authenticate login request
@@ -48,7 +51,7 @@ function doLogin(loginData: LoginRequest, redirect: any): void {
                 } else {
                     RootScope.resetAuthValues();
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )

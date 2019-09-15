@@ -8,7 +8,10 @@ import type { UsersVoteQuestions } from '../../../domain/UsersVoteQuestions';
 import type { Question } from '../../../domain/Question';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
 
-import { showSuccessAlertFn } from '../../../actions/sweetAlert';
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn,
+} from '../../../actions/sweetAlert';
 
 const questionService = CoreService.questionService;
 const usersVoteService = CoreService.usersVoteService;
@@ -102,7 +105,7 @@ function handleVoteQuestion(
                     setLoader(false);
 
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )
@@ -123,7 +126,7 @@ function handleVoteQuestion(
                     // Todo: Show error here
                     setLoader(false);
                     dispatch(
-                        showSuccessAlertFn(
+                        showErrorAlertFn(
                             'Error!',
                             ApplicationUtil.getErrorMsg(result.data)
                         )
