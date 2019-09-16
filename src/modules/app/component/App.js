@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import AppRouter from './../router/component/AppRouter';
 import Header from './header/Header';
 import RootScope from '../../../global/RootScope';

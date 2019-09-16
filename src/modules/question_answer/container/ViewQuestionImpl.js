@@ -3,13 +3,11 @@ import ViewQuestion from '../component/ViewQuestion';
 import Result from '../../../global/Result';
 import CoreService from '../../../global/CoreService';
 import type { Question } from '../../../domain/Question';
-import MainPage from '../../home/component/content/MainPage';
 import RootScope from '../../../global/RootScope';
 import type { UsersVoteQuestions } from '../../../domain/UsersVoteQuestions';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
 
 import {
-  showSuccessAlertFn,
   showErrorAlertFn,
 } from '../../../actions/sweetAlert';
 

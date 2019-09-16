@@ -1,9 +1,12 @@
 import React from 'react';
-import LeftNav from './left_nav/LeftNav';
-import { Link, Route, withRouter } from 'react-router-dom';
-import RightSidebar from '../container/RightSidebarImpl';
+
+import LeftNav from '../component/left_nav/LeftNav';
+import { Link, withRouter } from 'react-router-dom';
+import RightSidebar from './RightSidebarImpl';
 
 import { useTranslation } from 'react-i18next';
+
+import HomeRouter from './HomeRouter';
 
 const Home = ({ isAuthenticated, ChildComponent, match }) => {
     const { t } = useTranslation();
@@ -50,8 +53,7 @@ const Home = ({ isAuthenticated, ChildComponent, match }) => {
                                     position: 'static',
                                 }}
                             >
-                                <ChildComponent />
-
+                                <HomeRouter />
                                 <div className="hide-main-inner" />
                                 <div className="hide-sidebar sidebar-width">
                                     <div className="hide-sidebar-inner" />

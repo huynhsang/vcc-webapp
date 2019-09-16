@@ -1,5 +1,4 @@
 import React from 'react';
-import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
