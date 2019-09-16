@@ -5,7 +5,6 @@ import {
     failedAuthenticationFn,
     isAuthenticatedFn,
 } from '../../actions/appAuth';
-import type { User } from '../../domain/User';
 import CoreService from '../../global/CoreService';
 
 const accountService = CoreService.accountService;
