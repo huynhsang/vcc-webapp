@@ -1,17 +1,14 @@
 import connect from 'react-redux/es/connect/connect';
-import MainPage from '../component/content/MainPage';
-import CoreService from '../../../global/CoreService';
-import type { Filter } from '../../../global/Filter';
-import Result from '../../../global/Result';
-import RootScope from '../../../global/RootScope';
-import type { UsersVoteQuestions } from '../../../domain/UsersVoteQuestions';
-import type { Question } from '../../../domain/Question';
-import ApplicationUtil from '../../../common/util/ApplicationUtil';
+import MainPage from './MainPage';
+import CoreService from '../../global/CoreService';
+import type { Filter } from '../../global/Filter';
+import Result from '../../global/Result';
+import RootScope from '../../global/RootScope';
+import type { UsersVoteQuestions } from '../../domain/UsersVoteQuestions';
+import type { Question } from '../../domain/Question';
+import ApplicationUtil from '../../common/util/ApplicationUtil';
 
-import {
-    showSuccessAlertFn,
-    showErrorAlertFn,
-} from '../../../actions/sweetAlert';
+import { showErrorAlertFn } from '../../actions/sweetAlert';
 
 const questionService = CoreService.questionService;
 const usersVoteService = CoreService.usersVoteService;

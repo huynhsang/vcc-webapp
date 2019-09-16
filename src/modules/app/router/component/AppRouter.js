@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { AuthLink, PublicLink, UnAuthLink } from './../config/URLMatching';
 import UnAuthRouter from './../config/UnAuthRouter';
 import AuthRouter from './../config/AuthRouter';
@@ -26,40 +26,20 @@ const AppRouter = ({ auth }) => (
                 component={route.component}
             />
         ))}
-        {PublicLink.reduce((acc, route) => {
-            if (!route.subRoutes) {
-                return [
-                    ...acc,
-                    <Route
-                        key={`parent${acc.length}`}
-                        path={route.path}
-                        exact={route.exact}
-                        render={props => (
-                            <route.component
-                                isAuthenticated={auth.isAuthenticated}
-                                {...props}
-                            />
-                        )}
-                    />,
-                ];
-            }
-
-            const childRoutes = route.subRoutes.map((childRoute, index) => (
-                <Route
-                    key={`child${acc.length}`}
-                    path={`${route.path}${childRoute.path}`}
-                    exact={childRoute.exact}
-                    render={props => (
-                        <route.component
-                            isAuthenticated={auth.isAuthenticated}
-                            ChildComponent={childRoute.component}
-                            {...props}
-                        />
-                    )}
-                />
-            ));
-            return [...acc, ...childRoutes];
-        }, []).map((routeComponent, index) => routeComponent)}
+        {PublicLink.reduce((route, index) => (
+            <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                render={props => (
+                    <route.component
+                        isAuthenticated={auth.isAuthenticated}
+                        {...props}
+                    />
+                )}
+            />
+        ))}
+        <Redirect exact from="/" to="/home" />
         <Route component={RouteNotFound} />
     </Switch>
 );

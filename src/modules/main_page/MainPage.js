@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import type { Filter } from '../../../../global/Filter';
-import FilterBuilder from '../../../../global/Filter';
-import type { User } from '../../../../domain/User';
-import type { Question } from '../../../../domain/Question';
-import type { Category } from '../../../../domain/Category';
-import type { SubCategory } from '../../../../domain/SubCategory';
+import { Filter } from '../../global/Filter';
+import FilterBuilder from '../../global/Filter';
+import { User } from '../../domain/User';
+import { Question } from '../../domain/Question';
+import { Category } from '../../domain/Category';
+import { SubCategory } from '../../domain/SubCategory';
 import ReactMarkdown from 'react-markdown';
 
 import { useTranslation } from 'react-i18next';

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import type { Question } from '../../../domain/Question';
 import type { Answer } from '../../../domain/Answer';
 import type { User } from '../../../domain/User';
 import type { SubCategory } from '../../../domain/SubCategory';

@@ -3,7 +3,6 @@ import AnswersUI from '../component/AnswersUI';
 import type { Answer } from '../../../domain/Answer';
 import CoreService from '../../../global/CoreService';
 import Result from '../../../global/Result';
-import MainPage from '../../home/component/content/MainPage';
 import RootScope from '../../../global/RootScope';
 import type { UsersVoteAnswers } from '../../../domain/UsersVoteAnswers';
 import type { Question } from '../../../domain/Question';
