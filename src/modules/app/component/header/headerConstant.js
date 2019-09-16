@@ -1,7 +1,7 @@
 export const headerTabs = [
   {
     label : 'header_home',
-    path: ''
+    path: 'home'
   },
   {
     label : 'header_about_us',

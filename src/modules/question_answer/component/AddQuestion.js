@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BasicComponent from '../../../common/abstract/component/BasicComponent';
 import Tabs from '../../../component/tabs/Tabs';
 import TypeQuestionTab from './tabs/TypeQuestion';
 import TagsQuestionTab from './tabs/TagsQuestion';

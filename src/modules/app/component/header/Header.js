@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ApplicationUtil from '../../../../common/util/ApplicationUtil';
-import BasicComponent from '../../../../common/abstract/component/BasicComponent';
 import logo from '../../../../static/resources/img/logo/logo.png';
 import logo2x from '../../../../static/resources/img/logo/logo-2x.png';
 import PropTypes from 'prop-types';
