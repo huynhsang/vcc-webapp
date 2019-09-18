@@ -1,6 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import MainPage from '../../main_page/MainPageImpl';
+import {MainPage} from '../../MainPage';
 import ViewQuestion from '../../question_answer/container/ViewQuestionImpl';
 import SubCategory from '../../sub_category/container/SubCategoryImpl';
 import Badges from '../../badges/container/BadgesImpl';
