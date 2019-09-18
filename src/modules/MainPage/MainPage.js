@@ -38,7 +38,7 @@ const MainPage = ({ location, history }) => {
         )
     );
 
-    //Set Filter when change route
+    //Set Filter when change route 
     React.useEffect(() => {
         const urlParams = new URLSearchParams(location.search);
         const show = urlParams.get('show');
