@@ -31,8 +31,11 @@ const AppRouter = ({ auth }) => (
                 key={index}
                 path={route.path}
                 exact={route.exact}
-                render={() => (
-                    <route.component isAuthenticated={auth.isAuthenticated} />
+                render={props => (
+                    <route.component
+                        isAuthenticated={auth.isAuthenticated}
+                        {...props}
+                    />
                 )}
             />
         ))}
