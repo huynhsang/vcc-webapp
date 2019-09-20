@@ -6,7 +6,7 @@ import EmailVerification from '../../../user/container/email_verification/EmailV
 //Import for AuthLink
 // import IndexImpl from "../../../landing_page/container/IndexImpl";
 import Home from '../../../home/container/HomeContainer';
-import AddQuestion from '../../../question_answer/container/AddQuestionImpl';
+import {AddQuestion} from '../../../AddQuestion';
 import UserProfile from '../../../user/container/UserProfileImpl';
 import UserAbout from "../../../user/container/UserAboutlmpl";
 

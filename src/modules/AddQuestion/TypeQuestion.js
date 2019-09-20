@@ -1,6 +1,6 @@
 import React from 'react';
-import questionMark from '../../../../static/resources/img/question_mark_1.png';
-import ApplicationConstant from '../../../../common/constant/ApplicationConstant';
+import questionMark from '../../static/resources/img/question_mark_1.png';
+import ApplicationConstant from '../../common/constant/ApplicationConstant';
 import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';

@@ -16,7 +16,7 @@ import { useTranslation } from 'react-i18next';
 import CoreService from '../../global/CoreService';
 import { QuestionComponent } from './QuestionComponent';
 
-const questionService = CoreService.questionService;
+const {questionService} = CoreService;
 
 const orderMaps = {
     'recent-questions': 'createdOn DESC',

@@ -161,7 +161,7 @@ const QuestionComponent = ({
                                             :
                                         </span>
                                         <Link
-                                            to={`/question/${question.slug}/view`}
+                                            to={`/home/question/${question.slug}/view`}
                                             itemProp="url"
                                         >
                                             <time
@@ -191,7 +191,7 @@ const QuestionComponent = ({
                         <div>
                             <h2 className="post-title">
                                 <Link
-                                    to={`/question/${question.slug}/view`}
+                                    to={`/home/question/${question.slug}/view`}
                                     className="post-title"
                                 >
                                     {question.title}
@@ -277,11 +277,11 @@ const QuestionComponent = ({
                                 <li className={bestAnswerClassName}>
                                     <i className="icon-comment" />
                                     <Link
-                                        to={`/question/${question.slug}/view/#answers`}
+                                        to={`/home/question/${question.slug}/view/#answers`}
                                     >{`${question.numberOfAnswers} `}</Link>
                                     <span className="question-span">
                                         <Link
-                                            to={`/question/${question.slug}/view/#answers`}
+                                            to={`/home/question/${question.slug}/view/#answers`}
                                         >
                                             Answers
                                         </Link>
@@ -296,7 +296,7 @@ const QuestionComponent = ({
                                 </li>
                             </ul>
                             <Link
-                                to={`/question/${question.slug}/view`}
+                                to={`/home/question/${question.slug}/view`}
                                 className="meta-answer"
                             >
                                 {t('common_answer')}
