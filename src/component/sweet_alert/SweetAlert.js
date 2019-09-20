@@ -2,10 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import SweetAlertUI from 'sweetalert-react';
-import BasicComponent from '../../common/abstract/component/BasicComponent';
 import { hideAlertAction } from '../../actions/sweetAlert';
-
-import { SweetAlertType } from '../../constants/sweet-alert.constant';
 
 const MySweetAlert = ({ alertInfo, hideAlert }) => {
 

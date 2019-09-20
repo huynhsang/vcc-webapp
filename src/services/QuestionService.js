@@ -1,7 +1,7 @@
-import BasicService from "../../../common/abstract/services/BasicService";
-import Result from './../../../global/Result';
-import RootScope from "../../../global/RootScope";
-import FilterBuilder from "../../../global/Filter";
+import BasicService from "../common/abstract/services/BasicService";
+import Result from '../global/Result';
+import RootScope from "../global/RootScope";
+import FilterBuilder from "../global/Filter";
 import type {IQuestionService} from "../../../common/abstract/services/IQuestionService";
 import type {Filter} from "../../../global/Filter";
 

@@ -1,11 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Filter } from '../../global/Filter';
 import FilterBuilder from '../../global/Filter';
-import { User } from '../../domain/User';
-import { Question } from '../../domain/Question';
-import { Category } from '../../domain/Category';
+// import { User } from '../../domain/User';
+// import { Question } from '../../domain/Question';
+// import { Category } from '../../domain/Category';
 import { SubCategory } from '../../domain/SubCategory';
 import Result from '../../global/Result';
 import produce from 'immer';

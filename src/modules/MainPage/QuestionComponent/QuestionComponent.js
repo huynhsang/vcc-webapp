@@ -11,7 +11,7 @@ import ApplicationUtil from '../../../common/util/ApplicationUtil';
 import { showErrorAlertFn } from '../../../actions/sweetAlert';
 import CoreService from '../../../global/CoreService';
 
-import UserLogo from './UserLogo';
+import UserLogo from '../../../component/UserLogo';
 
 const usersVoteService = CoreService.usersVoteService;
 
@@ -59,7 +59,7 @@ const QuestionComponent = ({
             usersVoteService.voteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     updateVoteQuestion({
-                        votes: result.data,
+                        votes: [result.data],
                         numberOfVotes:
                             numberOfVotes + (isPositiveVote ? 1 : -1),
                     });
@@ -70,8 +70,6 @@ const QuestionComponent = ({
             });
         }
     };
-
-    const getVotes = () => {};
 
     const category: Category = question.category;
     const subCategories: Array<SubCategory> = question.tags
@@ -315,4 +313,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
 });
 
-export default connect()(withRouter(QuestionComponent));
+export default connect(
+    null,
+    mapDispatchToProps
+)(withRouter(QuestionComponent));
