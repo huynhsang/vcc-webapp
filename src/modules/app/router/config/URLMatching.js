@@ -1,32 +1,16 @@
-//Import for unAuthLink
-import ForgotPassword from '../../../user/container/forgot_password/ForgotPasswordImpl';
-import Login from '../../../user/container/signin_up/LoginImpl';
-import Registration from '../../../user/container/signin_up/RegistrationImpl';
-import EmailVerification from '../../../user/container/email_verification/EmailVerificationImpl';
-//Import for AuthLink
-// import IndexImpl from "../../../landing_page/container/IndexImpl";
 import Home from '../../../home/container/HomeContainer';
 import { AddQuestion } from '../../../AddQuestion';
-import UserProfile from '../../../user/container/UserProfileImpl';
-import UserAbout from '../../../user/container/UserAboutlmpl';
+import UserProfile from '../../../User/UserProfile/UserProfileImpl';
+import UserAbout from '../../../User/UserProfile/UserAbout';
+
+import {UserRouter} from '../../../User';
+
 
 export const UnAuthLink = [
     {
-        path: '/login',
-        component: Login
+        path: '/user',
+        component: UserRouter
     },
-    {
-        path: '/registration',
-        component: Registration
-    },
-    {
-        path: '/forgot-password',
-        component: ForgotPassword
-    },
-    {
-        path: '/confirm',
-        component: EmailVerification
-    }
 ];
 
 export const AuthLink = [

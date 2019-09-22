@@ -1,9 +1,9 @@
-import Result from './../../../global/Result';
-import BasicService from "../../../common/abstract/services/BasicService";
+import Result from '../global/Result';
+import BasicService from "../common/abstract/services/BasicService";
 import type {IAccountService} from "../../../common/abstract/services/IAccountService";
 import type {Filter} from "../../../global/Filter";
-import RootScope from "../../../global/RootScope";
-import FilterBuilder from "../../../global/Filter";
+import RootScope from "../global/RootScope";
+import FilterBuilder from "../global/Filter";
 
 const ACCOUNT_API = RootScope.appApiUrl + 'users';
 

@@ -37,7 +37,7 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
 
     const logout = () => {
         doLogOut();
-        history.push('/login');
+        history.push('/user/login');
     };
 
     const currentUser: User = RootScope.currentUser || {};
@@ -158,19 +158,19 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
                         <div className="right-header float_r">
                             <Link
                                 className="sign-in-lock mob-sign-in"
-                                to="/login"
+                                to="/user/login"
                             >
                                 <i className="icon-lock" />
                             </Link>
                             <Link
                                 className="button-default button-sign-in"
-                                to="/login"
+                                to="/user/login"
                             >
                                 Sign In
                             </Link>
                             <Link
                                 className="button-default-2 button-sign-up"
-                                to="/registration"
+                                to="/user/registration"
                             >
                                 Sign Up
                             </Link>

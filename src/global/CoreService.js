@@ -1,13 +1,13 @@
 import type {IAccountService} from "../common/abstract/services/IAccountService";
-import AccountService from "../modules/user/service/AccountService";
+import AccountService from "../services/AccountService";
 import type {IQuestionService} from "../common/abstract/services/IQuestionService";
 import QuestionService from "../services/QuestionService";
 import type {IAnswerService} from "../common/abstract/services/IAnswerService";
 import AnswerService from "../services/AnswerService";
 import type {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
-import SubCategoryService from "../modules/sub_category/service/SubCategoryService";
+import SubCategoryService from "../services/SubCategoryService";
 import type {IUserVoteService} from "../common/abstract/services/IUserVoteService";
-import UserVoteService from "../modules/user/service/UserVoteService";
+import UserVoteService from "../services/UserVoteService";
 
 const ACCOUNT_SERVICE: IAccountService = AccountService.builder();
 const QUESTION_SERVICE: IQuestionService = QuestionService.builder();

@@ -6,7 +6,7 @@ const AuthRouter = ({component: Component, isAuthenticated, subRoutes, ...rest})
 			<Component {...props} subRoutes={subRoutes}/>
 		) : (
 			<Redirect to={{
-				pathname: '/login'
+				pathname: '/user/login'
 			}}/>
 		)
 	)}/>

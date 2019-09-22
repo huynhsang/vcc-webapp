@@ -1,4 +1,4 @@
-import AccountJWTService from '../../modules/user/service/AccountJWTService';
+import AccountJWTService from '../../services/AccountJWTService';
 import Result from '../../global/Result';
 import RootScope from '../../global/RootScope';
 import {

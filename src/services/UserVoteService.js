@@ -1,6 +1,6 @@
-import Result from './../../../global/Result';
-import BasicService from "../../../common/abstract/services/BasicService";
-import RootScope from "../../../global/RootScope";
+import Result from '../global/Result';
+import BasicService from "../common/abstract/services/BasicService";
+import RootScope from "../global/RootScope";
 import type {IUserVoteService} from "../../../common/abstract/services/IUserVoteService";
 import type {UserVoteQuestion} from "../../../domain/UserVoteQuestion";
 import type {UserVoteAnswer} from "../../../domain/UserVoteAnswer";

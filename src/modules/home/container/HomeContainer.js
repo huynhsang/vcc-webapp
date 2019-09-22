@@ -23,7 +23,7 @@ const Home = ({ isAuthenticated, ChildComponent, match }) => {
                     {!isAuthenticated && (
                         <div className="col3">
                             <Link
-                                to="/registration"
+                                to="/user/registration"
                                 className="signup-panel button-default call-action-button"
                                 style={{ marginTop: '47.5px' }}
                             >

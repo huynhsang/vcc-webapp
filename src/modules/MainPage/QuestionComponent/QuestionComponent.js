@@ -34,7 +34,7 @@ const QuestionComponent = ({
     const { id, askedBy, numberOfVotes } = question;
 
     const handleVoteQuestion = (isPositiveVote, isVotedBefore) => {
-        if (!RootScope.userId) return history.push('/login');
+        if (!RootScope.userId) return history.push('/user/login');
         setLoader({ questionId: id });
 
         const data: UserVoteQuestion = {
