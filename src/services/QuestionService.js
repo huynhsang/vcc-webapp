@@ -1,9 +1,9 @@
-import BasicService from "../common/abstract/services/BasicService";
+import BasicService from '../common/abstract/services/BasicService';
 import Result from '../global/Result';
-import RootScope from "../global/RootScope";
-import FilterBuilder from "../global/Filter";
-import type {IQuestionService} from "../../../common/abstract/services/IQuestionService";
-import type {Filter} from "../../../global/Filter";
+import RootScope from '../global/RootScope';
+import FilterBuilder from '../global/Filter';
+import type {IQuestionService} from '../common/abstract/services/IQuestionService';
+import type {Filter} from '../global/Filter';
 
 const QUESTION_API = RootScope.appApiUrl + 'questions';
 const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;

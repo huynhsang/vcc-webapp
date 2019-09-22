@@ -15,13 +15,13 @@ import produce from 'immer';
 import { useTranslation } from 'react-i18next';
 import UserLogo from '../../component/UserLogo';
 import CoreService from '../../global/CoreService';
-import { UsersVoteQuestions } from '../../domain/UsersVoteQuestions';
+import { UserVoteQuestion } from '../../domain/UserVoteQuestion';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import RootScope from '../../global/RootScope';
 
 import { showErrorAlertFn } from '../../actions/sweetAlert';
 
-const { questionService, answerService, usersVoteService } = CoreService;
+const { questionService, answerService, userVoteService } = CoreService;
 
 const ViewQuestion = ({ match, history, showErrorNotification }) => {
     const { t } = useTranslation();
@@ -59,7 +59,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
     const handleVoteQuestion = isPositiveVote => {
         if (!RootScope.userId) return redirectTo('/login');
         setLoader({ questionId: question.id });
-        const data: UsersVoteQuestions = {
+        const data: UserVoteQuestion = {
             questionId: question.id,
             isPositiveVote,
         };
@@ -68,7 +68,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
         if (isVotedBefore) {
             data.id = question.votes[0].id;
             data.userId = question.votes[0].userId;
-            usersVoteService.reVoteQuestion(data).then((result: Result) => {
+            userVoteService.reVoteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     setQuestion(
                         produce(draft => {
@@ -83,7 +83,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
                 setLoader(false);
             });
         } else {
-            usersVoteService.voteQuestion(data).then((result: Result) => {
+            userVoteService.voteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     setQuestion(
                         produce(draft => {

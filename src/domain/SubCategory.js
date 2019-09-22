@@ -1,5 +1,5 @@
-import type {AuditingEntity} from "./AuditingEntity";
-import type {Category} from "./Category";
+import type {AuditingEntity} from './AuditingEntity';
+import type {Category} from './Category';
 
 export interface SubCategory extends AuditingEntity {
     id: number;

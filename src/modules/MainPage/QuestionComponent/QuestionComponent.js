@@ -2,9 +2,8 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { Question } from '../../../domain/Question';
 import RootScope from '../../../global/RootScope';
-import { UsersVoteQuestions } from '../../../domain/UsersVoteQuestions';
+import { UserVoteQuestion } from '../../../domain/UserVoteQuestion';
 
 import connect from 'react-redux/es/connect/connect';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
@@ -12,8 +11,11 @@ import { showErrorAlertFn } from '../../../actions/sweetAlert';
 import CoreService from '../../../global/CoreService';
 
 import UserLogo from '../../../component/UserLogo';
+import type {Category} from '../../../domain/Category';
+import type {SubCategory} from '../../../domain/SubCategory';
+import Result from '../../../global/Result';
 
-const usersVoteService = CoreService.usersVoteService;
+const userVoteService = CoreService.userVoteService;
 
 const QuestionComponent = ({
     question,
@@ -35,7 +37,7 @@ const QuestionComponent = ({
         if (!RootScope.userId) return history.push('/login');
         setLoader({ questionId: id });
 
-        const data: UsersVoteQuestions = {
+        const data: UserVoteQuestion = {
             questionId: question.id,
             isPositiveVote,
         };
@@ -43,7 +45,7 @@ const QuestionComponent = ({
         if (isVotedBefore) {
             data.id = question.votes[0].id;
             data.userId = question.votes[0].userId;
-            usersVoteService.reVoteQuestion(data).then((result: Result) => {
+            userVoteService.reVoteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     updateVoteQuestion({
                         isPositiveVote,
@@ -56,7 +58,7 @@ const QuestionComponent = ({
                 setLoader(false);
             });
         } else {
-            usersVoteService.voteQuestion(data).then((result: Result) => {
+            userVoteService.voteQuestion(data).then((result: Result) => {
                 if (result.success) {
                     updateVoteQuestion({
                         votes: [result.data],

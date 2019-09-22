@@ -6,8 +6,11 @@ import RootScope from '../../global/RootScope';
 import ReactMarkdown from 'react-markdown';
 import CoreService from '../../global/CoreService';
 import UserLogo from '../../component/UserLogo';
+import type {UserVoteAnswer} from "../../domain/UserVoteAnswer";
+import Result from "../../global/Result";
+import type {User} from "../../domain/User";
 
-const { usersVoteService, questionService } = CoreService;
+const { userVoteService, questionService } = CoreService;
 
 const AnswerComponent = ({
     answer,
@@ -58,14 +61,14 @@ const AnswerComponent = ({
     const handleVoteAnswer = isPositiveVote => {
         if (!RootScope.userId) return history.push('/login');
         setLoader({ answerId: answer.id });
-        const data: UsersVoteAnswers = {
+        const data: UserVoteAnswer = {
             answerId: answer.id,
             isPositiveVote,
         };
         if (isVotedBefore) {
             data.id = answer.votes[0].id;
             data.userId = answer.votes[0].userId;
-            usersVoteService.reVoteAnswer(data).then((result: Result) => {
+            userVoteService.reVoteAnswer(data).then((result: Result) => {
                 if (result.success) {
                     updateAnswer({
                         isPositiveVote,
@@ -78,7 +81,7 @@ const AnswerComponent = ({
                 setLoader(false);
             });
         } else {
-            usersVoteService.voteAnswer(data).then((result: Result) => {
+            userVoteService.voteAnswer(data).then((result: Result) => {
                 if (result.success) {
                     updateAnswer({
                         votes: [result.data],

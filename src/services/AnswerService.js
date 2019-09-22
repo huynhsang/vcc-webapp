@@ -1,9 +1,9 @@
 import Result from '../global/Result';
-import BasicService from "../common/abstract/services/BasicService";
-import type {Filter} from "../../../global/Filter";
-import RootScope from "../global/RootScope";
-import type {IAnswerService} from "../../../common/abstract/services/IAnswerService";
-import FilterBuilder from "../global/Filter";
+import BasicService from '../common/abstract/services/BasicService';
+import type {Filter} from '../global/Filter';
+import RootScope from '../global/RootScope';
+import type {IAnswerService} from '../common/abstract/services/IAnswerService';
+import FilterBuilder from '../global/Filter';
 
 const ANSWER_API = RootScope.appApiUrl + 'answers';
 
