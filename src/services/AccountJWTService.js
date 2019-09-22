@@ -1,9 +1,9 @@
-import Result from "./../../../global/Result";
-import RootScope from "../../../global/RootScope";
-import BasicService from "../../../common/abstract/services/BasicService";
-import ApplicationUtil from "../../../common/util/ApplicationUtil";
-import type {RegisterRequest} from "../request/RegisterRequest";
-import type {LoginRequest} from "../request/LoginRequest";
+import Result from "../global/Result";
+import RootScope from "../global/RootScope";
+import BasicService from "../common/abstract/services/BasicService";
+import ApplicationUtil from "../common/util/ApplicationUtil";
+import {RegisterRequest} from "../global/RegisterRequest";
+import {LoginRequest} from "../global/LoginRequest";
 
 const AUTHENTICATE_API: string = RootScope.appApiUrl + 'users/login';
 const ACCOUNT_REGISTRATION_API: string = RootScope.appApiUrl + 'users';

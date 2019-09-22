@@ -59,7 +59,7 @@ const AnswerComponent = ({
     const { numberOfVotes } = answer;
 
     const handleVoteAnswer = isPositiveVote => {
-        if (!RootScope.userId) return history.push('/login');
+        if (!RootScope.userId) return history.push('/user/login');
         setLoader({ answerId: answer.id });
         const data: UserVoteAnswer = {
             answerId: answer.id,

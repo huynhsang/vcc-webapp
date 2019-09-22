@@ -1,4 +1,4 @@
-import ApplicationConstant from "../../../common/constant/ApplicationConstant";
+import ApplicationConstant from "../common/constant/ApplicationConstant";
 
 export interface RegisterRequest {
 	password: String;

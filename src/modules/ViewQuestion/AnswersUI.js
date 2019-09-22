@@ -68,7 +68,7 @@ const AnswersUI = ({
 
     const leaveAnswerValidation = () => {
         if (!isAuthenticated) {
-            return history.push('/login');
+            return history.push('/user/login');
         }
         setLeaveAnswer(true);
     };

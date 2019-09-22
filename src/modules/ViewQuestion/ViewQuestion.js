@@ -57,7 +57,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
     const isVotedBefore = votes && votes.length > 0;
 
     const handleVoteQuestion = isPositiveVote => {
-        if (!RootScope.userId) return redirectTo('/login');
+        if (!RootScope.userId) return redirectTo('/user/login');
         setLoader({ questionId: question.id });
         const data: UserVoteQuestion = {
             questionId: question.id,

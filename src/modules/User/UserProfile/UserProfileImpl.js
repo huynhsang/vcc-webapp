@@ -1,5 +1,5 @@
 import connect from "react-redux/es/connect/connect";
-import UserProfile from "../component/UserProfile";
+import UserProfile from "./UserProfile";
 import CoreService from "../../../global/CoreService";
 import Result from "../../../global/Result";
 

@@ -1,8 +1,8 @@
-import Result from '../../../global/Result';
-import BasicService from "../../../common/abstract/services/BasicService";
+import Result from '../global/Result';
+import BasicService from "../common/abstract/services/BasicService";
 import type {Filter} from "../../../global/Filter";
-import RootScope from "../../../global/RootScope";
-import FilterBuilder from "../../../global/Filter";
+import RootScope from "../global/RootScope";
+import FilterBuilder from "../global/Filter";
 import type {ISubCategoryService} from "../../../common/abstract/services/ISubCategoryService";
 
 const SUBCATEGORY_API = RootScope.appApiUrl + 'SubCategories';
