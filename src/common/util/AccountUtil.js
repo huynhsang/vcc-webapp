@@ -1,41 +1,43 @@
-import AccountJWTService from "../../modules/user/service/AccountJWTService";
-import Result from "../../global/Result";
-import RootScope from "../../global/RootScope";
-import {failedAuthentication, isAuthenticated} from "../../modules/app/action/App";
-import type {User} from "../../domain/User";
-import CoreService from "../../global/CoreService";
+import AccountJWTService from '../../modules/user/service/AccountJWTService';
+import Result from '../../global/Result';
+import RootScope from '../../global/RootScope';
+import {
+    failedAuthenticationFn,
+    isAuthenticatedFn,
+} from '../../actions/appAuth';
+import CoreService from '../../global/CoreService';
 
 const accountService = CoreService.accountService;
-export default class AccountUtil {
 
-	static getCurrentUser(): User {
-		return AccountJWTService.getAccount(RootScope.token, RootScope.userId).then((res: Result) => {
-			if (res.isSuccess()) {
-				RootScope.currentUser = res.data;
-				return RootScope.currentUser;
-			} else {
-				return RootScope.resetAuthValues();
-			}
-		}).catch(() => {
-            return RootScope.resetAuthValues();
+export const getCurrentUser = () => {
+    return AccountJWTService.getAccount(RootScope.token, RootScope.userId)
+        .then((res: Result) => {
+            if (res.isSuccess()) {
+                RootScope.currentUser = res.data;
+                return RootScope.currentUser;
+            } else {
+                return RootScope.resetAuthValues();
+            }
         })
-	}
+        .catch(() => {
+            return RootScope.resetAuthValues();
+        });
+};
 
-	static updateApplicationAfterAuthenticated(dispatch: Function) {
-		if (RootScope.currentUser) {
-			dispatch(isAuthenticated());
-		} else {
-			dispatch(failedAuthentication());
-		}
-	}
+export const updateApplicationAfterAuthenticated = () => dispatch => {
+    if (RootScope.currentUser) {
+        dispatch(isAuthenticatedFn());
+    } else {
+        dispatch(failedAuthenticationFn());
+    }
+};
 
-	static searchUserByEmail(email: string): User {
-		return accountService.findOneByEmail(email).then((res: Result) => {
-			if (res.isSuccess()) {
-				return res.data;
-			} else {
-				return null;
-			}
-		})
-	}
-}
+export const searchUserByEmail = (email: string) => {
+    return accountService.findOneByEmail(email).then((res: Result) => {
+        if (res.isSuccess()) {
+            return res.data;
+        } else {
+            return null;
+        }
+    });
+};

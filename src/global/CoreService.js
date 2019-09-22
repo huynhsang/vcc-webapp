@@ -1,9 +1,9 @@
 import type {IAccountService} from "../common/abstract/services/IAccountService";
 import AccountService from "../modules/user/service/AccountService";
 import type {IQuestionService} from "../common/abstract/services/IQuestionService";
-import QuestionService from "../modules/question_answer/service/QuestionService";
+import QuestionService from "../services/QuestionService";
 import type {IAnswerService} from "../common/abstract/services/IAnswerService";
-import AnswerService from "../modules/question_answer/service/AnswerService";
+import AnswerService from "../services/AnswerService";
 import type {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
 import SubCategoryService from "../modules/sub_category/service/SubCategoryService";
 import type {IUsersVoteService} from "../common/abstract/services/IUsersVoteService";

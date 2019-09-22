@@ -34,6 +34,7 @@ export default {
   common_badges: 'Huy hiệu',
   common_beginner: 'Người bắt đầu',
   common_teacher: 'Người hướng dẫn',
+  common_top_members: 'Thành viên tích cực',
   
   header_home: 'Trang chủ',
   header_about_us: 'Giới thiệu',

@@ -1,16 +1,16 @@
 export const leftNavTabs =[
-    {
-        path : "/",
-        label: "nav_home",
-        iconClassName : "icon-home"
-    },
+    // {
+    //     path : "/home",
+    //     label: "nav_home",
+    //     iconClassName : "icon-home"
+    // },
     // {
     //     path : "/",
     //     label: "nav_communities",
     //     iconClassName : "icon-folder"
     // },
     {
-        path: "/?show=",
+        path: "/home/?show=",
         label: "nav_questions",
         iconClassName: "icon-book-open",
         children : [
@@ -33,12 +33,12 @@ export const leftNavTabs =[
         ]
     },
     {
-        path : "/tags",
+        path : "/home/tags",
         label: "nav_tags",
         iconClassName : "icon-tag"
     },
     {
-        path : "/badges",
+        path : "/home/badges",
         label: "nav_badges",
         iconClassName : "icon-trophy"
     },
