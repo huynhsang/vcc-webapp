@@ -6,35 +6,34 @@ import EmailVerification from '../../../user/container/email_verification/EmailV
 //Import for AuthLink
 // import IndexImpl from "../../../landing_page/container/IndexImpl";
 import Home from '../../../home/container/HomeContainer';
-import {AddQuestion} from '../../../AddQuestion';
+import { AddQuestion } from '../../../AddQuestion';
 import UserProfile from '../../../user/container/UserProfileImpl';
-import UserAbout from "../../../user/container/UserAboutlmpl";
-
+import UserAbout from '../../../user/container/UserAboutlmpl';
 
 export const UnAuthLink = [
     {
         path: '/login',
-        component: Login,
+        component: Login
     },
     {
         path: '/registration',
-        component: Registration,
+        component: Registration
     },
     {
         path: '/forgot-password',
-        component: ForgotPassword,
+        component: ForgotPassword
     },
     {
         path: '/confirm',
-        component: EmailVerification,
-    },
+        component: EmailVerification
+    }
 ];
 
 export const AuthLink = [
     {
         path: '/question/add',
-        component: AddQuestion,
-    },
+        component: AddQuestion
+    }
 ];
 
 export const PublicLink = [
@@ -44,7 +43,7 @@ export const PublicLink = [
     // },
     {
         path: '/home',
-        component: Home,
+        component: Home
     },
     {
         path: '/user-profile',
@@ -54,8 +53,7 @@ export const PublicLink = [
                 path: '',
                 exact: true,
                 component: UserAbout
-            },
+            }
         ]
-    },
-
+    }
 ];
