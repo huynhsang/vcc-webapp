@@ -34,6 +34,7 @@ const AppRouter = ({ auth }) => (
                 render={props => (
                     <route.component
                         isAuthenticated={auth.isAuthenticated}
+                        subRoutes={route.subRoutes}
                         {...props}
                     />
                 )}

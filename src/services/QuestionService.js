@@ -26,9 +26,9 @@ export default class QuestionService extends BasicService implements IQuestionSe
 
     findOneBySlug(slug: string): Result {
         let fullUrl: string = `${QUESTION_API}/get-detail?slug=${slug}`;
-        if (RootScope.userId) {
-            fullUrl = `${fullUrl}&${QuestionService.getTokenString()}`
-        }
+        // if (RootScope.userId) {
+        //     fullUrl = `${fullUrl}&${QuestionService.getTokenString()}`
+        // }
         return QuestionService.get(fullUrl, RootScope.axiosDefaultConfig);
     }
 

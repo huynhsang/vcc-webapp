@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PropTypes from 'prop-types';
-import type { Answer } from '../../../domain/Answer';
-import { Link } from 'react-router-dom';
+import { Answer } from '../../domain/Answer';
+import { Link, withRouter } from 'react-router-dom';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 
@@ -187,13 +186,9 @@ const AnswersUI = ({
     );
 };
 
-AnswersUI.prototypes = {
-    updateQuestion: PropTypes.func.isRequired,
-    updateAnswers: PropTypes.func.isRequired,
-    question: PropTypes.object.isRequired,
-    answers: PropTypes.array.isRequired,
-    isAuthenticated: PropTypes.bool.isRequired,
-};
+const mapStateToProps = ({ AppAuth: isAuthenticated }) => ({
+    isAuthenticated,
+});
 
 const mapDispatchToProps = dispatch => ({
     showErrorNotification: data =>
@@ -203,6 +198,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-  null,
-  mapDispatchToProps
-)(AnswersUI);
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(AnswersUI));

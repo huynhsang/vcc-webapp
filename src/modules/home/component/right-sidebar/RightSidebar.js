@@ -145,7 +145,7 @@ const RightSidebar = ({
                             className="widget-posts-text widget-no-img"
                           >
                             <span className="span-icon">
-                              <Link to={`/profile/${askedBy.id}`}>
+                              <Link to={`/user-profile/${askedBy.id}`}>
                                 <img
                                   className="avatar avatar-20 photo"
                                   alt={`${askedBy.firstName} ${askedBy.lastName}`}
@@ -192,7 +192,7 @@ const RightSidebar = ({
                     <ul>
                       <li>
                         <span className="span-icon">
-                          <a href="/profile/martin/">
+                          <a href="/user-profile/martin/">
                             <img
                               className="avatar avatar-25 photo"
                               alt="Martin Hope"
@@ -204,7 +204,7 @@ const RightSidebar = ({
                           </a>
                         </span>
                         <div>
-                          <a href="/profile/martin/">Martin Hope</a> added an
+                          <a href="/user-profile/martin/">Martin Hope</a> added an
                           answer{' '}
                           <span className="question-title">
                             <a href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-72">
@@ -218,7 +218,7 @@ const RightSidebar = ({
                       </li>
                       <li>
                         <span className="span-icon">
-                          <a href="/profile/marko/">
+                          <a href="/user-profile/marko/">
                             <img
                               className="avatar avatar-25 photo"
                               alt="Marko Smith"
@@ -230,7 +230,7 @@ const RightSidebar = ({
                           </a>
                         </span>
                         <div>
-                          <a href="/profile/marko/">Marko Smith</a> added an
+                          <a href="/user-profile/marko/">Marko Smith</a> added an
                           answer{' '}
                           <span className="question-title">
                             <a href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-71">
@@ -244,7 +244,7 @@ const RightSidebar = ({
                       </li>
                       <li>
                         <span className="span-icon">
-                          <a href="/profile/john/">
+                          <a href="/user-profile/john/">
                             <img
                               className="avatar avatar-25 photo"
                               alt="John Peter"
@@ -256,7 +256,7 @@ const RightSidebar = ({
                           </a>
                         </span>
                         <div>
-                          <a href="/profile/john/">John Peter</a> added an
+                          <a href="/user-profile/john/">John Peter</a> added an
                           answer{' '}
                           <span className="question-title">
                             <a href="/question/why-are-the-british-confused-about-us-calling-bread-rolls-biscuits-when-they-call-bread-rolls-puddings/#comment-69">
@@ -287,7 +287,7 @@ const RightSidebar = ({
                       <div className="post-section user-area user-area-small">
                         <div className="post-inner">
                           <div className="author-image author-image-42">
-                            <Link to={`/profile/${user.id}`}>
+                            <Link to={`/user-profile/${user.id}`}>
                               <span className="author-image-span">
                                 <img
                                   className="avatar avatar-42 photo"
@@ -303,19 +303,19 @@ const RightSidebar = ({
                           <div className="user-content">
                             <div className="user-inner">
                               <h4>
-                                <Link to={`/profile/${user.id}`}>
+                                <Link to={`/user-profile/${user.id}`}>
                                   {user.firstName} {user.lastName}
                                 </Link>
                               </h4>
                               <div className="user-data">
                                 <ul>
                                   <li className="user-questions">
-                                    <a href="/profile/marko/questions/">
+                                    <a href="/user-profile/marko/questions/">
                                       {user.numberOfQuestions} {t('common_questions')}
                                     </a>
                                   </li>
                                   <li className="user-points">
-                                    <a href="/profile/marko/points/">
+                                    <a href="/user-profile/marko/points/">
                                       {user.points} {t('common_points')}
                                     </a>
                                   </li>

@@ -212,7 +212,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
                                     <div className="question-header">
                                         <span>
                                             <Link
-                                                to={`/profile/${askedBy.id}`}
+                                                to={`/user-profile/${askedBy.id}`}
                                                 className="post-author"
                                             >
                                                 <span itemProp="name">{`${askedBy.firstName} ${askedBy.lastName}`}</span>
