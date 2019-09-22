@@ -9,17 +9,17 @@ const alertBuilder = (
     title: string,
     type: string,
     text: string,
-    confirmButtonText: string,
+    confirmButtonText: string
 ) => ({
     show: true,
     title,
     type,
     text,
-    showCanceltButton: false,
+    showCancelButton: false,
     confirmButtonText,
     cancelButtonText: null,
     onConfirm: null, //Set into sweet alert component
-    onCancel: null,
+    onCancel: null
 });
 
 const confirmAlertBuilder = (
@@ -28,17 +28,17 @@ const confirmAlertBuilder = (
     text: string,
     confirmButtonText: string,
     cancelButtonText: string,
-    onConfirm: void,
+    onConfirm: void
 ) => ({
     show: true,
     title,
     type,
     text,
-    showCanceltButton: true,
+    showCancelButton: true,
     confirmButtonText,
     cancelButtonText,
     onConfirm,
-    onCancel:null,
+    onCancel: null
 });
 
 export const showAlertAction = createAction(SHOW_ALERT);
@@ -46,12 +46,7 @@ export const hideAlertAction = createAction(HIDE_ALERT);
 
 const showGeneralAlert = (type: string) => (title: string, text: string) => {
     return dispatch => {
-        const alert = alertBuilder(
-            title,
-            type,
-            text,
-            'OK',
-        );
+        const alert = alertBuilder(title, type, text, 'OK');
         dispatch(showAlertAction(alert));
     };
 };
@@ -75,7 +70,7 @@ const showGeneralConfirmAlert = (type: string) => (
             text,
             confirmButtonText,
             'Cancel',
-            onConfirm,
+            onConfirm
         );
         dispatch(showAlertAction(alert));
     };
