@@ -1,15 +1,15 @@
 export const headerTabs = [
   {
     label : 'header_home',
-    path: 'home'
+    paths: ['questions', 'tags', 'badges']
   },
   {
     label : 'header_about_us',
-    path: 'about-us'
+    paths: ['about-us']
   },
   {
     label : 'header_contact_us',
-    path: 'contact-us'
+    paths: ['contact-us']
   }
 ]
 

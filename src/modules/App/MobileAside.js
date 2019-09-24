@@ -19,7 +19,7 @@ export default class MobileAside extends BasicComponent {
                                 </a>
                                 <div className="mobile-menu-top mobile--top">
                                     <div className="widget widget_ask">
-                                        <Link to="/question/add" className="button-default wpqa-question">Ask a Question</Link>
+                                        <Link to="/add-question" className="button-default wpqa-question">Ask a Question</Link>
                                     </div>
                                 </div>
                                 <div className="mobile-menu-left">

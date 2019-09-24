@@ -78,7 +78,7 @@ const RightSidebar = ({
         <h3 className="screen-reader-text">{t('common_slidebar')}</h3>
         <div className="inner-sidebar">
           <div className="widget widget_ask">
-            <Link to="/question/add" className="button-default wpqa-question">
+            <Link to="/add-question" className="button-default wpqa-question">
               {t('home_ask_a_question')}
             </Link>
           </div>
@@ -157,7 +157,7 @@ const RightSidebar = ({
                             <div>
                               <h3>
                                 <Link
-                                  to={`/home/question/${question.slug}/view`}
+                                  to={`/question/${question.slug}/view`}
                                   title={question.title}
                                 >
                                   {question.title}
@@ -166,7 +166,7 @@ const RightSidebar = ({
                               <ul className="widget-post-meta">
                                 <li>
                                   <Link
-                                    to={`/home/question/${question.slug}/view`}
+                                    to={`/question/${question.slug}/view`}
                                     className="post-meta-comment"
                                   >
                                     <i className="icon-comment" />

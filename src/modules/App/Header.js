@@ -59,11 +59,11 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
             {headerTabs.map(val => (
                 <li
                     className={
-                        tabSelected === val.path ? 'current-menu-item' : ''
+                        val.paths.includes(tabSelected) ? 'current-menu-item' : ''
                     }
                     key={val.label}
                 >
-                    <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
+                    <Link to={`/${val.paths[0]}`}>{t(`${val.label}`)}</Link>
                 </li>
             ))}
             <li key={''}>
@@ -288,7 +288,7 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
                             </div>
                             <div className="mobile-bar-ask">
                                 <Link
-                                    to="/question/add"
+                                    to="/add-question"
                                     className="wpqa-question"
                                 >
                                     <i className="icon-help-circled" />

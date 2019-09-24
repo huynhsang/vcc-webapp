@@ -6,15 +6,30 @@ import Page404 from './Page404';
 import { UserRouter } from '../User';
 import { UserProfile } from '../UserProfile';
 import { AddQuestion } from '../AddQuestion';
-import {Home} from '../Home';
+
+import { Questions } from '../Questions';
+import { SubCategory } from '../SubCategory';
+import { Badges } from '../Badges';
+
+import { ViewQuestion } from '../ViewQuestion';
 
 //TODO: add router need login
-const AppRouter = ({ auth }) => {
-
+const AppRouter = () => {
     return (
         <Switch>
-            <Route path="/home" render={props => <Home {...props} />} />
+            <Route
+                path="/questions"
+                render={props => <Questions {...props} />}
+            />
+            <Route path="/tags" render={props => <SubCategory {...props} />} />
+            <Route path="/badges" render={props => <Badges {...props} />} />
             <Route path="/user" render={props => <UserRouter {...props} />} />
+
+            <Route
+                exact
+                path={`/question/:slug/view`}
+                component={ViewQuestion}
+            />
 
             {/**TO DO: can change to /users to list all users profile, and /users/:id for invidual */}
             <Route
@@ -22,17 +37,13 @@ const AppRouter = ({ auth }) => {
                 render={props => <UserProfile {...props} />}
             />
             <Route
-                path="/question/add"
+                path="/add-question"
                 render={props => <AddQuestion {...props} />}
             />
-            <Redirect exact from="/" to="/home" />
+            <Redirect exact from="/" to="/questions" />
             <Route component={Page404} />
         </Switch>
     );
-};
-
-AppRouter.propTypes = {
-    auth: PropTypes.object.isRequired
 };
 
 export default AppRouter;

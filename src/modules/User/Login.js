@@ -54,7 +54,7 @@ const Login = ({
                 getCurrentUser().then(() => {
                     updateAuthenticated();
                     showSuccessAlert('Success!', 'Logged in');
-                    history.push('/home');
+                    history.push('/questions');
                 });
             } else {
                 RootScope.resetAuthValues();

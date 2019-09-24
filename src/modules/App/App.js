@@ -49,7 +49,7 @@ const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
                         doLogOut={logout}
                     />
                     <MobileAside />
-                    <AppRouter auth={auth} />
+                    <AppRouter />
                     <SweetAlert />
                 </div>
             </Router>
@@ -58,8 +58,8 @@ const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
 };
 
 // Retrieve data from store as props
-const mapStateToProps = store => ({
-    auth: store.AppAuth
+const mapStateToProps = ({AppAuth}) => ({
+    auth: AppAuth
 });
 
 const mapDispatchToProps = dispatch => ({

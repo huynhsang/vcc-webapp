@@ -14,13 +14,15 @@ import { useTranslation } from 'react-i18next';
 import CoreService from '../../global/CoreService';
 import { QuestionComponent } from './QuestionComponent';
 
-const {questionService} = CoreService;
+import {HomeLayout} from '../HomeLayout';
+
+const { questionService } = CoreService;
 
 const orderMaps = {
     'recent-questions': 'createdOn DESC',
     'most-answered': 'numberOfAnswers DESC',
     'most-visited': 'numberOfViews DESC',
-    'most-voted': 'numberOfVotes DESC',
+    'most-voted': 'numberOfVotes DESC'
 };
 
 const MainPage = ({ location, history }) => {
@@ -45,11 +47,11 @@ const MainPage = ({ location, history }) => {
             show === 'no-answers'
                 ? {
                       skip: 0,
-                      where: { numberOfAnswers: 0 },
+                      where: { numberOfAnswers: 0 }
                   }
                 : {
                       skip: 0,
-                      order: orderMaps[show] || orderMaps['recent-questions'],
+                      order: orderMaps[show] || orderMaps['recent-questions']
                   };
 
         setFilter(state => ({ ...state, ...newState }));
@@ -68,11 +70,15 @@ const MainPage = ({ location, history }) => {
         setFilter(state => ({ ...state, skip: state.skip + 1 }));
 
     //TODO: Use reducer instead
-    const updateVoteQuestion = index => ({isPositiveVote, numberOfVotes, votes}) => {
+    const updateVoteQuestion = index => ({
+        isPositiveVote,
+        numberOfVotes,
+        votes
+    }) => {
         setQuestions(
             produce(draft => {
-                if(votes){
-                    draft[index].votes = votes; 
+                if (votes) {
+                    draft[index].votes = votes;
                 } else {
                     draft[index].votes[0].isPositiveVote = isPositiveVote;
                 }
@@ -84,35 +90,39 @@ const MainPage = ({ location, history }) => {
     const showLoadMore = questions.length >= (filter.skip + 1) * filter.limit;
 
     return (
-        <div className="discy-main-inner float_l">
-            <TopNav show={'recent-questions'} />
-            <section>
-                <h2 className="screen-reader-text">VC&C Latest Questions</h2>
-                <div className="post-articles question-articles">
-                    {questions.map((question: Question, index) => (
-                        <QuestionComponent
-                            key={index}
-                            question={question}
-                            updateVoteQuestion={updateVoteQuestion(index)}
-                        />
-                    ))}
-                </div>
-                <div className="pagination-wrap pagination-question">
-                    <div className="pagination-nav posts-load-more">
-                        <span className="load_span">
-                            <span className="loader_2" />
-                        </span>
-                        {showLoadMore && (
-                            <div className="load-more">
-                                <a onClick={handleLoadMore}>
-                                    {t('mainpage_load_more_questions')}
-                                </a>
-                            </div>
-                        )}
+        <HomeLayout>
+            <div className="discy-main-inner float_l">
+                <TopNav show={'recent-questions'} />
+                <section>
+                    <h2 className="screen-reader-text">
+                        VC&C Latest Questions
+                    </h2>
+                    <div className="post-articles question-articles">
+                        {questions.map((question: Question, index) => (
+                            <QuestionComponent
+                                key={index}
+                                question={question}
+                                updateVoteQuestion={updateVoteQuestion(index)}
+                            />
+                        ))}
                     </div>
-                </div>
-            </section>
-        </div>
+                    <div className="pagination-wrap pagination-question">
+                        <div className="pagination-nav posts-load-more">
+                            <span className="load_span">
+                                <span className="loader_2" />
+                            </span>
+                            {showLoadMore && (
+                                <div className="load-more">
+                                    <a onClick={handleLoadMore}>
+                                        {t('mainpage_load_more_questions')}
+                                    </a>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </HomeLayout>
     );
 };
 

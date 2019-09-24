@@ -64,7 +64,7 @@ const AddQuestion = ({
         questionService.create(question).then((result: Result) => {
             if (result.success) {
                 showSuccessAlert('Success!', 'Created a Question');
-                history.push(`/home/question/${result.data.slug}/view`);
+                history.push(`/question/${result.data.slug}/view`);
             } else {
                 showErrorAlert(result.data);
             }
