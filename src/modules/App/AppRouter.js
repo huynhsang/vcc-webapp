@@ -3,45 +3,49 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Page404 from './Page404';
 
-import { UserRouter } from '../User';
 import { UserProfile } from '../UserProfile';
 import { AddQuestion } from '../AddQuestion';
 
-import { Questions } from '../Questions';
-import { SubCategory } from '../SubCategory';
-import { Badges } from '../Badges';
+import { Home } from '../Home';
+
+import { Authentification, EmailVerification } from '../Authentification';
 
 import { ViewQuestion } from '../ViewQuestion';
 
-//TODO: add router need login
-const AppRouter = () => {
+const AppRouter = ({ auth }) => {
+    const { isAuthenticated, toAuthenticate } = auth;
+
+    const renderComponent = Component => props => {
+        if (toAuthenticate && !isAuthenticated) {
+            return <Authentification toAuthenticate={toAuthenticate} {...props} />;
+        }
+
+        return <Component {...props} />;
+    };
+
     return (
         <Switch>
-            <Route
-                path="/questions"
-                render={props => <Questions {...props} />}
-            />
-            <Route path="/tags" render={props => <SubCategory {...props} />} />
-            <Route path="/badges" render={props => <Badges {...props} />} />
-            <Route path="/user" render={props => <UserRouter {...props} />} />
+            <Route path="/home" render={renderComponent(Home)} />
 
+            {/**TO DO: can change to /users to list all users profile, 
+            and /users/:id for invidual */}
             <Route
                 exact
-                path={`/question/:slug/view`}
-                component={ViewQuestion}
-            />
-
-            {/**TO DO: can change to /users to list all users profile, and /users/:id for invidual */}
-            <Route
                 path="/user-profile/:id"
-                render={props => <UserProfile {...props} />}
+                render={renderComponent(UserProfile)}
             />
             <Route
+                exact
                 path="/add-question"
-                render={props => <AddQuestion {...props} />}
+                render={renderComponent(AddQuestion)}
             />
-            <Redirect exact from="/" to="/questions" />
-            <Route component={Page404} />
+            <Route
+                exact
+                path="/confirm"
+                render={props => <EmailVerification {...props} />}
+            />
+            <Redirect exact from="/" to="/home/questions" />
+            <Route render={renderComponent(Page404)} />
         </Switch>
     );
 };

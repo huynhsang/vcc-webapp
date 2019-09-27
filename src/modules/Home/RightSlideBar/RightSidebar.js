@@ -157,7 +157,7 @@ const RightSidebar = ({
                             <div>
                               <h3>
                                 <Link
-                                  to={`/question/${question.slug}/view`}
+                                  to={`/home/question/${question.slug}/view`}
                                   title={question.title}
                                 >
                                   {question.title}
@@ -166,7 +166,7 @@ const RightSidebar = ({
                               <ul className="widget-post-meta">
                                 <li>
                                   <Link
-                                    to={`/question/${question.slug}/view`}
+                                    to={`/home/question/${question.slug}/view`}
                                     className="post-meta-comment"
                                   >
                                     <i className="icon-comment" />
@@ -347,7 +347,7 @@ const RightSidebar = ({
                 return (
                   <Link
                     key={index}
-                    to={`/questions?tags=${tag.slug}`}
+                    to={`/home/questions?tags=${tag.slug}`}
                     className="tag-cloud-link tag-link-11 tag-link-position-1"
                   >
                     {tag.nameEn}

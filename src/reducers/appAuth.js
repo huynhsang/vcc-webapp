@@ -1,18 +1,21 @@
 // Import Actions
 
 import { createReducer } from 'redux-starter-kit';
-import { isAuthenticatedFn, failedAuthenticationFn } from '../actions/appAuth';
+import { setIsAuthenticatedFn, setToAuthenticateFn } from '../actions/appAuth';
 
 const defaultState = {
     isAuthenticated: false,
+    toAuthenticate:'',
 };
 
 const appAuthReducer = createReducer(defaultState, {
-    [isAuthenticatedFn]: state => {
-        state.isAuthenticated = true;
+    [setIsAuthenticatedFn]: (state, action) => {
+        const {payload} = action;
+        state.isAuthenticated = payload;
     },
-    [failedAuthenticationFn]: state => {
-        state.isAuthenticated = false;
+    [setToAuthenticateFn]: (state, action) => {
+        const {payload} = action;
+        state.toAuthenticate = payload;
     },
 });
 

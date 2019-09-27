@@ -14,8 +14,6 @@ import { useTranslation } from 'react-i18next';
 import CoreService from '../../global/CoreService';
 import { QuestionComponent } from './QuestionComponent';
 
-import {HomeLayout} from '../HomeLayout';
-
 const { questionService } = CoreService;
 
 const orderMaps = {
@@ -90,39 +88,35 @@ const MainPage = ({ location, history }) => {
     const showLoadMore = questions.length >= (filter.skip + 1) * filter.limit;
 
     return (
-        <HomeLayout>
-            <div className="discy-main-inner float_l">
-                <TopNav show={'recent-questions'} />
-                <section>
-                    <h2 className="screen-reader-text">
-                        VC&C Latest Questions
-                    </h2>
-                    <div className="post-articles question-articles">
-                        {questions.map((question: Question, index) => (
-                            <QuestionComponent
-                                key={index}
-                                question={question}
-                                updateVoteQuestion={updateVoteQuestion(index)}
-                            />
-                        ))}
+        <div className="discy-main-inner float_l">
+            <TopNav show={'recent-questions'} />
+            <section>
+                <h2 className="screen-reader-text">VC&C Latest Questions</h2>
+                <div className="post-articles question-articles">
+                    {questions.map((question: Question, index) => (
+                        <QuestionComponent
+                            key={index}
+                            question={question}
+                            updateVoteQuestion={updateVoteQuestion(index)}
+                        />
+                    ))}
+                </div>
+                <div className="pagination-wrap pagination-question">
+                    <div className="pagination-nav posts-load-more">
+                        <span className="load_span">
+                            <span className="loader_2" />
+                        </span>
+                        {showLoadMore && (
+                            <div className="load-more">
+                                <a onClick={handleLoadMore}>
+                                    {t('mainpage_load_more_questions')}
+                                </a>
+                            </div>
+                        )}
                     </div>
-                    <div className="pagination-wrap pagination-question">
-                        <div className="pagination-nav posts-load-more">
-                            <span className="load_span">
-                                <span className="loader_2" />
-                            </span>
-                            {showLoadMore && (
-                                <div className="load-more">
-                                    <a onClick={handleLoadMore}>
-                                        {t('mainpage_load_more_questions')}
-                                    </a>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                </section>
-            </div>
-        </HomeLayout>
+                </div>
+            </section>
+        </div>
     );
 };
 

@@ -3,51 +3,30 @@ import actionsNames from '../constants/action-names.constant';
 
 import { SweetType } from '../constants/sweet-alert.constant';
 
+import { TO_LOGIN } from '../component/sweet_alert';
+
+import {i18n} from '../services/localize';
+
 const { SHOW_ALERT, HIDE_ALERT } = actionsNames;
-
-const alertBuilder = (
-    title: string,
-    type: string,
-    text: string,
-    confirmButtonText: string
-) => ({
-    show: true,
-    title,
-    type,
-    text,
-    showCancelButton: false,
-    confirmButtonText,
-    cancelButtonText: null,
-    onConfirm: null, //Set into sweet alert component
-    onCancel: null
-});
-
-const confirmAlertBuilder = (
-    title: string,
-    type: string,
-    text: string,
-    confirmButtonText: string,
-    cancelButtonText: string,
-    onConfirm: void
-) => ({
-    show: true,
-    title,
-    type,
-    text,
-    showCancelButton: true,
-    confirmButtonText,
-    cancelButtonText,
-    onConfirm,
-    onCancel: null
-});
 
 export const showAlertAction = createAction(SHOW_ALERT);
 export const hideAlertAction = createAction(HIDE_ALERT);
 
-const showGeneralAlert = (type: string) => (title: string, text: string) => {
+const showGeneralAlert = (type: string) => (
+    title: string,
+    text: string,
+    confirmButtonText: string = 'OK'
+) => {
     return dispatch => {
-        const alert = alertBuilder(title, type, text, 'OK');
-        dispatch(showAlertAction(alert));
+        dispatch(
+            showAlertAction({
+                show: true,
+                title,
+                type,
+                text,
+                confirmButtonText
+            })
+        );
     };
 };
 
@@ -61,21 +40,38 @@ const showGeneralConfirmAlert = (type: string) => (
     title: string,
     text: string,
     confirmButtonText: string,
-    onConfirm: void
+    confirmName: void,
+    cancelButtonText: string = 'Cancel'
 ) => {
     return dispatch => {
-        const alert = confirmAlertBuilder(
-            title,
-            type,
-            text,
-            confirmButtonText,
-            'Cancel',
-            onConfirm
+        dispatch(
+            showAlertAction({
+                show: true,
+                title,
+                type,
+                text,
+                showCancelButton: true,
+                confirmButtonText,
+                cancelButtonText,
+                confirmName
+            })
         );
-        dispatch(showAlertAction(alert));
     };
 };
 
 export const showWarningConfirmAlertFn = showGeneralConfirmAlert(
     SweetType.WARNING
 );
+
+export const showInfoConfirmAlertFn = showGeneralConfirmAlert(SweetType.INFO);
+
+export const showConfirmToLoginFn = () => dispatch => {
+    dispatch(
+        showInfoConfirmAlertFn(
+            i18n.t('common_login'),
+            i18n.t('login_thank_to_login_to_continue'),
+            'OK',
+            TO_LOGIN
+        )
+    );
+};

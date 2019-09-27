@@ -3,20 +3,51 @@ import { connect } from 'react-redux';
 
 import SweetAlertUI from 'sweetalert-react';
 import { hideAlertAction } from '../../actions/sweetAlert';
+import { setToLoginFn } from '../../actions/appAuth';
 
-const MySweetAlert = ({ alertInfo, hideAlert }) => {
+import { SweetAlertType } from '../../constants/sweet-alert.constant';
 
-    const onConfirm = alertInfo.onConfirm || hideAlert;
+import { TO_LOGIN } from './confirm-name.constant';
 
-    return <SweetAlertUI {...{...alertInfo, onConfirm, onCancel:hideAlert}} />;
+const sweetAlertDefault: SweetAlertType = {
+    show: false,
+    title: '',
+    type: null,
+    text: null,
+    showCancelButton: false,
+    confirmButtonText: '',
+    cancelButtonText: '',
+    onConfirm: null,
+    onCancel: null
+};
+
+const MySweetAlert = ({ alertInfo, hideAlert, setToLogin }) => {
+    const onConfirm =
+        alertInfo.confirmName === TO_LOGIN ? setToLogin : () => {};
+
+    const sweetAlertProps = {
+        ...sweetAlertDefault,
+        ...alertInfo,
+        onConfirm: () => {
+            onConfirm();
+            hideAlert();
+        },
+        onCancel: hideAlert
+    };
+
+    return <SweetAlertUI {...sweetAlertProps} />;
 };
 
 const mapStateToProps = ({ AlertState }) => ({
-    alertInfo: AlertState,
+    alertInfo: AlertState
 });
 
 const mapDispatchToProps = dispatch => ({
     hideAlert: () => dispatch(hideAlertAction()),
+    setToLogin: () => dispatch(setToLoginFn())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(MySweetAlert);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MySweetAlert);

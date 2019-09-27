@@ -10,8 +10,7 @@ const sweetAlertDefault: SweetAlertType = {
     showCancelButton: false,
     confirmButtonText: '',
     cancelButtonText: '',
-    onConfirm: null,
-    onCancel: null,
+    confirmName: '', //Prevent from storing function
 };
 
 const defaultState = { ...sweetAlertDefault };

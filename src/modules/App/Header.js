@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
@@ -9,14 +10,21 @@ import RootScope from '../../global/RootScope';
 import { User } from '../../domain/User';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
-
+import CookieHelper from '../../common/util/CookieHelper';
+import CookieConstant from '../../common/constant/CookieConstant';
 import { LanguageSelector } from '../LanguageSelector';
 
 import { headerTabs, userMenuTabs } from './header.constant';
 
+import {
+    setIsAuthenticatedFn,
+    setToLoginFn,
+    setToRegistreFn
+} from '../../actions/appAuth';
+
 const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    doLogOut: PropTypes.func.isRequired,
+    doLogOut: PropTypes.func.isRequired
 };
 
 const LanguageSelectorWapper = styled.div`
@@ -24,7 +32,15 @@ const LanguageSelectorWapper = styled.div`
     margin: 3px 0px 0px 15px;
 `;
 
-const Header = ({ doLogOut, isAuthenticated, history, location }) => {
+const Header = ({
+    doLogOut,
+    isAuthenticated,
+    setIsAuthenticated,
+    history,
+    location,
+    setToLogin,
+    setToRegistre
+}) => {
     const { t } = useTranslation();
 
     const { pathname } = location;
@@ -36,14 +52,15 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
     const [showSearch, setShowSearch] = React.useState(false);
 
     const logout = () => {
-        doLogOut();
-        history.push('/user/login');
+        CookieHelper.deleteCookie(CookieConstant.jwtTokenName);
+        CookieHelper.deleteCookie(CookieConstant.userIdKey);
+        setIsAuthenticated(false);
     };
 
     const currentUser: User = RootScope.currentUser || {};
     const fullName: string = ApplicationUtil.formatString('{0} {1}', [
         currentUser.firstName,
-        currentUser.lastName,
+        currentUser.lastName
     ]);
 
     const userMenuStyle = showUserMenu
@@ -59,11 +76,11 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
             {headerTabs.map(val => (
                 <li
                     className={
-                        val.paths.includes(tabSelected) ? 'current-menu-item' : ''
+                        val.path === tabSelected ? 'current-menu-item' : ''
                     }
                     key={val.label}
                 >
-                    <Link to={`/${val.paths[0]}`}>{t(`${val.label}`)}</Link>
+                    <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
                 </li>
             ))}
             <li key={''}>
@@ -156,24 +173,24 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
                         </div>
                     ) : (
                         <div className="right-header float_r">
-                            <Link
+                            <a
                                 className="sign-in-lock mob-sign-in"
-                                to="/user/login"
+                                onClick={setToLogin}
                             >
                                 <i className="icon-lock" />
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 className="button-default button-sign-in"
-                                to="/user/login"
+                                onClick={setToLogin}
                             >
                                 Sign In
-                            </Link>
-                            <Link
+                            </a>
+                            <a
                                 className="button-default-2 button-sign-up"
-                                to="/user/registration"
+                                onClick={setToRegistre}
                             >
                                 Sign Up
-                            </Link>
+                            </a>
                         </div>
                     )}
                     <div className="left-header float_l">
@@ -305,4 +322,18 @@ const Header = ({ doLogOut, isAuthenticated, history, location }) => {
 
 Header.propTypes = propTypes;
 
-export default withRouter(Header);
+// Retrieve data from store as props
+const mapStateToProps = ({ AppAuth: { isAuthenticated } }) => ({
+    isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+    setIsAuthenticated: val => dispatch(setIsAuthenticatedFn(val)),
+    setToLogin: () => dispatch(setToLoginFn()),
+    setToRegistre: () => dispatch(setToRegistreFn())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Header));

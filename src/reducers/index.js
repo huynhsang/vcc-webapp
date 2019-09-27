@@ -2,7 +2,7 @@
  * Root Reducer
  */
 
- // Import Reducers
+// Import Reducers
 import AppAuth from './appAuth';
 import AlertState from './sweetAlert';
 

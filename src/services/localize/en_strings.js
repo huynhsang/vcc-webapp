@@ -35,6 +35,7 @@ export default {
   common_beginner: 'Beginner',
   common_teacher: 'Teacher',
   common_top_members: 'Top members',
+  common_login: 'Login',
 
   header_home: 'Home',
   header_about_us: 'About Us',
@@ -138,4 +139,6 @@ export default {
   mainpage_no_answers: 'No Answers',
   mainpage_danang_vietnam : 'Da nang, Viet Nam',
   mainpage_load_more_questions: 'Load More Questions',
+
+  login_thank_to_login_to_continue: 'Thank to login to continue'
 };

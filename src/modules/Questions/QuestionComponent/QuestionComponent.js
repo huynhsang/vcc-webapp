@@ -7,12 +7,15 @@ import { UserVoteQuestion } from '../../../domain/UserVoteQuestion';
 
 import connect from 'react-redux/es/connect/connect';
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
-import { showErrorAlertFn } from '../../../actions/sweetAlert';
+import {
+    showErrorAlertFn,
+    showConfirmToLoginFn
+} from '../../../actions/sweetAlert';
 import CoreService from '../../../global/CoreService';
 
 import UserLogo from '../../../component/UserLogo';
-import type {Category} from '../../../domain/Category';
-import type {SubCategory} from '../../../domain/SubCategory';
+import type { Category } from '../../../domain/Category';
+import type { SubCategory } from '../../../domain/SubCategory';
 import Result from '../../../global/Result';
 
 const userVoteService = CoreService.userVoteService;
@@ -22,6 +25,7 @@ const QuestionComponent = ({
     history,
     updateVoteQuestion,
     showErrorNotification,
+    showConfirmToLogin
 }) => {
     const { t } = useTranslation();
 
@@ -34,12 +38,14 @@ const QuestionComponent = ({
     const { id, askedBy, numberOfVotes } = question;
 
     const handleVoteQuestion = (isPositiveVote, isVotedBefore) => {
-        if (!RootScope.userId) return history.push('/user/login');
+        if (!RootScope.userId) {
+            return showConfirmToLogin();
+        }
         setLoader({ questionId: id });
 
         const data: UserVoteQuestion = {
             questionId: question.id,
-            isPositiveVote,
+            isPositiveVote
         };
 
         if (isVotedBefore) {
@@ -50,7 +56,7 @@ const QuestionComponent = ({
                     updateVoteQuestion({
                         isPositiveVote,
                         numberOfVotes:
-                            numberOfVotes + 2 * (isPositiveVote ? 1 : -1),
+                            numberOfVotes + 2 * (isPositiveVote ? 1 : -1)
                     });
                 } else {
                     showErrorNotification(result.data);
@@ -62,8 +68,7 @@ const QuestionComponent = ({
                 if (result.success) {
                     updateVoteQuestion({
                         votes: [result.data],
-                        numberOfVotes:
-                            numberOfVotes + (isPositiveVote ? 1 : -1),
+                        numberOfVotes: numberOfVotes + (isPositiveVote ? 1 : -1)
                     });
                 } else {
                     showErrorNotification(result.data);
@@ -110,7 +115,7 @@ const QuestionComponent = ({
                                 <li
                                     className="li_loader"
                                     style={{
-                                        display: 'block',
+                                        display: 'block'
                                     }}
                                 >
                                     <span className="loader_3 fa-spin" />
@@ -149,7 +154,7 @@ const QuestionComponent = ({
                                 <span
                                     className="badge-span"
                                     style={{
-                                        backgroundColor: '#30a96f',
+                                        backgroundColor: '#30a96f'
                                     }}
                                 >
                                     {askedBy.level}
@@ -161,7 +166,7 @@ const QuestionComponent = ({
                                             :
                                         </span>
                                         <Link
-                                            to={`/question/${question.slug}/view`}
+                                            to={`/home/question/${question.slug}/view`}
                                             itemProp="url"
                                         >
                                             <time
@@ -191,7 +196,7 @@ const QuestionComponent = ({
                         <div>
                             <h2 className="post-title">
                                 <Link
-                                    to={`/question/${question.slug}/view`}
+                                    to={`/home/question/${question.slug}/view`}
                                     className="post-title"
                                 >
                                     {question.title}
@@ -217,7 +222,7 @@ const QuestionComponent = ({
                                     <li
                                         className="li_loader"
                                         style={{
-                                            display: 'block',
+                                            display: 'block'
                                         }}
                                     >
                                         <span className="loader_3 fa-spin" />
@@ -277,11 +282,11 @@ const QuestionComponent = ({
                                 <li className={bestAnswerClassName}>
                                     <i className="icon-comment" />
                                     <Link
-                                        to={`/question/${question.slug}/view/#answers`}
+                                        to={`/home/question/${question.slug}/view/#answers`}
                                     >{`${question.numberOfAnswers} `}</Link>
                                     <span className="question-span">
                                         <Link
-                                            to={`/question/${question.slug}/view/#answers`}
+                                            to={`/home/question/${question.slug}/view/#answers`}
                                         >
                                             Answers
                                         </Link>
@@ -296,7 +301,7 @@ const QuestionComponent = ({
                                 </li>
                             </ul>
                             <Link
-                                to={`/question/${question.slug}/view`}
+                                to={`/home/question/${question.slug}/view`}
                                 className="meta-answer"
                             >
                                 {t('common_answer')}
@@ -313,6 +318,7 @@ const QuestionComponent = ({
 const mapDispatchToProps = dispatch => ({
     showErrorNotification: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
 export default connect(

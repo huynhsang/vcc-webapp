@@ -2,10 +2,15 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 
 const {
-	IS_AUTHENTICATED,
-	FAILED_AUTHENTICATION
+	SET_IS_AUTHENTICATED,
+	SET_TO_AUTHENTICATE
 } = actionsNames;
 
 // Export Actions
-export const isAuthenticatedFn = createAction(IS_AUTHENTICATED);
-export const failedAuthenticationFn = createAction(FAILED_AUTHENTICATION);
+export const setIsAuthenticatedFn = createAction(SET_IS_AUTHENTICATED);
+
+export const setToAuthenticateFn = createAction(SET_TO_AUTHENTICATE);
+
+export const setToLoginFn = () => dispatch => dispatch(setToAuthenticateFn('login'));
+export const setToRegistreFn = () => dispatch => dispatch(setToAuthenticateFn('registre'));
+export const setToFindPasswordFn = () => dispatch => dispatch(setToAuthenticateFn('find-password'));

@@ -2,8 +2,7 @@ import AccountJWTService from '../../services/AccountJWTService';
 import Result from '../../global/Result';
 import RootScope from '../../global/RootScope';
 import {
-    failedAuthenticationFn,
-    isAuthenticatedFn,
+    setIsAuthenticatedFn
 } from '../../actions/appAuth';
 import CoreService from '../../global/CoreService';
 
@@ -26,9 +25,9 @@ export const getCurrentUser = () => {
 
 export const updateApplicationAfterAuthenticated = () => dispatch => {
     if (RootScope.currentUser) {
-        dispatch(isAuthenticatedFn());
+        dispatch(setIsAuthenticatedFn(true));
     } else {
-        dispatch(failedAuthenticationFn());
+        dispatch(setIsAuthenticatedFn(false));
     }
 };
 

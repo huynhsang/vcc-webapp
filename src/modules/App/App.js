@@ -8,7 +8,6 @@ import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/sweet_alert';
 import MobileAside from './MobileAside';
-import { failedAuthenticationFn } from '../../actions/appAuth';
 
 import {
     getCurrentUser,
@@ -18,7 +17,7 @@ import {
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
-const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
+const App = ({ auth, uppdateAuthenticate }) => {
     React.useEffect(() => {
         RootScope.token = CookieHelper.getCookie(CookieConstant.jwtTokenName);
         RootScope.userId = Number(
@@ -31,12 +30,6 @@ const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
         }
     }, []);
 
-    const logout = () => {
-        CookieHelper.deleteCookie(CookieConstant.jwtTokenName);
-        CookieHelper.deleteCookie(CookieConstant.userIdKey);
-        failedAuthentification();
-    };
-
     const classWrapper: string = auth.isAuthenticated
         ? 'wrap-login'
         : 'wrap-not-login';
@@ -44,12 +37,9 @@ const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
         <ConnectedRouter history={history}>
             <Router>
                 <div id="wrap" className={classWrapper}>
-                    <Header
-                        isAuthenticated={auth.isAuthenticated}
-                        doLogOut={logout}
-                    />
+                    <Header />
                     <MobileAside />
-                    <AppRouter />
+                    <AppRouter auth={auth} />
                     <SweetAlert />
                 </div>
             </Router>
@@ -58,13 +48,12 @@ const App = ({ auth, uppdateAuthenticate, failedAuthentification }) => {
 };
 
 // Retrieve data from store as props
-const mapStateToProps = ({AppAuth}) => ({
+const mapStateToProps = ({ AppAuth }) => ({
     auth: AppAuth
 });
 
 const mapDispatchToProps = dispatch => ({
-    uppdateAuthenticate: () => dispatch(updateApplicationAfterAuthenticated()),
-    failedAuthentification: () => dispatch(failedAuthenticationFn())
+    uppdateAuthenticate: () => dispatch(updateApplicationAfterAuthenticated())
 });
 
 export default connect(

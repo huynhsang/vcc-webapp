@@ -10,7 +10,7 @@ export const leftNavTabs =[
     //     iconClassName : "icon-folder"
     // },
     {
-        path: "/questions/?show=",
+        path: "/home/questions/?show=",
         label: "nav_questions",
         iconClassName: "icon-book-open",
         children : [
@@ -33,12 +33,12 @@ export const leftNavTabs =[
         ]
     },
     {
-        path : "/tags",
+        path : "/home/tags",
         label: "nav_tags",
         iconClassName : "icon-tag"
     },
     {
-        path : "/badges",
+        path : "/home/badges",
         label: "nav_badges",
         iconClassName : "icon-trophy"
     },

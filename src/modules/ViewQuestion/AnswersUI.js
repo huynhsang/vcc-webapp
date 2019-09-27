@@ -9,7 +9,11 @@ import 'easymde/dist/easymde.min.css';
 import { useTranslation } from 'react-i18next';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import CoreService from '../../global/CoreService';
-import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn,
+    showConfirmToLoginFn
+} from '../../actions/sweetAlert';
 
 import AnswerComponent from './Answer';
 import produce from 'immer';
@@ -26,6 +30,7 @@ const AnswersUI = ({
     isAuthenticated,
     showErrorNotification,
     showSuccessNotification,
+    showConfirmToLogin
 }) => {
     const { t } = useTranslation();
 
@@ -45,7 +50,7 @@ const AnswersUI = ({
         const answerRequest: Answer = {
             body: answerBody,
             description: answerBody.substring(0, descrLength),
-            questionId: question.id,
+            questionId: question.id
         };
         answerService.create(answerRequest).then((result: Result) => {
             if (result.success) {
@@ -68,7 +73,7 @@ const AnswersUI = ({
 
     const leaveAnswerValidation = () => {
         if (!isAuthenticated) {
-            return history.push('/user/login');
+            return showConfirmToLogin();
         }
         setLeaveAnswer(true);
     };
@@ -76,7 +81,7 @@ const AnswersUI = ({
     const updateAnswer = index => ({
         votes,
         isPositiveVote,
-        numberOfVotes,
+        numberOfVotes
     }) => {
         updateAnswers(
             produce(draft => {
@@ -134,6 +139,7 @@ const AnswersUI = ({
                                     showSuccessNotification
                                 }
                                 updateAnswer={updateAnswer(index)}
+                                showConfirmToLogin={showConfirmToLogin}
                             />
                         ))}
                     </ol>
@@ -164,7 +170,7 @@ const AnswersUI = ({
                             onChange={handleChangeAnswerBody}
                             options={{
                                 autofocus: true,
-                                spellChecker: false,
+                                spellChecker: false
                             }}
                         />
                         <p className="form-submit">
@@ -187,7 +193,7 @@ const AnswersUI = ({
 };
 
 const mapStateToProps = ({ AppAuth: isAuthenticated }) => ({
-    isAuthenticated,
+    isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -195,6 +201,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
     showSuccessNotification: (title, text) =>
         dispatch(showSuccessAlertFn(title, text)),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
 export default connect(

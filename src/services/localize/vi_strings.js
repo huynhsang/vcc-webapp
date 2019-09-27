@@ -135,5 +135,7 @@ export default {
   mainpage_no_answers: 'Không có câu trả lời',
   mainpage_danang_vietnam : 'Đà Nẵng, Việt Nam',
   mainpage_load_more_questions: 'Xem thêm câu trả lời',
+
+  login_thank_to_login_to_continue: 'Vui lòng đăng nhập để tiếp tục'
  };
  

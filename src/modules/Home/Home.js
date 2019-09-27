@@ -6,7 +6,9 @@ import RightSidebar from './RightSlideBar/RightSidebarImpl';
 
 import { useTranslation } from 'react-i18next';
 
-const Home = ({ isAuthenticated, children }) => {
+import HomeRouter from './HomeRouter';
+
+const Home = ({ isAuthenticated }) => {
     const { t } = useTranslation();
 
     return (
@@ -40,7 +42,7 @@ const Home = ({ isAuthenticated, children }) => {
                                 position: 'relative',
                                 overflow: 'visible',
                                 boxSizing: 'border-box',
-                                minHeight: '1px',
+                                minHeight: '1px'
                             }}
                         >
                             <div
@@ -48,10 +50,10 @@ const Home = ({ isAuthenticated, children }) => {
                                 style={{
                                     paddingTop: '0px',
                                     paddingBottom: '1px',
-                                    position: 'static',
+                                    position: 'static'
                                 }}
                             >
-                                {children}
+                                <HomeRouter />
                                 <div className="hide-main-inner" />
                                 <div className="hide-sidebar sidebar-width">
                                     <div className="hide-sidebar-inner" />
