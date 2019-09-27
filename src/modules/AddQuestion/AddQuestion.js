@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'react-redux/es/connect/connect';
 
 import PropTypes from 'prop-types';
-import Tabs from '../../component/tabs/Tabs';
+import Tabs from '../../component/Tabs/Tabs';
 import TypeQuestionTab from './TypeQuestion';
 import TagsQuestionTab from './TagsQuestion';
 import TitleQuestionTab from './TitleQuestion';

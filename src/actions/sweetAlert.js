@@ -3,7 +3,7 @@ import actionsNames from '../constants/action-names.constant';
 
 import { SweetType } from '../constants/sweet-alert.constant';
 
-import { TO_LOGIN } from '../component/sweet_alert';
+import { TO_LOGIN } from '../component/SweetAlert';
 
 import {i18n} from '../services/localize';
 

@@ -1,13 +1,13 @@
-import type {IAccountService} from "../common/abstract/services/IAccountService";
-import AccountService from "../services/AccountService";
-import type {IQuestionService} from "../common/abstract/services/IQuestionService";
-import QuestionService from "../services/QuestionService";
-import type {IAnswerService} from "../common/abstract/services/IAnswerService";
-import AnswerService from "../services/AnswerService";
-import type {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
-import SubCategoryService from "../services/SubCategoryService";
-import type {IUserVoteService} from "../common/abstract/services/IUserVoteService";
-import UserVoteService from "../services/UserVoteService";
+import {IAccountService} from "../common/abstract/services/IAccountService";
+import AccountService from "../services/account.service";
+import {IQuestionService} from "../common/abstract/services/IQuestionService";
+import QuestionService from "../services/question.service";
+import {IAnswerService} from "../common/abstract/services/IAnswerService";
+import AnswerService from "../services/answer.service";
+import {ISubCategoryService} from "../common/abstract/services/ISubCategoryService";
+import SubCategoryService from "../services/sub-category.service";
+import {IUserVoteService} from "../common/abstract/services/IUserVoteService";
+import UserVoteService from "../services/user-vote.service";
 
 const ACCOUNT_SERVICE: IAccountService = AccountService.builder();
 const QUESTION_SERVICE: IQuestionService = QuestionService.builder();

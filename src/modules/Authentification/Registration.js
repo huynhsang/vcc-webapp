@@ -2,7 +2,7 @@ import React from 'react';
 import { RegisterRequest } from '../../global/RegisterRequest';
 import RegisterRequestBuilder from '../../global/RegisterRequest';
 import { Link } from 'react-router-dom';
-import AccountJWTService from '../../services/AccountJWTService';
+import AccountJWTService from '../../services/accountJWT.service';
 
 const Registration = ({
     history,

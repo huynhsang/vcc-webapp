@@ -6,7 +6,7 @@ import {
     getCurrentUser,
 } from '../../common/util/AccountUtil';
 
-import AccountJWTService from '../../services/AccountJWTService';
+import AccountJWTService from '../../services/accountJWT.service';
 import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
 import RootScope from '../../global/RootScope';

@@ -6,7 +6,7 @@ import Header from './Header';
 import RootScope from '../../global/RootScope';
 import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
-import { SweetAlert } from '../../component/sweet_alert';
+import { SweetAlert } from '../../component/SweetAlert';
 import MobileAside from './MobileAside';
 
 import {
