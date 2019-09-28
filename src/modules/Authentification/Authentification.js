@@ -1,5 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Dialog } from 'primereact/dialog';
 import {
     getCurrentUser,
     updateApplicationAfterAuthenticated
@@ -19,19 +23,32 @@ import {
     setToFindPasswordFn
 } from '../../actions/appAuth';
 
+const BackgroundImage = require('../../static/resources/img/bg.jpg');
+
+const dialogStyle = {
+    width: '95%',
+    maxWidth: '450px'
+};
+
 const Authentication = ({
     location,
     history,
-    toAuthenticate,
     setToLogin,
     setToFindPassword,
     setToRegistre,
     updateAuthenticated,
     setToAuthenticate,
     showSuccessAlert,
-    showErrorAlert
+    showErrorAlert,
+    AppAuth,
+    className
 }) => {
+    const { t } = useTranslation();
+
     const [isMounted, setIsMounted] = React.useState(false);
+
+    const { isAuthenticated, toAuthenticate } = AppAuth;
+
     React.useEffect(() => {
         setIsMounted(true);
     }, []);
@@ -42,32 +59,75 @@ const Authentication = ({
         }
     }, [location.pathname]);
 
+    const headerTitle = () => {
+        switch (toAuthenticate) {
+            case 'login':
+                return 'common_login';
+            case 'registre':
+                return 'common_registre';
+            case 'find-password':
+                return 'common_forgot_password';
+            default:
+                return '';
+        }
+    };
+
     return (
-        <div className="bg-unauthenticated register-page">
-            {toAuthenticate === 'login' && (
-                <Login
-                    history={history}
-                    updateAuthenticated={updateAuthenticated}
-                    showSuccessAlert={showSuccessAlert}
-                    showErrorAlert={showErrorAlert}
-                    setToFindPassword={setToFindPassword}
-                    setToRegistre={setToRegistre}
-                />
-            )}
-            {toAuthenticate === 'registre' && (
-                <Registration
-                    history={history}
-                    showSuccessAlert={showSuccessAlert}
-                    showErrorAlert={showErrorAlert}
-                    setToLogin={setToLogin}
-                />
-            )}
-            {toAuthenticate === 'find-password' && (
-                <ForgotPassword setToLogin={setToLogin} />
-            )}
+        <div className={className}>
+            <Dialog
+                header={t(headerTitle())}
+                visible={Boolean(toAuthenticate)}
+                style={dialogStyle}
+                modal={true}
+                onHide={() => setToAuthenticate('')}
+            >
+                {toAuthenticate === 'login' && (
+                    <Login
+                        history={history}
+                        updateAuthenticated={updateAuthenticated}
+                        showSuccessAlert={showSuccessAlert}
+                        showErrorAlert={showErrorAlert}
+                        setToFindPassword={setToFindPassword}
+                        setToRegistre={setToRegistre}
+                    />
+                )}
+                {toAuthenticate === 'registre' && (
+                    <Registration
+                        history={history}
+                        showSuccessAlert={showSuccessAlert}
+                        showErrorAlert={showErrorAlert}
+                        setToLogin={setToLogin}
+                    />
+                )}
+                {toAuthenticate === 'find-password' && (
+                    <ForgotPassword setToLogin={setToLogin} />
+                )}
+            </Dialog>
         </div>
     );
 };
+
+const AuthenticationStyled = styled(Authentication)`
+    .p-dialog .p-dialog-content {
+        padding: 0 !important;
+        background: url('${BackgroundImage}') center center / 100% 100% no-repeat;
+        width: 100%;
+        padding: 30px 15px;
+        color: #a8a8a8;
+
+        & form{
+            color:white;
+        }
+
+        & input {
+            border : none;
+        }
+    }
+`;
+
+const mapStateToProp = ({ AppAuth }) => ({
+    AppAuth
+});
 
 const mapDispatchToProp = dispatch => ({
     setToLogin: () => dispatch(setToLoginFn()),
@@ -82,6 +142,6 @@ const mapDispatchToProp = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProp,
     mapDispatchToProp
-)(Authentication);
+)(withRouter(AuthenticationStyled));
