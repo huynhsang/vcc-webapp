@@ -27,6 +27,11 @@ import * as serviceWorker from './serviceWorker';
 // Link and init language manager
 import './services/localize';
 
+// Primereact
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 import './static/Scss/default.scss';
 
 render(

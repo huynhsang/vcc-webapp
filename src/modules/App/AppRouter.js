@@ -15,29 +15,21 @@ import { ViewQuestion } from '../ViewQuestion';
 const AppRouter = ({ auth }) => {
     const { isAuthenticated, toAuthenticate } = auth;
 
-    const renderComponent = Component => props => {
-        if (toAuthenticate && !isAuthenticated) {
-            return <Authentification toAuthenticate={toAuthenticate} {...props} />;
-        }
-
-        return <Component {...props} />;
-    };
-
     return (
         <Switch>
-            <Route path="/home" render={renderComponent(Home)} />
+            <Route path="/home" render={props => <Home {...props} />} />
 
             {/**TO DO: can change to /users to list all users profile, 
             and /users/:id for invidual */}
             <Route
                 exact
                 path="/user-profile/:id"
-                render={renderComponent(UserProfile)}
+                render={props => <UserProfile {...props} />}
             />
             <Route
                 exact
                 path="/add-question"
-                render={renderComponent(AddQuestion)}
+                render={props => <AddQuestion {...props} />}
             />
             <Route
                 exact
@@ -45,7 +37,7 @@ const AppRouter = ({ auth }) => {
                 render={props => <EmailVerification {...props} />}
             />
             <Redirect exact from="/" to="/home/questions" />
-            <Route render={renderComponent(Page404)} />
+            <Route component={Page404} />
         </Switch>
     );
 };

@@ -4,12 +4,16 @@ import RegisterRequestBuilder from '../../global/RegisterRequest';
 import { Link } from 'react-router-dom';
 import AccountJWTService from '../../services/accountJWT.service';
 
+import { useTranslation } from 'react-i18next';
+
 const Registration = ({
     history,
     showSuccessAlert,
     showErrorAlert,
     setToLogin
 }) => {
+    const { t } = useTranslation();
+
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
     const [email, setEmail] = React.useState('');
@@ -41,40 +45,33 @@ const Registration = ({
     };
 
     return (
-        <form
-            className="register box-shadow"
-            onSubmit={onSubmit}
-            method="post"
-        >
-            <h2 className="text-center">Sign Up</h2>
+        <form className="register" onSubmit={onSubmit} method="post">
             <div className="row mb3">
                 <div className="col-6">
                     <label
                         htmlFor="Firstname"
                         className="floatLabel font-size-16"
                     >
-                        First Name
+                        {t('authentification_first_name')}
                     </label>
                     <input
                         id="firstname"
                         className="font-size-14"
                         name="First name"
                         type="text"
-                        placeholder="Enter first name"
                         value={firstName}
                         onChange={ev => setFirstName(ev.target.value)}
                     />
                 </div>
                 <div className="col-6">
                     <label htmlFor="Lastname" className="font-size-16">
-                        Last Name
+                        {t('authentification_last_name')}
                     </label>
                     <input
                         id="lastname"
                         className="font-size-14"
                         name="Last name"
                         type="text"
-                        placeholder="Enter last name"
                         value={lastName}
                         onChange={ev => setLastName(ev.target.value)}
                     />
@@ -82,28 +79,26 @@ const Registration = ({
             </div>
             <div className="mb3">
                 <label htmlFor="Email" className="font-size-16">
-                    Email
+                    {t('common_email')}
                 </label>
                 <input
                     id="Email"
                     className="font-size-14"
                     name="Email"
                     type="text"
-                    placeholder="Email address"
                     value={email}
                     onChange={ev => setEmail(ev.target.value)}
                 />
             </div>
             <div className="mb3">
                 <label htmlFor="password" className="font-size-16">
-                    Password
+                    {t('common_password')}
                 </label>
                 <input
                     id="password"
                     className="font-size-14"
                     name="password"
                     type="password"
-                    placeholder="Password"
                     value={password}
                     onChange={ev => setPassword(ev.target.value)}
                 />
@@ -111,14 +106,13 @@ const Registration = ({
             </div>
             <div className="mb4">
                 <label htmlFor="confirm_password" className="font-size-16">
-                    Confirm Password
+                    {t('authentification_confirm_password')}
                 </label>
                 <input
                     id="confirm_password"
                     className="font-size-14"
                     name="confirm_password"
                     type="password"
-                    placeholder="Enter the password"
                     value={confirmPassword}
                     onChange={ev => setConfirmPassword(ev.target.value)}
                 />
@@ -126,10 +120,11 @@ const Registration = ({
             </div>
             <div>
                 <button className="btn btn-primary width-100 mb3" id="submit">
-                    Create Account
+                    {t('authentification_create_account')}
                 </button>
                 <a onClick={setToLogin} className="text-color-white">
-                    <i className="fas fa-arrow-left" /> Back to login
+                    <i className="fas fa-arrow-left" />
+                    {` ${t('authentification_back_to_login')}`}
                 </a>
             </div>
         </form>

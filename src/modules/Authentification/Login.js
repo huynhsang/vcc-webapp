@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginRequestBuilder from '../../global/LoginRequest';
+import { useTranslation } from 'react-i18next';
 
-import {
-    getCurrentUser,
-} from '../../common/util/AccountUtil';
+import { getCurrentUser } from '../../common/util/AccountUtil';
 
 import AccountJWTService from '../../services/accountJWT.service';
 import CookieHelper from '../../common/util/CookieHelper';
@@ -20,6 +19,7 @@ const Login = ({
     setToFindPassword,
     setToRegistre
 }) => {
+    const { t } = useTranslation();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [rememberMe, setRememberMe] = React.useState(false);
@@ -60,8 +60,10 @@ const Login = ({
     return (
         <div className="login-page">
             <div className="card box-shadow">
-                <div className="card-header position-relative">
-                    <h3 className="text-color-white">Sign In</h3>
+                <div
+                    className="position-relative"
+                    style={{ marginBottom: '15px' }}
+                >
                     <div className="social_icon">
                         <span>
                             <i className="fab fa-facebook-square" />
@@ -84,7 +86,7 @@ const Login = ({
                             </div>
                             <input
                                 type="text"
-                                placeholder="email"
+                                placeholder={t('common_email')}
                                 value={email}
                                 onChange={ev => setEmail(ev.target.value)}
                             />
@@ -97,7 +99,7 @@ const Login = ({
                             </div>
                             <input
                                 type="password"
-                                placeholder="password"
+                                placeholder={t('common_password')}
                                 value={password}
                                 onChange={ev => setPassword(ev.target.value)}
                             />
@@ -111,23 +113,23 @@ const Login = ({
                                     setRememberMe(ev.target.checked)
                                 }
                             />
-                            <label htmlFor="checkbox1">Remember Me</label>
+                            <label htmlFor="checkbox1">{t('authentification_remember_me')}</label>
                         </div>
                         <div className="text-right">
                             <button type="submit" className="btn btn-primary">
-                                Login
+                                {t('common_login')}
                             </button>
                         </div>
                     </form>
                 </div>
                 <div className="card-footer">
                     <div className="text-center">
-                        Don't have an account?{' '}
+                        {`${t('authentification_donot_have_account')} `}
                         <a
                             onClick={setToRegistre}
                             className="ml-1 text-color-white"
                         >
-                            Sign Up
+                            {t('authentification_sign_up')}
                         </a>
                     </div>
                     <div className="text-center">
@@ -135,7 +137,7 @@ const Login = ({
                             onClick={setToFindPassword}
                             className="text-color-white"
                         >
-                            Forgot your password?
+                            {t('authentification_forgot_your_password')}
                         </a>
                     </div>
                 </div>

@@ -9,6 +9,8 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
 import MobileAside from './MobileAside';
 
+import { Authentification } from '../Authentification';
+
 import {
     getCurrentUser,
     updateApplicationAfterAuthenticated
@@ -36,11 +38,12 @@ const App = ({ auth, uppdateAuthenticate }) => {
     return (
         <ConnectedRouter history={history}>
             <Router>
+                <Authentification />
+                <SweetAlert />
                 <div id="wrap" className={classWrapper}>
                     <Header />
                     <MobileAside />
                     <AppRouter auth={auth} />
-                    <SweetAlert />
                 </div>
             </Router>
         </ConnectedRouter>
