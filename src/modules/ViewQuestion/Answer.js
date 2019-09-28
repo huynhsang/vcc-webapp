@@ -6,9 +6,9 @@ import RootScope from '../../global/RootScope';
 import ReactMarkdown from 'react-markdown';
 import CoreService from '../../global/CoreService';
 import UserLogo from '../../component/UserLogo';
-import type {UserVoteAnswer} from "../../domain/UserVoteAnswer";
-import Result from "../../global/Result";
-import type {User} from "../../domain/User";
+import type { UserVoteAnswer } from '../../domain/UserVoteAnswer';
+import Result from '../../global/Result';
+import type { User } from '../../domain/User';
 
 const { userVoteService, questionService } = CoreService;
 
@@ -20,6 +20,7 @@ const AnswerComponent = ({
     history,
     showErrorNotification,
     showSuccessNotification,
+    showConfirmToLogin
 }) => {
     const { t } = useTranslation();
 
@@ -48,7 +49,7 @@ const AnswerComponent = ({
                     setDisableApproveBtn(false);
                     updateQuestion({
                         ...question,
-                        hasAcceptedAnswer: (answer.isTheBest = true),
+                        hasAcceptedAnswer: (answer.isTheBest = true)
                     });
                 } else {
                     showErrorNotification(result.data);
@@ -59,11 +60,13 @@ const AnswerComponent = ({
     const { numberOfVotes } = answer;
 
     const handleVoteAnswer = isPositiveVote => {
-        if (!RootScope.userId) return history.push('/login');
+        if (!RootScope.userId) {
+            return showConfirmToLogin();
+        }
         setLoader({ answerId: answer.id });
         const data: UserVoteAnswer = {
             answerId: answer.id,
-            isPositiveVote,
+            isPositiveVote
         };
         if (isVotedBefore) {
             data.id = answer.votes[0].id;
@@ -73,7 +76,7 @@ const AnswerComponent = ({
                     updateAnswer({
                         isPositiveVote,
                         numberOfVotes:
-                            numberOfVotes + 2 * (isPositiveVote ? 1 : -1),
+                            numberOfVotes + 2 * (isPositiveVote ? 1 : -1)
                     });
                 } else {
                     showErrorNotification(result.data);
@@ -86,7 +89,7 @@ const AnswerComponent = ({
                     updateAnswer({
                         votes: [result.data],
                         numberOfVotes:
-                            numberOfVotes + 1 * (isPositiveVote ? 1 : -1),
+                            numberOfVotes + 1 * (isPositiveVote ? 1 : -1)
                     });
                 } else {
                     showErrorNotification(result.data);

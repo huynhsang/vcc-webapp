@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Autocomplete from '../../component/autocomplete/AutoComplete';
+import Autocomplete from '../../component/Autocomplete/AutoComplete';
 import PropTypes from 'prop-types';
 import { SubCategory } from '../../domain/SubCategory';
 import CoreService from '../../global/CoreService';

@@ -2,8 +2,8 @@ import keyMirror from 'keymirror';
 
 const actionNames = keyMirror({
     //Authentification
-    IS_AUTHENTICATED: null,
-    FAILED_AUTHENTICATION: null,
+    SET_IS_AUTHENTICATED: null,
+    SET_TO_AUTHENTICATE: null,
 
     //SWEET ALERT
     SHOW_ALERT: null,

@@ -16,7 +16,7 @@ import './static/theme/css/sweet-alert.css';
 import './static/Scss/styles.scss';
 
 // Component
-import Root from './modules/app/container/AppImpl';
+import { App } from './modules/App';
 import * as serviceWorker from './serviceWorker';
 
 // Link and init language manager
@@ -25,10 +25,10 @@ import './services/localize';
 import './static/Scss/default.scss';
 
 render(
-  <Provider store={store}>
-    <Root />
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

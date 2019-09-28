@@ -19,11 +19,19 @@ import { UserVoteQuestion } from '../../domain/UserVoteQuestion';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import RootScope from '../../global/RootScope';
 
-import { showErrorAlertFn } from '../../actions/sweetAlert';
+import {
+    showErrorAlertFn,
+    showConfirmToLoginFn
+} from '../../actions/sweetAlert';
 
 const { questionService, answerService, userVoteService } = CoreService;
 
-const ViewQuestion = ({ match, history, showErrorNotification }) => {
+const ViewQuestion = ({
+    match,
+    history,
+    showErrorNotification,
+    showConfirmToLogin
+}) => {
     const { t } = useTranslation();
 
     const [question, setQuestion] = React.useState({});
@@ -57,11 +65,13 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
     const isVotedBefore = votes && votes.length > 0;
 
     const handleVoteQuestion = isPositiveVote => {
-        if (!RootScope.userId) return redirectTo('/login');
+        if (!RootScope.userId) {
+            return showConfirmToLogin();
+        }
         setLoader({ questionId: question.id });
         const data: UserVoteQuestion = {
             questionId: question.id,
-            isPositiveVote,
+            isPositiveVote
         };
 
         //TO DO: Simplify this
@@ -107,8 +117,10 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
         : [];
     const currentPath: string = history.location.pathname;
 
-    const disableUp: boolean = isVotedBefore && question.votes[0].isPositiveVote;
-    const disableDown: boolean = isVotedBefore && !question.votes[0].isPositiveVote;
+    const disableUp: boolean =
+        isVotedBefore && question.votes[0].isPositiveVote;
+    const disableDown: boolean =
+        isVotedBefore && !question.votes[0].isPositiveVote;
     const showLoader: boolean = loader && loader.questionId === question.id;
 
     const bestAnswerClassName = question.hasAcceptedAnswer
@@ -221,7 +233,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
                                         <span
                                             className="badge-span"
                                             style={{
-                                                backgroundColor: '#30a96f',
+                                                backgroundColor: '#30a96f'
                                             }}
                                         >
                                             {askedBy.level}
@@ -447,6 +459,7 @@ const ViewQuestion = ({ match, history, showErrorNotification }) => {
 const mapDispatchToProps = dispatch => ({
     showErrorNotification: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
 export default connect(
