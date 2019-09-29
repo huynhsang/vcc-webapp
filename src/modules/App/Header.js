@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import logo from '../../static/resources/img/logo/logo.png';
@@ -26,11 +25,6 @@ const propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
     doLogOut: PropTypes.func.isRequired
 };
-
-const LanguageSelectorWapper = styled.div`
-    float: right;
-    margin: 3px 0px 0px 15px;
-`;
 
 const Header = ({
     doLogOut,
@@ -216,9 +210,7 @@ const Header = ({
                             />
                         </Link>
                         <div className="mid-header float_l">
-                            <LanguageSelectorWapper>
-                                <LanguageSelector />
-                            </LanguageSelectorWapper>
+                            <LanguageSelector />
                             <div className="header-search float_r">
                                 <form
                                     role="search"
