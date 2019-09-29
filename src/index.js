@@ -12,6 +12,11 @@ import './static/theme/css/media-element.css';
 import './static/theme/css/custom.css';
 import './static/theme/css/sweet-alert.css';
 
+//Import PrimeReact css
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 // Our custom css
 import './static/Scss/styles.scss';
 
