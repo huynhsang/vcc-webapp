@@ -28,6 +28,7 @@ const Header = ({
     setToRegistre
 }) => {
     const { t } = useTranslation();
+    
 
     const { pathname } = location;
 
