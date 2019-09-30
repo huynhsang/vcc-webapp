@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import logo from '../../static/resources/img/logo/logo.png';
 import logo2x from '../../static/resources/img/logo/logo-2x.png';
-import PropTypes from 'prop-types';
 import RootScope from '../../global/RootScope';
 import { User } from '../../domain/User';
 import { useTranslation } from 'react-i18next';
@@ -22,18 +21,12 @@ import {
     setToRegistreFn
 } from '../../actions/appAuth';
 
-const propTypes = {
-    isAuthenticated: PropTypes.bool.isRequired,
-    doLogOut: PropTypes.func.isRequired
-};
-
 const LanguageSelectorWapper = styled.div`
     float: right;
     margin: 3px 0px 0px 15px;
 `;
 
 const Header = ({
-    doLogOut,
     isAuthenticated,
     setIsAuthenticated,
     history,
@@ -183,13 +176,13 @@ const Header = ({
                                 className="button-default button-sign-in"
                                 onClick={setToLogin}
                             >
-                                Sign In
+                                {t('common_login')}
                             </a>
                             <a
                                 className="button-default-2 button-sign-up"
                                 onClick={setToRegistre}
                             >
-                                Sign Up
+                                {t('authentification_sign_up')}
                             </a>
                         </div>
                     )}
@@ -319,8 +312,6 @@ const Header = ({
         </div>
     );
 };
-
-Header.propTypes = propTypes;
 
 // Retrieve data from store as props
 const mapStateToProps = ({ AppAuth: { isAuthenticated } }) => ({
