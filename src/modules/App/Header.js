@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import logo from '../../static/resources/img/logo/logo.png';
@@ -21,20 +20,15 @@ import {
     setToRegistreFn
 } from '../../actions/appAuth';
 
-const LanguageSelectorWapper = styled.div`
-    float: right;
-    margin: 3px 0px 0px 15px;
-`;
-
 const Header = ({
     isAuthenticated,
     setIsAuthenticated,
-    history,
     location,
     setToLogin,
     setToRegistre
 }) => {
     const { t } = useTranslation();
+    
 
     const { pathname } = location;
 
@@ -209,9 +203,7 @@ const Header = ({
                             />
                         </Link>
                         <div className="mid-header float_l">
-                            <LanguageSelectorWapper>
-                                <LanguageSelector />
-                            </LanguageSelectorWapper>
+                            <LanguageSelector />
                             <div className="header-search float_r">
                                 <form
                                     role="search"
