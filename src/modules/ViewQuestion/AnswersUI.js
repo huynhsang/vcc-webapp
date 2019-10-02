@@ -72,6 +72,7 @@ const AnswersUI = ({
     };
 
     const leaveAnswerValidation = () => {
+        console.log('TEST: ', isAuthenticated);
         if (!isAuthenticated) {
             return showConfirmToLogin();
         }
@@ -192,7 +193,7 @@ const AnswersUI = ({
     );
 };
 
-const mapStateToProps = ({ AppAuth: isAuthenticated }) => ({
+const mapStateToProps = ({ AppAuth: {isAuthenticated} }) => ({
     isAuthenticated
 });
 

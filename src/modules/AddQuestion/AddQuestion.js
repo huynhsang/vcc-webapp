@@ -1,5 +1,6 @@
 import React from 'react';
 import connect from 'react-redux/es/connect/connect';
+import { useTranslation } from 'react-i18next';
 
 import PropTypes from 'prop-types';
 import Tabs from '../../component/Tabs/Tabs';
@@ -14,7 +15,7 @@ import Result from '../../global/Result';
 import { Question } from '../../domain/Question';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 
-import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
+import { showSuccessAlertFn, showErrorAlertFn, showConfirmToLoginFn } from '../../actions/sweetAlert';
 
 const { questionService } = CoreService;
 
@@ -23,13 +24,33 @@ const AddQuestion = ({
     createQuestion,
     showSuccessAlert,
     showErrorAlert,
+    AppAuth,
+    showConfirmToLogin,
+    AlertState
 }) => {
+
+    const {t} = useTranslation();
+
+    const {isAuthenticated, toAuthenticate} = AppAuth;
+
+    React.useEffect(()=> {
+        if(!isAuthenticated && !toAuthenticate ){
+            showConfirmToLogin();
+        }
+    },[isAuthenticated, toAuthenticate])
+    
     const [currentTab, setCurrentTab] = React.useState('Type');
 
     const [categorySlug, setCategorySlug] = React.useState(null);
     const [selectedTags, setSelectedTags] = React.useState([]);
     const [titleEditted, setTitleEditted] = React.useState('');
     const [bodyEditted, setBodyEditted] = React.useState('');
+
+    if(!isAuthenticated){
+        return <div>
+            {t('authentification_this_page_need_to_authenticate')}
+        </div>
+    }
 
     const setCategory = category => {
         setCategorySlug(category);
@@ -64,7 +85,7 @@ const AddQuestion = ({
         questionService.create(question).then((result: Result) => {
             if (result.success) {
                 showSuccessAlert('Success!', 'Created a Question');
-                history.push(`/question/${result.data.slug}/view`);
+                history.push(`/home/question/${result.data.slug}/view`);
             } else {
                 showErrorAlert(result.data);
             }
@@ -118,14 +139,21 @@ const AddQuestion = ({
     );
 };
 
+const mapStateToProps = ({ AppAuth, AlertState }) => ({
+    AppAuth,
+    AlertState
+});
+
+
 const mapDispatchToProp = dispatch => ({
     showSuccessAlert: (title, text) =>
         dispatch(showSuccessAlertFn(title, text)),
     showErrorAlert: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin : () => dispatch(showConfirmToLoginFn())
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProp
 )(AddQuestion);

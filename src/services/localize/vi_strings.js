@@ -52,6 +52,7 @@ export default {
   authentification_sign_up: 'Đăng ký',
   authentification_forgot_your_password: 'Quên mật khẩu',
   authentification_donot_have_account: `Bạn chưa có tài khoản`,
+  authentification_this_page_need_to_authenticate: 'Vui lòng đăng nhập để tiếp tuc',
   authentification_: '',
 
   header_home: 'Trang chủ',

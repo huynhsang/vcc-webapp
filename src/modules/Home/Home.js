@@ -1,15 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import LeftNav from './LeftNav';
 import { Link, withRouter } from 'react-router-dom';
-import RightSidebar from './RightSlideBar/RightSidebarImpl';
+import { RightSlideBar } from './RightSlideBar';
 
 import { useTranslation } from 'react-i18next';
 
 import HomeRouter from './HomeRouter';
+import { setToRegistreFn } from '../../actions/appAuth';
 
-const Home = ({ isAuthenticated }) => {
+const Home = ({ AppAuth, setToRegistre }) => {
     const { t } = useTranslation();
+    const {isAuthenticated} = AppAuth;
 
     return (
         <section>
@@ -22,13 +25,13 @@ const Home = ({ isAuthenticated }) => {
                     </div>
                     {!isAuthenticated && (
                         <div className="col3">
-                            <Link
-                                to="/user/registration"
+                            <a
+                                onClick={setToRegistre}
                                 className="signup-panel button-default call-action-button"
                                 style={{ marginTop: '47.5px' }}
                             >
                                 {t('home_create_a_new_account')}
-                            </Link>
+                            </a>
                         </div>
                     )}
                 </div>
@@ -59,7 +62,7 @@ const Home = ({ isAuthenticated }) => {
                                     <div className="hide-sidebar-inner" />
                                 </div>
 
-                                <RightSidebar />
+                                <RightSlideBar />
                             </div>
                         </main>
                         <LeftNav />
@@ -70,4 +73,15 @@ const Home = ({ isAuthenticated }) => {
     );
 };
 
-export default withRouter(Home);
+const mapStateToProps = ({ AppAuth }) => ({
+    AppAuth
+});
+
+const mapDispatchToProps = dispatch => ({
+    setToRegistre: () => dispatch(setToRegistreFn())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Home));

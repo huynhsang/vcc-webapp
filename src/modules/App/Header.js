@@ -25,7 +25,8 @@ const Header = ({
     setIsAuthenticated,
     location,
     setToLogin,
-    setToRegistre
+    setToRegistre,
+    history
 }) => {
     const { t } = useTranslation();
     
@@ -42,6 +43,7 @@ const Header = ({
         CookieHelper.deleteCookie(CookieConstant.jwtTokenName);
         CookieHelper.deleteCookie(CookieConstant.userIdKey);
         setIsAuthenticated(false);
+        history.push('/home');
     };
 
     const currentUser: User = RootScope.currentUser || {};

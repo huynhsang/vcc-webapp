@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import SweetAlertUI from 'sweetalert-react';
 import { hideAlertAction } from '../../actions/sweetAlert';
@@ -21,7 +22,7 @@ const sweetAlertDefault: SweetAlertType = {
     onCancel: null
 };
 
-const MySweetAlert = ({ alertInfo, hideAlert, setToLogin }) => {
+const MySweetAlert = ({ alertInfo, hideAlert, setToLogin, history }) => {
     const onConfirm =
         alertInfo.confirmName === TO_LOGIN ? setToLogin : () => {};
 
@@ -50,4 +51,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(MySweetAlert);
+)(withRouter(MySweetAlert));
