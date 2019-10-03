@@ -10,24 +10,24 @@ export const leftNavTabs =[
     //     iconClassName : "icon-folder"
     // },
     {
-        path: "/home/questions/?show=",
+        path: "/home/questions",
         label: "nav_questions",
         iconClassName: "icon-book-open",
         children : [
           {
-            path : 'recent-questions',
+            path : '/?show=recent-questions',
             label : 'nav_new_question'
           },
           {
-            path : 'most-voted',
+            path : '/?show=most-voted',
             label : 'nav_trending_question'
           },
           {
-            path : 'most-visited',
+            path : '/?show=most-visited',
             label : 'nav_must_read_question'
           },
           {
-            path : 'most-answered',
+            path : '/?show=most-answered',
             label : 'nav_hot_question'
           }
         ]

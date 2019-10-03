@@ -52,6 +52,7 @@ export default {
   authentification_sign_up: 'Sign up',
   authentification_forgot_your_password: 'Forgot your password',
   authentification_donot_have_account: `Don't have an account?`,
+  authentification_this_page_need_to_authenticate: 'This page need to authentificate to continue',
   authentification_: '',
 
   header_home: 'Home',

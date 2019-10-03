@@ -18,7 +18,7 @@ import type { Category } from '../../../domain/Category';
 import type { SubCategory } from '../../../domain/SubCategory';
 import Result from '../../../global/Result';
 
-const userVoteService = CoreService.userVoteService;
+const {userVoteService} = CoreService;
 
 const QuestionComponent = ({
     question,

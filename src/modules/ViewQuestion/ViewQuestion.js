@@ -385,12 +385,6 @@ const ViewQuestion = ({
                                         {/*<i className="icon-star"/><span>8</span>*/}
                                         {/*</li>*/}
                                     </ul>
-                                    <a
-                                        className="meta-answer"
-                                        href={`${currentPath}/#respond`}
-                                    >
-                                        {t('common_answer')}
-                                    </a>
                                 </footer>
                             </div>
                             <div className="clearfix" />
