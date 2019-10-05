@@ -1,16 +1,186 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import BasicComponent from '../../common/abstract/component/BasicComponent';
-// import PropTypes from "prop-types";
+import Modal from '../../component/modal/modal';
 import logoCompany from '../../static/resources/img/logo/est-rouge.png';
 import logoFram from '../../static/resources/img/logo/fram.png';
+import { Dropdown } from 'primereact/dropdown';
+import { Calendar } from 'primereact/calendar';
+import ExperienceRequestBuilder from '../../global/ExperienceRequest'
+import CoreService from '../../global/CoreService';
+import Result from '../../global/Result';
 
-const propTypes = {
-    // doAbout: PropTypes.func.isRequired
-};
+import ApplicationUtil from '../../common/util/ApplicationUtil';
+import {
+    showSuccessAlertFn,
+    showErrorAlertFn
+} from '../../actions/sweetAlert';
 
-const UserAbout = props => {
+const { experienceService } = CoreService;
+
+const UserAbout = ({
+    showErrorNotification,
+    showSuccessNotification
+}) => {
+    const [isShowing, setIsShowing] = React.useState(false);
+    const [title, setTitle] = React.useState('');
+    const [employment, setIsEmloyment] = React.useState(0);
+    const [company, setCompany] = React.useState('');
+    const [location, setLocation] = React.useState('');
+    const [isWorking, setIsWorking] = React.useState(false);
+    const [startDate, setStartDate] = React.useState('');
+    const [endDate, setEndDate] = React.useState(new Date());
+    const [description, setDescription] = React.useState('');
+
+    // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
+    
+
+    const openModalHandler = () => {
+        setIsShowing(true);
+        //TODO: use in file css
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModalHandler = () => {
+        setIsShowing(false);
+        document.body.style.overflow = 'unset';
+    };
+    const employments = [
+        { label: '-', value: '0' },
+        { label: 'Full-time', value: '1' },
+        { label: 'Part-time', value: '2' },
+        { label: 'Self-employed', value: '3' },
+        { label: 'Freelance', value: '4' },
+        { label: 'Contract', value: '5' },
+        { label: 'Internship', value: '6' },
+        { label: 'Apprenticeship', value: '7' }
+    ];
+
+    
+    const onSubmit = event => {
+        event.preventDefault();
+        const registerExperience = ExperienceRequestBuilder.build(
+            title,
+            employment.label,
+            company,
+            location,
+            isWorking,
+            startDate,
+            endDate,
+            description
+        )
+        experienceService.create(registerExperience).then((result: Result) => {
+            if (result.success) {
+                // const experiences = experiencesEditted || [];
+                // experiences.unshift(result.data);
+                showSuccessNotification('Success!', 'Leaved an answer');
+                // setExperiencesEditted(experiences);
+            } else {
+                showErrorNotification(result.data);
+            }
+        })
+    };
     return (
         <div>
+            {isShowing ? (
+                <div onClick={closeModalHandler} className="back-drop"></div>
+            ) : null}
+            <Modal show={isShowing} close={closeModalHandler}>
+                <div className="modal-header">
+                    <h4>Experience</h4>
+                    <span className="close-modal-btn" onClick={closeModalHandler}>
+                        <svg
+                            viewBox="0 0 24 24"
+                            width="24px"
+                            height="24px"
+                            x="0"
+                            y="0"
+                        >
+                            <path d="M20,5.32L13.32,12,20,18.68,18.66,20,12,13.33,5.34,20,4,18.68,10.68,12,4,5.32,5.32,4,12,10.69,18.68,4Z" />
+                        </svg>
+                    </span>
+                </div>
+                <div className="modal-body">
+                    <div>
+                        <label> Title <span className="required">*</span></label>
+                        <input
+                            type="text"
+                            placeholder="Ex: Manager"
+                            onChange={ev => setTitle(ev.target.value)}
+                        />
+                        <span className="required"> Please enter your title. </span>
+                    </div>
+                    <div className="mt1">
+                        <label>Employment type</label>
+                        <Dropdown
+                            value={employment}
+                            options={employments}
+                            onChange={e => setIsEmloyment(e.value)}
+                            placeholder="-"
+                            optionLabel="label"
+                        />
+                    </div>
+                    <div className="mt1">
+                        <label> Company <span className="required">*</span></label>
+                        <input
+                            type="text"
+                            onChange={ev => setCompany(ev.target.value)}
+                        />
+                        <span className="required"> Please enter your title.</span>
+                    </div>
+                    <div className="mt1">
+                        <label>Location</label>
+                        <input
+                            type="text"
+                            onChange={ev => setLocation(ev.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <input
+                            id="work-1"
+                            type="checkbox"
+                            onChange={ev => setIsWorking(ev.target.checked)}
+                        />
+                        <label htmlFor="work-1">I am currently working in this role</label>
+                    </div>
+                    <div className="row mt1">
+                        <div className="col-sm-6">
+                            <label>Start Date <span className="required">*</span></label>
+                            <div>
+                                <Calendar
+                                    value={startDate}
+                                    placeholder='mm/dd/YY'
+                                    onChange={ev => setStartDate(ev.value)}
+                                />
+                            </div>
+                            <span className="required">Please enter a start date.</span>
+                        </div>
+                        <div className="col-sm-6">
+                            <label>End Date <span className="required">*</span></label>
+                            {isWorking ? <div className="end-date"><i>Present</i></div> :
+                                <div>
+                                    <Calendar
+                                        value={endDate}
+                                        onChange={ev => setEndDate(ev.value)}
+                                    />
+                                </div>
+                            }
+                            <span className="required">Please enter a end date.</span>
+                        </div>
+                    </div>
+                    <div className="mt1">
+                        <label>Description </label>
+                        <textarea
+                            rows="6"
+                            onChange={ev => setDescription(ev.target.value)}
+                        />
+                    </div>
+                </div>
+                <div className="modal-footer">
+                    <button className="btn btn-primary" onClick={onSubmit}>Save</button>
+                </div>
+            </Modal>
             <section className="box-content--user p5 mt3 box-shadow--blur about-user">
                 <h5 className="title-user m0">About</h5>
                 <p>
@@ -26,7 +196,7 @@ const UserAbout = props => {
                 <h5 className="title-user m0">Experience</h5>
                 <a
                     className="experience--icon experience--add"
-                    onClick={props.openModalHandler}
+                    onClick={openModalHandler}
                 >
                     <svg
                         viewBox="0 0 24 24"
@@ -172,6 +342,20 @@ const UserAbout = props => {
     );
 };
 
-UserAbout.propTypes = propTypes;
 
-export default UserAbout;
+const mapStateToProps = ({ AppAuth: {isAuthenticated} }) => ({
+    isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+    showErrorNotification: data =>
+        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showSuccessNotification: (title, text) =>
+        dispatch(showSuccessAlertFn(title, text))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(UserAbout));
+

@@ -1,9 +1,11 @@
 // only custom component UserProfile
 .user-container {
   color: $color-dark-9;
-
   p {
     @include rem(margin-bottom, 0);
+  }
+  .end-date {
+    @include rem(line-height, 40);
   }
 }
 .responsive-user {
@@ -118,7 +120,7 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 991px) {
   .responsive-user {
     @include rem(padding-right, 15);
   }
