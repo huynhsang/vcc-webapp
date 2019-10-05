@@ -8,12 +8,15 @@ import {ISubCategoryService} from "../common/abstract/services/ISubCategoryServi
 import SubCategoryService from "../services/sub-category.service";
 import {IUserVoteService} from "../common/abstract/services/IUserVoteService";
 import UserVoteService from "../services/user-vote.service";
+import { IExperienceService } from "../common/abstract/services/IExperienceService";
+import ExperienceService from "../services/experience.service";
 
 const ACCOUNT_SERVICE: IAccountService = AccountService.builder();
 const QUESTION_SERVICE: IQuestionService = QuestionService.builder();
 const ANSWER_SERVICE: IAnswerService = AnswerService.builder();
 const SUBCATEGORY_SERVICE: ISubCategoryService = SubCategoryService.builder();
 const USERS_VOTE_SERVICE: IUserVoteService = UserVoteService.builder();
+const EXPERIENCE_SERVICE: IExperienceService = ExperienceService.builder();
 
 export default class CoreService {
 	static get accountService(): IAccountService {
@@ -34,5 +37,9 @@ export default class CoreService {
 
     static get userVoteService(): IUserVoteService {
         return USERS_VOTE_SERVICE;
+    }
+
+    static get experienceService(): IExperienceService {
+        return EXPERIENCE_SERVICE;
     }
 }
