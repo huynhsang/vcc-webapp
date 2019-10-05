@@ -17,8 +17,9 @@ import { headerTabs, userMenuTabs } from './header.constant';
 import {
     setIsAuthenticatedFn,
     setToLoginFn,
-    setToRegistreFn
-} from '../../actions/appAuth';
+    setToRegistreFn,
+    toggleMobileAsideFn
+} from '../../actions/app';
 
 const Header = ({
     isAuthenticated,
@@ -26,10 +27,10 @@ const Header = ({
     location,
     setToLogin,
     setToRegistre,
-    history
+    history,
+    toggleMobileAside
 }) => {
     const { t } = useTranslation();
-    
 
     const { pathname } = location;
 
@@ -60,7 +61,7 @@ const Header = ({
         ? { display: 'none' }
         : { display: 'block' };
 
-    const PrincipalMenu = (
+    const MainMenu = (
         <ul id="menu-header" className="menu">
             {headerTabs.map(val => (
                 <li
@@ -101,7 +102,7 @@ const Header = ({
             <header className="header">
                 <div className="discy-container">
                     <div className="mobile-menu">
-                        <div className="mobile-menu-click">
+                        <div className="mobile-menu-click" onClick={() => toggleMobileAside(true)}>
                             <i className="icon-menu" />
                         </div>
                     </div>
@@ -235,11 +236,11 @@ const Header = ({
                                     </div>
                                 </form>
                             </div>
-                            <nav className="nav float_l">
+                            <nav className="nav float_l main-menu">
                                 <h3 className="screen-reader-text">
                                     VC&C Navigation
                                 </h3>
-                                {PrincipalMenu}
+                                {MainMenu}
                             </nav>
                         </div>
                     </div>
@@ -308,14 +309,15 @@ const Header = ({
 };
 
 // Retrieve data from store as props
-const mapStateToProps = ({ AppAuth: { isAuthenticated } }) => ({
+const mapStateToProps = ({ App: { isAuthenticated } }) => ({
     isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
     setIsAuthenticated: val => dispatch(setIsAuthenticatedFn(val)),
     setToLogin: () => dispatch(setToLoginFn()),
-    setToRegistre: () => dispatch(setToRegistreFn())
+    setToRegistre: () => dispatch(setToRegistreFn()),
+    toggleMobileAside: (val) => dispatch(toggleMobileAsideFn(val))
 });
 
 export default connect(

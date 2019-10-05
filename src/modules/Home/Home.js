@@ -8,11 +8,11 @@ import { RightSlideBar } from './RightSlideBar';
 import { useTranslation } from 'react-i18next';
 
 import HomeRouter from './HomeRouter';
-import { setToRegistreFn } from '../../actions/appAuth';
+import { setToRegistreFn } from '../../actions/app';
 
-const Home = ({ AppAuth, setToRegistre }) => {
+const Home = ({ App, setToRegistre }) => {
     const { t } = useTranslation();
-    const {isAuthenticated} = AppAuth;
+    const { isAuthenticated } = App;
 
     return (
         <section>
@@ -73,8 +73,8 @@ const Home = ({ AppAuth, setToRegistre }) => {
     );
 };
 
-const mapStateToProps = ({ AppAuth }) => ({
-    AppAuth
+const mapStateToProps = ({ App }) => ({
+    App
 });
 
 const mapDispatchToProps = dispatch => ({

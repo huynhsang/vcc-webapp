@@ -24,14 +24,14 @@ const AddQuestion = ({
     createQuestion,
     showSuccessAlert,
     showErrorAlert,
-    AppAuth,
+    App,
     showConfirmToLogin,
     AlertState
 }) => {
 
     const {t} = useTranslation();
 
-    const {isAuthenticated, toAuthenticate} = AppAuth;
+    const {isAuthenticated, toAuthenticate} = App;
 
     React.useEffect(()=> {
         if(!isAuthenticated && !toAuthenticate ){
@@ -139,8 +139,8 @@ const AddQuestion = ({
     );
 };
 
-const mapStateToProps = ({ AppAuth, AlertState }) => ({
-    AppAuth,
+const mapStateToProps = ({ App, AlertState }) => ({
+    App,
     AlertState
 });
 

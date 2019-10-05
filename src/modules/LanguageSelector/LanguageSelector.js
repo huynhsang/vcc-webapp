@@ -7,7 +7,10 @@ import { Dropdown } from 'primereact/dropdown';
 
 const Wrapper = styled.div`
     float: right;
-    margin-left: 15px;
+    position: ${p => p.position};
+    top: ${p => p.top};
+    right: ${p => p.right};
+    margin: ${p => p.margin || '0 0 0 15px'};
 
     & .p-dropdown {
         line-height: normal;
@@ -31,13 +34,13 @@ const items = [
 
 const supportLanguges = ['en', 'vi'];
 
-const LanguageSelector = () => {
+const LanguageSelector = ({customStyle}) => {
     useTranslation();
 
     const activeItem = items.find(item => item.value === i18n.language);
 
     return (
-        <Wrapper>
+        <Wrapper {...customStyle}>
             <Dropdown
                 value={activeItem}
                 options={items}

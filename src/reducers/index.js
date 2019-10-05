@@ -3,12 +3,12 @@
  */
 
 // Import Reducers
-import AppAuth from './appAuth';
+import App from './app';
 import AlertState from './sweetAlert';
 
 // Combine all reducers into one root reducer
 const reducers = {
-	AppAuth,
+	App,
 	AlertState
 };
 

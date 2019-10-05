@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import SweetAlertUI from 'sweetalert-react';
 import { hideAlertAction } from '../../actions/sweetAlert';
-import { setToLoginFn } from '../../actions/appAuth';
+import { setToLoginFn } from '../../actions/app';
 
 import { SweetAlertType } from '../../constants/sweet-alert.constant';
 

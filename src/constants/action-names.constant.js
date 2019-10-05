@@ -8,6 +8,8 @@ const actionNames = keyMirror({
     //SWEET ALERT
     SHOW_ALERT: null,
     HIDE_ALERT: null,
+
+    TOGGLE_MOBILE_ASIDE: null
 });
 
 export default actionNames;

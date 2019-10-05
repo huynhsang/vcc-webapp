@@ -21,7 +21,7 @@ import {
     setToAuthenticateFn,
     setToRegistreFn,
     setToFindPasswordFn
-} from '../../actions/appAuth';
+} from '../../actions/app';
 
 const BackgroundImage = require('../../static/resources/img/bg.jpg');
 
@@ -40,14 +40,14 @@ const Authentication = ({
     setToAuthenticate,
     showSuccessAlert,
     showErrorAlert,
-    AppAuth,
+    App,
     className
 }) => {
     const { t } = useTranslation();
 
     const [isMounted, setIsMounted] = React.useState(false);
 
-    const { isAuthenticated, toAuthenticate } = AppAuth;
+    const { isAuthenticated, toAuthenticate } = App;
 
     React.useEffect(() => {
         setIsMounted(true);
@@ -125,8 +125,8 @@ const AuthenticationStyled = styled(Authentication)`
     }
 `;
 
-const mapStateToProp = ({ AppAuth }) => ({
-    AppAuth
+const mapStateToProp = ({ App }) => ({
+    App
 });
 
 const mapDispatchToProp = dispatch => ({
