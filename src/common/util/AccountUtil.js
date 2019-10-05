@@ -1,9 +1,7 @@
 import AccountJWTService from '../../services/accountJWT.service';
 import Result from '../../global/Result';
 import RootScope from '../../global/RootScope';
-import {
-    setIsAuthenticatedFn
-} from '../../actions/appAuth';
+import { setIsAuthenticatedFn } from '../../actions/app';
 import CoreService from '../../global/CoreService';
 
 const accountService = CoreService.accountService;

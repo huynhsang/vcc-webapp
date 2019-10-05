@@ -19184,11 +19184,15 @@ a.meta-answer,
 
 .mCustomScrollBox {
     position: relative;
-    overflow: hidden;
+    overflow: auto;
     height: 100%;
     max-width: 100%;
     outline: none;
     direction: ltr
+}
+
+.mCustomScrollBox a {
+    color: black;
 }
 
 .mCSB_container {
@@ -19495,6 +19499,7 @@ a.meta-answer,
     #menu-explore,
     nav.nav_menu,
     div.nav_menu,
+    nav.main-menu,
     div.nav_menu_sidebar {
         display: none
     }
@@ -19705,14 +19710,14 @@ a.meta-answer,
 
 @media (max-width: 1110px) and (min-width: 992px) {
     .right-header {
-        width: 25%;
+        width: 30%;
         padding-left: 10px
     }
     .mid-header {
         width: 69%
     }
     .left-header {
-        width: 69%
+        width: 60%
     }
     .logo {
         padding-right: 10px
@@ -19742,13 +19747,13 @@ a.meta-answer,
 
 @media (max-width: 1025px) and (min-width: 992px) {
     .logo {
-        width: 191px
+        width: 120px
     }
     .left-header {
-        width: 67%
+        width: 60%
     }
     .right-header {
-        width: 26%
+        width: 30%
     }
 }
 
@@ -22315,6 +22320,7 @@ blockquote cite,
 .footer .about-text a,
 .answers-tabs-inner li a:hover,
 .mobile-aside li a:hover,
+.mobile-aside li.active>a,
 .stats-text,
 .wpqa-following .user-follower > ul > li.user-following h4,
 .wpqa-followers .user-follower > ul > li.user-followers h4,

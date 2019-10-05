@@ -193,7 +193,7 @@ const AnswersUI = ({
     );
 };
 
-const mapStateToProps = ({ AppAuth: {isAuthenticated} }) => ({
+const mapStateToProps = ({ App: {isAuthenticated} }) => ({
     isAuthenticated
 });
 

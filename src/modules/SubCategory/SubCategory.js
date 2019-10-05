@@ -8,7 +8,7 @@ import CoreService from '../../global/CoreService';
 import { useTranslation } from 'react-i18next';
 const { subCategoryService } = CoreService;
 
-const SubCategory = ({ getSubCategories }) => {
+const SubCategory = () => {
     const { t } = useTranslation();
 
     const [subCategories, setSubCategories] = React.useState([]);
@@ -129,10 +129,6 @@ const SubCategory = ({ getSubCategories }) => {
             </section>
         </div>
     );
-};
-
-SubCategory.propTypes = {
-    getSubCategories: PropTypes.func.isRequired
 };
 
 export default SubCategory;
