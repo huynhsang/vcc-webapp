@@ -17,7 +17,8 @@ const Login = ({
     showSuccessAlert,
     showErrorAlert,
     setToFindPassword,
-    setToRegistre
+    setToRegistre,
+    hideAuthentification
 }) => {
     const { t } = useTranslation();
     const [email, setEmail] = React.useState('');
@@ -47,6 +48,7 @@ const Login = ({
                 );
                 getCurrentUser().then(() => {
                     updateAuthenticated();
+                    hideAuthentification();
                     showSuccessAlert('Success!', 'Logged in');
                     history.push('/home/questions');
                 });

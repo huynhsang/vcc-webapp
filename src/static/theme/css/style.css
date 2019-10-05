@@ -19500,6 +19500,7 @@ a.meta-answer,
     nav.nav_menu,
     div.nav_menu,
     nav.main-menu,
+    .header-language-selector,
     div.nav_menu_sidebar {
         display: none
     }
