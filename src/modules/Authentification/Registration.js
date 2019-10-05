@@ -1,18 +1,34 @@
 import React from 'react';
+import styled from 'styled-components';
 import { RegisterRequest } from '../../global/RegisterRequest';
 import RegisterRequestBuilder from '../../global/RegisterRequest';
 import { Link } from 'react-router-dom';
 import AccountJWTService from '../../services/accountJWT.service';
-
+import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
+
+const LoaderWrapper = styled.div`
+    width: 100%;
+    min-height: 420px;
+    position: relative;
+    & > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+`;
 
 const Registration = ({
     history,
     showSuccessAlert,
     showErrorAlert,
-    setToLogin
+    setToLogin,
+    hideAuthentification
 }) => {
     const { t } = useTranslation();
+
+    const [loader, setLoader] = React.useState(false);
 
     const [password, setPassword] = React.useState('');
     const [confirmPassword, setConfirmPassword] = React.useState('');
@@ -29,13 +45,17 @@ const Registration = ({
             lastName,
             null
         );
+
+        setLoader(true);
         AccountJWTService.createAccount(registerRequest).then(
             (result: Result) => {
+                setLoader(false);
                 if (result.isSuccess()) {
                     showSuccessAlert(
                         'Success!',
                         'Check your email to complete the registration!'
                     );
+                    hideAuthentification();
                     history.push('/home');
                 } else {
                     showErrorAlert(result.data);
@@ -43,6 +63,14 @@ const Registration = ({
             }
         );
     };
+
+    if (loader) {
+        return (
+            <LoaderWrapper>
+                <ProgressSpinner />
+            </LoaderWrapper>
+        );
+    }
 
     return (
         <form className="register" onSubmit={onSubmit} method="post">

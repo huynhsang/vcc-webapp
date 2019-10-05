@@ -102,7 +102,10 @@ const Header = ({
             <header className="header">
                 <div className="discy-container">
                     <div className="mobile-menu">
-                        <div className="mobile-menu-click" onClick={() => toggleMobileAside(true)}>
+                        <div
+                            className="mobile-menu-click"
+                            onClick={() => toggleMobileAside(true)}
+                        >
                             <i className="icon-menu" />
                         </div>
                     </div>
@@ -206,7 +209,9 @@ const Header = ({
                             />
                         </Link>
                         <div className="mid-header float_l">
-                            <LanguageSelector />
+                            <div className="header-language-selector">
+                                <LanguageSelector />
+                            </div>
                             <div className="header-search float_r">
                                 <form
                                     role="search"
@@ -317,7 +322,7 @@ const mapDispatchToProps = dispatch => ({
     setIsAuthenticated: val => dispatch(setIsAuthenticatedFn(val)),
     setToLogin: () => dispatch(setToLoginFn()),
     setToRegistre: () => dispatch(setToRegistreFn()),
-    toggleMobileAside: (val) => dispatch(toggleMobileAsideFn(val))
+    toggleMobileAside: val => dispatch(toggleMobileAsideFn(val))
 });
 
 export default connect(

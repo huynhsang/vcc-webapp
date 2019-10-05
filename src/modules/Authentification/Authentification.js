@@ -72,6 +72,8 @@ const Authentication = ({
         }
     };
 
+    const hideAuthentification = () => setToAuthenticate('')
+
     return (
         <div className={className}>
             <Dialog
@@ -79,7 +81,8 @@ const Authentication = ({
                 visible={Boolean(toAuthenticate)}
                 style={dialogStyle}
                 modal={true}
-                onHide={() => setToAuthenticate('')}
+                onHide={hideAuthentification}
+                dismissableMask
             >
                 {toAuthenticate === 'login' && (
                     <Login
@@ -89,6 +92,7 @@ const Authentication = ({
                         showErrorAlert={showErrorAlert}
                         setToFindPassword={setToFindPassword}
                         setToRegistre={setToRegistre}
+                        hideAuthentification={hideAuthentification}
                     />
                 )}
                 {toAuthenticate === 'registre' && (
@@ -97,6 +101,7 @@ const Authentication = ({
                         showSuccessAlert={showSuccessAlert}
                         showErrorAlert={showErrorAlert}
                         setToLogin={setToLogin}
+                        hideAuthentification={hideAuthentification}
                     />
                 )}
                 {toAuthenticate === 'find-password' && (
