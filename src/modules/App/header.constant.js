@@ -6,10 +6,6 @@ export const headerTabs = [
     {
         label: 'header_about_us',
         path: 'about-us'
-    },
-    {
-        label: 'header_contact_us',
-        path: 'contact-us'
     }
 ];
 

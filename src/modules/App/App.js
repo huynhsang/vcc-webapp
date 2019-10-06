@@ -7,7 +7,8 @@ import RootScope from '../../global/RootScope';
 import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
-import {MobileAside} from '../MobileAside';
+import { MobileAside } from '../MobileAside';
+import { ContactUs } from '../ContactUs';
 
 import { Authentification } from '../Authentification';
 
@@ -39,6 +40,7 @@ const App = ({ auth, uppdateAuthenticate }) => {
         <ConnectedRouter history={history}>
             <Router>
                 <Authentification />
+                <ContactUs />
                 <SweetAlert />
                 <div id="wrap" className={classWrapper}>
                     <Header />

@@ -40,6 +40,10 @@ export default {
   common_forgot_password: 'Forgot password',
   common_email: 'Email',
   common_password: 'Password',
+  common_mentor: 'mentor',
+  common_mentee: 'mentee',
+  common_with_us: 'with us',
+  common_your_history: 'your story',
 
   authentification_enter_your_email: 'Enter your email address to recover your password',
   authentification_reset_password: 'Reset password',
@@ -158,5 +162,15 @@ export default {
   mainpage_danang_vietnam : 'Da nang, Viet Nam',
   mainpage_load_more_questions: 'Load More Questions',
 
-  login_thank_to_login_to_continue: 'Thank to login to continue'
+  login_thank_to_login_to_continue: 'Thank to login to continue',
+
+  contact_us_hello: 'Hello',
+  contact_us_if_you_want_to_registre:
+      'If you wat to registre',
+  contact_us_please_complete_this_formule: 'please complete this formule',
+  contact_us_please_email_to: 'please email to',
+
+  contact_us_if_you_want_to_share:
+      'If you want to share',
+  contact_us_feedback: 'Others feedback, please tell us via'
 };

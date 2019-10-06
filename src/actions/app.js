@@ -4,7 +4,8 @@ import actionsNames from '../constants/action-names.constant';
 const {
 	SET_IS_AUTHENTICATED,
 	SET_TO_AUTHENTICATE,
-	TOGGLE_MOBILE_ASIDE
+	TOGGLE_MOBILE_ASIDE,
+	TOGGLE_CONTACT_US
 } = actionsNames;
 
 // Export Actions
@@ -18,3 +19,5 @@ export const setToFindPasswordFn = () => dispatch => dispatch(setToAuthenticateF
 
 
 export const toggleMobileAsideFn = createAction(TOGGLE_MOBILE_ASIDE);
+
+export const toggleContactUsFn = createAction(TOGGLE_CONTACT_US);
