@@ -9,7 +9,6 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
-
 import { Authentification } from '../Authentification';
 
 import {
