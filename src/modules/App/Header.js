@@ -18,7 +18,8 @@ import {
     setIsAuthenticatedFn,
     setToLoginFn,
     setToRegistreFn,
-    toggleMobileAsideFn
+    toggleMobileAsideFn,
+    toggleContactUsFn
 } from '../../actions/app';
 
 const Header = ({
@@ -28,7 +29,8 @@ const Header = ({
     setToLogin,
     setToRegistre,
     history,
-    toggleMobileAside
+    toggleMobileAside,
+    toggleContactUs
 }) => {
     const { t } = useTranslation();
 
@@ -73,7 +75,10 @@ const Header = ({
                     <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
                 </li>
             ))}
-            <li key={''}>
+            <li key={'contact-us'}>
+                <a onClick={() => toggleContactUs(true)}>{t('header_contact_us')}</a>
+            </li>
+            <li key={'blog'}>
                 <a href="https://lqdalumni.site/">{t('header_blog')}</a>
             </li>
         </ul>
@@ -322,7 +327,8 @@ const mapDispatchToProps = dispatch => ({
     setIsAuthenticated: val => dispatch(setIsAuthenticatedFn(val)),
     setToLogin: () => dispatch(setToLoginFn()),
     setToRegistre: () => dispatch(setToRegistreFn()),
-    toggleMobileAside: val => dispatch(toggleMobileAsideFn(val))
+    toggleMobileAside: val => dispatch(toggleMobileAsideFn(val)),
+    toggleContactUs: val => dispatch(toggleContactUsFn(val))
 });
 
 export default connect(

@@ -4,13 +4,15 @@ import { createReducer } from 'redux-starter-kit';
 import {
     setIsAuthenticatedFn,
     setToAuthenticateFn,
-    toggleMobileAsideFn
+    toggleMobileAsideFn,
+    toggleContactUsFn
 } from '../actions/app';
 
 const defaultState = {
     isAuthenticated: false,
     toAuthenticate: '',
-    isOpenMobileAside: false
+    isOpenMobileAside: false,
+    isOpenContactUs: false
 };
 
 const appReducer = createReducer(defaultState, {
@@ -25,6 +27,10 @@ const appReducer = createReducer(defaultState, {
     [toggleMobileAsideFn]: (state, action) => {
         const { payload } = action;
         state.isOpenMobileAside = payload;
+    },
+    [toggleContactUsFn]: (state, action) => {
+        const { payload } = action;
+        state.isOpenContactUs = payload;
     }
 });
 

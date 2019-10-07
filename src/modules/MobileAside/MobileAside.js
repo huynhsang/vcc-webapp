@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { toggleMobileAsideFn } from '../../actions/app';
+import { toggleMobileAsideFn, toggleContactUsFn } from '../../actions/app';
 
 import { leftNavTabs } from '../Home/nav.constant';
 
@@ -12,6 +12,7 @@ import { LanguageSelector } from '../LanguageSelector';
 const MobileAside = ({
     isOpenMobileAside,
     toggleMobileAside,
+    toggleContactUs,
     history,
     location
 }) => {
@@ -164,14 +165,8 @@ const MobileAside = ({
                                         {t('header_about_us')}
                                     </a>
                                 </li>
-                                <li
-                                    className={
-                                        pathname === '/contact-us'
-                                            ? 'active'
-                                            : ''
-                                    }
-                                >
-                                    <a onClick={onClickTab('/contact-us')}>
+                                <li>
+                                    <a onClick={() => toggleContactUs(true)}>
                                         {t('header_contact_us')}
                                     </a>
                                 </li>
@@ -218,7 +213,8 @@ const mapStateToProps = ({ App: { isOpenMobileAside } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleMobileAside: val => dispatch(toggleMobileAsideFn(val))
+    toggleMobileAside: val => dispatch(toggleMobileAsideFn(val)),
+    toggleContactUs: val => dispatch(toggleContactUsFn(val))
 });
 
 export default connect(
