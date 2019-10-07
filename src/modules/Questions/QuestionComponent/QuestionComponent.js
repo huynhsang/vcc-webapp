@@ -18,7 +18,7 @@ import type { Category } from '../../../domain/Category';
 import type { SubCategory } from '../../../domain/SubCategory';
 import Result from '../../../global/Result';
 
-const {userVoteService} = CoreService;
+const { userVoteService } = CoreService;
 
 const QuestionComponent = ({
     question,
@@ -35,9 +35,10 @@ const QuestionComponent = ({
         history.push(path);
     };
 
-    const { id, askedBy, numberOfVotes } = question;
+    const { id, askedBy, numberOfVotes, votes } = question;
+    const isVotedBefore = votes && votes.length > 0;
 
-    const handleVoteQuestion = (isPositiveVote, isVotedBefore) => {
+    const handleVoteQuestion = isPositiveVote => {
         if (!RootScope.userId) {
             return showConfirmToLogin();
         }
@@ -86,10 +87,9 @@ const QuestionComponent = ({
         ? 'best-answer-meta meta-best-answer'
         : 'best-answer-meta';
 
-    const isVoted: boolean = question.votes && question.votes.length > 0;
-    const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
-    const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
-    const showLoader: boolean = loader && loader.questionId === question.id;
+    const disableUp = isVotedBefore && question.votes[0].isPositiveVote;
+    const disableDown = isVotedBefore && !question.votes[0].isPositiveVote;
+    const showLoader = loader && loader.questionId === question.id;
     return (
         <article className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
             {/* <div className="question-sticky-ribbon">
@@ -104,9 +104,7 @@ const QuestionComponent = ({
                                 <button
                                     className="wpqa_vote question_vote_up vote_allow"
                                     disabled={disableUp}
-                                    onClick={() =>
-                                        handleVoteQuestion(true, isVoted)
-                                    }
+                                    onClick={() => handleVoteQuestion(true)}
                                 >
                                     <i className="icon-up-dir" />
                                 </button>
@@ -132,9 +130,7 @@ const QuestionComponent = ({
                                 <button
                                     className="wpqa_vote question_vote_down vote_allow"
                                     disabled={disableDown}
-                                    onClick={() =>
-                                        handleVoteQuestion(false, isVoted)
-                                    }
+                                    onClick={() => handleVoteQuestion(false)}
                                 >
                                     <i className="icon-down-dir" />
                                 </button>
@@ -211,9 +207,7 @@ const QuestionComponent = ({
                                     <button
                                         className="wpqa_vote question_vote_up vote_allow"
                                         disabled={disableUp}
-                                        onClick={() =>
-                                            handleVoteQuestion(true, isVoted)
-                                        }
+                                        onClick={() => handleVoteQuestion(true)}
                                     >
                                         <i className="icon-up-dir" />
                                     </button>
@@ -240,7 +234,7 @@ const QuestionComponent = ({
                                         className="wpqa_vote question_vote_down vote_allow"
                                         disabled={disableDown}
                                         onClick={() =>
-                                            handleVoteQuestion(false, isVoted)
+                                            handleVoteQuestion(false)
                                         }
                                     >
                                         <i className="icon-down-dir" />

@@ -7,7 +7,7 @@ import RootScope from '../../global/RootScope';
 import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
-import {MobileAside} from '../MobileAside';
+import { MobileAside } from '../MobileAside';
 
 import { Authentification } from '../Authentification';
 
@@ -20,6 +20,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
 const App = ({ auth, uppdateAuthenticate }) => {
+    const [isVerifiedUser, setIsVerifiedUser] = React.useState(false);
+
     React.useEffect(() => {
         RootScope.token = CookieHelper.getCookie(CookieConstant.jwtTokenName);
         RootScope.userId = Number(
@@ -28,9 +30,16 @@ const App = ({ auth, uppdateAuthenticate }) => {
         if (RootScope.token && RootScope.userId) {
             getCurrentUser().then(() => {
                 uppdateAuthenticate();
+                setIsVerifiedUser(true);
             });
+        } else {
+            setIsVerifiedUser(true);
         }
     }, []);
+
+    if (!isVerifiedUser) {
+        return <div />;
+    }
 
     const classWrapper: string = auth.isAuthenticated
         ? 'wrap-login'
