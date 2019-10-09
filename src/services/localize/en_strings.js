@@ -172,5 +172,15 @@ export default {
 
   contact_us_if_you_want_to_share:
       'If you want to share',
-  contact_us_feedback: 'Others feedback, please tell us via'
+  contact_us_feedback: 'Others feedback, please tell us via',
+
+  about_us_VCNC: 'Vietnamese Counseiling and Connecting',
+  about_us_sologan: 'Get people connected',
+  about_us_our_story: 'Our story',
+  about_us_story: `VCNC's founders were students of Le Quy Don high school, Danang, Vietnam who are living and working overseas. When we first came to another country, we recognized a huge potential of unifying Vietnamese professionals to move forward together. That is why we built a platform where people can get advice or support from other professionals to have a clear vision in their careers.`,
+  about_us_our_mission: 'Our mission',
+  about_us_mission: 'We aim to become the biggest and coolest professional network in Vietnam where our members can get benefits from and benefit each other.',
+  about_us_what_we_do: 'What we do',
+  about_us_do: 'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that you can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your dream.',
+  about_us_our_team: 'Our team'
 };

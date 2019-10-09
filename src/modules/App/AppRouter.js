@@ -8,6 +8,8 @@ import { AddQuestion } from '../AddQuestion';
 
 import { Home } from '../Home';
 
+import { AboutUs } from '../AboutUs';
+
 import { Authentification, EmailVerification } from '../Authentification';
 
 import { ViewQuestion } from '../ViewQuestion';
@@ -18,6 +20,12 @@ const AppRouter = ({ auth }) => {
     return (
         <Switch>
             <Route path="/home" render={props => <Home {...props} />} />
+
+            <Route
+                exact
+                path="/about-us/"
+                render={props => <AboutUs {...props} />}
+            />
 
             {/**TO DO: can change to /users to list all users profile, 
             and /users/:id for invidual */}
