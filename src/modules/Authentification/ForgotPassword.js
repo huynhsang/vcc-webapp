@@ -1,8 +1,33 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import RootScope from '../../global/RootScope';
 
-const ForgotPassword = ({ setToLogin }) => {
+import AccountJWTService from '../../services/accountJWT.service';
+
+const ForgotPassword = ({
+    setToLogin,
+    history,
+    updateAuthenticated,
+    showSuccessAlert,
+    showErrorAlert,
+    hideAuthentification
+}) => {
     const { t } = useTranslation();
+
+    const [email, setEmail] = React.useState('');
+
+    const onSubmit = event => {
+        event.preventDefault();
+        AccountJWTService.doResetPassword({email}).then((result: Result) => {
+            if (result.isSuccess()) {
+                hideAuthentification();
+                showSuccessAlert('Success!', t('forgot_password_please_verify_your_email'));
+            } else {
+                RootScope.resetAuthValues();
+                showErrorAlert(result.data);
+            }
+        });
+    };
 
     return (
         <div className="p10 pl3 pr3">
@@ -13,13 +38,16 @@ const ForgotPassword = ({ setToLogin }) => {
                 <p className="text-center">
                     {t('authentification_enter_your_email')}
                 </p>
-                <form>
+                <form onSubmit={onSubmit}>
                     <input
-                        id="emailInput"
-                        placeholder="Email address"
+                        value={email}
+                        onChange={ev => setEmail(ev.target.value)}
                         type="email"
                     />
-                    <button className="btn btn-primary width-100 mb3">
+                    <button
+                        className="btn btn-primary width-100 mb3"
+                        id="submit"
+                    >
                         {t('authentification_reset_password')}
                     </button>
                     <a
