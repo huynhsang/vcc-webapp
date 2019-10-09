@@ -19880,9 +19880,9 @@ a.meta-answer,
     .sign-in-lock {
         display: inline-block
     }
-    .mobile_bar_active.hidden-header {
+    /* .mobile_bar_active.hidden-header {
         height: 145px
-    }
+    } */
     .mobile_bar_active.header-2.hidden-header {
         height: 125px
     }
@@ -19890,7 +19890,8 @@ a.meta-answer,
         top: 65px
     }
     .mobile-bar {
-        display: block
+        display: block;
+        position:unset;
     }
     body:not(.discy-boxed) .call-action-unlogged {
         width: 750px

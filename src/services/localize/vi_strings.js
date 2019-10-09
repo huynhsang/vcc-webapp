@@ -173,5 +173,15 @@ export default {
 
     contact_us_if_you_want_to_share:
         'Nếu bạn muốn chia sẻ',
-    contact_us_feedback: 'Mọi ý kiến phản hồi khác, xin gởi về '
+    contact_us_feedback: 'Mọi ý kiến phản hồi khác, xin gởi về ',
+
+    about_us_VCNC: 'Vietnamese Counseiling and Connecting',
+    about_us_sologan: 'Get people connected',
+    about_us_our_story: 'Câu chuyện của chúng tôi',
+    about_us_story: `Team sáng lập của VCNC gồm những cựu học sinh của THPT chuyên Lê Quý Đôn, Đà Nẵng đang học tập và làm việc ở nước ngoài. Khi đặt chân đến một đất nước xa lạ, chúng tôi nhận ra sự cần thiết của việc tập hợp người Việt Nam lại với nhau để giúp đỡ nhau đi lên. Đó là lý do chúng tôi tạo ra một nền tảng nơi mọi người có thể nhận được những lời khuyên và hỗ trợ từ những người có kinh nghiệm cho sự nghiệp của mình.`,
+    about_us_our_mission: 'Mục tiêu',
+    about_us_mission: 'Chúng tôi hướng đến tham vọng xây dựng một cộng đồng lớn nhất và ‘ngầu’ nhất Việt Nam nơi mọi thành viên nhận được sự hỗ trợ tốt nhất trên con đường sự nghiệp.',
+    about_us_what_we_do: 'Cụ thể, chúng tôi làm gì?',
+    about_us_do: 'Chúng tôi xây dựng một trang web để mọi người đặt câu hỏi và nhận được những câu trả lời đáng tin cậy từ người có kinh nghiệm ở khắp nơi trên thế giới thông qua các thuật toán cấp cao. Bên cạnh đó, chúng tôi đưa ra những gói dịch vụ tư vấn kết nối bạn trực tiếp với một chuyên gia trong ngành. Hệ thống của chúng tôi sẽ giúp bạn nhận được những hỗ trợ cũng như những mối quan hệ bạn cần trong sự nghiệp của bạn.',
+    about_us_our_team: 'Các thành viên'
 };
