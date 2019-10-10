@@ -182,5 +182,12 @@ export default {
   about_us_mission: 'We aim to become the biggest and coolest professional network in Vietnam where our members can get benefits from and benefit each other.',
   about_us_what_we_do: 'What we do',
   about_us_do: 'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that you can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your dream.',
-  about_us_our_team: 'Our team'
+  about_us_our_team: 'Our team',
+
+  forgot_password_please_verify_your_email: 'Please verify your email to reset password',
+  authentification_enter_new_password:'Enter your new password',
+  authentification_new_password: 'New password',
+  authentification_confirm_new_password: 'Confirm new password',
+  authentification_invalid_comfirm_password: 'Invalid confirm password',
+  authentification_your_password_has_been_reset: 'Your password has been reseted'
 };

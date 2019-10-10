@@ -72,7 +72,7 @@ const Authentication = ({
         }
     };
 
-    const hideAuthentification = () => setToAuthenticate('')
+    const hideAuthentification = () => setToAuthenticate('');
 
     return (
         <div className={className}>
@@ -105,7 +105,13 @@ const Authentication = ({
                     />
                 )}
                 {toAuthenticate === 'find-password' && (
-                    <ForgotPassword setToLogin={setToLogin} />
+                    <ForgotPassword
+                        setToLogin={setToLogin}
+                        history={history}
+                        showSuccessAlert={showSuccessAlert}
+                        showErrorAlert={showErrorAlert}
+                        hideAuthentification={hideAuthentification}
+                    />
                 )}
             </Dialog>
         </div>
