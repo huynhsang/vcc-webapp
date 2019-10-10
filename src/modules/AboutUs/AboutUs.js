@@ -40,6 +40,7 @@ const SmallTitle = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
     margin-top: 25px;
     background: white;
     border-radius: 10px;

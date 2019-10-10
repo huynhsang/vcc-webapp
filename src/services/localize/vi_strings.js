@@ -87,7 +87,7 @@ export default {
     nav_users: 'Người dùng',
     nav_help: 'Giúp đỡ',
     nav_ask_a_question: 'Đặt một câu hỏi',
-    nav_best_answers: 'Câu trả lời tốt nhất',
+    nav_best_answers: 'Câu trả lời hay',
     nav_top_members: 'Người dùng nổi bật',
 
     question_tell_us_your_questions: 'Hãy nói thêm về câu hỏi của bạn',
@@ -191,6 +191,6 @@ export default {
     authentification_new_password: 'Mật khẩu mới',
     authentification_confirm_new_password: 'Xác nhận mật khẩu mới',
     authentification_invalid_comfirm_password: 'Xác nhận mật khẩu không khớp',
-  authentification_your_password_has_been_reset: 'Mật khẩu của bạn đã được đặt lại'
-
+    authentification_your_password_has_been_reset:
+        'Mật khẩu của bạn đã được đặt lại'
 };

@@ -10578,14 +10578,14 @@ nav.nav ul > li ul li .menu-nav-arrow {
     box-shadow: 0 1px 5px 0 #d0d2d3;
     top: 100%;
     left: 0;
-    width: 195px;
+    width: 230px;
     margin: 0;
     padding: 20px 25px;
     display: none
 }
 
 .user-login-click>ul {
-    left: 5px
+    left: -35px
 }
 
 .user-login-bigger.user-login-click>ul {
@@ -19527,6 +19527,11 @@ a.meta-answer,
 }
 
 @media (max-width: 1200px) and (min-width: 992px) {
+
+    .header-search input[type="search"]{
+        width: 390px;
+    }
+
     .discy-container,
     .discy-boxed .mobile-bar-content>.discy-container {
         width: 100%;
@@ -19736,13 +19741,13 @@ a.meta-answer,
 
 @media (max-width: 1080px) and (min-width: 1030px) {
     .mid-header {
-        width: 66%
+        width: 70%
     }
 }
 
 @media (max-width: 1030px) and (min-width: 992px) {
     .mid-header {
-        width: 65%
+        width: 70%
     }
 }
 
