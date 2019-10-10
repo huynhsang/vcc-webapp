@@ -12,6 +12,7 @@ import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';
 import { LanguageSelector } from '../LanguageSelector';
 
+import useOutClick from '../../hooks/useOutClick';
 import { headerTabs, userMenuTabs } from './header.constant';
 
 import {
@@ -71,7 +72,9 @@ const Header = ({
                 </li>
             ))}
             <li key={'contact-us'}>
-                <a onClick={() => toggleContactUs(true)}>{t('header_contact_us')}</a>
+                <a onClick={() => toggleContactUs(true)}>
+                    {t('header_contact_us')}
+                </a>
             </li>
             <li key={'blog'}>
                 <a href="https://lqdalumni.site/">{t('header_blog')}</a>
@@ -79,8 +82,16 @@ const Header = ({
         </ul>
     );
 
+    const outClickMenu = () => {
+        if (showUserMenu) {
+            setShowUserMenu(false);
+        }
+    };
+
+    const outClickRef = useOutClick(outClickMenu);
+
     const UserMenu = (
-        <ul style={userMenuStyle}>
+        <ul style={userMenuStyle} ref={outClickRef}>
             {userMenuTabs.map(val => (
                 <li key={val.path}>
                     <Link to={`/${val.path}/${currentUser.id}`}>
@@ -112,26 +123,27 @@ const Header = ({
                     {isAuthenticated ? (
                         <div className="right-header float_r">
                             <div className="user-login-area">
-                                <div className="notifications-area user-notifications float_r">
+                                {/* <div className="notifications-area user-notifications float_r">
                                     <span className="notifications-click" />
                                     <i className="icon-bell" />
-                                    {/* <div>
-                                            <ul>
-                                              <li>
+                                    <div>
+                                        <ul>
+                                            <li>
                                                 <i className="icon-bucket" />
                                                 <div>
-                                                  Gift of the site - 20 Points.
-                                                  <span className="notifications-date">
-                                                    June 23, 2019 at 4:19 pm
-                                                  </span>
+                                                    Gift of the site - 20
+                                                    Points.
+                                                    <span className="notifications-date">
+                                                        June 23, 2019 at 4:19 pm
+                                                    </span>
                                                 </div>
-                                              </li>
-                                            </ul>
-                                            <Link to="/profile/sanght/notifications/">
-                                              Show all notifications.
-                                            </Link>
-                                          </div> */}
-                                </div>
+                                            </li>
+                                        </ul>
+                                        <Link to="/profile/sanght/notifications/">
+                                            Show all notifications.
+                                        </Link>
+                                    </div>
+                                </div> */}
                                 <div className="user-login-click float_r user-click-open">
                                     <span
                                         className="user-click"

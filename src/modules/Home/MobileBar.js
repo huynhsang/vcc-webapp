@@ -16,14 +16,13 @@ const MobileBar = () => {
                 <div className="mobile-bar-content">
                     <div className="discy-container">
                         <div className="mobile-bar-search">
-                            <Link
+                            <a
                                 style={buttonSearch}
-                                to="/"
                                 onClick={() => setShowSearch(state => !state)}
                             >
                                 <i className="icon-search" />
                                 Search
-                            </Link>
+                            </a>
                             <form
                                 style={searchInput}
                                 role="search"
