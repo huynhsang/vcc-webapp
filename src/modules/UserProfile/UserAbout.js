@@ -343,7 +343,7 @@ const UserAbout = ({
 };
 
 
-const mapStateToProps = ({ AppAuth: {isAuthenticated} }) => ({
+const mapStateToProps = ({ App: {isAuthenticated} }) => ({
     isAuthenticated
 });
 
