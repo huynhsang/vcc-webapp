@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import CoreService from "../../global/CoreService";
 import Result from "../../global/Result";
 
-import UserProfileRouter from'./UserProfileRouter';
+import UserInfoRouter from'./UserInfoRouter';
 
 const {accountService} = CoreService;
 
@@ -79,7 +79,7 @@ const UserProfile = ({ getProfileById, subRoutes }) => {
                     </div>
                 </section>
                 <div className="user-container col-lg-9 responsive-user">
-                    <UserProfileRouter/>
+                    <UserInfoRouter/>
                 </div>
             </div>
         </div>

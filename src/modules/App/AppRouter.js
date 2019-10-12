@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Page404 from './Page404';
 
-import { UserProfile } from '../UserProfile';
+import { UserInfo } from '../UserInfo';
 import { AddQuestion } from '../AddQuestion';
 
 import { Home } from '../Home';
@@ -33,8 +33,8 @@ const AppRouter = ({ auth }) => {
             and /users/:id for invidual */}
             <Route
                 exact
-                path="/user-profile/:id"
-                render={props => <UserProfile {...props} />}
+                path="/users/:id"
+                render={props => <UserInfo {...props} />}
             />
             <Route
                 exact

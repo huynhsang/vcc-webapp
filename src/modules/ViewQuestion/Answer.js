@@ -128,7 +128,7 @@ const AnswerComponent = ({
                         <div className="comment-meta">
                             <div className="comment-author">
                                 <span>
-                                    <Link to={`/user-profile/${answerBy.id}`}>
+                                    <Link to={`/users/${answerBy.id}`}>
                                         <span>{`${answerBy.firstName} ${answerBy.lastName}`}</span>
                                     </Link>
                                 </span>

@@ -145,7 +145,7 @@ const QuestionComponent = ({
                         <header className="article-header">
                             <div className="question-header">
                                 <Link
-                                    to={`/user-profile/${askedBy.id}`}
+                                    to={`/users/${askedBy.id}`}
                                     className="post-author"
                                     itemProp="url"
                                 >

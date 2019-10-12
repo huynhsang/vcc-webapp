@@ -12,7 +12,7 @@ export const headerTabs = [
 export const userMenuTabs = [
     {
         label: 'header_user_profile',
-        path: 'user-profile',
+        path: 'users',
         iconClassName: 'icon-user'
     },
     {

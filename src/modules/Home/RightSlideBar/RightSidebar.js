@@ -211,7 +211,7 @@ const RightSideBar = () => {
                                                         >
                                                             <span className="span-icon">
                                                                 <Link
-                                                                    to={`/user-profile/${askedBy.id}`}
+                                                                    to={`/users/${askedBy.id}`}
                                                                 >
                                                                     <img
                                                                         className="avatar avatar-20 photo"
@@ -271,7 +271,7 @@ const RightSideBar = () => {
                                         <ul>
                                             <li>
                                                 <span className="span-icon">
-                                                    <a href="/user-profile/martin/">
+                                                    <a href="/users/martin/">
                                                         <img
                                                             className="avatar avatar-25 photo"
                                                             alt="Martin Hope"
@@ -283,7 +283,7 @@ const RightSideBar = () => {
                                                     </a>
                                                 </span>
                                                 <div>
-                                                    <a href="/user-profile/martin/">
+                                                    <a href="/users/martin/">
                                                         Martin Hope
                                                     </a>{' '}
                                                     added an answer{' '}
@@ -301,7 +301,7 @@ const RightSideBar = () => {
                                             </li>
                                             <li>
                                                 <span className="span-icon">
-                                                    <a href="/user-profile/marko/">
+                                                    <a href="/users/marko/">
                                                         <img
                                                             className="avatar avatar-25 photo"
                                                             alt="Marko Smith"
@@ -313,7 +313,7 @@ const RightSideBar = () => {
                                                     </a>
                                                 </span>
                                                 <div>
-                                                    <a href="/user-profile/marko/">
+                                                    <a href="/users/marko/">
                                                         Marko Smith
                                                     </a>{' '}
                                                     added an answer{' '}
@@ -331,7 +331,7 @@ const RightSideBar = () => {
                                             </li>
                                             <li>
                                                 <span className="span-icon">
-                                                    <a href="/user-profile/john/">
+                                                    <a href="/users/john/">
                                                         <img
                                                             className="avatar avatar-25 photo"
                                                             alt="John Peter"
@@ -343,7 +343,7 @@ const RightSideBar = () => {
                                                     </a>
                                                 </span>
                                                 <div>
-                                                    <a href="/user-profile/john/">
+                                                    <a href="/users/john/">
                                                         John Peter
                                                     </a>{' '}
                                                     added an answer{' '}
@@ -382,7 +382,7 @@ const RightSideBar = () => {
                                                 <div className="post-inner">
                                                     <div className="author-image author-image-42">
                                                         <Link
-                                                            to={`/user-profile/${user.id}`}
+                                                            to={`/users/${user.id}`}
                                                         >
                                                             <span className="author-image-span">
                                                                 <img
@@ -402,7 +402,7 @@ const RightSideBar = () => {
                                                         <div className="user-inner">
                                                             <h4>
                                                                 <Link
-                                                                    to={`/user-profile/${user.id}`}
+                                                                    to={`/users/${user.id}`}
                                                                 >
                                                                     {
                                                                         user.firstName
@@ -415,7 +415,7 @@ const RightSideBar = () => {
                                                             <div className="user-data">
                                                                 <ul>
                                                                     <li className="user-questions">
-                                                                        <a href="/user-profile/marko/questions/">
+                                                                        <a href="/users/marko/questions/">
                                                                             {
                                                                                 user.numberOfQuestions
                                                                             }{' '}
@@ -425,7 +425,7 @@ const RightSideBar = () => {
                                                                         </a>
                                                                     </li>
                                                                     <li className="user-points">
-                                                                        <a href="/user-profile/marko/points/">
+                                                                        <a href="/users/marko/points/">
                                                                             {
                                                                                 user.points
                                                                             }{' '}

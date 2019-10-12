@@ -224,7 +224,7 @@ const ViewQuestion = ({
                                     <div className="question-header">
                                         <span>
                                             <Link
-                                                to={`/user-profile/${askedBy.id}`}
+                                                to={`/users/${askedBy.id}`}
                                                 className="post-author"
                                             >
                                                 <span itemProp="name">{`${askedBy.firstName} ${askedBy.lastName}`}</span>
