@@ -36,6 +36,16 @@ export default class BasicService {
 	}
 
 	static
+	patch(url: string, data: any, config: AxiosConfig): Result {
+		return axios.patch(url, data, config)
+			.then((result) => {
+				return Result.builder(result.data, true);
+			}).catch((err) => {
+				return Result.builder(err.response, false);
+			})
+	}
+
+	static
 	delete(url: string, config: AxiosConfig): Result {
 		return axios.delete(url, config)
 			.then((result) => {

@@ -32,7 +32,6 @@ const AppRouter = ({ auth }) => {
             {/**TO DO: can change to /users to list all users profile, 
             and /users/:id for invidual */}
             <Route
-                exact
                 path="/users/:id"
                 render={props => <UserInfo {...props} />}
             />

@@ -13,6 +13,11 @@ export default class AccountService extends BasicService implements IAccountServ
 		return super.save(data);
 	}
 
+	update(id, data): Result {
+		const fullUrl = AccountService.buildURLWithToken(`${ACCOUNT_API}/${id}`);
+		return AccountService.patch(fullUrl, data, RootScope.axiosDefaultConfig);
+	}
+
 	findAll(filter: Filter): Result {
 		return super.findAll(filter);
 	}

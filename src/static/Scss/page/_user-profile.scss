@@ -105,7 +105,7 @@
     }
   }
   .shell-info {
-    @include rem(margin, 0, -15, 0, -15);
+    @include rem(margin, 15, -15, 0, -15);
     .title-info {
       border-top: 1px solid $color-border;
       @include rem(padding, 8, 16);

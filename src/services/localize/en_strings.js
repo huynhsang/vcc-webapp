@@ -44,6 +44,15 @@ export default {
   common_mentee: 'mentee',
   common_with_us: 'with us',
   common_your_history: 'your story',
+  common_company: 'Company',
+  common_location: 'Location',
+  common_start_date: 'Start date',
+  common_end_date: 'End date',
+  common_present: 'Present',
+  common_description: 'Description',
+  common_lastname: 'Last name',
+  common_firstname: 'First name',
+  common_summary: 'Summary',
 
   authentification_enter_your_email: 'Enter your email address to recover your password',
   authentification_reset_password: 'Reset password',
@@ -189,5 +198,14 @@ export default {
   authentification_new_password: 'New password',
   authentification_confirm_new_password: 'Confirm new password',
   authentification_invalid_comfirm_password: 'Invalid confirm password',
-  authentification_your_password_has_been_reset: 'Your password has been reseted'
+  authentification_your_password_has_been_reset: 'Your password has been reseted',
+
+  form_require_all_values: 'Please enter all values required.',
+  form_your_job: 'Your job',
+  form_current_role: 'I am currently working in this role',
+  form_ex_work_manager: 'Ex: Manager',
+  form_your_school : 'Your School',
+  common_field_of_study: 'Field of study',
+  common_from_year: 'From year',
+  common_to_year:'To year' ,
 };

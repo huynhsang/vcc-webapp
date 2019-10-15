@@ -9972,7 +9972,7 @@ body {
 
 #wrap {
     position: relative;
-    z-index: 1
+    /* z-index: 1 */
 }
 
 .dicsuss-html-login,

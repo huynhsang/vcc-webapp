@@ -1,36 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import CoreService from "../../global/CoreService";
-import Result from "../../global/Result";
+import { Link, withRouter } from 'react-router-dom';
+import CoreService from '../../global/CoreService';
+import Result from '../../global/Result';
 
-import UserInfoRouter from'./UserInfoRouter';
+import UserInfoRouter from './UserInfoRouter';
 
-const {accountService} = CoreService;
 
-const UserProfile = ({ getProfileById, subRoutes }) => {
+const DefaultPhoto = require(`../../static/resources/img/bg-user.jpg`);
+
+const { accountService } = CoreService;
+
+const UserProfile = ({ getProfileById, subRoutes, location }) => {
     const [profile, setProfile] = React.useState({});
 
+    const userId: number = parseInt(window.location.pathname.split('/')[2]);
+
     React.useEffect(() => {
-        const userId: number = parseInt(window.location.pathname.split('/')[2]);
         if (userId) {
             accountService.findOneById(userId).then((result: Result) => {
                 if (result.success) {
                     setProfile(result.data);
-                } 
-            })
-        } 
+                }
+            });
+        }
     }, []);
 
+    const { firstName, lastName } = profile;
+
+
+
     return (
-        <div className="container discy-container">  
+        <div className="container discy-container">
             <div className="row">
                 <section
                     className="profile-background-image box-shadow--blur"
                     style={{
-                        backgroundImage:
-                            'url(' +
-                            require(`../../static/resources/img/bg-user.jpg`) +
-                            ')',
+                        backgroundImage: `url('${DefaultPhoto}')`,
                         backgroundPosition: 'center center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat'
@@ -47,6 +52,9 @@ const UserProfile = ({ getProfileById, subRoutes }) => {
                     </div>
                     <div className="title-user-info">
                         <div className="text-center">
+                            {`${lastName} ${firstName}`}
+                        </div>
+                        {/* <div className="text-center">
                             <button className="btn btn-info">Follow</button>
                         </div>
                         <div className="row follow">
@@ -58,33 +66,24 @@ const UserProfile = ({ getProfileById, subRoutes }) => {
                                 <p className="font-size-20">Following</p>
                                 <p className="follow-number">126</p>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="shell-info">
-                            <Link to="/" className="title-info">
-                                About<i className="fas fa-arrow-right"></i>
-                            </Link>
-                            <Link to="/" className="title-info">
-                                Education<i className="fas fa-arrow-right"></i>
-                            </Link>
-                            <Link to="/" className="title-info">
-                                Experience<i className="fas fa-arrow-right"></i>
-                            </Link>
-                            <Link to="/" className="title-info">
-                                Quetions<i className="fas fa-arrow-right"></i>
-                            </Link>
-                            <Link to="/" className="title-info">
-                                Answer<i className="fas fa-arrow-right"></i>
+                            <Link
+                                to={`/users/${userId}/general`}
+                                className="title-info"
+                            >
+                                General Infos
+                                <i className="fas fa-arrow-right" />
                             </Link>
                         </div>
                     </div>
                 </section>
                 <div className="user-container col-lg-9 responsive-user">
-                    <UserInfoRouter/>
+                    <UserInfoRouter profile={profile} setProfile={setProfile} />
                 </div>
             </div>
         </div>
     );
 };
 
-
-export default UserProfile;
+export default withRouter(UserProfile);

@@ -12,5 +12,5 @@ export interface IService {
 
 	deleteById(id: number): Result;
 
-	static builder(): IService;
+	builder(): IService;
 }
