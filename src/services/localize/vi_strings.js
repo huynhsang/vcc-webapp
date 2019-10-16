@@ -53,6 +53,13 @@ export default {
     common_lastname: 'Họ',
     common_firstname: 'Tên',
     common_summary: 'Giới thiệu',
+    common_nationality: 'Quốc tịch',
+    common_date_of_birth: 'Ngày sinh',
+    common_field_of_study: 'Ngành học',
+    common_from_year: 'Từ năm',
+    common_to_year: 'Đến năm',
+    common_save: 'Lưu',
+    common_reset: 'Đặt lại',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
@@ -207,8 +214,8 @@ export default {
     form_your_job: 'Công việc của bạn',
     form_current_role: 'Công việc hiện tại của tôi',
     form_ex_work_manager: 'Ví dụ: Quản lý',
-    form_your_school : 'Trường của bạn',
-    common_field_of_study: 'Ngành học',
-    common_from_year: 'Từ năm',
-    common_to_year:'Đến năm' ,
+    form_your_school: 'Trường của bạn',
+
+    my_profile_you_come_from: 'Bạn đến từ',
+    my_profile_choose_one_country: 'Chọn một nước'
 };

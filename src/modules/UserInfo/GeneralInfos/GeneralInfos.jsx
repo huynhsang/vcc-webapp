@@ -15,10 +15,6 @@ import {
 import { Experiences } from './Experiences';
 import { Educations } from './Educations';
 
-import ProfileModal from './ProfileModal';
-
-const { accountService } = CoreService;
-
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -26,38 +22,15 @@ const FlexWrapper = styled.div`
 `;
 
 const GeneralInfos = ({
-    profile,
-    setProfile,
     showErrorNotification,
     showSuccessNotification
 }) => {
     // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
 
-    const [isShownModal, setIsShownModal] = React.useState(false);
-
-    const { id } = profile;
-    const onSubmit = data => {
-        if (id) {
-            accountService.update(id, data).then((result: Result) => {
-                if (result.success) {
-                    setProfile(result.data);
-                }
-            });
-        }
-    };
-
     return (
         <>
             <section className="box-content--user p5 mt3 box-shadow--blur about-user">
-                <FlexWrapper>
-                    <h5 className="title-user m0">About</h5>
-                    <button
-                        className="btn btn-info"
-                        onClick={() => setIsShownModal(true)}
-                    >
-                        Edit Profile
-                    </button>
-                </FlexWrapper>
+                <h5 className="title-user m0">About</h5>
                 <p>
                     Until now 30/9/2018, I have more than 2 years experience on
                     the job developer (include: mobile and web (both front-end &
@@ -69,11 +42,6 @@ const GeneralInfos = ({
             </section>
             <Experiences />
             <Educations />
-            <ProfileModal
-                isShowing={isShownModal}
-                setIsShowing={setIsShownModal}
-                submit={onSubmit}
-            />
         </>
     );
 };

@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
 import logo from '../../static/resources/img/logo/logo.png';
 import logo2x from '../../static/resources/img/logo/logo-2x.png';
-import RootScope from '../../global/RootScope';
 import { User } from '../../domain/User';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
@@ -24,7 +22,7 @@ import {
 } from '../../actions/app';
 
 const Header = ({
-    isAuthenticated,
+    App,
     setIsAuthenticated,
     location,
     setToLogin,
@@ -34,6 +32,7 @@ const Header = ({
     toggleContactUs
 }) => {
     const { t } = useTranslation();
+    const { isAuthenticated, currentUser } = App;
 
     const { pathname } = location;
 
@@ -49,11 +48,9 @@ const Header = ({
         history.push('/home');
     };
 
-    const currentUser: User = RootScope.currentUser || {};
-    const fullName: string = ApplicationUtil.formatString('{0} {1}', [
-        currentUser.firstName,
-        currentUser.lastName
-    ]);
+    const { firstName, lastName } = currentUser || {};
+
+    const fullName = `${firstName} ${lastName}`;
 
     const userMenuStyle = showUserMenu
         ? { display: 'block' }
@@ -90,7 +87,7 @@ const Header = ({
 
     const outClickRef = useOutClick(outClickMenu);
 
-    const UserMenu = (
+    const UserMenu = isAuthenticated && (
         <ul style={userMenuStyle} ref={outClickRef}>
             {userMenuTabs.map(val => (
                 <li key={val.path}>
@@ -268,8 +265,8 @@ const Header = ({
 };
 
 // Retrieve data from store as props
-const mapStateToProps = ({ App: { isAuthenticated } }) => ({
-    isAuthenticated
+const mapStateToProps = ({ App }) => ({
+    App
 });
 
 const mapDispatchToProps = dispatch => ({

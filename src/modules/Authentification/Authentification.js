@@ -4,10 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
-import {
-    getCurrentUser,
-    updateApplicationAfterAuthenticated
-} from '../../common/util/AccountUtil';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
@@ -20,7 +16,8 @@ import {
     setToLoginFn,
     setToAuthenticateFn,
     setToRegistreFn,
-    setToFindPasswordFn
+    setToFindPasswordFn,
+    fetchUserFromCookieFn
 } from '../../actions/app';
 
 const BackgroundImage = require('../../static/resources/img/bg.jpg');
@@ -30,18 +27,36 @@ const dialogStyle = {
     maxWidth: '450px'
 };
 
+const Wrapper = styled.div`
+  .p-dialog .p-dialog-content {
+        padding: 0 !important;
+        background: url('${BackgroundImage}') center center / 100% 100% no-repeat;
+        width: 100%;
+        padding: 30px 15px;
+        color: #a8a8a8;
+
+        & form{
+            color:white;
+        }
+
+        & input {
+            border : none;
+        }
+    }
+
+`;
+
 const Authentication = ({
     location,
     history,
     setToLogin,
     setToFindPassword,
     setToRegistre,
-    updateAuthenticated,
     setToAuthenticate,
     showSuccessAlert,
     showErrorAlert,
     App,
-    className
+    fetchUserFromCookie
 }) => {
     const { t } = useTranslation();
 
@@ -75,7 +90,7 @@ const Authentication = ({
     const hideAuthentification = () => setToAuthenticate('');
 
     return (
-        <div className={className}>
+        <Wrapper>
             <Dialog
                 header={t(headerTitle())}
                 visible={Boolean(toAuthenticate)}
@@ -87,12 +102,12 @@ const Authentication = ({
                 {toAuthenticate === 'login' && (
                     <Login
                         history={history}
-                        updateAuthenticated={updateAuthenticated}
                         showSuccessAlert={showSuccessAlert}
                         showErrorAlert={showErrorAlert}
                         setToFindPassword={setToFindPassword}
                         setToRegistre={setToRegistre}
                         hideAuthentification={hideAuthentification}
+                        fetchUserFromCookie={fetchUserFromCookie}
                     />
                 )}
                 {toAuthenticate === 'registre' && (
@@ -114,27 +129,9 @@ const Authentication = ({
                     />
                 )}
             </Dialog>
-        </div>
+        </Wrapper>
     );
 };
-
-const AuthenticationStyled = styled(Authentication)`
-    .p-dialog .p-dialog-content {
-        padding: 0 !important;
-        background: url('${BackgroundImage}') center center / 100% 100% no-repeat;
-        width: 100%;
-        padding: 30px 15px;
-        color: #a8a8a8;
-
-        & form{
-            color:white;
-        }
-
-        & input {
-            border : none;
-        }
-    }
-`;
 
 const mapStateToProp = ({ App }) => ({
     App
@@ -149,10 +146,10 @@ const mapDispatchToProp = dispatch => ({
         dispatch(showSuccessAlertFn(title, text)),
     showErrorAlert: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    updateAuthenticated: () => dispatch(updateApplicationAfterAuthenticated())
+    fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
 });
 
 export default connect(
     mapStateToProp,
     mapDispatchToProp
-)(withRouter(AuthenticationStyled));
+)(withRouter(Authentication));

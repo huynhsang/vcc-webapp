@@ -5,12 +5,11 @@ import Result from '../../global/Result';
 
 import UserInfoRouter from './UserInfoRouter';
 
-
-const DefaultPhoto = require(`../../static/resources/img/bg-user.jpg`);
+const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
 const { accountService } = CoreService;
 
-const UserProfile = ({ getProfileById, subRoutes, location }) => {
+const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
     const [profile, setProfile] = React.useState({});
 
     const userId: number = parseInt(window.location.pathname.split('/')[2]);
@@ -27,15 +26,13 @@ const UserProfile = ({ getProfileById, subRoutes, location }) => {
 
     const { firstName, lastName } = profile;
 
-
-
     return (
         <div className="container discy-container">
             <div className="row">
                 <section
                     className="profile-background-image box-shadow--blur"
                     style={{
-                        backgroundImage: `url('${DefaultPhoto}')`,
+                        backgroundImage: `url('${BgPhoto}')`,
                         backgroundPosition: 'center center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat'
@@ -53,6 +50,14 @@ const UserProfile = ({ getProfileById, subRoutes, location }) => {
                     <div className="title-user-info">
                         <div className="text-center">
                             {`${lastName} ${firstName}`}
+                        </div>
+                        <div className="text-center">
+                            <button
+                                className="btn btn-info"
+                                onClick={() => history.push('/my-profile')}
+                            >
+                                View Profile
+                            </button>
                         </div>
                         {/* <div className="text-center">
                             <button className="btn btn-info">Follow</button>
@@ -79,7 +84,7 @@ const UserProfile = ({ getProfileById, subRoutes, location }) => {
                     </div>
                 </section>
                 <div className="user-container col-lg-9 responsive-user">
-                    <UserInfoRouter profile={profile} setProfile={setProfile} />
+                    <UserInfoRouter />
                 </div>
             </div>
         </div>

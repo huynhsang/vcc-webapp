@@ -53,6 +53,13 @@ export default {
   common_lastname: 'Last name',
   common_firstname: 'First name',
   common_summary: 'Summary',
+  common_nationality: 'Nationality',
+  common_date_of_birth: 'Date of birth',
+  common_field_of_study: 'Field of study',
+  common_from_year: 'From year',
+  common_to_year:'To year' ,
+  common_save:'Save' ,
+  common_reset:'Reset',
 
   authentification_enter_your_email: 'Enter your email address to recover your password',
   authentification_reset_password: 'Reset password',
@@ -205,7 +212,7 @@ export default {
   form_current_role: 'I am currently working in this role',
   form_ex_work_manager: 'Ex: Manager',
   form_your_school : 'Your School',
-  common_field_of_study: 'Field of study',
-  common_from_year: 'From year',
-  common_to_year:'To year' ,
+
+  my_profile_you_come_from : 'You comme from',
+  my_profile_choose_one_country: 'Choose one country'
 };

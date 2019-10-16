@@ -3,34 +3,20 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import Header from './Header';
-import RootScope from '../../global/RootScope';
-import CookieHelper from '../../common/util/CookieHelper';
-import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
 
 import { Authentification } from '../Authentification';
 
-import {
-    getCurrentUser,
-    updateApplicationAfterAuthenticated
-} from '../../common/util/AccountUtil';
-
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
-const App = ({ auth, uppdateAuthenticate }) => {
+import { fetchUserFromCookieFn } from '../../actions/app';
+
+const App = ({ auth, uppdateAuthenticate, fetchUserFromCookie }) => {
     React.useEffect(() => {
-        RootScope.token = CookieHelper.getCookie(CookieConstant.jwtTokenName);
-        RootScope.userId = Number(
-            CookieHelper.getCookie(CookieConstant.userIdKey)
-        );
-        if (RootScope.token && RootScope.userId) {
-            getCurrentUser().then(() => {
-                uppdateAuthenticate();
-            });
-        }
+        fetchUserFromCookie();
     }, []);
 
     const classWrapper: string = auth.isAuthenticated
@@ -58,7 +44,7 @@ const mapStateToProps = ({ App }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    uppdateAuthenticate: () => dispatch(updateApplicationAfterAuthenticated())
+    fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
 });
 
 export default connect(

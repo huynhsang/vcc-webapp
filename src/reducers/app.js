@@ -5,14 +5,19 @@ import {
     setIsAuthenticatedFn,
     setToAuthenticateFn,
     toggleMobileAsideFn,
-    toggleContactUsFn
+    toggleContactUsFn,
+    getCurrentUserRequest,
+    getCurrentUserSuccess,
+    getCurrentUserFailure
 } from '../actions/app';
 
 const defaultState = {
     isAuthenticated: false,
     toAuthenticate: '',
     isOpenMobileAside: false,
-    isOpenContactUs: false
+    isOpenContactUs: false,
+    isGettingUser: false,
+    currentUser: null
 };
 
 const appReducer = createReducer(defaultState, {
@@ -31,6 +36,19 @@ const appReducer = createReducer(defaultState, {
     [toggleContactUsFn]: (state, action) => {
         const { payload } = action;
         state.isOpenContactUs = payload;
+    },
+    [getCurrentUserRequest]: (state, action) => {
+        state.isGettingUser = true;
+    },
+    [getCurrentUserSuccess]: (state, action) => {
+        state.isGettingUser = false;
+        const { payload } = action;
+        state.currentUser = payload;
+        state.isAuthenticated = true;
+    },
+    [getCurrentUserFailure]: (state, action) => {
+        state.isGettingUser = false;
+        state.isAuthenticated = false;
     }
 });
 

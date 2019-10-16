@@ -11,7 +11,11 @@ const actionNames = keyMirror({
 
     TOGGLE_MOBILE_ASIDE: null,
 
-    TOGGLE_CONTACT_US: null
+    TOGGLE_CONTACT_US: null,
+
+    GET_CURRENT_USER_REQUEST: null,
+    GET_CURRENT_USER_SUCCESS: null,
+    GET_CURRENT_USER_FAILURE: null
 });
 
 export default actionNames;
