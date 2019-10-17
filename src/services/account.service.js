@@ -31,7 +31,7 @@ export default class AccountService extends BasicService implements IAccountServ
 		return AccountService.post(fullUrl, email, RootScope.axiosDefaultConfig);
 	}
 
-	findOneById(id: number): Result {
+	findOneById(id: string): Result {
     	const fullUrl: string = `${ACCOUNT_API}/profile?id=${id}`;
 		return AccountService.get(fullUrl, RootScope.axiosDefaultConfig);
 	}

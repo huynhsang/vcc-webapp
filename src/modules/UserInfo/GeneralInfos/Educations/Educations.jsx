@@ -7,6 +7,12 @@ import { EducationMock } from '../../Mock';
 
 import EducationModal from './EducationModal';
 
+const Wrapper = styled.section`
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    border-radius: 2px;
+`;
+
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
@@ -62,7 +68,7 @@ const Educations = ({}) => {
     ));
 
     return (
-        <section className="box-content--user p5 box-shadow--blur mt3 mb3">
+        <Wrapper className="p5 mt3 mb3">
             <FlexWrapper>
                 <h5 className="title-user m0">Education</h5>
                 <IconWrapper
@@ -77,7 +83,7 @@ const Educations = ({}) => {
                 isShowing={isShowingModal}
                 setIsShowing={setIsShowingModal}
             />
-        </section>
+        </Wrapper>
     );
 };
 

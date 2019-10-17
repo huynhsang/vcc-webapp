@@ -8,7 +8,10 @@ import {
     toggleContactUsFn,
     getCurrentUserRequest,
     getCurrentUserSuccess,
-    getCurrentUserFailure
+    getCurrentUserFailure,
+    updateCurrentUserRequest,
+    updateCurrentUserSuccess,
+    updateCurrentUserFailure
 } from '../actions/app';
 
 const defaultState = {
@@ -17,7 +20,8 @@ const defaultState = {
     isOpenMobileAside: false,
     isOpenContactUs: false,
     isGettingUser: false,
-    currentUser: null
+    currentUser: null,
+    isUpdatingUser: false
 };
 
 const appReducer = createReducer(defaultState, {
@@ -37,7 +41,7 @@ const appReducer = createReducer(defaultState, {
         const { payload } = action;
         state.isOpenContactUs = payload;
     },
-    [getCurrentUserRequest]: (state, action) => {
+    [getCurrentUserRequest]: state => {
         state.isGettingUser = true;
     },
     [getCurrentUserSuccess]: (state, action) => {
@@ -49,6 +53,17 @@ const appReducer = createReducer(defaultState, {
     [getCurrentUserFailure]: (state, action) => {
         state.isGettingUser = false;
         state.isAuthenticated = false;
+    },
+    [updateCurrentUserRequest]: state => {
+        state.isUpdatingUser = true;
+    },
+    [updateCurrentUserSuccess]: (state, action) => {
+        state.isUpdatingUser = false;
+        const { payload } = action;
+        state.currentUser = payload;
+    },
+    [updateCurrentUserFailure]: state => {
+        state.isUpdatingUser = false;
     }
 });
 

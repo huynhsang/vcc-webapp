@@ -1,16 +1,22 @@
 import { createAction } from 'redux-starter-kit';
+import { i18n } from '../services/localize';
 import actionsNames from '../constants/action-names.constant';
 
-import { fetchUserFromCookie } from '../services/user.service';
+import { fetchUserFromCookie, updateUser } from '../services/user.service';
+
+import { showErrorAlertFn, showSuccessAlertFn } from './sweetAlert';
 
 const {
     SET_IS_AUTHENTICATED,
     SET_TO_AUTHENTICATE,
     TOGGLE_MOBILE_ASIDE,
-	TOGGLE_CONTACT_US,
-	GET_CURRENT_USER_REQUEST,
-	GET_CURRENT_USER_SUCCESS,
-	GET_CURRENT_USER_FAILURE
+    TOGGLE_CONTACT_US,
+    GET_CURRENT_USER_REQUEST,
+    GET_CURRENT_USER_SUCCESS,
+    GET_CURRENT_USER_FAILURE,
+    UPDATE_CURRENT_USER_REQUEST,
+    UPDATE_CURRENT_USER_SUCCESS,
+    UPDATE_CURRENT_USER_FAILURE
 } = actionsNames;
 
 // Export Actions
@@ -37,12 +43,36 @@ export const fetchUserFromCookieFn = () => {
     return dispatch => {
         dispatch(getCurrentUserRequest());
         fetchUserFromCookie()
-            .then((data) => {
-				dispatch(getCurrentUserSuccess(data))
-			})
+            .then(data => {
+                dispatch(getCurrentUserSuccess(data));
+            })
             .catch(() => {
-				dispatch(getCurrentUserFailure())
-			});
+                dispatch(getCurrentUserFailure());
+            });
     };
 };
 
+export const updateCurrentUserRequest = createAction(
+    UPDATE_CURRENT_USER_REQUEST
+);
+export const updateCurrentUserSuccess = createAction(
+    UPDATE_CURRENT_USER_SUCCESS
+);
+export const updateCurrentUserFailure = createAction(
+    UPDATE_CURRENT_USER_FAILURE
+);
+
+export const updateCurrentUserFn = payload => {
+    return dispatch => {
+        dispatch(updateCurrentUserRequest());
+        updateUser(payload)
+            .then(data => {
+                dispatch(updateCurrentUserSuccess(data));
+                dispatch(showSuccessAlertFn('Success!', i18n.t('my_profile_user_info_updated')));
+            })
+            .catch(err => {
+                dispatch(updateCurrentUserFailure());
+                dispatch(showErrorAlertFn('Error!', err.message));
+            });
+    };
+};

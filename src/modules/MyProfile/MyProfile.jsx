@@ -9,6 +9,9 @@ import { SelectButton } from 'primereact/selectbutton';
 
 import Infos from './Infos';
 import EditForm from './EditForm';
+import { useTranslation } from 'react-i18next';
+
+import { updateCurrentUserFn } from '../../actions/app';
 
 const DefaultPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
@@ -20,6 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const TopBackground = styled.div`
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
     background-image: url('${DefaultPhoto}');
     background-position: center center;
     background-size: cover;
@@ -39,17 +43,26 @@ const ButtionsWrapper = styled.div`
     margin-bottom: 10px;
 `;
 
-const MyProfile = ({ getProfileById, subRoutes, location, App }) => {
+const MyProfile = ({
+    getProfileById,
+    subRoutes,
+    location,
+    App,
+    updateCurrentUser
+}) => {
+
+    const {t} = useTranslation();
+
     const { currentUser, isAuthenticated } = App;
 
     const items = [
-        { label: 'Info', value: 'info' },
-        { label: 'Edit', value: 'edit' }
+        { label: t('common_my_profile'), value: 'info' },
+        { label: t('common_edit'), value: 'edit' }
     ];
 
-    const [action, setAction] = React.useState(items[1].value);
+    const [action, setAction] = React.useState(items[0].value);
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || !currentUser) {
         return <div />;
     }
 
@@ -58,7 +71,7 @@ const MyProfile = ({ getProfileById, subRoutes, location, App }) => {
     return (
         <Wrapper className="container discy-container">
             <div className="row">
-                <TopBackground className="profile-background-image box-shadow--blur" />
+                <TopBackground className="profile-background-image" />
                 <LeftSection className="info-user position-relative col-lg-3">
                     <div className="avatar-user">
                         <img
@@ -78,7 +91,10 @@ const MyProfile = ({ getProfileById, subRoutes, location, App }) => {
                         />
                     </ButtionsWrapper>
                     {action === 'edit' ? (
-                        <EditForm currentUser={currentUser} />
+                        <EditForm
+                            currentUser={currentUser}
+                            updateCurrentUser={updateCurrentUser}
+                        />
                     ) : (
                         <Infos currentUser={currentUser} />
                     )}
@@ -91,4 +107,12 @@ const MyProfile = ({ getProfileById, subRoutes, location, App }) => {
 const mapStateToProps = ({ App }) => ({
     App
 });
-export default connect(mapStateToProps)(MyProfile);
+
+const mapDispatchToProps = dispatch => ({
+    updateCurrentUser: data => dispatch(updateCurrentUserFn(data))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(MyProfile);

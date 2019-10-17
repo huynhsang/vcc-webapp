@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import logoCompany from '../../../static/resources/img/logo/est-rouge.png';
 import logoFram from '../../../static/resources/img/logo/fram.png';
 import CoreService from '../../../global/CoreService';
@@ -21,25 +22,39 @@ const FlexWrapper = styled.div`
     margin-bottom: 10px;
 `;
 
+const SummaryWrapper = styled.section`
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: white;
+    border-radius: 2px;
+    & p {
+        text-align:justify;
+        padding: 0 25px;
+    }
+`;
+
+const SignWrapper = styled.div`
+    text-align: ${p => p.textAlign};
+    font-size: 40px;
+`;
+
 const GeneralInfos = ({
+    profile,
     showErrorNotification,
     showSuccessNotification
 }) => {
     // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
 
+    const { t } = useTranslation();
+
+    const { summary } = profile;
+
     return (
         <>
-            <section className="box-content--user p5 mt3 box-shadow--blur about-user">
-                <h5 className="title-user m0">About</h5>
-                <p>
-                    Until now 30/9/2018, I have more than 2 years experience on
-                    the job developer (include: mobile and web (both front-end &
-                    back-end)). I also have some knowledge about architecture
-                    system. You can look on my CV attached for more details. I'm
-                    a interesting, funny, sportive person and have a passion on
-                    researching AI and new technologies.
-                </p>
-            </section>
+            <SummaryWrapper className="p5 mt3">
+                <SignWrapper>“</SignWrapper>
+                <p>{summary}</p>
+                <SignWrapper textAlign="right">”</SignWrapper>
+            </SummaryWrapper>
             <Experiences />
             <Educations />
         </>

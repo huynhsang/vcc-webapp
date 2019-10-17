@@ -60,6 +60,8 @@ export default {
   common_to_year:'To year' ,
   common_save:'Save' ,
   common_reset:'Reset',
+  common_my_profile: 'My profile',
+  common_edit: 'Edit',
 
   authentification_enter_your_email: 'Enter your email address to recover your password',
   authentification_reset_password: 'Reset password',
@@ -214,5 +216,6 @@ export default {
   form_your_school : 'Your School',
 
   my_profile_you_come_from : 'You comme from',
-  my_profile_choose_one_country: 'Choose one country'
+  my_profile_choose_one_country: 'Choose one country',
+  my_profile_user_info_updated: 'Your profile has been updated!',
 };

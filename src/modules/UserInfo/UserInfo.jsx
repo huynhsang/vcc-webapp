@@ -1,18 +1,34 @@
 import React from 'react';
+import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
 import { Link, withRouter } from 'react-router-dom';
 import CoreService from '../../global/CoreService';
 import Result from '../../global/Result';
 
 import UserInfoRouter from './UserInfoRouter';
+import CookieConstant from '../../common/constant/CookieConstant';
+import CookieHelper from '../../common/util/CookieHelper';
+
+const { getCookie } = CookieHelper;
+const { jwtTokenName, userIdKey } = CookieConstant;
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
 const { accountService } = CoreService;
 
-const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
+const Wrapper = styled.section`
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    border-radius: 2px;
+`;
+
+const UserProfile = ({ subRoutes, location, history }) => {
+    const { t } = useTranslation();
+
     const [profile, setProfile] = React.useState({});
 
-    const userId: number = parseInt(window.location.pathname.split('/')[2]);
+    const userId = window.location.pathname.split('/')[2];
 
     React.useEffect(() => {
         if (userId) {
@@ -30,7 +46,7 @@ const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
         <div className="container discy-container">
             <div className="row">
                 <section
-                    className="profile-background-image box-shadow--blur"
+                    className="profile-background-image"
                     style={{
                         backgroundImage: `url('${BgPhoto}')`,
                         backgroundPosition: 'center center',
@@ -38,7 +54,7 @@ const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
                         backgroundRepeat: 'no-repeat'
                     }}
                 ></section>
-                <section className="user-container info-user box-shadow--blur position-relative col-lg-3">
+                <Wrapper className="user-container info-user position-relative col-lg-3">
                     <div className="avatar-user">
                         <img
                             src={profile.avatar}
@@ -51,27 +67,16 @@ const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
                         <div className="text-center">
                             {`${lastName} ${firstName}`}
                         </div>
-                        <div className="text-center">
-                            <button
-                                className="btn btn-info"
-                                onClick={() => history.push('/my-profile')}
-                            >
-                                View Profile
-                            </button>
-                        </div>
-                        {/* <div className="text-center">
-                            <button className="btn btn-info">Follow</button>
-                        </div>
-                        <div className="row follow">
-                            <div className="col-6">
-                                <p className="font-size-18">Follower</p>
-                                <p className="follow-number">540</p>
+                        {getCookie(userIdKey) === userId && (
+                            <div className="text-center mt1">
+                                <button
+                                    className="btn btn-info"
+                                    onClick={() => history.push('/my-profile')}
+                                >
+                                    {t('common_my_profile')}
+                                </button>
                             </div>
-                            <div className="col-6">
-                                <p className="font-size-20">Following</p>
-                                <p className="follow-number">126</p>
-                            </div>
-                        </div> */}
+                        )}
                         <div className="shell-info">
                             <Link
                                 to={`/users/${userId}/general`}
@@ -82,9 +87,9 @@ const UserProfile = ({ getProfileById, subRoutes, location, history }) => {
                             </Link>
                         </div>
                     </div>
-                </section>
+                </Wrapper>
                 <div className="user-container col-lg-9 responsive-user">
-                    <UserInfoRouter />
+                    <UserInfoRouter profile={profile} />
                 </div>
             </div>
         </div>

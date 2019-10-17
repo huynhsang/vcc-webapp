@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useTranslation} from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -19,6 +19,12 @@ import {
 import { experienceMock } from '../../Mock';
 
 const { experienceService } = CoreService;
+
+const Wrapper = styled.section`
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    background: #fff;
+    border-radius: 2px;
+`;
 
 const FlexWrapper = styled.div`
     display: flex;
@@ -41,9 +47,8 @@ const IconWrapper = styled.a`
 `;
 
 const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
+    const { t } = useTranslation();
 
-    const {t} = useTranslation();
-    
     const [experiences, setExperiences] = React.useState([]);
 
     const [isShowing, setIsShowing] = React.useState(false);
@@ -82,7 +87,7 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
     };
 
     const experiencesRender = experiences.map(val => (
-        <FlexWrapper key={val.id} className="box-content--info mt2">
+        <FlexWrapper key={val.id} className="mt2">
             <div className="logo-company">
                 <img
                     src={logoCompany}
@@ -107,7 +112,7 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
     ));
 
     return (
-        <section className="box-content--user p5 mt3 box-shadow--blur">
+        <Wrapper className="p5 mt3">
             <FlexWrapper>
                 <h5 className="title-user m0">Experience</h5>
                 <IconWrapper
@@ -124,7 +129,7 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
                 isShowing={isShowing}
                 setIsShowing={setIsShowing}
             />
-        </section>
+        </Wrapper>
     );
 };
 

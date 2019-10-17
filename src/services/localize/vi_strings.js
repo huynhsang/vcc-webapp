@@ -60,6 +60,8 @@ export default {
     common_to_year: 'Đến năm',
     common_save: 'Lưu',
     common_reset: 'Đặt lại',
+    common_my_profile: 'Hồ sơ cá nhân',
+    common_edit: 'Chỉnh sửa',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
@@ -217,5 +219,6 @@ export default {
     form_your_school: 'Trường của bạn',
 
     my_profile_you_come_from: 'Bạn đến từ',
-    my_profile_choose_one_country: 'Chọn một nước'
+    my_profile_choose_one_country: 'Chọn một nước',
+    my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi'
 };

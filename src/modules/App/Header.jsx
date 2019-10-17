@@ -87,7 +87,7 @@ const Header = ({
 
     const outClickRef = useOutClick(outClickMenu);
 
-    const UserMenu = isAuthenticated && (
+    const UserMenu = !!currentUser && (
         <ul style={userMenuStyle} ref={outClickRef}>
             {userMenuTabs.map(val => (
                 <li key={val.path}>
@@ -155,7 +155,7 @@ const Header = ({
                                             title={{ fullName }}
                                             width="29"
                                             height="29"
-                                            src={currentUser.avatar}
+                                            src={currentUser && currentUser.avatar}
                                         />
                                     </div>
                                     <div

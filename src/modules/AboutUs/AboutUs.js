@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import UserInfoList from './UserInfoList';
 
 const Wrapper = styled.div`
-    padding-top: 40px;
     color: #4f4f4f;
 
     width: 95%;
@@ -13,12 +12,14 @@ const Wrapper = styled.div`
     margin: 0 auto;
 `;
 const Title = styled.div`
+    color: white;
     font-size: 26px;
     text-align: center;
     font-weight: 600;
 `;
 
 const Sologan = styled.div`
+    color: white;
     font-size: 18px;
     text-align: center;
     margin: 5px 0 30px;
@@ -40,10 +41,10 @@ const SmallTitle = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     margin-top: 25px;
     background: white;
-    border-radius: 10px;
+    border-radius: 2px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -52,9 +53,9 @@ const ContentWrapper = styled.div`
 
 const ContentTitle = styled.div`
     font-weight: 600;
-    border-radius: ${p => p.borderRadius || '0 0 10px 0'};
+    border-radius: ${p => p.borderRadius || '0 0 2px 0'};
     font-size: 18px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     background-color: white;
     padding: 5px 15px;
 `;
@@ -68,29 +69,34 @@ const AboutUs = ({}) => {
     const { t } = useTranslation();
 
     return (
-        <Wrapper>
-            <Title>{t('about_us_VCNC')}</Title>
-            <Sologan>{t('about_us_sologan')}</Sologan>
+        <>
+            <div className="call-action-unlogged call-action-dark call-action-style_1">
+                <Title>{t('about_us_VCNC')}</Title>
+                <Sologan>{t('about_us_sologan')}</Sologan>
+            </div>
+            <Wrapper>
+                <ContentWrapper>
+                    <ContentTitle>{t('about_us_our_story')}</ContentTitle>
+                    <Content>{t('about_us_story')}</Content>
+                </ContentWrapper>
 
-            <ContentWrapper>
-                <ContentTitle>{t('about_us_our_story')}</ContentTitle>
-                <Content>{t('about_us_story')}</Content>
-            </ContentWrapper>
+                <ContentWrapper alignItem="start">
+                    <ContentTitle borderRadius="0 0 2px 2px">
+                        {t('about_us_our_mission')}
+                    </ContentTitle>
+                    <Content>{t('about_us_mission')}</Content>
+                </ContentWrapper>
 
-            <ContentWrapper alignItem="center">
-                <ContentTitle borderRadius="0 0 10px 10px">
-                    {t('about_us_our_mission')}
-                </ContentTitle>
-                <Content>{t('about_us_mission')}</Content>
-            </ContentWrapper>
-
-            <ContentWrapper>
-                <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
-                <Content>{t('about_us_do')}</Content>
-            </ContentWrapper>
-            <SmallTitle textAlign="center">{t('about_us_our_team')}</SmallTitle>
-            <UserInfoList />
-        </Wrapper>
+                <ContentWrapper>
+                    <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
+                    <Content>{t('about_us_do')}</Content>
+                </ContentWrapper>
+                <SmallTitle textAlign="center">
+                    {t('about_us_our_team')}
+                </SmallTitle>
+                <UserInfoList />
+            </Wrapper>
+        </>
     );
 };
 

@@ -10,12 +10,14 @@ import { Button } from 'primereact/button';
 
 import COUNTRIES from './countries.constant';
 
+import { isDate } from '../../utils/detect-date';
+
 const Title = styled.div`
     margin: 10px 0 5px;
     color: black;
 `;
 
-const Form = styled.form`
+const Wrapper = styled.div`
     margin-bottom: 50px;
 `;
 
@@ -29,7 +31,7 @@ const ButtonsWrapper = styled.div`
     }
 `;
 
-const EditForm = ({ currentUser }) => {
+const EditForm = ({ currentUser, updateCurrentUser }) => {
     const { t } = useTranslation();
 
     const [userEditted, setUserEditted] = React.useState(currentUser);
@@ -37,7 +39,6 @@ const EditForm = ({ currentUser }) => {
     const {
         lastName,
         firstName,
-        email,
         nationality,
         dateOfBirth,
         summary
@@ -49,8 +50,16 @@ const EditForm = ({ currentUser }) => {
 
     const handleEvent = (name, ev) => updateUser(name, ev.target.value);
 
+    const onSubmit = () => {
+        updateCurrentUser(userEditted);
+    };
+
+    const reset = () => {
+        setUserEditted(currentUser);
+    };
+
     return (
-        <Form>
+        <Wrapper>
             <Title>{t('common_lastname')}</Title>
             <InputText
                 value={lastName}
@@ -63,8 +72,15 @@ const EditForm = ({ currentUser }) => {
             />
             <Title>{t('common_date_of_birth')}</Title>
             <Calendar
-                value={dateOfBirth}
+                value={
+                    isDate(dateOfBirth)
+                        ? dateOfBirth
+                        : dateOfBirth
+                        ? new Date(dateOfBirth)
+                        : null
+                }
                 placeholder="mm/dd/YY"
+                dateFormat="mm/dd/yy"
                 onChange={ev => updateUser('dateOfBirth', ev.value)}
             />
             <Title>{t('my_profile_you_come_from')}</Title>
@@ -86,10 +102,15 @@ const EditForm = ({ currentUser }) => {
                     className="p-button-danger"
                     label={t('common_reset')}
                     icon="pi pi-times"
+                    onClick={reset}
                 />
-                <Button label={t('common_save')} icon="pi pi-check" />
+                <Button
+                    onClick={onSubmit}
+                    label={t('common_save')}
+                    icon="pi pi-check"
+                />
             </ButtonsWrapper>
-        </Form>
+        </Wrapper>
     );
 };
 
