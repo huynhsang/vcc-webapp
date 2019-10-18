@@ -91,7 +91,7 @@ const Header = ({
         <ul style={userMenuStyle} ref={outClickRef}>
             {userMenuTabs.map(val => (
                 <li key={val.path}>
-                    <Link to={`/${val.path}/${currentUser.id}`}>
+                    <Link to={`/${val.path}`}>
                         <i className={val.iconClassName} />
                         {t(val.label)}
                     </Link>
@@ -155,7 +155,10 @@ const Header = ({
                                             title={{ fullName }}
                                             width="29"
                                             height="29"
-                                            src={currentUser && currentUser.avatar}
+                                            src={
+                                                currentUser &&
+                                                currentUser.avatar
+                                            }
                                         />
                                     </div>
                                     <div

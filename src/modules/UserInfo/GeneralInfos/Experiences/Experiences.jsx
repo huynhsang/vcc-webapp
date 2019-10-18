@@ -17,6 +17,10 @@ import {
 } from '../../../../actions/sweetAlert';
 
 import { experienceMock } from '../../Mock';
+import CookieConstant from '../../../../common/constant/CookieConstant';
+import CookieHelper from '../../../../common/util/CookieHelper';
+const { getCookie } = CookieHelper;
+const { jwtTokenName, userIdKey } = CookieConstant;
 
 const { experienceService } = CoreService;
 
@@ -39,14 +43,17 @@ const ExperienceInfo = styled(FlexWrapper)`
 
 const IconWrapper = styled.a`
     display: flex;
-    align-items: center;
     justify-content: center;
     & .pi {
         font-size: 26px;
     }
 `;
 
-const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
+const Experiences = ({
+    showErrorNotification,
+    showSuccessNotification,
+    location
+}) => {
     const { t } = useTranslation();
 
     const [experiences, setExperiences] = React.useState([]);
@@ -56,6 +63,9 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
     React.useEffect(() => {
         setExperiences([experienceMock]);
     }, []);
+
+    const userId = location.pathname.split('/')[2];
+    const canEdit = getCookie(userIdKey) === userId;
 
     const onSubmit = ({
         title,
@@ -104,9 +114,11 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
                     <p className="note">{val.location}</p>
                     <p>{val.description}</p>
                 </div>
-                <IconWrapper className="experience--icon">
-                    <i className="pi pi-pencil" />
-                </IconWrapper>
+                {canEdit && (
+                    <IconWrapper className="experience--icon">
+                        <i className="pi pi-pencil" />
+                    </IconWrapper>
+                )}
             </ExperienceInfo>
         </FlexWrapper>
     ));
@@ -115,12 +127,14 @@ const Experiences = ({ showErrorNotification, showSuccessNotification }) => {
         <Wrapper className="p5 mt3">
             <FlexWrapper>
                 <h5 className="title-user m0">Experience</h5>
-                <IconWrapper
-                    className="experience--icon"
-                    onClick={() => setIsShowing(true)}
-                >
-                    <i className="pi pi-plus" />
-                </IconWrapper>
+                {canEdit && (
+                    <IconWrapper
+                        className="experience--icon"
+                        onClick={() => setIsShowing(true)}
+                    >
+                        <i className="pi pi-plus" />
+                    </IconWrapper>
+                )}
             </FlexWrapper>
 
             {experiencesRender}

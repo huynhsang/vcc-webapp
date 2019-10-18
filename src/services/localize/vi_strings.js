@@ -62,6 +62,7 @@ export default {
     common_reset: 'Đặt lại',
     common_my_profile: 'Hồ sơ cá nhân',
     common_edit: 'Chỉnh sửa',
+    common_general_infos: 'Thông tin chung',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',

@@ -22,7 +22,7 @@ const Sologan = styled.div`
     color: white;
     font-size: 18px;
     text-align: center;
-    margin: 5px 0 30px;
+    margin-top: 5px;
 `;
 
 const SmallTitle = styled.div`

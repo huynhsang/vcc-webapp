@@ -1,3 +1,8 @@
+import CookieConstant from '../../common/constant/CookieConstant';
+import CookieHelper from '../../common/util/CookieHelper';
+const { getCookie } = CookieHelper;
+const { userIdKey } = CookieConstant;
+
 export const headerTabs = [
     {
         label: 'header_home',
@@ -12,9 +17,9 @@ export const headerTabs = [
 export const userMenuTabs = [
     {
         label: 'header_user_profile',
-        path: 'my-profile',
+        path: `users/${getCookie(userIdKey)}/my-profile`,
         iconClassName: 'icon-user'
-    },
+    }
     // {
     //     label: 'header_edit_profile',
     //     path: '',

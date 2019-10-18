@@ -10,8 +10,6 @@ import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
 
-import { MyProfile } from '../MyProfile';
-
 import {
     Authentification,
     EmailVerification,
@@ -34,10 +32,6 @@ const AppRouter = ({ auth }) => {
             <Route
                 path="/users/:id"
                 render={props => <UserInfo {...props} />}
-            />
-            <Route
-                path="/my-profile"
-                render={props => <MyProfile {...props} />}
             />
             <Route
                 exact

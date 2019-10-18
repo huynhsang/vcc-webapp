@@ -29,6 +29,7 @@ const UserProfile = ({ subRoutes, location, history }) => {
     const [profile, setProfile] = React.useState({});
 
     const userId = window.location.pathname.split('/')[2];
+    const isMainUserProfile = getCookie(userIdKey) === userId;
 
     React.useEffect(() => {
         if (userId) {
@@ -67,22 +68,21 @@ const UserProfile = ({ subRoutes, location, history }) => {
                         <div className="text-center">
                             {`${lastName} ${firstName}`}
                         </div>
-                        {getCookie(userIdKey) === userId && (
-                            <div className="text-center mt1">
-                                <button
-                                    className="btn btn-info"
-                                    onClick={() => history.push('/my-profile')}
+                        <div className="shell-info">
+                            {isMainUserProfile && (
+                                <Link
+                                    to={`/users/${userId}/my-profile`}
+                                    className="title-info"
                                 >
                                     {t('common_my_profile')}
-                                </button>
-                            </div>
-                        )}
-                        <div className="shell-info">
+                                    <i className="fas fa-arrow-right" />
+                                </Link>
+                            )}
                             <Link
                                 to={`/users/${userId}/general`}
                                 className="title-info"
                             >
-                                General Infos
+                                {t('common_general_infos')}
                                 <i className="fas fa-arrow-right" />
                             </Link>
                         </div>

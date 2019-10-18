@@ -10,7 +10,7 @@ import { Button } from 'primereact/button';
 
 import COUNTRIES from './countries.constant';
 
-import { isDate } from '../../utils/detect-date';
+import { isDate } from '../../../utils/detect-date';
 
 const Title = styled.div`
     margin: 10px 0 5px;
@@ -19,6 +19,10 @@ const Title = styled.div`
 
 const Wrapper = styled.div`
     margin-bottom: 50px;
+    padding: 5px 20px 20px 20px;
+    border-radius: 2px;
+    background-color:white;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
 `;
 
 const ButtonsWrapper = styled.div`
