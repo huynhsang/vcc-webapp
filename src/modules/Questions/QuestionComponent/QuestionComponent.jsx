@@ -144,6 +144,12 @@ const QuestionComponent = ({
                     <div className="question-content question-content-first">
                         <header className="article-header">
                             <div className="question-header">
+                            <Link
+                                    to={`/home/question/${question.slug}/view`}
+                                    className="post-title"
+                                >
+                                    {question.title}
+                                </Link>
                                 <Link
                                     to={`/users/${askedBy.id}`}
                                     className="post-author"
@@ -193,16 +199,6 @@ const QuestionComponent = ({
                                 </div>
                             </div>
                         </header>
-                        <div>
-                            <h2 className="post-title">
-                                <Link
-                                    to={`/home/question/${question.slug}/view`}
-                                    className="post-title"
-                                >
-                                    {question.title}
-                                </Link>
-                            </h2>
-                        </div>
                     </div>
                     <div className="question-not-mobile question-image-vote question-vote-sticky">
                         <div>

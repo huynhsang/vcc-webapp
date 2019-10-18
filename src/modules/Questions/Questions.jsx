@@ -36,11 +36,11 @@ const MainPage = ({ location, history }) => {
         )
     );
 
+    const urlParams = new URLSearchParams(location.search);
+    const show = urlParams.get('show');
+
     //Set Filter when change route
     React.useEffect(() => {
-        const urlParams = new URLSearchParams(location.search);
-        const show = urlParams.get('show');
-
         const newState =
             show === 'no-answers'
                 ? {
@@ -53,7 +53,7 @@ const MainPage = ({ location, history }) => {
                   };
 
         setFilter(state => ({ ...state, ...newState }));
-    }, [location.search]);
+    }, [show]);
 
     //Load question when filter has been updated
     React.useEffect(() => {
@@ -89,7 +89,7 @@ const MainPage = ({ location, history }) => {
 
     return (
         <div className="discy-main-inner float_l">
-            <TopNav show={'recent-questions'} />
+            <TopNav show={show} />
             <section>
                 <h2 className="screen-reader-text">VC&C Latest Questions</h2>
                 <div className="post-articles question-articles">

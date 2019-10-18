@@ -63,6 +63,8 @@ export default {
     common_my_profile: 'My profile',
     common_edit: 'Edit',
     common_general_infos: 'General infos',
+    common_all: 'All',
+    common_recent: 'Recent',
 
     authentification_enter_your_email:
         'Enter your email address to recover your password',
