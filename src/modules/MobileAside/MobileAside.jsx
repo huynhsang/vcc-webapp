@@ -29,51 +29,6 @@ const MobileAside = ({
 
     const { pathname } = location;
 
-    const params = new URLSearchParams(location.search);
-    const currentShow = params.get('show');
-
-    const renderTabsChildren = tab => {
-        return (
-            <li
-                key={tab.path}
-                className={pathname === tab.path ? 'active' : ''}
-            >
-                <a onClick={onClickTab(tab.path)}>
-                    <i className={tab.iconClassName} />
-                    {t(tab.label)}
-                </a>
-                <ul
-                    className="sub-menu"
-                    style={{
-                        display: pathname.includes(tab.path) ? 'block' : '',
-                        color: 'black'
-                    }}
-                >
-                    {tab.children.map(childTab => (
-                        <li
-                            key={childTab.path}
-                            className={`menu-item menu-item-type-custom menu-item-object-custom ${
-                                `/?show=${currentShow}` === childTab.path
-                                    ? 'active'
-                                    : ''
-                            }`}
-                        >
-                            <a onClick={onClickTab(tab.path + childTab.path)}>
-                                {t(childTab.label)}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-                <span
-                    className="mobile-arrows"
-                    onClick={onClickTab(tab.path, false)}
-                >
-                    <i className="icon-down-open" />
-                </span>
-            </li>
-        );
-    };
-
     return (
         <aside
             className={`mobile-aside mobile-menu-wrap gray-mobile-menu ${isOpenMobileAside &&
@@ -111,7 +66,7 @@ const MobileAside = ({
                                     right: '30px'
                                 }}
                             />
-                            <div className="mobile-menu-top mobile--top">
+                            {/* <div className="mobile-menu-top mobile--top">
                                 <div className="widget widget_ask">
                                     <a
                                         onClick={onClickTab('/add-question')}
@@ -120,37 +75,23 @@ const MobileAside = ({
                                         {t('home_ask_a_question')}
                                     </a>
                                 </div>
-                            </div>
-                            <ul id="nav_menu" className="menu">
-                                {leftNavTabs.map(tab => {
-                                    if (!tab.children) {
-                                        return (
-                                            <li
-                                                className={
-                                                    pathname === tab.path
-                                                        ? 'active'
-                                                        : ''
-                                                }
-                                                key={tab.label}
-                                            >
-                                                <a
-                                                    onClick={onClickTab(
-                                                        tab.path
-                                                    )}
-                                                >
-                                                    <i
-                                                        className={
-                                                            tab.iconClassName
-                                                        }
-                                                    />
-                                                    {t(tab.label)}
-                                                </a>
-                                            </li>
-                                        );
-                                    }
-
-                                    return renderTabsChildren(tab);
-                                })}
+                            </div> */}
+                            <ul id="nav_menu" className="menu" style={{marginTop: '20px'}}>
+                                {leftNavTabs.map(tab => (
+                                    <li
+                                        className={
+                                            pathname === tab.path
+                                                ? 'active'
+                                                : ''
+                                        }
+                                        key={tab.label}
+                                    >
+                                        <a onClick={onClickTab(tab.path)}>
+                                            <i className={tab.iconClassName} />
+                                            {t(tab.label)}
+                                        </a>
+                                    </li>
+                                ))}
                             </ul>
                             <ul id="menu-header-1" className="menu">
                                 <li>
@@ -171,7 +112,7 @@ const MobileAside = ({
                                     </a>
                                 </li>
                             </ul>
-                            <div className="mobile--top post-search">
+                            {/* <div className="mobile--top post-search">
                                 <div className="row">
                                     <div className="col col12">
                                         <input
@@ -198,7 +139,7 @@ const MobileAside = ({
                                         />
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -221,3 +162,45 @@ export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(withRouter(MobileAside));
+
+// const renderTabsChildren = tab => {
+//     return (
+//         <li
+//             key={tab.path}
+//             className={pathname === tab.path ? 'active' : ''}
+//         >
+//             <a onClick={onClickTab(tab.path)}>
+//                 <i className={tab.iconClassName} />
+//                 {t(tab.label)}
+//             </a>
+//             <ul
+//                 className="sub-menu"
+//                 style={{
+//                     display: pathname.includes(tab.path) ? 'block' : '',
+//                     color: 'black'
+//                 }}
+//             >
+//                 {tab.children.map(childTab => (
+//                     <li
+//                         key={childTab.path}
+//                         className={`menu-item menu-item-type-custom menu-item-object-custom ${
+//                             `/?show=${currentShow}` === childTab.path
+//                                 ? 'active'
+//                                 : ''
+//                         }`}
+//                     >
+//                         <a onClick={onClickTab(tab.path + childTab.path)}>
+//                             {t(childTab.label)}
+//                         </a>
+//                     </li>
+//                 ))}
+//             </ul>
+//             <span
+//                 className="mobile-arrows"
+//                 onClick={onClickTab(tab.path, false)}
+//             >
+//                 <i className="icon-down-open" />
+//             </span>
+//         </li>
+//     );
+// };

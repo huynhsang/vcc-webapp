@@ -11038,7 +11038,7 @@ div.search-results:after {
     position: absolute;
     z-index: 1;
     top: 0;
-    left: 30px;
+    left: 15px;
     width: 25px;
     height: 25px;
     line-height: 25px;
@@ -12234,7 +12234,7 @@ div.search-results:after {
 .widget .stats-inner li:last-child {
     float: left;
     width: 50%;
-    padding: 12px 15px;
+    padding: 12px 0;
     margin: 0;
     text-align: center;
     position: relative;
@@ -15341,7 +15341,7 @@ a.question-poll:hover {
 }
 
 .article-question .post-title {
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     font-size: 19px;
     line-height: 27px;
     font-weight: 700;
@@ -15358,7 +15358,8 @@ a.question-poll:hover {
 .question-header .post-author,
 .question-header .question-author-un {
     float: left;
-    margin-right: 10px
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .question-content .badge-span {

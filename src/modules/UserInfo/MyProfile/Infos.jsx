@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import COUNTRIES from './countries.constant';
 
 const InfoTable = styled.table`
     color: black;
@@ -37,6 +38,10 @@ const Infos = ({ currentUser }) => {
         dateOfBirth,
         summary
     } = currentUser;
+
+    const country = COUNTRIES.find(val => val.code === nationality);
+    const countryName = country ? country.name : '';
+
     return (
         <InfoTable>
             <tbody>
@@ -45,7 +50,7 @@ const Infos = ({ currentUser }) => {
                 <Tab label={t('common_email')} value={email} />
                 <Tab
                     label={t('my_profile_you_come_from')}
-                    value={nationality}
+                    value={countryName}
                 />
                 <Tab label={t('common_date_of_birth')} value={dateOfBirth} />
                 <Tab label={t('common_summary')} value={summary} />

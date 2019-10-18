@@ -3,22 +3,61 @@ import { useTranslation } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 
 const ShowFilter = [
-    { value: 'recent-questions', label: 'mainpage_recent_question' },
+    { value: '', label: 'common_all' },
+    { value: 'recent-questions', label: 'common_recent' },
     { value: 'most-answered', label: 'mainpage_most_answerd' },
     { value: 'most-visited', label: 'mainpage_most_visited' },
     { value: 'most-voted', label: 'mainpage_most_voted' },
-    { value: 'no-answers', label: 'mainpage_no_answers' },
+    { value: 'no-answers', label: 'mainpage_no_answers' }
 ];
 
 const TopNav = ({ show }) => {
     const { t } = useTranslation();
-
-    //To do: Auto Resize
-    const [limitIndex, setLimitIndex] = React.useState(3);
     const uLRef = React.useRef();
+    const liRef = React.useRef();
 
-    const shownList = ShowFilter.slice(0, limitIndex).map(val => (
-        <li key={val.value} className={show === val.value ? 'active-tab' : ''}>
+    const [limitIndex, setLimitIndex] = React.useState(ShowFilter.length);
+    const [toReduceLimit, setToReduceLimit] = React.useState(false);
+
+    const verifyOffsetHeight = () => {
+        if (uLRef && liRef && uLRef.current && liRef.current) {
+            if (uLRef.current.offsetHeight >= liRef.current.offsetHeight * 2) {
+                setToReduceLimit(true);
+            }
+        }
+    };
+
+    React.useEffect(() => {
+        verifyOffsetHeight();
+    }, [uLRef, liRef, limitIndex]);
+
+    const resetCalcul = () => {
+        setLimitIndex(ShowFilter.length);
+        verifyOffsetHeight();
+    };
+
+    React.useEffect(() => {
+        window.addEventListener('resize', resetCalcul);
+        return () => {
+            window.removeEventListener('resize', resetCalcul);
+        };
+    }, []);
+
+    React.useEffect(() => {
+        if (toReduceLimit) {
+            setLimitIndex(state => state - 1);
+            setToReduceLimit(false);
+        }
+    }, [toReduceLimit]);
+
+    const shownList = ShowFilter.slice(0, limitIndex).map((val, index) => (
+        <li
+            key={val.value}
+            ref={index === 0 ? liRef : null}
+            className={
+                show === val.value || (!show && !val.value) ? 'active-tab' : ''
+            }
+        >
             <Link to={`?show=${val.value}`}>{t(val.label)}</Link>
         </li>
     ));
@@ -42,7 +81,7 @@ const TopNav = ({ show }) => {
                             className="flexMenu-popup"
                             style={{
                                 display: 'none',
-                                position: 'absolute',
+                                position: 'absolute'
                             }}
                         >
                             {hideList}

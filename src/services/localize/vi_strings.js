@@ -63,6 +63,8 @@ export default {
     common_my_profile: 'Hồ sơ cá nhân',
     common_edit: 'Chỉnh sửa',
     common_general_infos: 'Thông tin chung',
+    common_all: 'Tất cả',
+    common_recent: 'Gần đây',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
@@ -175,8 +177,8 @@ export default {
         'câu trả lời wiki ngoài cộng đồng để đạt được huy hiệu này. Câu trả lời cho điểm cao nhất vượt qua câu trả lời được chấp nhận với số điểm cao hơn',
 
     mainpage_recent_question: 'Câu hỏi gần đây',
-    mainpage_most_answerd: 'Trả lời nhiều nhất',
-    mainpage_most_visited: 'Xem nhiều nhất',
+    mainpage_most_answerd: 'Trả lời nhiều',
+    mainpage_most_visited: 'Xem nhiều',
     mainpage_most_voted: 'Vote nhiều nhất',
     mainpage_no_answers: 'Không có câu trả lời',
     mainpage_danang_vietnam: 'Đà Nẵng, Việt Nam',

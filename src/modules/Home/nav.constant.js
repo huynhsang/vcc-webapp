@@ -13,24 +13,6 @@ export const leftNavTabs =[
         path: "/home/questions",
         label: "nav_questions",
         iconClassName: "icon-book-open",
-        children : [
-          {
-            path : '/?show=recent-questions',
-            label : 'nav_new_question'
-          },
-          {
-            path : '/?show=most-voted',
-            label : 'nav_trending_question'
-          },
-          {
-            path : '/?show=most-visited',
-            label : 'nav_must_read_question'
-          },
-          {
-            path : '/?show=most-answered',
-            label : 'nav_hot_question'
-          }
-        ]
     },
     {
         path : "/home/tags",
