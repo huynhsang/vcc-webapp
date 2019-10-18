@@ -16,7 +16,8 @@ const {
     GET_CURRENT_USER_FAILURE,
     UPDATE_CURRENT_USER_REQUEST,
     UPDATE_CURRENT_USER_SUCCESS,
-    UPDATE_CURRENT_USER_FAILURE
+    UPDATE_CURRENT_USER_FAILURE,
+    SET_VERIFIED_USER
 } = actionsNames;
 
 // Export Actions
@@ -39,15 +40,23 @@ export const getCurrentUserRequest = createAction(GET_CURRENT_USER_REQUEST);
 export const getCurrentUserSuccess = createAction(GET_CURRENT_USER_SUCCESS);
 export const getCurrentUserFailure = createAction(GET_CURRENT_USER_FAILURE);
 
-export const fetchUserFromCookieFn = () => {
+export const setVerifiedUser = createAction(SET_VERIFIED_USER);
+
+export const fetchUserFromCookieFn = (isFirstRender = false) => {
     return dispatch => {
         dispatch(getCurrentUserRequest());
         fetchUserFromCookie()
             .then(data => {
                 dispatch(getCurrentUserSuccess(data));
+                if (isFirstRender) {
+                    dispatch(setVerifiedUser(true));
+                }
             })
             .catch(() => {
                 dispatch(getCurrentUserFailure());
+                if (isFirstRender) {
+                    dispatch(setVerifiedUser(true));
+                }
             });
     };
 };
@@ -68,7 +77,12 @@ export const updateCurrentUserFn = payload => {
         updateUser(payload)
             .then(data => {
                 dispatch(updateCurrentUserSuccess(data));
-                dispatch(showSuccessAlertFn('Success!', i18n.t('my_profile_user_info_updated')));
+                dispatch(
+                    showSuccessAlertFn(
+                        'Success!',
+                        i18n.t('my_profile_user_info_updated')
+                    )
+                );
             })
             .catch(err => {
                 dispatch(updateCurrentUserFailure());

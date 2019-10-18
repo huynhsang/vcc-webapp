@@ -14,14 +14,19 @@ import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 
-const App = ({ auth, uppdateAuthenticate, fetchUserFromCookie }) => {
+const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
     React.useEffect(() => {
         fetchUserFromCookie();
     }, []);
 
-    const classWrapper: string = auth.isAuthenticated
-        ? 'wrap-login'
-        : 'wrap-not-login';
+    const { isVerifiedUser, isAuthenticated } = App;
+
+    if (!isVerifiedUser) {
+        return <div />;
+    }
+
+    const classWrapper = isAuthenticated ? 'wrap-login' : 'wrap-not-login';
+
     return (
         <ConnectedRouter history={history}>
             <Router>
@@ -31,7 +36,7 @@ const App = ({ auth, uppdateAuthenticate, fetchUserFromCookie }) => {
                 <div id="wrap" className={classWrapper}>
                     <Header />
                     <MobileAside />
-                    <AppRouter auth={auth} />
+                    <AppRouter auth={App} />
                 </div>
             </Router>
         </ConnectedRouter>
@@ -40,11 +45,11 @@ const App = ({ auth, uppdateAuthenticate, fetchUserFromCookie }) => {
 
 // Retrieve data from store as props
 const mapStateToProps = ({ App }) => ({
-    auth: App
+    App
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
+    fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 
 export default connect(

@@ -11,7 +11,8 @@ import {
     getCurrentUserFailure,
     updateCurrentUserRequest,
     updateCurrentUserSuccess,
-    updateCurrentUserFailure
+    updateCurrentUserFailure,
+    setVerifiedUser
 } from '../actions/app';
 
 const defaultState = {
@@ -21,7 +22,8 @@ const defaultState = {
     isOpenContactUs: false,
     isGettingUser: false,
     currentUser: null,
-    isUpdatingUser: false
+    isUpdatingUser: false,
+    isVerifiedUser: false
 };
 
 const appReducer = createReducer(defaultState, {
@@ -64,6 +66,10 @@ const appReducer = createReducer(defaultState, {
     },
     [updateCurrentUserFailure]: state => {
         state.isUpdatingUser = false;
+    },
+    [setVerifiedUser]: (state, action) => {
+        const { payload } = action;
+        state.isVerifiedUser = payload;
     }
 });
 

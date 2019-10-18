@@ -19,7 +19,9 @@ const actionNames = keyMirror({
 
     UPDATE_CURRENT_USER_REQUEST: null,
     UPDATE_CURRENT_USER_SUCCESS: null,
-    UPDATE_CURRENT_USER_FAILURE: null
+    UPDATE_CURRENT_USER_FAILURE: null,
+
+    SET_VERIFIED_USER: null
 });
 
 export default actionNames;
