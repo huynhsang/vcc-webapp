@@ -13,12 +13,12 @@ import Result from '../../global/Result';
 
 const Login = ({
     history,
-    updateAuthenticated,
     showSuccessAlert,
     showErrorAlert,
     setToFindPassword,
     setToRegistre,
-    hideAuthentification
+    hideAuthentification,
+    fetchUserFromCookie
 }) => {
     const { t } = useTranslation();
     const [email, setEmail] = React.useState('');
@@ -46,12 +46,9 @@ const Login = ({
                     RootScope.userId,
                     exdays
                 );
-                getCurrentUser().then(() => {
-                    updateAuthenticated();
-                    hideAuthentification();
-                    showSuccessAlert('Success!', 'Logged in');
-                    history.push('/home/questions');
-                });
+                showSuccessAlert('Success!', 'Logged in');
+                fetchUserFromCookie();
+                history.push('/home/questions');
             } else {
                 RootScope.resetAuthValues();
                 showErrorAlert(result.data);

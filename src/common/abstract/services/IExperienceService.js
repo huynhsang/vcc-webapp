@@ -1,7 +1,8 @@
-import type {IService} from "./IService";
+import {IService} from "./IService";
 import Result from "../../../global/Result";
-import type {Filter} from "../../../global/Filter";
 
 export interface IExperienceService extends IService {
     create(data: any): Result;
+    get(data: any): Result;
+    update(data: any): Result;
 }

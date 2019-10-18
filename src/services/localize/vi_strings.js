@@ -44,6 +44,25 @@ export default {
     common_mentee: 'mentee',
     common_with_us: 'với chúng tôi',
     common_your_history: 'câu chuyện của mình',
+    common_company: 'Công ty',
+    common_location: 'Địa chỉ',
+    common_start_date: 'Từ ngày',
+    common_end_date: 'Đến ngày',
+    common_present: 'Đến nay',
+    common_description: 'Mô tả',
+    common_lastname: 'Họ',
+    common_firstname: 'Tên',
+    common_summary: 'Giới thiệu',
+    common_nationality: 'Quốc tịch',
+    common_date_of_birth: 'Ngày sinh',
+    common_field_of_study: 'Ngành học',
+    common_from_year: 'Từ năm',
+    common_to_year: 'Đến năm',
+    common_save: 'Lưu',
+    common_reset: 'Đặt lại',
+    common_my_profile: 'Hồ sơ cá nhân',
+    common_edit: 'Chỉnh sửa',
+    common_general_infos: 'Thông tin chung',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
@@ -192,5 +211,15 @@ export default {
     authentification_confirm_new_password: 'Xác nhận mật khẩu mới',
     authentification_invalid_comfirm_password: 'Xác nhận mật khẩu không khớp',
     authentification_your_password_has_been_reset:
-        'Mật khẩu của bạn đã được đặt lại'
+        'Mật khẩu của bạn đã được đặt lại',
+
+    form_require_all_values: 'Vui lòng nhập đầy đủ thông tin.',
+    form_your_job: 'Công việc của bạn',
+    form_current_role: 'Công việc hiện tại của tôi',
+    form_ex_work_manager: 'Ví dụ: Quản lý',
+    form_your_school: 'Trường của bạn',
+
+    my_profile_you_come_from: 'Bạn đến từ',
+    my_profile_choose_one_country: 'Chọn một nước',
+    my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi'
 };

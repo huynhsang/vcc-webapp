@@ -5,14 +5,25 @@ import {
     setIsAuthenticatedFn,
     setToAuthenticateFn,
     toggleMobileAsideFn,
-    toggleContactUsFn
+    toggleContactUsFn,
+    getCurrentUserRequest,
+    getCurrentUserSuccess,
+    getCurrentUserFailure,
+    updateCurrentUserRequest,
+    updateCurrentUserSuccess,
+    updateCurrentUserFailure,
+    setVerifiedUser
 } from '../actions/app';
 
 const defaultState = {
     isAuthenticated: false,
     toAuthenticate: '',
     isOpenMobileAside: false,
-    isOpenContactUs: false
+    isOpenContactUs: false,
+    isGettingUser: false,
+    currentUser: null,
+    isUpdatingUser: false,
+    isVerifiedUser: false
 };
 
 const appReducer = createReducer(defaultState, {
@@ -31,6 +42,34 @@ const appReducer = createReducer(defaultState, {
     [toggleContactUsFn]: (state, action) => {
         const { payload } = action;
         state.isOpenContactUs = payload;
+    },
+    [getCurrentUserRequest]: state => {
+        state.isGettingUser = true;
+    },
+    [getCurrentUserSuccess]: (state, action) => {
+        state.isGettingUser = false;
+        const { payload } = action;
+        state.currentUser = payload;
+        state.isAuthenticated = true;
+    },
+    [getCurrentUserFailure]: (state, action) => {
+        state.isGettingUser = false;
+        state.isAuthenticated = false;
+    },
+    [updateCurrentUserRequest]: state => {
+        state.isUpdatingUser = true;
+    },
+    [updateCurrentUserSuccess]: (state, action) => {
+        state.isUpdatingUser = false;
+        const { payload } = action;
+        state.currentUser = payload;
+    },
+    [updateCurrentUserFailure]: state => {
+        state.isUpdatingUser = false;
+    },
+    [setVerifiedUser]: (state, action) => {
+        const { payload } = action;
+        state.isVerifiedUser = payload;
     }
 });
 

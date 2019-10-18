@@ -21,14 +21,6 @@ export const getCurrentUser = () => {
         });
 };
 
-export const updateApplicationAfterAuthenticated = () => dispatch => {
-    if (RootScope.currentUser) {
-        dispatch(setIsAuthenticatedFn(true));
-    } else {
-        dispatch(setIsAuthenticatedFn(false));
-    }
-};
-
 export const searchUserByEmail = (email: string) => {
     return accountService.findOneByEmail(email).then((res: Result) => {
         if (res.isSuccess()) {

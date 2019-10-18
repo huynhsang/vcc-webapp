@@ -3,39 +3,30 @@ import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import Header from './Header';
-import RootScope from '../../global/RootScope';
-import CookieHelper from '../../common/util/CookieHelper';
-import CookieConstant from '../../common/constant/CookieConstant';
 import { SweetAlert } from '../../component/SweetAlert';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
 
 import { Authentification } from '../Authentification';
 
-import {
-    getCurrentUser,
-    updateApplicationAfterAuthenticated
-} from '../../common/util/AccountUtil';
-
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
-const App = ({ auth, uppdateAuthenticate }) => {
+import { fetchUserFromCookieFn } from '../../actions/app';
+
+const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
     React.useEffect(() => {
-        RootScope.token = CookieHelper.getCookie(CookieConstant.jwtTokenName);
-        RootScope.userId = Number(
-            CookieHelper.getCookie(CookieConstant.userIdKey)
-        );
-        if (RootScope.token && RootScope.userId) {
-            getCurrentUser().then(() => {
-                uppdateAuthenticate();
-            });
-        }
+        fetchUserFromCookie();
     }, []);
 
-    const classWrapper: string = auth.isAuthenticated
-        ? 'wrap-login'
-        : 'wrap-not-login';
+    const { isVerifiedUser, isAuthenticated } = App;
+
+    if (!isVerifiedUser) {
+        return <div />;
+    }
+
+    const classWrapper = isAuthenticated ? 'wrap-login' : 'wrap-not-login';
+
     return (
         <ConnectedRouter history={history}>
             <Router>
@@ -45,7 +36,7 @@ const App = ({ auth, uppdateAuthenticate }) => {
                 <div id="wrap" className={classWrapper}>
                     <Header />
                     <MobileAside />
-                    <AppRouter auth={auth} />
+                    <AppRouter auth={App} />
                 </div>
             </Router>
         </ConnectedRouter>
@@ -54,11 +45,11 @@ const App = ({ auth, uppdateAuthenticate }) => {
 
 // Retrieve data from store as props
 const mapStateToProps = ({ App }) => ({
-    auth: App
+    App
 });
 
 const mapDispatchToProps = dispatch => ({
-    uppdateAuthenticate: () => dispatch(updateApplicationAfterAuthenticated())
+    fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 
 export default connect(

@@ -13,6 +13,11 @@ export default class AccountService extends BasicService implements IAccountServ
 		return super.save(data);
 	}
 
+	update(id, data): Result {
+		const fullUrl = AccountService.buildURLWithToken(`${ACCOUNT_API}/${id}`);
+		return AccountService.patch(fullUrl, data, RootScope.axiosDefaultConfig);
+	}
+
 	findAll(filter: Filter): Result {
 		return super.findAll(filter);
 	}
@@ -26,7 +31,7 @@ export default class AccountService extends BasicService implements IAccountServ
 		return AccountService.post(fullUrl, email, RootScope.axiosDefaultConfig);
 	}
 
-	findOneById(id: number): Result {
+	findOneById(id: string): Result {
     	const fullUrl: string = `${ACCOUNT_API}/profile?id=${id}`;
 		return AccountService.get(fullUrl, RootScope.axiosDefaultConfig);
 	}
