@@ -65,6 +65,8 @@ export default {
     common_general_infos: 'General infos',
     common_all: 'All',
     common_recent: 'Recent',
+    common_show: 'Show',
+    common_hide: 'Hide',
 
     authentification_enter_your_email:
         'Enter your email address to recover your password',

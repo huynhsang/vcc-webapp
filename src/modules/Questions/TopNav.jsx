@@ -62,11 +62,16 @@ const TopNav = ({ show }) => {
         </li>
     ));
 
-    const hideList = ShowFilter.slice(limitIndex, 5).map(val => (
-        <li key={val.value} className={show === val.value ? 'active-tab' : ''}>
-            <Link to={`?show=${val.value}`}>{t(val.label)}</Link>
-        </li>
-    ));
+    const hideList = ShowFilter.slice(limitIndex, ShowFilter.length).map(
+        val => (
+            <li
+                key={val.value}
+                className={show === val.value ? 'active-tab' : ''}
+            >
+                <Link to={`?show=${val.value}`}>{t(val.label)}</Link>
+            </li>
+        )
+    );
 
     return (
         <div className="menu-tabs">

@@ -12,9 +12,38 @@ import { setToRegistreFn } from '../../actions/app';
 
 import MobileBar from './MobileBar';
 
-const Home = ({ App, setToRegistre }) => {
+import {
+    getTopUsersFn,
+    getPopularQuestionsFn,
+    getQuestionsTopAnsweredFn,
+    getTrendingTagsFn
+} from '../../actions/home';
+
+const Home = ({
+    App,
+    Home,
+    setToRegistre,
+    getTopUsers,
+    getPopularQuestions,
+    getQuestionsTopAnswered,
+    getTrendingTags
+}) => {
     const { t } = useTranslation();
+
+    React.useEffect(() => {
+        getTopUsers();
+        getPopularQuestions();
+        getQuestionsTopAnswered();
+        getTrendingTags();
+    }, []);
+
     const { isAuthenticated } = App;
+    const {
+        topUsers,
+        popularQuestions,
+        questionsTopAnswered,
+        trendingTags
+    } = Home;
 
     return (
         <>
@@ -66,7 +95,14 @@ const Home = ({ App, setToRegistre }) => {
                                         <div className="hide-sidebar-inner" />
                                     </div>
 
-                                    <RightSlideBar />
+                                    <RightSlideBar
+                                        topUsers={topUsers}
+                                        popularQuestions={popularQuestions}
+                                        questionsTopAnswered={
+                                            questionsTopAnswered
+                                        }
+                                        trendingTags={trendingTags}
+                                    />
                                 </div>
                             </main>
                             <LeftNav />
@@ -78,12 +114,17 @@ const Home = ({ App, setToRegistre }) => {
     );
 };
 
-const mapStateToProps = ({ App }) => ({
-    App
+const mapStateToProps = ({ App, Home }) => ({
+    App,
+    Home
 });
 
 const mapDispatchToProps = dispatch => ({
-    setToRegistre: () => dispatch(setToRegistreFn())
+    setToRegistre: () => dispatch(setToRegistreFn()),
+    getTopUsers: () => dispatch(getTopUsersFn()),
+    getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
+    getQuestionsTopAnswered: () => dispatch(getQuestionsTopAnsweredFn()),
+    getTrendingTags: () => dispatch(getTrendingTagsFn())
 });
 
 export default connect(

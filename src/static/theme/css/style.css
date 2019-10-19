@@ -11830,11 +11830,18 @@ div.search-results:after {
 
 .widget-title {
     font-size: 14px;
-    line-height: 23px
+    line-height: 23px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.widget-title:hover {
+   color: #2d6ff7;
 }
 
 .widget-title i {
-    margin-right: 15px;
     font-weight: normal;
     font-size: 19px
 }

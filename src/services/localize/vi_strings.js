@@ -65,6 +65,8 @@ export default {
     common_general_infos: 'Thông tin chung',
     common_all: 'Tất cả',
     common_recent: 'Gần đây',
+    common_show: 'Hiện',
+    common_hide: 'Ẩn',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
