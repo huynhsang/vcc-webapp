@@ -72,7 +72,6 @@ const AnswersUI = ({
     };
 
     const leaveAnswerValidation = () => {
-        console.log('TEST: ', isAuthenticated);
         if (!isAuthenticated) {
             return showConfirmToLogin();
         }

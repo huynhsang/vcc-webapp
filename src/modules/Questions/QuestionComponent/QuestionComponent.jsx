@@ -18,7 +18,7 @@ import type { Category } from '../../../domain/Category';
 import type { SubCategory } from '../../../domain/SubCategory';
 import Result from '../../../global/Result';
 
-const {userVoteService} = CoreService;
+const { userVoteService } = CoreService;
 
 const QuestionComponent = ({
     question,
@@ -35,9 +35,18 @@ const QuestionComponent = ({
         history.push(path);
     };
 
-    const { id, askedBy, numberOfVotes } = question;
+    const {
+        id,
+        askedBy,
+        numberOfVotes,
+        category,
+        tags,
+        hasAcceptedAnswer
+    } = question;
 
-    const handleVoteQuestion = (isPositiveVote, isVotedBefore) => {
+    const isVotedBefore = question.votes && question.votes.length > 0;
+
+    const handleVoteQuestion = isPositiveVote => {
         if (!RootScope.userId) {
             return showConfirmToLogin();
         }
@@ -78,18 +87,16 @@ const QuestionComponent = ({
         }
     };
 
-    const category: Category = question.category;
-    const subCategories: Array<SubCategory> = question.tags
-        ? JSON.parse(question.tags)
-        : [];
-    const bestAnswerClassName = question.hasAcceptedAnswer
+    const subCategories = tags ? JSON.parse(tags) : [];
+
+    const bestAnswerClassName = hasAcceptedAnswer
         ? 'best-answer-meta meta-best-answer'
         : 'best-answer-meta';
 
-    const isVoted: boolean = question.votes && question.votes.length > 0;
-    const disableUp: boolean = isVoted && question.votes[0].isPositiveVote;
-    const disableDown: boolean = isVoted && !question.votes[0].isPositiveVote;
-    const showLoader: boolean = loader && loader.questionId === question.id;
+    const disableUp = isVotedBefore && question.votes[0].isPositiveVote;
+    const disableDown = isVotedBefore && !question.votes[0].isPositiveVote;
+    const showLoader = loader && loader.questionId === question.id;
+
     return (
         <article className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
             {/* <div className="question-sticky-ribbon">
@@ -104,9 +111,7 @@ const QuestionComponent = ({
                                 <button
                                     className="wpqa_vote question_vote_up vote_allow"
                                     disabled={disableUp}
-                                    onClick={() =>
-                                        handleVoteQuestion(true, isVoted)
-                                    }
+                                    onClick={() => handleVoteQuestion(true)}
                                 >
                                     <i className="icon-up-dir" />
                                 </button>
@@ -132,9 +137,7 @@ const QuestionComponent = ({
                                 <button
                                     className="wpqa_vote question_vote_down vote_allow"
                                     disabled={disableDown}
-                                    onClick={() =>
-                                        handleVoteQuestion(false, isVoted)
-                                    }
+                                    onClick={() => handleVoteQuestion(false)}
                                 >
                                     <i className="icon-down-dir" />
                                 </button>
@@ -144,7 +147,7 @@ const QuestionComponent = ({
                     <div className="question-content question-content-first">
                         <header className="article-header">
                             <div className="question-header">
-                            <Link
+                                <Link
                                     to={`/home/question/${question.slug}/view`}
                                     className="post-title"
                                 >
@@ -167,33 +170,23 @@ const QuestionComponent = ({
                                 </span>
                                 <div className="post-meta">
                                     <span className="post-date">
-                                        {t('common_asked')}
-                                        <span className="date-separator">
-                                            :
-                                        </span>
-                                        <Link
-                                            to={`/home/question/${question.slug}/view`}
-                                            itemProp="url"
+                                        {`${t('common_asked')}: `}
+                                        <time
+                                            className="entry-date published"
+                                            style={{ color: 'black' }}
+                                            dateTime={question.createdOn}
                                         >
-                                            <time
-                                                className="entry-date published"
-                                                dateTime={question.createdOn}
-                                            >
-                                                {` ${new Date(
-                                                    question.createdOn
-                                                ).toDateString()}`}
-                                            </time>
-                                        </Link>
+                                            {` ${new Date(
+                                                question.createdOn
+                                            ).toDateString()}`}
+                                        </time>
                                     </span>
                                     <span className="byline">
                                         <span className="post-cat">
-                                            {t('common_in')}:
-                                            <Link
-                                                to={`/community/${category.slug}`}
-                                                rel="tag"
-                                            >
+                                            {`${t('common_in')}: `}
+                                            <span style={{ color: 'black' }}>
                                                 {category.nameEn}
-                                            </Link>
+                                            </span>
                                         </span>
                                     </span>
                                 </div>
@@ -207,9 +200,7 @@ const QuestionComponent = ({
                                     <button
                                         className="wpqa_vote question_vote_up vote_allow"
                                         disabled={disableUp}
-                                        onClick={() =>
-                                            handleVoteQuestion(true, isVoted)
-                                        }
+                                        onClick={() => handleVoteQuestion(true)}
                                     >
                                         <i className="icon-up-dir" />
                                     </button>
@@ -236,7 +227,7 @@ const QuestionComponent = ({
                                         className="wpqa_vote question_vote_down vote_allow"
                                         disabled={disableDown}
                                         onClick={() =>
-                                            handleVoteQuestion(false, isVoted)
+                                            handleVoteQuestion(false)
                                         }
                                     >
                                         <i className="icon-down-dir" />

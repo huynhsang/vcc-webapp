@@ -19,10 +19,9 @@ export async function fetchUserFromCookie() {
             `${GET_USER_URL}/${id}?access_token=${token}`
         );
         return httpResponse.data;
-    } 
-        
+    }
+
     throw new Error('Missing id cookie');
-    
 }
 
 export async function updateUser(data) {
@@ -33,7 +32,12 @@ export async function updateUser(data) {
             data
         );
         return httpResponse.data;
-    } 
+    }
 
     throw new Error('Missing id cookie');
+}
+
+export async function getUsers(params) {
+    const response = await http.get(GET_USER_URL, {params});
+    return response.data;
 }

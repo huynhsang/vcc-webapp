@@ -2,14 +2,14 @@
  * Root Reducer
  */
 
-// Import Reducers
 import App from './app';
 import AlertState from './sweetAlert';
+import Home from './home';
 
-// Combine all reducers into one root reducer
 const reducers = {
-	App,
-	AlertState
+    App,
+    AlertState,
+    Home
 };
 
 export default reducers;
