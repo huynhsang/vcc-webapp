@@ -1,23 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import Modal from '../../../../component/modal/modal';
 import { useTranslation } from 'react-i18next';
-import { Dropdown } from 'primereact/dropdown';
-import { Calendar } from 'primereact/calendar';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
-const defaultExpericence = () => ({
-    id: '',
-    title: '',
-    employment: 0,
-    company: '',
-    location: '',
-    isWorking: false,
-    startDate: '',
-    endDate: new Date(),
-    description: ''
-});
+// const defaultExpericence = () => ({
+//     id: '',
+//     title: '',
+//     employment: 0,
+//     company: '',
+//     location: '',
+//     isWorking: false,
+//     startDate: '',
+//     endDate: new Date(),
+//     description: ''
+// });
 
 const dialogStyle = {
     width: '95%',
@@ -59,6 +56,7 @@ const ExperienceModal = ({
     React.useEffect(() => {
         setEducationEditted(education);
         setIsShownError(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, isShowing]);
 
     const {
@@ -85,16 +83,6 @@ const ExperienceModal = ({
             toYear,
             description
         });
-    };
-
-    const renderError = (condition, valueRequired) => {
-        if (isShownError && condition) {
-            return (
-                <div className="required">
-                    {t('form_require_value', { value: valueRequired })}
-                </div>
-            );
-        }
     };
 
     const footer = (

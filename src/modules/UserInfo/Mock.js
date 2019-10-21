@@ -54,13 +54,13 @@ export const EducationMock = {
     updatedOn: '2019-10-13T12:18:55.728Z'
 };
 
-const employments = [
-    { label: '-', value: '0' },
-    { label: 'Full-time', value: '1' },
-    { label: 'Part-time', value: '2' },
-    { label: 'Self-employed', value: '3' },
-    { label: 'Freelance', value: '4' },
-    { label: 'Contract', value: '5' },
-    { label: 'Internship', value: '6' },
-    { label: 'Apprenticeship', value: '7' }
-];
+// export const employments = [
+//     { label: '-', value: '0' },
+//     { label: 'Full-time', value: '1' },
+//     { label: 'Part-time', value: '2' },
+//     { label: 'Self-employed', value: '3' },
+//     { label: 'Freelance', value: '4' },
+//     { label: 'Contract', value: '5' },
+//     { label: 'Internship', value: '6' },
+//     { label: 'Apprenticeship', value: '7' }
+// ];

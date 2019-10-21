@@ -1,10 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import FilterBuilder, { Filter } from '../../../global/Filter';
-import { User } from '../../../domain/User';
-import { Question } from '../../../domain/Question';
-import { SubCategory } from '../../../domain/SubCategory';
 
 import TopQuestions from './TopQuestions';
 import TopUsers from './TopUsers';

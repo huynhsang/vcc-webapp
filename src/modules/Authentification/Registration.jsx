@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { RegisterRequest } from '../../global/RegisterRequest';
 import RegisterRequestBuilder from '../../global/RegisterRequest';
-import { Link } from 'react-router-dom';
 import AccountJWTService from '../../services/accountJWT.service';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';

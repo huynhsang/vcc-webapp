@@ -67,6 +67,9 @@ export default {
     common_recent: 'Gần đây',
     common_show: 'Hiện',
     common_hide: 'Ẩn',
+    common_trending_tags: 'Tags phổ  biến',
+    common_education: 'Học vấn',
+    common_experience: 'Kinh nghiệm',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',

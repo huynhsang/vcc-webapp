@@ -32,8 +32,6 @@ const items = [
     }
 ];
 
-const supportLanguges = ['en', 'vi'];
-
 const LanguageSelector = ({customStyle}) => {
     useTranslation();
 

@@ -34,7 +34,7 @@ const List = styled.div`
     height: 100%;
 `;
 
-const UserInfoList = ({}) => {
+const UserInfoList = () => {
     const listRef = React.useRef(null);
 
     const [iniPos, setIniPos] = React.useState(0);

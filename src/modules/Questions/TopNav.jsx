@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const ShowFilter = [
     { value: '', label: 'common_all' },
@@ -41,6 +41,7 @@ const TopNav = ({ show }) => {
         return () => {
             window.removeEventListener('resize', resetCalcul);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     React.useEffect(() => {

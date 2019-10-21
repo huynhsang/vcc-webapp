@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import logo from '../../static/resources/img/logo/logo.png';
 import logo2x from '../../static/resources/img/logo/logo-2x.png';
-import { User } from '../../domain/User';
 import { useTranslation } from 'react-i18next';
 import { withRouter } from 'react-router-dom';
 import CookieHelper from '../../common/util/CookieHelper';

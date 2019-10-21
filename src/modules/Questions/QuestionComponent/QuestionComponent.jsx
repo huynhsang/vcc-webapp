@@ -14,8 +14,6 @@ import {
 import CoreService from '../../../global/CoreService';
 
 import UserLogo from '../../../component/UserLogo';
-import type { Category } from '../../../domain/Category';
-import type { SubCategory } from '../../../domain/SubCategory';
 import Result from '../../../global/Result';
 
 const { userVoteService } = CoreService;
@@ -30,10 +28,6 @@ const QuestionComponent = ({
     const { t } = useTranslation();
 
     const [loader, setLoader] = React.useState(null);
-
-    const redirectTo = (path: string) => {
-        history.push(path);
-    };
 
     const {
         id,

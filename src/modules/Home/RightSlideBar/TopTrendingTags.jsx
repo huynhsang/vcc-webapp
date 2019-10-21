@@ -1,12 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
-
-const Title = styled.h2`
-
-`;
 
 const TopTrendingTags = ({ trendingTags }) => {
     const { t } = useTranslation();
@@ -15,16 +10,16 @@ const TopTrendingTags = ({ trendingTags }) => {
 
     return (
         <section id="tag_cloud-2" className="widget widget_tag_cloud">
-            <Title
+            <h2
                 className="widget-title"
                 onClick={() => setIsShown(state => !state)}
             >
                 <i className="icon-folder" />
-                <span>Trending Tags</span>
+                <span>{t('common_trending_tags')}</span>
                 <span
                     className={`pi pi-chevron-${isShown ? 'down' : 'right'}`}
                 />
-            </Title>
+            </h2>
             {isShown && (
                 <div className="tagcloud">
                     {trendingTags.map((tag: SubCategory, index) => {

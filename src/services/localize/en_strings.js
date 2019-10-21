@@ -67,6 +67,9 @@ export default {
     common_recent: 'Recent',
     common_show: 'Show',
     common_hide: 'Hide',
+    common_trending_tags: 'Trending tags',
+    common_education: 'Education',
+    common_experience: 'Experience',
 
     authentification_enter_your_email:
         'Enter your email address to recover your password',

@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
-import CoreService from '../../../global/CoreService';
-import Result from '../../../global/Result';
-
 import { SelectButton } from 'primereact/selectbutton';
 
 import Infos from './Infos';
@@ -12,10 +8,6 @@ import EditForm from './EditForm';
 import { useTranslation } from 'react-i18next';
 
 import { updateCurrentUserFn } from '../../../actions/app';
-
-const DefaultPhoto = require(`../../../static/resources/img/bg-user.jpg`);
-
-const { accountService } = CoreService;
 
 const Wrapper = styled.div`
     margin-top: 15px;
@@ -51,8 +43,6 @@ const MyProfile = ({
     ) {
         return <div />;
     }
-
-    const { firstName, lastName, avatar } = currentUser;
 
     return (
         <Wrapper>

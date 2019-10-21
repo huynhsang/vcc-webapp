@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import ExperienceRequestBuilder from '../../../../global/ExperienceRequest';
 import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
-import logoFram from '../../../../static/resources/img/logo/fram.png';
 import CoreService from '../../../../global/CoreService';
 
 import ApplicationUtil from '../../../../common/util/ApplicationUtil';
@@ -20,7 +19,7 @@ import { experienceMock } from '../../Mock';
 import CookieConstant from '../../../../common/constant/CookieConstant';
 import CookieHelper from '../../../../common/util/CookieHelper';
 const { getCookie } = CookieHelper;
-const { jwtTokenName, userIdKey } = CookieConstant;
+const { userIdKey } = CookieConstant;
 
 const { experienceService } = CoreService;
 
@@ -126,7 +125,7 @@ const Experiences = ({
     return (
         <Wrapper className="p5 mt3">
             <FlexWrapper>
-                <h5 className="title-user m0">Experience</h5>
+                <h5 className="title-user m0">{t('common_experience')}</h5>
                 {canEdit && (
                     <IconWrapper
                         className="experience--icon"

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LeftNav from './LeftNav';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { RightSlideBar } from './RightSlideBar';
 
 import { useTranslation } from 'react-i18next';
@@ -35,6 +35,7 @@ const Home = ({
         getPopularQuestions();
         getQuestionsTopAnswered();
         getTrendingTags();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { isAuthenticated } = App;

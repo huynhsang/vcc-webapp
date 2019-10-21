@@ -2,8 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import AccountJWTService from '../../services/accountJWT.service';
 import Result from '../../global/Result';
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';

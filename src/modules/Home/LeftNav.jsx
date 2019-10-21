@@ -9,9 +9,6 @@ const LeftNav = ({ location }) => {
 
     const { pathname } = location;
 
-    const params = new URLSearchParams(location.search);
-    const currentShow = params.get('show');
-
     return (
         <nav className="nav_menu float_r fixed_nav_menu sider-left">
             <div

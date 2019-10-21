@@ -2,11 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import logoCompany from '../../../static/resources/img/logo/est-rouge.png';
-import logoFram from '../../../static/resources/img/logo/fram.png';
-import CoreService from '../../../global/CoreService';
-import Result from '../../../global/Result';
 
 import ApplicationUtil from '../../../common/util/ApplicationUtil';
 import {
@@ -15,12 +10,6 @@ import {
 } from '../../../actions/sweetAlert';
 import { Experiences } from './Experiences';
 import { Educations } from './Educations';
-
-const FlexWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-`;
 
 const SummaryWrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -43,8 +32,6 @@ const GeneralInfos = ({
     showSuccessNotification
 }) => {
     // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
-
-    const { t } = useTranslation();
 
     const { summary } = profile;
 

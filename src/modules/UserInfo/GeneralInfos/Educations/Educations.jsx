@@ -10,7 +10,7 @@ import EducationModal from './EducationModal';
 import CookieConstant from '../../../../common/constant/CookieConstant';
 import CookieHelper from '../../../../common/util/CookieHelper';
 const { getCookie } = CookieHelper;
-const { jwtTokenName, userIdKey } = CookieConstant;
+const { userIdKey } = CookieConstant;
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -79,7 +79,7 @@ const Educations = ({ location }) => {
     return (
         <Wrapper className="p5 mt3 mb3">
             <FlexWrapper>
-                <h5 className="title-user m0">Education</h5>
+                <h5 className="title-user m0">{t('common_education')}</h5>
                 {canEdit && (
                     <IconWrapper
                         className="experience--icon"

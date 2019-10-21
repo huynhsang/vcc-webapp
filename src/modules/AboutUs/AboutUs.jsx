@@ -65,7 +65,7 @@ const Content = styled.div`
     padding: 10px 15px;
 `;
 
-const AboutUs = ({}) => {
+const AboutUs = () => {
     const { t } = useTranslation();
 
     return (

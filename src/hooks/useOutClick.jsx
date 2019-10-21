@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const useOutClick = handleClose => {
     const outClickRef = React.useRef();
@@ -7,6 +6,7 @@ const useOutClick = handleClose => {
     React.useEffect(() => {
         document.addEventListener('click', handleClickOutside);
         return () => document.removeEventListener('click', handleClickOutside);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [handleClose]);
 
     const handleClickOutside = event => {

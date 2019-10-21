@@ -59,6 +59,7 @@ export function useSwipe({
         return () => {
             document.removeEventListener(action, swipeMove);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isSwipeStarted]);
 
     React.useEffect(() => {

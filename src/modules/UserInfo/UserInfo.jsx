@@ -11,7 +11,7 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import CookieHelper from '../../common/util/CookieHelper';
 
 const { getCookie } = CookieHelper;
-const { jwtTokenName, userIdKey } = CookieConstant;
+const { userIdKey } = CookieConstant;
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
@@ -39,7 +39,7 @@ const UserProfile = ({ subRoutes, location, history }) => {
                 }
             });
         }
-    }, []);
+    }, [userId]);
 
     const { firstName, lastName } = profile;
 

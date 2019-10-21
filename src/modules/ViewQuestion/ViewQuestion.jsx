@@ -1,9 +1,6 @@
 import React from 'react';
 import connect from 'react-redux/es/connect/connect';
-
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import type { Answer } from '../../../domain/Answer';
 import type { User } from '../../../domain/User';
 import type { SubCategory } from '../../../domain/SubCategory';
 import AnswersUI from './AnswersUI';
@@ -24,7 +21,7 @@ import {
     showConfirmToLoginFn
 } from '../../actions/sweetAlert';
 
-const { questionService, answerService, userVoteService } = CoreService;
+const { questionService, userVoteService } = CoreService;
 
 const ViewQuestion = ({
     match,
@@ -39,15 +36,11 @@ const ViewQuestion = ({
 
     const [loader, setLoader] = React.useState(null);
 
-    const redirectTo = (path: string) => {
-        history.push(path);
-    };
-
+    const slug = match && match.params && match.params.slug;
     React.useEffect(() => {
-        const slug: string = match && match.params && match.params.slug;
         if (slug) {
             questionService
-                .findOneBySlug(match.params.slug)
+                .findOneBySlug(slug)
                 .then((result: Result) => {
                     if (
                         result.success &&
@@ -59,7 +52,7 @@ const ViewQuestion = ({
                     }
                 });
         }
-    }, []);
+    }, [slug]);
 
     const { numberOfVotes, votes } = question;
     const isVotedBefore = votes && votes.length > 0;
@@ -115,7 +108,6 @@ const ViewQuestion = ({
     const subCategories: Array<SubCategory> = question.tags
         ? JSON.parse(question.tags)
         : [];
-    const currentPath: string = history.location.pathname;
 
     const disableUp: boolean =
         isVotedBefore && question.votes[0].isPositiveVote;

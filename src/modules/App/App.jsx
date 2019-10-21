@@ -17,6 +17,7 @@ import { fetchUserFromCookieFn } from '../../actions/app';
 const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
     React.useEffect(() => {
         fetchUserFromCookie();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { isVerifiedUser, isAuthenticated } = App;
@@ -36,7 +37,7 @@ const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
                 <div id="wrap" className={classWrapper}>
                     <Header />
                     <MobileAside />
-                    <AppRouter auth={App} />
+                    <AppRouter />
                 </div>
             </Router>
         </ConnectedRouter>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { toggleMobileAsideFn, toggleContactUsFn } from '../../actions/app';
@@ -76,7 +76,11 @@ const MobileAside = ({
                                     </a>
                                 </div>
                             </div> */}
-                            <ul id="nav_menu" className="menu" style={{marginTop: '20px'}}>
+                            <ul
+                                id="nav_menu"
+                                className="menu"
+                                style={{ marginTop: '20px' }}
+                            >
                                 {leftNavTabs.map(tab => (
                                     <li
                                         className={

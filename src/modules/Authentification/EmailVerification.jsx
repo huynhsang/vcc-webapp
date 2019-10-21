@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import AccountJWTService from '../../services/accountJWT.service';
 import Result from '../../global/Result';
@@ -26,6 +25,7 @@ const EmailVerification = ({ location, history }) => {
                 }
             );
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (

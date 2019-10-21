@@ -10,9 +10,7 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
     const [isPopularTab, setIsPopularTab] = React.useState(true);
 
     React.useEffect(() => {
-        if (!isShown) {
-            setIsShown(true);
-        }
+        setIsShown(true);
     }, [isPopularTab]);
 
     const popularClassName = isPopularTab ? 'tab current' : 'tab';
@@ -117,8 +115,7 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
 
 export default TopQuestions;
 
-{
-    /* <div
+/* <div
                     className="tab-inner-wrap tab-inner-wraptabs-widget-2"
                     style={{ display: 'none' }}
                 >
@@ -207,4 +204,3 @@ export default TopQuestions;
                         </div>
                     </div>
                 </div> */
-}

@@ -8,7 +8,7 @@ const Wrapper = styled.div`
     margin: 30px;
 `;
 
-const Page404 = ({}) => {
+const Page404 = () => {
     //TODO: add button comback
 
     const ErrorImage = RootScope.currentUser ? ErrorImageV2 : ErrorImageV3;

@@ -4,7 +4,7 @@ import FilterBuilder from '../../global/Filter';
 // import { User } from '../../domain/User';
 // import { Question } from '../../domain/Question';
 // import { Category } from '../../domain/Category';
-import { SubCategory } from '../../domain/SubCategory';
+// import { SubCategory } from '../../domain/SubCategory';
 import Result from '../../global/Result';
 import produce from 'immer';
 

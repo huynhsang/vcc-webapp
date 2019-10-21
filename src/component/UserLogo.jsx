@@ -11,7 +11,7 @@ const UserLogo = ({ user }) => {
                 <span className="author-image-span">
                     <img
                         className="avatar avatar-42 photo"
-                        alt="photo"
+                        alt=""
                         width="42"
                         height="42"
                         src={user.avatar}

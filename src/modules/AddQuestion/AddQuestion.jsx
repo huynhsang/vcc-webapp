@@ -2,7 +2,6 @@ import React from 'react';
 import connect from 'react-redux/es/connect/connect';
 import { useTranslation } from 'react-i18next';
 
-import PropTypes from 'prop-types';
 import Tabs from '../../component/Tabs/Tabs';
 import TypeQuestionTab from './TypeQuestion';
 import TagsQuestionTab from './TagsQuestion';
@@ -37,6 +36,7 @@ const AddQuestion = ({
         if(!isAuthenticated && !toAuthenticate ){
             showConfirmToLogin();
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[isAuthenticated, toAuthenticate])
     
     const [currentTab, setCurrentTab] = React.useState('Type');

@@ -1,10 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LoginRequestBuilder from '../../global/LoginRequest';
 import { useTranslation } from 'react-i18next';
-
-import { getCurrentUser } from '../../common/util/AccountUtil';
-
 import AccountJWTService from '../../services/accountJWT.service';
 import CookieHelper from '../../common/util/CookieHelper';
 import CookieConstant from '../../common/constant/CookieConstant';

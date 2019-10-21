@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Page404 from './Page404';
 
@@ -10,17 +9,9 @@ import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
 
-import {
-    Authentification,
-    EmailVerification,
-    ResetPassword
-} from '../Authentification';
+import { EmailVerification, ResetPassword } from '../Authentification';
 
-import { ViewQuestion } from '../ViewQuestion';
-
-const AppRouter = ({ auth }) => {
-    const { isAuthenticated, toAuthenticate } = auth;
-
+const AppRouter = () => {
     return (
         <Switch>
             <Route path="/home" render={props => <Home {...props} />} />

@@ -62,7 +62,7 @@ const Authentication = ({
 
     const [isMounted, setIsMounted] = React.useState(false);
 
-    const { isAuthenticated, toAuthenticate } = App;
+    const { toAuthenticate } = App;
 
     React.useEffect(() => {
         setIsMounted(true);
@@ -72,6 +72,7 @@ const Authentication = ({
         if (isMounted) {
             setToAuthenticate('');
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location.pathname]);
 
     const headerTitle = () => {
