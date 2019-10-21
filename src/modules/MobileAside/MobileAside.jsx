@@ -49,7 +49,7 @@ const MobileAside = ({
                         dir="ltr"
                     >
                         <div className="mobile-aside-inner-inner">
-                            <a
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 onClick={() => toggleMobileAside(false)}
                                 className="mobile-aside-close"
                             >
@@ -90,7 +90,9 @@ const MobileAside = ({
                                         }
                                         key={tab.label}
                                     >
-                                        <a onClick={onClickTab(tab.path)}>
+                                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                            onClick={onClickTab(tab.path)}
+                                        >
                                             <i className={tab.iconClassName} />
                                             {t(tab.label)}
                                         </a>
@@ -106,12 +108,16 @@ const MobileAside = ({
                                         pathname === '/about-us' ? 'active' : ''
                                     }
                                 >
-                                    <a onClick={onClickTab('/about-us')}>
+                                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                        onClick={onClickTab('/about-us')}
+                                    >
                                         {t('header_about_us')}
                                     </a>
                                 </li>
                                 <li>
-                                    <a onClick={() => toggleContactUs(true)}>
+                                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                        onClick={() => toggleContactUs(true)}
+                                    >
                                         {t('header_contact_us')}
                                     </a>
                                 </li>

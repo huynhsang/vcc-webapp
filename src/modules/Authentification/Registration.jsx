@@ -148,7 +148,10 @@ const Registration = ({
                 <button className="btn btn-primary width-100 mb3" id="submit">
                     {t('authentification_create_account')}
                 </button>
-                <a onClick={setToLogin} className="text-color-white">
+                <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                    onClick={setToLogin}
+                    className="text-color-white"
+                >
                     <i className="fas fa-arrow-left" />
                     {` ${t('authentification_back_to_login')}`}
                 </a>

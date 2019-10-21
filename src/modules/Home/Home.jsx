@@ -59,7 +59,7 @@ const Home = ({
                         </div>
                         {!isAuthenticated && (
                             <div className="col3">
-                                <a
+                                <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                     onClick={setToRegistre}
                                     className="signup-panel button-default call-action-button"
                                     style={{ marginTop: '47.5px' }}

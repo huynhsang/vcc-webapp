@@ -18,10 +18,13 @@ const ForgotPassword = ({
 
     const onSubmit = event => {
         event.preventDefault();
-        AccountJWTService.doResetPassword({email}).then((result: Result) => {
+        AccountJWTService.doResetPassword({ email }).then((result: Result) => {
             if (result.isSuccess()) {
                 hideAuthentification();
-                showSuccessAlert('Success!', t('forgot_password_please_verify_your_email'));
+                showSuccessAlert(
+                    'Success!',
+                    t('forgot_password_please_verify_your_email')
+                );
             } else {
                 RootScope.resetAuthValues();
                 showErrorAlert(result.data);
@@ -50,7 +53,7 @@ const ForgotPassword = ({
                     >
                         {t('authentification_reset_password')}
                     </button>
-                    <a
+                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
                         onClick={setToLogin}
                         className="text-left text-color-white"
                     >

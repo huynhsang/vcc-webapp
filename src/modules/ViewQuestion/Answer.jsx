@@ -139,7 +139,10 @@ const AnswerComponent = ({
                                     {answerBy.level}
                                 </span>
                             </div>
-                            <a href="" className="comment-date" itemProp="url">
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                className="comment-date"
+                                itemProp="url"
+                            >
                                 <span itemProp="dateCreated">
                                     Added an answer on{' '}
                                     {new Date(answer.createdOn).toDateString()}

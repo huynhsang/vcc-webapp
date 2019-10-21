@@ -108,7 +108,9 @@ const Login = ({
                                     setRememberMe(ev.target.checked)
                                 }
                             />
-                            <label htmlFor="checkbox1">{t('authentification_remember_me')}</label>
+                            <label htmlFor="checkbox1">
+                                {t('authentification_remember_me')}
+                            </label>
                         </div>
                         <div className="text-right">
                             <button type="submit" className="btn btn-primary">
@@ -120,7 +122,7 @@ const Login = ({
                 <div className="card-footer">
                     <div className="text-center">
                         {`${t('authentification_donot_have_account')} `}
-                        <a
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
                             onClick={setToRegistre}
                             className="ml-1 text-color-white"
                         >
@@ -128,7 +130,7 @@ const Login = ({
                         </a>
                     </div>
                     <div className="text-center">
-                        <a
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
                             onClick={setToFindPassword}
                             className="text-color-white"
                         >

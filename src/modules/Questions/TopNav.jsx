@@ -80,7 +80,8 @@ const TopNav = ({ show }) => {
                 {shownList}
                 {!!hideList.length && (
                     <li className="flexMenu-viewMore">
-                        <a title="">
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                        >
                             <i className="icon-dot-3" />
                         </a>
                         <ul

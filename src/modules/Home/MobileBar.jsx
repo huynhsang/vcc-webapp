@@ -16,7 +16,7 @@ const MobileBar = () => {
                 <div className="mobile-bar-content">
                     <div className="discy-container">
                         <div className="mobile-bar-search">
-                            <a
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 style={buttonSearch}
                                 onClick={() => setShowSearch(state => !state)}
                             >

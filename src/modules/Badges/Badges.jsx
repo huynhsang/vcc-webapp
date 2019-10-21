@@ -9,7 +9,8 @@ const Badges = () => {
             <div className="breadcrumbs">
                 <span className="crumbs">
                     <span>
-                        <a>
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                        >
                             <i className="icon-home" />
                             {t('common_home')}
                         </a>

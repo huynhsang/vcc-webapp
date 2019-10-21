@@ -39,18 +39,16 @@ const ViewQuestion = ({
     const slug = match && match.params && match.params.slug;
     React.useEffect(() => {
         if (slug) {
-            questionService
-                .findOneBySlug(slug)
-                .then((result: Result) => {
-                    if (
-                        result.success &&
-                        result.data &&
-                        Object.keys(result.data).length > 0
-                    ) {
-                        setQuestion(result.data);
-                        setAnswers(result.data.answers);
-                    }
-                });
+            questionService.findOneBySlug(slug).then((result: Result) => {
+                if (
+                    result.success &&
+                    result.data &&
+                    Object.keys(result.data).length > 0
+                ) {
+                    setQuestion(result.data);
+                    setAnswers(result.data.answers);
+                }
+            });
         }
     }, [slug]);
 
@@ -420,7 +418,9 @@ const ViewQuestion = ({
                             </div>
                             <ul className="question-link-list">
                                 <li className="report_activated">
-                                    <a className="report_q" href="">
+                                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                        className="report_q"
+                                    >
                                         <i className="icon-attention" />
                                         {t('common_report')}
                                     </a>

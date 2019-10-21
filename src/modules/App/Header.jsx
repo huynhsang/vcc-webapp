@@ -68,7 +68,9 @@ const Header = ({
                 </li>
             ))}
             <li key={'contact-us'}>
-                <a onClick={() => toggleContactUs(true)}>
+                <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                    onClick={() => toggleContactUs(true)}
+                >
                     {t('header_contact_us')}
                 </a>
             </li>
@@ -97,7 +99,9 @@ const Header = ({
                 </li>
             ))}
             <li key="logout">
-                <a onClick={logout}>
+                <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                    onClick={logout}
+                >
                     <i className="icon-logout" /> {t('header_logout')}
                 </a>
             </li>
@@ -177,19 +181,19 @@ const Header = ({
                         </div>
                     ) : (
                         <div className="right-header float_r">
-                            <a
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 className="sign-in-lock mob-sign-in"
                                 onClick={setToLogin}
                             >
                                 <i className="icon-lock" />
                             </a>
-                            <a
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 className="button-default button-sign-in"
                                 onClick={setToLogin}
                             >
                                 {t('common_login')}
                             </a>
-                            <a
+                            <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 className="button-default-2 button-sign-up"
                                 onClick={setToRegistre}
                             >

@@ -108,7 +108,9 @@ const MainPage = ({ location, history }) => {
                         </span>
                         {showLoadMore && (
                             <div className="load-more">
-                                <a onClick={handleLoadMore}>
+                                <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                                    onClick={handleLoadMore}
+                                >
                                     {t('mainpage_load_more_questions')}
                                 </a>
                             </div>

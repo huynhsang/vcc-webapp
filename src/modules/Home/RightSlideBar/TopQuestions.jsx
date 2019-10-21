@@ -23,12 +23,16 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
             <div className="widget-title widget-title-tabs">
                 <ul className="tabs tabstabs-widget-2">
                     <li className={popularClassName}>
-                        <a onClick={() => setIsPopularTab(true)}>
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                            onClick={() => setIsPopularTab(true)}
+                        >
                             {t('common_popular')}
                         </a>
                     </li>
                     <li className={answerClassName}>
-                        <a onClick={() => setIsPopularTab(false)}>
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                            onClick={() => setIsPopularTab(false)}
+                        >
                             {t('common_answers')}
                         </a>
                     </li>
