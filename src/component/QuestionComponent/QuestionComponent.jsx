@@ -2,19 +2,19 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import RootScope from '../../../global/RootScope';
-import { UserVoteQuestion } from '../../../domain/UserVoteQuestion';
+import RootScope from '../../global/RootScope';
+import { UserVoteQuestion } from '../../domain/UserVoteQuestion';
 
 import connect from 'react-redux/es/connect/connect';
-import ApplicationUtil from '../../../common/util/ApplicationUtil';
+import ApplicationUtil from '../../common/util/ApplicationUtil';
 import {
     showErrorAlertFn,
     showConfirmToLoginFn
-} from '../../../actions/sweetAlert';
-import CoreService from '../../../global/CoreService';
+} from '../../actions/sweetAlert';
+import CoreService from '../../global/CoreService';
 
-import UserLogo from '../../../component/UserLogo';
-import Result from '../../../global/Result';
+import UserLogo from '../UserLogo';
+import Result from '../../global/Result';
 
 const { userVoteService } = CoreService;
 
@@ -23,7 +23,8 @@ const QuestionComponent = ({
     history,
     updateVoteQuestion,
     showErrorNotification,
-    showConfirmToLogin
+    showConfirmToLogin,
+    isShownAnswerButton = true
 }) => {
     const { t } = useTranslation();
 
@@ -31,9 +32,9 @@ const QuestionComponent = ({
 
     const {
         id,
-        askedBy,
+        askedBy = {},
         numberOfVotes,
-        category,
+        category = {},
         tags,
         hasAcceptedAnswer
     } = question;
@@ -244,12 +245,12 @@ const QuestionComponent = ({
                                         {subCategories.map(
                                             (subCategory, count) => {
                                                 return (
-                                                    <Link
+                                                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                                         key={count}
-                                                        to={`/comunity/${subCategory.slug}`}
+                                                        // to={`/comunity/${subCategory.slug}`}
                                                     >
                                                         {subCategory.nameEn}
-                                                    </Link>
+                                                    </a>
                                                 );
                                             }
                                         )}
@@ -269,7 +270,7 @@ const QuestionComponent = ({
                                         <Link
                                             to={`/home/question/${question.slug}/view/#answers`}
                                         >
-                                            Answers
+                                            {t('common_answer')}
                                         </Link>
                                     </span>
                                 </li>
@@ -281,12 +282,14 @@ const QuestionComponent = ({
                                     </span>
                                 </li>
                             </ul>
-                            <Link
-                                to={`/home/question/${question.slug}/view`}
-                                className="meta-answer"
-                            >
-                                {t('common_answer')}
-                            </Link>
+                            {isShownAnswerButton && (
+                                <Link
+                                    to={`/home/question/${question.slug}/view`}
+                                    className="meta-answer"
+                                >
+                                    {t('common_answer')}
+                                </Link>
+                            )}
                         </footer>
                     </div>
                     <div className="clearfix" />

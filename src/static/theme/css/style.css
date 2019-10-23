@@ -11815,12 +11815,12 @@ div.search-results:after {
 
 .widget {
     padding: 0 20px 30px 18px;
-    margin-bottom: 30px
+    margin-bottom: 20px
 }
 
 .sidebar .widget,
 .nav_menu .widget {
-    border-bottom: 2px solid #e1e3e3
+    border-bottom: 3px solid #e1e3e3
 }
 
 .sidebar:not(.footer-sidebar) .widget:last-child,
@@ -15897,12 +15897,6 @@ ul.question-vote.answer-vote li.dislike_answers i {
 
 .question-stats span i {
     margin-right: 10px
-}
-
-.question-bottom {
-    padding-top: 30px;
-    margin-top: 30px;
-    border-top: 1px solid #e1e3e3
 }
 
 .question-navigation {

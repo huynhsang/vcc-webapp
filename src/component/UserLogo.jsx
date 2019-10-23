@@ -1,9 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 const UserLogo = ({ user }) => {
-    const { t } = useTranslation();
 
     return (
         <div className="author-image author-image-42">
@@ -18,7 +16,7 @@ const UserLogo = ({ user }) => {
                     />
                 </span>
             </Link>
-            <div className="author-image-pop-2">
+            {/* <div className="author-image-pop-2">
                 <div className="post-section user-area user-area-columns_pop">
                     <div className="post-inner">
                         <div className="author-image author-image-70">
@@ -92,7 +90,7 @@ const UserLogo = ({ user }) => {
                         <div className="clearfix" />
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };
