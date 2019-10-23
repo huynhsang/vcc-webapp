@@ -10,7 +10,7 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import { LanguageSelector } from '../LanguageSelector';
 
 import useOutClick from '../../hooks/useOutClick';
-import { headerTabs, userMenuTabs } from './header.constant';
+import { headerTabs } from './header.constant';
 
 import {
     setIsAuthenticatedFn,
@@ -19,6 +19,9 @@ import {
     toggleMobileAsideFn,
     toggleContactUsFn
 } from '../../actions/app';
+
+const { getCookie, deleteCookie } = CookieHelper;
+const { userIdKey } = CookieConstant;
 
 const Header = ({
     App,
@@ -41,8 +44,8 @@ const Header = ({
     const [showUserMenu, setShowUserMenu] = React.useState(false);
 
     const logout = () => {
-        CookieHelper.deleteCookie(CookieConstant.jwtTokenName);
-        CookieHelper.deleteCookie(CookieConstant.userIdKey);
+        deleteCookie(CookieConstant.jwtTokenName);
+        deleteCookie(CookieConstant.userIdKey);
         setIsAuthenticated(false);
         history.push('/home');
     };
@@ -90,14 +93,12 @@ const Header = ({
 
     const UserMenu = !!currentUser && (
         <ul style={userMenuStyle} ref={outClickRef}>
-            {userMenuTabs.map(val => (
-                <li key={val.path}>
-                    <Link to={`/${val.path}`}>
-                        <i className={val.iconClassName} />
-                        {t(val.label)}
-                    </Link>
-                </li>
-            ))}
+            <li>
+                <Link to={`/users/${getCookie(userIdKey)}/my-profile`}>
+                    <i className="icon-user" />
+                    {t('header_user_profile')}
+                </Link>
+            </li>
             <li key="logout">
                 <a //eslint-disable-line jsx-a11y/anchor-is-valid
                     onClick={logout}

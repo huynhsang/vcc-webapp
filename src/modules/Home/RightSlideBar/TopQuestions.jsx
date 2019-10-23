@@ -37,10 +37,10 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
                         </a>
                     </li>
                 </ul>
-                <div onClick={() => setIsShown(state => !state)}>
-                    {isShown ? t('common_hide') : t('common_show')}
-                </div>
-                <div className="clearfix" />
+                <div
+                    className={`pi pi-chevron-${isShown ? 'down' : 'right'}`}
+                    onClick={() => setIsShown(state => !state)}
+                />
             </div>
             <div className="widget-wrap">
                 {isShown && (

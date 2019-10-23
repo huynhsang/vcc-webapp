@@ -12,7 +12,7 @@ import TopNav from './TopNav';
 
 import { useTranslation } from 'react-i18next';
 import CoreService from '../../global/CoreService';
-import { QuestionComponent } from './QuestionComponent';
+import { QuestionComponent } from '../../component/QuestionComponent';
 
 const { questionService } = CoreService;
 
