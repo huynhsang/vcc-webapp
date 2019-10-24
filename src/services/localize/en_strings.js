@@ -70,6 +70,8 @@ export default {
     common_trending_tags: 'Trending tags',
     common_education: 'Education',
     common_experience: 'Experience',
+    pagination_previous: 'Previous',
+    pagination_next: 'Next',
 
     authentification_enter_your_email:
         'Enter your email address to recover your password',
@@ -229,5 +231,7 @@ export default {
 
     my_profile_you_come_from: 'You comme from',
     my_profile_choose_one_country: 'Choose one country',
-    my_profile_user_info_updated: 'Your profile has been updated!'
+    my_profile_user_info_updated: 'Your profile has been updated!',
+
+    user_info_question_asked: 'Question asked'
 };

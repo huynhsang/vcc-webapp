@@ -85,6 +85,13 @@ const UserProfile = ({ subRoutes, location, history }) => {
                                 {t('common_general_infos')}
                                 <i className="fas fa-arrow-right" />
                             </Link>
+                            <Link
+                                to={`/users/${userId}/question-asked`}
+                                className="title-info"
+                            >
+                                {t('user_info_question_asked')}
+                                <i className="fas fa-arrow-right" />
+                            </Link>
                         </div>
                     </div>
                 </Wrapper>

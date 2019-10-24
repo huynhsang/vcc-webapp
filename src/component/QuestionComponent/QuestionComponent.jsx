@@ -2,7 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import RootScope from '../../global/RootScope';
 import { UserVoteQuestion } from '../../domain/UserVoteQuestion';
 
 import connect from 'react-redux/es/connect/connect';
@@ -11,10 +10,10 @@ import {
     showErrorAlertFn,
     showConfirmToLoginFn
 } from '../../actions/sweetAlert';
-import CoreService from '../../global/CoreService';
 
 import UserLogo from '../UserLogo';
 import Result from '../../global/Result';
+import CoreService from '../../global/CoreService';
 
 const { userVoteService } = CoreService;
 
@@ -24,7 +23,8 @@ const QuestionComponent = ({
     updateVoteQuestion,
     showErrorNotification,
     showConfirmToLogin,
-    isShownAnswerButton = true
+    isShownAnswerButton = true,
+    isAuthenticated
 }) => {
     const { t } = useTranslation();
 
@@ -42,7 +42,7 @@ const QuestionComponent = ({
     const isVotedBefore = question.votes && question.votes.length > 0;
 
     const handleVoteQuestion = isPositiveVote => {
-        if (!RootScope.userId) {
+        if (!isAuthenticated) {
             return showConfirmToLogin();
         }
         setLoader({ questionId: id });
@@ -299,6 +299,10 @@ const QuestionComponent = ({
     );
 };
 
+const mapStateToProps = ({ App: { isAuthenticated } }) => ({
+    isAuthenticated
+});
+
 const mapDispatchToProps = dispatch => ({
     showErrorNotification: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
@@ -306,6 +310,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(withRouter(QuestionComponent));
