@@ -70,6 +70,8 @@ export default {
     common_trending_tags: 'Tags phổ  biến',
     common_education: 'Học vấn',
     common_experience: 'Kinh nghiệm',
+    pagination_previous: 'Trước',
+    pagination_next: 'Sau',
 
     authentification_enter_your_email: 'Nhập địa chỉ email của bạn',
     authentification_reset_password: 'Đặt lại mật khẩu',
@@ -228,5 +230,7 @@ export default {
 
     my_profile_you_come_from: 'Bạn đến từ',
     my_profile_choose_one_country: 'Chọn một nước',
-    my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi'
+    my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi',
+
+    user_info_question_asked: 'Câu hỏi đã hỏi'
 };
