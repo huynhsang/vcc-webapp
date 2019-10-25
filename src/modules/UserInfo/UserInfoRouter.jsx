@@ -4,6 +4,7 @@ import { withRouter, Route } from 'react-router-dom';
 import { GeneralInfos } from './GeneralInfos';
 import { MyProfile } from './MyProfile';
 import { QuestionsAsked } from './QuestionsAsked';
+import { AnswersRelated } from './AnswersRelated';
 
 const UserProfileRouter = ({ match, profile }) => {
     return (
@@ -27,6 +28,11 @@ const UserProfileRouter = ({ match, profile }) => {
                 exact
                 path={`${match.path}/question-asked`}
                 render={props => <QuestionsAsked {...props} />}
+            />
+            <Route
+                exact
+                path={`${match.path}/answers-related`}
+                render={props => <AnswersRelated {...props} />}
             />
         </>
     );

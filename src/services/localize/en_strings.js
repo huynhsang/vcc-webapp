@@ -233,5 +233,7 @@ export default {
     my_profile_choose_one_country: 'Choose one country',
     my_profile_user_info_updated: 'Your profile has been updated!',
 
-    user_info_question_asked: 'Question asked'
+    user_info_question_asked: 'Question asked',
+    user_info_amswers_related: 'Answers related',
+    user_info_added_an_answer: 'Added an answer on',
 };

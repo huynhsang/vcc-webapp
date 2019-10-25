@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-import QuestionAsked from './QuestionAsked';
+import QuestionRelated from './QuestionRelated';
 import Pagination from '../../../component/Pagination';
 
-import { mock } from './Mock';
+import { mock } from './mock';
 
 const Wrapper = styled.div``;
 
 const QuestionsWrapper = styled.div``;
 
-const QuestionsAsked = () => {
+const AnswersRelated = () => {
     const questionsRender = mock.map(question => (
-        <QuestionAsked key={question.id} question={question} />
+        <QuestionRelated key={question.id} question={question} />
     ));
 
     return (
@@ -22,4 +22,4 @@ const QuestionsAsked = () => {
     );
 };
 
-export default QuestionsAsked;
+export default AnswersRelated;
