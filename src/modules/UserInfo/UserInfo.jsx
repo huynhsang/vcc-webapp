@@ -23,6 +23,13 @@ const Wrapper = styled.section`
     border-radius: 2px;
 `;
 
+const Badge = styled.span`
+    background-color: #30a96f;
+    font-size: 16px;
+    padding: 0 5px;
+    color: white;
+`;
+
 const UserProfile = ({ subRoutes, location, history }) => {
     const { t } = useTranslation();
 
@@ -41,7 +48,11 @@ const UserProfile = ({ subRoutes, location, history }) => {
         }
     }, [userId]);
 
-    const { firstName, lastName } = profile;
+    // if (!profile) {
+    //     return <div />;
+    // }
+
+    const { firstName, lastName, level } = profile;
 
     return (
         <div className="container discy-container">
@@ -68,6 +79,9 @@ const UserProfile = ({ subRoutes, location, history }) => {
                         <div className="text-center">
                             {`${lastName} ${firstName}`}
                         </div>
+                        <div className="text-center">
+                            <Badge>{level} test</Badge>
+                        </div>
                         <div className="shell-info">
                             {isMainUserProfile && (
                                 <Link
@@ -90,6 +104,14 @@ const UserProfile = ({ subRoutes, location, history }) => {
                                 className="title-info"
                             >
                                 {t('user_info_question_asked')}
+                                <i className="fas fa-arrow-right" />
+                            </Link>
+
+                            <Link
+                                to={`/users/${userId}/answers-related`}
+                                className="title-info"
+                            >
+                                {t('user_info_amswers_related')}
                                 <i className="fas fa-arrow-right" />
                             </Link>
                         </div>

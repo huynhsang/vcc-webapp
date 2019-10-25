@@ -232,5 +232,7 @@ export default {
     my_profile_choose_one_country: 'Chọn một nước',
     my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi',
 
-    user_info_question_asked: 'Câu hỏi đã hỏi'
+    user_info_question_asked: 'Câu hỏi đã hỏi',
+    user_info_amswers_related: 'Những câu trả lời',
+    user_info_added_an_answer: 'Được trả lời vào ngày',
 };
