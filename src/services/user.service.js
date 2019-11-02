@@ -1,36 +1,31 @@
 import http from './https';
-import CookieConstant from '../common/constant/CookieConstant';
-import CookieHelper from '../common/util/CookieHelper';
-
-const { getCookie } = CookieHelper;
-const { jwtTokenName, userIdKey } = CookieConstant;
+import { setUrlWithToken } from '../utils/url';
+import { getIdAndToken } from '../utils/cookie-tools';
 
 const GET_USER_URL = 'users';
 
-const getIdAndToken = () => ({
-    id: getCookie(userIdKey),
-    token: getCookie(jwtTokenName)
-});
-
 export async function fetchUserFromCookie() {
     const { id, token } = getIdAndToken();
+
     if (id && token) {
-        const httpResponse = await http.get(
-            `${GET_USER_URL}/${id}?access_token=${token}`
-        );
+        const url = setUrlWithToken(`${GET_USER_URL}/${id}`);
+        const httpResponse = await http.get(url);
         return httpResponse.data;
     }
 
     throw new Error('Missing id cookie');
 }
 
+export async function getUser(id) {
+    const response = await http.get(`${GET_USER_URL}/${id}`);
+    return response.data;
+}
+
 export async function updateUser(data) {
     const { id, token } = getIdAndToken();
     if (id && token) {
-        const httpResponse = await http.patch(
-            `${GET_USER_URL}/${id}?access_token=${token}`,
-            data
-        );
+        const url = setUrlWithToken(`${GET_USER_URL}/${id}`);
+        const httpResponse = await http.patch(url, data);
         return httpResponse.data;
     }
 
@@ -38,6 +33,6 @@ export async function updateUser(data) {
 }
 
 export async function getUsers(params) {
-    const response = await http.get(GET_USER_URL, {params});
+    const response = await http.get(GET_USER_URL, { params });
     return response.data;
 }

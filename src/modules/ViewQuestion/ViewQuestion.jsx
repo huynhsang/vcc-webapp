@@ -5,7 +5,6 @@ import AnswersUI from './AnswersUI';
 import produce from 'immer';
 
 import { useTranslation } from 'react-i18next';
-import CoreService from '../../global/CoreService';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 
 import {
@@ -15,7 +14,7 @@ import {
 
 import { QuestionComponent } from '../../component/QuestionComponent';
 
-const { questionService } = CoreService;
+import { getQuestionWithSlug } from '../../services/question.service';
 
 const ViewQuestion = ({
     match,
@@ -31,14 +30,10 @@ const ViewQuestion = ({
     const slug = match && match.params && match.params.slug;
     React.useEffect(() => {
         if (slug) {
-            questionService.findOneBySlug(slug).then((result: Result) => {
-                if (
-                    result.success &&
-                    result.data &&
-                    Object.keys(result.data).length > 0
-                ) {
-                    setQuestion(result.data);
-                    setAnswers(result.data.answers);
+            getQuestionWithSlug(slug).then(data => {
+                if (data) {
+                    setQuestion(data);
+                    setAnswers(data.answers);
                 }
             });
         }

@@ -3,19 +3,15 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { Link, withRouter } from 'react-router-dom';
-import CoreService from '../../global/CoreService';
-import Result from '../../global/Result';
 
 import UserInfoRouter from './UserInfoRouter';
-import CookieConstant from '../../common/constant/CookieConstant';
-import CookieHelper from '../../common/util/CookieHelper';
 
-const { getCookie } = CookieHelper;
-const { userIdKey } = CookieConstant;
+import { getUser } from '../../services/user.service';
+
+import { getIdAndToken } from '../../utils/cookie-tools';
+
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
-
-const { accountService } = CoreService;
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -36,15 +32,12 @@ const UserProfile = ({ subRoutes, location, history }) => {
     const [profile, setProfile] = React.useState({});
 
     const userId = window.location.pathname.split('/')[2];
-    const isMainUserProfile = getCookie(userIdKey) === userId;
+    const { id } = getIdAndToken();
+    const isMainUserProfile = id === userId;
 
     React.useEffect(() => {
         if (userId) {
-            accountService.findOneById(userId).then((result: Result) => {
-                if (result.success) {
-                    setProfile(result.data);
-                }
-            });
+            getUser().then(data => setProfile(data));
         }
     }, [userId]);
 

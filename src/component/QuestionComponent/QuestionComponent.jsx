@@ -2,8 +2,6 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { UserVoteQuestion } from '../../domain/UserVoteQuestion';
-
 import connect from 'react-redux/es/connect/connect';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import {
@@ -12,10 +10,8 @@ import {
 } from '../../actions/sweetAlert';
 
 import UserLogo from '../UserLogo';
-import Result from '../../global/Result';
-import CoreService from '../../global/CoreService';
 
-const { userVoteService } = CoreService;
+import { voteQuestion, reVoteQuestion } from '../../services/question.service';
 
 const QuestionComponent = ({
     question,
@@ -47,38 +43,34 @@ const QuestionComponent = ({
         }
         setLoader({ questionId: id });
 
-        const data: UserVoteQuestion = {
-            questionId: question.id,
-            isPositiveVote
-        };
-
+        const action = isPositiveVote ? 'up' : 'down';
         if (isVotedBefore) {
-            data.id = question.votes[0].id;
-            data.userId = question.votes[0].userId;
-            userVoteService.reVoteQuestion(data).then((result: Result) => {
-                if (result.success) {
+            reVoteQuestion(id, question.votes[0].id, action)
+                .then(() => {
                     updateVoteQuestion({
                         isPositiveVote,
                         numberOfVotes:
                             numberOfVotes + 2 * (isPositiveVote ? 1 : -1)
                     });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+                    setLoader(false);
+                })
+                .catch(err => {
+                    showErrorNotification(err.response.data);
+                    setLoader(false);
+                });
         } else {
-            userVoteService.voteQuestion(data).then((result: Result) => {
-                if (result.success) {
+            voteQuestion(id, action)
+                .then(data => {
                     updateVoteQuestion({
-                        votes: [result.data],
+                        votes: [data],
                         numberOfVotes: numberOfVotes + (isPositiveVote ? 1 : -1)
                     });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+                    setLoader(false);
+                })
+                .catch(err => {
+                    showErrorNotification(err.response.data);
+                    setLoader(false);
+                });
         }
     };
 

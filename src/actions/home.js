@@ -2,11 +2,10 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 
 import { getUsers } from '../services/user.service';
-import { getTrendingTags } from '../services/sub-category.service';
-import {
-    getQuestions,
-    questionsFilterGenerator
-} from '../services/question.service';
+import { getTrendingTags } from '../services/tags.service';
+import { getQuestions } from '../services/question.service';
+
+import { questionsFilterGenerator } from '../utils/question';
 
 const {
     GET_TOP_USERS_REQUEST,
@@ -117,8 +116,7 @@ export const getTrendingTagsFn = () => {
         const params = {
             filter: {
                 skip: 0,
-                limit: 5,
-                order: 'numberOfQuestions DESC'
+                limit: 5
             }
         };
         getTrendingTags(params)

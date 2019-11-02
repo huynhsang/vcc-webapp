@@ -4,9 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ExperienceRequestBuilder from '../../../../global/ExperienceRequest';
 import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
-import CoreService from '../../../../global/CoreService';
 
 import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 
@@ -20,8 +18,6 @@ import CookieConstant from '../../../../common/constant/CookieConstant';
 import CookieHelper from '../../../../common/util/CookieHelper';
 const { getCookie } = CookieHelper;
 const { userIdKey } = CookieConstant;
-
-const { experienceService } = CoreService;
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -76,23 +72,23 @@ const Experiences = ({
         endDate,
         description
     }) => {
-        const registerExperience = ExperienceRequestBuilder.build(
-            title,
-            employment.label,
-            company,
-            location,
-            isWorking,
-            startDate,
-            endDate,
-            description
-        );
-        experienceService.create(registerExperience).then((result: Result) => {
-            if (result.success) {
-                showSuccessNotification('Success!', 'Leaved an answer');
-            } else {
-                showErrorNotification(result.data);
-            }
-        });
+        // const registerExperience = ExperienceRequestBuilder.build(
+        //     title,
+        //     employment.label,
+        //     company,
+        //     location,
+        //     isWorking,
+        //     startDate,
+        //     endDate,
+        //     description
+        // );
+        // experienceService.create(registerExperience).then((result: Result) => {
+        //     if (result.success) {
+        //         showSuccessNotification('Success!', 'Leaved an answer');
+        //     } else {
+        //         showErrorNotification(result.data);
+        //     }
+        // });
     };
 
     const experiencesRender = experiences.map(val => (

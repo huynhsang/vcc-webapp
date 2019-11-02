@@ -8,7 +8,6 @@ import 'easymde/dist/easymde.min.css';
 
 import { useTranslation } from 'react-i18next';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
-import CoreService from '../../global/CoreService';
 import {
     showSuccessAlertFn,
     showErrorAlertFn,
@@ -18,7 +17,7 @@ import {
 import AnswerComponent from './Answer';
 import produce from 'immer';
 
-const { answerService } = CoreService;
+import { createAnswer } from '../../services/answer.service';
 
 const AnswersUI = ({
     history,
@@ -45,24 +44,17 @@ const AnswersUI = ({
 
     const onSubmit = event => {
         event.preventDefault();
-
-        const descrLength: number = answerBody.length / 3;
-        const answerRequest: Answer = {
-            body: answerBody,
-            description: answerBody.substring(0, descrLength),
-            questionId: question.id
-        };
-        answerService.create(answerRequest).then((result: Result) => {
-            if (result.success) {
+        createAnswer(question.id, answerBody)
+            .then((data) => {
                 const answers = answersEditted || [];
-                answers.unshift(result.data);
+                answers.unshift(data);
                 showSuccessNotification('Success!', 'Leaved an answer');
                 setAnswersEditted(answers);
                 setAnswerBody('');
-            } else {
-                showErrorNotification(result.data);
-            }
-        });
+            })
+            .catch(err => {
+                showErrorNotification(err.response.data);
+            });
     };
 
     const handleChangeAnswerBody = value => {
@@ -192,7 +184,7 @@ const AnswersUI = ({
     );
 };
 
-const mapStateToProps = ({ App: {isAuthenticated} }) => ({
+const mapStateToProps = ({ App: { isAuthenticated } }) => ({
     isAuthenticated
 });
 

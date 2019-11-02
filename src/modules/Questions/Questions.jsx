@@ -1,20 +1,15 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import FilterBuilder from '../../global/Filter';
-// import { User } from '../../domain/User';
-// import { Question } from '../../domain/Question';
-// import { Category } from '../../domain/Category';
-// import { SubCategory } from '../../domain/SubCategory';
-import Result from '../../global/Result';
+
 import produce from 'immer';
 
 import TopNav from './TopNav';
 
 import { useTranslation } from 'react-i18next';
-import CoreService from '../../global/CoreService';
 import { QuestionComponent } from '../../component/QuestionComponent';
 
-const { questionService } = CoreService;
+import { getQuestions } from '../../services/question.service';
 
 const orderMaps = {
     'recent-questions': 'createdOn DESC',
@@ -57,10 +52,8 @@ const MainPage = ({ location, history }) => {
 
     //Load question when filter has been updated
     React.useEffect(() => {
-        questionService.findAll(filter).then((result: Result) => {
-            if (result.success) {
-                setQuestions(result.data);
-            }
+        getQuestions(filter).then(data => {
+            setQuestions(data);
         });
     }, [filter]);
 

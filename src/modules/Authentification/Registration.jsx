@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import RegisterRequestBuilder from '../../global/RegisterRequest';
-import AccountJWTService from '../../services/accountJWT.service';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
+
+import { register } from '../../services/account.service';
 
 const LoaderWrapper = styled.div`
     width: 100%;
@@ -36,30 +36,23 @@ const Registration = ({
 
     const onSubmit = event => {
         event.preventDefault();
-        const registerRequest = RegisterRequestBuilder.build(
-            password,
-            email,
-            firstName,
-            lastName,
-            null
-        );
+        const data = { password, email, firstName, lastName };
 
         setLoader(true);
-        AccountJWTService.createAccount(registerRequest).then(
-            (result: Result) => {
+        register(data)
+            .then(() => {
                 setLoader(false);
-                if (result.isSuccess()) {
-                    showSuccessAlert(
-                        'Success!',
-                        'Check your email to complete the registration!'
-                    );
-                    hideAuthentification();
-                    history.push('/home');
-                } else {
-                    showErrorAlert(result.data);
-                }
-            }
-        );
+                showSuccessAlert(
+                    'Success!',
+                    'Check your email to complete the registration!'
+                );
+                hideAuthentification();
+                history.push('/home');
+            })
+            .catch(err => {
+                setLoader(false);
+                showErrorAlert(err.response.data.error.message);
+            });
     };
 
     if (loader) {

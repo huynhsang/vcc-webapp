@@ -2,10 +2,9 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import AccountJWTService from '../../services/accountJWT.service';
-import Result from '../../global/Result';
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
+
+import { setNewPassword } from '../../services/account.service';
 
 const ResetPassword = ({
     location,
@@ -31,22 +30,20 @@ const ResetPassword = ({
         const urlParams = new URLSearchParams(location.search);
         const token = urlParams.get('accessToken');
 
-        AccountJWTService.doSetNewPassword(token, {
-            newPassword: password
-        }).then((result: Result) => {
-            if (result.isSuccess()) {
+        setNewPassword(token, password)
+            .then(() => {
                 showSuccessAlert(
                     'Success!',
                     t('authentification_your_password_has_been_reset')
                 );
                 history.push('/home/questions');
-            } else {
+            })
+            .catch(err => {
                 showErrorAlert(
                     'Error!',
-                    ApplicationUtil.getErrorMsg(result.data)
+                    showErrorAlert(err.response.data.error.message)
                 );
-            }
-        });
+            });
     };
 
     return (

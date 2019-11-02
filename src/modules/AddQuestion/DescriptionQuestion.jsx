@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
-import PropTypes from 'prop-types';
 
 const DescriptionQuestion = ({ setBody, body, next, previous }) => {
   const { t } = useTranslation();
@@ -48,22 +47,15 @@ const DescriptionQuestion = ({ setBody, body, next, previous }) => {
       />
 
       <div className="mt3 text-right">
-        <button className="btn btn-light mr3" onClick={() => previous('Title')}>
+        <button className="btn btn-light mr3" onClick={previous}>
           {t('common_previous_step')}
         </button>
-        <button className="btn btn-primary" onClick={() => next('Review')}>
+        <button className="btn btn-primary" onClick={next}>
           {t('common_next')}
         </button>
       </div>
     </section>
   );
-};
-
-DescriptionQuestion.propTypes = {
-  body: PropTypes.string.isRequired,
-  next: PropTypes.func.isRequired,
-  previous: PropTypes.func.isRequired,
-  setBody: PropTypes.func.isRequired,
 };
 
 export default DescriptionQuestion;

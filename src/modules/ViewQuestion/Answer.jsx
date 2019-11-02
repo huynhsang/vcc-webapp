@@ -4,13 +4,11 @@ import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import RootScope from '../../global/RootScope';
 import ReactMarkdown from 'react-markdown';
-import CoreService from '../../global/CoreService';
 import UserLogo from '../../component/UserLogo';
-import type { UserVoteAnswer } from '../../domain/UserVoteAnswer';
-import Result from '../../global/Result';
 import type { User } from '../../domain/User';
 
-const { userVoteService, questionService } = CoreService;
+import { approveAnswer } from '../../services/question.service';
+import { voteAnswer, reVoteAnswer } from '../../services/answer.service';
 
 const AnswerComponent = ({
     answer,
@@ -40,20 +38,18 @@ const AnswerComponent = ({
     const showLoader: boolean = loader && loader.answerId === answer.id;
     const hideApprove: boolean = answer.answerBy === question.askedBy;
 
-    const approveAnswer = () => {
+    const approveAnswerFn = () => {
         setDisableApproveBtn(true);
-        questionService
-            .doApproveAnswer(question.id, answer.id)
-            .then((result: Result) => {
-                if (result.success) {
-                    setDisableApproveBtn(false);
-                    updateQuestion({
-                        ...question,
-                        hasAcceptedAnswer: (answer.isTheBest = true)
-                    });
-                } else {
-                    showErrorNotification(result.data);
-                }
+        approveAnswer(question.id, answer.id)
+            .then(() => {
+                setDisableApproveBtn(false);
+                updateQuestion({
+                    ...question,
+                    hasAcceptedAnswer: (answer.isTheBest = true)
+                });
+            })
+            .catch(err => {
+                showErrorNotification(err.response.data);
             });
     };
 
@@ -64,38 +60,37 @@ const AnswerComponent = ({
             return showConfirmToLogin();
         }
         setLoader({ answerId: answer.id });
-        const data: UserVoteAnswer = {
-            answerId: answer.id,
-            isPositiveVote
-        };
+
+        const action = isPositiveVote ? 'up' : 'down';
+
         if (isVotedBefore) {
-            data.id = answer.votes[0].id;
-            data.userId = answer.votes[0].userId;
-            userVoteService.reVoteAnswer(data).then((result: Result) => {
-                if (result.success) {
+            reVoteAnswer(answer.id, answer.votes[0].id, action)
+                .then(() => {
                     updateAnswer({
                         isPositiveVote,
                         numberOfVotes:
                             numberOfVotes + 2 * (isPositiveVote ? 1 : -1)
                     });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+                    setLoader(false);
+                })
+                .catch(err => {
+                    showErrorNotification(err.response.data);
+                    setLoader(false);
+                });
         } else {
-            userVoteService.voteAnswer(data).then((result: Result) => {
-                if (result.success) {
+            voteAnswer(answer.id, action)
+                .then(data => {
                     updateAnswer({
-                        votes: [result.data],
+                        votes: [data],
                         numberOfVotes:
                             numberOfVotes + 1 * (isPositiveVote ? 1 : -1)
                     });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+                    setLoader(false);
+                })
+                .catch(err => {
+                    showErrorNotification(err.response.data);
+                    setLoader(false);
+                });
         }
     };
 
@@ -118,7 +113,7 @@ const AnswerComponent = ({
                             <button
                                 className="btn btn-approve"
                                 disabled={disableApproveBtn}
-                                onClick={approveAnswer}
+                                onClick={approveAnswerFn}
                             >
                                 <i className="fas fa-check" /> {t('Approve')}
                             </button>

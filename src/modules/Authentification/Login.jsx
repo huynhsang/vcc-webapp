@@ -1,11 +1,9 @@
 import React from 'react';
 import LoginRequestBuilder from '../../global/LoginRequest';
 import { useTranslation } from 'react-i18next';
-import AccountJWTService from '../../services/accountJWT.service';
-import CookieHelper from '../../common/util/CookieHelper';
-import CookieConstant from '../../common/constant/CookieConstant';
 import RootScope from '../../global/RootScope';
-import Result from '../../global/Result';
+
+import { login } from '../../services/account.service';
 
 const Login = ({
     history,
@@ -25,31 +23,16 @@ const Login = ({
         event.preventDefault();
         const data = LoginRequestBuilder.build(email, password, rememberMe);
 
-        AccountJWTService.doAuthenticate(data).then((result: Result) => {
-            if (result.isSuccess()) {
-                RootScope.token = result.data.id;
-                RootScope.userId = result.data.userId;
-                const exdays = data.rememberMe
-                    ? CookieConstant.maxExDay
-                    : CookieConstant.minExDay;
-                CookieHelper.setCookie(
-                    CookieConstant.jwtTokenName,
-                    RootScope.token,
-                    exdays
-                );
-                CookieHelper.setCookie(
-                    CookieConstant.userIdKey,
-                    RootScope.userId,
-                    exdays
-                );
+        login(data)
+            .then(data => {
                 showSuccessAlert('Success!', 'Logged in');
                 fetchUserFromCookie();
                 history.push('/home/questions');
-            } else {
+            })
+            .catch(err => {
                 RootScope.resetAuthValues();
-                showErrorAlert(result.data);
-            }
-        });
+                showErrorAlert(err.response.data.error.message);
+            });
     };
 
     return (

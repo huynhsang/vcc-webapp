@@ -2,41 +2,20 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Autocomplete from '../../component/Autocomplete/AutoComplete';
-import PropTypes from 'prop-types';
-import { SubCategory } from '../../domain/SubCategory';
-import CoreService from '../../global/CoreService';
 
-const { subCategoryService } = CoreService;
-
-const TagsQuestion = ({ category, selectedTags, next, previous }) => {
+const TagsQuestion = ({ tags, tagIds, setTagIds, next, previous }) => {
     const { t } = useTranslation();
 
-    const [tagsEditted, setTagsEditted] = React.useState(selectedTags || []);
-    const [suggestions, setSuggestion] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    if (!tags) {
+        return <div />;
+    }
 
-    React.useEffect(() => {
-        setIsLoading(true);
-        subCategoryService
-            .getSubCategoriesByCategory(category)
-            .then((result: Result) => {
-                if (result.success) {
-                    setSuggestion(result.data);
-                } else {
-                    // Todo: handle error here
-                }
-                setIsLoading(false);
-            });
-    }, [category]);
-
-    const onSelectTag = (tag: SubCategory) => {
-        setTagsEditted(state => [...state, tag]);
-        setSuggestion(state => state.filter(val => val.id !== tag.id));
+    const onSelectTag = tag => {
+        setTagIds([...tagIds, tag.id]);
     };
 
-    const onRemoveTag = (tag: SubCategory) => {
-        setSuggestion(state => [...state, tag]);
-        setTagsEditted(state => state.filter(val => val.id !== tag.id));
+    const onRemoveTag = id => {
+        setTagIds(tagIds.filter(tag => tag.id !== id));
     };
 
     return (
@@ -65,58 +44,42 @@ const TagsQuestion = ({ category, selectedTags, next, previous }) => {
                 </p>
             </div>
 
-            {!isLoading && (
-                <>
-                    <div className="mt3">
-                        <p className="font-weight-700 mb2">
-                            {t('common_tags')}
-                        </p>
-                        <div className="tagcloud">
-                            <div className="question-tags">
-                                {tagsEditted.map((tag, index) => {
-                                    return (
-                                        <button
-                                            key={index}
-                                            className="module"
-                                            onClick={() => onRemoveTag(tag)}
-                                        >
-                                            {tag.nameEn}{' '}
-                                            <i className="fas fa-times" />
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                        <Autocomplete
-                            suggestions={suggestions}
-                            filterBy="nameEn"
-                            onSelected={onSelectTag}
-                        />
+            <div className="mt3">
+                <p className="font-weight-700 mb2">{t('common_tags')}</p>
+                <div className="tagcloud">
+                    <div className="question-tags">
+                        {tags
+                            .filter(t => tagIds.includes(t.id))
+                            .map((tag, index) => {
+                                return (
+                                    <button
+                                        key={index}
+                                        className="module"
+                                        onClick={() => onRemoveTag(tag.id)}
+                                    >
+                                        {tag.nameEn}{' '}
+                                        <i className="fas fa-times" />
+                                    </button>
+                                );
+                            })}
                     </div>
-                    <div className="mt3 text-right">
-                        <button
-                            className="btn btn-light mr3"
-                            onClick={() => previous('Type')}
-                        >
-                            {t('common_previous_step')}
-                        </button>
-                        <button
-                            className="btn btn-primary"
-                            onClick={() => next(tagsEditted)}
-                        >
-                            {t('common_next')}
-                        </button>
-                    </div>
-                </>
-            )}
+                </div>
+                <Autocomplete
+                    suggestions={tags.filter(tag => !tagIds.includes(tag.id))}
+                    filterBy="nameEn"
+                    onSelected={onSelectTag}
+                />
+            </div>
+            <div className="mt3 text-right">
+                <button className="btn btn-light mr3" onClick={previous}>
+                    {t('common_previous_step')}
+                </button>
+                <button className="btn btn-primary" onClick={next}>
+                    {t('common_next')}
+                </button>
+            </div>
         </section>
     );
-};
-
-TagsQuestion.propTypes = {
-    next: PropTypes.func.isRequired,
-    previous: PropTypes.func.isRequired,
-    selectedTags: PropTypes.array.isRequired,
 };
 
 export default TagsQuestion;

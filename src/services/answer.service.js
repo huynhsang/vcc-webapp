@@ -1,34 +1,32 @@
-import Result from '../global/Result';
-import BasicService from '../common/abstract/services/BasicService';
-import type {Filter} from '../global/Filter';
-import RootScope from '../global/RootScope';
-import type {IAnswerService} from '../common/abstract/services/IAnswerService';
-import FilterBuilder from '../global/Filter';
+import http from './https';
+import { setUrlWithToken } from '../utils/url';
 
-const ANSWER_API = RootScope.appApiUrl + 'answers';
+const ANSWER_URL = 'answers';
+const VOTE_ANSWER_URL = (id) => `answers/${id}/vote`;
 
-export default class AnswerService extends BasicService implements IAnswerService {
+export async function createAnswer(questionId, body) {
+    const url = setUrlWithToken(ANSWER_URL);
+    const response = await http.post(url, { questionId, body });
+    return response.data;
+}
 
-    create(data: any): Result {
-        const fullUrl: string = AnswerService.buildURLWithToken(ANSWER_API);
-        return AnswerService.post(fullUrl, data, RootScope.axiosDefaultConfig);
-    }
+export async function editAnswer(data) {
+    const url = setUrlWithToken(ANSWER_URL);
+    const response = await http.put(url, data);
+    return response.data;
+}
 
-    findAll(filter: Filter): Result {
-        return super.findAll(filter);
-    }
+export async function voteAnswer(id, action) {
+    const url = setUrlWithToken(VOTE_ANSWER_URL(id));
+    const response = await http.post(url, { action });
+    return response.data;
+}
 
-    deleteById(id: number): Result {
-        return super.deleteById(id);
-    }
-
-    getAnswersByQuestionId(id: number, filter: Filter): Result {
-        const api: string = `${ANSWER_API}/find-all-by-question-id?id=${id}`;
-        const fullUrl: string = `${api}&${FilterBuilder.toString(filter)}`;
-        return AnswerService.get(fullUrl, RootScope.axiosDefaultConfig);
-    }
-
-    static builder(): IAnswerService {
-        return new AnswerService();
-    }
+export async function reVoteAnswer(answerId, voteId, action) {
+    const url = setUrlWithToken(VOTE_ANSWER_URL(answerId));
+    const response = await http.put(url, {
+        voteId,
+        action
+    });
+    return response.data;
 }

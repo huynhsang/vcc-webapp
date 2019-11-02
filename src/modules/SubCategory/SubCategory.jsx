@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import Result from '../../global/Result';
-import CoreService from '../../global/CoreService';
-
 import { useTranslation } from 'react-i18next';
-const { subCategoryService } = CoreService;
+import { getTagList } from '../../services/tags.service';
 
 const SubCategory = () => {
     const { t } = useTranslation();
@@ -13,13 +9,11 @@ const SubCategory = () => {
     const [subCategories, setSubCategories] = React.useState([]);
 
     React.useEffect(() => {
-        subCategoryService.findAll({}).then((result: Result) => {
-            if (result.success) {
-                setSubCategories(result.data);
-            } else {
-                // Todo: handle error here
-            }
-        });
+        getTagList()
+            .then(data => {
+                setSubCategories(data);
+            })
+            .catch(err => console.log(err.message));
     }, []);
 
     return (

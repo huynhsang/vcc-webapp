@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import RootScope from '../../global/RootScope';
-
-import AccountJWTService from '../../services/accountJWT.service';
+import { resetPassword } from '../../services/account.service';
 
 const ForgotPassword = ({
     setToLogin,
@@ -18,18 +17,18 @@ const ForgotPassword = ({
 
     const onSubmit = event => {
         event.preventDefault();
-        AccountJWTService.doResetPassword({ email }).then((result: Result) => {
-            if (result.isSuccess()) {
+        resetPassword(email)
+            .then(() => {
                 hideAuthentification();
                 showSuccessAlert(
                     'Success!',
                     t('forgot_password_please_verify_your_email')
                 );
-            } else {
+            })
+            .catch(err => {
                 RootScope.resetAuthValues();
-                showErrorAlert(result.data);
-            }
-        });
+                showErrorAlert(err.response.data.error.message);
+            });
     };
 
     return (
