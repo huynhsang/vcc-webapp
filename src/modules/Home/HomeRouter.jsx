@@ -4,7 +4,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import { Questions } from '../Questions';
 import { SubCategory } from '../SubCategory';
 import { Badges } from '../Badges';
-import { ViewQuestion } from '../ViewQuestion';
+import { QuestionDetail } from '../QuestionDetail';
 
 const HomeRouter = ({ match }) => {
     return (
@@ -16,7 +16,7 @@ const HomeRouter = ({ match }) => {
             <Route
                 exact
                 path={`${match.path}/question/:slug/view`}
-                component={ViewQuestion}
+                component={QuestionDetail}
             />
             <Route
                 path={`${match.path}/tags`}

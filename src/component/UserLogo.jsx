@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const UserLogo = ({ user }) => {
+import DefaultUserLogo from '../images/default-user-logo.png';
 
+const UserLogo = ({ user }) => {
     return (
         <div className="author-image author-image-42">
             <Link to={`/users/${user.id}`}>
@@ -12,7 +13,7 @@ const UserLogo = ({ user }) => {
                         alt=""
                         width="42"
                         height="42"
-                        src={user.avatar}
+                        src={user.avatar || DefaultUserLogo}
                     />
                 </span>
             </Link>

@@ -7,7 +7,7 @@ import { Dialog } from 'primereact/dialog';
 
 import { toggleContactUsFn } from '../../actions/app';
 
-import VCNCLogo from '../../image/VCNC-logo.png';
+import VCNCLogo from '../../images/VCNC-logo.png';
 
 const REGISTRE_MENTOR_FORM_LINK = 'google.com';
 const REGISTRE_MENTEE_FORM_LINK = 'google.com';

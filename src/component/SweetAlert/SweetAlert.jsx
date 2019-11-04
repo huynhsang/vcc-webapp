@@ -39,8 +39,8 @@ const MySweetAlert = ({ alertInfo, hideAlert, setToLogin, history }) => {
     return <SweetAlertUI {...sweetAlertProps} />;
 };
 
-const mapStateToProps = ({ AlertState }) => ({
-    alertInfo: AlertState
+const mapStateToProps = ({ alertState }) => ({
+    alertInfo: alertState
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -24,8 +24,7 @@ const AddQuestion = ({
     showSuccessAlert,
     showErrorAlert,
     App,
-    showConfirmToLogin,
-    AlertState
+    showConfirmToLogin
 }) => {
     const { t } = useTranslation();
 
@@ -85,7 +84,7 @@ const AddQuestion = ({
     }
 
     const postQuestion = () => {
-        createQuestion({...question, isPublic : true})
+        createQuestion({ ...question, isPublic: true })
             .then(data => {
                 showSuccessAlert('Success!', 'Created a Question');
                 history.push(`/home/question/${data.slug}/view`);
@@ -148,9 +147,8 @@ const AddQuestion = ({
     );
 };
 
-const mapStateToProps = ({ App, AlertState }) => ({
-    App,
-    AlertState
+const mapStateToProps = ({ App }) => ({
+    App
 });
 
 const mapDispatchToProp = dispatch => ({
