@@ -36,11 +36,7 @@ const MyProfile = ({
     const [action, setAction] = React.useState(items[0].value);
     const userId = location.pathname.split('/')[2];
 
-    if (
-        !isAuthenticated ||
-        !currentUser ||
-        parseInt(userId) !== currentUser.id
-    ) {
+    if (!isAuthenticated || !currentUser || userId !== currentUser.id) {
         return <div />;
     }
 

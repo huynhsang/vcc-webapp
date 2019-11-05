@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getTagList } from '../../services/tags.service';
+import { getTags } from '../../services/tags.service';
 
 const SubCategory = () => {
     const { t } = useTranslation();
@@ -9,7 +9,7 @@ const SubCategory = () => {
     const [subCategories, setSubCategories] = React.useState([]);
 
     React.useEffect(() => {
-        getTagList()
+        getTags()
             .then(data => {
                 setSubCategories(data);
             })

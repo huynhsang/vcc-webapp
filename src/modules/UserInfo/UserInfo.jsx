@@ -10,6 +10,7 @@ import { getUser } from '../../services/user.service';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 
+import DefaultUserLogo from '../../images/default-user-logo.png';
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
@@ -37,7 +38,7 @@ const UserProfile = ({ subRoutes, location, history }) => {
 
     React.useEffect(() => {
         if (userId) {
-            getUser().then(data => setProfile(data));
+            getUser(userId).then(data => setProfile(data));
         }
     }, [userId]);
 
@@ -53,16 +54,16 @@ const UserProfile = ({ subRoutes, location, history }) => {
                 <section
                     className="profile-background-image"
                     style={{
-                        backgroundImage: `url('${BgPhoto}')`,
+                        backgroundImage: `url('${BgPhoto }')`,
                         backgroundPosition: 'center center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat'
                     }}
-                ></section>
+                />
                 <Wrapper className="user-container info-user position-relative col-lg-3">
                     <div className="avatar-user">
                         <img
-                            src={profile.avatar}
+                            src={profile.avatar || DefaultUserLogo}
                             width="200"
                             alt=""
                             className="img-responsive"

@@ -1,4 +1,4 @@
-const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;
+// const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;
 
 export const getDefaultFields = () => [
     'id',
@@ -16,25 +16,25 @@ export const questionsFilterGenerator = ({
     order = null,
     skip = 0,
     limit = 5,
-    include = [
-        {
-            relation: 'askedBy',
-            scope: {
-                fields: getDefaultFields()
-            }
-        }
-    ],
-    where = {
-        created: {
-            gt: new Date(Date.now() - ONE_MONTH)
-        }
-    }
+    // include = [
+    //     {
+    //         relation: 'askedBy',
+    //         scope: {
+    //             fields: getDefaultFields()
+    //         }
+    //     }
+    // ],
+    // where = {
+    //     created: {
+    //         gt: new Date(Date.now() - ONE_MONTH)
+    //     }
+    // }
 }) => ({
     order,
     skip,
     limit,
-    include,
-    where
+    // include,
+    // where
 });
 
 // order

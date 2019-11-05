@@ -96,7 +96,7 @@ const Header = ({
     const UserMenu = !!currentUser && (
         <ul style={userMenuStyle} ref={outClickRef}>
             <li>
-                <Link to={`/users/${getCookie(userIdKey)}/my-profile`}>
+                <Link to={`/users/${getCookie(userIdKey)}/general`}>
                     <i className="icon-user" />
                     {t('header_user_profile')}
                 </Link>

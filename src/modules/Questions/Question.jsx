@@ -6,8 +6,8 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
 import {
-  showErrorAlertFn,
-  showConfirmToLoginFn
+    showErrorAlertFn,
+    showConfirmToLoginFn
 } from '../../actions/sweetAlert';
 
 import UserLogo from '../../component/UserLogo';
@@ -23,201 +23,216 @@ import { getIdAndToken } from '../../utils/cookie-tools';
 import { voteQuestionFn, reVoteQuestionFn } from '../../actions/questions';
 
 const Wrapper = styled.article`
-  .entry-date {
-    color: black;
-  }
+    .entry-date {
+        color: black;
+    }
 
-  .post-cat span {
-    color: black;
-  }
-  /* 
+    .post-cat span {
+        color: black;
+    }
+    /* 
   .badge-span {
     background-color: #30a96f;
   } */
 `;
 
 const Question = ({
-  question,
-  history,
-  showErrorNotification,
-  showConfirmToLogin,
-  isShownAnswerButton = true,
-  isAuthenticated,
-  voteQuestion,
-  reVoteQuestion,
-  questionsReducer
+    question,
+    history,
+    showErrorNotification,
+    showConfirmToLogin,
+    isShownAnswerButton = true,
+    isAuthenticated,
+    voteQuestion,
+    reVoteQuestion,
+    questionsReducer
 }) => {
-  const { t } = useTranslation();
+    const { t } = useTranslation();
 
-  const { votingQuestionId } = questionsReducer;
+    const { votingQuestionId } = questionsReducer;
 
-  const {
-    id,
-    askedBy = {},
-    body,
-    categoryItem,
-    hasAcceptedAnswer,
-    created,
-    votes = [],
-    upVoteCount,
-    downVoteCount,
-    answerCount,
-    viewCount,
-    slug,
-    tagList
-  } = question;
+    const {
+        id,
+        askedBy = {},
+        body,
+        categoryItem,
+        bestAnswerItem,
+        created,
+        votes = [],
+        upVoteCount,
+        downVoteCount,
+        answerCount,
+        viewCount,
+        slug,
+        tagList
+    } = question;
 
-  const { id: currentUserId } = getIdAndToken();
+    const { id: currentUserId } = getIdAndToken();
 
-  const lastVote = votes.find((vote)=> vote.ownerId === currentUserId );
+    const lastVote = votes.find(vote => vote.ownerId === currentUserId);
 
-  const handleVoteQuestion = isPositiveVote => {
-    if (!isAuthenticated) {
-      return showConfirmToLogin();
-    }
-    const action = isPositiveVote ? 'up' : 'down';
-    if (lastVote) {
-      reVoteQuestion(id, lastVote.id, action);
-    } else {
-      voteQuestion(id, action);
-    }
-  };
+    const handleVoteQuestion = isPositiveVote => {
+        if (!isAuthenticated) {
+            return showConfirmToLogin();
+        }
+        const action = isPositiveVote ? 'up' : 'down';
+        if (lastVote) {
+            reVoteQuestion(id, lastVote.id, action);
+        } else {
+            voteQuestion(id, action);
+        }
+    };
 
-  const bestAnswerClassName = hasAcceptedAnswer
-    ? 'best-answer-meta meta-best-answer'
-    : 'best-answer-meta';
-    
-  const renderVote = isMobile => (
-    <Vote
-      disableUp={
-        currentUserId === askedBy.id ||
-        (lastVote && lastVote.action === 'up')
-      }
-      disableDown={
-        currentUserId === askedBy.id ||
-        (lastVote && lastVote.action === 'down')
-      }
-      isLoading={votingQuestionId === question.id}
-      handleVote={handleVoteQuestion}
-      points={upVoteCount - downVoteCount}
-      isMobile={isMobile}
-    />
-  );
+    const bestAnswerClassName = bestAnswerItem
+        ? 'best-answer-meta meta-best-answer'
+        : 'best-answer-meta';
 
-  const tagsRender = (tagList || []).map(tag => (
-    <a //eslint-disable-line jsx-a11y/anchor-is-valid
-      key={tag.slug}
-      // to={`/comunity/${tag.slug}`}
-    >
-      {getNameByLanguage(tag)}
-    </a>
-  ));
+    const renderVote = isMobile => (
+        <Vote
+            disableUp={
+                currentUserId === askedBy.id ||
+                (lastVote && lastVote.action === 'up')
+            }
+            disableDown={
+                currentUserId === askedBy.id ||
+                (lastVote && lastVote.action === 'down')
+            }
+            isLoading={votingQuestionId === question.id}
+            handleVote={handleVoteQuestion}
+            points={upVoteCount - downVoteCount}
+            isMobile={isMobile}
+        />
+    );
 
-  return (
-    <Wrapper className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
-      {/* <div className="question-sticky-ribbon">
+    const tagsRender = (tagList || []).map(tag => (
+        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+            key={tag.slug}
+            // to={`/comunity/${tag.slug}`}
+        >
+            {getNameByLanguage(tag)}
+        </a>
+    ));
+
+    return (
+        <Wrapper className="article-question article-post clearfix question-vote-image question-type-normal post-118 question type-question status-publish hentry question-category-language question_tags-english question_tags-language">
+            {/* <div className="question-sticky-ribbon">
             <div>Pinned</div>
             </div> */}
-      <div className="single-inner-content">
-        <div className="question-inner">
-          <div className="question-image-vote">
-            <UserLogo user={askedBy} />
-            {renderVote(true)}
-          </div>
-          <div className="question-content question-content-first">
-            <div className="question-header">
-              <Link to={`/home/question/${slug}/view`} className="post-title">
-                {question.title}
-              </Link>
-              <Link
-                to={`/users/${askedBy.id}`}
-                className="post-author"
-                itemProp="url"
-              >
-                {`${askedBy.firstName} ${askedBy.lastName}`}
-              </Link>
-              <Badge points={askedBy.points} />
-              <div className="post-meta">
-                <span className="post-date">
-                  {`${t('common_asked')}: `}
-                  <time className="entry-date published" dateTime={created}>
-                    {` ${new Date(created).toDateString()}`}
-                  </time>
-                </span>
-                <span className="post-cat">
-                  {`${t('common_in')}: `}
-                  <span>{getNameByLanguage(categoryItem)}</span>
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="question-not-mobile question-image-vote question-vote-sticky">
-            {renderVote(false)}
-          </div>
-          <div className="question-content question-content-second">
-            <div className="post-wrap-content">
-              <div className="question-content-text">
-                <div className="all_not_signle_question_content">
-                  <ReactMarkdown source={body} />
+            <div className="single-inner-content">
+                <div className="question-inner">
+                    <div className="question-image-vote">
+                        <UserLogo user={askedBy} />
+                        {renderVote(true)}
+                    </div>
+                    <div className="question-content question-content-first">
+                        <div className="question-header">
+                            <Link
+                                to={`/home/question/${slug}/view`}
+                                className="post-title"
+                            >
+                                {question.title}
+                            </Link>
+                            <Link
+                                to={`/users/${askedBy.id}`}
+                                className="post-author"
+                                itemProp="url"
+                            >
+                                {`${askedBy.firstName} ${askedBy.lastName}`}
+                            </Link>
+                            <Badge points={askedBy.points} />
+                            <div className="post-meta">
+                                <span className="post-date">
+                                    {`${t('common_asked')}: `}
+                                    <time
+                                        className="entry-date published"
+                                        dateTime={created}
+                                    >
+                                        {` ${new Date(created).toDateString()}`}
+                                    </time>
+                                </span>
+                                <span className="post-cat">
+                                    {`${t('common_in')}: `}
+                                    <span>
+                                        {getNameByLanguage(categoryItem)}
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="question-not-mobile question-image-vote question-vote-sticky">
+                        {renderVote(false)}
+                    </div>
+                    <div className="question-content question-content-second">
+                        <div className="post-wrap-content">
+                            <div className="question-content-text">
+                                <div className="all_not_signle_question_content">
+                                    <ReactMarkdown source={body} />
+                                </div>
+                            </div>
+                            {!isEmpty(tagsRender) && (
+                                <div className="tagcloud">
+                                    <div className="question-tags">
+                                        <i className="fas fa-tags" />
+                                        {tagsRender}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                        <div className="wpqa_error" />
+                        <footer className="question-footer">
+                            <ul className="footer-meta">
+                                <li className={bestAnswerClassName}>
+                                    <i className="icon-comment" />
+                                    <Link
+                                        to={`/home/question/${slug}/view/#answers`}
+                                    >{`${answerCount} `}</Link>
+                                    <span className="question-span">
+                                        <Link
+                                            to={`/home/question/${slug}/view/#answers`}
+                                        >
+                                            {t('common_answer')}
+                                        </Link>
+                                    </span>
+                                </li>
+                                <li className="view-stats-meta">
+                                    <i className="icon-eye" />
+                                    {`${viewCount} `}
+                                    <span className="question-span">
+                                        {t('common_views')}
+                                    </span>
+                                </li>
+                            </ul>
+                            <Link
+                                to={`/home/question/${slug}/view`}
+                                className="meta-answer"
+                            >
+                                {t('common_answer')}
+                            </Link>
+                        </footer>
+                    </div>
+                    <div className="clearfix" />
                 </div>
-              </div>
-              {!isEmpty(tagsRender) && (
-                <div className="tagcloud">
-                  <div className="question-tags">
-                    <i className="fas fa-tags" />
-                    {tagsRender}
-                  </div>
-                </div>
-              )}
             </div>
-            <div className="wpqa_error" />
-            <footer className="question-footer">
-              <ul className="footer-meta">
-                <li className={bestAnswerClassName}>
-                  <i className="icon-comment" />
-                  <Link
-                    to={`/home/question/${slug}/view/#answers`}
-                  >{`${answerCount} `}</Link>
-                  <span className="question-span">
-                    <Link to={`/home/question/${slug}/view/#answers`}>
-                      {t('common_answer')}
-                    </Link>
-                  </span>
-                </li>
-                <li className="view-stats-meta">
-                  <i className="icon-eye" />
-                  {`${viewCount} `}
-                  <span className="question-span">{t('common_views')}</span>
-                </li>
-              </ul>
-              <Link to={`/home/question/${slug}/view`} className="meta-answer">
-                {t('common_answer')}
-              </Link>
-            </footer>
-          </div>
-          <div className="clearfix" />
-        </div>
-      </div>
-    </Wrapper>
-  );
+        </Wrapper>
+    );
 };
 
 const mapStateToProps = ({ App: { isAuthenticated }, questionsReducer }) => ({
-  isAuthenticated,
-  questionsReducer
+    isAuthenticated,
+    questionsReducer
 });
 
 const mapDispatchToProps = dispatch => ({
-  showErrorNotification: data =>
-    dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-  showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
-  voteQuestion: (questionId, action) =>
-    dispatch(voteQuestionFn(questionId, action)),
-  reVoteQuestion: (questionId, voteId, action) =>
-    dispatch(reVoteQuestionFn(questionId, voteId, action))
+    showErrorNotification: data =>
+        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
+    voteQuestion: (questionId, action) =>
+        dispatch(voteQuestionFn(questionId, action)),
+    reVoteQuestion: (questionId, voteId, action) =>
+        dispatch(reVoteQuestionFn(questionId, voteId, action))
 });
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(withRouter(Question));
