@@ -5,17 +5,9 @@ import { Calendar } from 'primereact/calendar';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 
-// const defaultExpericence = () => ({
-//     id: '',
-//     title: '',
-//     employment: 0,
-//     company: '',
-//     location: '',
-//     isWorking: false,
-//     startDate: '',
-//     endDate: new Date(),
-//     description: ''
-// });
+import { ProgressSpinner } from 'primereact/progressspinner';
+
+import { isDate } from '../../../../utils/detect-date';
 
 const dialogStyle = {
     width: '95%',
@@ -40,27 +32,61 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
+const LoaderWrapper = styled.div`
+    width: 100%;
+    min-height: 420px;
+    position: relative;
+    & > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+`;
+
 const ExperienceModal = ({
     submit,
     isShowing,
-    setIsShowing,
-    experience = {}
+    onClose,
+    experienceToEdit,
+    isChangingExperience,
+    isFetchingError
 }) => {
     const { t } = useTranslation();
 
+    const [isMounted, setIsMounted] = React.useState(false);
+
     const [isShownError, setIsShownError] = React.useState(false);
 
-    const [experienceEditted, setExperienceEditted] = React.useState(
-        experience
-    );
-
-    const { id } = experience;
+    const [experienceEditted, setExperienceEditted] = React.useState({});
 
     React.useEffect(() => {
-        setExperienceEditted(experience);
-        setIsShownError(false);
+        setIsMounted(true);
+    }, []);
+
+    React.useEffect(() => {
+        const newObj = experienceToEdit ? { ...experienceToEdit } : {};
+
+        if (experienceToEdit) {
+            const { startDate, endDate } = experienceToEdit;
+            if (experienceToEdit && !isDate(startDate)) {
+                newObj.startDate = new Date(startDate);
+            }
+            if (experienceToEdit && !isDate(endDate)) {
+                newObj.endDate = new Date(endDate);
+            }
+        }
+
+        setExperienceEditted(newObj);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [id, isShowing]);
+    }, [experienceToEdit]);
+
+    React.useEffect(() => {
+        if (isMounted && !isChangingExperience && !isFetchingError) {
+            onClose();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isChangingExperience]);
 
     const {
         title = '',
@@ -78,18 +104,10 @@ const ExperienceModal = ({
     };
 
     const onSubmit = () => {
-        if (!title || !company || !startDate || !(!isWorking && endDate)) {
+        if (!title || !company || !startDate || !(isWorking || endDate)) {
             return setIsShownError(true);
         }
-        submit({
-            title,
-            company,
-            location,
-            isWorking,
-            startDate,
-            endDate,
-            description
-        });
+        submit(experienceEditted);
     };
 
     const footer = (
@@ -111,96 +129,113 @@ const ExperienceModal = ({
             style={dialogStyle}
             contentStyle={contentStyle}
             modal={true}
-            onHide={() => setIsShowing(false)}
+            onHide={onClose}
             footer={footer}
             dismissableMask
         >
-            <div>
-                {t('form_your_job')} <span className="required">*</span>
-            </div>
-            <Input
-                type="text"
-                placeholder={t('form_ex_work_manager')}
-                value={title}
-                onChange={ev =>
-                    updateExperienceEditted({ title: ev.target.value })
-                }
-                isShownAlert={isShownError && !title}
-            />
-            <div className="mt2">
-                {t('common_company')} <span className="required">*</span>
-            </div>
-            <Input
-                type="text"
-                value={company}
-                onChange={ev =>
-                    updateExperienceEditted({ company: ev.target.value })
-                }
-                isShownAlert={isShownError && !company}
-            />
-            <div className="mt2">{t('common_location')}</div>
-            <Input
-                type="text"
-                value={location}
-                onChange={ev =>
-                    updateExperienceEditted({ location: ev.target.value })
-                }
-                isShownAlert={isShownError && !location}
-            />
-            <div className="mt2">
-                <input
-                    id="work-1"
-                    type="checkbox"
-                    onChange={ev =>
-                        updateExperienceEditted({
-                            isWorking: ev.target.checked
-                        })
-                    }
-                />
-                <label htmlFor="work-1">{t('form_current_role')}</label>
-            </div>
-            <div className="row mt2">
-                <div className="col-sm-6">
-                    <label>
-                        {t('common_start_date')}
-                        <span className="required"> *</span>
-                    </label>
-                    <Calendar
-                        value={startDate}
-                        placeholder="mm/dd/YY"
+            {isChangingExperience ? (
+                <LoaderWrapper>
+                    <ProgressSpinner />
+                </LoaderWrapper>
+            ) : (
+                <>
+                    <div>
+                        {t('form_your_job')} <span className="required">*</span>
+                    </div>
+                    <Input
+                        type="text"
+                        placeholder={t('form_ex_work_manager')}
+                        value={title}
                         onChange={ev =>
-                            setExperienceEditted({ startDate: ev.value })
+                            updateExperienceEditted({ title: ev.target.value })
                         }
+                        isShownAlert={isShownError && !title}
                     />
-                </div>
-                <div className="col-sm-6">
-                    <label>
-                        {t('common_end_date')}
-                        <span className="required"> *</span>
-                    </label>
-                    {isWorking ? (
-                        <i>{t('common_present')}</i>
-                    ) : (
-                        <Calendar
-                            value={endDate}
-                            placeholder="mm/dd/YY"
+                    <div className="mt2">
+                        {t('common_company')}{' '}
+                        <span className="required">*</span>
+                    </div>
+                    <Input
+                        type="text"
+                        value={company}
+                        onChange={ev =>
+                            updateExperienceEditted({
+                                company: ev.target.value
+                            })
+                        }
+                        isShownAlert={isShownError && !company}
+                    />
+                    <div className="mt2">{t('common_location')}</div>
+                    <Input
+                        type="text"
+                        value={location}
+                        onChange={ev =>
+                            updateExperienceEditted({
+                                location: ev.target.value
+                            })
+                        }
+                        isShownAlert={isShownError && !location}
+                    />
+                    <div className="mt2">
+                        <input
+                            id="work-1"
+                            type="checkbox"
                             onChange={ev =>
                                 updateExperienceEditted({
-                                    endDate: ev.value
+                                    isWorking: ev.target.checked
                                 })
                             }
                         />
-                    )}
-                </div>
-            </div>
-            <div className="mt2">{t('common_description')}</div>
-            <textarea
-                rows="6"
-                value={description}
-                onChange={ev =>
-                    updateExperienceEditted({ description: ev.target.value })
-                }
-            />
+                        <label htmlFor="work-1">{t('form_current_role')}</label>
+                    </div>
+                    <div className="row mt2">
+                        <div className="col-sm-6">
+                            <label>
+                                {t('common_start_date')}
+                                <span className="required"> *</span>
+                            </label>
+                            <Calendar
+                                value={isDate(startDate) ? startDate : null}
+                                placeholder="mm/dd/YY"
+                                onChange={ev =>
+                                    updateExperienceEditted({
+                                        startDate: ev.value
+                                    })
+                                }
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <label>
+                                {t('common_end_date')}
+                                <span className="required"> *</span>
+                            </label>
+                            {isWorking ? (
+                                <i>{t('common_present')}</i>
+                            ) : (
+                                <Calendar
+                                    value={isDate(endDate) ? endDate : null}
+                                    placeholder="mm/dd/YY"
+                                    onChange={ev =>
+                                        updateExperienceEditted({
+                                            endDate: ev.value
+                                        })
+                                    }
+                                />
+                            )}
+                        </div>
+                    </div>
+                    <div className="mt2">{t('common_description')}</div>
+                    <textarea
+                        rows="6"
+                        value={description}
+                        onChange={ev =>
+                            updateExperienceEditted({
+                                description: ev.target.value
+                            })
+                        }
+                    />
+                </>
+            )}
         </Dialog>
     );
 };

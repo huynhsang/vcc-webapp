@@ -9,3 +9,23 @@ export const questionEntity = new schema.Entity(
 );
 
 export const questionsEntity = [questionEntity];
+
+export const educationEntity = new schema.Entity(
+    'educations',
+    {},
+    {
+        idAttribute: 'id'
+    }
+);
+
+export const educationsEntity = [educationEntity];
+
+export const experienceEntity = new schema.Entity(
+    'experiences',
+    {},
+    {
+        idAttribute: 'id'
+    }
+);
+
+export const experiencesEntity = [experienceEntity];

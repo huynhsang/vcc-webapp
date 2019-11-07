@@ -6,7 +6,7 @@ export const getDefaultFields = () => [
     'firstName',
     'lastName',
     'numberOfQuestions',
-    'numberOfAnswers',
+    'answerCount',
     'numberOfBestAnswers',
     'points',
     'level'

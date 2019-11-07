@@ -74,7 +74,7 @@ const AnswersUI = ({
                 <div className="post-inner">
                     <div className="answers-tabs">
                         <h3 className="section-title">
-                            <span>{question.numberOfAnswers} </span>
+                            <span>{question.answerCount} </span>
                             {t('common_answers')}
                         </h3>
                         <div className="answers-tabs-inner">

@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
 
-import { EducationMock } from '../../Mock';
-
 import EducationModal from './EducationModal';
-import CookieConstant from '../../../../common/constant/CookieConstant';
-import CookieHelper from '../../../../common/util/CookieHelper';
-const { getCookie } = CookieHelper;
-const { userIdKey } = CookieConstant;
+
+import {
+    createEducationFn,
+    editEducationFn
+} from '../../../../actions/userInfos';
+
+import { getIdAndToken } from '../../../../utils/cookie-tools';
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -25,7 +27,7 @@ const FlexWrapper = styled.div`
 
 const EducationInfo = styled(FlexWrapper)`
     border-top: 1px solid #707885;
-    min-width: 80%;
+    width: 80%;
     padding-top: 10px;
 `;
 
@@ -37,20 +39,54 @@ const IconWrapper = styled.a`
     }
 `;
 
-const Educations = ({ location }) => {
+const Educations = ({
+    location,
+    createEducation,
+    editEducation,
+    userInfos
+}) => {
     const { t } = useTranslation();
 
-    const [educations, setEducations] = React.useState([]);
+    const {
+        educations,
+        userProfile,
+        isChangingEducation,
+        isFetchingError
+    } = userInfos;
+
     const [isShowingModal, setIsShowingModal] = React.useState(false);
 
+    const [editEducationId, setEditEducationId] = React.useState(null);
+
     React.useEffect(() => {
-        setEducations([EducationMock]);
-    }, []);
+        if (editEducationId) {
+            setIsShowingModal(true);
+        }
+    }, [editEducationId]);
 
-    const userId = location.pathname.split('/')[2];
-    const canEdit = getCookie(userIdKey) === userId;
+    const onSubmit = data => {
+        delete data.modified;
+        delete data.created;
+        if (data.id) {
+            editEducation(data);
+        } else {
+            createEducation({
+                ...data,
+                ownerId: currentUserId
+            });
+        }
+    };
 
-    const educationsRender = educations.map(val => (
+    const onClose = () => {
+        setIsShowingModal(false);
+        setEditEducationId(null);
+    };
+
+    const { id: currentUserId } = getIdAndToken();
+
+    const canEdit = currentUserId === userProfile.id;
+
+    const educationsRender = Object.values(educations).map(val => (
         <FlexWrapper key={val.id} className="box-content--info mt2">
             <div className="logo-company">
                 <img
@@ -68,7 +104,10 @@ const Educations = ({ location }) => {
                     <p className="note pt2">{val.description}</p>
                 </div>
                 {canEdit && (
-                    <IconWrapper className="experience--icon">
+                    <IconWrapper
+                        className="experience--icon"
+                        onClick={() => setEditEducationId(val.id)}
+                    >
                         <i className="pi pi-pencil" />
                     </IconWrapper>
                 )}
@@ -91,11 +130,25 @@ const Educations = ({ location }) => {
             </FlexWrapper>
             {educationsRender}
             <EducationModal
+                submit={onSubmit}
                 isShowing={isShowingModal}
-                setIsShowing={setIsShowingModal}
+                onClose={onClose}
+                educationToEdit={educations[editEducationId]}
+                isChangingEducation={isChangingEducation}
+                isFetchingError={isFetchingError}
             />
         </Wrapper>
     );
 };
 
-export default withRouter(Educations);
+const mapStateToProps = ({ userInfos }) => ({ userInfos });
+
+const mapDispatchToProps = dispatch => ({
+    createEducation: data => dispatch(createEducationFn(data)),
+    editEducation: data => dispatch(editEducationFn(data))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Educations));

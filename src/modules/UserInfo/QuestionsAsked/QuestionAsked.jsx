@@ -70,8 +70,8 @@ const QuestionAsked = ({ question }) => {
                     </span>
                     <span>
                         <InfoTitle>{`${t('common_asked')}:`}</InfoTitle>
-                        <time dateTime={question.createdOn}>
-                            {` ${new Date(question.createdOn).toDateString()}`}
+                        <time dateTime={question.created}>
+                            {` ${new Date(question.created).toDateString()}`}
                         </time>
                     </span>
                 </Infos>

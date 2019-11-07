@@ -128,9 +128,9 @@ const QuestionRelated = ({ question }) => {
                             </Badge>
                             <span>
                                 <InfoTitle>{`${t('common_asked')}:`}</InfoTitle>
-                                <time dateTime={question.createdOn}>
+                                <time dateTime={question.created}>
                                     {` ${new Date(
-                                        question.createdOn
+                                        question.created
                                     ).toDateString()}`}
                                 </time>
                             </span>

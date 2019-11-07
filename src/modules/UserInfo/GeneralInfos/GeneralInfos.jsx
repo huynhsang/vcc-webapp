@@ -27,13 +27,13 @@ const SignWrapper = styled.div`
 `;
 
 const GeneralInfos = ({
-    profile,
+    userInfos,
     showErrorNotification,
     showSuccessNotification
 }) => {
     // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
 
-    const { summary } = profile;
+    const { userProfile : {summary} } = userInfos;
 
     return (
         <>
@@ -48,8 +48,8 @@ const GeneralInfos = ({
     );
 };
 
-const mapStateToProps = ({ App: { isAuthenticated } }) => ({
-    isAuthenticated
+const mapStateToProps = ({ userInfos}) => ({
+    userInfos
 });
 
 const mapDispatchToProps = dispatch => ({

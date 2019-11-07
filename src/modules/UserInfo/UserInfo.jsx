@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { Link, withRouter } from 'react-router-dom';
 
 import UserInfoRouter from './UserInfoRouter';
 
-import { getUser } from '../../services/user.service';
-
 import { getIdAndToken } from '../../utils/cookie-tools';
 
 import DefaultUserLogo from '../../images/default-user-logo.png';
+
+import {
+    getUserProfileFn,
+    getExperiencesFn,
+    getEducationsFn,
+    getQuestionsAskedFn,
+    getQuestionsAnsweredFn
+} from '../../actions/userInfos';
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
@@ -27,10 +34,20 @@ const Badge = styled.span`
     color: white;
 `;
 
-const UserProfile = ({ subRoutes, location, history }) => {
+const UserProfile = ({
+    subRoutes,
+    location,
+    history,
+    userInfos,
+    getUserProfile,
+    getExperiences,
+    getEducations,
+    getQuestionsAsked,
+    getQuestionsAnswered
+}) => {
     const { t } = useTranslation();
 
-    const [profile, setProfile] = React.useState({});
+    const { userProfile } = userInfos;
 
     const userId = window.location.pathname.split('/')[2];
     const { id } = getIdAndToken();
@@ -38,15 +55,20 @@ const UserProfile = ({ subRoutes, location, history }) => {
 
     React.useEffect(() => {
         if (userId) {
-            getUser(userId).then(data => setProfile(data));
+            getUserProfile(userId);
+            getExperiences(userId);
+            getEducations(userId);
+            getQuestionsAsked(userId);
+            getQuestionsAnswered(userId);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
 
-    // if (!profile) {
-    //     return <div />;
-    // }
+    if (!userProfile) {
+        return <div />;
+    }
 
-    const { firstName, lastName, level } = profile;
+    const { firstName, lastName, level, avatar,  } = userProfile;
 
     return (
         <div className="container discy-container">
@@ -54,7 +76,7 @@ const UserProfile = ({ subRoutes, location, history }) => {
                 <section
                     className="profile-background-image"
                     style={{
-                        backgroundImage: `url('${BgPhoto }')`,
+                        backgroundImage: `url('${BgPhoto}')`,
                         backgroundPosition: 'center center',
                         backgroundSize: 'cover',
                         backgroundRepeat: 'no-repeat'
@@ -63,7 +85,7 @@ const UserProfile = ({ subRoutes, location, history }) => {
                 <Wrapper className="user-container info-user position-relative col-lg-3">
                     <div className="avatar-user">
                         <img
-                            src={profile.avatar || DefaultUserLogo}
+                            src={avatar || DefaultUserLogo}
                             width="200"
                             alt=""
                             className="img-responsive"
@@ -112,11 +134,24 @@ const UserProfile = ({ subRoutes, location, history }) => {
                     </div>
                 </Wrapper>
                 <div className="user-container col-lg-9 responsive-user">
-                    <UserInfoRouter profile={profile} />
+                    <UserInfoRouter />
                 </div>
             </div>
         </div>
     );
 };
 
-export default withRouter(UserProfile);
+const mapStateToProps = ({ userInfos }) => ({ userInfos });
+
+const mapDispatchToProps = dispatch => ({
+    getUserProfile: userId => dispatch(getUserProfileFn(userId)),
+    getExperiences: userId => dispatch(getExperiencesFn(userId)),
+    getEducations: userId => dispatch(getEducationsFn(userId)),
+    getQuestionsAsked: userId => dispatch(getQuestionsAskedFn(userId)),
+    getQuestionsAnswered: userId => dispatch(getQuestionsAnsweredFn(userId))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(UserProfile));

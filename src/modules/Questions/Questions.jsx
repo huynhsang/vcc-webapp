@@ -14,10 +14,10 @@ import QuestionComponent from './Question';
 import { getQuestionsFn } from '../../actions/questions';
 
 const orderMaps = {
-    'recent-questions': 'createdOn DESC',
-    'most-answered': 'numberOfAnswers DESC',
-    'most-visited': 'numberOfViews DESC',
-    'most-voted': 'numberOfVotes DESC'
+    'recent-questions': 'created DESC',
+    'most-answered': 'answerCount DESC',
+    'most-visited': 'viewCount DESC',
+    'most-voted': 'upVoteCount DESC'
 };
 
 const MainPage = ({ questionsReducer, getQuestions, location, history }) => {

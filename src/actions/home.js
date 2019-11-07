@@ -66,7 +66,7 @@ export const getPopularQuestionsFn = () => {
     return dispatch => {
         dispatch(getPopularQuestionsRequest());
         const params = {
-            filter: questionsFilterGenerator({ order: 'numberOfViews DESC' })
+            filter: questionsFilterGenerator({ order: 'viewCount DESC' })
         };
         getQuestions(params)
             .then(data => {
@@ -93,7 +93,7 @@ export const getQuestionsTopAnsweredFn = () => {
     return dispatch => {
         dispatch(getQuestionsTopAnsweredRequest());
         const params = {
-            filter: questionsFilterGenerator({ order: 'numberOfAnswers DESC' })
+            filter: questionsFilterGenerator({ order: 'answerCount DESC' })
         };
         getQuestions(params)
             .then(data => {

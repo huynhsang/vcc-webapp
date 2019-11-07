@@ -105,7 +105,7 @@ const AnswerComponent = ({
                             >
                                 <span itemProp="dateCreated">
                                     Added an answer on{' '}
-                                    {new Date(answer.createdOn).toDateString()}
+                                    {new Date(answer.created).toDateString()}
                                 </span>
                             </a>
                         </div>

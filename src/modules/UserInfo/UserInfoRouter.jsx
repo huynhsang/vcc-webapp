@@ -12,27 +12,27 @@ const UserProfileRouter = ({ match, profile }) => {
             <Route
                 exact
                 path={`${match.path}/`}
-                render={props => <GeneralInfos {...props} profile={profile} />}
+                component={GeneralInfos}
             />
             <Route
                 exact
                 path={`${match.path}/general`}
-                render={props => <GeneralInfos {...props} profile={profile} />}
+                component={GeneralInfos}
             />
             <Route
                 exact
                 path={`${match.path}/my-profile`}
-                render={props => <MyProfile {...props} />}
+                component={MyProfile}
             />
             <Route
                 exact
                 path={`${match.path}/question-asked`}
-                render={props => <QuestionsAsked {...props} />}
+                component={QuestionsAsked}
             />
             <Route
                 exact
                 path={`${match.path}/answers-related`}
-                render={props => <AnswersRelated {...props} />}
+                component={AnswersRelated}
             />
         </>
     );
