@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
+import { getNameByLanguage } from '../../../utils/multiple-language';
+
 const Wrapper = styled.div`
     background-color: white;
     padding: 10px;
@@ -17,9 +19,7 @@ const Title = styled.div`
     margin-bottom: 10px;
 `;
 
-const FlexWrapper = styled.div`
-
-`;
+const FlexWrapper = styled.div``;
 
 const InfoTitle = styled.span`
     color: #7c7f85;
@@ -39,19 +39,17 @@ const Infos = styled(FlexWrapper)`
 const QuestionAsked = ({ question }) => {
     const { t } = useTranslation();
 
-    const { category = {}, tags, title } = question;
+    const { categoryItem, tagList, title } = question;
 
-    const subCategories = tags ? JSON.parse(tags) : [];
-
-    const subCategoryRender = subCategories.length > 0 && (
+    const subCategoryRender = tagList.length > 0 && (
         <TagsWrapper className="tagcloud">
             <i className="fas fa-tags" />
-            {subCategories.map((subCategory, count) => {
+            {tagList.map(tag => {
                 return (
                     <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                        key={count}
+                        key={tag.slug}
                     >
-                        {subCategory.nameEn}
+                        {getNameByLanguage(tag)}
                     </a>
                 );
             })}
@@ -63,18 +61,18 @@ const QuestionAsked = ({ question }) => {
             <Title>{title}</Title>
             <ReactMarkdown source={question.body} />
             {subCategoryRender}
-                <Infos>
-                    <span>
-                        <InfoTitle>{`${t('common_in')}:`}</InfoTitle>
-                        <span>{category.nameEn}</span>
-                    </span>
-                    <span>
-                        <InfoTitle>{`${t('common_asked')}:`}</InfoTitle>
-                        <time dateTime={question.created}>
-                            {` ${new Date(question.created).toDateString()}`}
-                        </time>
-                    </span>
-                </Infos>
+            <Infos>
+                <span>
+                    <InfoTitle>{`${t('common_in')}:`}</InfoTitle>
+                    <span>{getNameByLanguage(categoryItem)}</span>
+                </span>
+                <span>
+                    <InfoTitle>{`${t('common_asked')}:`}</InfoTitle>
+                    <time dateTime={question.created}>
+                        {` ${new Date(question.created).toDateString()}`}
+                    </time>
+                </span>
+            </Infos>
         </Wrapper>
     );
 };

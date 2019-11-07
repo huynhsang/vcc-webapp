@@ -6,12 +6,18 @@ import ReactMarkdown from 'react-markdown';
 import Answer from './Answer';
 
 import { createMediaTemplate } from '../../../utils/css-tools';
+import DefaultUserLogo from '../../../images/default-user-logo.png';
+import { Badge } from '../../Badges';
+
+import { getNameByLanguage } from '../../../utils/multiple-language';
+
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     overflow: hidden;
+    margin: 10px 0;
 `;
 
 const QuestionWrapper = styled.div`
@@ -38,11 +44,6 @@ const Logo = styled.img`
     margin: 0 15px 0 5px;
 `;
 
-const Badge = styled.div`
-    background-color: #30a96f;
-    margin-left: 5px;
-`;
-
 const InfoTitle = styled.span`
     color: #7c7f85;
     margin: 0 5px;
@@ -53,6 +54,10 @@ const TagsWrapper = styled.div`
 `;
 
 const Infos = styled(FlexWrapper)`
+    margin-bottom: 10px;
+    & .post-author {
+        margin-right: 10px;
+    }
     ${media.tabletLandscape`flex-direction: column; align-items: start;`}
 `;
 
@@ -71,7 +76,7 @@ const MoreButton = styled.div`
     height: 35px;
     width: 35px;
 
-    &:hover{
+    &:hover {
         background-color: #dfdfdf;
     }
 
@@ -85,19 +90,24 @@ const AnswersWrapper = styled.div``;
 const QuestionRelated = ({ question }) => {
     const { t } = useTranslation();
 
-    const { askedBy = {}, category = {}, tags, title, answers } = question;
+    const {
+        askedBy,
+        categoryItem,
+        tagList,
+        title,
+        answers,
+        created
+    } = question;
 
-    const subCategories = tags ? JSON.parse(tags) : [];
-
-    const subCategoryRender = subCategories.length > 0 && (
+    const tagsRender = tagList.length > 0 && (
         <TagsWrapper className="tagcloud">
             <i className="fas fa-tags" />
-            {subCategories.map((subCategory, count) => {
+            {tagList.map(tag => {
                 return (
                     <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                        key={count}
+                        key={tag.slug}
                     >
-                        {subCategory.nameEn}
+                        {getNameByLanguage(tag)}
                     </a>
                 );
             })}
@@ -106,7 +116,7 @@ const QuestionRelated = ({ question }) => {
 
     const answersRender = (
         <AnswersWrapper>
-            {answers.map(answer => (
+            {(answers || []).map(answer => (
                 <Answer id={answer.id} answer={answer} />
             ))}
         </AnswersWrapper>
@@ -117,37 +127,33 @@ const QuestionRelated = ({ question }) => {
             <QuestionWrapper>
                 <Title>{title}</Title>
                 <FlexWrapper>
-                    <Logo alt="" src={askedBy.avatar} />
+                    <Logo alt="" src={askedBy.avatar || DefaultUserLogo} />
                     <div>
                         <Infos>
                             <div className="post-author">
                                 {`${askedBy.firstName} ${askedBy.lastName}`}
                             </div>
-                            <Badge className="badge-span">
-                                {askedBy.level}
-                            </Badge>
+                            <Badge points={askedBy.points} />
                             <span>
                                 <InfoTitle>{`${t('common_asked')}:`}</InfoTitle>
-                                <time dateTime={question.created}>
-                                    {` ${new Date(
-                                        question.created
-                                    ).toDateString()}`}
+                                <time dateTime={created}>
+                                    {` ${new Date(created).toDateString()}`}
                                 </time>
                             </span>
                             <span>
                                 <InfoTitle>{`${t('common_in')}:`}</InfoTitle>
-                                <span>{category.nameEn}</span>
+                                <span> {getNameByLanguage(categoryItem)}</span>
                             </span>
                         </Infos>
                         <ReactMarkdown source={question.body} />
-                        {subCategoryRender}
+                        {tagsRender}
                     </div>
                 </FlexWrapper>
             </QuestionWrapper>
             {answersRender}
             <ButtonWrapper>
                 <MoreButton>
-                    <i class="pi pi-ellipsis-h"></i>
+                    <i className="pi pi-ellipsis-h"></i>
                 </MoreButton>
             </ButtonWrapper>
         </Wrapper>

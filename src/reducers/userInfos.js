@@ -74,7 +74,7 @@ const userInfosReducer = createReducer(defaultState, {
     [createEducationSuccess]: (state, action) => {
         state.isChangingEducation = false;
         const {payload} = action;
-        state.education[payload.id] = payload;
+        state.educations[payload.id] = payload;
     },
     [createEducationFailure]: state => {
         state.isFetchingError = true;
@@ -94,10 +94,10 @@ const userInfosReducer = createReducer(defaultState, {
         state.isChangingEducation = false;
     },
     [getQuestionsAskedSuccess]: (state, action) => {
-        state.questionsAsked = action.payload;
+        state.questionsAsked = action.payload.entities.questions || {} ;
     },
     [getQuestionsAnsweredSuccess]: (state, action) => {
-        state.questionsAnswered = action.payload;
+        state.questionsAnswered = action.payload.entities.questions || {} ;
     }
 });
 

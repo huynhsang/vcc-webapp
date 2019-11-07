@@ -3,11 +3,6 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import ApplicationUtil from '../../../common/util/ApplicationUtil';
-import {
-    showSuccessAlertFn,
-    showErrorAlertFn
-} from '../../../actions/sweetAlert';
 import { Experiences } from './Experiences';
 import { Educations } from './Educations';
 
@@ -16,7 +11,7 @@ const SummaryWrapper = styled.section`
     background: white;
     border-radius: 2px;
     & p {
-        text-align:justify;
+        text-align: justify;
         padding: 0 25px;
     }
 `;
@@ -26,14 +21,11 @@ const SignWrapper = styled.div`
     font-size: 40px;
 `;
 
-const GeneralInfos = ({
-    userInfos,
-    showErrorNotification,
-    showSuccessNotification
-}) => {
-    // const [experiencesEditted, setExperiencesEditted] = React.useState(experiences);
+const GeneralInfos = ({ userInfos }) => {
 
-    const { userProfile : {summary} } = userInfos;
+    const {
+        userProfile: { summary }
+    } = userInfos;
 
     return (
         <>
@@ -48,18 +40,8 @@ const GeneralInfos = ({
     );
 };
 
-const mapStateToProps = ({ userInfos}) => ({
+const mapStateToProps = ({ userInfos }) => ({
     userInfos
 });
 
-const mapDispatchToProps = dispatch => ({
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    showSuccessNotification: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text))
-});
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(GeneralInfos));
+export default connect(mapStateToProps)(withRouter(GeneralInfos));
