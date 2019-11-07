@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 
 const ReviewQuestion = ({ title, body, tags, postQuestion }) => {
@@ -74,13 +73,6 @@ const ReviewQuestion = ({ title, body, tags, postQuestion }) => {
       </div>
     </section>
   );
-};
-
-ReviewQuestion.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  tags: PropTypes.array.isRequired,
-  postQuestion: PropTypes.func.isRequired,
 };
 
 export default ReviewQuestion;

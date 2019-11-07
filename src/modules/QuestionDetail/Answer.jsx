@@ -1,101 +1,71 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import RootScope from '../../global/RootScope';
 import ReactMarkdown from 'react-markdown';
-import CoreService from '../../global/CoreService';
 import UserLogo from '../../component/UserLogo';
-import type { UserVoteAnswer } from '../../domain/UserVoteAnswer';
-import Result from '../../global/Result';
-import type { User } from '../../domain/User';
 
-const { userVoteService, questionService } = CoreService;
+import { approveAnswer } from '../../services/question.service';
+import { voteAnswerFn, reVoteAnswerFn } from '../../actions/questionDetail';
+import Vote from '../../component/Vote';
+
+import { getIdAndToken } from '../../utils/cookie-tools';
+import { Badge } from '../Badges';
 
 const AnswerComponent = ({
     answer,
     question,
     updateQuestion,
-    updateAnswer,
     history,
     showErrorNotification,
     showSuccessNotification,
-    showConfirmToLogin
+    showConfirmToLogin,
+    voteAnswer,
+    reVoteAnswer,
+    questionDetail,
+    isAuthenticated
 }) => {
     const { t } = useTranslation();
+    const { id: currentUserId } = getIdAndToken();
 
-    const [loader, setLoader] = React.useState(null);
+    const { votingAnswerId } = questionDetail;
+
+    const { votes = [], upVoteCount, downVoteCount, answerBy } = answer;
+
     const [disableApproveBtn, setDisableApproveBtn] = React.useState(false);
 
-    const answerBy: User = answer.answerBy;
+    const isQuestionOwner =
+        question.askedBy && question.askedBy.id === currentUserId;
 
-    const isOwner: boolean = question.askedBy
-        ? question.askedBy.id === RootScope.userId
-        : false;
-    const isVotedBefore: boolean = answer.votes && answer.votes.length > 0;
+    const lastVote = votes.find(vote => vote.ownerId === currentUserId);
 
-    const disableUp: boolean = isVotedBefore && answer.votes[0].isPositiveVote;
-    const disableDown: boolean =
-        isVotedBefore && !answer.votes[0].isPositiveVote;
-    const showLoader: boolean = loader && loader.answerId === answer.id;
-    const hideApprove: boolean = answer.answerBy === question.askedBy;
+    const isAnswerOwner = answerBy && answerBy.id === currentUserId;
 
-    const approveAnswer = () => {
+    const approveAnswerFn = () => {
         setDisableApproveBtn(true);
-        questionService
-            .doApproveAnswer(question.id, answer.id)
-            .then((result: Result) => {
-                if (result.success) {
-                    setDisableApproveBtn(false);
-                    updateQuestion({
-                        ...question,
-                        hasAcceptedAnswer: (answer.isTheBest = true)
-                    });
-                } else {
-                    showErrorNotification(result.data);
-                }
+        approveAnswer(question.id, answer.id)
+            .then(() => {
+                setDisableApproveBtn(false);
+                updateQuestion({
+                    ...question,
+                    hasAcceptedAnswer: (answer.isTheBest = true)
+                });
+            })
+            .catch(err => {
+                showErrorNotification(err.response.data);
             });
     };
 
-    const { numberOfVotes } = answer;
-
     const handleVoteAnswer = isPositiveVote => {
-        if (!RootScope.userId) {
+        if (!isAuthenticated) {
             return showConfirmToLogin();
         }
-        setLoader({ answerId: answer.id });
-        const data: UserVoteAnswer = {
-            answerId: answer.id,
-            isPositiveVote
-        };
-        if (isVotedBefore) {
-            data.id = answer.votes[0].id;
-            data.userId = answer.votes[0].userId;
-            userVoteService.reVoteAnswer(data).then((result: Result) => {
-                if (result.success) {
-                    updateAnswer({
-                        isPositiveVote,
-                        numberOfVotes:
-                            numberOfVotes + 2 * (isPositiveVote ? 1 : -1)
-                    });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+        const action = isPositiveVote ? 'up' : 'down';
+
+        if (lastVote) {
+            reVoteAnswer(answer.id, lastVote.id, action);
         } else {
-            userVoteService.voteAnswer(data).then((result: Result) => {
-                if (result.success) {
-                    updateAnswer({
-                        votes: [result.data],
-                        numberOfVotes:
-                            numberOfVotes + 1 * (isPositiveVote ? 1 : -1)
-                    });
-                } else {
-                    showErrorNotification(result.data);
-                }
-                setLoader(false);
-            });
+            voteAnswer(answer.id, action);
         }
     };
 
@@ -105,39 +75,29 @@ const AnswerComponent = ({
                 <div className="comment-text">
                     <UserLogo user={answerBy} />
                     <div className="author clearfix">
-                        {question.hasAcceptedAnswer && answer.isTheBest ? (
+                        {question.bestAnswerItem && answer.isTheBest && (
                             <div className="best-answer">
                                 {t('answer_best_answers')}
                             </div>
-                        ) : (
-                            ''
                         )}
-                        {isOwner &&
-                        !question.hasAcceptedAnswer &&
-                        hideApprove ? (
-                            <button
-                                className="btn btn-approve"
-                                disabled={disableApproveBtn}
-                                onClick={approveAnswer}
-                            >
-                                <i className="fas fa-check" /> {t('Approve')}
-                            </button>
-                        ) : (
-                            ''
-                        )}
+                        {isQuestionOwner &&
+                            !question.bestAnswerItem &&
+                            !isAnswerOwner && (
+                                <button
+                                    className="btn btn-approve"
+                                    disabled={disableApproveBtn}
+                                    onClick={approveAnswerFn}
+                                >
+                                    <i className="fas fa-check" />{' '}
+                                    {t('Approve')}
+                                </button>
+                            )}
                         <div className="comment-meta">
                             <div className="comment-author">
-                                <span>
-                                    <Link to={`/users/${answerBy.id}`}>
-                                        <span>{`${answerBy.firstName} ${answerBy.lastName}`}</span>
-                                    </Link>
-                                </span>
-                                <span
-                                    className="badge-span"
-                                    style={{ backgroundColor: '#ffbf00' }}
-                                >
-                                    {answerBy.level}
-                                </span>
+                                <Link to={`/users/${answerBy.id}`}>
+                                    <span>{`${answerBy.firstName} ${answerBy.lastName}`}</span>
+                                </Link>
+                                <Badge points={answerBy.points} />
                             </div>
                             <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                 className="comment-date"
@@ -145,7 +105,7 @@ const AnswerComponent = ({
                             >
                                 <span itemProp="dateCreated">
                                     Added an answer on{' '}
-                                    {new Date(answer.createdOn).toDateString()}
+                                    {new Date(answer.created).toDateString()}
                                 </span>
                             </a>
                         </div>
@@ -157,41 +117,20 @@ const AnswerComponent = ({
                         <div className="clearfix" />
                         <div className="clearfix" />
                         <div className="wpqa_error" />
-                        <ul className="question-vote answer-vote answer-vote-dislike">
-                            <li>
-                                <button
-                                    className="wpqa_vote comment_vote_up vote_allow"
-                                    disabled={disableUp}
-                                    onClick={() => handleVoteAnswer(true)}
-                                >
-                                    <i className="icon-up-dir" />
-                                </button>
-                            </li>
-                            {showLoader ? (
-                                <li
-                                    className="li_loader"
-                                    style={{ display: 'block' }}
-                                >
-                                    <span className="loader_3 fa-spin" />
-                                </li>
-                            ) : (
-                                <li
-                                    className="vote_result"
-                                    itemProp="upvoteCount"
-                                >
-                                    {answer.numberOfVotes}
-                                </li>
-                            )}
-                            <li className="dislike_answers">
-                                <button
-                                    className="wpqa_vote comment_vote_down vote_allow"
-                                    disabled={disableDown}
-                                    onClick={() => handleVoteAnswer(false)}
-                                >
-                                    <i className="icon-down-dir" />
-                                </button>
-                            </li>
-                        </ul>
+                        <Vote
+                            disableUp={
+                                isAnswerOwner ||
+                                (lastVote && lastVote.action === 'up')
+                            }
+                            disableDown={
+                                isAnswerOwner ||
+                                (lastVote && lastVote.action === 'down')
+                            }
+                            isLoading={votingAnswerId === answer.id}
+                            handleVote={handleVoteAnswer}
+                            points={upVoteCount - downVoteCount}
+                            isAnswerVote
+                        />
                         <ul className="comment-reply comment-reply-main">
                             <li>
                                 <button
@@ -268,4 +207,18 @@ const AnswerComponent = ({
     );
 };
 
-export default withRouter(AnswerComponent);
+const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
+    questionDetail,
+    isAuthenticated
+});
+
+const mapDispatchToProps = dispatch => ({
+    voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
+    reVoteAnswer: (answerId, voteId, action) =>
+        dispatch(reVoteAnswerFn(answerId, voteId, action))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(AnswerComponent));

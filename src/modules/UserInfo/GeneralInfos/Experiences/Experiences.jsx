@@ -4,24 +4,14 @@ import { useTranslation } from 'react-i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import ExperienceRequestBuilder from '../../../../global/ExperienceRequest';
 import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
-import CoreService from '../../../../global/CoreService';
-
-import ApplicationUtil from '../../../../common/util/ApplicationUtil';
 
 import {
-    showSuccessAlertFn,
-    showErrorAlertFn
-} from '../../../../actions/sweetAlert';
+    createExperienceFn,
+    editExperienceFn
+} from '../../../../actions/userInfos';
 
-import { experienceMock } from '../../Mock';
-import CookieConstant from '../../../../common/constant/CookieConstant';
-import CookieHelper from '../../../../common/util/CookieHelper';
-const { getCookie } = CookieHelper;
-const { userIdKey } = CookieConstant;
-
-const { experienceService } = CoreService;
+import { getIdAndToken } from '../../../../utils/cookie-tools';
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -36,7 +26,7 @@ const FlexWrapper = styled.div`
 
 const ExperienceInfo = styled(FlexWrapper)`
     border-top: 1px solid #707885;
-    min-width: 80%;
+    width: 80%;
     padding-top: 10px;
 `;
 
@@ -49,53 +39,51 @@ const IconWrapper = styled.a`
 `;
 
 const Experiences = ({
-    showErrorNotification,
-    showSuccessNotification,
-    location
+    location,
+    userInfos,
+    createExperience,
+    editExperience
 }) => {
     const { t } = useTranslation();
 
-    const [experiences, setExperiences] = React.useState([]);
+    const {
+        experiences,
+        userProfile,
+        isChangingExperience,
+        isFetchingError
+    } = userInfos;
 
     const [isShowing, setIsShowing] = React.useState(false);
+    const [editExperienceId, setEditExperienceId] = React.useState(null);
 
     React.useEffect(() => {
-        setExperiences([experienceMock]);
-    }, []);
+        if (editExperienceId) {
+            setIsShowing(true);
+        }
+    }, [editExperienceId]);
 
-    const userId = location.pathname.split('/')[2];
-    const canEdit = getCookie(userIdKey) === userId;
+    const { id: currentUserId } = getIdAndToken();
+    const canEdit = currentUserId === userProfile.id;
 
-    const onSubmit = ({
-        title,
-        employment,
-        company,
-        location,
-        isWorking,
-        startDate,
-        endDate,
-        description
-    }) => {
-        const registerExperience = ExperienceRequestBuilder.build(
-            title,
-            employment.label,
-            company,
-            location,
-            isWorking,
-            startDate,
-            endDate,
-            description
-        );
-        experienceService.create(registerExperience).then((result: Result) => {
-            if (result.success) {
-                showSuccessNotification('Success!', 'Leaved an answer');
-            } else {
-                showErrorNotification(result.data);
-            }
-        });
+    const onSubmit = data => {
+        delete data.modified;
+        delete data.created;
+        if (data.id) {
+            editExperience(data);
+        } else {
+            createExperience({
+                ...data,
+                ownerId: currentUserId
+            });
+        }
     };
 
-    const experiencesRender = experiences.map(val => (
+    const onClose = () => {
+        setIsShowing(false);
+        setEditExperienceId(null);
+    };
+
+    const experiencesRender = Object.values(experiences).map(val => (
         <FlexWrapper key={val.id} className="mt2">
             <div className="logo-company">
                 <img
@@ -109,12 +97,19 @@ const Experiences = ({
                 <div>
                     <h6 className="m0 mr6">{val.title}</h6>
                     <p className="font-size-14">{val.company}</p>
-                    <p>Sep 2018 – Present . 11 mos</p>
+                    <p>{` ${new Date(val.startDate).toDateString()} - ${
+                        val.isWorking
+                            ? 'Prensent'
+                            : new Date(val.endDate).toDateString()
+                    }`}</p>
                     <p className="note">{val.location}</p>
                     <p>{val.description}</p>
                 </div>
                 {canEdit && (
-                    <IconWrapper className="experience--icon">
+                    <IconWrapper
+                        className="experience--icon"
+                        onClick={() => setEditExperienceId(val.id)}
+                    >
                         <i className="pi pi-pencil" />
                     </IconWrapper>
                 )}
@@ -140,21 +135,20 @@ const Experiences = ({
             <ExperienceModal
                 submit={onSubmit}
                 isShowing={isShowing}
-                setIsShowing={setIsShowing}
+                onClose={onClose}
+                experienceToEdit={experiences[editExperienceId]}
+                isChangingExperience={isChangingExperience}
+                isFetchingError={isFetchingError}
             />
         </Wrapper>
     );
 };
 
-const mapStateToProps = ({ App: { isAuthenticated } }) => ({
-    isAuthenticated
-});
+const mapStateToProps = ({ userInfos }) => ({ userInfos });
 
 const mapDispatchToProps = dispatch => ({
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    showSuccessNotification: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text))
+    createExperience: data => dispatch(createExperienceFn(data)),
+    editExperience: data => dispatch(editExperienceFn(data))
 });
 
 export default connect(

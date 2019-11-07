@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AccountJWTService from '../../services/accountJWT.service';
-import Result from '../../global/Result';
+
+import { verifyEmail } from '../../services/account.service';
 
 const EmailVerification = ({ location, history }) => {
     const [message, setMessage] = React.useState('Your email is verifying...');
@@ -13,17 +13,15 @@ const EmailVerification = ({ location, history }) => {
         if (!uid || !token) {
             history.push('/');
         } else {
-            AccountJWTService.doVerifyEmail(uid, token).then(
-                (result: Result) => {
-                    if (result.isSuccess()) {
-                        setMessage('Registration verified successfully');
-                    } else {
-                        setMessage(
-                            'Registration has not been successfully verified'
-                        );
-                    }
-                }
-            );
+            verifyEmail(uid, token)
+                .then(() => {
+                    setMessage('Registration verified successfully');
+                })
+                .catch(() => {
+                    setMessage(
+                        'Registration has not been successfully verified'
+                    );
+                });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

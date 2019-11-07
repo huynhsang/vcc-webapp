@@ -2,11 +2,10 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 
 import { getUsers } from '../services/user.service';
-import { getTrendingTags } from '../services/sub-category.service';
-import {
-    getQuestions,
-    questionsFilterGenerator
-} from '../services/question.service';
+import { getTrendingTags } from '../services/tags.service';
+import { getQuestions } from '../services/question.service';
+
+import { questionsFilterGenerator } from '../utils/question';
 
 const {
     GET_TOP_USERS_REQUEST,
@@ -67,7 +66,7 @@ export const getPopularQuestionsFn = () => {
     return dispatch => {
         dispatch(getPopularQuestionsRequest());
         const params = {
-            filter: questionsFilterGenerator({ order: 'numberOfViews DESC' })
+            filter: questionsFilterGenerator({ order: 'viewCount DESC' })
         };
         getQuestions(params)
             .then(data => {
@@ -94,7 +93,7 @@ export const getQuestionsTopAnsweredFn = () => {
     return dispatch => {
         dispatch(getQuestionsTopAnsweredRequest());
         const params = {
-            filter: questionsFilterGenerator({ order: 'numberOfAnswers DESC' })
+            filter: questionsFilterGenerator({ order: 'answerCount DESC' })
         };
         getQuestions(params)
             .then(data => {
@@ -117,8 +116,7 @@ export const getTrendingTagsFn = () => {
         const params = {
             filter: {
                 skip: 0,
-                limit: 5,
-                order: 'numberOfQuestions DESC'
+                limit: 5
             }
         };
         getTrendingTags(params)

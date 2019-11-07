@@ -20,6 +20,8 @@ import {
     toggleContactUsFn
 } from '../../actions/app';
 
+const DefaultAvatar = 'https://cdn0.iconfinder.com/data/icons/user-pictures/100/malecostume-512.png';
+
 const { getCookie, deleteCookie } = CookieHelper;
 const { userIdKey } = CookieConstant;
 
@@ -94,7 +96,7 @@ const Header = ({
     const UserMenu = !!currentUser && (
         <ul style={userMenuStyle} ref={outClickRef}>
             <li>
-                <Link to={`/users/${getCookie(userIdKey)}/my-profile`}>
+                <Link to={`/users/${getCookie(userIdKey)}/general`}>
                     <i className="icon-user" />
                     {t('header_user_profile')}
                 </Link>
@@ -155,14 +157,11 @@ const Header = ({
                                     <div className="user-image float_l">
                                         <img
                                             className="avatar avatar-29 photo"
-                                            alt={{ fullName }}
-                                            title={{ fullName }}
+                                            alt=''
+                                            title={ fullName }
                                             width="29"
                                             height="29"
-                                            src={
-                                                currentUser &&
-                                                currentUser.avatar
-                                            }
+                                            src={DefaultAvatar}
                                         />
                                     </div>
                                     <div

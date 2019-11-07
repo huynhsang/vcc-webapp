@@ -1,40 +1,34 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import { withRouter } from 'react-router-dom';
-import FilterBuilder from '../../global/Filter';
-// import { User } from '../../domain/User';
-// import { Question } from '../../domain/Question';
-// import { Category } from '../../domain/Category';
-// import { SubCategory } from '../../domain/SubCategory';
-import Result from '../../global/Result';
-import produce from 'immer';
 
 import TopNav from './TopNav';
 
 import { useTranslation } from 'react-i18next';
-import CoreService from '../../global/CoreService';
-import { QuestionComponent } from '../../component/QuestionComponent';
+import QuestionComponent from './Question';
 
-const { questionService } = CoreService;
+// import { getQuestions } from '../../services/question.service';
+
+import { getQuestionsFn } from '../../actions/questions';
 
 const orderMaps = {
-    'recent-questions': 'createdOn DESC',
-    'most-answered': 'numberOfAnswers DESC',
-    'most-visited': 'numberOfViews DESC',
-    'most-voted': 'numberOfVotes DESC'
+    'recent-questions': 'recent',
+    'most-answered': 'mostAnswered',
+    'most-visited': 'mostVisited',
+    'most-voted': 'highVote'
 };
 
-const MainPage = ({ location, history }) => {
+const MainPage = ({ questionsReducer, getQuestions, location, history }) => {
     const { t } = useTranslation();
 
-    const [questions, setQuestions] = React.useState([]);
+    const { questions } = questionsReducer;
 
-    const [filter, setFilter] = React.useState(
-        FilterBuilder.buildPaginationFilter(
-            orderMaps['recent-questions'],
-            0,
-            10
-        )
-    );
+    const [filter, setFilter] = React.useState({
+        sort: orderMaps['recent-questions'],
+        skip: 0,
+        limit: 10
+    });
 
     const urlParams = new URLSearchParams(location.search);
     const show = urlParams.get('show');
@@ -45,11 +39,11 @@ const MainPage = ({ location, history }) => {
             show === 'no-answers'
                 ? {
                       skip: 0,
-                      where: { numberOfAnswers: 0 }
+                      sort: 'noAnswers'
                   }
                 : {
                       skip: 0,
-                      order: orderMaps[show] || orderMaps['recent-questions']
+                      sort: orderMaps[show] || orderMaps['recent-questions']
                   };
 
         setFilter(state => ({ ...state, ...newState }));
@@ -57,33 +51,12 @@ const MainPage = ({ location, history }) => {
 
     //Load question when filter has been updated
     React.useEffect(() => {
-        questionService.findAll(filter).then((result: Result) => {
-            if (result.success) {
-                setQuestions(result.data);
-            }
-        });
+        getQuestions({Filter : filter});
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
     const handleLoadMore = () =>
         setFilter(state => ({ ...state, skip: state.skip + 1 }));
-
-    //TODO: Use reducer instead
-    const updateVoteQuestion = index => ({
-        isPositiveVote,
-        numberOfVotes,
-        votes
-    }) => {
-        setQuestions(
-            produce(draft => {
-                if (votes) {
-                    draft[index].votes = votes;
-                } else {
-                    draft[index].votes[0].isPositiveVote = isPositiveVote;
-                }
-                draft[index].numberOfVotes = numberOfVotes;
-            })
-        );
-    };
 
     const showLoadMore = questions.length >= (filter.skip + 1) * filter.limit;
 
@@ -93,12 +66,8 @@ const MainPage = ({ location, history }) => {
             <section>
                 <h2 className="screen-reader-text">VC&C Latest Questions</h2>
                 <div className="post-articles question-articles">
-                    {questions.map((question: Question, index) => (
-                        <QuestionComponent
-                            key={index}
-                            question={question}
-                            updateVoteQuestion={updateVoteQuestion(index)}
-                        />
+                    {Object.values(questions).map((question, index) => (
+                        <QuestionComponent key={index} question={question} />
                     ))}
                 </div>
                 <div className="pagination-wrap pagination-question">
@@ -122,4 +91,15 @@ const MainPage = ({ location, history }) => {
     );
 };
 
-export default withRouter(MainPage);
+const mapStateToProps = ({ questionsReducer }) => ({
+    questionsReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+    getQuestions: params => dispatch(getQuestionsFn(params))
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(MainPage));

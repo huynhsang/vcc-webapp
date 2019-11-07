@@ -1,45 +1,22 @@
-import Result from '../global/Result';
-import BasicService from '../common/abstract/services/BasicService';
-import RootScope from '../global/RootScope';
-import FilterBuilder from '../global/Filter';
+import http from './https';
+import { setUrlWithToken } from '../utils/url';
+import { normalize } from 'normalizr';
+import { experiencesEntity } from '../constants/schemas';
 
-import { IExperienceService } from '../common/abstract/services/IExperienceService';
+const EXPERIENCE_URL = 'experiences';
 
-const EXPERIENCE_API = RootScope.appApiUrl + 'Experiences';
+export async function getExperiences(params) {
+    const response = await http.get(EXPERIENCE_URL, { params });
+    return normalize(response.data, experiencesEntity);
+}
 
-export default class ExperienceService extends BasicService
-    implements IExperienceService {
-    get(filter): Result {
-        const fullUrl: string = FilterBuilder.buildUrlWithFilter(
-            EXPERIENCE_API,
-            filter
-        );
-        return ExperienceService.get(fullUrl, RootScope.axiosDefaultConfig);
-    }
+export async function createExperience(data) {
+    const url = setUrlWithToken(EXPERIENCE_URL);
+    const response = await http.post(url, data);
+    return response.data;
+}
 
-    create(data: any): Result {
-        const fullUrl: string = ExperienceService.buildURLWithToken(
-            EXPERIENCE_API
-        );
-        return ExperienceService.post(
-            fullUrl,
-            data,
-            RootScope.axiosDefaultConfig
-        );
-    }
-
-    update(data: any): Result {
-        const fullUrl: string = ExperienceService.buildURLWithToken(
-            EXPERIENCE_API
-        );
-        return ExperienceService.put(
-            fullUrl,
-            data,
-            RootScope.axiosDefaultConfig
-        );
-    }
-
-    static builder(): IExperienceService {
-        return new ExperienceService();
-    }
+export async function editExperience(data) {
+    const response = await http.put(EXPERIENCE_URL, data);
+    return response.data;
 }

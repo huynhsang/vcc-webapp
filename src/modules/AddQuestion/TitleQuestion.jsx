@@ -1,15 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 const TitleQuestion = ({ title, setTitle, next, previous }) => {
   const { t } = useTranslation();
 
-  const [titleEditted, setTitleEditted] = React.useState(title || '');
-
-  const onBlurHandler = () => {
-    setTitle(titleEditted);
-  };
+  const handleTitle = (ev) => {
+    const {value} = ev.target;
+    setTitle(value.replace(/ +/g, ' '));
+  }
 
   return (
     <section className="mt5 mb3">
@@ -41,29 +39,21 @@ const TitleQuestion = ({ title, setTitle, next, previous }) => {
         <p className="font-weight-700">{t('common_title')}</p>
         <input
           type="text"
-          value={titleEditted}
+          value={title}
           autoFocus={true}
-          onChange={ev => setTitleEditted(ev.target.value)}
-          onBlur={onBlurHandler}
+          onChange={handleTitle}
         />
       </div>
       <div className="mt3 text-right">
-        <button className="btn btn-light mr3" onClick={() => previous('Tags')}>
+        <button className="btn btn-light mr3" onClick={previous}>
           {t('common_previous_step')}
         </button>
-        <button className="btn btn-primary" onClick={() => next('Description')}>
+        <button className="btn btn-primary" onClick={next}>
           {t('common_next')}
         </button>
       </div>
     </section>
   );
-};
-
-TitleQuestion.propTypes = {
-  next: PropTypes.func.isRequired,
-  previous: PropTypes.func.isRequired,
-  setTitle: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
 };
 
 export default TitleQuestion;

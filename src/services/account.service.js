@@ -1,48 +1,54 @@
-import Result from '../global/Result';
-import BasicService from "../common/abstract/services/BasicService";
-import type {IAccountService} from "../../../common/abstract/services/IAccountService";
-import type {Filter} from "../../../global/Filter";
-import RootScope from "../global/RootScope";
-import FilterBuilder from "../global/Filter";
+import http from './https';
+import { REALM } from '../constants/constants';
 
-const ACCOUNT_API = RootScope.appApiUrl + 'users';
+import CookieHelper from '../common/util/CookieHelper';
+import CookieConstant from '../common/constant/CookieConstant';
+import RootScope from '../global/RootScope';
 
-export default class AccountService extends BasicService implements IAccountService {
+const USER_URL = 'users';
+const LOGIN_URL = 'users/login';
 
-    create(data: any): Result {
-		return super.save(data);
-	}
+const EMAIL_VERIFICATION_URL = (uid, token) =>
+    `users/confirm?uid=${uid}&token=${token}`;
 
-	update(id, data): Result {
-		const fullUrl = AccountService.buildURLWithToken(`${ACCOUNT_API}/${id}`);
-		return AccountService.patch(fullUrl, data, RootScope.axiosDefaultConfig);
-	}
+const RESET_PASSWORD_URL = 'users/reset';
 
-	findAll(filter: Filter): Result {
-		return super.findAll(filter);
-	}
+const SET_NEW_PASSWORD_URL = token =>
+    `users/reset-password?access_token=${token}`;
 
-    deleteById(id: number): Result {
-		return super.deleteById(id);
-	}
+export async function login(data) {
+    const response = await http.post(LOGIN_URL, { realm: REALM.user, ...data });
 
-	findOneByEmail(email: string): Result {
-		const fullUrl: string = `${ACCOUNT_API}/search`;
-		return AccountService.post(fullUrl, email, RootScope.axiosDefaultConfig);
-	}
+    const { maxExDay, minExDay, jwtTokenName, userIdKey } = CookieConstant;
 
-	findOneById(id: string): Result {
-    	const fullUrl: string = `${ACCOUNT_API}/profile?id=${id}`;
-		return AccountService.get(fullUrl, RootScope.axiosDefaultConfig);
-	}
+    RootScope.token = response.data.id;
+    RootScope.userId = response.data.userId;
+    const exdays = response.data.rememberMe ? maxExDay : minExDay;
+    CookieHelper.setCookie(jwtTokenName, RootScope.token, exdays);
+    CookieHelper.setCookie(userIdKey, RootScope.userId, exdays);
 
-    getTopUsersWithTheHighestPoints(filter: Filter): Result {
-        filter.order = "points DESC";
-    	const fullUrl: string = FilterBuilder.buildUrlWithFilter(ACCOUNT_API, filter);
-    	return AccountService.get(fullUrl, RootScope.axiosDefaultConfig)
-	}
+    return response.data;
+}
 
-	static builder(): IAccountService {
-		return new AccountService();
-	}
+export async function verifyEmail(uid, token) {
+    const url = EMAIL_VERIFICATION_URL(uid, token);
+    const response = await http.get(url);
+    return response.data;
+}
+
+export async function register(data) {
+    const response = await http.post(USER_URL, data);
+    return response.data;
+}
+
+export async function resetPassword(email) {
+    const response = await http.post(RESET_PASSWORD_URL, { email });
+    return response.data;
+}
+
+export async function setNewPassword(token, newPassword) {
+    const response = await http.post(SET_NEW_PASSWORD_URL(token), {
+        newPassword
+    });
+    return response.data;
 }

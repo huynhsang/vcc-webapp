@@ -21,7 +21,7 @@ import {
 
 const Home = ({
     App,
-    Home,
+    home,
     setToRegistre,
     getTopUsers,
     getPopularQuestions,
@@ -44,7 +44,7 @@ const Home = ({
         popularQuestions,
         questionsTopAnswered,
         trendingTags
-    } = Home;
+    } = home;
 
     return (
         <>
@@ -115,9 +115,9 @@ const Home = ({
     );
 };
 
-const mapStateToProps = ({ App, Home }) => ({
+const mapStateToProps = ({ App, home }) => ({
     App,
-    Home
+    home
 });
 
 const mapDispatchToProps = dispatch => ({
