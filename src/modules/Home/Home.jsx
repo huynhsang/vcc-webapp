@@ -32,8 +32,8 @@ const Home = ({
 
     React.useEffect(() => {
         getTopUsers();
-        getPopularQuestions();
-        getQuestionsTopAnswered();
+        // getPopularQuestions();
+        // getQuestionsTopAnswered();
         getTrendingTags();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

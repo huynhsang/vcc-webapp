@@ -132,7 +132,7 @@ const AnswerComponent = ({
                             isAnswerVote
                         />
                         <ul className="comment-reply comment-reply-main">
-                            <li>
+                            {/* <li>
                                 <button
                                     rel="nofollow"
                                     className="comment-reply-link wpqa-reply-link"
@@ -141,7 +141,7 @@ const AnswerComponent = ({
                                     <i className="icon-reply" />
                                     {t('common_reply')}
                                 </button>
-                            </li>
+                            </li> */}
                             <li className="comment-share question-share question-share-2">
                                 <i className="icon-share" /> {t('common_share')}
                                 <div className="post-share">
@@ -185,7 +185,7 @@ const AnswerComponent = ({
                             </li>
                             <li className="clearfix last-item-answers" />
                         </ul>
-                        <ul className="comment-reply comment-list-links">
+                        {/* <ul className="comment-reply comment-list-links">
                             <li className="question-list-details comment-list-details">
                                 <i className="icon-dot-3" />
                                 <ul>
@@ -198,7 +198,7 @@ const AnswerComponent = ({
                                 </ul>
                             </li>
                             <li className="clearfix last-item-answers" />
-                        </ul>
+                        </ul> */}
                     </div>
                     <div className="clearfix" />
                 </div>

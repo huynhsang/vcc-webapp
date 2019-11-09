@@ -51,7 +51,7 @@ const MainPage = ({ questionsReducer, getQuestions, location, history }) => {
 
     //Load question when filter has been updated
     React.useEffect(() => {
-        getQuestions({Filter : filter});
+        getQuestions({filter});
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 

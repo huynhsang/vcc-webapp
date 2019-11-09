@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-import TopQuestions from './TopQuestions';
 import TopUsers from './TopUsers';
 import TopTrendingTags from './TopTrendingTags';
 
@@ -44,7 +43,7 @@ const RightSideBar = ({
                             {t('home_ask_a_question')}
                         </Link>
                     </div>
-                    <section
+                    {/* <section
                         id="stats-widget-2"
                         className="widget-no-divider widget stats-widget"
                     >
@@ -87,13 +86,13 @@ const RightSideBar = ({
                                 </li>
                             </ul>
                         </div>
-                    </section>
-                    <TopQuestions
+                    </section> */}
+                    {/* <TopQuestions
                         popularQuestions={popularQuestions}
                         questionsTopAnswered={questionsTopAnswered}
-                    />
-                    <TopUsers topUsers={topUsers} />
+                    /> */}
                     <TopTrendingTags trendingTags={trendingTags} />
+                    <TopUsers topUsers={topUsers} />
                 </div>
             </div>
         </aside>

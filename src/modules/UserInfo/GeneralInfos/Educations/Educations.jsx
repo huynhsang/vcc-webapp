@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
+import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
 import EducationModal from './EducationModal';
 
@@ -37,6 +37,14 @@ const IconWrapper = styled.a`
     & .pi {
         font-size: 26px;
     }
+`;
+
+const Img = styled.img`
+    object-fit: contain;
+    width: 14%;
+    max-height: 90%;
+    height: auto;
+    margin-left: 1.5%;
 `;
 
 const Educations = ({
@@ -87,15 +95,8 @@ const Educations = ({
     const canEdit = currentUserId === userProfile.id;
 
     const educationsRender = Object.values(educations).map(val => (
-        <FlexWrapper key={val.id} className="box-content--info mt2">
-            <div className="logo-company">
-                <img
-                    src={logoCompany}
-                    alt=""
-                    width="100"
-                    className="img-responsive"
-                />
-            </div>
+        <FlexWrapper key={val.id} className="mt2">
+            <Img src={defaultCompanyLogo} alt="" width="100" />
             <EducationInfo>
                 <div>
                     <h6 className="m0">{val.degree}</h6>
