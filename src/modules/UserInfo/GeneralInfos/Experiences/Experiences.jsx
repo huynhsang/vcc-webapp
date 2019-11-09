@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import logoCompany from '../../../../static/resources/img/logo/est-rouge.png';
+import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
 import {
     createExperienceFn,
@@ -36,6 +36,14 @@ const IconWrapper = styled.a`
     & .pi {
         font-size: 26px;
     }
+`;
+
+const Img = styled.img`
+    object-fit: contain;
+    width: 14%;
+    max-height: 90%;
+    height: auto;
+    margin-left: 1.5%;
 `;
 
 const Experiences = ({
@@ -85,14 +93,7 @@ const Experiences = ({
 
     const experiencesRender = Object.values(experiences).map(val => (
         <FlexWrapper key={val.id} className="mt2">
-            <div className="logo-company">
-                <img
-                    src={logoCompany}
-                    alt=""
-                    width="100"
-                    className="img-responsive"
-                />
-            </div>
+            <Img src={defaultCompanyLogo} alt="" width="100" />
             <ExperienceInfo>
                 <div>
                     <h6 className="m0 mr6">{val.title}</h6>

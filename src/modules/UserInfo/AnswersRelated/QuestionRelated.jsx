@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
+import { withRouter } from 'react-router-dom';
 
 import Answer from './Answer';
 
@@ -10,6 +11,7 @@ import DefaultUserLogo from '../../../images/default-user-logo.png';
 import { Badge } from '../../Badges';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
+import { getQuestionWithSlug } from '../../../services/question.service';
 
 const media = createMediaTemplate();
 
@@ -71,7 +73,7 @@ const MoreButton = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: -5px 5px 5px 0;
+    margin: 5px 5px 5px 0;
 
     height: 35px;
     width: 35px;
@@ -87,17 +89,20 @@ const MoreButton = styled.div`
 
 const AnswersWrapper = styled.div``;
 
-const QuestionRelated = ({ question }) => {
+const QuestionRelated = ({ question, location }) => {
     const { t } = useTranslation();
 
-    const {
-        askedBy,
-        categoryItem,
-        tagList,
-        title,
-        answers,
-        created
-    } = question;
+    const [answers, setAnswers] = React.useState([]);
+
+    const { askedBy, categoryItem, tagList, title, created, slug } = question;
+
+    const getQuestionDetail = () => {
+        getQuestionWithSlug(slug).then(data => {
+            if (data && data.answers) {
+                setAnswers(data.answers);
+            }
+        });
+    };
 
     const tagsRender = tagList.length > 0 && (
         <TagsWrapper className="tagcloud">
@@ -114,11 +119,15 @@ const QuestionRelated = ({ question }) => {
         </TagsWrapper>
     );
 
+    const userId = location.pathname.split('/')[2];
+
     const answersRender = (
         <AnswersWrapper>
-            {(answers || []).map(answer => (
-                <Answer id={answer.id} answer={answer} />
-            ))}
+            {(answers || [])
+                .filter(answer => answer.ownerId === userId)
+                .map(answer => (
+                    <Answer id={answer.id} answer={answer} key={answer.id} />
+                ))}
         </AnswersWrapper>
     );
 
@@ -152,7 +161,7 @@ const QuestionRelated = ({ question }) => {
             </QuestionWrapper>
             {answersRender}
             <ButtonWrapper>
-                <MoreButton>
+                <MoreButton onClick={getQuestionDetail}>
                     <i className="pi pi-ellipsis-h"></i>
                 </MoreButton>
             </ButtonWrapper>
@@ -160,4 +169,4 @@ const QuestionRelated = ({ question }) => {
     );
 };
 
-export default QuestionRelated;
+export default withRouter(QuestionRelated);

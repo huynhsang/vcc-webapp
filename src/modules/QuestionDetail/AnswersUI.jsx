@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { Answer } from '../../domain/Answer';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 
@@ -77,7 +77,7 @@ const AnswersUI = ({
                             <span>{question.answerCount} </span>
                             {t('common_answers')}
                         </h3>
-                        <div className="answers-tabs-inner">
+                        {/* <div className="answers-tabs-inner">
                             <ul>
                                 <li className="active-tab">
                                     <Link to="?show=voted">
@@ -95,7 +95,7 @@ const AnswersUI = ({
                                     </Link>
                                 </li>
                             </ul>
-                        </div>
+                        </div> */}
                         <div className="clearfix" />
                     </div>
                     <ol className="commentlist clearfix custom-comment-list">

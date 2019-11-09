@@ -24,14 +24,14 @@ const Answer = ({ answer }) => {
 
     const {t} = useTranslation();
 
-    const { createdOn, body } = answer;
+    const { created, body } = answer;
 
     return (
         <Wrapper>
             <div>{body}</div>
             <DateWrapper itemProp="dateCreated">
                 <DateTitle>{`${t('user_info_added_an_answer')} `}</DateTitle>
-                {new Date(createdOn).toDateString()}
+                {new Date(created).toDateString()}
             </DateWrapper>
         </Wrapper>
     );
