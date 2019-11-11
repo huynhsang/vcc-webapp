@@ -11,7 +11,6 @@ import DefaultUserLogo from '../../../images/default-user-logo.png';
 import { Badge } from '../../Badges';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
-import { getQuestionWithSlug } from '../../../services/question.service';
 
 const media = createMediaTemplate();
 
@@ -63,46 +62,45 @@ const Infos = styled(FlexWrapper)`
     ${media.tabletLandscape`flex-direction: column; align-items: start;`}
 `;
 
-const ButtonWrapper = styled.div`
-    display: flex;
-    justify-content: end;
-`;
+// const ButtonWrapper = styled.div`
+//     display: flex;
+//     justify-content: end;
+// `;
 
-const MoreButton = styled.div`
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 5px 5px 5px 0;
+// const MoreButton = styled.div`
+//     border-radius: 50%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 5px 5px 5px 0;
 
-    height: 35px;
-    width: 35px;
+//     height: 35px;
+//     width: 35px;
 
-    &:hover {
-        background-color: #dfdfdf;
-    }
+//     &:hover {
+//         background-color: #dfdfdf;
+//     }
 
-    & i {
-        font-size: 30px;
-    }
-`;
+//     & i {
+//         font-size: 30px;
+//     }
+// `;
 
 const AnswersWrapper = styled.div``;
 
-const QuestionRelated = ({ question, location }) => {
+const QuestionRelated = ({ answers, location }) => {
     const { t } = useTranslation();
 
-    const [answers, setAnswers] = React.useState([]);
+    console.log(answers[0].question);
 
-    const { askedBy, categoryItem, tagList, title, created, slug } = question;
-
-    const getQuestionDetail = () => {
-        getQuestionWithSlug(slug).then(data => {
-            if (data && data.answers) {
-                setAnswers(data.answers);
-            }
-        });
-    };
+    const {
+        askedBy,
+        categoryItem,
+        tagList,
+        title,
+        created,
+        body
+    } = answers[0].question;
 
     const tagsRender = tagList.length > 0 && (
         <TagsWrapper className="tagcloud">
@@ -154,17 +152,17 @@ const QuestionRelated = ({ question, location }) => {
                                 <span> {getNameByLanguage(categoryItem)}</span>
                             </span>
                         </Infos>
-                        <ReactMarkdown source={question.body} />
+                        <ReactMarkdown source={body} />
                         {tagsRender}
                     </div>
                 </FlexWrapper>
             </QuestionWrapper>
             {answersRender}
-            <ButtonWrapper>
+            {/* <ButtonWrapper>
                 <MoreButton onClick={getQuestionDetail}>
                     <i className="pi pi-ellipsis-h"></i>
                 </MoreButton>
-            </ButtonWrapper>
+            </ButtonWrapper> */}
         </Wrapper>
     );
 };

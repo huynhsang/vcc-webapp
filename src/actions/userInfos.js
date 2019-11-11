@@ -11,10 +11,13 @@ import {
     getEducations,
     editEducation
 } from '../services/education.service';
-import { getQuestions } from '../services/question.service';
+import { getQuestions, getNumberQuestions } from '../services/question.service';
+import { getAnswers, getNumberAnswers } from '../services/answer.service';
 import { getUser } from '../services/user.service';
 
 import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
+
+const DEFAULT_GET_LIMIT = 5;
 
 const {
     GET_EXPERIENCES_SUCCESS,
@@ -32,8 +35,10 @@ const {
     EDIT_EDUCATION_SUCCESS,
     EDIT_EDUCATION_FAILURE,
     GET_QUESTIONS_ASKED_SUCCESS,
-    GET_QUESTIONS_ANSWERED_SUCCESS,
-    GET_USER_PROFILE_SUCCESS
+    GET_ANSWERS_RELATED_SUCCESS,
+    GET_USER_PROFILE_SUCCESS,
+    GET_NUMBER_ANSWERS_RELATED_SUCCESS,
+    GET_NUMBER_QUESTIONS_ASKED_SUCCESS
 } = actionsNames;
 
 export const getUserProfileSuccess = createAction(GET_USER_PROFILE_SUCCESS);
@@ -70,7 +75,7 @@ export const createExperienceRequest = createAction(CREATE_EXPERIENCE_REQUEST);
 export const createExperienceSuccess = createAction(CREATE_EXPERIENCE_SUCCESS);
 export const createExperienceFailure = createAction(CREATE_EXPERIENCE_FAILURE);
 
-export const createExperienceFn = (data) => {
+export const createExperienceFn = data => {
     return dispatch => {
         dispatch(createExperienceRequest());
         createExperience(data)
@@ -80,7 +85,9 @@ export const createExperienceFn = (data) => {
             })
             .catch(err => {
                 dispatch(createExperienceFailure());
-                dispatch(showErrorAlertFn('Error!', err.response.data.error.message));
+                dispatch(
+                    showErrorAlertFn('Error!', err.response.data.error.message)
+                );
             });
     };
 };
@@ -89,7 +96,7 @@ export const editExperienceRequest = createAction(EDIT_EXPERIENCE_REQUEST);
 export const editExperienceSuccess = createAction(EDIT_EXPERIENCE_SUCCESS);
 export const editExperienceFailure = createAction(EDIT_EXPERIENCE_FAILURE);
 
-export const editExperienceFn = (data) => {
+export const editExperienceFn = data => {
     return dispatch => {
         dispatch(editExperienceRequest());
         editExperience(data)
@@ -99,7 +106,9 @@ export const editExperienceFn = (data) => {
             })
             .catch(err => {
                 dispatch(editExperienceFailure());
-                dispatch(showErrorAlertFn('Error!', err.response.data.error.message));
+                dispatch(
+                    showErrorAlertFn('Error!', err.response.data.error.message)
+                );
             });
     };
 };
@@ -126,7 +135,7 @@ export const createEducationRequest = createAction(CREATE_EDUCATION_REQUEST);
 export const createEducationSuccess = createAction(CREATE_EDUCATION_SUCCESS);
 export const createEducationFailure = createAction(CREATE_EDUCATION_FAILURE);
 
-export const createEducationFn = (data) => {
+export const createEducationFn = data => {
     return dispatch => {
         dispatch(createEducationRequest());
         createEducation(data)
@@ -136,7 +145,9 @@ export const createEducationFn = (data) => {
             })
             .catch(err => {
                 dispatch(createEducationFailure());
-                dispatch(showErrorAlertFn('Error!', err.response.data.error.message));
+                dispatch(
+                    showErrorAlertFn('Error!', err.response.data.error.message)
+                );
             });
     };
 };
@@ -145,7 +156,7 @@ export const editEducationRequest = createAction(EDIT_EDUCATION_REQUEST);
 export const editEducationSuccess = createAction(EDIT_EDUCATION_SUCCESS);
 export const editEducationFailure = createAction(EDIT_EDUCATION_FAILURE);
 
-export const editEducationFn = (data) => {
+export const editEducationFn = data => {
     return dispatch => {
         dispatch(editEducationRequest());
         editEducation(data)
@@ -155,7 +166,9 @@ export const editEducationFn = (data) => {
             })
             .catch(err => {
                 dispatch(editEducationFailure());
-                dispatch(showErrorAlertFn('Error!', err.response.data.error.message));
+                dispatch(
+                    showErrorAlertFn('Error!', err.response.data.error.message)
+                );
             });
     };
 };
@@ -164,25 +177,81 @@ export const getQuestionsAskedSuccess = createAction(
     GET_QUESTIONS_ASKED_SUCCESS
 );
 
-export const getQuestionsAskedFn = userId => {
+export const getNumberQuestionsAskedSuccess = createAction(
+    GET_NUMBER_QUESTIONS_ASKED_SUCCESS
+);
+
+export const getQuestionsAskedFn = (userId, page = 1) => {
+    const where = {
+        ownerId: userId
+    };
+    const filter = {
+        where,
+        order: ['modified DESC', 'created DESC'],
+        limit: DEFAULT_GET_LIMIT,
+        skip: (page - 1) * DEFAULT_GET_LIMIT
+    };
     return dispatch => {
-        getQuestions()
+        getQuestions({ filter })
             .then(data => {
                 dispatch(getQuestionsAskedSuccess(data));
+            })
+            .catch(err => console.log(err));
+
+        getNumberQuestions({ where })
+            .then(data => {
+                dispatch(getNumberQuestionsAskedSuccess(data));
             })
             .catch(err => console.log(err));
     };
 };
 
-export const getQuestionsAnsweredSuccess = createAction(
-    GET_QUESTIONS_ANSWERED_SUCCESS
+export const getAnswersRelatedSuccess = createAction(
+    GET_ANSWERS_RELATED_SUCCESS
 );
 
-export const getQuestionsAnsweredFn = userId => {
+export const getNumberAnswersRelatedSuccess = createAction(
+    GET_NUMBER_ANSWERS_RELATED_SUCCESS
+);
+
+export const getAnswersRelatedFn = userId => {
+    const where = {
+        ownerId: userId
+    };
+    const filter = {
+        where,
+        include: [
+            {
+                relation: 'question',
+                scope: {
+                    include: {
+                        relation: 'askedBy',
+                        scope: {
+                            fields: [
+                                'id',
+                                'avatar',
+                                'firstName',
+                                'lastName',
+                                'points'
+                            ]
+                        }
+                    }
+                }
+            }
+        ],
+        order: ['modified DESC', 'created DESC']
+    };
+
     return dispatch => {
-        getQuestions()
+        getAnswers({ filter })
             .then(data => {
-                dispatch(getQuestionsAnsweredSuccess(data));
+                dispatch(getAnswersRelatedSuccess(data));
+            })
+            .catch(err => console.log(err));
+
+        getNumberAnswers({ where })
+            .then(data => {
+                dispatch(getNumberAnswersRelatedSuccess(data));
             })
             .catch(err => console.log(err));
     };

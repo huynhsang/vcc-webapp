@@ -15,8 +15,6 @@ import {
     getUserProfileFn,
     getExperiencesFn,
     getEducationsFn,
-    getQuestionsAskedFn,
-    getQuestionsAnsweredFn
 } from '../../actions/userInfos';
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
@@ -42,8 +40,6 @@ const UserProfile = ({
     getUserProfile,
     getExperiences,
     getEducations,
-    getQuestionsAsked,
-    getQuestionsAnswered
 }) => {
     const { t } = useTranslation();
 
@@ -58,8 +54,6 @@ const UserProfile = ({
             getUserProfile(userId);
             getExperiences(userId);
             getEducations(userId);
-            getQuestionsAsked(userId);
-            getQuestionsAnswered(userId);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
@@ -68,7 +62,7 @@ const UserProfile = ({
         return <div />;
     }
 
-    const { firstName, lastName, level, avatar,  } = userProfile;
+    const { firstName, lastName, level, avatar } = userProfile;
 
     return (
         <div className="container discy-container">
@@ -147,8 +141,6 @@ const mapDispatchToProps = dispatch => ({
     getUserProfile: userId => dispatch(getUserProfileFn(userId)),
     getExperiences: userId => dispatch(getExperiencesFn(userId)),
     getEducations: userId => dispatch(getEducationsFn(userId)),
-    getQuestionsAsked: userId => dispatch(getQuestionsAskedFn(userId)),
-    getQuestionsAnswered: userId => dispatch(getQuestionsAnsweredFn(userId))
 });
 
 export default connect(

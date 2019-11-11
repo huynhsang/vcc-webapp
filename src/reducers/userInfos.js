@@ -16,7 +16,9 @@ import {
     editEducationSuccess,
     editEducationFailure,
     getQuestionsAskedSuccess,
-    getQuestionsAnsweredSuccess,
+    getAnswersRelatedSuccess,
+    getNumberAnswersRelatedSuccess,
+    getNumberQuestionsAskedSuccess,
     getUserProfileSuccess
 } from '../actions/userInfos';
 
@@ -25,10 +27,12 @@ const defaultState = {
     experiences: {},
     educations: {},
     questionsAsked: {},
-    questionsAnswered: {},
+    answersRelated: [],
     isChangingEducation: false,
     isChangingExperience: false,
     isFetchingError : false,
+    numberAnswersRelated: 0,
+    numberQuestionsAsked: 0,
 };
 
 const userInfosReducer = createReducer(defaultState, {
@@ -96,9 +100,15 @@ const userInfosReducer = createReducer(defaultState, {
     [getQuestionsAskedSuccess]: (state, action) => {
         state.questionsAsked = action.payload.entities.questions || {} ;
     },
-    [getQuestionsAnsweredSuccess]: (state, action) => {
-        state.questionsAnswered = action.payload.entities.questions || {} ;
-    }
+    [getAnswersRelatedSuccess]: (state, action) => {
+        state.answersRelated = action.payload;
+    },
+    [getNumberAnswersRelatedSuccess]: (state, action) => {
+        state.numberAnswersRelated = action.payload.count;
+    },
+    [getNumberQuestionsAskedSuccess] : (state, action) => {
+        state.numberQuestionsAsked = action.payload.count;
+    },
 });
 
 export default userInfosReducer;

@@ -29,3 +29,13 @@ export const experienceEntity = new schema.Entity(
 );
 
 export const experiencesEntity = [experienceEntity];
+
+export const answerEntity = new schema.Entity(
+    'answers',
+    {},
+    {
+        idAttribute: 'id'
+    }
+);
+
+export const answersEntity = [answerEntity];

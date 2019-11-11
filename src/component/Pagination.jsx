@@ -19,7 +19,7 @@ const Wrapper = styled.div`
             }
         }
 
-        & .active a{
+        & .active a {
             background-color: #007ad9;
             color: white;
         }
@@ -27,6 +27,21 @@ const Wrapper = styled.div`
         & .break-me a {
             background-color: unset;
             box-shadow: unset;
+        }
+
+        & .next.disabled {
+            opacity: 0.5;
+            & a {
+                cursor: default;
+            }
+        }
+
+        & .previous.disabled {
+            opacity: 0.5;
+
+            & a {
+                cursor: default;
+            }
         }
     }
 `;
@@ -41,12 +56,13 @@ const Pagination = ({ nbPages, activePage, onPageChange }) => {
                 breakLabel={'...'}
                 breakClassName={'break-me'}
                 pageCount={nbPages}
-                marginPagesDisplayed={activePage}
+                marginPagesDisplayed={2}
                 pageRangeDisplayed={5}
                 onPageChange={onPageChange}
                 containerClassName={'paginations'}
                 subContainerClassName={'TESTT'}
                 activeClassName={'active'}
+                disabledClassName={'disabled'}
             />
         </Wrapper>
     );

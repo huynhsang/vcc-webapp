@@ -44,6 +44,7 @@ const actionNames = keyMirror({
     VOTE_QUESTION_REQUEST: null,
     VOTE_QUESTION_SUCCESS: null,
     VOTE_QUESTION_FAILURE: null,
+    GET_NUMBER_QUESTIONS: null,
 
     //Question
     GET_QUESTION_REQUEST: null,
@@ -72,8 +73,10 @@ const actionNames = keyMirror({
     EDIT_EDUCATION_SUCCESS: null,
     EDIT_EDUCATION_FAILURE: null,
     GET_QUESTIONS_ASKED_SUCCESS: null,
-    GET_QUESTIONS_ANSWERED_SUCCESS: null,
-    GET_USER_PROFILE_SUCCESS: null
+    GET_ANSWERS_RELATED_SUCCESS: null,
+    GET_USER_PROFILE_SUCCESS: null,
+    GET_NUMBER_ANSWERS_RELATED_SUCCESS: null,
+    GET_NUMBER_QUESTIONS_ASKED_SUCCESS: null
 });
 
 export default actionNames;
