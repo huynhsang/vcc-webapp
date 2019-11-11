@@ -10,7 +10,10 @@ import QuestionComponent from './Question';
 
 // import { getQuestions } from '../../services/question.service';
 
-import { getQuestionsFn } from '../../actions/questions';
+import { getQuestionsFn, getNumberQuestionsFn } from '../../actions/questions';
+
+const DEFAULT_LIMIT = 5;
+const DEFAULT_SKIP = 0;
 
 const orderMaps = {
     'recent-questions': 'recent',
@@ -19,15 +22,21 @@ const orderMaps = {
     'most-voted': 'highVote'
 };
 
-const MainPage = ({ questionsReducer, getQuestions, location, history }) => {
+const MainPage = ({
+    questionsReducer,
+    getQuestions,
+    getNumberQuestions,
+    location,
+    history
+}) => {
     const { t } = useTranslation();
 
-    const { questions } = questionsReducer;
+    const { questions, numberQuestions } = questionsReducer;
 
     const [filter, setFilter] = React.useState({
         sort: orderMaps['recent-questions'],
-        skip: 0,
-        limit: 10
+        skip: DEFAULT_SKIP,
+        limit: DEFAULT_LIMIT
     });
 
     const urlParams = new URLSearchParams(location.search);
@@ -51,14 +60,15 @@ const MainPage = ({ questionsReducer, getQuestions, location, history }) => {
 
     //Load question when filter has been updated
     React.useEffect(() => {
-        getQuestions({filter});
+        getQuestions({ filter });
+        getNumberQuestions();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filter]);
 
     const handleLoadMore = () =>
-        setFilter(state => ({ ...state, skip: state.skip + 1 }));
+        setFilter(state => ({ ...state, limit: state.limit + DEFAULT_LIMIT }));
 
-    const showLoadMore = questions.length >= (filter.skip + 1) * filter.limit;
+    const showLoadMore = numberQuestions >= filter.limit;
 
     return (
         <div className="discy-main-inner float_l">
@@ -96,7 +106,8 @@ const mapStateToProps = ({ questionsReducer }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getQuestions: params => dispatch(getQuestionsFn(params))
+    getQuestions: params => dispatch(getQuestionsFn(params)),
+    getNumberQuestions: params => dispatch(getNumberQuestionsFn(params))
 });
 
 export default connect(

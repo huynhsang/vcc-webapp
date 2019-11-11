@@ -4,13 +4,28 @@ import styled from 'styled-components';
 import QuestionRelated from './QuestionRelated';
 // import Pagination from '../../../component/Pagination';
 
+import { getAnswersRelatedFn } from '../../../actions/userInfos';
+
+import groupBy from 'lodash/groupBy';
+
 const Wrapper = styled.div``;
 
 const QuestionsWrapper = styled.div``;
 
-const AnswersRelated = ({questionsAnswered}) => {
-    const questionsRender = Object.values(questionsAnswered).map(question => (
-        <QuestionRelated key={question.id} question={question} />
+const AnswersRelated = ({ answersRelated, getAnswersRelated }) => {
+    const userId = window.location.pathname.split('/')[2];
+
+    const answersGrouped = groupBy(answersRelated, 'question.id')
+
+    React.useEffect(() => {
+        if (userId) {
+            getAnswersRelated(userId);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [userId]);
+
+    const questionsRender = Object.values(answersGrouped).map(answers => (
+        <QuestionRelated key={answers[0].question.id} answers={answers} />
     ));
 
     return (
@@ -21,8 +36,14 @@ const AnswersRelated = ({questionsAnswered}) => {
     );
 };
 
-const mapStateToProps = ({ userInfos: { questionsAnswered } }) => ({
-    questionsAnswered
+const mapStateToProps = ({ userInfos: { answersRelated } }) => ({
+    answersRelated
 });
 
-export default connect(mapStateToProps)(AnswersRelated);
+const mapDispatchToProps = dispatch => ({
+    getAnswersRelated: userId => dispatch(getAnswersRelatedFn(userId))
+});
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(AnswersRelated);
