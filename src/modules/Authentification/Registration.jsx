@@ -4,6 +4,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
 
 import { register } from '../../services/account.service';
+import {REALM} from "../../constants/constants";
 
 const LoaderWrapper = styled.div`
     width: 100%;
@@ -37,6 +38,7 @@ const Registration = ({
     const onSubmit = event => {
         event.preventDefault();
         const data = { password, email, firstName, lastName };
+        data.realm = REALM.user;
 
         setLoader(true);
         register(data)
