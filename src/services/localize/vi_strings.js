@@ -202,7 +202,7 @@ export default {
     contact_us_if_you_want_to_share: 'Nếu bạn muốn chia sẻ',
     contact_us_feedback: 'Mọi ý kiến phản hồi khác, xin gởi về ',
 
-    about_us_VCNC: 'Vietnamese Counseiling and Connecting',
+    about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',
     about_us_our_story: 'Câu chuyện của chúng tôi',
     about_us_story: `Team sáng lập của VCNC gồm những cựu học sinh của THPT chuyên Lê Quý Đôn, Đà Nẵng đang học tập và làm việc ở nước ngoài. Khi đặt chân đến một đất nước xa lạ, chúng tôi nhận ra sự cần thiết của việc tập hợp người Việt Nam lại với nhau để giúp đỡ nhau đi lên. Đó là lý do chúng tôi tạo ra một nền tảng nơi mọi người có thể nhận được những lời khuyên và hỗ trợ từ những người có kinh nghiệm cho sự nghiệp của mình.`,

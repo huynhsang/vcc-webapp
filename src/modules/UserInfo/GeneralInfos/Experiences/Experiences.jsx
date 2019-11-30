@@ -100,7 +100,7 @@ const Experiences = ({
                     <p className="font-size-14">{val.company}</p>
                     <p>{` ${new Date(val.startDate).toDateString()} - ${
                         val.isWorking
-                            ? 'Prensent'
+                            ? 'Present'
                             : new Date(val.endDate).toDateString()
                     }`}</p>
                     <p className="note">{val.location}</p>

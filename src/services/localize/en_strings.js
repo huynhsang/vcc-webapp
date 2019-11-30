@@ -203,7 +203,7 @@ export default {
     contact_us_if_you_want_to_share: 'If you want to share',
     contact_us_feedback: 'Others feedback, please tell us via',
 
-    about_us_VCNC: 'Vietnamese Counseiling and Connecting',
+    about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',
     about_us_our_story: 'Our story',
     about_us_story: `VCNC's founders were students of Le Quy Don high school, Danang, Vietnam who are living and working overseas. When we first came to another country, we recognized a huge potential of unifying Vietnamese professionals to move forward together. That is why we built a platform where people can get advice or support from other professionals to have a clear vision in their careers.`,
