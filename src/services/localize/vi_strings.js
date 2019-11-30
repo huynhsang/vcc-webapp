@@ -156,6 +156,7 @@ export default {
     question_i_have_a_question_about: 'Tôi có một câu hỏi về học tập',
     question_i_need_help_with: 'Tôi cần giải quyết vấn đề về việc làm',
     question_i_nedd_to_troubleshoot: 'Tôi cần giải quyết vấn đề về định cư',
+    question_answer_min_20: 'Vui lòng để lại câu trả lời ít 20 kí tự',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -234,5 +235,5 @@ export default {
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',
-    user_info_added_an_answer: 'Được trả lời vào ngày',
+    user_info_added_an_answer: 'Được trả lời vào ngày'
 };
