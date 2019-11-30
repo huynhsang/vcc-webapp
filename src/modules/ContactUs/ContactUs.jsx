@@ -9,8 +9,10 @@ import { toggleContactUsFn } from '../../actions/app';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
 
-const REGISTRE_MENTOR_FORM_LINK = 'google.com';
-const REGISTRE_MENTEE_FORM_LINK = 'google.com';
+const REGISTRE_MENTOR_FORM_LINK =
+    'https://docs.google.com/forms/d/e/1FAIpQLSd8OGWo4yevWotalne-vQjCgWmXiogr374rR8QuCRHbK0rEAw/viewform?usp=pp_url';
+const REGISTRE_MENTEE_FORM_LINK =
+    'https://docs.google.com/forms/d/e/1FAIpQLSfhMbG6WVOWnw7Rye27A99QOElj0MfdW47q1U_4ei1ZW-wpQA/viewform?usp=pp_url';
 const VCNC_BLOG_EMAIL = 'vcncblog@gmail.com';
 const VCNC_APP_EMAIL = 'vcnc.app@gmail.com';
 
@@ -64,8 +66,12 @@ const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
                 {t('contact_us_if_you_want_to_registre')}
                 <strong>{` ${t('common_mentor')}, `}</strong>
                 {`${t('contact_us_please_complete_this_formule')}: `}
-                <a href={REGISTRE_MENTOR_FORM_LINK}>
-                    {REGISTRE_MENTOR_FORM_LINK}
+                <a
+                    href={REGISTRE_MENTOR_FORM_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    link
                 </a>
             </InfoWrapper>
             <InfoWrapper>
@@ -73,8 +79,12 @@ const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
                 {t('contact_us_if_you_want_to_registre')}
                 <strong>{` ${t('common_mentee')}, `}</strong>
                 {`${t('contact_us_please_complete_this_formule')}: `}
-                <a href={REGISTRE_MENTEE_FORM_LINK}>
-                    {REGISTRE_MENTEE_FORM_LINK}
+                <a
+                    href={REGISTRE_MENTEE_FORM_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    link
                 </a>
             </InfoWrapper>
             <InfoWrapper>
@@ -101,7 +111,4 @@ const mapDispatchToProps = dispatch => ({
     toggleContactUs: val => dispatch(toggleContactUsFn(val))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ContactUs);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactUs);
