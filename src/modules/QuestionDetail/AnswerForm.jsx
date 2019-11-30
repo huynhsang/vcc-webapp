@@ -41,6 +41,7 @@ const AnswerForm = ({
         if (isMounted && !isFetchingError) {
             reloadQuestion();
             setLeaveAnswer(false);
+            setAnswerBody('');
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isCreatingAnswer]);
