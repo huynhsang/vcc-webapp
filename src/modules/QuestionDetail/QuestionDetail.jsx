@@ -1,38 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import AnswersUI from './AnswersUI';
-
 import { useTranslation } from 'react-i18next';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
-
-import {
-    showErrorAlertFn,
-    showConfirmToLoginFn
-} from '../../actions/sweetAlert';
+import { Link, withRouter } from 'react-router-dom';
 
 import Question from './Question';
+import AnswerComponent from './Answer';
+import AnswerForm from './AnswerForm';
 
 import { getQuestionFn } from '../../actions/questionDetail';
 import Share from './Share';
 
-const QuestionDetail = ({
-    match,
-    history,
-    showErrorNotification,
-    showConfirmToLogin,
-    getQuestion,
-    questionDetail
-}) => {
+const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
     const { t } = useTranslation();
 
     const { question } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
-    React.useEffect(() => {
+
+    const fetchQuestion = () => {
         if (slug) {
             getQuestion(slug);
         }
+    };
+
+    React.useEffect(() => {
+        fetchQuestion();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slug]);
 
@@ -41,6 +33,10 @@ const QuestionDetail = ({
     }
 
     const { answers } = question;
+
+    const renderAnswers = answers.map((answer: Answer, index: number) => (
+        <AnswerComponent key={answer.id} answer={answer} question={question} />
+    ));
 
     return (
         <div className="discy-main-inner float_l">
@@ -90,38 +86,74 @@ const QuestionDetail = ({
                 <Question question={question} />
                 <div className="question-bottom">
                     <Share />
-                    {/* <ul className="question-link-list">
-            <li className="report_activated">
-              <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                className="report_q"
-              >
-                <i className="icon-attention" />
-                {t('common_report')}
-              </a>
-            </li>
-          </ul> */}
+                    {/* 
+                    <ul className="question-link-list">
+                        <li className="report_activated">
+                        <a //eslint-disable-line jsx-a11y/anchor-is-valid
+                            className="report_q"
+                        >
+                            <i className="icon-attention" />
+                            {t('common_report')}
+                        </a>
+                        </li>
+                    </ul> 
+                    */}
                     <div className="clearfix" />
                 </div>
-                <AnswersUI
-                    answers={answers}
-                    question={question}
-                    redirect={history}
-                />
+                <div className="question-adv-comments question-has-comments question-has-tabs">
+                    <div id="comments" className="post-section">
+                        <div className="post-inner">
+                            <div className="answers-tabs">
+                                <h3 className="section-title">
+                                    <span>{question.answerCount} </span>
+                                    {t('common_answers')}
+                                </h3>
+                                {/* <div className="answers-tabs-inner">
+                            <ul>
+                                <li className="active-tab">
+                                    <Link to="?show=voted">
+                                        {t('common_voted')}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="?show=oldest">
+                                        {t('common_oldest')}
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="?show=recent">
+                                        {t('common_rencent')}
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div> */}
+                                <div className="clearfix" />
+                            </div>
+                            <ol className="commentlist clearfix custom-comment-list">
+                                {renderAnswers}
+                            </ol>
+                            <div className="clearfix" />
+                        </div>
+                    </div>
+                    <AnswerForm
+                        questionId={question.id}
+                        reloadQuestion={fetchQuestion}
+                    />
+                </div>
             </div>
         </div>
     );
 };
 
-const mapStateToProps = ({ questionDetail }) => ({ questionDetail });
+const mapStateToProps = ({ questionDetail }) => ({
+    questionDetail
+});
 
 const mapDispatchToProps = dispatch => ({
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
     getQuestion: slug => dispatch(getQuestionFn(slug))
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(QuestionDetail);
+)(withRouter(QuestionDetail));

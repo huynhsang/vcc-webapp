@@ -11,6 +11,13 @@ import Vote from '../../component/Vote';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { Badge } from '../Badges';
+import ApplicationUtil from '../../common/util/ApplicationUtil';
+
+import {
+    showErrorAlertFn,
+    showConfirmToLoginFn,
+    showSuccessAlertFn
+} from '../../actions/sweetAlert';
 
 const AnswerComponent = ({
     answer,
@@ -46,10 +53,10 @@ const AnswerComponent = ({
         approveAnswer(question.id, answer.id)
             .then(() => {
                 setDisableApproveBtn(false);
-                updateQuestion({
-                    ...question,
-                    hasAcceptedAnswer: (answer.isTheBest = true)
-                });
+                // updateQuestion({
+                //     ...question,
+                //     hasAcceptedAnswer: (answer.isTheBest = true)
+                // });
             })
             .catch(err => {
                 showErrorNotification(err.response.data);
@@ -215,7 +222,12 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
 const mapDispatchToProps = dispatch => ({
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
     reVoteAnswer: (answerId, voteId, action) =>
-        dispatch(reVoteAnswerFn(answerId, voteId, action))
+        dispatch(reVoteAnswerFn(answerId, voteId, action)),
+    showErrorNotification: data =>
+        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
+    showSuccessNotification: (title, text) =>
+        dispatch(showSuccessAlertFn(title, text))
 });
 
 export default connect(

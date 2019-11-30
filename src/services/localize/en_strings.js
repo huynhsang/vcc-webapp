@@ -157,6 +157,7 @@ export default {
     question_i_have_a_question_about: 'I have a question about studying',
     question_i_nedd_help_with: 'I need help with a working problem',
     question_i_nedd_to_troubleshoot: 'I need to troubleshoot some immigration',
+    question_answer_min_20: 'Please leave an answer at least 20 characters',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',
@@ -235,5 +236,5 @@ export default {
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',
-    user_info_added_an_answer: 'Added an answer on',
+    user_info_added_an_answer: 'Added an answer on'
 };
