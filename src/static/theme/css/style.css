@@ -15811,13 +15811,13 @@ ul.question-vote.answer-vote li i,
 .question-simple.question-meta-vote .question-footer ul.question-vote li i,
 .question-simple.question-meta-vote .question-footer ul.question-vote li.vote_result,
 .question-simple.question-meta-vote .question-footer ul.question-vote li.li_loader {
-    line-height: 15px
+    line-height: 30px
 }
 
 ul.question-vote.answer-vote li.vote_result,
 .question-meta-vote .question-footer ul.question-vote li.vote_result {
     font-size: 17px;
-    line-height: 15px
+    line-height: 30px
 }
 
 .question-meta-vote .question-footer ul.question-vote li i,

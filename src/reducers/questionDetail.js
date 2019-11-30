@@ -50,23 +50,29 @@ function voteQuestionFn(state, action) {
 
 function voteAnswerFn(state, action) {
     const { payload } = action;
-    const { model } = payload;
+    const { model, modelId } = payload;
     delete payload.model;
 
     const { answers } = state.question;
-    const answer = answers.find(answer => answer.id === model.id);
+    const answer = answers.find(answer => answer.id === modelId);
 
-    const lastVote = (answer.votes || []).find(vote => vote.id === payload.id);
+    const lastVote = answer.votes
+        ? answer.votes.find(vote => vote.id === payload.id)
+        : null;
 
     if (payload.action === 'up') {
-        answer.upVoteCount = model.upVoteCount + 1;
         if (lastVote) {
+            answer.upVoteCount = model.upVoteCount + 1;
             answer.downVoteCount = model.downVoteCount - 1;
+        } else {
+            answer.upVoteCount = (answer.upVoteCount || 0) + 1;
         }
     } else if (payload.action === 'down') {
-        answer.downVoteCount = model.downVoteCount + 1;
         if (lastVote) {
+            answer.downVoteCount = model.downVoteCount + 1;
             answer.upVoteCount = model.upVoteCount - 1;
+        } else {
+            answer.downVoteCount = (answer.downVoteCount || 0) + 1;
         }
     }
     answer.votes = [payload];
