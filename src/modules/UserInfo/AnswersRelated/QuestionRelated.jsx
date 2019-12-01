@@ -30,6 +30,7 @@ const Title = styled.div`
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
+    cursor: pointer;
 `;
 
 const FlexWrapper = styled.div`
@@ -88,7 +89,7 @@ const Infos = styled(FlexWrapper)`
 
 const AnswersWrapper = styled.div``;
 
-const QuestionRelated = ({ answers, location }) => {
+const QuestionRelated = ({ answers, location, history }) => {
     const { t } = useTranslation();
 
     console.log(answers[0].question);
@@ -99,8 +100,13 @@ const QuestionRelated = ({ answers, location }) => {
         tagList,
         title,
         created,
-        body
+        body,
+        slug
     } = answers[0].question;
+
+    const handleTitle = () => {
+        history.push(`/home/question/${slug}/view`);
+    };
 
     const tagsRender = tagList.length > 0 && (
         <TagsWrapper className="tagcloud">
@@ -132,7 +138,7 @@ const QuestionRelated = ({ answers, location }) => {
     return (
         <Wrapper>
             <QuestionWrapper>
-                <Title>{title}</Title>
+                <Title onClick={handleTitle}>{title}</Title>
                 <FlexWrapper>
                     <Logo alt="" src={askedBy.avatar || DefaultUserLogo} />
                     <div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
@@ -17,6 +18,7 @@ const Title = styled.div`
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
+    cursor: pointer;
 `;
 
 const FlexWrapper = styled.div``;
@@ -36,7 +38,7 @@ const Infos = styled(FlexWrapper)`
     align-items: center;
 `;
 
-const QuestionAsked = ({ question }) => {
+const QuestionAsked = ({ question, history }) => {
     const { t } = useTranslation();
 
     const { categoryItem, tagList, title } = question;
@@ -56,9 +58,13 @@ const QuestionAsked = ({ question }) => {
         </TagsWrapper>
     );
 
+    const handleTitle = () => {
+        history.push(`/home/question/${question.slug}/view`);
+    };
+
     return (
         <Wrapper>
-            <Title>{title}</Title>
+            <Title onClick={handleTitle}>{title}</Title>
             <ReactMarkdown source={question.body} />
             {subCategoryRender}
             <Infos>
@@ -77,4 +83,4 @@ const QuestionAsked = ({ question }) => {
     );
 };
 
-export default QuestionAsked;
+export default withRouter(QuestionAsked);
