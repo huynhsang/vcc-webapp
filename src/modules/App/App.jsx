@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './AppRouter';
-import Header from './Header';
+import { Header } from '../Header';
 import { SweetAlert } from '../../component/SweetAlert';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
@@ -53,7 +53,4 @@ const mapDispatchToProps = dispatch => ({
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

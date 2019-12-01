@@ -10,7 +10,7 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import { LanguageSelector } from '../LanguageSelector';
 
 import useOutClick from '../../hooks/useOutClick';
-import { headerTabs } from './header.constant';
+import { headerTabs } from '../App/header.constant';
 
 import {
     setIsAuthenticatedFn,
