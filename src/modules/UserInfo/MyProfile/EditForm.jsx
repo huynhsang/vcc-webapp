@@ -21,8 +21,8 @@ const Wrapper = styled.div`
     margin-bottom: 50px;
     padding: 5px 20px 20px 20px;
     border-radius: 2px;
-    background-color:white;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.2);
+    background-color: white;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
 `;
 
 const ButtonsWrapper = styled.div`
@@ -83,8 +83,9 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
                         ? new Date(dateOfBirth)
                         : null
                 }
-                placeholder="mm/dd/YY"
-                dateFormat="mm/dd/yy"
+                touchUI
+                placeholder="dd/mm/YY"
+                dateFormat="dd/mm/yy"
                 onChange={ev => updateUser('dateOfBirth', ev.value)}
             />
             <Title>{t('my_profile_you_come_from')}</Title>
