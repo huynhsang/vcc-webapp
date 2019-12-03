@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Link, withRouter } from 'react-router-dom';
+
+import qs from 'qs';
+
 import logo from '../../static/resources/img/logo/logo.png';
 import logo2x from '../../static/resources/img/logo/logo-2x.png';
 import { LanguageSelector } from '../LanguageSelector';
@@ -18,8 +21,6 @@ import {
 
 import Authenticate from './Authenticate';
 
-const SearchInput = styled.input``;
-
 const Header = ({
     App,
     setIsAuthenticated,
@@ -30,7 +31,28 @@ const Header = ({
     toggleMobileAside,
     toggleContactUs
 }) => {
+    const { t } = useTranslation();
     const { isAuthenticated, currentUser } = App;
+
+    const { show, text } = qs.parse(location.search.substr(1));
+
+    const [searchText, setSearchText] = React.useState(text);
+
+    const search = () => {
+        const { pathname } = location;
+        const params = { page: 1, text: searchText };
+        if (/home\/questions/.test(pathname)) {
+            params.show = { show };
+        }
+        const url = `/home/questions?${qs.stringify(params)}`;
+        history.push(url);
+    };
+
+    const onkeyPress = (ev) => {
+        if (ev.which === 13) {
+            search();
+        }
+    };
 
     return (
         <div className="hidden-header header-dark mobile_bar_active">
@@ -78,16 +100,32 @@ const Header = ({
                                 <LanguageSelector />
                             </div>
                             <div className="header-search float_r">
-                                <SearchInput
-                                    type="search"
-                                    placeholder="Type Search Words"
-                                />
+                                <div className="search-wrapper">
+                                    <input
+                                        type="search"
+                                        placeholder={t(
+                                            'question_search_question'
+                                        )}
+                                        value={searchText}
+                                        onChange={ev =>
+                                            setSearchText(ev.target.value)
+                                        }
+                                        onKeyUp={onkeyPress}
+                                    />
+                                    <button type="submit" onClick={search}>
+                                        <i className="icon-search" />
+                                    </button>
+                                </div>
                             </div>
                             <nav className="nav float_l main-menu">
                                 <h3 className="screen-reader-text">
                                     VC&C Navigation
                                 </h3>
-                                <MainMenu toggleContactUs={toggleContactUs} />
+                                <MainMenu
+                                    toggleContactUs={toggleContactUs}
+                                    location={location}
+                                    history={history}
+                                />
                             </nav>
                         </div>
                     </div>
@@ -110,7 +148,7 @@ const mapDispatchToProps = dispatch => ({
     toggleContactUs: val => dispatch(toggleContactUsFn(val))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
 
 /* <form
     role="search"

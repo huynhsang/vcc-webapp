@@ -2,73 +2,55 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
+import qs from 'qs';
 
 import TopNav from './TopNav';
 
-import { useTranslation } from 'react-i18next';
 import QuestionComponent from './Question';
-
-// import { getQuestions } from '../../services/question.service';
 
 import { getQuestionsFn, getNumberQuestionsFn } from '../../actions/questions';
 
-const DEFAULT_LIMIT = 5;
-const DEFAULT_SKIP = 0;
+import { setUpQuestionFilter, DEFAULT_LIMIT } from '../../utils/question';
 
-const orderMaps = {
-    'recent-questions': 'recent',
-    'most-answered': 'mostAnswered',
-    'most-visited': 'mostVisited',
-    'most-voted': 'highVote'
-};
+import Pagination from '../../component/Pagination';
 
-const MainPage = ({
+const Questions = ({
     questionsReducer,
     getQuestions,
     getNumberQuestions,
     location,
     history
 }) => {
-    const { t } = useTranslation();
-
     const { questions, numberQuestions } = questionsReducer;
 
-    const [filter, setFilter] = React.useState({
-        sort: orderMaps['recent-questions'],
-        skip: DEFAULT_SKIP,
-        limit: DEFAULT_LIMIT
-    });
-
-    const urlParams = new URLSearchParams(location.search);
-    const show = urlParams.get('show');
+    const { show, page, text } = qs.parse(location.search.substr(1));
 
     //Set Filter when change route
     React.useEffect(() => {
-        const newState =
-            show === 'no-answers'
-                ? {
-                      skip: 0,
-                      sort: 'noAnswers'
-                  }
-                : {
-                      skip: 0,
-                      sort: orderMaps[show] || orderMaps['recent-questions']
-                  };
+        const { filterFixed, filter } = setUpQuestionFilter({
+            show,
+            page,
+            text
+        });
 
-        setFilter(state => ({ ...state, ...newState }));
-    }, [show]);
-
-    //Load question when filter has been updated
-    React.useEffect(() => {
-        getQuestions({ filter });
-        getNumberQuestions();
+        if (filterFixed) {
+            const url = `/home/questions?${qs.stringify(filterFixed)}`;
+            history.push(url);
+        } else {
+            getQuestions({ filter });
+            getNumberQuestions();
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filter]);
+    }, [show, page, text]);
 
-    const handleLoadMore = () =>
-        setFilter(state => ({ ...state, limit: state.limit + DEFAULT_LIMIT }));
-
-    const showLoadMore = numberQuestions >= filter.limit;
+    const onPageChange = ({ selected }) => {
+        const url = `/home/questions?${qs.stringify({
+            show,
+            page: selected + 1,
+            text
+        })}`;
+        history.push(url);
+    };
 
     return (
         <div className="discy-main-inner float_l">
@@ -80,22 +62,13 @@ const MainPage = ({
                         <QuestionComponent key={index} question={question} />
                     ))}
                 </div>
-                <div className="pagination-wrap pagination-question">
-                    <div className="pagination-nav posts-load-more">
-                        <span className="load_span">
-                            <span className="loader_2" />
-                        </span>
-                        {showLoadMore && (
-                            <div className="load-more">
-                                <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                                    onClick={handleLoadMore}
-                                >
-                                    {t('mainpage_load_more_questions')}
-                                </a>
-                            </div>
-                        )}
-                    </div>
-                </div>
+                <Pagination
+                    nbPages={Math.ceil(numberQuestions / DEFAULT_LIMIT)}
+                    activePage={page}
+                    onPageChange={onPageChange}
+                    justifyContent="center"
+                    color="#37424a"
+                />
             </section>
         </div>
     );
@@ -113,4 +86,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(MainPage));
+)(withRouter(Questions));

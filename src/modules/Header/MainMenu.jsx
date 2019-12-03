@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { headerTabs } from './header.constant';
 
@@ -38,4 +38,4 @@ const MainMenu = ({ location, history, toggleContactUs }) => {
     );
 };
 
-export default withRouter(MainMenu);
+export default MainMenu;

@@ -49,8 +49,9 @@ const questionsReducer = createReducer(defaultState, {
     },
     [getQuestionsSuccess]: (state, action) => {
         state.isFetching = false;
-        const { questions } = action.payload.entities;
-        state.questions = questions;
+        state.questions = action.payload && action.payload.entities
+            ? action.payload.entities.questions || {}
+            : {};
     },
     [getQuestionsFailure]: state => {
         state.isFetching = false;

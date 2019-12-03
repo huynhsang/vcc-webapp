@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import LeftNav from './LeftNav';
-import { withRouter } from 'react-router-dom';
 import { RightSlideBar } from './RightSlideBar';
 
 import { useTranslation } from 'react-i18next';
@@ -131,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(Home));
+)(Home);

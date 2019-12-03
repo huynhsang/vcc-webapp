@@ -10426,13 +10426,13 @@ nav.nav ul > li ul li .menu-nav-arrow {
 }
 
 .header-search input[type="search"] {
-    font-size: 12px;
+    font-size: 14px;
     font-style: italic;
     border: none;
     background-color: #202228;
     width: 230px;
     display: inline-block;
-    height: 29px;
+    height: 35px;
     padding: 0 0 0 10px
 }
 
