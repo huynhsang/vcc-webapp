@@ -22,6 +22,8 @@ import { getIdAndToken } from '../../utils/cookie-tools';
 
 import { voteQuestionFn, reVoteQuestionFn } from '../../actions/questions';
 
+import Tag from '../../component/Tag';
+
 const Wrapper = styled.article`
     .entry-date {
         color: black;
@@ -30,10 +32,6 @@ const Wrapper = styled.article`
     .post-cat span {
         color: black;
     }
-    /* 
-  .badge-span {
-    background-color: #30a96f;
-  } */
 `;
 
 const Question = ({
@@ -105,12 +103,7 @@ const Question = ({
     );
 
     const tagsRender = (tagList || []).map(tag => (
-        <a //eslint-disable-line jsx-a11y/anchor-is-valid
-            key={tag.slug}
-            // to={`/comunity/${tag.slug}`}
-        >
-            {getNameByLanguage(tag)}
-        </a>
+        <Tag key={tag.id} tag={tag} />
     ));
 
     return (
