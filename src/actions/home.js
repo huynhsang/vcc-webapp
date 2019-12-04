@@ -113,13 +113,13 @@ export const getTrendingTagsFailure = createAction(GET_TRENDING_TAGS_FAILURE);
 export const getTrendingTagsFn = () => {
     return dispatch => {
         dispatch(getTrendingTagsRequest());
-        const params = {
-            filter: {
-                skip: 0,
-                limit: 5
-            }
-        };
-        getTrendingTags(params)
+        // const params = {
+        //     filter: {
+        //         skip: 0,
+        //         limit: 5
+        //     }
+        // };
+        getTrendingTags()
             .then(data => {
                 dispatch(getTrendingTagsSuccess(data));
             })

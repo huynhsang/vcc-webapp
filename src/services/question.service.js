@@ -9,7 +9,11 @@ const VOTE_QUESTION_URL = id => `questions/${id}/vote`;
 export async function getQuestions(params) {
     const url = setUrlWithToken(QUESTION_URL);
     const response = await http.get(url, { params });
-    return normalize(response.data, questionsEntity);
+    const objReturn = normalize(response.data, questionsEntity);
+    if(params && params.totalCount){
+        objReturn.count = parseInt(response.headers['x-total-count'], 10) || 0;
+    }
+    return objReturn;
 }
 
 export async function getQuestionWithSlug(slug, params) {

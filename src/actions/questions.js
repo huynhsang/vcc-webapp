@@ -5,7 +5,6 @@ import {
     getQuestions,
     voteQuestion,
     reVoteQuestion,
-    getNumberQuestions
 } from '../services/question.service';
 
 const {
@@ -14,8 +13,7 @@ const {
     GET_QUESTIONS_FAILURE,
     VOTE_QUESTION_REQUEST,
     VOTE_QUESTION_SUCCESS,
-    VOTE_QUESTION_FAILURE,
-    GET_NUMBER_QUESTIONS
+    VOTE_QUESTION_FAILURE
 } = actionsNames;
 
 export const getQuestionsRequest = createAction(GET_QUESTIONS_REQUEST);
@@ -65,15 +63,5 @@ export const reVoteQuestionFn = (questionId, voteId, action) => {
                 dispatch(voteQuestionFailure());
                 console.log(err.message);
             });
-    };
-};
-
-export const getNumberQuestionsSuccess = createAction(GET_NUMBER_QUESTIONS);
-
-export const getNumberQuestionsFn = params => {
-    return dispatch => {
-        getNumberQuestions(params).then(data => {
-            dispatch(getNumberQuestionsSuccess(data));
-        });
     };
 };

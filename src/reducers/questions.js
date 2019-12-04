@@ -6,8 +6,7 @@ import {
     getQuestionsFailure,
     voteQuestionRequest,
     voteQuestionSuccess,
-    voteQuestionFailure,
-    getNumberQuestionsSuccess
+    voteQuestionFailure
 } from '../actions/questions';
 
 const defaultState = {
@@ -49,9 +48,11 @@ const questionsReducer = createReducer(defaultState, {
     },
     [getQuestionsSuccess]: (state, action) => {
         state.isFetching = false;
-        state.questions = action.payload && action.payload.entities
-            ? action.payload.entities.questions || {}
-            : {};
+        state.questions =
+            action.payload && action.payload.entities
+                ? action.payload.entities.questions || {}
+                : {};
+        state.numberQuestions = action.payload.count;
     },
     [getQuestionsFailure]: state => {
         state.isFetching = false;
@@ -62,9 +63,6 @@ const questionsReducer = createReducer(defaultState, {
     [voteQuestionSuccess]: voteQuestionFn,
     [voteQuestionFailure]: state => {
         state.votingQuestionId = null;
-    },
-    [getNumberQuestionsSuccess]: (state, action) => {
-        state.numberQuestions = action.payload.count;
     }
 });
 

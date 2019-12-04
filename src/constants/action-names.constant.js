@@ -44,7 +44,6 @@ const actionNames = keyMirror({
     VOTE_QUESTION_REQUEST: null,
     VOTE_QUESTION_SUCCESS: null,
     VOTE_QUESTION_FAILURE: null,
-    GET_NUMBER_QUESTIONS: null,
 
     //Question
     GET_QUESTION_REQUEST: null,

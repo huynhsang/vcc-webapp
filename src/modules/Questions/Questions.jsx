@@ -8,40 +8,34 @@ import TopNav from './TopNav';
 
 import QuestionComponent from './Question';
 
-import { getQuestionsFn, getNumberQuestionsFn } from '../../actions/questions';
+import { getQuestionsFn } from '../../actions/questions';
 
 import { setUpQuestionFilter, DEFAULT_LIMIT } from '../../utils/question';
 
 import Pagination from '../../component/Pagination';
 
-const Questions = ({
-    questionsReducer,
-    getQuestions,
-    getNumberQuestions,
-    location,
-    history
-}) => {
+const Questions = ({ questionsReducer, getQuestions, location, history }) => {
     const { questions, numberQuestions } = questionsReducer;
 
-    const { show, page, text } = qs.parse(location.search.substr(1));
+    const { show, page, text, tags } = qs.parse(location.search.substr(1));
 
     //Set Filter when change route
     React.useEffect(() => {
         const { filterFixed, filter } = setUpQuestionFilter({
             show,
             page,
-            text
+            text,
+            tags
         });
 
         if (filterFixed) {
             const url = `/home/questions?${qs.stringify(filterFixed)}`;
-            history.push(url);
+            history.replace(url);
         } else {
-            getQuestions({ filter });
-            getNumberQuestions();
+            getQuestions({ filter, totalCount: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [show, page, text]);
+    }, [show, page, text, tags]);
 
     const onPageChange = ({ selected }) => {
         const url = `/home/questions?${qs.stringify({
@@ -79,8 +73,7 @@ const mapStateToProps = ({ questionsReducer }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getQuestions: params => dispatch(getQuestionsFn(params)),
-    getNumberQuestions: params => dispatch(getNumberQuestionsFn(params))
+    getQuestions: params => dispatch(getQuestionsFn(params))
 });
 
 export default connect(

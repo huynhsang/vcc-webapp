@@ -51,7 +51,7 @@ const orderMaps = {
     'no-answers': 'noAnswers'
 };
 
-export const setUpQuestionFilter = ({ show, page, text }) => {
+export const setUpQuestionFilter = ({ show, page, text, tags }) => {
     const filterObj = {};
     const filterFixed = {};
     let hasError = false;
@@ -74,8 +74,13 @@ export const setUpQuestionFilter = ({ show, page, text }) => {
     }
 
     if (text) {
-        filterObj.where = { title: { like: `%${text.replace(' ', '%')}%` } };
+        filterObj.keyword = text;
         filterFixed.text = text;
+    }
+
+    if (tags) {
+        filterObj.tagIds = tags.split(',');
+        filterFixed.tags = tags;
     }
 
     return hasError ? { filterFixed } : { filter: filterObj };
