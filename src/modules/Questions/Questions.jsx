@@ -52,7 +52,8 @@ const Questions = ({ questionsReducer, getQuestions, location, history }) => {
         const url = `/home/questions?${qs.stringify({
             show,
             page: selected + 1,
-            text
+            text,
+            tags
         })}`;
         history.push(url);
     };
