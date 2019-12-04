@@ -25,15 +25,15 @@ const MobileBar = ({ history, location }) => {
     const { t } = useTranslation();
     const [showSearch, setShowSearch] = React.useState(false);
 
-    const { show, text } = qs.parse(location.search.substr(1));
+    const { show, text, tags } = qs.parse(location.search.substr(1));
 
-    const [searchText, setSearchText] = React.useState(text);
+    const [searchText, setSearchText] = React.useState(text || '');
 
     const search = (inputText = searchText) => {
         const { pathname } = location;
         const params = { page: 1, text: inputText };
         if (/home\/questions/.test(pathname)) {
-            params.show = { show };
+            Object.assign(params, { show, tags });
         }
         const url = `/home/questions?${qs.stringify(params)}`;
         history.push(url);
@@ -49,7 +49,7 @@ const MobileBar = ({ history, location }) => {
         setShowSearch(false);
         setSearchText('');
         search('');
-    }
+    };
 
     return (
         <div className="mobile-bar">
