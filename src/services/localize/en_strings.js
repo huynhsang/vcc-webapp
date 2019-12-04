@@ -70,6 +70,9 @@ export default {
     common_trending_tags: 'Trending tags',
     common_education: 'Education',
     common_experience: 'Experience',
+    common_no_result:'No result',
+    common_come_back:'Come back',
+
     pagination_previous: 'Previous',
     pagination_next: 'Next',
 
@@ -158,6 +161,8 @@ export default {
     question_i_nedd_help_with: 'I need help with a working problem',
     question_i_nedd_to_troubleshoot: 'I need to troubleshoot some immigration',
     question_answer_min_20: 'Please leave an answer at least 20 characters',
+    question_search_question: 'Search question',
+    question_hit_enter_to_search: 'Hit enter to search',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',

@@ -70,6 +70,9 @@ export default {
     common_trending_tags: 'Tags phổ  biến',
     common_education: 'Học vấn',
     common_experience: 'Kinh nghiệm',
+    common_no_result:'Không tìm thấy kết quả',
+    common_come_back:'Quay lại',
+
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
 
@@ -157,6 +160,8 @@ export default {
     question_i_need_help_with: 'Tôi cần giải quyết vấn đề về việc làm',
     question_i_nedd_to_troubleshoot: 'Tôi cần giải quyết vấn đề về định cư',
     question_answer_min_20: 'Vui lòng để lại câu trả lời ít 20 kí tự',
+    question_search_question: 'Tìm kiếm câu hỏi',
+    question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',

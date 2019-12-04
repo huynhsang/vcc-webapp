@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
+
+import Tag from '../../../component/Tag';
 
 const TopTrendingTags = ({ trendingTags }) => {
     const { t } = useTranslation();
@@ -24,13 +24,7 @@ const TopTrendingTags = ({ trendingTags }) => {
                 <div className="tagcloud">
                     {trendingTags.map((tag: SubCategory, index) => {
                         return (
-                            <Link
-                                key={index}
-                                to={`/home/questions?tags=${tag.slug}`}
-                                className="tag-cloud-link tag-link-11 tag-link-position-1"
-                            >
-                                {tag.nameEn}
-                            </Link>
+                            <Tag key={tag.id} tag={tag}/>
                         );
                     })}
                 </div>

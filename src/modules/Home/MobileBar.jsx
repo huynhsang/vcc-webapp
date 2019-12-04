@@ -1,15 +1,56 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
+
+import qs from 'qs';
 
 import { Link } from 'react-router-dom';
 
-const MobileBar = () => {
+const SearchWrapper = styled.div`
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: ${p => (p.show ? 'block' : 'none')};
+
+    & i {
+        font-size: 14px;
+        padding: 0 10px;
+        cursor: pointer;
+    }
+`;
+
+const MobileBar = ({ history, location }) => {
     const { t } = useTranslation();
     const [showSearch, setShowSearch] = React.useState(false);
-    const searchInput = showSearch ? { display: 'block' } : { display: 'none' };
-    const buttonSearch = showSearch
-        ? { display: 'none' }
-        : { display: 'block' };
+
+    const { show, text } = qs.parse(location.search.substr(1));
+
+    const [searchText, setSearchText] = React.useState(text);
+
+    const search = (inputText = searchText) => {
+        const { pathname } = location;
+        const params = { page: 1, text: inputText };
+        if (/home\/questions/.test(pathname)) {
+            params.show = { show };
+        }
+        const url = `/home/questions?${qs.stringify(params)}`;
+        history.push(url);
+    };
+
+    const onkeyPress = ev => {
+        if (ev.which === 13) {
+            search();
+        }
+    };
+
+    const hideSearch = () => {
+        setShowSearch(false);
+        setSearchText('');
+        search('');
+    }
+
     return (
         <div className="mobile-bar">
             <div className="discy-container">
@@ -17,31 +58,30 @@ const MobileBar = () => {
                     <div className="discy-container">
                         <div className="mobile-bar-search">
                             <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                                style={buttonSearch}
+                                style={{
+                                    display: showSearch ? 'none' : 'block'
+                                }}
                                 onClick={() => setShowSearch(state => !state)}
                             >
                                 <i className="icon-search" />
-                                Search
+                                {t('question_search_question')}
                             </a>
-                            <form
-                                style={searchInput}
-                                role="search"
-                                method="get"
-                                className="searchform main-search-form"
-                                action="/"
-                            >
+                            <SearchWrapper show={showSearch}>
                                 <i
                                     className="icon-left-open"
-                                    onClick={() =>
-                                        setShowSearch(state => !state)
-                                    }
+                                    onClick={hideSearch}
                                 />
                                 <input
                                     type="search"
-                                    className="live-search"
-                                    autoComplete="off"
                                     name="search"
-                                    placeholder="Hit enter to search"
+                                    placeholder={t(
+                                        'question_hit_enter_to_search'
+                                    )}
+                                    value={searchText}
+                                    onChange={ev =>
+                                        setSearchText(ev.target.value)
+                                    }
+                                    onKeyUp={onkeyPress}
                                 />
                                 <div className="loader_2 search_loader" />
                                 <div className="search-results results-empty" />
@@ -51,7 +91,7 @@ const MobileBar = () => {
                                     className="search_type"
                                     value="questions"
                                 />
-                            </form>
+                            </SearchWrapper>
                         </div>
                         <div className="mobile-bar-ask">
                             <Link to="/add-question" className="wpqa-question">
@@ -66,4 +106,4 @@ const MobileBar = () => {
     );
 };
 
-export default MobileBar;
+export default withRouter(MobileBar);

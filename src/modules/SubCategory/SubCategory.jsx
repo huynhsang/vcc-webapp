@@ -2,16 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getTags } from '../../services/tags.service';
+import { getNameByLanguage } from '../../utils/multiple-language';
 
 const SubCategory = () => {
     const { t } = useTranslation();
 
-    const [subCategories, setSubCategories] = React.useState([]);
+    const [tags, setTags] = React.useState([]);
 
     React.useEffect(() => {
         getTags()
             .then(data => {
-                setSubCategories(data);
+                setTags(data);
             })
             .catch(err => console.log(err.message));
     }, []);
@@ -85,36 +86,30 @@ const SubCategory = () => {
                         <div className="post-wrap-content">
                             <div className="post-content-text" />
                             <div className="row cats-sections tags-sections">
-                                {subCategories.map(
-                                    (item: SubCategory, index) => {
-                                        return (
-                                            <div
-                                                key={index}
-                                                className="col col6"
-                                            >
-                                                <div className="cat-sections-follow">
-                                                    <div className="cat-sections">
-                                                        <Link to="/">
-                                                            <i className="icon-tag" />
-                                                            {item.nameEn}
-                                                        </Link>
-                                                    </div>
-                                                    <div className="cat-section-follow">
-                                                        <div className="cat-follow-button">
-                                                            <i className="icon-users" />
-                                                            <span className="follow-cat-count">
-                                                                {' '}
-                                                                {item.amount}
-                                                            </span>
-                                                            questions
-                                                        </div>
-                                                        <div className="clearfix" />
-                                                    </div>
-                                                </div>
+                                {tags.map((item, index) => (
+                                    <div key={item.id} className="col col6">
+                                        <div className="cat-sections-follow">
+                                            <div className="cat-sections">
+                                                <Link
+                                                    to={`/home/questions?page=1&tags=${item.id}`}
+                                                >
+                                                    <i className="icon-tag" />
+                                                    {getNameByLanguage(item)}
+                                                </Link>
                                             </div>
-                                        );
-                                    }
-                                )}
+                                            <div className="cat-section-follow">
+                                                <div className="cat-follow-button">
+                                                    <i className="icon-users" />
+                                                    <span className="follow-cat-count">
+                                                        {item.questionCount}
+                                                    </span>
+                                                    {t('common_questions')}
+                                                </div>
+                                                <div className="clearfix" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>

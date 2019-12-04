@@ -15,7 +15,7 @@ export const getDefaultFields = () => [
 export const questionsFilterGenerator = ({
     order = null,
     skip = 0,
-    limit = 5,
+    limit = 5
     // include = [
     //     {
     //         relation: 'askedBy',
@@ -32,7 +32,7 @@ export const questionsFilterGenerator = ({
 }) => ({
     order,
     skip,
-    limit,
+    limit
     // include,
     // where
 });
@@ -40,3 +40,48 @@ export const questionsFilterGenerator = ({
 // order
 // numberOfViews DESC
 // numberOfAnswers DESC
+
+export const DEFAULT_LIMIT = 5;
+
+const orderMaps = {
+    'recent-questions': 'recent',
+    'most-answered': 'mostAnswered',
+    'most-visited': 'mostVisited',
+    'most-voted': 'highVote',
+    'no-answers': 'noAnswers'
+};
+
+export const setUpQuestionFilter = ({ show, page, text, tags }) => {
+    const filterObj = {};
+    const filterFixed = {};
+    let hasError = false;
+
+    if (orderMaps[show]) {
+        filterObj.sort = orderMaps[show];
+        filterFixed.show = show;
+    } else if (show) {
+        hasError = true;
+    }
+
+    if (page && !isNaN(page * 1)) {
+        const pageNumber = page * 1;
+        filterObj.skip = (pageNumber - 1) * DEFAULT_LIMIT;
+        filterObj.limit = DEFAULT_LIMIT;
+        filterFixed.page = page;
+    } else {
+        hasError = true;
+        filterFixed.page = '1';
+    }
+
+    if (text) {
+        filterObj.keyword = text;
+        filterFixed.text = text;
+    }
+
+    if (tags) {
+        filterObj.tagIds = tags.split(',');
+        filterFixed.tags = tags;
+    }
+
+    return hasError ? { filterFixed } : { filter: filterObj };
+};
