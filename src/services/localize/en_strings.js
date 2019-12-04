@@ -70,6 +70,9 @@ export default {
     common_trending_tags: 'Trending tags',
     common_education: 'Education',
     common_experience: 'Experience',
+    common_no_result:'No result',
+    common_come_back:'Come back',
+
     pagination_previous: 'Previous',
     pagination_next: 'Next',
 

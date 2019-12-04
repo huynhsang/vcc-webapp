@@ -70,6 +70,9 @@ export default {
     common_trending_tags: 'Tags phổ  biến',
     common_education: 'Học vấn',
     common_experience: 'Kinh nghiệm',
+    common_no_result:'Không tìm thấy kết quả',
+    common_come_back:'Quay lại',
+
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
 
