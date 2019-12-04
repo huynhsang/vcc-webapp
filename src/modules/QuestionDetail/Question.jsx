@@ -21,6 +21,7 @@ import { Badge } from '../Badges';
 import { getIdAndToken } from '../../utils/cookie-tools';
 
 import { voteQuestionFn, reVoteQuestionFn } from '../../actions/questionDetail';
+import Tag from '../../component/Tag';
 
 const Wrapper = styled.article`
     .entry-date {
@@ -101,12 +102,7 @@ const Question = ({
     );
 
     const tagsRender = (tagList || []).map(tag => (
-        <a //eslint-disable-line jsx-a11y/anchor-is-valid
-            key={tag.slug}
-            // to={`/comunity/${tag.slug}`}
-        >
-            {getNameByLanguage(tag)}
-        </a>
+        <Tag key={tag.id} tag={tag} />
     ));
 
     return (
