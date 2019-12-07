@@ -70,8 +70,8 @@ export default {
     common_trending_tags: 'Tags phổ  biến',
     common_education: 'Học vấn',
     common_experience: 'Kinh nghiệm',
-    common_no_result:'Không tìm thấy kết quả',
-    common_come_back:'Quay lại',
+    common_no_result: 'Không tìm thấy kết quả',
+    common_come_back: 'Quay lại',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -227,6 +227,8 @@ export default {
     authentification_invalid_comfirm_password: 'Xác nhận mật khẩu không khớp',
     authentification_your_password_has_been_reset:
         'Mật khẩu của bạn đã được đặt lại',
+    authentication_please_enter_email_and_password:
+        'Vui lòng nhập email và mật khẩu để tiếp tục',
 
     form_require_all_values: 'Vui lòng nhập đầy đủ thông tin.',
     form_your_job: 'Công việc của bạn',

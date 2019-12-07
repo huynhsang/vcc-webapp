@@ -6,7 +6,6 @@ import RootScope from '../../global/RootScope';
 import { login } from '../../services/account.service';
 
 const Login = ({
-    history,
     showSuccessAlert,
     showErrorAlert,
     setToFindPassword,
@@ -23,16 +22,20 @@ const Login = ({
         event.preventDefault();
         const data = LoginRequestBuilder.build(email, password, rememberMe);
 
-        login(data)
+        if(!email || !password){
+            showErrorAlert(t('authentication_please_enter_email_and_password'));
+        } else {
+            login(data)
             .then(data => {
                 showSuccessAlert('Success!', 'Logged in');
                 fetchUserFromCookie();
-                history.push('/home/questions');
+                hideAuthentification();
             })
             .catch(err => {
                 RootScope.resetAuthValues();
                 showErrorAlert(err.response.data.error.message);
             });
+        }
     };
 
     return (

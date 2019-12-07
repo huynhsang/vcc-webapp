@@ -228,6 +228,7 @@ export default {
     authentification_invalid_comfirm_password: 'Invalid confirm password',
     authentification_your_password_has_been_reset:
         'Your password has been reseted',
+    authentication_please_enter_email_and_password: 'Please enter your email and password to continue',
 
     form_require_all_values: 'Please enter all values required.',
     form_your_job: 'Your job',
