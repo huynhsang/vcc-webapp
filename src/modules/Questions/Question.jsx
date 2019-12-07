@@ -62,7 +62,8 @@ const Question = ({
         answerCount,
         viewCount,
         slug,
-        tagList
+        tagList,
+        voted
     } = question;
 
     const { id: currentUserId } = getIdAndToken();
@@ -87,14 +88,8 @@ const Question = ({
 
     const renderVote = isMobile => (
         <Vote
-            disableUp={
-                currentUserId === askedBy.id ||
-                (lastVote && lastVote.action === 'up')
-            }
-            disableDown={
-                currentUserId === askedBy.id ||
-                (lastVote && lastVote.action === 'down')
-            }
+            disableUp={currentUserId === askedBy.id || voted === 'up'}
+            disableDown={currentUserId === askedBy.id || voted === 'down'}
             isLoading={votingQuestionId === question.id}
             handleVote={handleVoteQuestion}
             points={upVoteCount - downVoteCount}

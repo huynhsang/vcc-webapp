@@ -48,10 +48,10 @@ const Questions = ({ questionsReducer, getQuestions, location, history }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [show, page, text, tags]);
 
-    const onPageChange = ({ selected }) => {
+    const onPageChange = page => {
         const url = `/home/questions?${qs.stringify({
             show,
-            page: selected + 1,
+            page,
             text,
             tags
         })}`;
@@ -83,7 +83,7 @@ const Questions = ({ questionsReducer, getQuestions, location, history }) => {
                                     numberQuestions / DEFAULT_LIMIT
                                 )}
                                 activePage={page}
-                                onPageChange={onPageChange}
+                                changePage={onPageChange}
                                 justifyContent="center"
                                 color="#37424a"
                             />
