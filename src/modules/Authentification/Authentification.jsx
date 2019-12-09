@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
 
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
 

@@ -12,7 +12,8 @@ import {
     updateCurrentUserRequest,
     updateCurrentUserSuccess,
     updateCurrentUserFailure,
-    setVerifiedUser
+    setVerifiedUser,
+    getUserByLoginTokenSuccess
 } from '../actions/app';
 
 const defaultState = {
@@ -70,6 +71,11 @@ const appReducer = createReducer(defaultState, {
     [setVerifiedUser]: (state, action) => {
         const { payload } = action;
         state.isVerifiedUser = payload;
+    },
+    [getUserByLoginTokenSuccess]: (state, action) => {
+        const { payload } = action;
+        state.currentUser = payload;
+        state.isAuthenticated = true;
     }
 });
 

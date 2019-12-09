@@ -8,10 +8,10 @@ const EmailVerification = ({ location, history }) => {
 
     React.useEffect(() => {
         const search = new URLSearchParams(location.search);
-        const uid: number = search.get('uid');
-        const token: string = search.get('token');
+        const uid = search.get('uid');
+        const token = search.get('token');
         if (!uid || !token) {
-            history.push('/');
+            history.push('/home/questions');
         } else {
             verifyEmail(uid, token)
                 .then(() => {

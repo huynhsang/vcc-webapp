@@ -3,6 +3,7 @@ import { setUrlWithToken } from '../utils/url';
 import { getIdAndToken } from '../utils/cookie-tools';
 
 const GET_USER_URL = 'users';
+const GET_USER_BY_LOGIN_TOKEN_URL = token => `users/me?access_token=${token}`;
 
 export async function fetchUserFromCookie() {
     const { id, token } = getIdAndToken();
@@ -34,5 +35,10 @@ export async function updateUser(data) {
 
 export async function getUsers(params) {
     const response = await http.get(GET_USER_URL, { params });
+    return response.data;
+}
+
+export async function getUserByLoginToken(token) {
+    const response = await http.get(GET_USER_BY_LOGIN_TOKEN_URL(token));
     return response.data;
 }

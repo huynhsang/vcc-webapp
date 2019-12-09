@@ -23,6 +23,8 @@ const actionNames = keyMirror({
 
     SET_VERIFIED_USER: null,
 
+    GET_USER_BY_LOGIN_TOKEN_SUCCESS: null,
+
     //HOME
     GET_TOP_USERS_REQUEST: null,
     GET_TOP_USERS_SUCCESS: null,
