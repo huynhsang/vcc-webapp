@@ -138,7 +138,7 @@ export default {
     question_post_your_question: 'Đăng câu hỏi',
     question_what_your_programming: `Câu hỏi lập trình của bạn là gì? Bạn cần cụ thể nó.`,
     question_what_languages_technologies:
-        'Ngôn ngữ, công nghệ, framework trong câu hỏi của bạn là gì?',
+        'Framework trong câu hỏi của bạn là gì?',
     question_tags_help_the_right_people:
         'Gắn tags để giúp mọi người tìm thấy câu hỏi của bạn dễ dàng hơn.',
     question_identify_your_tags: `Tìm tags của bạn bằng cách hoàn thành câu hỏi: “Câu hỏi của mình là về…”`,
