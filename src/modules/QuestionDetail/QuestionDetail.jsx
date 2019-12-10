@@ -34,7 +34,7 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
 
     const { answers } = question;
 
-    const renderAnswers = answers.map((answer: Answer, index: number) => (
+    const renderAnswers = answers.map(answer => (
         <AnswerComponent key={answer.id} answer={answer} question={question} />
     ));
 
@@ -85,7 +85,7 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
             <div className="post-articles question-articles">
                 <Question question={question} />
                 <div className="question-bottom">
-                    <Share />
+                    <Share questionSlug={slug}/>
                     {/* 
                     <ul className="question-link-list">
                         <li className="report_activated">
