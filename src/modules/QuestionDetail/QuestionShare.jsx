@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
-const FACEBOOK_SHARE_URL = 'https://www.facebook.com/sharer/sharer.php?u=';
-const TWITTER_SHARE_URL = 'https://twitter.com/intent/tweet?url=';
-const LINKEDIN_SHARE_URL = 'https://www.linkedin.com/shareArticle?url=';
+import {
+    FACEBOOK_SHARE_URL,
+    TWITTER_SHARE_URL,
+    LINKEDIN_SHARE_URL
+} from '../../constants/share.constant';
 
 const Share = ({ questionSlug }) => {
     const { t } = useTranslation();

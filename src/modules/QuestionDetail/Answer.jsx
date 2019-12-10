@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import UserLogo from '../../component/UserLogo';
@@ -18,14 +18,12 @@ import {
     showConfirmToLoginFn,
     showSuccessAlertFn
 } from '../../actions/sweetAlert';
+import AnswerShare from './AnswerShare';
 
 const AnswerComponent = ({
     answer,
     question,
-    updateQuestion,
-    history,
     showErrorNotification,
-    showSuccessNotification,
     showConfirmToLogin,
     voteAnswer,
     reVoteAnswer,
@@ -77,7 +75,7 @@ const AnswerComponent = ({
     };
 
     return (
-        <li className="comment byuser comment-author-james even thread-even depth-1">
+        <li className="comment" id={answer.id}>
             <div className="comment-body clearfix">
                 <div className="comment-text">
                     <UserLogo user={answerBy} />
@@ -138,60 +136,10 @@ const AnswerComponent = ({
                             points={upVoteCount - downVoteCount}
                             isAnswerVote
                         />
-                        <ul className="comment-reply comment-reply-main">
-                            {/* <li>
-                                <button
-                                    rel="nofollow"
-                                    className="comment-reply-link wpqa-reply-link"
-                                    aria-label={`Reply to ${answerBy.firstName} ${answerBy.lastName}`}
-                                >
-                                    <i className="icon-reply" />
-                                    {t('common_reply')}
-                                </button>
-                            </li> */}
-                            <li className="comment-share question-share question-share-2">
-                                <i className="icon-share" /> {t('common_share')}
-                                <div className="post-share">
-                                    <span>
-                                        <i className="icon-share" />
-                                        <span>{t('common_share')}</span>
-                                    </span>
-                                    <ul style={{ right: '-180px' }}>
-                                        <li className="share-facebook">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://www.facebook.com/sharer.php?"
-                                            >
-                                                <i className="icon-facebook" />
-                                                {t('share_on_facebook')}
-                                            </a>
-                                        </li>
-                                        <li className="share-twitter">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://twitter.com/share?"
-                                            >
-                                                <i className="icon-twitter" />
-                                                {t('share_on_twitter')}
-                                            </a>
-                                        </li>
-                                        <li className="share-linkedin">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://www.linkedin.com/shareArticle?"
-                                            >
-                                                <i className="icon-linkedin" />
-                                                {t('share_on_linkedIn')}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="clearfix last-item-answers" />
-                        </ul>
+                        <AnswerShare
+                            questionSlug={question.slug}
+                            answerId={answer.id}
+                        />
                         {/* <ul className="comment-reply comment-list-links">
                             <li className="question-list-details comment-list-details">
                                 <i className="icon-dot-3" />
@@ -230,7 +178,4 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showSuccessAlertFn(title, text))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(AnswerComponent));
+export default connect(mapStateToProps, mapDispatchToProps)(AnswerComponent);

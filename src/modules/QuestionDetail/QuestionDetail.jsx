@@ -8,7 +8,7 @@ import AnswerComponent from './Answer';
 import AnswerForm from './AnswerForm';
 
 import { getQuestionFn } from '../../actions/questionDetail';
-import Share from './Share';
+import QuestionShare from './QuestionShare';
 
 const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
     const { t } = useTranslation();
@@ -85,7 +85,7 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
             <div className="post-articles question-articles">
                 <Question question={question} />
                 <div className="question-bottom">
-                    <Share questionSlug={slug}/>
+                    <QuestionShare questionSlug={slug}/>
                     {/* 
                     <ul className="question-link-list">
                         <li className="report_activated">
