@@ -70,8 +70,8 @@ export default {
     common_trending_tags: 'Tags phổ  biến',
     common_education: 'Học vấn',
     common_experience: 'Kinh nghiệm',
-    common_no_result:'Không tìm thấy kết quả',
-    common_come_back:'Quay lại',
+    common_no_result: 'Không tìm thấy kết quả',
+    common_come_back: 'Quay lại',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -138,7 +138,7 @@ export default {
     question_post_your_question: 'Đăng câu hỏi',
     question_what_your_programming: `Câu hỏi lập trình của bạn là gì? Bạn cần cụ thể nó.`,
     question_what_languages_technologies:
-        'Ngôn ngữ, công nghệ, framework trong câu hỏi của bạn là gì?',
+        'Framework trong câu hỏi của bạn là gì?',
     question_tags_help_the_right_people:
         'Gắn tags để giúp mọi người tìm thấy câu hỏi của bạn dễ dàng hơn.',
     question_identify_your_tags: `Tìm tags của bạn bằng cách hoàn thành câu hỏi: “Câu hỏi của mình là về…”`,
@@ -227,6 +227,8 @@ export default {
     authentification_invalid_comfirm_password: 'Xác nhận mật khẩu không khớp',
     authentification_your_password_has_been_reset:
         'Mật khẩu của bạn đã được đặt lại',
+    authentication_please_enter_email_and_password:
+        'Vui lòng nhập email và mật khẩu để tiếp tục',
 
     form_require_all_values: 'Vui lòng nhập đầy đủ thông tin.',
     form_your_job: 'Công việc của bạn',

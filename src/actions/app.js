@@ -6,6 +6,8 @@ import { fetchUserFromCookie, updateUser } from '../services/user.service';
 
 import { showErrorAlertFn, showSuccessAlertFn } from './sweetAlert';
 
+import { getUserProfileFn } from './userInfos';
+
 const {
     SET_IS_AUTHENTICATED,
     SET_TO_AUTHENTICATE,
@@ -83,6 +85,7 @@ export const updateCurrentUserFn = payload => {
                         i18n.t('my_profile_user_info_updated')
                     )
                 );
+                dispatch(getUserProfileFn(data.id));
             })
             .catch(err => {
                 dispatch(updateCurrentUserFailure());

@@ -177,14 +177,9 @@ const Question = ({
                                     <i className="icon-comment" />
                                     <Link
                                         to={`/home/question/${slug}/view/#answers`}
-                                    >{`${answerCount} `}</Link>
-                                    <span className="question-span">
-                                        <Link
-                                            to={`/home/question/${slug}/view/#answers`}
-                                        >
-                                            {t('common_answer')}
-                                        </Link>
-                                    </span>
+                                    >
+                                        {`${answerCount} ${t('common_answer')}`}
+                                    </Link>
                                 </li>
                                 <li className="view-stats-meta">
                                     <i className="icon-eye" />

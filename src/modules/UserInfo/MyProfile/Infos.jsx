@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import COUNTRIES from './countries.constant';
 
+import dateformat from 'dateformat';
+
 const InfoTable = styled.table`
     color: black;
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -52,7 +54,10 @@ const Infos = ({ currentUser }) => {
                     label={t('my_profile_you_come_from')}
                     value={countryName}
                 />
-                <Tab label={t('common_date_of_birth')} value={dateOfBirth} />
+                <Tab
+                    label={t('common_date_of_birth')}
+                    value={dateOfBirth && dateformat(dateOfBirth, 'dd-mm-yyyy')}
+                />
                 <Tab label={t('common_summary')} value={summary} />
             </tbody>
         </InfoTable>

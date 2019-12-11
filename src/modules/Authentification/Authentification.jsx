@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Dialog } from 'primereact/dialog';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
 
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
 
@@ -102,7 +101,6 @@ const Authentication = ({
             >
                 {toAuthenticate === 'login' && (
                     <Login
-                        history={history}
                         showSuccessAlert={showSuccessAlert}
                         showErrorAlert={showErrorAlert}
                         setToFindPassword={setToFindPassword}
@@ -145,8 +143,8 @@ const mapDispatchToProp = dispatch => ({
     setToAuthenticate: () => dispatch(setToAuthenticateFn()),
     showSuccessAlert: (title, text) =>
         dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showErrorAlert: message =>
+        dispatch(showErrorAlertFn('Error!', message)),
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
 });
 
