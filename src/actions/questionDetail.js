@@ -2,15 +2,10 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 import {
     getQuestionWithSlug,
-    voteQuestion,
-    reVoteQuestion
+    voteQuestion
 } from '../services/question.service';
 
-import {
-    voteAnswer,
-    reVoteAnswer,
-    createAnswer
-} from '../services/answer.service';
+import { voteAnswer, createAnswer } from '../services/answer.service';
 
 import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
 
@@ -71,20 +66,6 @@ export const voteQuestionFn = (questionId, action) => {
     };
 };
 
-export const reVoteQuestionFn = (questionId, voteId, action) => {
-    return dispatch => {
-        dispatch(voteQuestionDetailRequest());
-        reVoteQuestion(questionId, voteId, action)
-            .then(data => {
-                dispatch(voteQuestionDetailSuccess(data));
-            })
-            .catch(err => {
-                dispatch(voteQuestionDetailFailure());
-                console.log(err.message);
-            });
-    };
-};
-
 export const voteAnswerRequest = createAction(VOTE_ANSWER_REQUEST);
 export const voteAnswerSuccess = createAction(VOTE_ANSWER_SUCCESS);
 export const voteAnswerFailure = createAction(VOTE_ANSWER_FAILURE);
@@ -93,20 +74,6 @@ export const voteAnswerFn = (answerId, action) => {
     return dispatch => {
         dispatch(voteAnswerRequest(answerId));
         voteAnswer(answerId, action)
-            .then(data => {
-                dispatch(voteAnswerSuccess(data));
-            })
-            .catch(err => {
-                dispatch(voteAnswerFailure());
-                console.log(err.message);
-            });
-    };
-};
-
-export const reVoteAnswerFn = (answerId, voteId, action) => {
-    return dispatch => {
-        dispatch(voteAnswerRequest(answerId));
-        reVoteAnswer(answerId, voteId, action)
             .then(data => {
                 dispatch(voteAnswerSuccess(data));
             })

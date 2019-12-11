@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import UserLogo from '../../component/UserLogo';
 
 import { approveAnswer } from '../../services/question.service';
-import { voteAnswerFn, reVoteAnswerFn } from '../../actions/questionDetail';
+import { voteAnswerFn } from '../../actions/questionDetail';
 import Vote from '../../component/Vote';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
@@ -26,7 +26,6 @@ const AnswerComponent = ({
     showErrorNotification,
     showConfirmToLogin,
     voteAnswer,
-    reVoteAnswer,
     questionDetail,
     isAuthenticated
 }) => {
@@ -35,14 +34,12 @@ const AnswerComponent = ({
 
     const { votingAnswerId } = questionDetail;
 
-    const { votes = [], upVoteCount, downVoteCount, answerBy } = answer;
+    const { voted, upVoteCount, downVoteCount, answerBy } = answer;
 
     const [disableApproveBtn, setDisableApproveBtn] = React.useState(false);
 
     const isQuestionOwner =
         question.askedBy && question.askedBy.id === currentUserId;
-
-    const lastVote = votes.find(vote => vote.ownerId === currentUserId);
 
     const isAnswerOwner = answerBy && answerBy.id === currentUserId;
 
@@ -66,12 +63,7 @@ const AnswerComponent = ({
             return showConfirmToLogin();
         }
         const action = isPositiveVote ? 'up' : 'down';
-
-        if (lastVote) {
-            reVoteAnswer(answer.id, lastVote.id, action);
-        } else {
-            voteAnswer(answer.id, action);
-        }
+        voteAnswer(answer.id, action);
     };
 
     return (
@@ -123,14 +115,8 @@ const AnswerComponent = ({
                         <div className="clearfix" />
                         <div className="wpqa_error" />
                         <Vote
-                            disableUp={
-                                isAnswerOwner ||
-                                (lastVote && lastVote.action === 'up')
-                            }
-                            disableDown={
-                                isAnswerOwner ||
-                                (lastVote && lastVote.action === 'down')
-                            }
+                            disableUp={isAnswerOwner || voted === 'up'}
+                            disableDown={isAnswerOwner || voted === 'down'}
                             isLoading={votingAnswerId === answer.id}
                             handleVote={handleVoteAnswer}
                             points={upVoteCount - downVoteCount}
@@ -169,8 +155,6 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
-    reVoteAnswer: (answerId, voteId, action) =>
-        dispatch(reVoteAnswerFn(answerId, voteId, action)),
     showErrorNotification: data =>
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),

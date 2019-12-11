@@ -10,7 +10,12 @@ import AnswerForm from './AnswerForm';
 import { getQuestionFn } from '../../actions/questionDetail';
 import QuestionShare from './QuestionShare';
 
-const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
+const QuestionDetail = ({
+    match,
+    getQuestion,
+    questionDetail,
+    isAuthenticated
+}) => {
     const { t } = useTranslation();
 
     const { question } = questionDetail;
@@ -26,7 +31,7 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
     React.useEffect(() => {
         fetchQuestion();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [slug]);
+    }, [slug, isAuthenticated]);
 
     if (!question) {
         return null;
@@ -85,7 +90,7 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
             <div className="post-articles question-articles">
                 <Question question={question} />
                 <div className="question-bottom">
-                    <QuestionShare questionSlug={slug}/>
+                    <QuestionShare questionSlug={slug} />
                     {/* 
                     <ul className="question-link-list">
                         <li className="report_activated">
@@ -145,8 +150,9 @@ const QuestionDetail = ({ match, getQuestion, questionDetail }) => {
     );
 };
 
-const mapStateToProps = ({ questionDetail }) => ({
-    questionDetail
+const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
+    questionDetail,
+    isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
