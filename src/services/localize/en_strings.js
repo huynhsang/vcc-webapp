@@ -240,6 +240,9 @@ export default {
     my_profile_you_come_from: 'You comme from',
     my_profile_choose_one_country: 'Choose one country',
     my_profile_user_info_updated: 'Your profile has been updated!',
+    my_profile_change_password: 'Change password',
+    my_profile_old_password: 'Old password',
+    my_profile_new_password: 'New password',
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',

@@ -239,6 +239,9 @@ export default {
     my_profile_you_come_from: 'Bạn đến từ',
     my_profile_choose_one_country: 'Chọn một nước',
     my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi',
+    my_profile_change_password: 'Thay đổi mật khẩu',
+    my_profile_old_password: 'Mật khẩu hiện tại',
+    my_profile_new_password: 'Mật khẩu mới',
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',

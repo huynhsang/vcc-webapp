@@ -6,7 +6,7 @@ import { MyProfile } from './MyProfile';
 import { QuestionsAsked } from './QuestionsAsked';
 import { AnswersRelated } from './AnswersRelated';
 
-const UserProfileRouter = ({ match, profile }) => {
+const UserProfileRouter = ({ match }) => {
     return (
         <>
             <Route
