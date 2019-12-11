@@ -1,4 +1,5 @@
 import { createReducer } from 'redux-starter-kit';
+import {updateEntityVoted} from '../utils/update-voted';
 
 import {
     getQuestionsRequest,
@@ -17,28 +18,9 @@ const defaultState = {
 };
 
 function voteQuestionFn(state, action) {
-    const { payload } = action;
-    const { model } = payload;
-    delete payload.model;
-
-    const question = state.questions[model.id];
-    const lastVote = (question.votes || []).find(
-        vote => vote.id === payload.id
-    );
-
-    if (payload.action === 'up') {
-        question.upVoteCount = model.upVoteCount + 1;
-        if (lastVote) {
-            question.downVoteCount = model.downVoteCount - 1;
-        }
-    } else if (payload.action === 'down') {
-        question.downVoteCount = model.downVoteCount + 1;
-        if (lastVote) {
-            question.upVoteCount = model.upVoteCount - 1;
-        }
-    }
-
-    question.votes = [payload];
+    const { action: voteAction, modelId } = action.payload;
+    const question = state.questions[modelId];
+    updateEntityVoted(question, voteAction);
     state.votingQuestionId = null;
 }
 

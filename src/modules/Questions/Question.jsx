@@ -20,7 +20,7 @@ import Vote from '../../component/Vote';
 import { Badge } from '../Badges';
 import { getIdAndToken } from '../../utils/cookie-tools';
 
-import { voteQuestionFn, reVoteQuestionFn } from '../../actions/questions';
+import { voteQuestionFn } from '../../actions/questions';
 
 import Tag from '../../component/Tag';
 
@@ -36,13 +36,9 @@ const Wrapper = styled.article`
 
 const Question = ({
     question,
-    history,
-    showErrorNotification,
     showConfirmToLogin,
-    isShownAnswerButton = true,
     isAuthenticated,
     voteQuestion,
-    reVoteQuestion,
     questionsReducer
 }) => {
     const { t } = useTranslation();
@@ -56,7 +52,6 @@ const Question = ({
         categoryItem,
         bestAnswerItem,
         created,
-        votes = [],
         upVoteCount,
         downVoteCount,
         answerCount,
@@ -68,18 +63,12 @@ const Question = ({
 
     const { id: currentUserId } = getIdAndToken();
 
-    const lastVote = votes.find(vote => vote.ownerId === currentUserId);
-
     const handleVoteQuestion = isPositiveVote => {
         if (!isAuthenticated) {
             return showConfirmToLogin();
         }
         const action = isPositiveVote ? 'up' : 'down';
-        if (lastVote) {
-            reVoteQuestion(id, lastVote.id, action);
-        } else {
-            voteQuestion(id, action);
-        }
+        voteQuestion(id, action);
     };
 
     const bestAnswerClassName = bestAnswerItem
@@ -215,9 +204,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
     voteQuestion: (questionId, action) =>
-        dispatch(voteQuestionFn(questionId, action)),
-    reVoteQuestion: (questionId, voteId, action) =>
-        dispatch(reVoteQuestionFn(questionId, voteId, action))
+        dispatch(voteQuestionFn(questionId, action))
 });
 
 export default connect(

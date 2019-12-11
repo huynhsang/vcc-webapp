@@ -24,7 +24,13 @@ const LoaderWrapper = styled.div`
     margin-top: 50px;
 `;
 
-const Questions = ({ questionsReducer, getQuestions, location, history }) => {
+const Questions = ({
+    questionsReducer,
+    getQuestions,
+    location,
+    history,
+    isAuthenticated
+}) => {
     const { t } = useTranslation();
     const { questions, numberQuestions, isFetching } = questionsReducer;
 
@@ -46,7 +52,7 @@ const Questions = ({ questionsReducer, getQuestions, location, history }) => {
             getQuestions({ filter, totalCount: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [show, page, text, tags]);
+    }, [show, page, text, tags, isAuthenticated]);
 
     const onPageChange = page => {
         const url = `/home/questions?${qs.stringify({
@@ -102,8 +108,9 @@ const Questions = ({ questionsReducer, getQuestions, location, history }) => {
     );
 };
 
-const mapStateToProps = ({ questionsReducer }) => ({
-    questionsReducer
+const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
+    questionsReducer,
+    isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -22,15 +22,6 @@ export async function voteAnswer(id, action) {
     return response.data;
 }
 
-export async function reVoteAnswer(answerId, voteId, action) {
-    const url = setUrlWithToken(VOTE_ANSWER_URL(answerId));
-    const response = await http.put(url, {
-        voteId,
-        action
-    });
-    return response.data;
-}
-
 export async function getAnswers(params) {
     const response = await http.get(ANSWER_URL, { params });
     return response.data;
