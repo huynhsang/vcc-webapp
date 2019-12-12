@@ -240,6 +240,15 @@ export default {
     my_profile_you_come_from: 'You comme from',
     my_profile_choose_one_country: 'Choose one country',
     my_profile_user_info_updated: 'Your profile has been updated!',
+    my_profile_change_password: 'Change password',
+    my_profile_old_password: 'Old password',
+    my_profile_new_password: 'New password',
+    my_profile_passwords_not_identique: 'Your new passwords are not the same',
+    my_profile_change_password_success: 'Your password is changed!',
+    my_profile_confirm_new_password: 'Confirm new password',
+    my_profile_please_complete_all_fields: 'Please complete all fields',
+    my_profile_passwords_contrain:
+        'Your password must have at least 8 character, 1 uppercase letter, 1 lowercase letter, 1 digit ',
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',

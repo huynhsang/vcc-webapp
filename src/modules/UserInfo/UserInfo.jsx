@@ -116,7 +116,6 @@ const UserProfile = ({
                                 {t('user_info_question_asked')}
                                 <i className="fas fa-arrow-right" />
                             </Link>
-
                             <Link
                                 to={`/users/${userId}/answers-related`}
                                 className="title-info"

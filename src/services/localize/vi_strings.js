@@ -239,6 +239,15 @@ export default {
     my_profile_you_come_from: 'Bạn đến từ',
     my_profile_choose_one_country: 'Chọn một nước',
     my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi',
+    my_profile_change_password: 'Thay đổi mật khẩu',
+    my_profile_old_password: 'Mật khẩu hiện tại',
+    my_profile_new_password: 'Mật khẩu mới',
+    my_profile_passwords_not_identique: 'Mật khẩu mới không đồng nhất',
+    my_profile_change_password_success: 'Bạn đã thay đổi mật khẩu thành công!',
+    my_profile_confirm_new_password: 'Xác nhận mật khẩu mới',
+    my_profile_please_complete_all_fields: 'Vui lòng điền đầy đủ thông tin',
+    my_profile_passwords_contrain:
+        'Mật khẩu phải chứa ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',

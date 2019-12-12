@@ -103,7 +103,7 @@ const Authenticate = ({
                         {!!currentUser && (
                             <ul style={userMenuStyle} ref={outClickRef}>
                                 <li>
-                                    <Link to={`/users/${userId}/general`}>
+                                    <Link to={`/users/${userId}/my-profile`}>
                                         <i className="icon-user" />
                                         {t('header_user_profile')}
                                     </Link>
