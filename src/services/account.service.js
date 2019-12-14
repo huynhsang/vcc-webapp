@@ -5,8 +5,8 @@ import CookieHelper from '../common/util/CookieHelper';
 import CookieConstant from '../common/constant/CookieConstant';
 import RootScope from '../global/RootScope';
 
-const USER_URL = 'users';
 const LOGIN_URL = 'users/login';
+const REGISTER_URL = 'users/register';
 
 const EMAIL_VERIFICATION_URL = (uid, token) =>
     `users/confirm?uid=${uid}&token=${token}`;
@@ -37,7 +37,7 @@ export async function verifyEmail(uid, token) {
 }
 
 export async function register(data) {
-    const response = await http.post(USER_URL, data);
+    const response = await http.post(REGISTER_URL, data);
     return response.data;
 }
 
