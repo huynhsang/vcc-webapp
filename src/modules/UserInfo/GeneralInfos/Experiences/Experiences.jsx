@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import i18n from 'i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -12,6 +13,7 @@ import {
 } from '../../../../actions/userInfos';
 
 import { getIdAndToken } from '../../../../utils/cookie-tools';
+import dateformat from 'dateformat';
 
 const Wrapper = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -91,6 +93,8 @@ const Experiences = ({
         setEditExperienceId(null);
     };
 
+    const formatDate = i18n.language === 'en' ? 'mmmm yyyy' : 'mm/yyyy';
+
     const experiencesRender = Object.values(experiences).map(val => (
         <FlexWrapper key={val.id} className="mt2">
             <Img src={defaultCompanyLogo} alt="" width="100" />
@@ -98,10 +102,10 @@ const Experiences = ({
                 <div>
                     <h6 className="m0 mr6">{val.title}</h6>
                     <p className="font-size-14">{val.company}</p>
-                    <p>{` ${new Date(val.startDate).toDateString()} - ${
-                        val.isWorking
-                            ? 'Present'
-                            : new Date(val.endDate).toDateString()
+                    <p>{` ${dateformat(val.startDate, formatDate)} - ${
+                        val.isWorkings
+                            ? t('common_present')
+                            : dateformat(val.endDate, formatDate)
                     }`}</p>
                     <p className="note">{val.location}</p>
                     <p>{val.description}</p>
