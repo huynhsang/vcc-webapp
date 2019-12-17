@@ -1,5 +1,5 @@
 import { createReducer } from 'redux-starter-kit';
-import {updateEntityVoted} from '../utils/update-voted';
+import { updateEntityVoted } from '../utils/update-voted';
 
 import {
     getQuestionsRequest,
@@ -34,7 +34,7 @@ const questionsReducer = createReducer(defaultState, {
             action.payload && action.payload.entities
                 ? action.payload.entities.questions || {}
                 : {};
-        state.numberQuestions = action.payload.count;
+        state.numberQuestions = action.payload ? action.payload.count : 0;
     },
     [getQuestionsFailure]: state => {
         state.isFetching = false;
