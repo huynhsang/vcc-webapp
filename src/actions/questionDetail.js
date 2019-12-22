@@ -2,7 +2,8 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 import {
     getQuestionWithSlug,
-    voteQuestion
+    voteQuestion,
+    approveAnswer
 } from '../services/question.service';
 
 import { voteAnswer, createAnswer } from '../services/answer.service';
@@ -21,7 +22,8 @@ const {
     VOTE_ANSWER_FAILURE,
     CREATE_ANSWER_REQUEST,
     CREATE_ANSWER_SUCCESS,
-    CREATE_ANSWER_FAILURE
+    CREATE_ANSWER_FAILURE,
+    APPROVE_ANSWER_SUCCESS
 } = actionsNames;
 
 export const getQuestionRequest = createAction(GET_QUESTION_REQUEST);
@@ -95,6 +97,25 @@ export const createAnswerFn = (questionId, answerBody) => {
             .then(() => {
                 dispatch(showSuccessAlertFn('Success!', 'Leaved an answer'));
                 dispatch(createAnswerSuccess());
+            })
+            .catch(err => {
+                showErrorAlertFn('Error!', err.response.data.error.message);
+                dispatch(createAnswerFailure());
+                console.log(err.message);
+            });
+    };
+};
+
+export const approveAnswerSuccess = createAction(APPROVE_ANSWER_SUCCESS);
+
+export const approveAnswerFn = (questionId, answerId) => {
+    return dispatch => {
+        approveAnswer(questionId, answerId)
+            .then(data => {
+                dispatch(
+                    showSuccessAlertFn('Success!', 'Approved this answer')
+                );
+                dispatch(approveAnswerSuccess(data));
             })
             .catch(err => {
                 showErrorAlertFn('Error!', err.response.data.error.message);

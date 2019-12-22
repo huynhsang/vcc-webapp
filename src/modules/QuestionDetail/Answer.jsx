@@ -5,27 +5,21 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import UserLogo from '../../component/UserLogo';
 
-import { approveAnswer } from '../../services/question.service';
-import { voteAnswerFn } from '../../actions/questionDetail';
+import { voteAnswerFn, approveAnswerFn } from '../../actions/questionDetail';
 import Vote from '../../component/Vote';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { Badge } from '../Badges';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
 
-import {
-    showErrorAlertFn,
-    showConfirmToLoginFn,
-    showSuccessAlertFn
-} from '../../actions/sweetAlert';
+import { showConfirmToLoginFn } from '../../actions/sweetAlert';
 import AnswerShare from './AnswerShare';
 
 const AnswerComponent = ({
     answer,
     question,
-    showErrorNotification,
     showConfirmToLogin,
     voteAnswer,
+    approveAnswer,
     questionDetail,
     isAuthenticated
 }) => {
@@ -43,19 +37,9 @@ const AnswerComponent = ({
 
     const isAnswerOwner = answerBy && answerBy.id === currentUserId;
 
-    const approveAnswerFn = () => {
+    const approve = () => {
         setDisableApproveBtn(true);
-        approveAnswer(question.id, answer.id)
-            .then(() => {
-                setDisableApproveBtn(false);
-                // updateQuestion({
-                //     ...question,
-                //     hasAcceptedAnswer: (answer.isTheBest = true)
-                // });
-            })
-            .catch(err => {
-                showErrorNotification(err.response.data);
-            });
+        approveAnswer(question.id, answer.id);
     };
 
     const handleVoteAnswer = isPositiveVote => {
@@ -72,21 +56,22 @@ const AnswerComponent = ({
                 <div className="comment-text">
                     <UserLogo user={answerBy} />
                     <div className="author clearfix">
-                        {question.bestAnswerItem && answer.isTheBest && (
-                            <div className="best-answer">
-                                {t('answer_best_answers')}
-                            </div>
-                        )}
+                        {question.bestAnswerItem &&
+                            answer.id === question.bestAnswerItem.id && (
+                                <div className="best-answer">
+                                    {t('answer_best_answers')}
+                                </div>
+                            )}
                         {isQuestionOwner &&
                             !question.bestAnswerItem &&
                             !isAnswerOwner && (
                                 <button
                                     className="btn btn-approve"
                                     disabled={disableApproveBtn}
-                                    onClick={approveAnswerFn}
+                                    onClick={approve}
                                 >
                                     <i className="fas fa-check" />{' '}
-                                    {t('Approve')}
+                                    {t('common_approve')}
                                 </button>
                             )}
                         <div className="comment-meta">
@@ -155,11 +140,9 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
-    showSuccessNotification: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text))
+    approveAnswer: (questionId, answerId) =>
+        dispatch(approveAnswerFn(questionId, answerId)),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnswerComponent);

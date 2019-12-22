@@ -12,7 +12,8 @@ import {
     voteAnswerFailure,
     createAnswerRequest,
     createAnswerSuccess,
-    createAnswerFailure
+    createAnswerFailure,
+    approveAnswerSuccess
 } from '../actions/questionDetail';
 
 import { updateEntityVoted } from '../utils/update-voted';
@@ -76,6 +77,9 @@ const questionDetailReducer = createReducer(defaultState, {
     [createAnswerFailure]: state => {
         state.isFetchingError = true;
         state.isCreatingAnswer = false;
+    },
+    [approveAnswerSuccess]: (state, action) => {
+        state.question.bestAnswerItem = action.payload;
     }
 });
 
