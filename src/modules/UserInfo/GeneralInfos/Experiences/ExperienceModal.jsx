@@ -107,7 +107,13 @@ const ExperienceModal = ({
     };
 
     const onSubmit = () => {
-        if (!title || !company || !startDate || !(isWorking || endDate)) {
+        if (
+            !title ||
+            !location ||
+            !company ||
+            !startDate ||
+            !(isWorking || endDate)
+        ) {
             return setIsShownError(true);
         }
         submit(experienceEditted);
@@ -168,7 +174,10 @@ const ExperienceModal = ({
                         }
                         isShownAlert={isShownError && !company}
                     />
-                    <div className="mt2">{t('common_location')}</div>
+                    <div className="mt2">
+                        {t('common_location')}{' '}
+                        <span className="required">*</span>
+                    </div>
                     <Input
                         type="text"
                         value={location}
