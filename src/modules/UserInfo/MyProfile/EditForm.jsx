@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { InputText } from 'primereact/inputtext';
-import { Calendar } from 'primereact/calendar';
 import { Dropdown } from 'primereact/dropdown';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
+import { InputMask } from 'primereact/inputmask';
 
 import COUNTRIES from './countries.constant';
 
-import { isDate } from '../../../utils/detect-date';
+import dateformat from 'dateformat';
 
 const Title = styled.div`
     margin: 10px 0 5px;
@@ -40,6 +40,8 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
 
     const [userEditted, setUserEditted] = React.useState(currentUser);
 
+    const [birthDayEditted, setBirthDayEditted] = React.useState(null);
+
     const {
         lastName,
         firstName,
@@ -48,6 +50,12 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
         summary
     } = userEditted;
 
+    React.useEffect(() => {
+        setBirthDayEditted(
+            dateOfBirth ? dateformat(dateOfBirth, 'mm/dd/yyyy') : null
+        );
+    }, [dateOfBirth]);
+
     const updateUser = (name, value) => {
         setUserEditted({ ...userEditted, [name]: value });
     };
@@ -55,7 +63,10 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
     const handleEvent = (name, ev) => updateUser(name, ev.target.value);
 
     const onSubmit = () => {
-        updateCurrentUser(userEditted);
+        updateCurrentUser({
+            ...userEditted,
+            dateOfBirth: birthDayEditted ? new Date(birthDayEditted) : null
+        });
     };
 
     const reset = () => {
@@ -75,19 +86,12 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
                 onChange={e => handleEvent('firstName', e)}
             />
             <Title>{t('common_date_of_birth')}</Title>
-            <Calendar
-                value={
-                    isDate(dateOfBirth)
-                        ? dateOfBirth
-                        : dateOfBirth
-                        ? new Date(dateOfBirth)
-                        : null
-                }
-                touchUI
-                placeholder="dd/mm/YY"
-                dateFormat="dd/mm/yy"
-                onChange={ev => updateUser('dateOfBirth', ev.value)}
-            />
+            <InputMask
+                mask="99/99/9999"
+                value={birthDayEditted}
+                placeholder="mm/dd/yyyy"
+                onChange={e => setBirthDayEditted(e.value)}
+            ></InputMask>
             <Title>{t('my_profile_you_come_from')}</Title>
             <Dropdown
                 optionLabel="name"
