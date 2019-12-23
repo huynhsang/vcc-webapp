@@ -253,5 +253,11 @@ export default {
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',
-    user_info_added_an_answer: 'Được trả lời vào ngày'
+    user_info_added_an_answer: 'Được trả lời vào ngày',
+
+    home_ask_verified_professionals:
+        'Xin lời khuyên về định hướng nghề nghiệp, kinh nghiệm phỏng vấn, thông tin về công ty từ các chuyên gia từ các công ty lớn hàng đầu...',
+    home_want_to_get:
+        'Bạn muốn thêm thu nhập từ việc đưa ra lời khuyên/ý kiến?',
+    home_find_out_how: 'Gia nhập VCNC'
 };

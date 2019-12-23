@@ -254,5 +254,10 @@ export default {
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',
-    user_info_added_an_answer: 'Added an answer on'
+    user_info_added_an_answer: 'Added an answer on',
+
+    home_ask_verified_professionals:
+        'Ask verified professionals for career advices, interview training, resume review and company insights...',
+    home_want_to_get: 'Want to get paid for sharing your knowledge?',
+    home_find_out_how: 'Find out how we work'
 };
