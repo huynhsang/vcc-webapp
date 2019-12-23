@@ -72,6 +72,8 @@ export default {
     common_experience: 'Experience',
     common_no_result: 'No result',
     common_come_back: 'Come back',
+    common_userName: 'User name',
+    common_invalid_username: 'Invalid user name!',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

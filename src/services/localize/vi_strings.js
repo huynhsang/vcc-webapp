@@ -72,6 +72,8 @@ export default {
     common_experience: 'Kinh nghiệm',
     common_no_result: 'Không tìm thấy kết quả',
     common_come_back: 'Quay lại',
+    common_userName: 'Tên người dùng',
+    common_invalid_username: 'Tên người dùng không hợp lệ!',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

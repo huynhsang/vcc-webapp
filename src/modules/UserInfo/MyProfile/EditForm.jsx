@@ -12,6 +12,8 @@ import COUNTRIES from './countries.constant';
 
 import dateformat from 'dateformat';
 
+const USERNAME_REGEX = /([A-Za-z0-9_]){8,24}/;
+
 const Title = styled.div`
     margin: 10px 0 5px;
     color: black;
@@ -35,7 +37,7 @@ const ButtonsWrapper = styled.div`
     }
 `;
 
-const EditForm = ({ currentUser, updateCurrentUser }) => {
+const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
     const { t } = useTranslation();
 
     const [userEditted, setUserEditted] = React.useState(currentUser);
@@ -43,6 +45,7 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
     const [birthDayEditted, setBirthDayEditted] = React.useState(null);
 
     const {
+        username,
         lastName,
         firstName,
         nationality,
@@ -63,6 +66,9 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
     const handleEvent = (name, ev) => updateUser(name, ev.target.value);
 
     const onSubmit = () => {
+        if (!USERNAME_REGEX.test(username)) {
+            return showErrorAlert('common_invalid_username');
+        }
         updateCurrentUser({
             ...userEditted,
             dateOfBirth: birthDayEditted ? new Date(birthDayEditted) : null
@@ -75,6 +81,11 @@ const EditForm = ({ currentUser, updateCurrentUser }) => {
 
     return (
         <Wrapper>
+            <Title>{t('common_userName')}</Title>
+            <InputText
+                value={username}
+                onChange={e => handleEvent('username', e)}
+            />
             <Title>{t('common_lastname')}</Title>
             <InputText
                 value={lastName}

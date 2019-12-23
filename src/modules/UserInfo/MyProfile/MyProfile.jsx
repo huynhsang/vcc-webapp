@@ -9,6 +9,7 @@ import EditForm from './EditForm';
 import { useTranslation } from 'react-i18next';
 
 import { updateCurrentUserFn } from '../../../actions/app';
+import { showErrorAlertFn } from '../../../actions/sweetAlert';
 
 const Wrapper = styled.div`
     margin-top: 15px;
@@ -18,7 +19,7 @@ const ButtionsWrapper = styled.div`
     margin-bottom: 15px;
 `;
 
-const MyProfile = ({ location, App, updateCurrentUser }) => {
+const MyProfile = ({ location, App, updateCurrentUser, showErrorAlert }) => {
     const { t } = useTranslation();
 
     const { currentUser, isAuthenticated } = App;
@@ -49,11 +50,11 @@ const MyProfile = ({ location, App, updateCurrentUser }) => {
                 <EditForm
                     currentUser={currentUser}
                     updateCurrentUser={updateCurrentUser}
+                    showErrorAlert={showErrorAlert}
                 />
             )}
             {action === 'change-password' && <ChangePassword />}
             {action === 'info' && <Infos currentUser={currentUser} />}
-
         </Wrapper>
     );
 };
@@ -63,7 +64,8 @@ const mapStateToProps = ({ App }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    updateCurrentUser: data => dispatch(updateCurrentUserFn(data))
+    updateCurrentUser: data => dispatch(updateCurrentUserFn(data)),
+    showErrorAlert: text => dispatch(showErrorAlertFn('ERROR!', text))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
