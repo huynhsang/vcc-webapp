@@ -2,7 +2,11 @@ import { createAction } from 'redux-starter-kit';
 import { i18n } from '../services/localize';
 import actionsNames from '../constants/action-names.constant';
 
-import { fetchUserFromCookie, updateUser } from '../services/user.service';
+import {
+    fetchUserFromCookie,
+    updateUser,
+    getUserByLoginToken
+} from '../services/user.service';
 
 import { showErrorAlertFn, showSuccessAlertFn } from './sweetAlert';
 
@@ -19,7 +23,8 @@ const {
     UPDATE_CURRENT_USER_REQUEST,
     UPDATE_CURRENT_USER_SUCCESS,
     UPDATE_CURRENT_USER_FAILURE,
-    SET_VERIFIED_USER
+    SET_VERIFIED_USER,
+    GET_USER_BY_LOGIN_TOKEN_SUCCESS
 } = actionsNames;
 
 // Export Actions
@@ -91,5 +96,19 @@ export const updateCurrentUserFn = payload => {
                 dispatch(updateCurrentUserFailure());
                 dispatch(showErrorAlertFn('Error!', err.message));
             });
+    };
+};
+
+export const getUserByLoginTokenSuccess = createAction(
+    GET_USER_BY_LOGIN_TOKEN_SUCCESS
+);
+
+export const getUserByLoginTokenFn = token => {
+    return dispatch => {
+        getUserByLoginToken(token)
+            .then(data => {
+                dispatch(getUserByLoginTokenSuccess(data));
+            })
+            .catch(err => console.log(err));
     };
 };

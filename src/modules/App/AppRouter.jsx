@@ -9,7 +9,7 @@ import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
 
-import { EmailVerification, ResetPassword } from '../Authentification';
+import { EmailVerification, ResetPassword, SSOLogin } from '../Authentification';
 
 const AppRouter = () => {
     return (
@@ -38,6 +38,11 @@ const AppRouter = () => {
                 exact
                 path="/reset-password"
                 render={props => <ResetPassword {...props} />}
+            />
+            <Route
+                exact
+                path="/social-login"
+                render={props => <SSOLogin {...props} />}
             />
             <Redirect exact from="/" to="/home/questions" />
             <Route component={Page404} />
