@@ -11,7 +11,7 @@ const Login = ({
     setToFindPassword,
     setToRegistre,
     hideAuthentification,
-    fetchUserFromCookie
+    fetchUserFromCookie,
 }) => {
     const { t } = useTranslation();
     const [email, setEmail] = React.useState('');
@@ -38,6 +38,10 @@ const Login = ({
         }
     };
 
+    const onAuth = (type) => () => {
+        window.location=`/auth/${type}`
+    }
+
     return (
         <div className="login-page">
             <div className="card box-shadow">
@@ -46,15 +50,15 @@ const Login = ({
                     style={{ marginBottom: '15px' }}
                 >
                     <div className="social_icon">
-                        <span>
+                        <span onClick={onAuth('facebook')}>
                             <i className="fab fa-facebook-square" />
                         </span>
-                        <span>
+                        <span onClick={onAuth('google')}>
                             <i className="fab fa-google-plus-square" />
                         </span>
-                        <span>
+                        {/* <span>
                             <i className="fab fa-twitter-square" />
-                        </span>
+                        </span> */}
                     </div>
                 </div>
                 <div className="card-body">

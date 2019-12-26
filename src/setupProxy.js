@@ -4,7 +4,14 @@ const { REACT_APP_API_URL } = process.env;
 
 module.exports = function(app) {
     app.use(
-        '/auth',
+        '/auth/google',
+        proxy({
+            target: `${REACT_APP_API_URL}`,
+            changeOrigin: true
+        })
+    );
+    app.use(
+        '/auth/facebook',
         proxy({
             target: `${REACT_APP_API_URL}`,
             changeOrigin: true
