@@ -70,8 +70,10 @@ export default {
     common_trending_tags: 'Trending tags',
     common_education: 'Education',
     common_experience: 'Experience',
-    common_no_result:'No result',
-    common_come_back:'Come back',
+    common_no_result: 'No result',
+    common_come_back: 'Come back',
+    common_userName: 'User name',
+    common_invalid_username: 'Invalid user name!',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -140,7 +142,7 @@ export default {
     question_post_your_question: 'Post Your Question',
     question_what_your_programming: `What's your programming question? Be specific.`,
     question_what_languages_technologies:
-        'What languages, technologies, and/or frameworks is your question about?',
+        'What frameworks is your question about?',
     question_tags_help_the_right_people:
         'Tags help the right people find and answer your question.',
     question_identify_your_tags: `Identify your tags by completing the sentence, “My question is about…”`,
@@ -228,7 +230,8 @@ export default {
     authentification_invalid_comfirm_password: 'Invalid confirm password',
     authentification_your_password_has_been_reset:
         'Your password has been reseted',
-    authentication_please_enter_email_and_password: 'Please enter your email and password to continue',
+    authentication_please_enter_email_and_password:
+        'Please enter your email and password to continue',
 
     form_require_all_values: 'Please enter all values required.',
     form_your_job: 'Your job',
@@ -239,8 +242,22 @@ export default {
     my_profile_you_come_from: 'You comme from',
     my_profile_choose_one_country: 'Choose one country',
     my_profile_user_info_updated: 'Your profile has been updated!',
+    my_profile_change_password: 'Change password',
+    my_profile_old_password: 'Old password',
+    my_profile_new_password: 'New password',
+    my_profile_passwords_not_identique: 'Your new passwords are not the same',
+    my_profile_change_password_success: 'Your password is changed!',
+    my_profile_confirm_new_password: 'Confirm new password',
+    my_profile_please_complete_all_fields: 'Please complete all fields',
+    my_profile_passwords_contrain:
+        'Your password must have at least 8 character, 1 uppercase letter, 1 lowercase letter, 1 digit ',
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',
-    user_info_added_an_answer: 'Added an answer on'
+    user_info_added_an_answer: 'Added an answer on',
+
+    home_ask_verified_professionals:
+        'Ask verified professionals for career advices, interview training, resume review and company insights...',
+    home_want_to_get: 'Want to get paid for sharing your knowledge?',
+    home_find_out_how: 'Find out how we work'
 };

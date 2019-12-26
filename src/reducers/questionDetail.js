@@ -12,8 +12,11 @@ import {
     voteAnswerFailure,
     createAnswerRequest,
     createAnswerSuccess,
-    createAnswerFailure
+    createAnswerFailure,
+    approveAnswerSuccess
 } from '../actions/questionDetail';
+
+import { updateEntityVoted } from '../utils/update-voted';
 
 const defaultState = {
     question: null,
@@ -25,57 +28,17 @@ const defaultState = {
 };
 
 function voteQuestionFn(state, action) {
-    const { payload } = action;
-    const { model } = payload;
-    delete payload.model;
-
+    const { action: voteAction } = action.payload;
     const { question } = state;
-    const { vote } = question;
-
-    if (payload.action === 'up') {
-        question.upVoteCount = model.upVoteCount + 1;
-        if (vote) {
-            question.downVoteCount = model.downVoteCount - 1;
-        }
-    } else if (payload.action === 'down') {
-        question.downVoteCount = model.downVoteCount + 1;
-        if (vote) {
-            question.upVoteCount = model.upVoteCount - 1;
-        }
-    }
-
-    question.vote = payload;
+    updateEntityVoted(question, voteAction);
     state.isVotingQuestion = false;
 }
 
 function voteAnswerFn(state, action) {
-    const { payload } = action;
-    const { model, modelId } = payload;
-    delete payload.model;
-
+    const { action: voteAction, modelId } = action.payload;
     const { answers } = state.question;
     const answer = answers.find(answer => answer.id === modelId);
-
-    const lastVote = answer.votes
-        ? answer.votes.find(vote => vote.id === payload.id)
-        : null;
-
-    if (payload.action === 'up') {
-        if (lastVote) {
-            answer.upVoteCount = model.upVoteCount + 1;
-            answer.downVoteCount = model.downVoteCount - 1;
-        } else {
-            answer.upVoteCount = (answer.upVoteCount || 0) + 1;
-        }
-    } else if (payload.action === 'down') {
-        if (lastVote) {
-            answer.downVoteCount = model.downVoteCount + 1;
-            answer.upVoteCount = model.upVoteCount - 1;
-        } else {
-            answer.downVoteCount = (answer.downVoteCount || 0) + 1;
-        }
-    }
-    answer.votes = [payload];
+    updateEntityVoted(answer, voteAction);
     state.votingAnswerId = null;
 }
 
@@ -114,6 +77,9 @@ const questionDetailReducer = createReducer(defaultState, {
     [createAnswerFailure]: state => {
         state.isFetchingError = true;
         state.isCreatingAnswer = false;
+    },
+    [approveAnswerSuccess]: (state, action) => {
+        state.question.bestAnswerItem = action.payload;
     }
 });
 

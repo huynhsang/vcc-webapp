@@ -17,6 +17,7 @@ export async function createExperience(data) {
 }
 
 export async function editExperience(data) {
-    const response = await http.put(EXPERIENCE_URL, data);
+    const url = setUrlWithToken(EXPERIENCE_URL);
+    const response = await http.put(url, data);
     return response.data;
 }

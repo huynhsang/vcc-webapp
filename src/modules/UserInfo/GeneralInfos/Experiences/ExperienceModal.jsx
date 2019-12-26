@@ -62,6 +62,9 @@ const ExperienceModal = ({
 
     React.useEffect(() => {
         setIsMounted(true);
+        return () => {
+            setIsShownError(false);
+        };
     }, []);
 
     React.useEffect(() => {
@@ -104,7 +107,13 @@ const ExperienceModal = ({
     };
 
     const onSubmit = () => {
-        if (!title || !company || !startDate || !(isWorking || endDate)) {
+        if (
+            !title ||
+            !location ||
+            !company ||
+            !startDate ||
+            !(isWorking || endDate)
+        ) {
             return setIsShownError(true);
         }
         submit(experienceEditted);
@@ -165,7 +174,10 @@ const ExperienceModal = ({
                         }
                         isShownAlert={isShownError && !company}
                     />
-                    <div className="mt2">{t('common_location')}</div>
+                    <div className="mt2">
+                        {t('common_location')}{' '}
+                        <span className="required">*</span>
+                    </div>
                     <Input
                         type="text"
                         value={location}
@@ -180,6 +192,7 @@ const ExperienceModal = ({
                         <input
                             id="work-1"
                             type="checkbox"
+                            checked={isWorking}
                             onChange={ev =>
                                 updateExperienceEditted({
                                     isWorking: ev.target.checked
@@ -196,7 +209,11 @@ const ExperienceModal = ({
                             </label>
                             <Calendar
                                 value={isDate(startDate) ? startDate : null}
-                                placeholder="mm/dd/YY"
+                                placeholder="mm/yy"
+                                view="month"
+                                dateFormat="mm/yy"
+                                yearNavigator={true}
+                                yearRange="2010:2030"
                                 onChange={ev =>
                                     updateExperienceEditted({
                                         startDate: ev.value
@@ -210,11 +227,17 @@ const ExperienceModal = ({
                                 <span className="required"> *</span>
                             </label>
                             {isWorking ? (
-                                <i>{t('common_present')}</i>
+                                <div>
+                                    <i>{t('common_present')}</i>
+                                </div>
                             ) : (
                                 <Calendar
                                     value={isDate(endDate) ? endDate : null}
-                                    placeholder="mm/dd/YY"
+                                    placeholder="mm/yy"
+                                    view="month"
+                                    dateFormat="mm/yy"
+                                    yearNavigator={true}
+                                    yearRange="2010:2030"
                                     onChange={ev =>
                                         updateExperienceEditted({
                                             endDate: ev.value

@@ -1,34 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import UserLogo from '../../component/UserLogo';
 
-import { approveAnswer } from '../../services/question.service';
-import { voteAnswerFn, reVoteAnswerFn } from '../../actions/questionDetail';
+import { voteAnswerFn, approveAnswerFn } from '../../actions/questionDetail';
 import Vote from '../../component/Vote';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { Badge } from '../Badges';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
 
-import {
-    showErrorAlertFn,
-    showConfirmToLoginFn,
-    showSuccessAlertFn
-} from '../../actions/sweetAlert';
+import { showConfirmToLoginFn } from '../../actions/sweetAlert';
+import AnswerShare from './AnswerShare';
 
 const AnswerComponent = ({
     answer,
     question,
-    updateQuestion,
-    history,
-    showErrorNotification,
-    showSuccessNotification,
     showConfirmToLogin,
     voteAnswer,
-    reVoteAnswer,
+    approveAnswer,
     questionDetail,
     isAuthenticated
 }) => {
@@ -37,30 +28,18 @@ const AnswerComponent = ({
 
     const { votingAnswerId } = questionDetail;
 
-    const { votes = [], upVoteCount, downVoteCount, answerBy } = answer;
+    const { voted, upVoteCount, downVoteCount, answerBy } = answer;
 
     const [disableApproveBtn, setDisableApproveBtn] = React.useState(false);
 
     const isQuestionOwner =
         question.askedBy && question.askedBy.id === currentUserId;
 
-    const lastVote = votes.find(vote => vote.ownerId === currentUserId);
-
     const isAnswerOwner = answerBy && answerBy.id === currentUserId;
 
-    const approveAnswerFn = () => {
+    const approve = () => {
         setDisableApproveBtn(true);
-        approveAnswer(question.id, answer.id)
-            .then(() => {
-                setDisableApproveBtn(false);
-                // updateQuestion({
-                //     ...question,
-                //     hasAcceptedAnswer: (answer.isTheBest = true)
-                // });
-            })
-            .catch(err => {
-                showErrorNotification(err.response.data);
-            });
+        approveAnswer(question.id, answer.id);
     };
 
     const handleVoteAnswer = isPositiveVote => {
@@ -68,35 +47,31 @@ const AnswerComponent = ({
             return showConfirmToLogin();
         }
         const action = isPositiveVote ? 'up' : 'down';
-
-        if (lastVote) {
-            reVoteAnswer(answer.id, lastVote.id, action);
-        } else {
-            voteAnswer(answer.id, action);
-        }
+        voteAnswer(answer.id, action);
     };
 
     return (
-        <li className="comment byuser comment-author-james even thread-even depth-1">
+        <li className="comment" id={answer.id}>
             <div className="comment-body clearfix">
                 <div className="comment-text">
                     <UserLogo user={answerBy} />
                     <div className="author clearfix">
-                        {question.bestAnswerItem && answer.isTheBest && (
-                            <div className="best-answer">
-                                {t('answer_best_answers')}
-                            </div>
-                        )}
+                        {question.bestAnswerItem &&
+                            answer.id === question.bestAnswerItem.id && (
+                                <div className="best-answer">
+                                    {t('answer_best_answers')}
+                                </div>
+                            )}
                         {isQuestionOwner &&
                             !question.bestAnswerItem &&
                             !isAnswerOwner && (
                                 <button
                                     className="btn btn-approve"
                                     disabled={disableApproveBtn}
-                                    onClick={approveAnswerFn}
+                                    onClick={approve}
                                 >
                                     <i className="fas fa-check" />{' '}
-                                    {t('Approve')}
+                                    {t('common_approve')}
                                 </button>
                             )}
                         <div className="comment-meta">
@@ -125,73 +100,17 @@ const AnswerComponent = ({
                         <div className="clearfix" />
                         <div className="wpqa_error" />
                         <Vote
-                            disableUp={
-                                isAnswerOwner ||
-                                (lastVote && lastVote.action === 'up')
-                            }
-                            disableDown={
-                                isAnswerOwner ||
-                                (lastVote && lastVote.action === 'down')
-                            }
+                            disableUp={isAnswerOwner || voted === 'up'}
+                            disableDown={isAnswerOwner || voted === 'down'}
                             isLoading={votingAnswerId === answer.id}
                             handleVote={handleVoteAnswer}
                             points={upVoteCount - downVoteCount}
                             isAnswerVote
                         />
-                        <ul className="comment-reply comment-reply-main">
-                            {/* <li>
-                                <button
-                                    rel="nofollow"
-                                    className="comment-reply-link wpqa-reply-link"
-                                    aria-label={`Reply to ${answerBy.firstName} ${answerBy.lastName}`}
-                                >
-                                    <i className="icon-reply" />
-                                    {t('common_reply')}
-                                </button>
-                            </li> */}
-                            <li className="comment-share question-share question-share-2">
-                                <i className="icon-share" /> {t('common_share')}
-                                <div className="post-share">
-                                    <span>
-                                        <i className="icon-share" />
-                                        <span>{t('common_share')}</span>
-                                    </span>
-                                    <ul style={{ right: '-180px' }}>
-                                        <li className="share-facebook">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://www.facebook.com/sharer.php?"
-                                            >
-                                                <i className="icon-facebook" />
-                                                {t('share_on_facebook')}
-                                            </a>
-                                        </li>
-                                        <li className="share-twitter">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://twitter.com/share?"
-                                            >
-                                                <i className="icon-twitter" />
-                                                {t('share_on_twitter')}
-                                            </a>
-                                        </li>
-                                        <li className="share-linkedin">
-                                            <a
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                href="http://www.linkedin.com/shareArticle?"
-                                            >
-                                                <i className="icon-linkedin" />
-                                                {t('share_on_linkedIn')}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                            <li className="clearfix last-item-answers" />
-                        </ul>
+                        <AnswerShare
+                            questionSlug={question.slug}
+                            answerId={answer.id}
+                        />
                         {/* <ul className="comment-reply comment-list-links">
                             <li className="question-list-details comment-list-details">
                                 <i className="icon-dot-3" />
@@ -221,16 +140,9 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
-    reVoteAnswer: (answerId, voteId, action) =>
-        dispatch(reVoteAnswerFn(answerId, voteId, action)),
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
-    showSuccessNotification: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text))
+    approveAnswer: (questionId, answerId) =>
+        dispatch(approveAnswerFn(questionId, answerId)),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(AnswerComponent));
+export default connect(mapStateToProps, mapDispatchToProps)(AnswerComponent);

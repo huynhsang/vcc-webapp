@@ -5,18 +5,14 @@ import { SweetType } from '../constants/sweet-alert.constant';
 
 import { TO_LOGIN } from '../component/SweetAlert';
 
-import {i18n} from '../services/localize';
+import { i18n } from '../services/localize';
 
 const { SHOW_ALERT, HIDE_ALERT } = actionsNames;
 
 export const showAlertAction = createAction(SHOW_ALERT);
 export const hideAlertAction = createAction(HIDE_ALERT);
 
-const showGeneralAlert = (type: string) => (
-    title: string,
-    text: string,
-    confirmButtonText: string = 'OK'
-) => {
+const showGeneralAlert = type => (title, text, confirmButtonText = 'OK') => {
     return dispatch => {
         dispatch(
             showAlertAction({
@@ -36,12 +32,12 @@ export const showWarningAlertFn = showGeneralAlert(SweetType.WARNING);
 export const showInfoAlertFn = showGeneralAlert(SweetType.INFO);
 
 //Atenttion for callback: onconfirm, oncancel, error immutable in redux
-const showGeneralConfirmAlert = (type: string) => (
-    title: string,
-    text: string,
-    confirmButtonText: string,
-    confirmName: void,
-    cancelButtonText: string = 'Cancel'
+const showGeneralConfirmAlert = type => (
+    title,
+    text,
+    confirmButtonText,
+    confirmName,
+    cancelButtonText = 'Cancel'
 ) => {
     return dispatch => {
         dispatch(

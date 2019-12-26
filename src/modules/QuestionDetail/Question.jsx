@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import ApplicationUtil from '../../common/util/ApplicationUtil';
@@ -20,7 +20,7 @@ import Vote from '../../component/Vote';
 import { Badge } from '../Badges';
 import { getIdAndToken } from '../../utils/cookie-tools';
 
-import { voteQuestionFn, reVoteQuestionFn } from '../../actions/questionDetail';
+import { voteQuestionFn } from '../../actions/questionDetail';
 import Tag from '../../component/Tag';
 
 const Wrapper = styled.article`
@@ -39,13 +39,9 @@ const Wrapper = styled.article`
 
 const Question = ({
     question,
-    history,
-    showErrorNotification,
     showConfirmToLogin,
-    isShownAnswerButton = true,
     isAuthenticated,
     voteQuestion,
-    reVoteQuestion,
     questionDetail
 }) => {
     const { t } = useTranslation();
@@ -59,7 +55,7 @@ const Question = ({
         categoryItem,
         bestAnswerItem,
         created,
-        vote,
+        voted,
         upVoteCount,
         downVoteCount,
         answerCount,
@@ -75,11 +71,7 @@ const Question = ({
             return showConfirmToLogin();
         }
         const action = isPositiveVote ? 'up' : 'down';
-        if (vote) {
-            reVoteQuestion(id, vote.id, action);
-        } else {
-            voteQuestion(id, action);
-        }
+        voteQuestion(id, action);
     };
 
     const bestAnswerClassName = bestAnswerItem
@@ -88,12 +80,8 @@ const Question = ({
 
     const renderVote = isMobile => (
         <Vote
-            disableUp={
-                currentUserId === askedBy.id || (vote && vote.action === 'up')
-            }
-            disableDown={
-                currentUserId === askedBy.id || (vote && vote.action === 'down')
-            }
+            disableUp={currentUserId === askedBy.id || voted === 'up'}
+            disableDown={currentUserId === askedBy.id || voted === 'down'}
             isLoading={isVotingQuestion}
             handleVote={handleVoteQuestion}
             points={upVoteCount - downVoteCount}
@@ -177,14 +165,9 @@ const Question = ({
                                     <i className="icon-comment" />
                                     <Link
                                         to={`/home/question/${slug}/view/#answers`}
-                                    >{`${answerCount} `}</Link>
-                                    <span className="question-span">
-                                        <Link
-                                            to={`/home/question/${slug}/view/#answers`}
-                                        >
-                                            {t('common_answer')}
-                                        </Link>
-                                    </span>
+                                    >
+                                        {`${answerCount} ${t('common_answer')}`}
+                                    </Link>
                                 </li>
                                 <li className="view-stats-meta">
                                     <i className="icon-eye" />
@@ -213,12 +196,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
     voteQuestion: (questionId, action) =>
-        dispatch(voteQuestionFn(questionId, action)),
-    reVoteQuestion: (questionId, voteId, action) =>
-        dispatch(reVoteQuestionFn(questionId, voteId, action))
+        dispatch(voteQuestionFn(questionId, action))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withRouter(Question));
+export default connect(mapStateToProps, mapDispatchToProps)(Question);

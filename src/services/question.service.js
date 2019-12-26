@@ -53,15 +53,6 @@ export async function voteQuestion(id, action) {
     return response.data;
 }
 
-export async function reVoteQuestion(questionId, voteId, action) {
-    const url = setUrlWithToken(VOTE_QUESTION_URL(questionId));
-    const response = await http.put(url, {
-        voteId,
-        action
-    });
-    return response.data;
-}
-
 export async function getNumberQuestions(params) {
     const response = await http.get(`${QUESTION_URL}/count`, {
         params

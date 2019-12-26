@@ -1,5 +1,7 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import LeftNav from './LeftNav';
 import { RightSlideBar } from './RightSlideBar';
@@ -17,6 +19,65 @@ import {
     getQuestionsTopAnsweredFn,
     getTrendingTagsFn
 } from '../../actions/home';
+
+import Cover from '../../images/cover.png';
+
+import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
+
+const CoverWrapper = styled.div`
+    background-image: url('${Cover}');
+    filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='${Cover}', sizingMethod="scale");
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${Cover}',sizingMethod='scale')";
+    background-color: black !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center right;
+`;
+
+const AskWrapper = styled.div`
+    font-size: 17px;
+    line-height: 30px;
+    margin-bottom: 10px;
+    color: white;
+
+    & a {
+        color: #ffff00cc;
+        border-bottom: 1px solid;
+        margin-left: 10px;
+        user-select: none;
+
+        &:hover {
+            color: yellow;
+        }
+    }
+`;
+
+const Glass = styled.div`
+    background: #0000006b;
+`;
+
+const FindOut = styled.div`
+    position: relative;
+    margin: 20px 0 0 20px;
+    font-size: 17px;
+    border: 1px solid #ffff00cc;
+    width: 170px;
+    height: 30px;
+    & a {
+        position: absolute;
+        background-color: #dede00;
+        color: black;
+        bottom: 8px;
+        left: 8px;
+        height: 30px;
+        width: 170px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        user-select: none;
+        cursor: pointer;
+    }
+`;
 
 const Home = ({
     App,
@@ -49,12 +110,26 @@ const Home = ({
         <>
             <MobileBar />
             <section>
-                <div className="call-action-unlogged call-action-dark call-action-style_1">
-                    <div className="call-action-opacity" />
+                <CoverWrapper className="call-action-unlogged call-action-dark call-action-style_1">
+                    <Glass className="call-action-opacity" />
                     <div className="discy-container">
-                        <div className="col6">
-                            <h3>{t('home_share_and_grow')}</h3>
-                            <p>{t('home_description')}</p>
+                        <div className="col7">
+                            <AskWrapper>
+                                {t('home_ask_verified_professionals')}
+                                <Link to="/add-question">
+                                    {`+ ${t('home_ask_a_question')}`}
+                                </Link>
+                            </AskWrapper>
+                            <p>{t('home_want_to_get')}</p>
+                            <FindOut>
+                                <a
+                                    href={REGISTRE_MENTOR_FORM_LINK}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    {t('home_find_out_how')}
+                                </a>
+                            </FindOut>
                         </div>
                         {!isAuthenticated && (
                             <div className="col3">
@@ -68,7 +143,7 @@ const Home = ({
                             </div>
                         )}
                     </div>
-                </div>
+                </CoverWrapper>
                 <div className="discy-content">
                     <div className="discy-inner-content menu_sidebar">
                         <div className="discy-container">
@@ -127,7 +202,4 @@ const mapDispatchToProps = dispatch => ({
     getTrendingTags: () => dispatch(getTrendingTagsFn())
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

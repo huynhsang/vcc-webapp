@@ -9,7 +9,7 @@ import { toggleContactUsFn } from '../../actions/app';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
 
-const REGISTRE_MENTOR_FORM_LINK =
+export const REGISTRE_MENTOR_FORM_LINK =
     'https://docs.google.com/forms/d/e/1FAIpQLSd8OGWo4yevWotalne-vQjCgWmXiogr374rR8QuCRHbK0rEAw/viewform?usp=pp_url';
 const REGISTRE_MENTEE_FORM_LINK =
     'https://docs.google.com/forms/d/e/1FAIpQLSfhMbG6WVOWnw7Rye27A99QOElj0MfdW47q1U_4ei1ZW-wpQA/viewform?usp=pp_url';

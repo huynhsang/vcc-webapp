@@ -60,6 +60,7 @@ const actionNames = keyMirror({
     CREATE_ANSWER_REQUEST: null,
     CREATE_ANSWER_SUCCESS: null,
     CREATE_ANSWER_FAILURE: null,
+    APPROVE_ANSWER_SUCCESS: null,
 
     //User Infos,
     GET_EXPERIENCES_SUCCESS: null,

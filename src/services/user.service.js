@@ -4,6 +4,7 @@ import { getIdAndToken } from '../utils/cookie-tools';
 
 const GET_USER_URL = 'users';
 const GET_USER_BY_LOGIN_TOKEN_URL = token => `users/me?access_token=${token}`;
+const CHANGE_USER_PASSWORD_URL = 'users/change-password';
 
 export async function fetchUserFromCookie() {
     const { id, token } = getIdAndToken();
@@ -41,4 +42,10 @@ export async function getUsers(params) {
 export async function getUserByLoginToken(token) {
     const response = await http.get(GET_USER_BY_LOGIN_TOKEN_URL(token));
     return response.data;
+}
+
+export async function changeUserPassword({ oldPassword, newPassword }) {
+    const url = setUrlWithToken(CHANGE_USER_PASSWORD_URL);
+    const httpResponse = await http.post(url, { oldPassword, newPassword });
+    return httpResponse.data;
 }

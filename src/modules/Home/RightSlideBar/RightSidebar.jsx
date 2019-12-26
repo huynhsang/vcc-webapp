@@ -43,54 +43,7 @@ const RightSideBar = ({
                             {t('home_ask_a_question')}
                         </Link>
                     </div>
-                    {/* <section
-                        id="stats-widget-2"
-                        className="widget-no-divider widget stats-widget"
-                    >
-                        <h3 className="screen-reader-text">
-                            {t('common_stats')}
-                        </h3>
-                        <div className="widget-wrap">
-                            <ul className="stats-inner">
-                                <li className="stats-questions">
-                                    <div>
-                                        <span className="stats-text">
-                                            {t('common_questions')}
-                                        </span>
-                                        <span className="stats-value">21</span>
-                                    </div>
-                                </li>
-                                <li className="stats-answers">
-                                    <div>
-                                        <span className="stats-text">
-                                            {t('common_answers')}
-                                        </span>
-                                        <span className="stats-value">69</span>
-                                    </div>
-                                </li>
-                                <li className="stats-best_answers">
-                                    <div>
-                                        <span className="stats-text">
-                                            {t('nav_best_answers')}
-                                        </span>
-                                        <span className="stats-value">10</span>
-                                    </div>
-                                </li>
-                                <li className="stats-users">
-                                    <div>
-                                        <span className="stats-text">
-                                            {t('common_users')}
-                                        </span>
-                                        <span className="stats-value">118</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </section> */}
-                    {/* <TopQuestions
-                        popularQuestions={popularQuestions}
-                        questionsTopAnswered={questionsTopAnswered}
-                    /> */}
+
                     <TopTrendingTags trendingTags={trendingTags} />
                     <TopUsers topUsers={topUsers} />
                 </div>
@@ -100,3 +53,52 @@ const RightSideBar = ({
 };
 
 export default RightSideBar;
+
+/* <section
+    id="stats-widget-2"
+    className="widget-no-divider widget stats-widget"
+>
+    <h3 className="screen-reader-text">
+        {t('common_stats')}
+    </h3>
+    <div className="widget-wrap">
+        <ul className="stats-inner">
+            <li className="stats-questions">
+                <div>
+                    <span className="stats-text">
+                        {t('common_questions')}
+                    </span>
+                    <span className="stats-value">21</span>
+                </div>
+            </li>
+            <li className="stats-answers">
+                <div>
+                    <span className="stats-text">
+                        {t('common_answers')}
+                    </span>
+                    <span className="stats-value">69</span>
+                </div>
+            </li>
+            <li className="stats-best_answers">
+                <div>
+                    <span className="stats-text">
+                        {t('nav_best_answers')}
+                    </span>
+                    <span className="stats-value">10</span>
+                </div>
+            </li>
+            <li className="stats-users">
+                <div>
+                    <span className="stats-text">
+                        {t('common_users')}
+                    </span>
+                    <span className="stats-value">118</span>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section> */
+/* <TopQuestions
+    popularQuestions={popularQuestions}
+    questionsTopAnswered={questionsTopAnswered}
+/> */

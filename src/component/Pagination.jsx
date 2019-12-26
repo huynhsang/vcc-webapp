@@ -8,13 +8,13 @@ const Wrapper = styled.div`
         display: flex;
         justify-content: ${p => p.justifyContent || 'end'};
         margin: 15px -5px 15px 0;
-        user-select:none;
+        user-select: none;
 
         & li {
             margin: 0 5px;
             & a {
                 background-color: white;
-                color : ${p => p.color};
+                color: ${p => p.color};
                 padding: 5px 10px;
                 text-align: center;
                 box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
@@ -48,8 +48,19 @@ const Wrapper = styled.div`
     }
 `;
 
-const Pagination = ({ nbPages, activePage, onPageChange, justifyContent, color }) => {
+const Pagination = ({
+    nbPages,
+    activePage,
+    changePage,
+    justifyContent,
+    color
+}) => {
     const { t } = useTranslation();
+
+    const onPageChange = ({ selected }) => {
+        changePage(selected + 1);
+    };
+
     return (
         <Wrapper justifyContent={justifyContent} color={color}>
             <ReactPaginate
@@ -65,6 +76,7 @@ const Pagination = ({ nbPages, activePage, onPageChange, justifyContent, color }
                 subContainerClassName={'TESTT'}
                 activeClassName={'active'}
                 disabledClassName={'disabled'}
+                forcePage={activePage - 1}
             />
         </Wrapper>
     );

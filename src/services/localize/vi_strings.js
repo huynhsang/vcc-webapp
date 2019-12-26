@@ -72,6 +72,8 @@ export default {
     common_experience: 'Kinh nghiệm',
     common_no_result: 'Không tìm thấy kết quả',
     common_come_back: 'Quay lại',
+    common_userName: 'Tên người dùng',
+    common_invalid_username: 'Tên người dùng không hợp lệ!',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -138,7 +140,7 @@ export default {
     question_post_your_question: 'Đăng câu hỏi',
     question_what_your_programming: `Câu hỏi lập trình của bạn là gì? Bạn cần cụ thể nó.`,
     question_what_languages_technologies:
-        'Ngôn ngữ, công nghệ, framework trong câu hỏi của bạn là gì?',
+        'Framework trong câu hỏi của bạn là gì?',
     question_tags_help_the_right_people:
         'Gắn tags để giúp mọi người tìm thấy câu hỏi của bạn dễ dàng hơn.',
     question_identify_your_tags: `Tìm tags của bạn bằng cách hoàn thành câu hỏi: “Câu hỏi của mình là về…”`,
@@ -239,8 +241,23 @@ export default {
     my_profile_you_come_from: 'Bạn đến từ',
     my_profile_choose_one_country: 'Chọn một nước',
     my_profile_user_info_updated: 'Hồ sơ của bạn đã được thay đổi',
+    my_profile_change_password: 'Thay đổi mật khẩu',
+    my_profile_old_password: 'Mật khẩu hiện tại',
+    my_profile_new_password: 'Mật khẩu mới',
+    my_profile_passwords_not_identique: 'Mật khẩu mới không đồng nhất',
+    my_profile_change_password_success: 'Bạn đã thay đổi mật khẩu thành công!',
+    my_profile_confirm_new_password: 'Xác nhận mật khẩu mới',
+    my_profile_please_complete_all_fields: 'Vui lòng điền đầy đủ thông tin',
+    my_profile_passwords_contrain:
+        'Mật khẩu phải chứa ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',
-    user_info_added_an_answer: 'Được trả lời vào ngày'
+    user_info_added_an_answer: 'Được trả lời vào ngày',
+
+    home_ask_verified_professionals:
+        'Xin lời khuyên về định hướng nghề nghiệp, kinh nghiệm phỏng vấn, thông tin về công ty từ các chuyên gia từ các công ty lớn hàng đầu...',
+    home_want_to_get:
+        'Bạn muốn thêm thu nhập từ việc đưa ra lời khuyên/ý kiến?',
+    home_find_out_how: 'Gia nhập VCNC'
 };

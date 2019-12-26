@@ -38,7 +38,8 @@ const Infos = ({ currentUser }) => {
         email,
         nationality,
         dateOfBirth,
-        summary
+        summary,
+        username
     } = currentUser;
 
     const country = COUNTRIES.find(val => val.code === nationality);
@@ -47,6 +48,7 @@ const Infos = ({ currentUser }) => {
     return (
         <InfoTable>
             <tbody>
+                <Tab label={t('common_userName')} value={username} />
                 <Tab label={t('common_lastname')} value={lastName} />
                 <Tab label={t('common_firstname')} value={firstName} />
                 <Tab label={t('common_email')} value={email} />

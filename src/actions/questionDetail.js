@@ -3,14 +3,10 @@ import actionsNames from '../constants/action-names.constant';
 import {
     getQuestionWithSlug,
     voteQuestion,
-    reVoteQuestion
+    approveAnswer
 } from '../services/question.service';
 
-import {
-    voteAnswer,
-    reVoteAnswer,
-    createAnswer
-} from '../services/answer.service';
+import { voteAnswer, createAnswer } from '../services/answer.service';
 
 import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
 
@@ -26,7 +22,8 @@ const {
     VOTE_ANSWER_FAILURE,
     CREATE_ANSWER_REQUEST,
     CREATE_ANSWER_SUCCESS,
-    CREATE_ANSWER_FAILURE
+    CREATE_ANSWER_FAILURE,
+    APPROVE_ANSWER_SUCCESS
 } = actionsNames;
 
 export const getQuestionRequest = createAction(GET_QUESTION_REQUEST);
@@ -71,20 +68,6 @@ export const voteQuestionFn = (questionId, action) => {
     };
 };
 
-export const reVoteQuestionFn = (questionId, voteId, action) => {
-    return dispatch => {
-        dispatch(voteQuestionDetailRequest());
-        reVoteQuestion(questionId, voteId, action)
-            .then(data => {
-                dispatch(voteQuestionDetailSuccess(data));
-            })
-            .catch(err => {
-                dispatch(voteQuestionDetailFailure());
-                console.log(err.message);
-            });
-    };
-};
-
 export const voteAnswerRequest = createAction(VOTE_ANSWER_REQUEST);
 export const voteAnswerSuccess = createAction(VOTE_ANSWER_SUCCESS);
 export const voteAnswerFailure = createAction(VOTE_ANSWER_FAILURE);
@@ -93,20 +76,6 @@ export const voteAnswerFn = (answerId, action) => {
     return dispatch => {
         dispatch(voteAnswerRequest(answerId));
         voteAnswer(answerId, action)
-            .then(data => {
-                dispatch(voteAnswerSuccess(data));
-            })
-            .catch(err => {
-                dispatch(voteAnswerFailure());
-                console.log(err.message);
-            });
-    };
-};
-
-export const reVoteAnswerFn = (answerId, voteId, action) => {
-    return dispatch => {
-        dispatch(voteAnswerRequest(answerId));
-        reVoteAnswer(answerId, voteId, action)
             .then(data => {
                 dispatch(voteAnswerSuccess(data));
             })
@@ -128,6 +97,25 @@ export const createAnswerFn = (questionId, answerBody) => {
             .then(() => {
                 dispatch(showSuccessAlertFn('Success!', 'Leaved an answer'));
                 dispatch(createAnswerSuccess());
+            })
+            .catch(err => {
+                showErrorAlertFn('Error!', err.response.data.error.message);
+                dispatch(createAnswerFailure());
+                console.log(err.message);
+            });
+    };
+};
+
+export const approveAnswerSuccess = createAction(APPROVE_ANSWER_SUCCESS);
+
+export const approveAnswerFn = (questionId, answerId) => {
+    return dispatch => {
+        approveAnswer(questionId, answerId)
+            .then(data => {
+                dispatch(
+                    showSuccessAlertFn('Success!', 'Approved this answer')
+                );
+                dispatch(approveAnswerSuccess(data));
             })
             .catch(err => {
                 showErrorAlertFn('Error!', err.response.data.error.message);
