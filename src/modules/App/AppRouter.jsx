@@ -9,7 +9,12 @@ import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
 
-import { EmailVerification, ResetPassword, SSOLogin } from '../Authentification';
+import {
+    EmailVerification,
+    ResetPassword,
+    SSOLogin
+} from '../Authentification';
+import { Policy } from '../Policy';
 
 const AppRouter = () => {
     return (
@@ -38,6 +43,11 @@ const AppRouter = () => {
                 exact
                 path="/reset-password"
                 render={props => <ResetPassword {...props} />}
+            />
+            <Route
+                exact
+                path="/policy"
+                render={props => <Policy {...props} />}
             />
             <Route
                 exact
