@@ -107,7 +107,7 @@ const Question = ({
                     <div className="question-content question-content-first">
                         <div className="question-header">
                             <Link
-                                to={`/home/question/${slug}/view`}
+                                to={`/homes/question/${slug}/view`}
                                 className="post-title"
                             >
                                 {question.title}
@@ -164,7 +164,7 @@ const Question = ({
                                 <li className={bestAnswerClassName}>
                                     <i className="icon-comment" />
                                     <Link
-                                        to={`/home/question/${slug}/view/#answers`}
+                                        to={`/homes/question/${slug}/view/#answers`}
                                     >
                                         {`${answerCount} ${t('common_answer')}`}
                                     </Link>

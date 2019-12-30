@@ -36,7 +36,7 @@ const ResetPassword = ({
                     'Success!',
                     t('authentification_your_password_has_been_reset')
                 );
-                history.push('/home/questions');
+                history.push('/homes/questions');
             })
             .catch(err => {
                 showErrorAlert(

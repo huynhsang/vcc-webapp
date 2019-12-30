@@ -41,10 +41,10 @@ const Header = ({
     const search = () => {
         const { pathname } = location;
         const params = { page: 1, text: searchText };
-        if (/home\/questions/.test(pathname)) {
+        if (/homes\/questions/.test(pathname)) {
             Object.assign(params, { show, tags });
         }
-        const url = `/home/questions?${qs.stringify(params)}`;
+        const url = `/homes/questions?${qs.stringify(params)}`;
         history.push(url);
     };
 

@@ -74,6 +74,8 @@ export default {
     common_come_back: 'Come back',
     common_userName: 'User name',
     common_invalid_username: 'Invalid user name!',
+    common_popular_question: 'Popular question',
+    common_see_all: 'See all',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

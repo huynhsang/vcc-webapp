@@ -8,6 +8,7 @@ import { AddQuestion } from '../AddQuestion';
 import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
+import { HomePage } from '../HomePage';
 
 import {
     EmailVerification,
@@ -19,7 +20,9 @@ import { Policy } from '../Policy';
 const AppRouter = () => {
     return (
         <Switch>
-            <Route path="/home" render={props => <Home {...props} />} />
+            <Route path="/" exact render={props => <HomePage {...props} />} />
+            <Route path="/home" exact render={props => <HomePage {...props} />} />
+            <Route path="/homes" render={props => <Home {...props} />} />
             <Route
                 exact
                 path="/about-us/"
@@ -54,7 +57,7 @@ const AppRouter = () => {
                 path="/social-login"
                 render={props => <SSOLogin {...props} />}
             />
-            <Redirect exact from="/" to="/home/questions" />
+            {/* <Redirect exact from="/" to="/home/questions" /> */}
             <Route component={Page404} />
         </Switch>
     );

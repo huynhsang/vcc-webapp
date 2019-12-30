@@ -3,22 +3,8 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import LeftNav from './LeftNav';
-import { RightSlideBar } from './RightSlideBar';
-
 import { useTranslation } from 'react-i18next';
-
-import HomeRouter from './HomeRouter';
 import { setToRegistreFn } from '../../actions/app';
-
-import MobileBar from './MobileBar';
-
-import {
-    getTopUsersFn,
-    getPopularQuestionsFn,
-    getQuestionsTopAnsweredFn,
-    getTrendingTagsFn
-} from '../../actions/home';
 
 import Cover from '../../images/cover.png';
 
@@ -79,36 +65,14 @@ const FindOut = styled.div`
     }
 `;
 
-const Home = ({
-    App,
-    home,
+const PageCover = ({
+    isAuthenticated,
     setToRegistre,
-    getTopUsers,
-    getPopularQuestions,
-    getQuestionsTopAnswered,
-    getTrendingTags
 }) => {
     const { t } = useTranslation();
 
-    React.useEffect(() => {
-        getTopUsers();
-        // getPopularQuestions();
-        // getQuestionsTopAnswered();
-        getTrendingTags();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    const { isAuthenticated } = App;
-    const {
-        topUsers,
-        popularQuestions,
-        questionsTopAnswered,
-        trendingTags
-    } = home;
-
     return (
         <>
-            <MobileBar />
             <section>
                 <CoverWrapper className="call-action-unlogged call-action-dark call-action-style_1">
                     <Glass className="call-action-opacity" />
@@ -144,62 +108,17 @@ const Home = ({
                         )}
                     </div>
                 </CoverWrapper>
-                <div className="discy-content">
-                    <div className="discy-inner-content menu_sidebar">
-                        <div className="discy-container">
-                            <main
-                                className="discy-main-wrap discy-site-content float_l"
-                                style={{
-                                    position: 'relative',
-                                    overflow: 'visible',
-                                    boxSizing: 'border-box',
-                                    minHeight: '1px'
-                                }}
-                            >
-                                <div
-                                    className="theiaStickySidebar"
-                                    style={{
-                                        paddingTop: '0px',
-                                        paddingBottom: '1px',
-                                        position: 'static'
-                                    }}
-                                >
-                                    <HomeRouter />
-                                    <div className="hide-main-inner" />
-                                    <div className="hide-sidebar sidebar-width">
-                                        <div className="hide-sidebar-inner" />
-                                    </div>
-
-                                    <RightSlideBar
-                                        topUsers={topUsers}
-                                        popularQuestions={popularQuestions}
-                                        questionsTopAnswered={
-                                            questionsTopAnswered
-                                        }
-                                        trendingTags={trendingTags}
-                                    />
-                                </div>
-                            </main>
-                            <LeftNav />
-                        </div>
-                    </div>
-                </div>
             </section>
         </>
     );
 };
 
-const mapStateToProps = ({ App, home }) => ({
-    App,
-    home
+const mapStateToProps = ({ App : {isAuthenticated} }) => ({
+    isAuthenticated,
 });
 
 const mapDispatchToProps = dispatch => ({
     setToRegistre: () => dispatch(setToRegistreFn()),
-    getTopUsers: () => dispatch(getTopUsersFn()),
-    getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
-    getQuestionsTopAnswered: () => dispatch(getQuestionsTopAnsweredFn()),
-    getTrendingTags: () => dispatch(getTrendingTagsFn())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(PageCover);

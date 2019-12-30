@@ -67,12 +67,10 @@
  split columns
 */
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  -webkit-flex-wrap: wrap;
-  margin-left: -15px;
-  margin-right: -15px;
+.row::after {
+  content: '';
+  clear: both;
+  display: table;
 }
 
 // columns 10

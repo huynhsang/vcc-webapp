@@ -87,7 +87,7 @@ const AddQuestion = ({
         createQuestion({ ...question, isPublic: true })
             .then(data => {
                 showSuccessAlert('Success!', 'Created a Question');
-                history.push(`/home/question/${data.slug}/view`);
+                history.push(`/homes/question/${data.slug}/view`);
             })
             .catch(response =>
                 showErrorAlert(response.response.data.error.message)
