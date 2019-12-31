@@ -16,9 +16,12 @@ import {
 import { PageCover } from '../Header';
 import Question from './Question';
 
+import WorkSpace from './WorkSpace';
+
 const Wrapper = styled.div`
     max-width: 1280px;
     margin: 0 auto;
+    padding: 20px;
 `;
 
 const FlexWrapper = styled.div`
@@ -78,8 +81,11 @@ const Home = ({
                     <Title>{t('common_popular_question')}</Title>
                     <div>{`${t('common_see_all')} >`}</div>
                 </FlexWrapper>
-                <QuestionsWrapper>{renderQuestions}</QuestionsWrapper>
+                <QuestionsWrapper className="row">
+                    {renderQuestions}
+                </QuestionsWrapper>
             </Wrapper>
+            <WorkSpace />
         </>
     );
 };

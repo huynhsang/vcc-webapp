@@ -261,5 +261,20 @@ export default {
         'Xin lời khuyên về định hướng nghề nghiệp, kinh nghiệm phỏng vấn, thông tin về công ty từ các chuyên gia từ các công ty lớn hàng đầu...',
     home_want_to_get:
         'Bạn muốn thêm thu nhập từ việc đưa ra lời khuyên/ý kiến?',
-    home_find_out_how: 'Gia nhập VCNC'
+    home_find_out_how: 'Gia nhập VCNC',
+
+    workspace_how_does_it_work: 'Hoạt động như thế nào',
+    workspace_if_you_are_asking: 'Nếu bạn là người đặt câu hỏi',
+    workspace_post_a_question: 'Đặt một câu hỏi',
+    workspace_choose_professionals: 'Chọn người trả lời câu hỏi bạn muốn được kết nối tới',
+    workspace_receive_answer_from: 'Nhận được câu trả lời bạn cần',
+    workspace_rate_your_experience: 'Đánh giá câu trả lời và nhận được điểm thưởng vào tài khoản',
+    workspace_if_you_are_answering: 'Nếu bạn là người trả lời',
+    workspace_get_notification: 'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
+    workspace_answer_the_assigned: 'Trả lời câu hỏi nhận được trong vòng 24h',
+    workspace_get_paid: 'Nhận điểm thưởng sau khi đăng tải câu trả lời',
+    workspace_our_support: 'Hỗ trợ',
+    workspace_give_instruction_to_ask: 'Giới thiệu những mẫu câu hỏi',
+    workspace_give_rule_to_answer: 'Đưa ra các yêu cầu về nội dung cần trả lời',
+    workspace_censorship_content: 'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
 };

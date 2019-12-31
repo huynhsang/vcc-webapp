@@ -261,5 +261,20 @@ export default {
     home_ask_verified_professionals:
         'Ask verified professionals for career advices, interview training, resume review and company insights...',
     home_want_to_get: 'Want to get paid for sharing your knowledge?',
-    home_find_out_how: 'Find out how we work'
+    home_find_out_how: 'Find out how we work',
+
+    workspace_how_does_it_work: 'How does it work',
+    workspace_if_you_are_asking: 'If you are asking',
+    workspace_post_a_question: 'Post a question',
+    workspace_choose_professionals: 'Choose professionals to get matched',
+    workspace_receive_answer_from: 'Receive answer from professionals',
+    workspace_rate_your_experience: 'Rate your experience and get bonus',
+    workspace_if_you_are_answering: 'If you are answering',
+    workspace_get_notification: 'Get notification if you are requested to answer a question',
+    workspace_answer_the_assigned: 'Answer the assigned question in 24h',
+    workspace_get_paid: 'Get bonus after submitting your answer',
+    workspace_our_support: 'Our support',
+    workspace_give_instruction_to_ask: 'Give instruction to ask',
+    workspace_give_rule_to_answer: 'Give rule to answer',
+    workspace_censorship_content: 'Censorship content (question and answer)',
 };
