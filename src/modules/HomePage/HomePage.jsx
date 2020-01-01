@@ -15,6 +15,7 @@ import {
 
 import { PageCover } from '../Header';
 import Question from './Question';
+import TopUser from './TopUser';
 
 import WorkSpace from './WorkSpace';
 
@@ -40,6 +41,10 @@ const Title = styled.div`
 const QuestionsWrapper = styled.div`
     width: calc(100% + 20px);
     margin: 0 -10px;
+`;
+
+const WhiteBackground = styled.div`
+    
 `;
 
 const Home = ({
@@ -73,6 +78,10 @@ const Home = ({
         <Question key={q.id} question={q} />
     ));
 
+    const renderUsers = Object.values(topUsers).map(u => (
+        <TopUser key={u.id} user={u} />
+    ));
+
     return (
         <>
             <PageCover />
@@ -86,6 +95,13 @@ const Home = ({
                 </QuestionsWrapper>
             </Wrapper>
             <WorkSpace />
+            <Wrapper>
+                <Title>{t('common_top_members')}</Title>
+                <QuestionsWrapper className="row">
+                    {renderUsers}
+                </QuestionsWrapper>
+            </Wrapper>
+            
         </>
     );
 };
