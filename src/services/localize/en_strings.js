@@ -78,6 +78,10 @@ export default {
     common_see_all: 'See all',
     common_ask_now:'Ask a question now?',
     common_ask: 'Ask',
+    common_about_us: 'About Us',
+    common_contact_us: 'Contact Us',
+    common_policy: 'Policy',
+    common_follow_us: 'Follow us',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -99,13 +103,12 @@ export default {
     authentification_: '',
 
     header_home: 'Home',
-    header_about_us: 'About Us',
-    header_contact_us: 'Contact Us',
     header_blog: 'Blog',
     header_user_profile: 'User Profile',
     header_edit_profile: 'Edit Profile',
     header_best_answers: 'Best Answers',
     header_logout: 'Logout',
+
     home_ask_a_question: 'Ask a Question',
     home_share_and_grow: "Share & grow the world's knowledge!",
     home_description: `We want to connect the people who have knowledge to the people who need it, to bring
@@ -279,4 +282,6 @@ export default {
     workspace_give_instruction_to_ask: 'Give instruction to ask',
     workspace_give_rule_to_answer: 'Give rule to answer',
     workspace_censorship_content: 'Censorship content (question and answer)',
+
+    footer_all_right_reserved : 'All rights reserved © 2020',
 };

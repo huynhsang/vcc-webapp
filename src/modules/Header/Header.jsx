@@ -96,27 +96,6 @@ const Header = ({
                             />
                         </Link>
                         <div className="mid-header float_l">
-                            <div className="header-language-selector">
-                                <LanguageSelector />
-                            </div>
-                            <div className="header-search float_r">
-                                <div className="search-wrapper">
-                                    <input
-                                        type="search"
-                                        placeholder={t(
-                                            'question_search_question'
-                                        )}
-                                        value={searchText}
-                                        onChange={ev =>
-                                            setSearchText(ev.target.value)
-                                        }
-                                        onKeyUp={onkeyPress}
-                                    />
-                                    <button type="submit" onClick={search}>
-                                        <i className="icon-search" />
-                                    </button>
-                                </div>
-                            </div>
                             <nav className="nav float_l main-menu">
                                 <h3 className="screen-reader-text">
                                     VC&C Navigation

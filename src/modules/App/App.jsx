@@ -1,8 +1,10 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppRouter from './AppRouter';
 import { Header } from '../Header';
+import { Footer } from '../Footer';
 import { SweetAlert } from '../../component/SweetAlert';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
@@ -14,19 +16,23 @@ import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 
-const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
+const AppWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
+const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
         fetchUserFromCookie();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { isVerifiedUser, isAuthenticated } = App;
+    const { isVerifiedUser } = App;
 
     if (!isVerifiedUser) {
         return <div />;
     }
-
-    const classWrapper = isAuthenticated ? 'wrap-login' : 'wrap-not-login';
 
     return (
         <ConnectedRouter history={history}>
@@ -34,11 +40,12 @@ const App = ({ App, uppdateAuthenticate, fetchUserFromCookie }) => {
                 <Authentification />
                 <ContactUs />
                 <SweetAlert />
-                <div id="wrap" className={classWrapper}>
-                    <Header />
+                <AppWrapper>
                     <MobileAside />
+                    <Header />
                     <AppRouter />
-                </div>
+                    <Footer />
+                </AppWrapper>
             </Router>
         </ConnectedRouter>
     );

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { headerTabs } from './header.constant';
 
-const MainMenu = ({ location, history, toggleContactUs }) => {
+const MainMenu = ({ location }) => {
     const { t } = useTranslation();
 
     const { pathname } = location;
@@ -24,13 +24,6 @@ const MainMenu = ({ location, history, toggleContactUs }) => {
                     <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
                 </li>
             ))}
-            <li key={'contact-us'}>
-                <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                    onClick={() => toggleContactUs(true)}
-                >
-                    {t('header_contact_us')}
-                </a>
-            </li>
             <li key={'blog'}>
                 <a href="https://lqdalumni.site/">{t('header_blog')}</a>
             </li>

@@ -2,6 +2,9 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import store from './configureStore';
+
+import './style.css';
+
 import '../node_modules/slick-carousel/slick/slick.css';
 import '../node_modules/slick-carousel/slick/slick-theme.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';

@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 
 import { showConfirmToLoginFn } from '../actions/sweetAlert';
 
-
 const AskButton = ({ label, history, isAuthenticated, showConfirmToLogin }) => {
     const onClick = () => {
         if (!isAuthenticated) {
@@ -17,7 +16,12 @@ const AskButton = ({ label, history, isAuthenticated, showConfirmToLogin }) => {
     };
 
     return (
-        <Button variant="contained" onClick={onClick} color='secondary' size='small'>
+        <Button
+            variant="contained"
+            onClick={onClick}
+            color="secondary"
+            size="small"
+        >
             {label}
         </Button>
     );

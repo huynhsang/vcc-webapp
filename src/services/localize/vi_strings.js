@@ -78,6 +78,10 @@ export default {
     common_see_all: 'Xem tất cả',
     common_ask_now:'Đặt ngay một câu hỏi?',
     common_ask: 'Đặt câu hỏi',
+    common_about_us: 'Giới thiệu',
+    common_contact_us: 'Liên hệ',
+    common_policy: 'Policy',
+    common_follow_us: 'Theo dõi chúng tôi',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -98,8 +102,6 @@ export default {
     authentification_: '',
 
     header_home: 'Trang chủ',
-    header_about_us: 'Giới thiệu',
-    header_contact_us: 'Liên hệ',
     header_blog: 'Blog',
     header_user_profile: 'Hồ sơ cá nhân',
     header_edit_profile: 'Thay đổi hồ sơ cá nhân',
@@ -279,4 +281,6 @@ export default {
     workspace_give_instruction_to_ask: 'Giới thiệu những mẫu câu hỏi',
     workspace_give_rule_to_answer: 'Đưa ra các yêu cầu về nội dung cần trả lời',
     workspace_censorship_content: 'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
+
+    footer_all_right_reserved : 'All rights reserved © 2020',
 };

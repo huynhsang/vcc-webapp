@@ -10,14 +10,41 @@ import Cover from '../../images/cover.png';
 
 import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
 
-const CoverWrapper = styled.div`
+import {defaultWrapperCss, WidthWrapper, rowCss, DefaultWrapper} from '../../component/Wrappers';
+
+const CoverWrapper = styled.section`
     background-image: url('${Cover}');
     filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='${Cover}', sizingMethod="scale");
     -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='${Cover}',sizingMethod='scale')";
-    background-color: black !important;
+    background-color: black;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center right;
+
+    width : 100%;
+    height: 250px;
+    position: relative;
+    color: white;
+`;
+
+const Glass = styled.div`
+    position: absolute;
+    background: #0000006b;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+`;
+
+const ContentWrapper = styled(DefaultWrapper)`
+    position: relative;
+    display: flex;
+    height: 100%;
+    align-items: center;
+`;
+
+const LeftContent = styled.div`
+    width: 70%;
 `;
 
 const AskWrapper = styled.div`
@@ -36,10 +63,6 @@ const AskWrapper = styled.div`
             color: yellow;
         }
     }
-`;
-
-const Glass = styled.div`
-    background: #0000006b;
 `;
 
 const FindOut = styled.div`
@@ -62,63 +85,46 @@ const FindOut = styled.div`
         align-items: center;
         user-select: none;
         cursor: pointer;
+        text-decoration: none;
     }
 `;
 
-const PageCover = ({
-    isAuthenticated,
-    setToRegistre,
-}) => {
+const PageCover = () => {
     const { t } = useTranslation();
 
     return (
-        <>
-            <section>
-                <CoverWrapper className="call-action-unlogged call-action-dark call-action-style_1">
-                    <Glass className="call-action-opacity" />
-                    <div className="discy-container">
-                        <div className="col7">
-                            <AskWrapper>
-                                {t('home_ask_verified_professionals')}
-                                <Link to="/add-question">
-                                    {`+ ${t('home_ask_a_question')}`}
-                                </Link>
-                            </AskWrapper>
-                            <p>{t('home_want_to_get')}</p>
-                            <FindOut>
-                                <a
-                                    href={REGISTRE_MENTOR_FORM_LINK}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    {t('home_find_out_how')}
-                                </a>
-                            </FindOut>
-                        </div>
-                        {!isAuthenticated && (
-                            <div className="col3">
-                                <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                                    onClick={setToRegistre}
-                                    className="signup-panel button-default call-action-button"
-                                    style={{ marginTop: '47.5px' }}
-                                >
-                                    {t('home_create_a_new_account')}
-                                </a>
-                            </div>
-                        )}
-                    </div>
-                </CoverWrapper>
-            </section>
-        </>
+        <CoverWrapper>
+            <Glass />
+            <ContentWrapper>
+                <LeftContent>
+                    <AskWrapper>
+                        {t('home_ask_verified_professionals')}
+                        <Link to="/add-question">
+                            {`+ ${t('home_ask_a_question')}`}
+                        </Link>
+                    </AskWrapper>
+                    <p>{t('home_want_to_get')}</p>
+                    <FindOut>
+                        <a
+                            href={REGISTRE_MENTOR_FORM_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            {t('home_find_out_how')}
+                        </a>
+                    </FindOut>
+                </LeftContent>
+            </ContentWrapper>
+        </CoverWrapper>
     );
 };
 
-const mapStateToProps = ({ App : {isAuthenticated} }) => ({
-    isAuthenticated,
+const mapStateToProps = ({ App: { isAuthenticated } }) => ({
+    isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-    setToRegistre: () => dispatch(setToRegistreFn()),
+    setToRegistre: () => dispatch(setToRegistreFn())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PageCover);
