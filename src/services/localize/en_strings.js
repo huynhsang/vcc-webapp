@@ -76,6 +76,8 @@ export default {
     common_invalid_username: 'Invalid user name!',
     common_popular_question: 'Popular question',
     common_see_all: 'See all',
+    common_ask_now:'Ask a question now?',
+    common_ask: 'Ask',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

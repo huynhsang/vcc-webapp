@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import {  withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
 
 import UserLogo from '../../component/UserLogo';
 

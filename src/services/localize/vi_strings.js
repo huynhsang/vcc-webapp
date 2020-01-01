@@ -76,6 +76,8 @@ export default {
     common_invalid_username: 'Tên người dùng không hợp lệ!',
     common_popular_question: 'Câu hỏi phổ biến',
     common_see_all: 'Xem tất cả',
+    common_ask_now:'Đặt ngay một câu hỏi?',
+    common_ask: 'Đặt câu hỏi',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

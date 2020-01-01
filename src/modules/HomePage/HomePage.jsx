@@ -19,6 +19,8 @@ import TopUser from './TopUser';
 
 import WorkSpace from './WorkSpace';
 
+import AskButton from '../../component/AskButton';
+
 const Wrapper = styled.div`
     max-width: 1280px;
     margin: 0 auto;
@@ -44,7 +46,18 @@ const QuestionsWrapper = styled.div`
 `;
 
 const WhiteBackground = styled.div`
-    
+    background-color: white;
+`;
+
+const ToAskWrapper = styled(Wrapper)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const Ask = styled.div`
+    font-size: 18px;
+    margin-bottom: 10px;
 `;
 
 const Home = ({
@@ -101,7 +114,12 @@ const Home = ({
                     {renderUsers}
                 </QuestionsWrapper>
             </Wrapper>
-            
+            <WhiteBackground>
+                <ToAskWrapper>
+                    <Ask>{t('common_ask_now')}</Ask>
+                    <AskButton label={t('common_ask')} />
+                </ToAskWrapper>
+            </WhiteBackground>
         </>
     );
 };
