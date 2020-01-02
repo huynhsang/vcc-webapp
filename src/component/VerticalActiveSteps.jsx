@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Wrapper = styled.div`
     width: 100%;
+    height: 100%;
     background: white;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 `;

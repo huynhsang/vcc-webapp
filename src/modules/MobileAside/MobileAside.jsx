@@ -7,8 +7,6 @@ import { toggleMobileAsideFn, toggleContactUsFn } from '../../actions/app';
 
 import { leftNavTabs } from '../Home/nav.constant';
 
-import { LanguageSelector } from '../LanguageSelector';
-
 const MobileAside = ({
     isOpenMobileAside,
     toggleMobileAside,
@@ -58,14 +56,6 @@ const MobileAside = ({
                                     Close
                                 </span>
                             </a>
-                            <LanguageSelector
-                                customStyle={{
-                                    margin: '0',
-                                    position: 'absolute',
-                                    top: 0,
-                                    right: '30px'
-                                }}
-                            />
                             {/* <div className="mobile-menu-top mobile--top">
                                 <div className="widget widget_ask">
                                     <a
@@ -118,7 +108,7 @@ const MobileAside = ({
                                     <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                         onClick={() => toggleContactUs(true)}
                                     >
-                                        {t('header_contact_us')}
+                                        {t('common_contact_us')}
                                     </a>
                                 </li>
                             </ul>

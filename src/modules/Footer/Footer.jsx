@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { withRouter } from 'react-router-dom';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
 
@@ -11,6 +13,7 @@ import LinkedinIcon from '../../images/LinkedinIcon.png';
 import FbIcon from '../../images/FbIcon.png';
 
 import { FACEBOOK_URL, LINKEDIN_URL } from '../../constants/links.constant';
+import { toggleContactUsFn } from '../../actions/app';
 
 const FlexWrapper = styled.div`
     display: flex;
@@ -57,7 +60,7 @@ const SocialIcon = styled.div`
   }
 `;
 
-const Footer = ({}) => {
+const Footer = ({ history, toggleContactUs }) => {
     const { t } = useTranslation();
 
     const openNewTab = link => {
@@ -72,7 +75,10 @@ const Footer = ({}) => {
                         <Logo src={VCNCLogo} />
                         <div>{t('footer_all_right_reserved')}</div>
                     </LogoWrapper>
-                    <FooterMenu />
+                    <FooterMenu
+                        toggleContactUs={toggleContactUs}
+                        history={history}
+                    />
                 </FlexWrapper>
                 <Block>
                     <LanguageSelector />
@@ -96,4 +102,8 @@ const Footer = ({}) => {
     );
 };
 
-export default Footer;
+const mapDispatchToProps = dispatch => ({
+    toggleContactUs: val => dispatch(toggleContactUsFn(val))
+});
+
+export default connect(null, mapDispatchToProps)(withRouter(Footer));

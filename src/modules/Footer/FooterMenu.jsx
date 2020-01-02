@@ -5,15 +5,16 @@ import { useTranslation } from 'react-i18next';
 const DEFAULT_TABS = [
     {
         label: 'common_about_us',
-        path: '/about-us'
+        path: 'about-us'
     },
     {
         label: 'common_contact_us',
-        path: '/contact-us'
+        path: 'contact-us',
+        isContact: true
     },
     {
         label: 'common_policy',
-        path: '/policy-us'
+        path: 'policy-us'
     }
 ];
 
@@ -32,10 +33,18 @@ const Tab = styled.div`
     }
 `;
 
-const FooterMenu = () => {
+const FooterMenu = ({ history, toggleContactUs }) => {
     const { t } = useTranslation();
+    const onClick = (url, isContact) => () => {
+        if (isContact) {
+            return toggleContactUs(true);
+        }
+        history.push(url);
+    };
     const renderTabs = DEFAULT_TABS.map(tab => (
-        <Tab key={tab.label}>{t(tab.label)}</Tab>
+        <Tab key={tab.label} onClick={onClick(tab.path, tab.isContact)}>
+            {t(tab.label)}
+        </Tab>
     ));
     return <Wrapper>{renderTabs}</Wrapper>;
 };

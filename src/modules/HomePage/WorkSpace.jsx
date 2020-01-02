@@ -7,7 +7,7 @@ import VerticalActiveSteps from '../../component/VerticalActiveSteps';
 import { askSteps, answerSteps, supportText } from './workspaceText.constant';
 
 const FullWidth = styled.div`
-    background-color: white;
+    background-color: #f7f7f7;
 `;
 
 const Wrapper = styled.div`
@@ -44,6 +44,7 @@ const SupportWrapper = styled.div`
     margin-top: 20px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     padding: 10px;
+    background-color: white;
 `;
 
 const SupportOl = styled.ul`
@@ -82,8 +83,8 @@ const WorkSpace = () => {
                 <SupportWrapper>
                     <SmallTitle>{t('workspace_our_support')}</SmallTitle>
                     <SupportOl>
-                        {supportText.map(text => (
-                            <li>{text}</li>
+                        {supportText.map((text,key) => (
+                            <li key={key}>{text}</li>
                         ))}
                     </SupportOl>
                 </SupportWrapper>

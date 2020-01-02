@@ -20307,12 +20307,6 @@ a.meta-answer,
     .admin-bar .header.fixed-nav {
         top: 46px !important
     }
-    html {
-        margin-top: 0 !important
-    }
-    * html body {
-        margin-top: 0 !important
-    }
     .discy-main-inner {
         padding-bottom: 15px;
         padding-top: 13px

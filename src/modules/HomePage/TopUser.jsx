@@ -15,6 +15,7 @@ const Wrapper = styled.div`
     margin: 10px;
     user-select: none;
     cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 `;
 
 const InfosWrapper = styled.div`

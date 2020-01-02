@@ -51,7 +51,7 @@ const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
     const { t } = useTranslation();
     return (
         <Dialog
-            header={t('header_contact_us')}
+            header={t('common_contact_us')}
             visible={isOpenContactUs}
             style={dialogStyle}
             contentStyle={contentStyle}

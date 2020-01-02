@@ -47,11 +47,11 @@ const BootstrapInput = withStyles(theme => ({
 const useStyles = makeStyles(() => ({
     selectLabel: {
         transform: 'unset',
-        color: 'rgba(255,255,255,0.5)',
+        color: 'rgba(255,255,255,1)',
         fontSize: 14,
         fontWeight: 300,
         '&.Mui-focused': {
-            color: 'rgba(255,255,255,0.8) !important'
+            color: 'rgba(255,255,255, 1) !important'
         }
     },
     centerLabel: {
