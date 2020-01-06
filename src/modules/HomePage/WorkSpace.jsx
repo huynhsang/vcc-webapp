@@ -32,10 +32,10 @@ const SmallTitle = styled.div`
 
 const StepsWrapper = styled.div`
     margin: 0 -10px;
+    display: flex;
 `;
 
 const StepWrapper = styled.div`
-    float: left;
     width: calc(50% - 20px);
     margin: 0 10px;
 `;
@@ -66,7 +66,7 @@ const WorkSpace = () => {
         <FullWidth>
             <Wrapper>
                 <Title>{t('workspace_how_does_it_work')}</Title>
-                <StepsWrapper className="row">
+                <StepsWrapper >
                     <StepWrapper>
                         <VerticalActiveSteps
                             steps={askSteps}

@@ -15,7 +15,7 @@ export const getDefaultFields = () => [
 export const questionsFilterGenerator = ({
     order = null,
     skip = 0,
-    limit = 5
+    limit = 6
     // include = [
     //     {
     //         relation: 'askedBy',

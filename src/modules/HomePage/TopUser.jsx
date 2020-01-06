@@ -1,9 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {  withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import UserLogo from '../../component/UserLogo';
+import TruncateMarkup from 'react-truncate-markup';
 
 import { Badge } from '../Badges';
 
@@ -50,6 +51,7 @@ const UserName = styled.span`
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
     font-size: 15px;
+    min-height: 45px;
 `;
 
 const TopUser = ({ user, history }) => {
@@ -89,7 +91,9 @@ const TopUser = ({ user, history }) => {
                     </InfosSup>
                 </InfosWrapper>
             </FlexWrapper>
-            <DescriptionWrapper>{summary}</DescriptionWrapper>
+            <TruncateMarkup lines={2}>
+                <DescriptionWrapper>{summary}</DescriptionWrapper>
+            </TruncateMarkup>
         </Wrapper>
     );
 };

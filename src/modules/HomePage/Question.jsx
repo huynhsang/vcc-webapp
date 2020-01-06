@@ -13,6 +13,8 @@ import { getNameByLanguage } from '../../utils/multiple-language';
 import { Badge } from '../Badges';
 
 import Tag from '../../component/Tag';
+import TruncateMarkup from 'react-truncate-markup';
+import { QuillText } from '../../component/QuillText';
 
 const Wrapper = styled.div`
     width: calc(33.33% - 20px);
@@ -38,6 +40,7 @@ const Title = styled.div`
     font-weight: 600;
     font-size: 17px;
     margin-bottom: 10px;
+    min-height: 45px;
 `;
 
 const InfosSup = styled.div`
@@ -76,6 +79,7 @@ const BottomWrapper = styled(FlexWrapper)`
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
     font-size: 15px;
+    min-height: 50px;
 `;
 
 const Question = ({ question, history }) => {
@@ -97,21 +101,21 @@ const Question = ({ question, history }) => {
         <Tag key={tag.id} tag={tag} />
     ));
 
-    const redirect = url => (ev) => {
+    const redirect = url => ev => {
         ev.stopPropagation();
         history.push(url);
     };
 
     return (
         <Wrapper onClick={redirect(`/homes/question/${slug}/view`)}>
-            <Title>{question.title}</Title>
+            <TruncateMarkup lines={2}><Title>
+                {question.title}
+            </Title></TruncateMarkup>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>
                     <div>
-                        <UserName
-                            onClick={redirect(`/users/${askedBy.id}`)}
-                        >
+                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
                             {`${askedBy.firstName} ${askedBy.lastName}`}
                         </UserName>
                         <Badge points={askedBy.points} />
@@ -127,7 +131,7 @@ const Question = ({ question, history }) => {
                 </InfosWrapper>
             </FlexWrapper>
             <DescriptionWrapper>
-                <ReactMarkdown source={body} />
+                <QuillText lines={2} content={body} />
             </DescriptionWrapper>
             {!isEmpty(tagsRender) && <div className="row">{tagsRender}</div>}
             <BottomWrapper>
