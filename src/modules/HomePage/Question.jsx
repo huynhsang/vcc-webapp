@@ -16,15 +16,25 @@ import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const Wrapper = styled.div`
     width: calc(33.33% - 20px);
-    float: left;
     background-color: white;
-    padding: 10px;
+    padding: 10px 10px 40px 10px;
     margin: 10px;
     user-select: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    position: relative;
+
+    ${media.tabletLandscape`
+        width: calc(50% - 20px);
+    `}
+    ${media.mobileLandscape`
+        width: calc(100% - 20px);
+    `}
 `;
 
 const InfosWrapper = styled.div`
@@ -66,9 +76,10 @@ const UserName = styled.span`
     }
 `;
 
-const BottomWrapper = styled(FlexWrapper)`
-    justify-content: flex-end;
-    width: 100%;
+const BottomWrapper = styled.div`
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
 
     & i {
         margin-right: 5px;
@@ -108,9 +119,9 @@ const Question = ({ question, history }) => {
 
     return (
         <Wrapper onClick={redirect(`/homes/question/${slug}/view`)}>
-            <TruncateMarkup lines={2}><Title>
-                {question.title}
-            </Title></TruncateMarkup>
+            <TruncateMarkup lines={2}>
+                <Title>{question.title}</Title>
+            </TruncateMarkup>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>

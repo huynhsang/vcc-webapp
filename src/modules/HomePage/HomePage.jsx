@@ -40,9 +40,11 @@ const Title = styled.div`
     font-weight: 600;
 `;
 
-const QuestionsWrapper = styled.div`
+const SmallWrapper = styled.div`
     width: calc(100% + 20px);
     margin: 0 -10px;
+    display: flex;
+    flex-wrap: wrap;
 `;
 
 const WhiteBackground = styled.div`
@@ -103,16 +105,16 @@ const Home = ({
                     <Title>{t('common_popular_question')}</Title>
                     <div>{`${t('common_see_all')} >`}</div>
                 </FlexWrapper>
-                <QuestionsWrapper className="row">
+                <SmallWrapper>
                     {renderQuestions}
-                </QuestionsWrapper>
+                </SmallWrapper>
             </Wrapper>
             <WorkSpace />
             <Wrapper>
                 <Title>{t('common_top_members')}</Title>
-                <QuestionsWrapper className="row">
+                <SmallWrapper>
                     {renderUsers}
-                </QuestionsWrapper>
+                </SmallWrapper>
             </Wrapper>
             <WhiteBackground>
                 <ToAskWrapper>

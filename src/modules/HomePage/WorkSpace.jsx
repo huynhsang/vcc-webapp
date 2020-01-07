@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
 import VerticalActiveSteps from '../../component/VerticalActiveSteps';
-
 import { askSteps, answerSteps, supportText } from './workspaceText.constant';
+import AskButton from '../../component/AskButton';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
 
 const FullWidth = styled.div`
     background-color: #f7f7f7;
@@ -17,7 +19,7 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.div`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 15px;
 `;
@@ -27,17 +29,20 @@ const SmallTitle = styled.div`
     font-size: 18px;
     font-weight: bold;
     padding: 15px 0;
-
 `;
 
 const StepsWrapper = styled.div`
     margin: 0 -10px;
     display: flex;
+    flex-wrap: wrap;
 `;
 
 const StepWrapper = styled.div`
     width: calc(50% - 20px);
-    margin: 0 10px;
+    margin: 10px;
+    ${media.mobileLandscape`
+        width: calc(100% - 20px);
+    `}
 `;
 
 const SupportWrapper = styled.div`
@@ -52,11 +57,24 @@ const SupportOl = styled.ul`
     font-size: 14px;
     font-weight: 600;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
 
     & li {
         margin-left: 20px;
+        width: calc(33.33% - 20px);
+        line-height: 30px;
+        ${media.mobileLandscape`
+            width: calc(100% - 20px);
+        `}
     }
+`;
+
+const AskWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
 `;
 
 const WorkSpace = () => {
@@ -66,7 +84,7 @@ const WorkSpace = () => {
         <FullWidth>
             <Wrapper>
                 <Title>{t('workspace_how_does_it_work')}</Title>
-                <StepsWrapper >
+                <StepsWrapper>
                     <StepWrapper>
                         <VerticalActiveSteps
                             steps={askSteps}
@@ -83,11 +101,14 @@ const WorkSpace = () => {
                 <SupportWrapper>
                     <SmallTitle>{t('workspace_our_support')}</SmallTitle>
                     <SupportOl>
-                        {supportText.map((text,key) => (
+                        {supportText.map((text, key) => (
                             <li key={key}>{text}</li>
                         ))}
                     </SupportOl>
                 </SupportWrapper>
+                <AskWrapper>
+                    <AskButton label={t('common_ask')} />
+                </AskWrapper>
             </Wrapper>
         </FullWidth>
     );

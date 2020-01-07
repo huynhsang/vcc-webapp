@@ -15,18 +15,28 @@ import FbIcon from '../../images/FbIcon.png';
 import { FACEBOOK_URL, LINKEDIN_URL } from '../../constants/links.constant';
 import { toggleContactUsFn } from '../../actions/app';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const FlexWrapper = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
+`;
+
+const ResponsiveFlexWrapper = styled(FlexWrapper)`
+    ${media.tabletLandscape`
+        flex-direction: column;
+    `}
 `;
 
 const LogoWrapper = styled(FlexWrapper)`
     flex-direction: column;
-    padding: 0 30px 0 10px;
+    padding: 10px 30px 0px 10px;
 `;
 
 const Block = styled.div`
-    padding: 0 10px;
+    padding: 10px;
 `;
 
 const FooterWrapper = styled.footer`
@@ -34,7 +44,7 @@ const FooterWrapper = styled.footer`
     color: rgba(255, 255, 255, 0.9);
 `;
 
-const ContentWrapper = styled(FlexWrapper)`
+const ContentWrapper = styled(ResponsiveFlexWrapper)`
     max-width: 1280px;
     margin: 0 auto;
     padding: 10px;
@@ -70,7 +80,7 @@ const Footer = ({ history, toggleContactUs }) => {
     return (
         <FooterWrapper>
             <ContentWrapper>
-                <FlexWrapper>
+                <ResponsiveFlexWrapper>
                     <LogoWrapper>
                         <Logo src={VCNCLogo} />
                         <div>{t('footer_all_right_reserved')}</div>
@@ -79,7 +89,7 @@ const Footer = ({ history, toggleContactUs }) => {
                         toggleContactUs={toggleContactUs}
                         history={history}
                     />
-                </FlexWrapper>
+                </ResponsiveFlexWrapper>
                 <Block>
                     <LanguageSelector />
                 </Block>

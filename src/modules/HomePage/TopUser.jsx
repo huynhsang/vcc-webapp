@@ -7,16 +7,23 @@ import UserLogo from '../../component/UserLogo';
 import TruncateMarkup from 'react-truncate-markup';
 
 import { Badge } from '../Badges';
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
 
 const Wrapper = styled.div`
     width: calc(33.33% - 20px);
-    float: left;
     background-color: white;
     padding: 10px;
     margin: 10px;
     user-select: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    ${media.tabletLandscape`
+        width: calc(50% - 20px);
+    `}
+    ${media.mobile`
+        width: calc(100% - 20px);
+    `}
 `;
 
 const InfosWrapper = styled.div`

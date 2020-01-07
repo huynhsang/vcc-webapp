@@ -2,6 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const DEFAULT_TABS = [
     {
         label: 'common_about_us',
@@ -21,6 +24,11 @@ const DEFAULT_TABS = [
 const Wrapper = styled.div`
     display: flex;
     border-left: 1px solid white;
+
+    ${media.tabletLandscape`
+        border: none;
+        margin: 5px 0;
+    `}
 `;
 
 const Tab = styled.div`

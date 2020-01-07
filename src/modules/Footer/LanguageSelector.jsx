@@ -44,7 +44,7 @@ const BootstrapInput = withStyles(theme => ({
     }
 }))(InputBase);
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
     selectLabel: {
         transform: 'unset',
         color: 'rgba(255,255,255,1)',
@@ -52,24 +52,22 @@ const useStyles = makeStyles(() => ({
         fontWeight: 300,
         '&.Mui-focused': {
             color: 'rgba(255,255,255, 1) !important'
+        },
+        '@media (max-width: 1024px)': {
+            left: '50%',
+            transform: 'translateX(-50%)'
         }
-    },
-    centerLabel: {
-        left: '50%',
-        transform: 'translateX(-50%)'
     }
 }));
 
-const LanguageSelector = ({ isSmallSize }) => {
+const LanguageSelector = ( ) => {
     const { t, i18n } = useTranslation();
     const classes = useStyles();
     return (
         <div>
             <FormControl>
                 <InputLabel
-                    className={`${classes.selectLabel} ${
-                        isSmallSize ? classes.centerLabel : ''
-                    }`}
+                    className={classes.selectLabel}
                     shrink
                 >
                     {t('common_language')}
