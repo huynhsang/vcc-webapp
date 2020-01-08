@@ -11,7 +11,7 @@ const EmailVerification = ({ location, history }) => {
         const uid = search.get('uid');
         const token = search.get('token');
         if (!uid || !token) {
-            history.push('/home/questions');
+            history.push('/homes/questions');
         } else {
             verifyEmail(uid, token)
                 .then(() => {

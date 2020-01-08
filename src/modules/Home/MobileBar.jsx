@@ -35,7 +35,7 @@ const MobileBar = ({ history, location }) => {
         if (/home\/questions/.test(pathname)) {
             Object.assign(params, { show, tags });
         }
-        const url = `/home/questions?${qs.stringify(params)}`;
+        const url = `/homes/questions?${qs.stringify(params)}`;
         history.push(url);
     };
 

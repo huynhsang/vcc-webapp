@@ -74,7 +74,7 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
                         <div>
                           <h3>
                             <Link
-                              to={`/home/question/${question.slug}/view`}
+                              to={`/homes/question/${question.slug}/view`}
                               title={question.title}
                             >
                               {question.title}
@@ -83,7 +83,7 @@ const TopQuestions = ({ popularQuestions, questionsTopAnswered }) => {
                           <ul className="widget-post-meta">
                             <li>
                               <Link
-                                to={`/home/question/${question.slug}/view`}
+                                to={`/homes/question/${question.slug}/view`}
                                 className="post-meta-comment"
                               >
                                 <i className="icon-comment" />

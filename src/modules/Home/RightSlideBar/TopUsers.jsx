@@ -21,7 +21,7 @@ const TopUsers = ({ topUsers }) => {
       {isShown && (
         <div className="widget-wrap">
           <div className="user-section user-section-small row user-not-normal">
-            {topUsers.map((user: User, index) => {
+            {topUsers.map((user, index) => {
               return (
                 <div key={index} className="col col12">
                   <div className="post-section user-area user-area-small">

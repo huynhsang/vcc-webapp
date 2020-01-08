@@ -5,7 +5,7 @@ import DefaultUserLogo from '../images/default-user-logo.png';
 
 const UserLogo = ({ user }) => {
     return (
-        <div className="author-image author-image-42">
+        <div onClick={ev => ev.stopPropagation()}>
             <Link to={`/users/${user.id}`}>
                 <span className="author-image-span">
                     <img

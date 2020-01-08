@@ -9,7 +9,7 @@ import {
 const Share = ({ questionSlug }) => {
     const { t } = useTranslation();
     const { REACT_APP_DOMAIN_NAME } = process.env;
-    const url = `${REACT_APP_DOMAIN_NAME}/home/question/${questionSlug}/view`;
+    const url = `${REACT_APP_DOMAIN_NAME}/homes/question/${questionSlug}/view`;
     return (
         <div className="post-share">
             <span>

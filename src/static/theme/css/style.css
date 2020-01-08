@@ -9673,11 +9673,6 @@ figure {
     margin-left: auto
 }
 
-.row {
-    margin-left: -15px;
-    margin-right: -15px
-}
-
 .col {
     padding-left: 15px;
     padding-right: 15px
@@ -9886,15 +9881,6 @@ input[type="submit"]:not(.button-default),
 
 #colorbox.crayon-colorbox {
     z-index: 99999
-}
-
-body {
-    background-color: #f2f2f2;
-    margin: 0;
-    color: #707885;
-    line-height: 22px;
-    font-size: 13px;
-    font-weight: 400
 }
 
 .loader {
@@ -10479,12 +10465,6 @@ nav.nav ul > li ul li .menu-nav-arrow {
     height: 85px;
     padding-right: 20px;
     padding-left: 10px
-}
-
-.wrap-not-login .right-header {
-    overflow: hidden;
-    padding-right: 10px;
-    padding-left: 20px
 }
 
 .button-sign-in,
@@ -20327,12 +20307,6 @@ a.meta-answer,
     .admin-bar .header.fixed-nav {
         top: 46px !important
     }
-    html {
-        margin-top: 0 !important
-    }
-    * html body {
-        margin-top: 0 !important
-    }
     .discy-main-inner {
         padding-bottom: 15px;
         padding-top: 13px
@@ -21211,13 +21185,6 @@ a.meta-answer,
     .wpqa-cover-background {
         height: 250px
     }
-    .wrap-login .right-header {
-        width: auto
-    }
-    .wrap-not-login .right-header {
-        max-width: 150px;
-        width: auto
-    }
     .button-sign-in,
     .button-sign-up {
         float: left
@@ -21225,10 +21192,6 @@ a.meta-answer,
     .button-sign-in {
         margin-bottom: 9px;
         margin-right: 0
-    }
-    .wrap-not-login .header-2 .right-header {
-        padding-top: 3px;
-        padding-bottom: 2px
     }
     .header-2 .button-sign-in {
         margin-bottom: 2px
@@ -21857,10 +21820,6 @@ a.meta-answer,
         padding-left: 10px;
         padding-right: 10px
     }
-    .wrap-not-login .right-header {
-        max-width: 150px;
-        width: auto
-    }
     .header-simple .button-default.wpqa-question {
         display: none
     }
@@ -22116,9 +22075,6 @@ a.meta-answer,
 }
 
 @media only screen and (max-width: 410px) {
-    .wrap-not-login .logo {
-        border-right: none
-    }
     .call-action-unlogged .call-action-button {
         width: 100%
     }

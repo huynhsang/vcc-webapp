@@ -9,7 +9,7 @@ import {
 const AnswerShare = ({ questionSlug, answerId }) => {
     const { t } = useTranslation();
     const { REACT_APP_DOMAIN_NAME } = process.env;
-    const url = `${REACT_APP_DOMAIN_NAME}/home/question/${questionSlug}/view#${answerId}`;
+    const url = `${REACT_APP_DOMAIN_NAME}/homes/question/${questionSlug}/view#${answerId}`;
 
     return (
         <ul className="comment-reply comment-reply-main">

@@ -49,7 +49,7 @@ const Registration = ({
                     'Check your email to complete the registration!'
                 );
                 hideAuthentification();
-                history.push('/home');
+                history.push('/homes');
             })
             .catch(err => {
                 setLoader(false);

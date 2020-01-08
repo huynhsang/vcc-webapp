@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 
-import qs from 'qs';
-
 import logo from '../../static/resources/img/logo/logo.png';
 import logo2x from '../../static/resources/img/logo/logo-2x.png';
-import { LanguageSelector } from '../LanguageSelector';
 
 import MainMenu from './MainMenu';
 
@@ -33,26 +30,6 @@ const Header = ({
 }) => {
     const { t } = useTranslation();
     const { isAuthenticated, currentUser } = App;
-
-    const { show, text, tags } = qs.parse(location.search.substr(1));
-
-    const [searchText, setSearchText] = React.useState(text || '');
-
-    const search = () => {
-        const { pathname } = location;
-        const params = { page: 1, text: searchText };
-        if (/home\/questions/.test(pathname)) {
-            Object.assign(params, { show, tags });
-        }
-        const url = `/home/questions?${qs.stringify(params)}`;
-        history.push(url);
-    };
-
-    const onkeyPress = ev => {
-        if (ev.which === 13) {
-            search();
-        }
-    };
 
     return (
         <div className="hidden-header header-dark mobile_bar_active">
@@ -96,27 +73,6 @@ const Header = ({
                             />
                         </Link>
                         <div className="mid-header float_l">
-                            <div className="header-language-selector">
-                                <LanguageSelector />
-                            </div>
-                            <div className="header-search float_r">
-                                <div className="search-wrapper">
-                                    <input
-                                        type="search"
-                                        placeholder={t(
-                                            'question_search_question'
-                                        )}
-                                        value={searchText}
-                                        onChange={ev =>
-                                            setSearchText(ev.target.value)
-                                        }
-                                        onKeyUp={onkeyPress}
-                                    />
-                                    <button type="submit" onClick={search}>
-                                        <i className="icon-search" />
-                                    </button>
-                                </div>
-                            </div>
                             <nav className="nav float_l main-menu">
                                 <h3 className="screen-reader-text">
                                     VC&C Navigation

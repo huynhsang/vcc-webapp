@@ -5,8 +5,8 @@ export const headerTabs = [
         path: 'home'
     },
     {
-        label: 'header_about_us',
-        path: 'about-us'
+        label: 'common_questions',
+        path: 'questions'
     }
 ];
 

@@ -10,17 +10,17 @@ export const leftNavTabs =[
     //     iconClassName : "icon-folder"
     // },
     {
-        path: "/home/questions",
+        path: "/homes/questions",
         label: "nav_questions",
         iconClassName: "icon-book-open",
     },
     {
-        path : "/home/tags",
+        path : "/homes/tags",
         label: "nav_tags",
         iconClassName : "icon-tag"
     },
     {
-        path : "/home/badges",
+        path : "/homes/badges",
         label: "nav_badges",
         iconClassName : "icon-trophy"
     },

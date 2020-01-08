@@ -46,7 +46,7 @@ const Questions = ({
         });
 
         if (filterFixed) {
-            const url = `/home/questions?${qs.stringify(filterFixed)}`;
+            const url = `/homes/questions?${qs.stringify(filterFixed)}`;
             history.replace(url);
         } else {
             getQuestions({ filter, totalCount: true });
@@ -55,7 +55,7 @@ const Questions = ({
     }, [show, page, text, tags, isAuthenticated]);
 
     const onPageChange = page => {
-        const url = `/home/questions?${qs.stringify({
+        const url = `/homes/questions?${qs.stringify({
             show,
             page,
             text,
@@ -96,7 +96,7 @@ const Questions = ({
                         ) : (
                             <div>
                                 {`${t('common_no_result')} `}
-                                <Link to={`/home/questions?page=1`}>
+                                <Link to={`/homes/questions?page=1`}>
                                     {t('common_come_back')}
                                 </Link>
                             </div>

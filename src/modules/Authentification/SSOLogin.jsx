@@ -11,7 +11,7 @@ const SSOLogin = ({ location, history, getUserByLoginToken }) => {
         if (token) {
             getUserByLoginToken(token);
         }
-        history.push('/home/questions');
+        history.push('/homes/questions');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

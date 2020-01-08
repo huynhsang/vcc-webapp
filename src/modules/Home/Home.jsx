@@ -61,7 +61,7 @@ const FindOut = styled.div`
     margin: 20px 0 0 20px;
     font-size: 17px;
     border: 1px solid #ffff00cc;
-    width: 170px;
+    width: 200px;
     height: 30px;
     & a {
         position: absolute;
@@ -70,7 +70,7 @@ const FindOut = styled.div`
         bottom: 8px;
         left: 8px;
         height: 30px;
-        width: 170px;
+        width: 200px;
         display: flex;
         justify-content: center;
         align-items: center;
