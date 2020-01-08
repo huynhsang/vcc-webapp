@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
 import { setToRegistreFn } from '../../actions/app';
@@ -21,11 +20,7 @@ import WorkSpace from './WorkSpace';
 
 import AskButton from '../../component/AskButton';
 
-const Wrapper = styled.div`
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 20px;
-`;
+import { DefaultWrapper } from '../../component/Wrappers';
 
 const FlexWrapper = styled.div`
     display: flex;
@@ -51,7 +46,7 @@ const WhiteBackground = styled.div`
     background-color: white;
 `;
 
-const ToAskWrapper = styled(Wrapper)`
+const ToAskWrapper = styled(DefaultWrapper)`
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -62,32 +57,16 @@ const Ask = styled.div`
     margin-bottom: 10px;
 `;
 
-const Home = ({
-    App,
-    home,
-    setToRegistre,
-    getTopUsers,
-    getPopularQuestions,
-    getQuestionsTopAnswered,
-    getTrendingTags
-}) => {
+const Home = ({ home, getTopUsers, getPopularQuestions }) => {
     const { t } = useTranslation();
 
     React.useEffect(() => {
         getTopUsers();
         getPopularQuestions();
-        getQuestionsTopAnswered();
-        // getTrendingTags();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { isAuthenticated } = App;
-    const {
-        topUsers,
-        popularQuestions,
-        questionsTopAnswered,
-        trendingTags
-    } = home;
+    const { topUsers, popularQuestions } = home;
 
     const renderQuestions = Object.values(popularQuestions).map(q => (
         <Question key={q.id} question={q} />
@@ -100,22 +79,18 @@ const Home = ({
     return (
         <>
             <PageCover />
-            <Wrapper>
+            <DefaultWrapper>
                 <FlexWrapper>
                     <Title>{t('common_popular_question')}</Title>
                     <div>{`${t('common_see_all')} >`}</div>
                 </FlexWrapper>
-                <SmallWrapper>
-                    {renderQuestions}
-                </SmallWrapper>
-            </Wrapper>
+                <SmallWrapper>{renderQuestions}</SmallWrapper>
+            </DefaultWrapper>
             <WorkSpace />
-            <Wrapper>
+            <DefaultWrapper>
                 <Title>{t('common_top_members')}</Title>
-                <SmallWrapper>
-                    {renderUsers}
-                </SmallWrapper>
-            </Wrapper>
+                <SmallWrapper>{renderUsers}</SmallWrapper>
+            </DefaultWrapper>
             <WhiteBackground>
                 <ToAskWrapper>
                     <Ask>{t('common_ask_now')}</Ask>
@@ -126,17 +101,13 @@ const Home = ({
     );
 };
 
-const mapStateToProps = ({ App, home }) => ({
-    App,
+const mapStateToProps = ({ home }) => ({
     home
 });
 
 const mapDispatchToProps = dispatch => ({
-    setToRegistre: () => dispatch(setToRegistreFn()),
     getTopUsers: () => dispatch(getTopUsersFn()),
-    getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
-    getQuestionsTopAnswered: () => dispatch(getQuestionsTopAnsweredFn()),
-    getTrendingTags: () => dispatch(getTrendingTagsFn())
+    getPopularQuestions: () => dispatch(getPopularQuestionsFn())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

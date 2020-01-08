@@ -10,7 +10,7 @@ import Cover from '../../images/cover.png';
 
 import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
 
-import {defaultWrapperCss, WidthWrapper, rowCss, DefaultWrapper} from '../../component/Wrappers';
+import { DefaultWrapper } from '../../component/Wrappers';
 
 const CoverWrapper = styled.section`
     background-image: url('${Cover}');

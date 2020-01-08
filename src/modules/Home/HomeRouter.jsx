@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
-import { Questions } from '../Questions';
+import { Questions } from '../Questions2';
 import { SubCategory } from '../SubCategory';
 import { Badges } from '../Badges';
 import { QuestionDetail } from '../QuestionDetail';

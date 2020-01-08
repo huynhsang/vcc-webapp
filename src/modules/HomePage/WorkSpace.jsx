@@ -4,18 +4,13 @@ import { useTranslation } from 'react-i18next';
 import VerticalActiveSteps from '../../component/VerticalActiveSteps';
 import { askSteps, answerSteps, supportText } from './workspaceText.constant';
 import AskButton from '../../component/AskButton';
+import { DefaultWrapper } from '../../component/Wrappers';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const FullWidth = styled.div`
     background-color: #f7f7f7;
-`;
-
-const Wrapper = styled.div`
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 20px;
 `;
 
 const Title = styled.div`
@@ -82,7 +77,7 @@ const WorkSpace = () => {
 
     return (
         <FullWidth>
-            <Wrapper>
+            <DefaultWrapper>
                 <Title>{t('workspace_how_does_it_work')}</Title>
                 <StepsWrapper>
                     <StepWrapper>
@@ -109,7 +104,7 @@ const WorkSpace = () => {
                 <AskWrapper>
                     <AskButton label={t('common_ask')} />
                 </AskWrapper>
-            </Wrapper>
+            </DefaultWrapper>
         </FullWidth>
     );
 };
