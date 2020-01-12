@@ -82,6 +82,7 @@ export default {
     common_contact_us: 'Contact Us',
     common_policy: 'Policy',
     common_follow_us: 'Follow us',
+    common_sort_by:'Sort by',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

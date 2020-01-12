@@ -48,7 +48,7 @@ const Tag = ({ tag, history, location }) => {
             }
         }
         params.tags = ids.join(',');
-        const url = `/homes/questions?${qs.stringify(params)}`;
+        const url = `/questions?${qs.stringify(params)}`;
         history.push(url);
     };
 

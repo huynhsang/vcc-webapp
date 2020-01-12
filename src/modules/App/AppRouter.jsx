@@ -9,6 +9,7 @@ import { Home } from '../Home';
 
 import { AboutUs } from '../AboutUs';
 import { HomePage } from '../HomePage';
+import { QuestionsPage } from '../QuestionsPage';
 
 import {
     EmailVerification,
@@ -22,6 +23,7 @@ const AppRouter = () => {
         <Switch>
             <Route path="/" exact render={props => <HomePage {...props} />} />
             <Route path="/home" exact render={props => <HomePage {...props} />} />
+            <Route path="/questions" exact render={props => <QuestionsPage {...props} />} />
             <Route path="/homes" render={props => <Home {...props} />} />
             <Route
                 exact

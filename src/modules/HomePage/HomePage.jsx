@@ -1,25 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-
 import { useTranslation } from 'react-i18next';
-import { setToRegistreFn } from '../../actions/app';
-
 import {
     getTopUsersFn,
     getPopularQuestionsFn,
-    getQuestionsTopAnsweredFn,
-    getTrendingTagsFn
 } from '../../actions/home';
-
 import { PageCover } from '../Header';
 import Question from './Question';
 import TopUser from './TopUser';
-
 import WorkSpace from './WorkSpace';
-
 import AskButton from '../../component/AskButton';
-
 import { DefaultWrapper } from '../../component/Wrappers';
 
 const FlexWrapper = styled.div`

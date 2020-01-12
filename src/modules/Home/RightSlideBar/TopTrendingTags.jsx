@@ -22,7 +22,7 @@ const TopTrendingTags = ({ trendingTags }) => {
             </h2>
             {isShown && (
                 <div className="tagcloud">
-                    {trendingTags.map((tag: SubCategory, index) => {
+                    {trendingTags.map((tag, index) => {
                         return (
                             <Tag key={tag.id} tag={tag}/>
                         );

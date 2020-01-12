@@ -41,7 +41,7 @@ export const questionsFilterGenerator = ({
 // numberOfViews DESC
 // numberOfAnswers DESC
 
-export const DEFAULT_LIMIT = 5;
+export const DEFAULT_LIMIT = 6;
 
 const orderMaps = {
     'recent-questions': 'recent',
@@ -51,7 +51,7 @@ const orderMaps = {
     'no-answers': 'noAnswers'
 };
 
-export const setUpQuestionFilter = ({ show, page, text, tags }) => {
+export const setUpQuestionFilter = ({ category, show, page, text, tags }) => {
     const filterObj = {};
     const filterFixed = {};
     let hasError = false;
@@ -77,6 +77,9 @@ export const setUpQuestionFilter = ({ show, page, text, tags }) => {
         filterObj.keyword = text;
         filterFixed.text = text;
     }
+
+    filterObj.category = category || '';
+    filterFixed.category = category || '';
 
     if (tags) {
         filterObj.tagIds = tags.split(',');
