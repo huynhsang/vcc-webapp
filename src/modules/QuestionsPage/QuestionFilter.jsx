@@ -9,6 +9,10 @@ import QuestionSort from './QuestionSort';
 import TagFilter from './TagFilter';
 import { withRouter } from 'react-router-dom';
 
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
+
 const FlexWrapper = styled.div`
     display: flex;
 `;
@@ -25,9 +29,22 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const QuestionFilter = ({ category, show, tags, history, onChangeFilter }) => {
+const QuestionFilter = ({
+    category,
+    show,
+    tags,
+    text,
+    history,
+    onChangeFilter
+}) => {
     const { t } = useTranslation();
     const classes = useStyles();
+
+    const [searchText, setSearchText] = React.useState(text || '');
+
+    const search = () => {
+        onChangeFilter({text: searchText})
+    }
 
     return (
         <>
@@ -44,6 +61,21 @@ const QuestionFilter = ({ category, show, tags, history, onChangeFilter }) => {
                         className={classes.searchInput}
                         label={t('question_search_question')}
                         variant="outlined"
+                        value={searchText}
+                        onChange={ev => setSearchText(ev.target.value)}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={search}
+                                        edge="end"
+                                    >
+                                        <SearchIcon />
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
                     />
                 </FlexWrapper>
             </DefaultWrapper>
