@@ -33,7 +33,11 @@ const QuestionFilter = ({ category, tags, history, onChangeFilter }) => {
         <>
             <CategoryFilter category={category} history={history} />
             <DefaultWrapper>
-                <TagFilter category={category} tags={tags}/>
+                <TagFilter
+                    category={category}
+                    tags={tags}
+                    onChangeFilter={onChangeFilter}
+                />
                 <FlexWrapper>
                     <QuestionSort />
                     <TextField
