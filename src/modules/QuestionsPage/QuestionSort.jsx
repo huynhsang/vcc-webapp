@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const QuestionSort = () => {
+const QuestionSort = ({ show, onChangeFilter }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -30,13 +30,18 @@ const QuestionSort = () => {
         </MenuItem>
     ));
 
+    const onChange = ev => {
+        const { value } = ev.target;
+        onChangeFilter({ show: value === 'all' ? '' : value });
+    };
+
     return (
         <FormControl variant="outlined" className={classes.formControl}>
             <InputLabel ref={inputLabel}>{t('common_sort_by')}</InputLabel>
             <Select
                 labelWidth={labelWidth}
-                // value={age}
-                // onChange={handleChange}
+                value={show || 'all'}
+                onChange={onChange}
             >
                 {sortElements}
             </Select>
@@ -44,4 +49,4 @@ const QuestionSort = () => {
     );
 };
 
-export default QuestionSort
+export default QuestionSort;

@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const QuestionFilter = ({ category, tags, history, onChangeFilter }) => {
+const QuestionFilter = ({ category, show, tags, history, onChangeFilter }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -39,7 +39,7 @@ const QuestionFilter = ({ category, tags, history, onChangeFilter }) => {
                     onChangeFilter={onChangeFilter}
                 />
                 <FlexWrapper>
-                    <QuestionSort />
+                    <QuestionSort show={show} onChangeFilter={onChangeFilter} />
                     <TextField
                         className={classes.searchInput}
                         label={t('question_search_question')}
