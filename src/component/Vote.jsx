@@ -1,4 +1,41 @@
 import React from 'react';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import RightArrowIcon from '@material-ui/icons/PlayArrow';
+import Fab from '@material-ui/core/Fab';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles(() => ({
+    button: {
+        minWidth: '25px',
+        padding: '5px 0',
+        color: 'rgba(0, 0, 0, 0.5)',
+        backgroundColor: 'rgba(0, 0, 0, 0.08)',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.2)'
+    }
+}));
+
+const BottomArrowIcon = styled(RightArrowIcon)`
+    transform: rotate(90deg);
+`;
+
+const TopArrowIcon = styled(RightArrowIcon)`
+    transform: rotate(270deg);
+`;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+`;
+
+const CountWrapper = styled.div`
+    padding: 8px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+`;
 
 const Vote = ({
     points,
@@ -9,47 +46,17 @@ const Vote = ({
     isMobile,
     isAnswerVote
 }) => {
+    const classes = useStyles();
     return (
-        <ul
-            className={`question-vote ${
-                isAnswerVote
-                    ? 'answer-vote answer-vote-dislike'
-                    : isMobile && 'question-mobile'
-            }`}
-        >
-            <li>
-                <button
-                    className="wpqa_vote question_vote_up vote_allow"
-                    disabled={disableUp}
-                    onClick={() => handleVote(true)}
-                >
-                    <i className="icon-up-dir" />
-                </button>
-            </li>
-            {isLoading ? (
-                <li
-                    className="li_loader"
-                    style={{
-                        display: 'block'
-                    }}
-                >
-                    <span className="loader_3 fa-spin" />
-                </li>
-            ) : (
-                <li className="vote_result" itemProp="upvoteCount">
-                    {points}
-                </li>
-            )}
-            <li>
-                <button
-                    className="wpqa_vote question_vote_down vote_allow"
-                    disabled={disableDown}
-                    onClick={() => handleVote(false)}
-                >
-                    <i className="icon-down-dir" />
-                </button>
-            </li>
-        </ul>
+        <Wrapper>
+            <Button className={classes.button} size="small" variant="contained">
+                <TopArrowIcon />
+            </Button>
+            <CountWrapper>{points}</CountWrapper>
+            <Button className={classes.button} size="small" variant="contained">
+                <BottomArrowIcon />
+            </Button>
+        </Wrapper>
     );
 };
 

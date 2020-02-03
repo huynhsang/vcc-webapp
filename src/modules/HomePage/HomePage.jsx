@@ -2,16 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import {
-    getTopUsersFn,
-    getPopularQuestionsFn,
-} from '../../actions/home';
+import { getTopUsersFn, getPopularQuestionsFn } from '../../actions/home';
 import { PageCover } from '../Header';
 import Question from './Question';
 import TopUser from './TopUser';
 import WorkSpace from './WorkSpace';
 import AskButton from '../../component/AskButton';
 import { DefaultWrapper } from '../../component/Wrappers';
+
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
 
 const FlexWrapper = styled.div`
     display: flex;
@@ -48,8 +48,15 @@ const Ask = styled.div`
     margin-bottom: 10px;
 `;
 
-const Home = ({ home, getTopUsers, getPopularQuestions }) => {
+const useStyles = makeStyles(() => ({
+    linkButton: {
+        color: 'rgba(0, 0, 0, 0.58)'
+    }
+}));
+
+const Home = ({ home, getTopUsers, getPopularQuestions, history }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     React.useEffect(() => {
         getTopUsers();
@@ -73,7 +80,12 @@ const Home = ({ home, getTopUsers, getPopularQuestions }) => {
             <DefaultWrapper>
                 <FlexWrapper>
                     <Title>{t('common_popular_question')}</Title>
-                    <div>{`${t('common_see_all')} >`}</div>
+                    <Button
+                        onClick={() => history.push('/questions')}
+                        className={classes.linkButton}
+                    >
+                        {t('common_see_all')}
+                    </Button>
                 </FlexWrapper>
                 <SmallWrapper>{renderQuestions}</SmallWrapper>
             </DefaultWrapper>

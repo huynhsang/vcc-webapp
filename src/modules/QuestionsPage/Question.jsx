@@ -14,6 +14,7 @@ import { Badge } from '../Badges';
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
+import Vote from '../../component/Vote';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -39,7 +40,7 @@ const InfosWrapper = styled.div`
 
 const InfosSup = styled.span`
     margin-left: 10px;
-    font-size: 12px;
+    font-size: 0.9em;
 
     & span {
         color: #bbbbbb;
@@ -52,7 +53,7 @@ const InfosSup = styled.span`
 
 const Title = styled.div`
     font-weight: 600;
-    font-size: 17px;
+    font-size: 1.2em;
     margin-bottom: 10px;
     min-height: 45px;
 `;
@@ -60,7 +61,7 @@ const Title = styled.div`
 const UserName = styled.span`
     color: #009fff;
     margin-right: 10px;
-    font-size: 15px;
+    font-size: 1.1em;
 
     &:hover {
         color: #0570b1;
@@ -69,12 +70,14 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
-    font-size: 15px;
+    font-size: 1.1em;
     min-height: 50px;
 `;
 
 const LeftWrapper = styled.div`
     padding-right: 10px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const RightWrapper = styled.div`
@@ -114,7 +117,9 @@ const Question = ({ question, history }) => {
         answerCount,
         viewCount,
         slug,
-        tagList
+        tagList,
+        upVoteCount,
+        downVoteCount
     } = question;
 
     const tagsRender = (tagList || []).map(tag => (
@@ -132,6 +137,7 @@ const Question = ({ question, history }) => {
         <Wrapper>
             <LeftWrapper>
                 <UserLogo user={askedBy} />
+                <Vote points={upVoteCount - downVoteCount} />
             </LeftWrapper>
             <RightWrapper>
                 <TruncateMarkup lines={2}>

@@ -43,8 +43,14 @@ const QuestionFilter = ({
     const [searchText, setSearchText] = React.useState(text || '');
 
     const search = () => {
-        onChangeFilter({text: searchText})
-    }
+        onChangeFilter({ text: searchText });
+    };
+
+    const onTextKeyUp = ev => {
+        if (ev.which === 13) {
+            search();
+        }
+    };
 
     return (
         <>
@@ -63,6 +69,7 @@ const QuestionFilter = ({
                         variant="outlined"
                         value={searchText}
                         onChange={ev => setSearchText(ev.target.value)}
+                        onKeyUp={onTextKeyUp}
                         InputProps={{
                             endAdornment: (
                                 <InputAdornment position="end">

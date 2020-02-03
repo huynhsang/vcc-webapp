@@ -6,7 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import UserLogo from '../../component/UserLogo';
 
 import { voteAnswerFn, approveAnswerFn } from '../../actions/questionDetail';
-import Vote from '../../component/Vote';
+import Vote from '../../component/Vote2';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { Badge } from '../Badges';

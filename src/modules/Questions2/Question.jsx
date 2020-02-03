@@ -16,7 +16,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import Vote from '../../component/Vote';
+import Vote from '../../component/Vote2';
 import { Badge } from '../Badges';
 import { getIdAndToken } from '../../utils/cookie-tools';
 
