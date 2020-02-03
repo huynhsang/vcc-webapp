@@ -16,6 +16,12 @@ import qs from 'qs';
 
 import Question from './Question';
 import Pagination from '../../component/Pagination';
+import { voteQuestionFn } from '../../actions/questions';
+import {
+    showErrorAlertFn,
+    showConfirmToLoginFn
+} from '../../actions/sweetAlert';
+import ApplicationUtil from '../../common/util/ApplicationUtil';
 
 const QuestionPageWrapper = styled.div`
     min-height: calc(100vh - 100px);
@@ -32,10 +38,17 @@ const QuestionPage = ({
     getQuestions,
     location,
     history,
-    isAuthenticated
+    isAuthenticated,
+    showConfirmToLogin,
+    voteQuestion
 }) => {
     const { t } = useTranslation();
-    const { questions, numberQuestions, isFetching } = questionsReducer;
+    const {
+        questions,
+        numberQuestions,
+        isFetching,
+        votingQuestionId
+    } = questionsReducer;
 
     const { category, show, page, text, tags } = qs.parse(
         location.search.substr(1)
@@ -72,7 +85,15 @@ const QuestionPage = ({
     };
 
     const questionElements = Object.values(questions).map((question, index) => (
-        <Question key={index} question={question} />
+        <Question
+            key={index}
+            question={question}
+            history={history}
+            isVoting={votingQuestionId === question.id}
+            isAuthenticated={isAuthenticated}
+            showConfirmToLogin={showConfirmToLogin}
+            voteQuestion={voteQuestion}
+        />
     ));
 
     return (
@@ -117,7 +138,12 @@ const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getQuestions: params => dispatch(getQuestionsFn(params))
+    getQuestions: params => dispatch(getQuestionsFn(params)),
+    showErrorNotification: data =>
+        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
+    voteQuestion: (questionId, action) =>
+        dispatch(voteQuestionFn(questionId, action))
 });
 
 export default connect(

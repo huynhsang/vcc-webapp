@@ -15,6 +15,7 @@ import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
 import Vote from '../../component/Vote';
+import { getIdAndToken } from '../../utils/cookie-tools';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -105,10 +106,17 @@ const InfoSpace = styled.span`
     }
 `;
 
-const Question = ({ question, history }) => {
+const Question = ({
+    question,
+    isVoting,
+    isAuthenticated,
+    voteQuestion,
+    showConfirmToLogin,
+    history
+}) => {
     const { t } = useTranslation();
-
     const {
+        id,
         askedBy = {},
         body,
         categoryItem,
@@ -119,8 +127,11 @@ const Question = ({ question, history }) => {
         slug,
         tagList,
         upVoteCount,
-        downVoteCount
+        downVoteCount,
+        voted
     } = question;
+
+    const { id: currentUserId } = getIdAndToken();
 
     const tagsRender = (tagList || []).map(tag => (
         <Tag key={tag.id} tag={tag} />
@@ -131,13 +142,30 @@ const Question = ({ question, history }) => {
         history.push(url);
     };
 
+    const handleVoteQuestion = isPositiveVote => {
+        if (!isAuthenticated) {
+            return showConfirmToLogin();
+        }
+        const action = isPositiveVote ? 'up' : 'down';
+        voteQuestion(id, action);
+    };
+
     const toQuestionView = () => redirect(`/homes/question/${slug}/view`);
+
+    console.log(isVoting);
 
     return (
         <Wrapper>
             <LeftWrapper>
                 <UserLogo user={askedBy} />
-                <Vote points={upVoteCount - downVoteCount} />
+                <Vote
+                    points={upVoteCount - downVoteCount}
+                    disableVote={currentUserId === askedBy.id}
+                    voted={voted}
+                    isLoading={isVoting}
+                    handleVote={handleVoteQuestion}
+                    points={upVoteCount - downVoteCount}
+                />
             </LeftWrapper>
             <RightWrapper>
                 <TruncateMarkup lines={2}>
@@ -178,4 +206,4 @@ const Question = ({ question, history }) => {
     );
 };
 
-export default withRouter(Question);
+export default Question;
