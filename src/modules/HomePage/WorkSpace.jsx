@@ -59,6 +59,7 @@ const SupportOl = styled.ul`
         margin-left: 20px;
         width: calc(33.33% - 20px);
         line-height: 30px;
+        color: rgba(0, 0, 0, 0.87);
         ${media.mobileLandscape`
             width: calc(100% - 20px);
         `}

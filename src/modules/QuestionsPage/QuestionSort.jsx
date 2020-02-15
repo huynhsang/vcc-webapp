@@ -10,7 +10,10 @@ import MenuItem from '@material-ui/core/MenuItem';
 const useStyles = makeStyles(() => ({
     formControl: {
         marginRight: 10,
-        minWidth: 230
+        minWidth: 230,
+        '@media (max-width: 768px)': {
+            width: '100%'
+        }
     }
 }));
 

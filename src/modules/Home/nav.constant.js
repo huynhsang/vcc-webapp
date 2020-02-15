@@ -1,37 +1,17 @@
 export const leftNavTabs =[
-    // {
-    //     path : "/home",
-    //     label: "nav_home",
-    //     iconClassName : "icon-home"
-    // },
-    // {
-    //     path : "/",
-    //     label: "nav_communities",
-    //     iconClassName : "icon-folder"
-    // },
     {
-        path: "/homes/questions",
+        path : "/home",
+        label: "common_home",
+        iconClassName : "icon-home"
+    },
+    {
+        path: "/questions",
         label: "nav_questions",
         iconClassName: "icon-book-open",
     },
     {
-        path : "/homes/tags",
-        label: "nav_tags",
-        iconClassName : "icon-tag"
-    },
-    {
-        path : "/homes/badges",
-        label: "nav_badges",
+        path : "/information",
+        label: "common_information",
         iconClassName : "icon-trophy"
     },
-    // {
-    //     path : "/",
-    //     label: "nav_users",
-    //     iconClassName : "icon-users"
-    // },
-    // {
-    //     path : "/",
-    //     label: "nav_help",
-    //     iconClassName : "icon-lifebuoy"
-    // },
 ]

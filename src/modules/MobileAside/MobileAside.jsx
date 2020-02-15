@@ -101,7 +101,7 @@ const MobileAside = ({
                                     <a //eslint-disable-line jsx-a11y/anchor-is-valid
                                         onClick={onClickTab('/about-us')}
                                     >
-                                        {t('header_about_us')}
+                                        {t('common_about_us')}
                                     </a>
                                 </li>
                                 <li>
@@ -112,34 +112,6 @@ const MobileAside = ({
                                     </a>
                                 </li>
                             </ul>
-                            {/* <div className="mobile--top post-search">
-                                <div className="row">
-                                    <div className="col col12">
-                                        <input
-                                            type="search"
-                                            className="live-search"
-                                            autoComplete="off"
-                                            name="search"
-                                            defaultValue="Hit enter to search"
-                                        />
-                                        <div className="loader_2 search_loader"></div>
-                                        <div className="search-results results-empty"></div>
-                                        <input
-                                            type="hidden"
-                                            name="search_type"
-                                            className="search_type"
-                                            defaultValue="questions"
-                                        />
-                                    </div>
-                                    <div className="wpqa_form col col12">
-                                        <input
-                                            type="submit"
-                                            className="button-default"
-                                            defaultValue="Search"
-                                        />
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>

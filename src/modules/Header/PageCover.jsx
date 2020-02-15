@@ -12,6 +12,9 @@ import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
 
 import { DefaultWrapper } from '../../component/Wrappers';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const CoverWrapper = styled.section`
     background-image: url('${Cover}');
     filter: progid: DXImageTransform.Microsoft.AlphaImageLoader(src='${Cover}', sizingMethod="scale");
@@ -25,6 +28,10 @@ const CoverWrapper = styled.section`
     height: 250px;
     position: relative;
     color: white;
+
+    ${media.mobile`
+        height: 320px;
+    `}
 `;
 
 const Glass = styled.div`
@@ -45,6 +52,9 @@ const ContentWrapper = styled(DefaultWrapper)`
 
 const LeftContent = styled.div`
     width: 70%;
+    ${media.mobileLandscape`
+        width: 90%;
+    `}
 `;
 
 const AskWrapper = styled.div`
@@ -58,6 +68,7 @@ const AskWrapper = styled.div`
         border-bottom: 1px solid;
         margin-left: 10px;
         user-select: none;
+        white-space: nowrap;
 
         &:hover {
             color: yellow;
