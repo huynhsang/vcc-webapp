@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { Link, withRouter } from 'react-router-dom';
 
 import logo from '../../static/resources/img/logo/logo.png';
@@ -28,7 +27,6 @@ const Header = ({
     toggleMobileAside,
     toggleContactUs
 }) => {
-    const { t } = useTranslation();
     const { isAuthenticated, currentUser } = App;
 
     return (

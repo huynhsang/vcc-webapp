@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link, withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import ReactMarkdown from 'react-markdown';
 
 import UserLogo from '../../component/UserLogo';
 
@@ -155,4 +153,4 @@ const Question = ({ question, history }) => {
     );
 };
 
-export default withRouter(Question);
+export default Question;

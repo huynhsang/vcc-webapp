@@ -4,7 +4,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { useTranslation } from 'react-i18next';
 
 import { register } from '../../services/account.service';
-import {REALM} from "../../constants/constants";
+import { REALM } from '../../constants/constants';
 
 const LoaderWrapper = styled.div`
     width: 100%;
@@ -16,6 +16,11 @@ const LoaderWrapper = styled.div`
         left: 50%;
         transform: translateX(-50%) translateY(-50%);
     }
+`;
+
+const FlewWrapper = styled.div`
+    display: flex;
+    margin: 0 -15px 15px;
 `;
 
 const Registration = ({
@@ -49,7 +54,7 @@ const Registration = ({
                     'Check your email to complete the registration!'
                 );
                 hideAuthentification();
-                history.push('/homes');
+                history.push('/home');
             })
             .catch(err => {
                 setLoader(false);
@@ -67,7 +72,7 @@ const Registration = ({
 
     return (
         <form className="register" onSubmit={onSubmit} method="post">
-            <div className="row mb3">
+            <FlewWrapper>
                 <div className="col-6">
                     <label
                         htmlFor="Firstname"
@@ -97,7 +102,7 @@ const Registration = ({
                         onChange={ev => setLastName(ev.target.value)}
                     />
                 </div>
-            </div>
+            </FlewWrapper>
             <div className="mb3">
                 <label htmlFor="Email" className="font-size-16">
                     {t('common_email')}

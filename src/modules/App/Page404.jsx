@@ -6,6 +6,7 @@ import RootScope from '../../global/RootScope';
 
 const Wrapper = styled.div`
     margin: 30px;
+    min-height: calc(100vh - 260px);
 `;
 
 const Page404 = () => {

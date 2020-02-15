@@ -82,6 +82,7 @@ export default {
     common_contact_us: 'Liên hệ',
     common_policy: 'Policy',
     common_follow_us: 'Theo dõi chúng tôi',
+    common_sort_by:'Sắp xếp',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

@@ -97,7 +97,7 @@ const Authentication = ({
                 style={dialogStyle}
                 modal={true}
                 onHide={hideAuthentification}
-                dismissableMask
+                // dismissableMask
             >
                 {toAuthenticate === 'login' && (
                     <Login
@@ -143,8 +143,7 @@ const mapDispatchToProp = dispatch => ({
     setToAuthenticate: () => dispatch(setToAuthenticateFn()),
     showSuccessAlert: (title, text) =>
         dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: message =>
-        dispatch(showErrorAlertFn('Error!', message)),
+    showErrorAlert: message => dispatch(showErrorAlertFn('Error!', message)),
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
 });
 

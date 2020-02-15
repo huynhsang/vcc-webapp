@@ -1,55 +1,84 @@
 import React from 'react';
+import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
+import RightArrowIcon from '@material-ui/icons/PlayArrow';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Vote = ({
-    points,
-    disableUp,
-    disableDown,
-    isLoading,
-    handleVote,
-    isMobile,
-    isAnswerVote
-}) => {
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const useStyles = makeStyles(() => ({
+    button: {
+        minWidth: '25px',
+        padding: '5px 0',
+        color: 'rgba(0, 0, 0, 0.4)',
+        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        '&:disabled': {
+            backgroundColor: '#eee !important'
+        }
+    },
+    buttonVoted: {
+        '&:disabled': {
+            color: '#2c6bae !important',
+            backgroundColor: 'white !important'
+        }
+    }
+}));
+
+const BottomArrowIcon = styled(RightArrowIcon)`
+    transform: rotate(90deg);
+`;
+
+const TopArrowIcon = styled(RightArrowIcon)`
+    transform: rotate(270deg);
+`;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+`;
+
+const CountWrapper = styled.div`
+    padding: 10px 0;
+    font-size: 1.2em;
+    font-weight: 600;
+`;
+
+const Vote = ({ points, disableVote, voted, isLoading, handleVote }) => {
+    const classes = useStyles();
     return (
-        <ul
-            className={`question-vote ${
-                isAnswerVote
-                    ? 'answer-vote answer-vote-dislike'
-                    : isMobile && 'question-mobile'
-            }`}
-        >
-            <li>
-                <button
-                    className="wpqa_vote question_vote_up vote_allow"
-                    disabled={disableUp}
-                    onClick={() => handleVote(true)}
-                >
-                    <i className="icon-up-dir" />
-                </button>
-            </li>
-            {isLoading ? (
-                <li
-                    className="li_loader"
-                    style={{
-                        display: 'block'
-                    }}
-                >
-                    <span className="loader_3 fa-spin" />
-                </li>
-            ) : (
-                <li className="vote_result" itemProp="upvoteCount">
-                    {points}
-                </li>
-            )}
-            <li>
-                <button
-                    className="wpqa_vote question_vote_down vote_allow"
-                    disabled={disableDown}
-                    onClick={() => handleVote(false)}
-                >
-                    <i className="icon-down-dir" />
-                </button>
-            </li>
-        </ul>
+        <Wrapper>
+            <Button
+                className={`${classes.button} ${voted === 'up' &&
+                    classes.buttonVoted}`}
+                disabled={disableVote || voted === 'up'}
+                size="small"
+                variant="contained"
+                onClick={() => handleVote(true)}
+            >
+                <TopArrowIcon />
+            </Button>
+            <CountWrapper>
+                {isLoading ? (
+                    <CircularProgress size={18} thickness={5} />
+                ) : (
+                    points
+                )}
+            </CountWrapper>
+            <Button
+                className={`${classes.button} ${voted === 'down' &&
+                    classes.buttonVoted}`}
+                disabled={disableVote || voted === 'down'}
+                size="small"
+                variant="contained"
+                onClick={() => handleVote(false)}
+            >
+                <BottomArrowIcon />
+            </Button>
+        </Wrapper>
     );
 };
 

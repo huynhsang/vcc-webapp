@@ -2,27 +2,33 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-
 import { Link, withRouter } from 'react-router-dom';
-
 import UserInfoRouter from './UserInfoRouter';
-
 import { getIdAndToken } from '../../utils/cookie-tools';
-
 import DefaultUserLogo from '../../images/default-user-logo.png';
 
 import {
     getUserProfileFn,
     getExperiencesFn,
-    getEducationsFn,
+    getEducationsFn
 } from '../../actions/userInfos';
 
 const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
 
-const Wrapper = styled.section`
+const Wrapper = styled.div`
+    display: flex;
+`;
+
+const LeftNav = styled.section`
     box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
+    width: 25%;
+`;
+
+const ContentWrapper = styled.div`
+    width: 75%;
+    padding: 15px;
 `;
 
 const Badge = styled.span`
@@ -39,7 +45,7 @@ const UserProfile = ({
     userInfos,
     getUserProfile,
     getExperiences,
-    getEducations,
+    getEducations
 }) => {
     const { t } = useTranslation();
 
@@ -65,18 +71,21 @@ const UserProfile = ({
     const { firstName, lastName, level, avatar } = userProfile;
 
     return (
-        <div className="container discy-container">
-            <div className="row">
-                <section
-                    className="profile-background-image"
-                    style={{
-                        backgroundImage: `url('${BgPhoto}')`,
-                        backgroundPosition: 'center center',
-                        backgroundSize: 'cover',
-                        backgroundRepeat: 'no-repeat'
-                    }}
-                />
-                <Wrapper className="user-container info-user position-relative col-lg-3">
+        <div
+            className="container discy-container"
+            style={{ minHeight: 'calc(100vh - 185px)' }}
+        >
+            <section
+                className="profile-background-image"
+                style={{
+                    backgroundImage: `url('${BgPhoto}')`,
+                    backgroundPosition: 'center center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            />
+            <Wrapper>
+                <LeftNav className="user-container info-user position-relative">
                     <div className="avatar-user">
                         <img
                             src={avatar || DefaultUserLogo}
@@ -125,11 +134,11 @@ const UserProfile = ({
                             </Link>
                         </div>
                     </div>
-                </Wrapper>
-                <div className="user-container col-lg-9 responsive-user">
+                </LeftNav>
+                <ContentWrapper className="user-container responsive-user">
                     <UserInfoRouter />
-                </div>
-            </div>
+                </ContentWrapper>
+            </Wrapper>
         </div>
     );
 };
@@ -139,7 +148,7 @@ const mapStateToProps = ({ userInfos }) => ({ userInfos });
 const mapDispatchToProps = dispatch => ({
     getUserProfile: userId => dispatch(getUserProfileFn(userId)),
     getExperiences: userId => dispatch(getExperiencesFn(userId)),
-    getEducations: userId => dispatch(getEducationsFn(userId)),
+    getEducations: userId => dispatch(getEducationsFn(userId))
 });
 
 export default connect(
