@@ -11,6 +11,7 @@ import QuestionFilter from './QuestionFilter';
 import { getQuestionsFn } from '../../actions/questions';
 
 import { setUpQuestionFilter, DEFAULT_LIMIT } from '../../utils/question';
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 import qs from 'qs';
 
@@ -25,6 +26,13 @@ const QuestionsWrapper = styled(DefaultWrapper)`
     display: flex;
     flex-wrap: wrap;
     padding: 0 10px;
+`;
+
+const LoaderWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
 `;
 
 const QuestionPage = ({
@@ -86,27 +94,37 @@ const QuestionPage = ({
                 tags={tags}
                 onChangeFilter={onChangeFilter}
             />
-            <QuestionsWrapper>{questionElements}</QuestionsWrapper>
-            <DefaultWrapper>
-                {numberQuestions > 0 ? (
-                    <Pagination
-                        nbPages={Math.ceil(numberQuestions / DEFAULT_LIMIT)}
-                        activePage={page}
-                        changePage={newPage =>
-                            onChangeFilter({ page: newPage })
-                        }
-                        justifyContent="center"
-                        color="#37424a"
-                    />
-                ) : (
-                    <div>
-                        {`${t('common_no_result')} `}
-                        <Link to={`/homes/questions?page=1`}>
-                            {t('common_come_back')}
-                        </Link>
-                    </div>
-                )}
-            </DefaultWrapper>
+            {isFetching ? (
+                <LoaderWrapper>
+                    <ProgressSpinner />
+                </LoaderWrapper>
+            ) : (
+                <>
+                    <QuestionsWrapper>{questionElements}</QuestionsWrapper>
+                    <DefaultWrapper>
+                        {numberQuestions > 0 ? (
+                            <Pagination
+                                nbPages={Math.ceil(
+                                    numberQuestions / DEFAULT_LIMIT
+                                )}
+                                activePage={page}
+                                changePage={newPage =>
+                                    onChangeFilter({ page: newPage })
+                                }
+                                justifyContent="center"
+                                color="#37424a"
+                            />
+                        ) : (
+                            <div>
+                                {`${t('common_no_result')} `}
+                                <Link to={`/homes/questions?page=1`}>
+                                    {t('common_come_back')}
+                                </Link>
+                            </div>
+                        )}
+                    </DefaultWrapper>
+                </>
+            )}
         </QuestionPageWrapper>
     );
 };

@@ -66,7 +66,7 @@ const Home = ({ home, getTopUsers, getPopularQuestions, history }) => {
 
     const { topUsers, popularQuestions } = home;
 
-    const renderQuestions = Object.values(popularQuestions).map(q => (
+    const renderQuestions = Object.values(popularQuestions || {}).map(q => (
         <Question key={q.id} question={q} />
     ));
 

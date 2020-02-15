@@ -9,10 +9,10 @@ import { QuestionDetail } from '../QuestionDetail';
 const HomeRouter = ({ match }) => {
     return (
         <Switch>
-            <Route
+            {/* <Route
                 path={`${match.path}/questions`}
                 render={props => <Questions {...props} />}
-            />
+            /> */}
             <Route
                 exact
                 path={`${match.path}/question/:slug/view`}
