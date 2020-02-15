@@ -83,6 +83,8 @@ export default {
     common_policy: 'Policy',
     common_follow_us: 'Theo dõi chúng tôi',
     common_sort_by:'Sắp xếp',
+    common_information:'Thông tin',
+    common_point_scale: 'Thang điểm',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -181,7 +183,8 @@ export default {
 
     badges_point_system: 'Hệ thống tính điểm',
     badges_beside_gaining_reputation:
-        'Bên cạnh nâng cao uy tín bằng việc đặt câu hỏi và trả lời, bạn có thể nhận được huy hiệu bằng cách giúp đỡ người khác (bình chọn cho câu hỏi hay, câu trả lời tốt v.v). Huy hiệu sẽ xuất hiện trên trang của bạn',
+        'Bên cạnh nâng cao uy tín bằng việc đặt câu hỏi và trả lời, bạn có thể nhận được huy hiệu bằng cách giúp đỡ người khác (bình chọn cho câu hỏi hay, câu trả lời tốt v.v).',
+    badges_shown: 'Huy hiệu sẽ xuất hiện trên trang của bạn.',
     badges_points_for_a_new: 'Điểm cho người dùng mới',
     badges_choosing_the_best: 'Chọn một câu trả lời tốt nhất cho một câu hỏi',
     badges_add_an_answer: 'Thêm một câu trả lời',
