@@ -119,7 +119,7 @@ const Badges = () => {
                 </Title>
                 <Stepper orientation="vertical" className={classes.scaleBar}>
                     {pointScale.map((step, index) => (
-                        <Step key={step.value} active={true}>
+                        <Step key={`step-${index}`} active={true}>
                             <StepLabel
                                 icon={
                                     !index ? '0' : pointScale[index - 1].start
