@@ -114,7 +114,6 @@ const PageCover = () => {
                             {`+ ${t('home_ask_a_question')}`}
                         </Link>
                     </AskWrapper>
-                    <p>{t('home_want_to_get')}</p>
                     <FindOut>
                         <a
                             href={REGISTRE_MENTOR_FORM_LINK}
