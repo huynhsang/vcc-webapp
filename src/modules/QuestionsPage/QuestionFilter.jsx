@@ -13,8 +13,14 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const FlexWrapper = styled.div`
     display: flex;
+    ${media.mobileLandscape`
+        display: block;
+    `}
 `;
 
 const useStyles = makeStyles(() => ({
@@ -25,6 +31,10 @@ const useStyles = makeStyles(() => ({
         '& input': {
             border: 'none',
             height: 32
+        },
+        '@media (max-width: 768px)': {
+            width: '100%',
+            marginTop: '15px'
         }
     }
 }));

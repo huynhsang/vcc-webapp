@@ -76,13 +76,15 @@ export default {
     common_invalid_username: 'Invalid user name!',
     common_popular_question: 'Popular question',
     common_see_all: 'See all',
-    common_ask_now:'Ask a question now?',
+    common_ask_now: 'Ask a question now?',
     common_ask: 'Ask',
     common_about_us: 'About Us',
     common_contact_us: 'Contact Us',
     common_policy: 'Policy',
     common_follow_us: 'Follow us',
-    common_sort_by:'Sort by',
+    common_sort_by: 'Sort by',
+    common_information: 'Information',
+    common_point_scale: 'Point scale',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -183,7 +185,8 @@ export default {
 
     badges_point_system: 'Points System',
     badges_beside_gaining_reputation:
-        'Besides gaining reputation with your questions and answers, you receive badges for being especially helpful. Badges appears on your profile page, questions & answers.',
+        'Besides gaining reputation with your questions and answers, you receive badges for being especially helpful.',
+    badges_shown: 'Badges appears on your profile page, questions & answers.',
     badges_points_for_a_new: 'Points for a new user in the community.',
     badges_choosing_the_best: 'Choosing the best answer for a question.',
     badges_add_an_answer: 'Add an answer in the community.',
@@ -276,7 +279,8 @@ export default {
     workspace_receive_answer_from: 'Receive answer from professionals',
     workspace_rate_your_experience: 'Rate your experience and get bonus',
     workspace_if_you_are_answering: 'If you are answering',
-    workspace_get_notification: 'Get notification if you are requested to answer a question',
+    workspace_get_notification:
+        'Get notification if you are requested to answer a question',
     workspace_answer_the_assigned: 'Answer the assigned question in 24h',
     workspace_get_paid: 'Get bonus after submitting your answer',
     workspace_our_support: 'Our support',
@@ -284,5 +288,5 @@ export default {
     workspace_give_rule_to_answer: 'Give rule to answer',
     workspace_censorship_content: 'Censorship content (question and answer)',
 
-    footer_all_right_reserved : 'All rights reserved © 2020',
+    footer_all_right_reserved: 'All rights reserved © 2020'
 };

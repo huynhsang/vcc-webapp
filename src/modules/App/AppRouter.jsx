@@ -6,6 +6,7 @@ import { UserInfo } from '../UserInfo';
 import { AddQuestion } from '../AddQuestion';
 
 import { Home } from '../Home';
+import { InfosPage } from '../InfosPage';
 
 import { AboutUs } from '../AboutUs';
 import { HomePage } from '../HomePage';
@@ -22,9 +23,18 @@ const AppRouter = () => {
     return (
         <Switch>
             <Route path="/" exact render={props => <HomePage {...props} />} />
-            <Route path="/home" exact render={props => <HomePage {...props} />} />
-            <Route path="/questions" exact render={props => <QuestionsPage {...props} />} />
+            <Route
+                path="/home"
+                exact
+                render={props => <HomePage {...props} />}
+            />
+            <Route
+                path="/questions"
+                exact
+                render={props => <QuestionsPage {...props} />}
+            />
             <Route path="/homes" render={props => <Home {...props} />} />
+            <Route path="/information" render={props => <InfosPage {...props} />} />
             <Route
                 exact
                 path="/about-us/"

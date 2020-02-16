@@ -7,6 +7,10 @@ export const headerTabs = [
     {
         label: 'common_questions',
         path: 'questions'
+    },
+    {
+        label: 'common_information',
+        path: 'information'
     }
 ];
 

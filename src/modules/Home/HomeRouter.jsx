@@ -18,7 +18,7 @@ const HomeRouter = ({ match }) => {
                 path={`${match.path}/question/:slug/view`}
                 component={QuestionDetail}
             />
-            <Route
+            {/* <Route
                 path={`${match.path}/tags`}
                 render={props => <SubCategory {...props} />}
             />
@@ -26,7 +26,7 @@ const HomeRouter = ({ match }) => {
                 path={`${match.path}/badges`}
                 render={props => <Badges {...props} />}
             />
-            <Route component={Questions} />
+            <Route component={Questions} /> */}
         </Switch>
     );
 };
