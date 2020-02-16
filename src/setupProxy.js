@@ -4,7 +4,7 @@ const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
 
 module.exports = function(app) {
     app.use(
-        '/auth',
+        '/auth/',
         proxy({
             target: REACT_APP_SOCIAL_LOGIN_API_URL,
             changeOrigin: true,
