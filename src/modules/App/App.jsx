@@ -33,6 +33,8 @@ const App = ({ App, fetchUserFromCookie }) => {
     if (!isVerifiedUser) {
         return <div />;
     }
+const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
+console.log('TESTT 2: ', REACT_APP_SOCIAL_LOGIN_API_URL);
 
     return (
         <ConnectedRouter history={history}>
