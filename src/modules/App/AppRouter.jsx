@@ -11,6 +11,7 @@ import { InfosPage } from '../InfosPage';
 import { AboutUs } from '../AboutUs';
 import { HomePage } from '../HomePage';
 import { QuestionsPage } from '../QuestionsPage';
+import { QuestionView } from '../QuestionView';
 
 import {
     EmailVerification,
@@ -32,6 +33,11 @@ const AppRouter = () => {
                 path="/questions"
                 exact
                 render={props => <QuestionsPage {...props} />}
+            />
+            <Route
+                path="/questions/:slug"
+                exact
+                render={props => <QuestionView {...props} />}
             />
             <Route path="/homes" render={props => <Home {...props} />} />
             <Route path="/information" render={props => <InfosPage {...props} />} />

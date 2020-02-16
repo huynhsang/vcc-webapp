@@ -9,7 +9,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const useStyles = makeStyles(() => ({
     button: {
         minWidth: '25px',
-        padding: '5px 0',
+        padding: '5px',
         color: 'rgba(0, 0, 0, 0.4)',
         backgroundColor: 'rgba(0, 0, 0, 0.05)',
         boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
@@ -35,22 +35,29 @@ const TopArrowIcon = styled(RightArrowIcon)`
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: ${p => p.isColumn && 'column'};
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: ${p => (p.isColumn ? '15px 0' : '0 15px')};
 `;
 
 const CountWrapper = styled.div`
-    padding: 10px 0;
+    padding: 10px;
     font-size: 1.2em;
     font-weight: 600;
 `;
 
-const Vote = ({ points, disableVote, voted, isLoading, handleVote }) => {
+const Vote = ({
+    points,
+    disableVote,
+    voted,
+    isLoading,
+    handleVote,
+    isColumn = true
+}) => {
     const classes = useStyles();
     return (
-        <Wrapper>
+        <Wrapper isColumn={isColumn}>
             <Button
                 className={`${classes.button} ${voted === 'up' &&
                     classes.buttonVoted}`}
