@@ -5,6 +5,8 @@ import RootScope from '../../global/RootScope';
 
 import { login } from '../../services/account.service';
 
+const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
+
 const Login = ({
     showSuccessAlert,
     showErrorAlert,
@@ -39,7 +41,7 @@ const Login = ({
     };
 
     const onAuth = (type) => () => {
-        window.location=`/auth/${type}`
+        window.location=`${REACT_APP_SOCIAL_LOGIN_API_URL}/auth/${type}`
     }
 
     return (

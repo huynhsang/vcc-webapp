@@ -4,10 +4,18 @@ const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
 
 module.exports = function(app) {
     app.use(
-        '/auth',
+        '/auth/',
         proxy({
-            target: "https://api-staging.vcnc.app",
+            target: REACT_APP_SOCIAL_LOGIN_API_URL,
             changeOrigin: true,
+            onProxyReq(proxyReq) {
+                if (proxyReq.getHeader('origin')) {
+                    proxyReq.setHeader(
+                        'origin',
+                        REACT_APP_SOCIAL_LOGIN_API_URL
+                    );
+                }
+            },
             logLevel: 'debug'
         })
     );
