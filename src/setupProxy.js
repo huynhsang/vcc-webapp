@@ -4,19 +4,11 @@ const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
 
 module.exports = function(app) {
     app.use(
-        '/auth/google',
+        '/auth',
         proxy({
-            target: `${REACT_APP_SOCIAL_LOGIN_API_URL}/auth/google`,
-            // changeOrigin: true,
-            // onProxyReq(proxyReq) {
-            //     if (proxyReq.getHeader('origin')) {
-            //         proxyReq.setHeader(
-            //             'origin',
-            //             REACT_APP_SOCIAL_LOGIN_API_URL
-            //         );
-            //     }
-            // },
-            // logLevel: 'debug'
+            target: "https://api-staging.vcnc.app",
+            changeOrigin: true,
+            logLevel: 'debug'
         })
     );
 };
