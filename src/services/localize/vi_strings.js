@@ -287,4 +287,6 @@ export default {
     workspace_censorship_content: 'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
 
     footer_all_right_reserved : 'All rights reserved © 2020',
+
+    answer_added_an_answer_on : 'Trả lời vào ngày',
 };

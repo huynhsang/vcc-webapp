@@ -288,5 +288,7 @@ export default {
     workspace_give_rule_to_answer: 'Give rule to answer',
     workspace_censorship_content: 'Censorship content (question and answer)',
 
-    footer_all_right_reserved: 'All rights reserved © 2020'
+    footer_all_right_reserved: 'All rights reserved © 2020',
+
+    answer_added_an_answer_on : 'Added an answer on',
 };

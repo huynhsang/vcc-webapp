@@ -6,10 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { createMediaTemplate } from '../utils/css-tools';
+const media = createMediaTemplate();
+
 const useStyles = makeStyles(() => ({
     button: {
-        minWidth: '25px',
-        padding: '5px',
+        minWidth: '0px',
+        padding: '2px',
         color: 'rgba(0, 0, 0, 0.4)',
         backgroundColor: 'rgba(0, 0, 0, 0.05)',
         boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
@@ -39,6 +42,12 @@ const Wrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: ${p => (p.isColumn ? '15px 0' : '0 15px')};
+
+    ${p=> p.isResponsive && media.mobileLandscape`
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 5px 0;
+    `}
 `;
 
 const CountWrapper = styled.div`
@@ -53,11 +62,12 @@ const Vote = ({
     voted,
     isLoading,
     handleVote,
-    isColumn = true
+    isColumn = true,
+    isResponsive= false
 }) => {
     const classes = useStyles();
     return (
-        <Wrapper isColumn={isColumn}>
+        <Wrapper isColumn={isColumn} isResponsive={isResponsive}>
             <Button
                 className={`${classes.button} ${voted === 'up' &&
                     classes.buttonVoted}`}

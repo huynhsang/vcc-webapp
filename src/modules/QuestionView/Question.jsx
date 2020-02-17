@@ -25,14 +25,13 @@ const Wrapper = styled.div`
     padding: 20px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-
-    ${media.tabletLandscape`
-        width: calc(100% - 20px);
+    ${media.mobileLandscape`
+        padding: 10px;
     `}
 `;
 
 const InfosWrapper = styled.div`
-    margin: 5px 10px;
+    margin-left: 10px;
 `;
 
 const InfosSup = styled.div`
@@ -67,6 +66,7 @@ const DescriptionWrapper = styled.div`
     margin: 15px 0;
     font-size: 1.1em;
     min-height: 50px;
+    color: #464646;
 `;
 
 const BottomWrapper = styled.div`
@@ -76,9 +76,6 @@ const BottomWrapper = styled.div`
 `;
 
 const InfoSpace = styled.span`
-    background-color: white;
-    margin-right: 10px;
-    padding: 5px 10px;
     & i {
         margin-right: 5px;
     }
@@ -110,7 +107,6 @@ const Question = ({
         categoryItem,
         bestAnswerItem,
         created,
-        answerCount,
         viewCount,
         slug,
         tagList,
@@ -151,6 +147,7 @@ const Question = ({
                     <UserName onClick={redirect(`/users/${askedBy.id}`)}>
                         {`${askedBy.firstName} ${askedBy.lastName}`}
                     </UserName>
+                    <br />
                     <Badge points={askedBy.points} />
                 </InfosWrapper>
             </FlexWrapper>
@@ -177,16 +174,10 @@ const Question = ({
                         points={upVoteCount - downVoteCount}
                     />
                 </FlexWrapper>
-                <FlexWrapper>
-                    <InfoSpace>
-                        <i className="icon-comment" />
-                        <span>{`${answerCount} ${t('common_answer')}`}</span>
-                    </InfoSpace>
-                    <InfoSpace>
-                        <i className="icon-eye" />
-                        <span>{`${viewCount} ${t('common_views')}`}</span>
-                    </InfoSpace>
-                </FlexWrapper>
+                <InfoSpace>
+                    <i className="icon-eye" />
+                    <span>{`${viewCount} ${t('common_views')}`}</span>
+                </InfoSpace>
             </BottomWrapper>
         </Wrapper>
     );

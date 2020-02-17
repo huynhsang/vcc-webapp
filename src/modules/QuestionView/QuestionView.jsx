@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Question from './Question';
-import { voteQuestionFn } from '../../actions/questions';
-import { getQuestionFn } from '../../actions/questionDetail';
+import { getQuestionFn, voteAnswerFn,voteQuestionFn, approveAnswerFn } from '../../actions/questionDetail';
 import { showConfirmToLoginFn } from '../../actions/sweetAlert';
 
 import { DefaultWrapper } from '../../component/Wrappers';
+
+import Answer from './Answer';
 
 const Background = styled.div`
     background-color: #f4f4f4;
@@ -38,11 +39,12 @@ const QuestionView = ({
     getQuestion,
     history,
     showConfirmToLogin,
-    voteQuestion
+    voteQuestion,
+    voteAnswer
 }) => {
     const { t } = useTranslation();
 
-    const { question } = questionDetail;
+    const { question, isVotingQuestion, votingAnswerId } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
 
@@ -63,6 +65,17 @@ const QuestionView = ({
 
     const { answerCount, answers } = question;
 
+    const answersRender = answers.map(a => (
+        <Answer
+            key={a.id}
+            answer={a}
+            isVoting={votingAnswerId === a.id}
+            isAuthenticated={isAuthenticated}
+            showConfirmToLogin={showConfirmToLogin}
+            voteAnswer={voteAnswer}
+        />
+    ));
+
     return (
         <Background>
             <DefaultWrapper>
@@ -72,12 +85,14 @@ const QuestionView = ({
                     isAuthenticated={isAuthenticated}
                     showConfirmToLogin={showConfirmToLogin}
                     voteQuestion={voteQuestion}
+                    isVoting={isVotingQuestion}
                 />
                 <AnswerWrapper>
                     <AnswerCount>
                         <span>{answerCount}</span>
                         {t('common_answer')}
                     </AnswerCount>
+                    {answersRender}
                 </AnswerWrapper>
             </DefaultWrapper>
         </Background>
@@ -93,7 +108,8 @@ const mapDispatchToProps = dispatch => ({
     getQuestion: slug => dispatch(getQuestionFn(slug)),
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
     voteQuestion: (questionId, action) =>
-        dispatch(voteQuestionFn(questionId, action))
+        dispatch(voteQuestionFn(questionId, action)),
+    voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionView);
