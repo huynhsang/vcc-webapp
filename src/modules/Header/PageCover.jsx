@@ -25,12 +25,16 @@ const CoverWrapper = styled.section`
     background-position: center right;
 
     width : 100%;
-    height: 250px;
+    height: 170px;
     position: relative;
     color: white;
 
+    ${media.mobileLandscape`
+        height: 200px;
+    `}
+
     ${media.mobile`
-        height: 320px;
+        height: 250px;
     `}
 `;
 
