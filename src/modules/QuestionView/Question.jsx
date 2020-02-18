@@ -17,12 +17,20 @@ import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { rowCss } from '../../component/Wrappers';
 
+import SocialNetwork from '../../component/SocialNetwork';
+
+import {
+    FACEBOOK_SHARE_URL,
+    TWITTER_SHARE_URL,
+    LINKEDIN_SHARE_URL
+} from '../../constants/share.constant';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
     background-color: white;
-    padding: 20px;
+    padding: 20px 20px 10px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     ${media.mobileLandscape`
@@ -86,9 +94,19 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
+const FlexSpaceBetween = styled(FlexWrapper)`
+    justify-content: space-between;
+`;
+
 const TagsWrapper = styled.div`
     ${rowCss};
     margin-bottom: 10px;
+`;
+
+const SocialWrapper = styled.div`
+    border-top: 1px solid #eaeaea;
+    padding-top: 10px;
+    margin-top: 10px;
 `;
 
 const Question = ({
@@ -134,13 +152,12 @@ const Question = ({
         voteQuestion(id, action);
     };
 
-    const toQuestionView = () => redirect(`/homes/question/${slug}/view`);
-
-    console.log(isVoting);
+    const { REACT_APP_DOMAIN_NAME } = process.env;
+    const url = `${REACT_APP_DOMAIN_NAME}/questions/${slug}`;
 
     return (
         <Wrapper>
-            <Title onClick={toQuestionView}>{question.title}</Title>
+            <Title>{question.title}</Title>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>
@@ -161,7 +178,7 @@ const Question = ({
                 {getNameByLanguage(categoryItem)}
             </InfosSup>
             {!isEmpty(tagsRender) && <TagsWrapper>{tagsRender}</TagsWrapper>}
-            <BottomWrapper>
+            <FlexSpaceBetween>
                 <FlexWrapper>
                     <div>Vote : </div>
                     <Vote
@@ -178,7 +195,14 @@ const Question = ({
                     <i className="icon-eye" />
                     <span>{`${viewCount} ${t('common_views')}`}</span>
                 </InfoSpace>
-            </BottomWrapper>
+            </FlexSpaceBetween>
+            <SocialWrapper>
+                <SocialNetwork
+                    fbLink={`${FACEBOOK_SHARE_URL}${url}`}
+                    twitterLink={`${TWITTER_SHARE_URL}${url}`}
+                    linkedInLink={`${LINKEDIN_SHARE_URL}${url}`}
+                />
+            </SocialWrapper>
         </Wrapper>
     );
 };

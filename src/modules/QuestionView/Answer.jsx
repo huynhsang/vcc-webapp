@@ -51,7 +51,7 @@ const RightWrapper = styled.div`
     margin-left: 10px;
     flex-grow: 1;
     flex-basis: 0;
-    min-height:0;
+    min-height: 0;
     ${media.mobileLandscape`
       margin-left: 0px;
       flex-basis: auto;
