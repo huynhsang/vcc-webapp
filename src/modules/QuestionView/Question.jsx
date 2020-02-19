@@ -11,8 +11,6 @@ import { getNameByLanguage } from '../../utils/multiple-language';
 import { Badge } from '../Badges';
 
 import Tag from '../../component/Tag';
-import TruncateMarkup from 'react-truncate-markup';
-import { QuillText } from '../../component/QuillText';
 import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { rowCss } from '../../component/Wrappers';
@@ -75,12 +73,6 @@ const DescriptionWrapper = styled.div`
     font-size: 1.1em;
     min-height: 50px;
     color: #464646;
-`;
-
-const BottomWrapper = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
 `;
 
 const InfoSpace = styled.span`
@@ -157,7 +149,10 @@ const Question = ({
 
     return (
         <Wrapper>
-            <Title>{question.title}</Title>
+            <FlexWrapper>
+                <Title>{question.title}</Title>
+                {!!bestAnswerItem && <div>Answered</div>}
+            </FlexWrapper>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>
@@ -188,7 +183,6 @@ const Question = ({
                         voted={voted}
                         isLoading={isVoting}
                         handleVote={handleVoteQuestion}
-                        points={upVoteCount - downVoteCount}
                     />
                 </FlexWrapper>
                 <InfoSpace>

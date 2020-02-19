@@ -163,7 +163,6 @@ const Question = ({
                     voted={voted}
                     isLoading={isVoting}
                     handleVote={handleVoteQuestion}
-                    points={upVoteCount - downVoteCount}
                 />
             </LeftWrapper>
             <RightWrapper>
@@ -199,6 +198,7 @@ const Question = ({
                         <i className="icon-eye" />
                         <span>{`${viewCount} ${t('common_views')}`}</span>
                     </InfoSpace>
+                    {!!bestAnswerItem && <div>Answered</div>}
                 </BottomWrapper>
             </RightWrapper>
         </Wrapper>

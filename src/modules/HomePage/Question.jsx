@@ -148,6 +148,7 @@ const Question = ({ question, history }) => {
                 <span>{`${answerCount} ${t('common_answer')}`}</span>
                 <i className="icon-eye" />
                 <span>{`${viewCount} ${t('common_views')}`}</span>
+                {!!bestAnswerItem && <div>Answered</div>}
             </BottomWrapper>
         </Wrapper>
     );

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import Vote from '../../component/Vote';
+import Button from '@material-ui/core/Button';
 import { createMediaTemplate } from '../../utils/css-tools';
 
 const media = createMediaTemplate();
@@ -63,7 +64,8 @@ const Answer = ({
     isVoting,
     isAuthenticated,
     showConfirmToLogin,
-    voteAnswer
+    voteAnswer,
+    approveAnswer
 }) => {
     const { t } = useTranslation();
     const { id: currentUserId } = getIdAndToken();
@@ -102,6 +104,9 @@ const Answer = ({
                         {new Date(created).toDateString()}
                     </DateWrapper>
                 </UserInfos>
+                {!!approveAnswer && (
+                    <Button onClick={approveAnswer}>Approve</Button>
+                )}
             </RightWrapper>
             <Vote
                 isResponsive
@@ -110,7 +115,6 @@ const Answer = ({
                 voted={voted}
                 isLoading={isVoting}
                 handleVote={handleVoteAnswer}
-                points={upVoteCount - downVoteCount}
             />
         </Wrapper>
     );

@@ -3,12 +3,24 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Question from './Question';
-import { getQuestionFn, voteAnswerFn,voteQuestionFn, approveAnswerFn } from '../../actions/questionDetail';
-import { showConfirmToLoginFn } from '../../actions/sweetAlert';
+import {
+    getQuestionFn,
+    voteAnswerFn,
+    voteQuestionFn,
+    approveAnswerFn
+} from '../../actions/questionDetail';
+import {
+    showConfirmToLoginFn,
+    showErrorAlertFn
+} from '../../actions/sweetAlert';
+import { createAnswerFn } from '../../actions/questionDetail';
 
 import { DefaultWrapper } from '../../component/Wrappers';
 
 import Answer from './Answer';
+import AnswerForm from './AnswerForm';
+
+import { getIdAndToken } from '../../utils/cookie-tools';
 
 const Background = styled.div`
     background-color: #f4f4f4;
@@ -40,11 +52,21 @@ const QuestionView = ({
     history,
     showConfirmToLogin,
     voteQuestion,
-    voteAnswer
+    voteAnswer,
+    showErrorNotification,
+    createAnswer,
+    approveAnswer
 }) => {
     const { t } = useTranslation();
+    const { id: currentUserId } = getIdAndToken();
 
-    const { question, isVotingQuestion, votingAnswerId } = questionDetail;
+    const {
+        question,
+        isVotingQuestion,
+        votingAnswerId,
+        isCreatingAnswer,
+        isFetchingError
+    } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
 
@@ -63,18 +85,29 @@ const QuestionView = ({
         return null;
     }
 
-    const { answerCount, answers } = question;
+    const { answerCount, answers, askedBy } = question;
 
-    const answersRender = answers.map(a => (
-        <Answer
-            key={a.id}
-            answer={a}
-            isVoting={votingAnswerId === a.id}
-            isAuthenticated={isAuthenticated}
-            showConfirmToLogin={showConfirmToLogin}
-            voteAnswer={voteAnswer}
-        />
-    ));
+    const isQuestionOwner = askedBy.id === currentUserId;
+
+    const answersRender = answers.map(a => {
+        const isAnswerOwner = a.answerBy && a.answerBy.id === currentUserId;
+        const approveAnswerInner =
+            isQuestionOwner && !isAnswerOwner
+                ? () => approveAnswer(question.id, a.id)
+                : null;
+
+        return (
+            <Answer
+                key={a.id}
+                answer={a}
+                isVoting={votingAnswerId === a.id}
+                isAuthenticated={isAuthenticated}
+                showConfirmToLogin={showConfirmToLogin}
+                voteAnswer={voteAnswer}
+                approveAnswer={approveAnswerInner}
+            />
+        );
+    });
 
     return (
         <Background>
@@ -94,6 +127,16 @@ const QuestionView = ({
                     </AnswerCount>
                     {answersRender}
                 </AnswerWrapper>
+                <AnswerForm
+                    questionId={question.id}
+                    reloadQuestion={fetchQuestion}
+                    isAuthenticated={isAuthenticated}
+                    createAnswer={createAnswer}
+                    showErrorNotification={showErrorNotification}
+                    showConfirmToLogin={showConfirmToLogin}
+                    isCreatingAnswer={isCreatingAnswer}
+                    isFetchingError={isFetchingError}
+                />
             </DefaultWrapper>
         </Background>
     );
@@ -110,6 +153,11 @@ const mapDispatchToProps = dispatch => ({
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action)),
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
+    showErrorNotification: text => dispatch(showErrorAlertFn('Error!', text)),
+    createAnswer: (questionId, answerBody) =>
+        dispatch(createAnswerFn(questionId, answerBody)),
+    approveAnswer: (questionId, answerId) =>
+        dispatch(approveAnswerFn(questionId, answerId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionView);

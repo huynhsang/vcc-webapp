@@ -1,0 +1,84 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+
+import 'easymde/dist/easymde.min.css';
+import SimpleMDEReact from 'react-simplemde-editor';
+
+import Button from '@material-ui/core/Button';
+
+const AnswerForm = ({
+    questionId,
+    reloadQuestion,
+    isAuthenticated,
+    createAnswer,
+    showErrorNotification,
+    showConfirmToLogin,
+    questionDetail
+}) => {
+    const { t } = useTranslation();
+
+    const [isMounted, setIsMounted] = React.useState(false);
+
+    const [leaveAnswer, setLeaveAnswer] = React.useState(false);
+    const [answerBody, setAnswerBody] = React.useState('');
+
+    React.useEffect(() => {
+        setIsMounted(true);
+    }, []);
+
+    const { isCreatingAnswer, isFetchingError } = questionDetail;
+
+    React.useEffect(() => {
+        if (isMounted && !isFetchingError) {
+            reloadQuestion();
+            setLeaveAnswer(false);
+            setAnswerBody('');
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isCreatingAnswer]);
+
+    const leaveAnswerValidation = () => {
+        if (!isAuthenticated) {
+            return showConfirmToLogin();
+        }
+        setLeaveAnswer(true);
+    };
+
+    const onSubmit = () => {
+        if (answerBody.length < 20) {
+            return showErrorNotification(t('question_answer_min_20'));
+        }
+        createAnswer(questionId, answerBody);
+    };
+
+    const handleChangeAnswerBody = value => {
+        if (value.length < 10000) {
+            setAnswerBody(value);
+        }
+    };
+
+    if (!leaveAnswer) {
+        return (
+            <Button onClick={leaveAnswerValidation}>
+                {t('answer_leave_answer')}
+            </Button>
+        );
+    }
+
+    return (
+        <div>
+            <h3>{t('answer_leave_answer')}</h3>
+            <SimpleMDEReact
+                value={answerBody}
+                onChange={handleChangeAnswerBody}
+                options={{
+                    autofocus: true,
+                    spellChecker: false
+                }}
+            />
+            <Button onClick={onSubmit}>Submit</Button>
+        </div>
+    );
+};
+
+export default AnswerForm;

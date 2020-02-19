@@ -35,6 +35,8 @@ const SocialNetwork = ({
             case 'linkedIn':
                 link = linkedInLink;
                 break;
+            default:
+                link = '';
         }
         window.open(link, '_blank');
     };
