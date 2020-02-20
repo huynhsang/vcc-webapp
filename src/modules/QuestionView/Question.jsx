@@ -60,7 +60,6 @@ const Title = styled.div`
 
 const UserName = styled.span`
     color: #009fff;
-    margin-right: 10px;
     font-size: 1.1em;
 
     &:hover {
@@ -71,7 +70,6 @@ const UserName = styled.span`
 const DescriptionWrapper = styled.div`
     margin: 15px 0;
     font-size: 1.1em;
-    min-height: 50px;
     color: #464646;
 `;
 

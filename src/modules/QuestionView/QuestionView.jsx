@@ -85,14 +85,14 @@ const QuestionView = ({
         return null;
     }
 
-    const { answerCount, answers, askedBy } = question;
+    const { answerCount, answers, askedBy, bestAnswerItem } = question;
 
     const isQuestionOwner = askedBy.id === currentUserId;
 
     const answersRender = answers.map(a => {
         const isAnswerOwner = a.answerBy && a.answerBy.id === currentUserId;
         const approveAnswerInner =
-            isQuestionOwner && !isAnswerOwner
+            !bestAnswerItem && isQuestionOwner && !isAnswerOwner
                 ? () => approveAnswer(question.id, a.id)
                 : null;
 
@@ -105,9 +105,12 @@ const QuestionView = ({
                 showConfirmToLogin={showConfirmToLogin}
                 voteAnswer={voteAnswer}
                 approveAnswer={approveAnswerInner}
+                isBestAnswer={bestAnswerItem && bestAnswerItem.id === a.id}
             />
         );
     });
+
+    console.log(bestAnswerItem);
 
     return (
         <Background>

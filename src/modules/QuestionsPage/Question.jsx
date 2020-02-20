@@ -78,6 +78,9 @@ const LeftWrapper = styled.div`
     padding-right: 10px;
     display: flex;
     flex-direction: column;
+    ${media.mobileLandscape`
+        padding-right: 5px;
+    `}
 `;
 
 const RightWrapper = styled.div`
@@ -86,14 +89,24 @@ const RightWrapper = styled.div`
     flex-grow: 1;
     flex-basis: 0;
     min-height: 0;
+    ${media.mobileLandscape`
+        padding-bottom: 70px;
+    `}
 `;
 
 const BottomWrapper = styled.div`
     position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     bottom: 0;
     background-color: #efefefc7;
     width: 100%;
     padding: 15px 10px;
+    ${media.mobileLandscape`
+        flex-direction: column;
+        padding: 10px 5px;
+    `}
 `;
 
 const InfoSpace = styled.span`
@@ -151,8 +164,6 @@ const Question = ({
 
     const toQuestionView = () => redirect(`/homes/question/${slug}/view`);
 
-    console.log(isVoting);
-
     return (
         <Wrapper>
             <LeftWrapper>
@@ -190,14 +201,18 @@ const Question = ({
                     <div className="row">{tagsRender}</div>
                 )}
                 <BottomWrapper>
-                    <InfoSpace>
-                        <i className="icon-comment" />
-                        <span>{`${answerCount} ${t('common_answer')}`}</span>
-                    </InfoSpace>
-                    <InfoSpace>
-                        <i className="icon-eye" />
-                        <span>{`${viewCount} ${t('common_views')}`}</span>
-                    </InfoSpace>
+                    <div>
+                        <InfoSpace>
+                            <i className="icon-comment" />
+                            <span>{`${answerCount} ${t(
+                                'common_answer'
+                            )}`}</span>
+                        </InfoSpace>
+                        <InfoSpace>
+                            <i className="icon-eye" />
+                            <span>{`${viewCount} ${t('common_views')}`}</span>
+                        </InfoSpace>
+                    </div>
                     {!!bestAnswerItem && <div>Answered</div>}
                 </BottomWrapper>
             </RightWrapper>

@@ -74,10 +74,11 @@ const UserName = styled.span`
     }
 `;
 
-const BottomWrapper = styled.div`
+const BottomWrapper = styled(FlexWrapper)`
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    width: calc(100% - 20px);
+    justify-content: space-between;
 
     & i {
         margin-right: 5px;
@@ -144,11 +145,13 @@ const Question = ({ question, history }) => {
             </DescriptionWrapper>
             {!isEmpty(tagsRender) && <div className="row">{tagsRender}</div>}
             <BottomWrapper>
-                <i className="icon-comment" />
-                <span>{`${answerCount} ${t('common_answer')}`}</span>
-                <i className="icon-eye" />
-                <span>{`${viewCount} ${t('common_views')}`}</span>
                 {!!bestAnswerItem && <div>Answered</div>}
+                <div>
+                    <i className="icon-comment" />
+                    <span>{`${answerCount} ${t('common_answer')}`}</span>
+                    <i className="icon-eye" />
+                    <span>{`${viewCount} ${t('common_views')}`}</span>
+                </div>
             </BottomWrapper>
         </Wrapper>
     );

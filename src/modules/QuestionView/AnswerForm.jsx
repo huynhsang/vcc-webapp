@@ -1,10 +1,24 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import 'easymde/dist/easymde.min.css';
 import SimpleMDEReact from 'react-simplemde-editor';
 
 import Button from '@material-ui/core/Button';
+
+const CenterWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    & button {
+        margin: 0 10px;
+    }
+`;
+
+const FormWrapper = styled.div`
+    margin: 20px 0;
+`;
 
 const AnswerForm = ({
     questionId,
@@ -13,7 +27,8 @@ const AnswerForm = ({
     createAnswer,
     showErrorNotification,
     showConfirmToLogin,
-    questionDetail
+    isCreatingAnswer,
+    isFetchingError
 }) => {
     const { t } = useTranslation();
 
@@ -25,8 +40,6 @@ const AnswerForm = ({
     React.useEffect(() => {
         setIsMounted(true);
     }, []);
-
-    const { isCreatingAnswer, isFetchingError } = questionDetail;
 
     React.useEffect(() => {
         if (isMounted && !isFetchingError) {
@@ -59,15 +72,21 @@ const AnswerForm = ({
 
     if (!leaveAnswer) {
         return (
-            <Button onClick={leaveAnswerValidation}>
-                {t('answer_leave_answer')}
-            </Button>
+            <CenterWrapper>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={leaveAnswerValidation}
+                >
+                    {t('answer_leave_answer')}
+                </Button>
+            </CenterWrapper>
         );
     }
 
     return (
-        <div>
-            <h3>{t('answer_leave_answer')}</h3>
+        <FormWrapper>
+            <h5>{t('answer_leave_answer')}</h5>
             <SimpleMDEReact
                 value={answerBody}
                 onChange={handleChangeAnswerBody}
@@ -76,8 +95,19 @@ const AnswerForm = ({
                     spellChecker: false
                 }}
             />
-            <Button onClick={onSubmit}>Submit</Button>
-        </div>
+            <CenterWrapper>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => setLeaveAnswer(false)}
+                >
+                    Cancel
+                </Button>
+                <Button variant="contained" color="primary" onClick={onSubmit}>
+                    Submit
+                </Button>
+            </CenterWrapper>
+        </FormWrapper>
     );
 };
 
