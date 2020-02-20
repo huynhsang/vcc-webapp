@@ -162,7 +162,7 @@ const Question = ({
         voteQuestion(id, action);
     };
 
-    const toQuestionView = () => redirect(`/homes/question/${slug}/view`);
+    const toQuestionView = () => redirect(`/questions/${slug}`);
 
     return (
         <Wrapper>

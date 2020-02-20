@@ -59,7 +59,7 @@ const QuestionAsked = ({ question, history }) => {
     );
 
     const handleTitle = () => {
-        history.push(`/homes/question/${question.slug}/view`);
+        history.push(`/questions/${question.slug}`);
     };
 
     return (

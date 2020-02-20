@@ -110,8 +110,6 @@ const QuestionView = ({
         );
     });
 
-    console.log(bestAnswerItem);
-
     return (
         <Background>
             <DefaultWrapper>

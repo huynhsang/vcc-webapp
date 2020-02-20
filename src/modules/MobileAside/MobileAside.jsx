@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import { toggleMobileAsideFn, toggleContactUsFn } from '../../actions/app';
 
-import { leftNavTabs } from '../Home/nav.constant';
+import { leftNavTabs } from './nav.constant';
 
 const MobileAside = ({
     isOpenMobileAside,

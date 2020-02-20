@@ -117,7 +117,7 @@ const Question = ({ question, history }) => {
     };
 
     return (
-        <Wrapper onClick={redirect(`/homes/question/${slug}/view`)}>
+        <Wrapper onClick={redirect(`/questions/${slug}`)}>
             <TruncateMarkup lines={2}>
                 <Title>{question.title}</Title>
             </TruncateMarkup>

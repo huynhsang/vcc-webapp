@@ -87,7 +87,7 @@ const AddQuestion = ({
         createQuestion({ ...question, isPublic: true })
             .then(data => {
                 showSuccessAlert('Success!', 'Created a Question');
-                history.push(`/homes/question/${data.slug}/view`);
+                history.push(`/questions/${data.slug}`);
             })
             .catch(response =>
                 showErrorAlert(response.response.data.error.message)
@@ -158,7 +158,4 @@ const mapDispatchToProp = dispatch => ({
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProp
-)(AddQuestion);
+export default connect(mapStateToProps, mapDispatchToProp)(AddQuestion);

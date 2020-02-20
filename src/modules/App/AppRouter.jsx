@@ -5,7 +5,6 @@ import Page404 from './Page404';
 import { UserInfo } from '../UserInfo';
 import { AddQuestion } from '../AddQuestion';
 
-import { Home } from '../Home';
 import { InfosPage } from '../InfosPage';
 
 import { AboutUs } from '../AboutUs';
@@ -39,8 +38,10 @@ const AppRouter = () => {
                 exact
                 render={props => <QuestionView {...props} />}
             />
-            <Route path="/homes" render={props => <Home {...props} />} />
-            <Route path="/information" render={props => <InfosPage {...props} />} />
+            <Route
+                path="/information"
+                render={props => <InfosPage {...props} />}
+            />
             <Route
                 exact
                 path="/about-us/"
