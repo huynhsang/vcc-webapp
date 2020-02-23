@@ -3,6 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import Page404 from './Page404';
 
 import { UserInfo } from '../UserInfo';
+import { UserInfo as UserInfo2 } from '../UserInfo copy';
 import { AddQuestion } from '../AddQuestion';
 
 import { InfosPage } from '../InfosPage';
@@ -50,6 +51,10 @@ const AppRouter = () => {
             <Route
                 path="/users/:id"
                 render={props => <UserInfo {...props} />}
+            />
+            <Route
+                path="/users2/:id"
+                render={props => <UserInfo2 {...props} />}
             />
             <Route
                 exact
