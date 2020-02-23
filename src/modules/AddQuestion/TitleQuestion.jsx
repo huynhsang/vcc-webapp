@@ -25,15 +25,6 @@ const TitleQuestion = ({ title, setTitle, next, previous }) => {
             <i className="fas fa-times" /> {t('question_please_help_with_R')}
           </span>
         </p>
-        <p className="m0">
-          <span>
-            <i className="fas fa-check" /> {t('question_is_there_an_R')}
-          </span>
-          <br />
-          <span>
-            <i className="fas fa-times" /> {t('question_please_help_with_R')}
-          </span>
-        </p>
       </div>
       <div className="mt3">
         <p className="font-weight-700">{t('common_title')}</p>

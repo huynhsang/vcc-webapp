@@ -97,7 +97,10 @@ const AddQuestion = ({
     const isDisabled = !categoryId;
 
     return (
-        <section className="tabs-container pl3 pr3 pt5">
+        <section
+            className="tabs-container pl3 pr3 pt5"
+            style={{ minHeight: 'calc(100vh - 180px)' }}
+        >
             <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}>
                 <div label="Type">
                     <TypeQuestionTab

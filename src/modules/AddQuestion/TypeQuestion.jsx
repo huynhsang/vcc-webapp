@@ -2,13 +2,13 @@ import React from 'react';
 import questionMark from '../../static/resources/img/question_mark_1.png';
 import PropTypes from 'prop-types';
 
-import { useTranslation } from 'react-i18next'; 
+import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
 const TypeQuestion = ({ categories, categoryId, setCategoryId, next }) => {
     const { t } = useTranslation();
 
-    if(!categories){
+    if (!categories) {
         return null;
     }
 
@@ -29,7 +29,7 @@ const TypeQuestion = ({ categories, categoryId, setCategoryId, next }) => {
     ));
 
     return (
-        <section className="row mt5 mb3">
+        <section className="row mt5 mb3" style={{ display: 'flex' }}>
             <div className="col-md-5">
                 <img
                     className="img-responsive"
