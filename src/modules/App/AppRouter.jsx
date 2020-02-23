@@ -5,12 +5,12 @@ import Page404 from './Page404';
 import { UserInfo } from '../UserInfo';
 import { AddQuestion } from '../AddQuestion';
 
-import { Home } from '../Home';
 import { InfosPage } from '../InfosPage';
 
 import { AboutUs } from '../AboutUs';
 import { HomePage } from '../HomePage';
 import { QuestionsPage } from '../QuestionsPage';
+import { QuestionView } from '../QuestionView';
 
 import {
     EmailVerification,
@@ -33,8 +33,15 @@ const AppRouter = () => {
                 exact
                 render={props => <QuestionsPage {...props} />}
             />
-            <Route path="/homes" render={props => <Home {...props} />} />
-            <Route path="/information" render={props => <InfosPage {...props} />} />
+            <Route
+                path="/questions/:slug"
+                exact
+                render={props => <QuestionView {...props} />}
+            />
+            <Route
+                path="/information"
+                render={props => <InfosPage {...props} />}
+            />
             <Route
                 exact
                 path="/about-us/"

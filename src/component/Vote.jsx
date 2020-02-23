@@ -6,10 +6,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import { createMediaTemplate } from '../utils/css-tools';
+const media = createMediaTemplate();
+
 const useStyles = makeStyles(() => ({
     button: {
-        minWidth: '25px',
-        padding: '5px 0',
+        minWidth: '0px',
+        padding: '2px',
         color: 'rgba(0, 0, 0, 0.4)',
         backgroundColor: 'rgba(0, 0, 0, 0.05)',
         boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
@@ -35,29 +38,48 @@ const TopArrowIcon = styled(RightArrowIcon)`
 
 const Wrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: ${p => p.isColumn && 'column'};
     justify-content: space-between;
     align-items: center;
-    padding: 15px 0;
+    padding: ${p => (p.isColumn ? '15px 0' : '0 15px')};
+
+    ${p=> p.isResponsive && media.mobileLandscape`
+        flex-direction: row;
+        justify-content: flex-start;
+        padding: 5px 0;
+    `}
 `;
 
 const CountWrapper = styled.div`
-    padding: 10px 0;
+    padding: 10px;
     font-size: 1.2em;
     font-weight: 600;
 `;
 
-const Vote = ({ points, disableVote, voted, isLoading, handleVote }) => {
+const Vote = ({
+    points,
+    disableVote,
+    voted,
+    isLoading,
+    handleVote,
+    isColumn = true,
+    isResponsive= false
+}) => {
     const classes = useStyles();
+    const toVote = (value) => (ev) => {
+        ev.stopPropagation();
+        handleVote(value);
+    }
+
     return (
-        <Wrapper>
+        <Wrapper isColumn={isColumn} isResponsive={isResponsive}>
             <Button
                 className={`${classes.button} ${voted === 'up' &&
                     classes.buttonVoted}`}
                 disabled={disableVote || voted === 'up'}
                 size="small"
                 variant="contained"
-                onClick={() => handleVote(true)}
+                onClick={toVote(true)}
             >
                 <TopArrowIcon />
             </Button>
@@ -74,7 +96,7 @@ const Vote = ({ points, disableVote, voted, isLoading, handleVote }) => {
                 disabled={disableVote || voted === 'down'}
                 size="small"
                 variant="contained"
-                onClick={() => handleVote(false)}
+                onClick={toVote(false)}
             >
                 <BottomArrowIcon />
             </Button>

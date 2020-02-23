@@ -173,6 +173,7 @@ export default {
     question_answer_min_20: 'Vui lòng để lại câu trả lời ít 20 kí tự',
     question_search_question: 'Tìm kiếm câu hỏi',
     question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
+    question_resolved : 'Đã được giải quyết',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -287,4 +288,6 @@ export default {
     workspace_censorship_content: 'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
 
     footer_all_right_reserved : 'All rights reserved © 2020',
+
+    answer_added_an_answer_on : 'Trả lời vào ngày',
 };

@@ -13,6 +13,7 @@ import { Badge } from '../Badges';
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
+import DoneAll from '@material-ui/icons/DoneAll';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -74,10 +75,11 @@ const UserName = styled.span`
     }
 `;
 
-const BottomWrapper = styled.div`
+const BottomWrapper = styled(FlexWrapper)`
     position: absolute;
     bottom: 10px;
-    right: 10px;
+    width: calc(100% - 20px);
+    justify-content: flex-end;
 
     & i {
         margin-right: 5px;
@@ -89,6 +91,30 @@ const DescriptionWrapper = styled.div`
     margin-top: 5px;
     font-size: 15px;
     min-height: 50px;
+`;
+
+const TopWrapper = styled(FlexWrapper)`
+    justify-content: space-between;
+    margin-bottom: 10px;
+`;
+
+const ResolveLabel = styled.div`
+    background-color: #1ea01e;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    white-space: nowrap;
+    border-radius: 6px;
+    & svg {
+        margin-right: 5px;
+    }
+`;
+
+const CategoryWrapper = styled.div`
+    border: 1px solid #b5b5b5;
+    border-radius: 6px;
+    padding: 3px 5px;
 `;
 
 const Question = ({ question, history }) => {
@@ -116,7 +142,18 @@ const Question = ({ question, history }) => {
     };
 
     return (
-        <Wrapper onClick={redirect(`/homes/question/${slug}/view`)}>
+        <Wrapper onClick={redirect(`/questions/${slug}`)}>
+            <TopWrapper>
+                <CategoryWrapper>
+                    {getNameByLanguage(categoryItem)}
+                </CategoryWrapper>
+                {!!bestAnswerItem && (
+                    <ResolveLabel>
+                        <DoneAll />
+                        {t('question_resolved')}
+                    </ResolveLabel>
+                )}
+            </TopWrapper>
             <TruncateMarkup lines={2}>
                 <Title>{question.title}</Title>
             </TruncateMarkup>
@@ -134,8 +171,6 @@ const Question = ({ question, history }) => {
                         <time dateTime={created}>
                             {` ${new Date(created).toDateString()}`}
                         </time>
-                        <span>{`${t('common_in')}: `}</span>
-                        {getNameByLanguage(categoryItem)}
                     </InfosSup>
                 </InfosWrapper>
             </FlexWrapper>

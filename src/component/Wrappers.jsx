@@ -1,10 +1,16 @@
 import styled, { css } from 'styled-components';
 
+import { createMediaTemplate } from '../utils/css-tools';
+const media = createMediaTemplate();
+
 export const defaultWrapperCss = css`
     max-width: 1280px;
     width: 100%;
     padding: 20px;
     margin: 0 auto;
+    ${media.mobileLandscape`
+        padding: 10px;
+    `}
 `;
 
 export const DefaultWrapper = styled.div`
