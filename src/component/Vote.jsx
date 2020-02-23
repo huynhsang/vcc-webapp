@@ -66,6 +66,11 @@ const Vote = ({
     isResponsive= false
 }) => {
     const classes = useStyles();
+    const toVote = (value) => (ev) => {
+        ev.stopPropagation();
+        handleVote(value);
+    }
+
     return (
         <Wrapper isColumn={isColumn} isResponsive={isResponsive}>
             <Button
@@ -74,7 +79,7 @@ const Vote = ({
                 disabled={disableVote || voted === 'up'}
                 size="small"
                 variant="contained"
-                onClick={() => handleVote(true)}
+                onClick={toVote(true)}
             >
                 <TopArrowIcon />
             </Button>
@@ -91,7 +96,7 @@ const Vote = ({
                 disabled={disableVote || voted === 'down'}
                 size="small"
                 variant="contained"
-                onClick={() => handleVote(false)}
+                onClick={toVote(false)}
             >
                 <BottomArrowIcon />
             </Button>

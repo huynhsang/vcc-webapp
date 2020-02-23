@@ -21,6 +21,7 @@ import Answer from './Answer';
 import AnswerForm from './AnswerForm';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
+import { PageCover } from '../Header';
 
 const Background = styled.div`
     background-color: #f4f4f4;
@@ -112,6 +113,7 @@ const QuestionView = ({
 
     return (
         <Background>
+            <PageCover />
             <DefaultWrapper>
                 <Question
                     question={question}

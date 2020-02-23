@@ -175,6 +175,7 @@ export default {
     question_answer_min_20: 'Please leave an answer at least 20 characters',
     question_search_question: 'Search question',
     question_hit_enter_to_search: 'Hit enter to search',
+    question_resolved : 'Resolved',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',

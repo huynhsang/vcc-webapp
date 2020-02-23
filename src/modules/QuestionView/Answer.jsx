@@ -84,7 +84,7 @@ const SpaceBetween = styled(FlexWrapper)`
 `;
 
 const DoneOutlineIcon = styled(DoneOutline)`
-    color: green;
+    color: #1ea01e;
     font-size: 40px !important;
     display: ${p => (p.isdesktop ? 'block' : 'none')} !important;
     ${media.mobileLandscape`

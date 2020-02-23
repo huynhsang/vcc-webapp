@@ -15,6 +15,7 @@ import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
 import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
+import DoneAll from '@material-ui/icons/DoneAll';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -29,6 +30,7 @@ const Wrapper = styled.div`
     position: relative;
     display: flex;
 
+    cursor: pointer;
     ${media.tabletLandscape`
         width: calc(100% - 20px);
     `}
@@ -69,7 +71,7 @@ const UserName = styled.span`
 `;
 
 const DescriptionWrapper = styled.div`
-    margin-top: 5px;
+    margin: 10px 0;
     font-size: 1.1em;
     min-height: 50px;
 `;
@@ -90,8 +92,12 @@ const RightWrapper = styled.div`
     flex-basis: 0;
     min-height: 0;
     ${media.mobileLandscape`
-        padding-bottom: 70px;
+        padding-bottom: 80px;
     `}
+
+    @media (max-width: 1080px)  and (min-width: 1025px) {
+        padding-bottom: 80px;
+    }
 `;
 
 const BottomWrapper = styled.div`
@@ -103,6 +109,11 @@ const BottomWrapper = styled.div`
     background-color: #efefefc7;
     width: 100%;
     padding: 15px 10px;
+
+    @media (max-width: 1080px) and (min-width: 1025px) {
+        flex-direction: column;
+    }
+
     ${media.mobileLandscape`
         flex-direction: column;
         padding: 10px 5px;
@@ -116,6 +127,28 @@ const InfoSpace = styled.span`
     & i {
         margin-right: 5px;
     }
+`;
+
+const ResolveLabel = styled.div`
+    background-color: #1ea01e;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    white-space: nowrap;
+    border-radius: 3px;
+
+    & svg {
+        margin-right: 5px;
+    }
+
+    @media (max-width: 1080px) and (min-width: 1025px) {
+        margin-top: 10px;
+    }
+
+    ${media.mobileLandscape`
+        margin-top: 10px;
+    `}
 `;
 
 const Question = ({
@@ -162,10 +195,8 @@ const Question = ({
         voteQuestion(id, action);
     };
 
-    const toQuestionView = () => redirect(`/questions/${slug}`);
-
     return (
-        <Wrapper>
+        <Wrapper onClick={redirect(`/questions/${slug}`)}>
             <LeftWrapper>
                 <UserLogo user={askedBy} />
                 <Vote
@@ -178,7 +209,7 @@ const Question = ({
             </LeftWrapper>
             <RightWrapper>
                 <TruncateMarkup lines={2}>
-                    <Title onClick={toQuestionView}>{question.title}</Title>
+                    <Title>{question.title}</Title>
                 </TruncateMarkup>
                 <InfosWrapper>
                     <UserName onClick={redirect(`/users/${askedBy.id}`)}>
@@ -213,7 +244,12 @@ const Question = ({
                             <span>{`${viewCount} ${t('common_views')}`}</span>
                         </InfoSpace>
                     </div>
-                    {!!bestAnswerItem && <div>Answered</div>}
+                    {!!bestAnswerItem && (
+                        <ResolveLabel>
+                            <DoneAll />
+                            {t('question_resolved')}
+                        </ResolveLabel>
+                    )}
                 </BottomWrapper>
             </RightWrapper>
         </Wrapper>

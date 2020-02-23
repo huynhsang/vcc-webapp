@@ -22,6 +22,7 @@ import {
     TWITTER_SHARE_URL,
     LINKEDIN_SHARE_URL
 } from '../../constants/share.constant';
+import DoneAll from '@material-ui/icons/DoneAll';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -55,7 +56,6 @@ const InfosSup = styled.div`
 const Title = styled.div`
     font-weight: 600;
     font-size: 1.2em;
-    margin-bottom: 15px;
 `;
 
 const UserName = styled.span`
@@ -86,6 +86,24 @@ const FlexWrapper = styled.div`
 
 const FlexSpaceBetween = styled(FlexWrapper)`
     justify-content: space-between;
+`;
+
+const TopWrapper = styled(FlexSpaceBetween)`
+    margin-bottom: 15px;
+`;
+
+const ResolveLabel = styled.div`
+    background-color: #1ea01e;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 3px 5px;
+    margin-left: 5px;
+    border-radius: 3px;
+
+    & svg{
+        margin-right: 5px;
+    }
 `;
 
 const TagsWrapper = styled.div`
@@ -147,10 +165,15 @@ const Question = ({
 
     return (
         <Wrapper>
-            <FlexWrapper>
+            <TopWrapper>
                 <Title>{question.title}</Title>
-                {!!bestAnswerItem && <div>Answered</div>}
-            </FlexWrapper>
+                {!!bestAnswerItem && (
+                    <ResolveLabel>
+                        <DoneAll />
+                        {t('question_resolved')}
+                    </ResolveLabel>
+                )}
+            </TopWrapper>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>
