@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import passwordValidator from 'password-validator';
 
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 import {
     showSuccessAlertFn,
@@ -13,6 +14,13 @@ import {
 } from '../../../actions/sweetAlert';
 
 import { changeUserPassword } from '../../../services/user.service';
+
+const useStyles = makeStyles(() => ({
+    textInput: {
+        width: '100%',
+        margin: '10px 0'
+    }
+}));
 
 const schema = new passwordValidator();
 schema
@@ -30,17 +38,11 @@ schema
     .not()
     .spaces(); // Should not have spaces
 
-const Title = styled.div`
-    margin: 10px 0 5px;
-    color: black;
-`;
-
 const Wrapper = styled.div`
-    margin-bottom: 50px;
     padding: 5px 20px 20px 20px;
     border-radius: 2px;
     background-color: white;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
 `;
 
 const ButtonsWrapper = styled.div`
@@ -54,6 +56,7 @@ const ButtonsWrapper = styled.div`
 `;
 
 const ChangePassword = ({ showErrorNotification, showSuccessNotification }) => {
+    const classes = useStyles();
     const { t } = useTranslation();
 
     const [oldPassword, setOldPassword] = React.useState('');
@@ -87,36 +90,53 @@ const ChangePassword = ({ showErrorNotification, showSuccessNotification }) => {
 
     return (
         <Wrapper>
-            <Title>{t('my_profile_old_password')}</Title>
-            <InputText
+            <TextField
+                variant="outlined"
+                type="password"
+                className={classes.textInput}
                 value={oldPassword}
-                type="password"
+                label={t('my_profile_old_password')}
                 onChange={e => setOldPassword(e.target.value)}
+                margin="dense"
             />
-            <Title>{t('my_profile_new_password')}</Title>
-            <InputText
+
+            <TextField
+                variant="outlined"
+                type="password"
+                className={classes.textInput}
                 value={newPassword}
-                type="password"
+                label={t('my_profile_new_password')}
                 onChange={e => setNewPassword(e.target.value)}
+                margin="dense"
             />
-            <Title>{t('my_profile_confirm_new_password')}</Title>
-            <InputText
-                value={confirmNewPassword}
+
+            <TextField
+                variant="outlined"
                 type="password"
+                className={classes.textInput}
+                value={confirmNewPassword}
+                label={t('my_profile_confirm_new_password')}
                 onChange={e => setConfirmNewPassword(e.target.value)}
+                margin="dense"
             />
+
             <ButtonsWrapper>
                 <Button
-                    className="p-button-danger"
-                    label={t('common_reset')}
-                    icon="pi pi-times"
+                    size="small"
+                    variant="contained"
+                    color="secondary"
                     onClick={reset}
-                />
+                >
+                    {t('common_reset')}
+                </Button>
                 <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
                     onClick={onSubmit}
-                    label={t('common_save')}
-                    icon="pi pi-check"
-                />
+                >
+                    {t('common_save')}
+                </Button>
             </ButtonsWrapper>
         </Wrapper>
     );

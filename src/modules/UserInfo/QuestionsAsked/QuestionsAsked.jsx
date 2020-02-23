@@ -30,12 +30,12 @@ const QuestionsAsked = ({ userInfos, getQuestionsAsked }) => {
 
     return (
         <Wrapper>
+            <QuestionsWrapper>{questionsRender}</QuestionsWrapper>
             <Pagination
                 nbPages={Math.ceil(numberQuestionsAsked / 5)}
                 activePage={activePage}
                 onPageChange={setActivePage}
             />
-            <QuestionsWrapper>{questionsRender}</QuestionsWrapper>
         </Wrapper>
     );
 };

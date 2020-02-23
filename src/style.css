@@ -1,9 +1,9 @@
 html {
-    margin-top: 0 !important
+    margin-top: 0 !important;
 }
 
 * html body {
-    margin-top: 0 !important
+    margin-top: 0 !important;
 }
 
 body {
@@ -11,5 +11,20 @@ body {
     color: #707885;
     line-height: 22px;
     font-size: 14px;
-    font-weight: 400
+    font-weight: 400;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
 }

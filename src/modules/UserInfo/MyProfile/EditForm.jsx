@@ -1,30 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
-import { InputText } from 'primereact/inputtext';
-import { Dropdown } from 'primereact/dropdown';
-import { InputTextarea } from 'primereact/inputtextarea';
-import { Button } from 'primereact/button';
-import { InputMask } from 'primereact/inputmask';
-
+import { makeStyles } from '@material-ui/core/styles';
 import COUNTRIES from './countries.constant';
 
 import dateformat from 'dateformat';
 
+import TextField from '@material-ui/core/TextField';
+import { SelectInput } from '../../../component/Inputs';
+
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles(() => ({
+    textInput: {
+        width: '100%',
+        margin: '10px 0'
+    }
+}));
+
 const USERNAME_REGEX = /([A-Za-z0-9_]){8,24}/;
 
-const Title = styled.div`
-    margin: 10px 0 5px;
-    color: black;
-`;
-
 const Wrapper = styled.div`
-    margin-bottom: 50px;
     padding: 5px 20px 20px 20px;
     border-radius: 2px;
     background-color: white;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
 `;
 
 const ButtonsWrapper = styled.div`
@@ -39,6 +39,7 @@ const ButtonsWrapper = styled.div`
 
 const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const [userEditted, setUserEditted] = React.useState(currentUser);
 
@@ -79,56 +80,78 @@ const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
         setUserEditted(currentUser);
     };
 
+    console.log(nationality);
+
     return (
         <Wrapper>
-            <Title>{t('common_userName')}</Title>
-            <InputText
+            <TextField
+                variant="outlined"
+                className={classes.textInput}
                 value={username}
+                label={t('common_userName')}
                 onChange={e => handleEvent('username', e)}
+                margin="dense"
             />
-            <Title>{t('common_lastname')}</Title>
-            <InputText
+            <TextField
+                variant="outlined"
+                className={classes.textInput}
                 value={lastName}
+                label={t('common_lastname')}
                 onChange={e => handleEvent('lastName', e)}
+                margin="dense"
             />
-            <Title>{t('common_firstname')}</Title>
-            <InputText
+            <TextField
+                variant="outlined"
+                className={classes.textInput}
                 value={firstName}
+                label={t('common_firstname')}
                 onChange={e => handleEvent('firstName', e)}
+                margin="dense"
             />
-            <Title>{t('common_date_of_birth')}</Title>
-            <InputMask
-                mask="99/99/9999"
-                value={birthDayEditted}
-                placeholder="mm/dd/yyyy"
-                onChange={e => setBirthDayEditted(e.value)}
-            ></InputMask>
-            <Title>{t('my_profile_you_come_from')}</Title>
-            <Dropdown
-                optionLabel="name"
-                value={COUNTRIES.find(val => val.code === nationality)}
+            <TextField
+                className={classes.textInput}
+                label={t('common_date_of_birth')}
+                variant="outlined"
+                type="date"
+                defaultValue={dateformat(dateOfBirth, 'yyyy-mm-dd')}
+                InputLabelProps={{
+                    shrink: true
+                }}
+                margin="dense"
+                onChange={e => setBirthDayEditted(e.target.value)}
+            />
+            <SelectInput
+                title={t('my_profile_you_come_from')}
+                value={nationality}
                 options={COUNTRIES}
-                onChange={ev => updateUser('nationality', ev.value.code)}
-                placeholder={t('my_profile_choose_one_country')}
+                handleValue={value => updateUser('nationality', value)}
             />
-            <Title>{t('common_summary')}</Title>
-            <InputTextarea
-                rows={5}
+            <TextField
+                className={classes.textInput}
+                label={t('common_summary')}
+                multiline
+                rows="5"
                 value={summary}
+                variant="outlined"
                 onChange={e => handleEvent('summary', e)}
             />
             <ButtonsWrapper>
                 <Button
-                    className="p-button-danger"
-                    label={t('common_reset')}
-                    icon="pi pi-times"
+                    size="small"
+                    variant="contained"
+                    color="secondary"
                     onClick={reset}
-                />
+                >
+                    {t('common_reset')}
+                </Button>
                 <Button
+                    size="small"
+                    variant="contained"
+                    color="primary"
                     onClick={onSubmit}
-                    label={t('common_save')}
-                    icon="pi pi-check"
-                />
+                >
+                    {t('common_save')}
+                </Button>
             </ButtonsWrapper>
         </Wrapper>
     );

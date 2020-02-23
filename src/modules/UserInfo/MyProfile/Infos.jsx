@@ -7,7 +7,7 @@ import dateformat from 'dateformat';
 
 const InfoTable = styled.table`
     color: black;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.2);
     border-radius: 2px;
     border: none;
 `;
@@ -42,8 +42,8 @@ const Infos = ({ currentUser }) => {
         username
     } = currentUser;
 
-    const country = COUNTRIES.find(val => val.code === nationality);
-    const countryName = country ? country.name : '';
+    const country = COUNTRIES.find(val => val.value === nationality);
+    const countryName = country ? country.label : '';
 
     return (
         <InfoTable>
