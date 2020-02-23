@@ -1,61 +1,67 @@
-import i18n from 'i18next';
+import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LngDetector from 'i18next-browser-languagedetector';
-import { isEmpty } from 'lodash';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+import moment from 'moment';
+// NOTE: en is imported by default
+import 'moment/locale/vi';
+// NOTE: make sure the last loaded language is the same as the first one used by i18n
+// so that the same default is used for text and dates
 
 import en from './en_strings';
 import vi from './vi_strings';
 
 const detectionOptions = {
-  order: ['cookie', 'localStorage', 'navigator'],
-  lookupCookie: 'i18next',
-  lookupLocalStorage: 'i18nextLng',
-  cache: ['cookie', 'localStorage'],
+    order: ['cookie', 'localStorage', 'navigator'],
+    lookupCookie: 'i18next',
+    lookupLocalStorage: 'i18nextLng',
+    cache: ['cookie', 'localStorage'],
 
-  cookieMinute: 10,
-  cookieDomain: process.env.DOMAIN_NAME,
+    cookieMinute: 10,
+    cookieDomain: process.env.REACT_APP_DOMAIN_NAME
 };
 
-const resources = {
-  en: {
-    translation: {
-      ...en,
-    },
-  },
-  vi: {
-    translation: {
-      ...vi,
-    },
-  },
-};
 
-i18n
-  .use(LngDetector) // detect user language
-  .use(initReactI18next) // passes i18n down to react-i18next
-  .init({
-    resources,
-    detection: detectionOptions,
-    fallbackLng: {
-      default: ['en', 'vi'],
-    },
-    load: 'languageOnly',
-    whitelist: ['en', 'vi'],
-    nonExplicitWhitelist: true,
-    debug: true,
+i18next
+    .use(LanguageDetector) // for using browser auto detection
+    .use(initReactI18next) // for using with React components (note that Provider is no longer needed)
+    .init({
+        // we init with resources
+        resources: {
+            en: { translations: en },
+            vi: { translations: vi }
+        },
+        detection: detectionOptions,
+        load: 'languageOnly',
+        fallbackLng: {
+            default: ['en', 'vi']
+        },
+        whitelist: ['en', 'vi'],
+        nonExplicitWhitelist: true,
+        debug: process.env.NODE_ENV !== 'production',
 
-    keySeparator: false, // we do not use keys in form messages.welcome
+        // have a common namespace used around the full app
+        ns: ['translations'],
+        defaultNS: 'translations',
 
-    interpolation: {
-      escapeValue: false, // react already safes from xss
-    },
-  });
+        keySeparator: false, // we use content as keys
 
-async function changeLanguage(language: string) {
-  if (isEmpty(language)) {
-    return;
-  }
+        interpolation: {
+            escapeValue: false, // not needed for react
+            formatSeparator: ','
+        },
 
-  await i18n.changeLanguage(language);
-}
+        react: {
+            wait: true,
+            nsMode: 'fallback',
+        }
+    });
 
-export { i18n, changeLanguage };
+i18next.on('languageChanged', lng => {
+    moment.locale(lng);
+});
+
+// this is required in order to be able to use i18next.t outside a react component
+i18next.t = i18next.t.bind(i18next);
+
+export default i18next;

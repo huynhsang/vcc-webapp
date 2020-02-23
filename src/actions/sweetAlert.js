@@ -5,7 +5,7 @@ import { SweetType } from '../constants/sweet-alert.constant';
 
 import { TO_LOGIN } from '../component/SweetAlert';
 
-import { i18n } from '../services/localize';
+import i18n from 'i18next';
 
 const { SHOW_ALERT, HIDE_ALERT } = actionsNames;
 

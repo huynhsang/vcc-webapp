@@ -25,8 +25,8 @@ const WorkSpace = ({ title, steps = [] }) => {
         <Wrapper>
             <Title>{title}</Title>
             <Stepper orientation="vertical">
-                {steps.map(step => (
-                    <Step key={step.title} active={true}>
+                {steps.map((step, key) => (
+                    <Step key={`step-${key}`} active={true}>
                         <StepLabel>{step.title}</StepLabel>
                         <StepContent>
                             <Typography>{step.description}</Typography>

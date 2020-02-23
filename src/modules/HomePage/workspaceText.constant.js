@@ -1,4 +1,4 @@
-import { i18n } from '../../services/localize';
+import i18n from 'i18next';
 
 export const askSteps = [
     {

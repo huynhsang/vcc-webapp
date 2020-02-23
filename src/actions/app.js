@@ -1,5 +1,5 @@
 import { createAction } from 'redux-starter-kit';
-import { i18n } from '../services/localize';
+import i18n from 'i18next';
 import actionsNames from '../constants/action-names.constant';
 
 import {

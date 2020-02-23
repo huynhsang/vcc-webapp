@@ -15,7 +15,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
-
+import { withTranslation } from 'react-i18next';
 const AppWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -60,4 +60,7 @@ const mapDispatchToProps = dispatch => ({
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withTranslation()(App));
