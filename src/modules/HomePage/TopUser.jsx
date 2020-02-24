@@ -49,10 +49,6 @@ const UserName = styled.span`
     color: #009fff;
     margin-right: 10px;
     font-size: 15px;
-
-    &:hover {
-        color: #0570b1;
-    }
 `;
 
 const DescriptionWrapper = styled.div`
