@@ -105,7 +105,7 @@ const QuestionRelated = ({ answers, location, history }) => {
     } = answers[0].question;
 
     const handleTitle = () => {
-        history.push(`/homes/question/${slug}/view`);
+        history.push(`/questions/${slug}`);
     };
 
     const tagsRender = tagList.length > 0 && (

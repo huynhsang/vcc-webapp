@@ -36,7 +36,7 @@ const ResetPassword = ({
                     'Success!',
                     t('authentification_your_password_has_been_reset')
                 );
-                history.push('/homes/questions');
+                history.push('/questions');
             })
             .catch(err => {
                 showErrorAlert(
@@ -96,7 +96,4 @@ const mapDispatchToProp = dispatch => ({
     showErrorAlert: (title, text) => dispatch(showErrorAlertFn(title, text))
 });
 
-export default connect(
-    null,
-    mapDispatchToProp
-)(withRouter(ResetPassword));
+export default connect(null, mapDispatchToProp)(withRouter(ResetPassword));

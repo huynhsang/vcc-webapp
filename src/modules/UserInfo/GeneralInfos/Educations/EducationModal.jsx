@@ -1,31 +1,44 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
-import { ProgressSpinner } from 'primereact/progressspinner';
+import { makeStyles } from '@material-ui/core/styles';
 
-const dialogStyle = {
-    width: '95%',
-    maxWidth: '750px'
-};
-const contentStyle = {
-    position: 'relative',
-    maxHeight: '65vh',
-    padding: '12px 24px 24px 24px',
-    overflowY: 'auto'
-};
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
+import Button from '@material-ui/core/Button';
 
-const Input = styled.input`
-    border-color: ${p => p.isShownAlert && 'red !important'};
-`;
+import TextField from '@material-ui/core/TextField';
+
+const useStyle = makeStyles(() => ({
+    title: {
+        paddingBottom: 0,
+        '& > h2': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        }
+    },
+    content: {
+        paddingBottom: 20
+    },
+    actions: {
+        justifyContent: 'space-between',
+        flexDirection: 'row-reverse'
+    },
+    fullWidth: {
+        width: '100%'
+    }
+}));
 
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    color: red;
-    align-items: center;
+    margin-bottom: 10px;
 `;
 
 const LoaderWrapper = styled.div`
@@ -49,6 +62,7 @@ const EducationModal = ({
     isFetchingError
 }) => {
     const { t } = useTranslation();
+    const classes = useStyle();
 
     const [isMounted, setIsMounted] = React.useState(false);
 
@@ -92,101 +106,99 @@ const EducationModal = ({
         submit(educationEditted);
     };
 
-    const footer = (
-        <FlexWrapper>
-            <Button
-                label="Save"
-                className="btn-primary"
-                icon="pi pi-check"
-                onClick={onSubmit}
-            />
-            {isShownError && <div>{t('form_require_all_values')}</div>}
-        </FlexWrapper>
-    );
-
     return (
-        <Dialog
-            header={t('common_education')}
-            visible={isShowing}
-            style={dialogStyle}
-            contentStyle={contentStyle}
-            modal={true}
-            onHide={onClose}
-            footer={footer}
-            dismissableMask
-        >
-            {isChangingEducation ? (
-                <LoaderWrapper>
-                    <ProgressSpinner />
-                </LoaderWrapper>
-            ) : (
-                <>
-                    <div>
-                        {t('form_your_school')}{' '}
-                        <span className="required">*</span>
-                    </div>
-                    <Input
-                        type="text"
-                        value={degree}
-                        onChange={ev =>
-                            updateEducationEditted({ degree: ev.target.value })
-                        }
-                        isShownAlert={isShownError && !degree}
-                    />
-                    <div className="mt2">
-                        {t('common_field_of_study')}{' '}
-                        <span className="required">*</span>
-                    </div>
-                    <Input
-                        type="text"
-                        value={fieldOfStudy}
-                        onChange={ev =>
-                            updateEducationEditted({
-                                fieldOfStudy: ev.target.value
-                            })
-                        }
-                        isShownAlert={isShownError && !fieldOfStudy}
-                    />
-                    <div className="row mt2">
-                        <div className="col-sm-6">
-                            <div className="mt2">{t('common_from_year')}</div>
-                            <Input
+        <Dialog open={isShowing}>
+            <DialogTitle className={classes.title}>
+                <div>{t('common_education')}</div>
+                <IconButton size="medium" onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent className={classes.content}>
+                {isChangingEducation ? (
+                    <LoaderWrapper>
+                        <CircularProgress />
+                    </LoaderWrapper>
+                ) : (
+                    <>
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('form_your_school')}
+                            variant="outlined"
+                            value={degree}
+                            onChange={ev =>
+                                updateEducationEditted({
+                                    degree: ev.target.value
+                                })
+                            }
+                            error={isShownError && !degree}
+                            margin="dense"
+                        />
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('common_field_of_study')}
+                            variant="outlined"
+                            value={fieldOfStudy}
+                            onChange={ev =>
+                                updateEducationEditted({
+                                    fieldOfStudy: ev.target.value
+                                })
+                            }
+                            error={isShownError && !fieldOfStudy}
+                            margin="dense"
+                        />
+                        <FlexWrapper>
+                            <TextField
+                                className={classes.fullWidth}
                                 type="number"
+                                label={t('common_from_year')}
+                                variant="outlined"
                                 value={fromYear}
                                 onChange={ev =>
                                     updateEducationEditted({
                                         fromYear: ev.target.value
                                     })
                                 }
-                                isShownAlert={isShownError && !fromYear}
+                                error={isShownError && !fromYear}
+                                margin="dense"
                             />
-                        </div>
-                        <div className="col-sm-6">
-                            <div className="mt2">{t('common_to_year')}</div>
-                            <Input
+                            <TextField
+                                className={classes.fullWidth}
                                 type="number"
+                                label={t('common_to_year')}
+                                variant="outlined"
                                 value={toYear}
                                 onChange={ev =>
                                     updateEducationEditted({
                                         toYear: ev.target.value
                                     })
                                 }
-                                isShownAlert={isShownError && !toYear}
+                                error={isShownError && !toYear}
+                                margin="dense"
                             />
-                        </div>
-                    </div>
-                    <div className="mt2">{t('common_description')}</div>
-                    <textarea
-                        rows="6"
-                        value={description}
-                        onChange={ev =>
-                            updateEducationEditted({
-                                description: ev.target.value
-                            })
-                        }
-                    />
-                </>
-            )}
+                        </FlexWrapper>
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('common_description')}
+                            multiline
+                            rows="6"
+                            value={description}
+                            variant="outlined"
+                            onChange={ev =>
+                                updateEducationEditted({
+                                    description: ev.target.value
+                                })
+                            }
+                        />
+                    </>
+                )}
+            </DialogContent>
+            <MuiDialogActions className={classes.actions}>
+                <Button variant="contained" onClick={onSubmit} color="primary">
+                    {t('common_save')}
+                </Button>
+                {isShownError && <div>{t('form_require_all_values')}</div>}
+            </MuiDialogActions>
         </Dialog>
     );
 };

@@ -4,14 +4,13 @@ import { connect } from 'react-redux';
 import { getUserByLoginTokenFn } from '../../actions/app';
 
 const SSOLogin = ({ location, history, getUserByLoginToken }) => {
-
     React.useEffect(() => {
         const search = new URLSearchParams(location.search);
         const token = search.get('access_token');
         if (token) {
             getUserByLoginToken(token);
         }
-        history.push('/homes/questions');
+        history.push('/questions');
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 

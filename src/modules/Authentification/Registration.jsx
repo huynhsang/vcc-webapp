@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ProgressSpinner } from 'primereact/progressspinner';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { useTranslation } from 'react-i18next';
 
 import { register } from '../../services/account.service';
@@ -65,7 +66,7 @@ const Registration = ({
     if (loader) {
         return (
             <LoaderWrapper>
-                <ProgressSpinner />
+                <CircularProgress />
             </LoaderWrapper>
         );
     }

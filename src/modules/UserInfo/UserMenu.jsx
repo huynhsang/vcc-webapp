@@ -58,26 +58,24 @@ const UserMenu = ({ location, history, userId }) => {
     const isMainUserProfile = id === userId;
 
     const paths = pathname.match(/\/[\w-]+/g);
-    const tabSelected = paths && paths[2] ? paths[2].substring(1) : '';
-
-    const handleChange = (event, newValue) => {
-        const { path } = TABS[newValue];
-        history.push(`/users/${userId}/${path}`);
-    };
-
-    if (!tabSelected) {
-        return null;
-    }
+    const tabSelected = paths && paths[2] ? paths[2].substring(1) : 'general';
 
     const tabs = isMainUserProfile
         ? TABS
         : TABS.filter((val, key) => key !== 0);
+
+    const handleChange = (event, newValue) => {
+        const { path } = tabs[newValue];
+        history.push(`/users/${userId}/${path}`);
+    };
 
     const activeIndex = tabs.findIndex(val => tabSelected === val.path);
 
     const tabsRender = tabs.map((tab, key) => (
         <Tab key={`tab-${key}`} label={t(tab.label)} {...a11yProps(key)} />
     ));
+
+    console.log(activeIndex);
 
     return (
         <FullWidth>

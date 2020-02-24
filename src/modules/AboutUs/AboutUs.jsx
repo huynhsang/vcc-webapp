@@ -82,14 +82,12 @@ const AboutUs = () => {
                     <ContentTitle>{t('about_us_our_story')}</ContentTitle>
                     <Content>{t('about_us_story')}</Content>
                 </ContentWrapper>
-
                 <ContentWrapper alignItem="start">
                     <ContentTitle borderRadius="0 0 2px 2px">
                         {t('about_us_our_mission')}
                     </ContentTitle>
                     <Content>{t('about_us_mission')}</Content>
                 </ContentWrapper>
-
                 <ContentWrapper>
                     <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
                     <Content>{t('about_us_do')}</Content>

@@ -3,19 +3,17 @@ import styled from 'styled-components';
 
 import UserInfo from './UserInfo';
 import { team } from './VCNC-team.constant';
-import { Button } from 'primereact/button';
 
 import { useSwipe } from '../../hooks/useSwipe';
+import IconButton from '@material-ui/core/IconButton';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 
 const Wrapper = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin: 20px 5px;
-
-    & .p-button:focus {
-        box-shadow: none !important;
-    }
 `;
 
 const ListShown = styled.div`
@@ -29,7 +27,7 @@ const List = styled.div`
     display: flex;
     justify-content: ${p => p.justifyContent};
     user-select: none;
-    position: absolute  
+    position: absolute;
     width: 100%;
     height: 100%;
 `;
@@ -94,11 +92,9 @@ const UserInfoList = () => {
     return (
         <Wrapper>
             {toScroll && (
-                <Button
-                    icon="pi pi-chevron-left"
-                    className="p-button-secondary"
-                    onClick={scroll('left')}
-                />
+                <IconButton onClick={scroll('left')}>
+                    <ChevronLeft />
+                </IconButton>
             )}
             <ListShown>
                 <List
@@ -111,11 +107,9 @@ const UserInfoList = () => {
                 </List>
             </ListShown>
             {toScroll && (
-                <Button
-                    icon="pi pi-chevron-right"
-                    className="p-button-secondary"
-                    onClick={scroll('right')}
-                />
+                <IconButton onClick={scroll('right')}>
+                    <ChevronRight />
+                </IconButton>
             )}
         </Wrapper>
     );

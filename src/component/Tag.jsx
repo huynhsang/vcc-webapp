@@ -38,7 +38,7 @@ const Tag = ({ tag, history, location }) => {
 
     const onClick = () => {
         const params = { page: 1 };
-        if (/homes\/questions/.test(pathname)) {
+        if (/questions/.test(pathname)) {
             Object.assign(params, { show, text });
             const index = ids.findIndex(id => id === tag.id);
             if (index !== -1) {

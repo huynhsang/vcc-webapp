@@ -11,7 +11,7 @@ import QuestionFilter from './QuestionFilter';
 import { getQuestionsFn } from '../../actions/questions';
 
 import { setUpQuestionFilter, DEFAULT_LIMIT } from '../../utils/question';
-import { ProgressSpinner } from 'primereact/progressspinner';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import qs from 'qs';
 
@@ -117,7 +117,7 @@ const QuestionPage = ({
             />
             {isFetching ? (
                 <LoaderWrapper>
-                    <ProgressSpinner />
+                    <CircularProgress />
                 </LoaderWrapper>
             ) : (
                 <>
@@ -138,7 +138,7 @@ const QuestionPage = ({
                         ) : (
                             <div>
                                 {`${t('common_no_result')} `}
-                                <Link to={`/homes/questions?page=1`}>
+                                <Link to={`/questions?page=1`}>
                                     {t('common_come_back')}
                                 </Link>
                             </div>
