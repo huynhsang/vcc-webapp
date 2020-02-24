@@ -7,7 +7,7 @@ import { Experiences } from './Experiences';
 import { Educations } from './Educations';
 
 const SummaryWrapper = styled.section`
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: white;
     border-radius: 2px;
     & p {
@@ -22,7 +22,6 @@ const SignWrapper = styled.div`
 `;
 
 const GeneralInfos = ({ userInfos }) => {
-
     const {
         userProfile: { summary }
     } = userInfos;

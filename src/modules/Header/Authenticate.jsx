@@ -44,7 +44,7 @@ const Authenticate = ({
         deleteCookie(CookieConstant.jwtTokenName);
         deleteCookie(userIdKey);
         setIsAuthenticated(false);
-        history.push('/homes');
+        history.push('/home');
     };
 
     const userMenuStyle = showUserMenu

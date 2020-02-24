@@ -15,7 +15,7 @@ import { getNameByLanguage } from '../../../utils/multiple-language';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     overflow: hidden;
     margin: 10px 0;
@@ -105,7 +105,7 @@ const QuestionRelated = ({ answers, location, history }) => {
     } = answers[0].question;
 
     const handleTitle = () => {
-        history.push(`/homes/question/${slug}/view`);
+        history.push(`/questions/${slug}`);
     };
 
     const tagsRender = tagList.length > 0 && (

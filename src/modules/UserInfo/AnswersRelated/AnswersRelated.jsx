@@ -8,14 +8,16 @@ import { getAnswersRelatedFn } from '../../../actions/userInfos';
 
 import groupBy from 'lodash/groupBy';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    min-height: calc(100vh - 650px);
+`;
 
 const QuestionsWrapper = styled.div``;
 
 const AnswersRelated = ({ answersRelated, getAnswersRelated }) => {
     const userId = window.location.pathname.split('/')[2];
 
-    const answersGrouped = groupBy(answersRelated, 'question.id')
+    const answersGrouped = groupBy(answersRelated, 'question.id');
 
     React.useEffect(() => {
         if (userId) {
@@ -43,7 +45,4 @@ const mapStateToProps = ({ userInfos: { answersRelated } }) => ({
 const mapDispatchToProps = dispatch => ({
     getAnswersRelated: userId => dispatch(getAnswersRelatedFn(userId))
 });
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AnswersRelated);
+export default connect(mapStateToProps, mapDispatchToProps)(AnswersRelated);

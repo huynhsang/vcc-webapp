@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { Dialog } from 'primereact/dialog';
 
 import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
 
@@ -19,31 +18,32 @@ import {
     fetchUserFromCookieFn
 } from '../../actions/app';
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+
 const BackgroundImage = require('../../static/resources/img/bg.jpg');
 
-const dialogStyle = {
-    width: '95%',
-    maxWidth: '450px'
-};
-
-const Wrapper = styled.div`
-  .p-dialog .p-dialog-content {
-        padding: 0 !important;
-        background: url('${BackgroundImage}') center center / 100% 100% no-repeat;
-        width: 100%;
-        padding: 30px 15px;
-        color: #a8a8a8;
-
-        & form{
-            color:white;
+const useStyle = makeStyles(() => ({
+    dialog: {
+        '& .MuiDialog-paper': {
+            background: `url('${BackgroundImage}') center center / 100% 100% no-repeat`
         }
-
-        & input {
-            border : none;
+    },
+    title: {
+        paddingBottom: 0,
+        '& > h2': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
         }
+    },
+    content: {
+        paddingBottom: 20
     }
-
-`;
+}));
 
 const Authentication = ({
     location,
@@ -58,6 +58,7 @@ const Authentication = ({
     fetchUserFromCookie
 }) => {
     const { t } = useTranslation();
+    const classes = useStyle();
 
     const [isMounted, setIsMounted] = React.useState(false);
 
@@ -90,15 +91,18 @@ const Authentication = ({
     const hideAuthentification = () => setToAuthenticate('');
 
     return (
-        <Wrapper>
-            <Dialog
-                header={t(headerTitle())}
-                visible={Boolean(toAuthenticate)}
-                style={dialogStyle}
-                modal={true}
-                onHide={hideAuthentification}
-                // dismissableMask
-            >
+        <Dialog
+            className={classes.dialog}
+            open={Boolean(toAuthenticate)}
+            onClose={hideAuthentification}
+        >
+            <DialogTitle className={classes.title}>
+                <div>{t(headerTitle())}</div>
+                <IconButton size="small" onClick={hideAuthentification}>
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent className={classes.content}>
                 {toAuthenticate === 'login' && (
                     <Login
                         showSuccessAlert={showSuccessAlert}
@@ -127,8 +131,8 @@ const Authentication = ({
                         hideAuthentification={hideAuthentification}
                     />
                 )}
-            </Dialog>
-        </Wrapper>
+            </DialogContent>
+        </Dialog>
     );
 };
 

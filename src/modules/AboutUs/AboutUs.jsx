@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { PageCover } from '../Header';
 
 import UserInfoList from './UserInfoList';
 
@@ -65,28 +66,28 @@ const Content = styled.div`
     padding: 10px 15px;
 `;
 
+const BottomWrapper = styled.div`
+    background-color: #171717;
+    padding: 20px;
+`;
+
 const AboutUs = () => {
     const { t } = useTranslation();
 
     return (
         <>
-            <div className="call-action-unlogged call-action-dark call-action-style_1">
-                <Title>{t('about_us_VCNC')}</Title>
-                <Sologan>{t('about_us_sologan')}</Sologan>
-            </div>
+            <PageCover />
             <Wrapper>
                 <ContentWrapper>
                     <ContentTitle>{t('about_us_our_story')}</ContentTitle>
                     <Content>{t('about_us_story')}</Content>
                 </ContentWrapper>
-
                 <ContentWrapper alignItem="start">
                     <ContentTitle borderRadius="0 0 2px 2px">
                         {t('about_us_our_mission')}
                     </ContentTitle>
                     <Content>{t('about_us_mission')}</Content>
                 </ContentWrapper>
-
                 <ContentWrapper>
                     <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
                     <Content>{t('about_us_do')}</Content>
@@ -96,6 +97,10 @@ const AboutUs = () => {
                 </SmallTitle>
                 <UserInfoList />
             </Wrapper>
+            <BottomWrapper>
+                <Title>{t('about_us_VCNC')}</Title>
+                <Sologan>{t('about_us_sologan')}</Sologan>
+            </BottomWrapper>
         </>
     );
 };

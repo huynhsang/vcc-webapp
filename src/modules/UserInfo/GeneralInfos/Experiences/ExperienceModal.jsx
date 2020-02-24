@@ -1,35 +1,50 @@
 import React from 'react';
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import { Calendar } from 'primereact/calendar';
-import { Dialog } from 'primereact/dialog';
-import { Button } from 'primereact/button';
+import Button from '@material-ui/core/Button';
 
-import { ProgressSpinner } from 'primereact/progressspinner';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import IconButton from '@material-ui/core/IconButton';
+import MuiDialogActions from '@material-ui/core/DialogActions';
+import CloseIcon from '@material-ui/icons/Close';
 
-import { isDate } from '../../../../utils/detect-date';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
-const dialogStyle = {
-    width: '95%',
-    maxWidth: '750px'
-};
-const contentStyle = {
-    position: 'relative',
-    maxHeight: '73vh',
-    padding: '12px 24px 24px 24px',
-    overflowY: 'auto'
-};
+import dateformat from 'dateformat';
 
-const Input = styled.input`
-    border-color: ${p => p.isShownAlert && 'red !important'};
-`;
+const useStyle = makeStyles(() => ({
+    title: {
+        paddingBottom: 0,
+        '& > h2': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center'
+        }
+    },
+    content: {
+        paddingBottom: 20
+    },
+    actions: {
+        justifyContent: 'space-between',
+        flexDirection: 'row-reverse'
+    },
+    fullWidth: {
+        width: '100%'
+    }
+}));
 
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
-    flex-direction: row-reverse;
-    color: red;
     align-items: center;
+    margin: 10px 0 15px;
+    padding: 0 20px;
 `;
 
 const LoaderWrapper = styled.div`
@@ -52,6 +67,7 @@ const ExperienceModal = ({
     isChangingExperience,
     isFetchingError
 }) => {
+    const classes = useStyle();
     const { t } = useTranslation();
 
     const [isMounted, setIsMounted] = React.useState(false);
@@ -69,17 +85,6 @@ const ExperienceModal = ({
 
     React.useEffect(() => {
         const newObj = experienceToEdit ? { ...experienceToEdit } : {};
-
-        if (experienceToEdit) {
-            const { startDate, endDate } = experienceToEdit;
-            if (experienceToEdit && !isDate(startDate)) {
-                newObj.startDate = new Date(startDate);
-            }
-            if (experienceToEdit && !isDate(endDate)) {
-                newObj.endDate = new Date(endDate);
-            }
-        }
-
         setExperienceEditted(newObj);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [experienceToEdit]);
@@ -119,146 +124,139 @@ const ExperienceModal = ({
         submit(experienceEditted);
     };
 
-    const footer = (
-        <FlexWrapper>
-            <Button
-                label="Save"
-                className="btn-primary"
-                icon="pi pi-check"
-                onClick={onSubmit}
-            />
-            {isShownError && <div>{t('form_require_all_values')}</div>}
-        </FlexWrapper>
-    );
-
     return (
-        <Dialog
-            header="Experience"
-            visible={isShowing}
-            style={dialogStyle}
-            contentStyle={contentStyle}
-            modal={true}
-            onHide={onClose}
-            footer={footer}
-            dismissableMask
-        >
-            {isChangingExperience ? (
-                <LoaderWrapper>
-                    <ProgressSpinner />
-                </LoaderWrapper>
-            ) : (
-                <>
-                    <div>
-                        {t('form_your_job')} <span className="required">*</span>
-                    </div>
-                    <Input
-                        type="text"
-                        placeholder={t('form_ex_work_manager')}
-                        value={title}
-                        onChange={ev =>
-                            updateExperienceEditted({ title: ev.target.value })
-                        }
-                        isShownAlert={isShownError && !title}
-                    />
-                    <div className="mt2">
-                        {t('common_company')}{' '}
-                        <span className="required">*</span>
-                    </div>
-                    <Input
-                        type="text"
-                        value={company}
-                        onChange={ev =>
-                            updateExperienceEditted({
-                                company: ev.target.value
-                            })
-                        }
-                        isShownAlert={isShownError && !company}
-                    />
-                    <div className="mt2">
-                        {t('common_location')}{' '}
-                        <span className="required">*</span>
-                    </div>
-                    <Input
-                        type="text"
-                        value={location}
-                        onChange={ev =>
-                            updateExperienceEditted({
-                                location: ev.target.value
-                            })
-                        }
-                        isShownAlert={isShownError && !location}
-                    />
-                    <div className="mt2">
-                        <input
-                            id="work-1"
-                            type="checkbox"
-                            checked={isWorking}
+        <Dialog open={isShowing}>
+            <DialogTitle className={classes.title}>
+                <div>{t('common_experience')}</div>
+                <IconButton size="medium" onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
+            </DialogTitle>
+            <DialogContent className={classes.content}>
+                {isChangingExperience ? (
+                    <LoaderWrapper>
+                        <CircularProgress />
+                    </LoaderWrapper>
+                ) : (
+                    <>
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('form_your_job')}
+                            helperText={t('form_ex_work_manager')}
+                            variant="outlined"
+                            value={title}
                             onChange={ev =>
                                 updateExperienceEditted({
-                                    isWorking: ev.target.checked
+                                    title: ev.target.value
                                 })
                             }
+                            error={isShownError && !title}
+                            margin="dense"
                         />
-                        <label htmlFor="work-1">{t('form_current_role')}</label>
-                    </div>
-                    <div className="row mt2">
-                        <div className="col-sm-6">
-                            <label>
-                                {t('common_start_date')}
-                                <span className="required"> *</span>
-                            </label>
-                            <Calendar
-                                value={isDate(startDate) ? startDate : null}
-                                placeholder="mm/yy"
-                                view="month"
-                                dateFormat="mm/yy"
-                                yearNavigator={true}
-                                yearRange="2010:2030"
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('common_company')}
+                            variant="outlined"
+                            value={company}
+                            onChange={ev =>
+                                updateExperienceEditted({
+                                    company: ev.target.value
+                                })
+                            }
+                            error={isShownError && !company}
+                            margin="dense"
+                        />
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('common_location')}
+                            variant="outlined"
+                            value={location}
+                            onChange={ev =>
+                                updateExperienceEditted({
+                                    location: ev.target.value
+                                })
+                            }
+                            error={isShownError && !location}
+                            margin="dense"
+                        />
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    checked={isWorking}
+                                    onChange={ev =>
+                                        updateExperienceEditted({
+                                            isWorking: ev.target.checked
+                                        })
+                                    }
+                                    color="primary"
+                                />
+                            }
+                            label={t('form_current_role')}
+                        />
+                        <FlexWrapper>
+                            <TextField
+                                label={t('common_start_date')}
+                                type="date"
+                                defaultValue={dateformat(
+                                    startDate,
+                                    'yyyy-mm-dd'
+                                )}
+                                className={classes.textField}
+                                InputLabelProps={{
+                                    shrink: true
+                                }}
                                 onChange={ev =>
                                     updateExperienceEditted({
-                                        startDate: ev.value
+                                        startDate: ev.target.value
                                     })
                                 }
                             />
-                        </div>
-                        <div className="col-sm-6">
-                            <label>
-                                {t('common_end_date')}
-                                <span className="required"> *</span>
-                            </label>
                             {isWorking ? (
                                 <div>
                                     <i>{t('common_present')}</i>
                                 </div>
                             ) : (
-                                <Calendar
-                                    value={isDate(endDate) ? endDate : null}
-                                    placeholder="mm/yy"
-                                    view="month"
-                                    dateFormat="mm/yy"
-                                    yearNavigator={true}
-                                    yearRange="2010:2030"
+                                <TextField
+                                    label={t('common_start_date')}
+                                    type="date"
+                                    defaultValue={dateformat(
+                                        endDate,
+                                        'yyyy-mm-dd'
+                                    )}
+                                    className={classes.textField}
+                                    InputLabelProps={{
+                                        shrink: true
+                                    }}
                                     onChange={ev =>
                                         updateExperienceEditted({
-                                            endDate: ev.value
+                                            endDate: ev.target.value
                                         })
                                     }
                                 />
                             )}
-                        </div>
-                    </div>
-                    <div className="mt2">{t('common_description')}</div>
-                    <textarea
-                        rows="6"
-                        value={description}
-                        onChange={ev =>
-                            updateExperienceEditted({
-                                description: ev.target.value
-                            })
-                        }
-                    />
-                </>
-            )}
+                        </FlexWrapper>
+                        <TextField
+                            className={classes.fullWidth}
+                            label={t('common_description')}
+                            multiline
+                            rows="6"
+                            value={description}
+                            variant="outlined"
+                            onChange={ev =>
+                                updateExperienceEditted({
+                                    description: ev.target.value
+                                })
+                            }
+                        />
+                    </>
+                )}
+            </DialogContent>
+            <MuiDialogActions className={classes.actions}>
+                <Button variant="contained" onClick={onSubmit} color="primary">
+                    {t('common_save')}
+                </Button>
+                {isShownError && <div>{t('form_require_all_values')}</div>}
+            </MuiDialogActions>
         </Dialog>
     );
 };

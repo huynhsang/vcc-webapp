@@ -14,8 +14,12 @@ import {
 
 import { getIdAndToken } from '../../../../utils/cookie-tools';
 
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/AddCircle';
+import EditIcon from '@material-ui/icons/Edit';
+
 const Wrapper = styled.section`
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
 `;
@@ -29,14 +33,6 @@ const EducationInfo = styled(FlexWrapper)`
     border-top: 1px solid #707885;
     width: 80%;
     padding-top: 10px;
-`;
-
-const IconWrapper = styled.a`
-    display: flex;
-    justify-content: center;
-    & .pi {
-        font-size: 26px;
-    }
 `;
 
 const Img = styled.img`
@@ -105,12 +101,9 @@ const Educations = ({
                     <p className="note pt2">{val.description}</p>
                 </div>
                 {canEdit && (
-                    <IconWrapper
-                        className="experience--icon"
-                        onClick={() => setEditEducationId(val.id)}
-                    >
-                        <i className="pi pi-pencil" />
-                    </IconWrapper>
+                    <IconButton onClick={() => setEditEducationId(val.id)}>
+                        <EditIcon />
+                    </IconButton>
                 )}
             </EducationInfo>
         </FlexWrapper>
@@ -121,12 +114,9 @@ const Educations = ({
             <FlexWrapper>
                 <h5 className="title-user m0">{t('common_education')}</h5>
                 {canEdit && (
-                    <IconWrapper
-                        className="experience--icon"
-                        onClick={() => setIsShowingModal(true)}
-                    >
-                        <i className="pi pi-plus" />
-                    </IconWrapper>
+                    <IconButton onClick={() => setIsShowingModal(true)}>
+                        <AddIcon color="primary" />
+                    </IconButton>
                 )}
             </FlexWrapper>
             {educationsRender}

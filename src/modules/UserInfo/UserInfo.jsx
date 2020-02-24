@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
-import { Link, withRouter } from 'react-router-dom';
+import {  withRouter } from 'react-router-dom';
 import UserInfoRouter from './UserInfoRouter';
-import { getIdAndToken } from '../../utils/cookie-tools';
 import DefaultUserLogo from '../../images/default-user-logo.png';
 
 import {
@@ -12,48 +10,36 @@ import {
     getExperiencesFn,
     getEducationsFn
 } from '../../actions/userInfos';
+import { PageCover } from '../Header';
+import { DefaultWrapper } from '../../component/Wrappers';
 
-const BgPhoto = require(`../../static/resources/img/bg-user.jpg`);
+import { Badge } from '../Badges';
+import UserMenu from './UserMenu';
 
-const Wrapper = styled.div`
+const UserImage = styled.img`
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-top: 10px;
+`;
+
+const CenterWrapper = styled.div`
     display: flex;
-`;
-
-const LeftNav = styled.section`
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    background: #fff;
-    border-radius: 2px;
-    width: 25%;
-`;
-
-const ContentWrapper = styled.div`
-    width: 75%;
-    padding: 15px;
-`;
-
-const Badge = styled.span`
-    background-color: #30a96f;
-    font-size: 16px;
-    padding: 0 5px;
-    color: white;
+    align-items: center;
+    flex-direction: column;
 `;
 
 const UserProfile = ({
-    subRoutes,
-    location,
-    history,
     userInfos,
     getUserProfile,
     getExperiences,
-    getEducations
+    getEducations,
+    location,
+    history
 }) => {
-    const { t } = useTranslation();
-
     const { userProfile } = userInfos;
 
     const userId = window.location.pathname.split('/')[2];
-    const { id } = getIdAndToken();
-    const isMainUserProfile = id === userId;
 
     React.useEffect(() => {
         if (userId) {
@@ -68,78 +54,21 @@ const UserProfile = ({
         return <div />;
     }
 
-    const { firstName, lastName, level, avatar } = userProfile;
+    const { firstName, lastName, avatar, points } = userProfile;
 
     return (
-        <div
-            className="container discy-container"
-            style={{ minHeight: 'calc(100vh - 185px)' }}
-        >
-            <section
-                className="profile-background-image"
-                style={{
-                    backgroundImage: `url('${BgPhoto}')`,
-                    backgroundPosition: 'center center',
-                    backgroundSize: 'cover',
-                    backgroundRepeat: 'no-repeat'
-                }}
-            />
-            <Wrapper>
-                <LeftNav className="user-container info-user position-relative">
-                    <div className="avatar-user">
-                        <img
-                            src={avatar || DefaultUserLogo}
-                            width="200"
-                            alt=""
-                            className="img-responsive"
-                        />
-                    </div>
-                    <div className="title-user-info">
-                        <div className="text-center">
-                            {`${lastName} ${firstName}`}
-                        </div>
-                        <div className="text-center">
-                            <Badge>{level} test</Badge>
-                        </div>
-                        <div className="shell-info">
-                            {isMainUserProfile && (
-                                <Link
-                                    to={`/users/${userId}/my-profile`}
-                                    className="title-info"
-                                >
-                                    {t('common_my_profile')}
-                                    <i className="fas fa-arrow-right" />
-                                </Link>
-                            )}
-                            <Link
-                                to={`/users/${userId}/general`}
-                                className="title-info"
-                            >
-                                {t('common_general_infos')}
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                            <Link
-                                to={`/users/${userId}/question-asked`}
-                                className="title-info"
-                            >
-                                {t('user_info_question_asked')}
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                            <Link
-                                to={`/users/${userId}/answers-related`}
-                                className="title-info"
-                            >
-                                {t('user_info_amswers_related')}
-                                <i className="fas fa-arrow-right" />
-                            </Link>
-                        </div>
-                    </div>
-                </LeftNav>
-                <ContentWrapper className="user-container responsive-user">
-                    <UserInfoRouter />
-                </ContentWrapper>
-            </Wrapper>
-        </div>
+        <>
+            <PageCover />
+            <UserMenu location={location} history={history} userId={userId} />
+            <CenterWrapper>
+                <UserImage src={avatar || DefaultUserLogo} alt="" />
+                <div>{`${lastName} ${firstName}`}</div>
+                <Badge points={points} />
+            </CenterWrapper>
+            <DefaultWrapper>
+                <UserInfoRouter />
+            </DefaultWrapper>
+        </>
     );
 };
 

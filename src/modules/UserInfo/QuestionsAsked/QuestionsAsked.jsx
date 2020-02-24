@@ -6,12 +6,13 @@ import Pagination from '../../../component/Pagination';
 
 import { getQuestionsAskedFn } from '../../../actions/userInfos';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+    min-height: calc(100% - 650px);
+`;
 
 const QuestionsWrapper = styled.div``;
 
 const QuestionsAsked = ({ userInfos, getQuestionsAsked }) => {
-
     const [activePage, setActivePage] = React.useState(1);
 
     const { questionsAsked, numberQuestionsAsked } = userInfos;
@@ -30,12 +31,12 @@ const QuestionsAsked = ({ userInfos, getQuestionsAsked }) => {
 
     return (
         <Wrapper>
+            <QuestionsWrapper>{questionsRender}</QuestionsWrapper>
             <Pagination
                 nbPages={Math.ceil(numberQuestionsAsked / 5)}
                 activePage={activePage}
                 onPageChange={setActivePage}
             />
-            <QuestionsWrapper>{questionsRender}</QuestionsWrapper>
         </Wrapper>
     );
 };
@@ -45,10 +46,8 @@ const mapStateToProps = ({ userInfos }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    getQuestionsAsked: (userId, page) => dispatch(getQuestionsAskedFn(userId, page))
+    getQuestionsAsked: (userId, page) =>
+        dispatch(getQuestionsAskedFn(userId, page))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(QuestionsAsked);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionsAsked);
