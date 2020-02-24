@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     padding: 10px;
     margin: 10px 0;
     border-radius: 2px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
 `;
 
 const Title = styled.div`
