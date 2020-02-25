@@ -29,7 +29,8 @@ const BackgroundImage = require('../../static/resources/img/bg.jpg');
 const useStyle = makeStyles(() => ({
     dialog: {
         '& .MuiDialog-paper': {
-            background: `url('${BackgroundImage}') center center / 100% 100% no-repeat`
+            // background: `url('${BackgroundImage}') center center / 100% 100% no-repeat`
+            background: '#fdfdfd'
         }
     },
     title: {
@@ -98,7 +99,7 @@ const Authentication = ({
         >
             <DialogTitle className={classes.title}>
                 <div>{t(headerTitle())}</div>
-                <IconButton size="small" onClick={hideAuthentification}>
+                <IconButton onClick={hideAuthentification}>
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
