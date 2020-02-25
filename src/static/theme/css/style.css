@@ -15129,7 +15129,6 @@ blockquote.alignright {
     color: #26aa6c
 }
 
-.coupon_area input[type="text"],
 .bump-question-area input[type="text"] {
     width: 75%;
     margin-right: 10px;
@@ -17512,9 +17511,7 @@ i.message_new.message-new {
 }
 
 .footer .widget_search input,
-.footer .subscribe-widget form input[type="text"],
 .footer textarea,
-.footer input[type="text"],
 .footer input[type="password"],
 .footer input[type="datetime"],
 .footer input[type="datetime-local"],
@@ -17867,7 +17864,6 @@ ul.question-link-list li,
 body,
 .section-title,
 textarea,
-input[type="text"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
@@ -18189,7 +18185,6 @@ span.verified_user,
 }
 
 textarea,
-input[type="text"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
@@ -18321,7 +18316,6 @@ div.search-results,
 }
 
 textarea,
-input[type="text"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
@@ -18456,8 +18450,6 @@ mark.dark,
 .wpqa_checkbox input[type="checkbox"],
 .wpqa_radio input[type="radio"],
 textarea,
-input[type="text"],
-input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
 input[type="time"],
@@ -18665,7 +18657,6 @@ input[type="submit"]:not(.button-default),
 }
 
 textarea,
-input[type="text"],
 input[type="datetime"],
 input[type="datetime-local"],
 input[type="month"],
@@ -18919,7 +18910,6 @@ li.li-follow-question a i,
 .footer .widget_search input,
 .footer .subscribe-widget form input[type="text"],
 .footer textarea,
-.footer input[type="text"],
 .footer input[type="password"],
 .footer input[type="datetime"],
 .footer input[type="datetime-local"],
@@ -21328,7 +21318,6 @@ a.meta-answer,
     .section-title,
     .commentlist > li.comment,
     textarea,
-    input[type="text"],
     input[type="datetime"],
     input[type="datetime-local"],
     input[type="month"],

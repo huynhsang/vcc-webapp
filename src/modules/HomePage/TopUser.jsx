@@ -40,7 +40,7 @@ const InfosSup = styled.div`
     font-size: 12px;
 
     & span {
-        color: #bbbbbb;
+        color: #7f7f7f;
         margin-right: 10px;
     }
 `;

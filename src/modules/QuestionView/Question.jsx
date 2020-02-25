@@ -45,7 +45,7 @@ const InfosSup = styled.div`
     margin-bottom: 10px;
     font-size: 0.9em;
     & span {
-        color: #bbbbbb;
+        color: #7f7f7f;
     }
 
     & time {
@@ -101,7 +101,7 @@ const ResolveLabel = styled.div`
     margin-left: 5px;
     border-radius: 3px;
 
-    & svg{
+    & svg {
         margin-right: 5px;
     }
 `;

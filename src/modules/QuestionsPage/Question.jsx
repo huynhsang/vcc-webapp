@@ -45,7 +45,7 @@ const InfosSup = styled.span`
     font-size: 0.9em;
 
     & span {
-        color: #bbbbbb;
+        color: #7f7f7f;
     }
 
     & time {
