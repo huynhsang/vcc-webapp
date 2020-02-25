@@ -76,6 +76,16 @@ const AskWrapper = styled.div`
 const WorkSpace = () => {
     const { t } = useTranslation();
 
+    const askStepsTranslate = askSteps.map(val => ({
+        ...val,
+        title: t(val.title)
+    }));
+
+    const answerStepsTranslate = answerSteps.map(val => ({
+        ...val,
+        title: t(val.title)
+    }));
+
     return (
         <FullWidth>
             <DefaultWrapper>
@@ -83,13 +93,13 @@ const WorkSpace = () => {
                 <StepsWrapper>
                     <StepWrapper>
                         <VerticalActiveSteps
-                            steps={askSteps}
+                            steps={askStepsTranslate}
                             title={t('workspace_if_you_are_asking')}
                         />
                     </StepWrapper>
                     <StepWrapper>
                         <VerticalActiveSteps
-                            steps={answerSteps}
+                            steps={answerStepsTranslate}
                             title={t('workspace_if_you_are_answering')}
                         />
                     </StepWrapper>
@@ -98,7 +108,7 @@ const WorkSpace = () => {
                     <SmallTitle>{t('workspace_our_support')}</SmallTitle>
                     <SupportOl>
                         {supportText.map((text, key) => (
-                            <li key={key}>{text}</li>
+                            <li key={key}>{t(text)}</li>
                         ))}
                     </SupportOl>
                 </SupportWrapper>
