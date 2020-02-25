@@ -1,11 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { useTranslation } from 'react-i18next';
 
 import { register } from '../../services/account.service';
 import { REALM } from '../../constants/constants';
+
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
+const useStyle = makeStyles(() => ({
+    button: {
+        fontSize: 12,
+        marginTop: 20
+    },
+    submitButton: {
+        marginTop: 10
+    }
+}));
+
+const Wrapper = styled.div`
+    padding: 30px 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const ContentWrapper = styled.div`
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    box-shadow: 0 0 1em #d9d9d9;
+    position: relative;
+    width: 90%;
+    ${media.mobileLandscape`
+        padding: 10px;
+    `}
+`;
 
 const LoaderWrapper = styled.div`
     width: 100%;
@@ -19,11 +56,6 @@ const LoaderWrapper = styled.div`
     }
 `;
 
-const FlewWrapper = styled.div`
-    display: flex;
-    margin: 0 -15px 15px;
-`;
-
 const Registration = ({
     history,
     showSuccessAlert,
@@ -32,6 +64,7 @@ const Registration = ({
     hideAuthentification
 }) => {
     const { t } = useTranslation();
+    const classes = useStyle();
 
     const [loader, setLoader] = React.useState(false);
 
@@ -72,92 +105,70 @@ const Registration = ({
     }
 
     return (
-        <form className="register" onSubmit={onSubmit} method="post">
-            <FlewWrapper>
-                <div className="col-6">
-                    <label
-                        htmlFor="Firstname"
-                        className="floatLabel font-size-16"
-                    >
-                        {t('authentification_first_name')}
-                    </label>
-                    <input
-                        id="firstname"
-                        className="font-size-14"
-                        name="First name"
-                        type="text"
-                        value={firstName}
-                        onChange={ev => setFirstName(ev.target.value)}
-                    />
-                </div>
-                <div className="col-6">
-                    <label htmlFor="Lastname" className="font-size-16">
-                        {t('authentification_last_name')}
-                    </label>
-                    <input
-                        id="lastname"
-                        className="font-size-14"
-                        name="Last name"
-                        type="text"
-                        value={lastName}
-                        onChange={ev => setLastName(ev.target.value)}
-                    />
-                </div>
-            </FlewWrapper>
-            <div className="mb3">
-                <label htmlFor="Email" className="font-size-16">
-                    {t('common_email')}
-                </label>
-                <input
-                    id="Email"
-                    className="font-size-14"
-                    name="Email"
-                    type="text"
+        <Wrapper>
+            <ContentWrapper>
+                <TextField
+                    fullWidth
+                    label={t('authentification_first_name')}
+                    variant="outlined"
+                    value={firstName}
+                    onChange={ev => setFirstName(ev.target.value)}
+                    margin="normal"
+                />
+                <TextField
+                    fullWidth
+                    label={t('authentification_last_name')}
+                    variant="outlined"
+                    value={lastName}
+                    onChange={ev => setLastName(ev.target.value)}
+                    margin="normal"
+                />
+                <TextField
+                    fullWidth
+                    label={t('common_email')}
+                    variant="outlined"
                     value={email}
                     onChange={ev => setEmail(ev.target.value)}
+                    margin="normal"
                 />
-            </div>
-            <div className="mb3">
-                <label htmlFor="password" className="font-size-16">
-                    {t('common_password')}
-                </label>
-                <input
-                    id="password"
-                    className="font-size-14"
-                    name="password"
+                <TextField
                     type="password"
+                    fullWidth
+                    label={t('common_password')}
+                    variant="outlined"
                     value={password}
                     onChange={ev => setPassword(ev.target.value)}
+                    margin="normal"
                 />
-                {/*<span className="text-white font-italic font-size-12">Enter a password longer than 8 characters</span>*/}
-            </div>
-            <div className="mb4">
-                <label htmlFor="confirm_password" className="font-size-16">
-                    {t('authentification_confirm_password')}
-                </label>
-                <input
-                    id="confirm_password"
-                    className="font-size-14"
-                    name="confirm_password"
+                <TextField
                     type="password"
+                    fullWidth
+                    label={t('authentification_confirm_password')}
+                    variant="outlined"
                     value={confirmPassword}
                     onChange={ev => setConfirmPassword(ev.target.value)}
+                    margin="normal"
                 />
-                {/*<span className="text-white font-italic font-size-12">Your passwords do not match</span>*/}
-            </div>
-            <div>
-                <button className="btn btn-primary width-100 mb3" id="submit">
-                    {t('authentification_create_account')}
-                </button>
-                <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                    onClick={setToLogin}
-                    className="text-color-white"
+
+                <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={onSubmit}
+                    color="primary"
+                    className={classes.submitButton}
                 >
-                    <i className="fas fa-arrow-left" />
-                    {` ${t('authentification_back_to_login')}`}
-                </a>
-            </div>
-        </form>
+                    {t('authentification_create_account')}
+                </Button>
+                <Button
+                    color="default"
+                    className={classes.button}
+                    startIcon={<ChevronLeft />}
+                    onClick={setToLogin}
+                >
+                    {t('authentification_back_to_login')}
+                </Button>
+            </ContentWrapper>
+        </Wrapper>
     );
 };
 

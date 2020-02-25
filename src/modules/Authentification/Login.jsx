@@ -15,6 +15,9 @@ import Button from '@material-ui/core/Button';
 import Facebook from '@material-ui/icons/Facebook';
 import Mail from '@material-ui/icons/Mail';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
 
 const useStyle = makeStyles(() => ({
@@ -24,19 +27,22 @@ const useStyle = makeStyles(() => ({
 }));
 
 const Wrapper = styled.div`
-    padding: 30px 20px 20px;
+    padding: 30px 0 20px;
     display: flex;
     justify-content: center;
     align-items: center;
 `;
 
 const ContentWrapper = styled.div`
-    margin: 0 15px;
-    padding: 30px;
+    padding: 20px;
     background-color: rgba(0, 0, 0, 0.05);
     border-radius: 2px;
     box-shadow: 0 0 1em #d9d9d9;
     position: relative;
+    width: 90%;
+    ${media.mobileLandscape`
+        padding: 10px;
+    `}
 `;
 
 const TopWrapper = styled.div`
@@ -45,12 +51,16 @@ const TopWrapper = styled.div`
     right: 24px;
     display: flex;
     align-items: center;
+    ${media.mobileLandscape`
+        top: -41px;
+        right: 6px;
+    `}
 `;
 
 const FootWrapper = styled.div`
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(180, 180, 180, 0.7);
     text-align: center;
 `;
 
@@ -65,11 +75,17 @@ const iconCss = css`
 const FacebookIcon = styled(Facebook)`
     ${iconCss};
     font-size: 80px !important;
+    ${media.mobileLandscape`
+        font-size: 60px !important;
+    `}
 `;
 
 const MailIcon = styled(Mail)`
     ${iconCss};
     font-size: 87px !important;
+    ${media.mobileLandscape`
+        font-size: 67px !important;
+    `}
 `;
 
 const ClickDiv = styled.strong`

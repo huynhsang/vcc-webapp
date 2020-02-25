@@ -24,13 +24,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-const BackgroundImage = require('../../static/resources/img/bg.jpg');
-
 const useStyle = makeStyles(() => ({
     dialog: {
         '& .MuiDialog-paper': {
-            // background: `url('${BackgroundImage}') center center / 100% 100% no-repeat`
-            background: '#fdfdfd'
+            background: '#fdfdfd',
+            '@media (max-width: 768px)': {
+                margin: 10
+            }
         }
     },
     title: {
@@ -42,7 +42,10 @@ const useStyle = makeStyles(() => ({
         }
     },
     content: {
-        paddingBottom: 20
+        paddingBottom: 20,
+        '@media (max-width: 768px)': {
+            padding: '8px 12px'
+        }
     }
 }));
 
