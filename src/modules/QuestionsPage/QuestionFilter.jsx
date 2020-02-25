@@ -28,10 +28,6 @@ const useStyles = makeStyles(() => ({
         flexGrow: 1,
         flexBasis: 0,
         minHeight: 0,
-        '& input': {
-            border: 'none',
-            height: 32
-        },
         '@media (max-width: 768px)': {
             width: '100%',
             marginTop: '15px'
@@ -84,7 +80,7 @@ const QuestionFilter = ({
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton
-                                        aria-label="toggle password visibility"
+                                        size="small"
                                         onClick={search}
                                         edge="end"
                                     >

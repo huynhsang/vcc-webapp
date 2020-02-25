@@ -1,7 +1,27 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 
 import { getUserByLoginTokenFn } from '../../actions/app';
+
+const Wrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 186px);
+`;
+
+const ContentWrapper = styled.div`
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 2px;
+    box-shadow: 0 0 1em #a0a0a0;
+    position: relative;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    margin: 10px auto;
+`;
 
 const SSOLogin = ({ location, history, getUserByLoginToken }) => {
     React.useEffect(() => {
@@ -15,15 +35,11 @@ const SSOLogin = ({ location, history, getUserByLoginToken }) => {
     }, []);
 
     return (
-        <div className="bg-unauthenticated">
-            <div className="login-page">
-                <div className="card box-shadow">
-                    <div className="card-header position-relative">
-                        <h3 className="text-color-white">Log in...</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <Wrapper>
+            <ContentWrapper>
+                <h3>Log in...</h3>
+            </ContentWrapper>
+        </Wrapper>
     );
 };
 
