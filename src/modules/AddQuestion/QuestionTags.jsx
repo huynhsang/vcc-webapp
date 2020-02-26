@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import Autocomplete from '../../component/Autocomplete/AutoComplete';
 
-const TagsQuestion = ({ tags, tagIds, setTagIds, next, previous }) => {
+const QuestionTags = ({ tags, tagIds, setTagIds }) => {
     const { t } = useTranslation();
 
     if (!tags) {
@@ -74,4 +74,4 @@ const TagsQuestion = ({ tags, tagIds, setTagIds, next, previous }) => {
     );
 };
 
-export default TagsQuestion;
+export default QuestionTags;

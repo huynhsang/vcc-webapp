@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import connect from 'react-redux/es/connect/connect';
 import { useTranslation } from 'react-i18next';
 
-import TypeQuestionTab from './TypeQuestion';
-import TagsQuestionTab from './TagsQuestion';
-import TitleQuestionTab from './TitleQuestion';
-import DescriptionQuestionTab from './DescriptionQuestion';
-import ReviewQuestionTab from './ReviewQuestion';
+import QuestionCategory from './QuestionCategory';
+import QuestionTags from './QuestionTags';
+import QuestionTitle from './QuestionTitle';
+import QuestionDescription from './QuestionDescription';
+import QuestionReview from './QuestionReview';
 
 import {
     showSuccessAlertFn,
@@ -119,7 +119,7 @@ const AddQuestion = ({
         switch (step) {
             case 0:
                 return (
-                    <TypeQuestionTab
+                    <QuestionCategory
                         categories={categories}
                         categoryId={categoryId}
                         setCategoryId={val =>
@@ -129,7 +129,7 @@ const AddQuestion = ({
                 );
             case 1:
                 return (
-                    <TagsQuestionTab
+                    <QuestionTags
                         tags={tags}
                         tagIds={tagIds}
                         setTagIds={val => updateQuestion({ tagIds: val })}
@@ -137,21 +137,21 @@ const AddQuestion = ({
                 );
             case 2:
                 return (
-                    <TitleQuestionTab
+                    <QuestionTitle
                         title={title}
                         setTitle={val => updateQuestion({ title: val })}
                     />
                 );
             case 3:
                 return (
-                    <DescriptionQuestionTab
+                    <QuestionDescription
                         body={body}
                         setBody={val => updateQuestion({ body: val })}
                     />
                 );
             case 4:
                 return (
-                    <ReviewQuestionTab
+                    <QuestionReview
                         title={title}
                         body={body}
                         tags={tags && tags.filter(t => tagIds.includes(t.id))}

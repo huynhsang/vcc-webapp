@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const TitleQuestion = ({ title, setTitle }) => {
+const QuestionTitle =({ title, setTitle }) => {
   const { t } = useTranslation();
 
   const handleTitle = (ev) => {
@@ -39,4 +39,4 @@ const TitleQuestion = ({ title, setTitle }) => {
   );
 };
 
-export default TitleQuestion;
+export default QuestionTitle;

@@ -1,11 +1,10 @@
 import React from 'react';
 import questionMark from '../../static/resources/img/question_mark_1.png';
-import PropTypes from 'prop-types';
 
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
-const TypeQuestion = ({ categories, categoryId, setCategoryId }) => {
+const QuestionCategory = ({ categories, categoryId, setCategoryId }) => {
     const { t } = useTranslation();
 
     if (!categories) {
@@ -50,8 +49,4 @@ const TypeQuestion = ({ categories, categoryId, setCategoryId }) => {
     );
 };
 
-TypeQuestion.propTypes = {
-    category: PropTypes.string
-};
-
-export default TypeQuestion;
+export default QuestionCategory;

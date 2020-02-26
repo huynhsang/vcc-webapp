@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
-const ReviewQuestion = ({ title, body, tags }) => {
+const QuestionReview = ({ title, body, tags }) => {
   const { t } = useTranslation();
   return (
     <section className="mt5 mb3">
@@ -70,4 +70,4 @@ const ReviewQuestion = ({ title, body, tags }) => {
   );
 };
 
-export default ReviewQuestion;
+export default QuestionReview;

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 
-const DescriptionQuestion = ({ setBody, body }) => {
+const QuestionDescription = ({ setBody, body }) => {
   const { t } = useTranslation();
 
   const [questionBody, setQuestionBody] = React.useState(body);
@@ -49,4 +49,4 @@ const DescriptionQuestion = ({ setBody, body }) => {
   );
 };
 
-export default DescriptionQuestion;
+export default QuestionDescription;
