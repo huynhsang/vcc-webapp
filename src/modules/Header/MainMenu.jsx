@@ -1,33 +1,72 @@
 import React from 'react';
+import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-
 import { headerTabs } from './header.constant';
 
-const MainMenu = ({ location }) => {
+import Button from '@material-ui/core/Button';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
+const useStyles = makeStyles(() => ({
+    button: {
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#1a1c21'
+        },
+        margin: '0px 5px'
+    },
+    activeButton: {
+        backgroundColor: '#1a1c21',
+        fontWeight: 600
+    }
+}));
+
+const Wrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+
+    ${media.mobileLandscape`
+        display:none;
+    `}
+`;
+
+const MainMenu = ({ location, history }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const { pathname } = location;
 
     const paths = pathname.match(/\/[\w-]+/g);
     const tabSelected = paths && paths[0] ? paths[0].substring(1) : '';
 
+    const redirect = url => () => {
+        history.push(url);
+    };
+
     return (
-        <ul id="menu-header" className="menu">
+        <Wrapper>
             {headerTabs.map(val => (
-                <li
-                    className={
-                        val.path === tabSelected ? 'current-menu-item' : ''
-                    }
+                <Button
+                    className={`${classes.button} ${val.path === tabSelected &&
+                        classes.activeButton} `}
                     key={val.label}
+                    onClick={redirect(`/${val.path}`)}
                 >
-                    <Link to={`/${val.path}`}>{t(`${val.label}`)}</Link>
-                </li>
+                    {t(val.label)}
+                </Button>
             ))}
-            <li key={'blog'}>
-                <a href="https://lqdalumni.site/">{t('header_blog')}</a>
-            </li>
-        </ul>
+            <Button
+                className={classes.button}
+                onClick={() => {
+                    window.location = 'https://vcncblog.site/';
+                }}
+            >
+                {t('header_blog')}
+            </Button>
+        </Wrapper>
     );
 };
 

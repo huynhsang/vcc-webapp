@@ -1,9 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
-import logo from '../../static/resources/img/logo/logo.png';
-import logo2x from '../../static/resources/img/logo/logo-2x.png';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+
+import { DefaultWrapper } from '../../component/Wrappers';
 
 import MainMenu from './MainMenu';
 
@@ -15,7 +17,45 @@ import {
     toggleContactUsFn
 } from '../../actions/app';
 
-import Authenticate from './Authenticate';
+import VCNCLogo from '../../images/VCNC-logo.png';
+
+import UserBox from './UserBox';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+
+const useStyles = makeStyles(() => ({
+    iconButton: {
+        color: 'white',
+        '&:hover': {
+            backgroundColor: '#1a1c21'
+        },
+        display: 'none',
+        '@media (max-width: 768px)': {
+            display: 'block'
+        }
+    }
+}));
+
+const HeaderWrapper = styled.header`
+    background: rgba(0, 0, 0, 1);
+`;
+
+const ContentWrapper = styled(DefaultWrapper)`
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const FlexWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const Logo = styled.img`
+    width: 60px;
+`;
 
 const Header = ({
     App,
@@ -27,65 +67,45 @@ const Header = ({
     toggleMobileAside,
     toggleContactUs
 }) => {
+    const classes = useStyles();
+
     const { isAuthenticated, currentUser } = App;
 
+    const redirect = url => () => {
+        history.push(url);
+    };
+
     return (
-        <div className="hidden-header header-dark mobile_bar_active">
-            <header className="header">
-                <div className="discy-container">
-                    <div className="mobile-menu">
-                        <div
-                            className="mobile-menu-click"
-                            onClick={() => toggleMobileAside(true)}
-                        >
-                            <i className="icon-menu" />
-                        </div>
-                    </div>
-                    <Authenticate
-                        isAuthenticated={isAuthenticated}
-                        currentUser={currentUser}
-                        setIsAuthenticated={setIsAuthenticated}
-                        setToLogin={setToLogin}
-                        setToRegistre={setToRegistre}
+        <HeaderWrapper>
+            <ContentWrapper>
+                <IconButton
+                    className={classes.iconButton}
+                    onClick={() => toggleMobileAside(true)}
+                >
+                    <MenuIcon />
+                </IconButton>
+                <FlexWrapper>
+                    <Logo
+                        title="VC&C"
+                        alt="VC&C Logo"
+                        src={VCNCLogo}
+                        onClick={redirect('/')}
                     />
-                    <div className="left-header float_l">
-                        <h2 className="screen-reader-text site_logo">VC&C</h2>
-                        <Link
-                            className="logo float_l logo-img"
-                            to="/"
-                            title="Home"
-                        >
-                            <img
-                                title="VC&C"
-                                width="60"
-                                className="default_screen"
-                                alt="VC&C Logo"
-                                src={logo}
-                            />
-                            <img
-                                title="VC&C"
-                                width="60"
-                                className="retina_screen"
-                                alt="VC&C Logo"
-                                src={logo2x}
-                            />
-                        </Link>
-                        <div className="mid-header float_l">
-                            <nav className="nav float_l main-menu">
-                                <h3 className="screen-reader-text">
-                                    VC&C Navigation
-                                </h3>
-                                <MainMenu
-                                    toggleContactUs={toggleContactUs}
-                                    location={location}
-                                    history={history}
-                                />
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </header>
-        </div>
+                    <MainMenu
+                        toggleContactUs={toggleContactUs}
+                        location={location}
+                        history={history}
+                    />
+                </FlexWrapper>
+                <UserBox
+                    isAuthenticated={isAuthenticated}
+                    currentUser={currentUser}
+                    setIsAuthenticated={setIsAuthenticated}
+                    setToLogin={setToLogin}
+                    setToRegistre={setToRegistre}
+                />
+            </ContentWrapper>
+        </HeaderWrapper>
     );
 };
 

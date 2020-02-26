@@ -1,17 +1,21 @@
-export const leftNavTabs =[
+import HomeIcon from '@material-ui/icons/Home';
+import MenuBook from '@material-ui/icons/MenuBook';
+import Info from '@material-ui/icons/Info';
+
+export const leftNavTabs = [
     {
-        path : "/home",
-        label: "common_home",
-        iconClassName : "icon-home"
+        path: '/home',
+        label: 'common_home',
+        Icon: HomeIcon
     },
     {
-        path: "/questions",
-        label: "nav_questions",
-        iconClassName: "icon-book-open",
+        path: '/questions',
+        label: 'nav_questions',
+        Icon: MenuBook
     },
     {
-        path : "/information",
-        label: "common_information",
-        iconClassName : "icon-trophy"
-    },
-]
+        path: '/information',
+        label: 'common_information',
+        Icon: Info
+    }
+];
