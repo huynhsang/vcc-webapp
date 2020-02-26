@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import ErrorImageV2 from '../../static/resources/img/errors/error-404-v2.png';
-import ErrorImageV3 from '../../static/resources/img/errors/error-404-v3.png';
+import ErrorImageV2 from '../../images/error-404-v2.png';
+import ErrorImageV3 from '../../images/error-404-v3.png';
 import RootScope from '../../global/RootScope';
 
 const Wrapper = styled.div`

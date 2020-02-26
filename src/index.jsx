@@ -10,18 +10,8 @@ import './services/localize';
 
 import './style.css';
 
-import '../node_modules/slick-carousel/slick/slick.css';
-import '../node_modules/slick-carousel/slick/slick-theme.css';
-import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
-
 // Theme css
-import './static/theme/css/style.css';
-import './static/theme/css/media-element.css';
-import './static/theme/css/custom.css';
-import './static/theme/css/sweet-alert.css';
-
-// Our custom css
-import './static/Scss/styles.scss';
+import './static/sweet-alert.css';
 
 import 'easymde/dist/easymde.min.css';
 
@@ -31,8 +21,6 @@ import { unregister } from './serviceWorker';
 
 // Link and init language manager
 import './services/localize';
-
-import './static/Scss/default.scss';
 
 render(
     <Provider store={store}>
