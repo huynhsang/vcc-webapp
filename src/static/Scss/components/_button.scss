@@ -39,11 +39,6 @@
     background-color: $color-white-5;
   }
 }
-button:disabled, button[disabled] {
-  background-color: $color-disable !important;
-  color: $text-btn-default !important;
-  cursor: initial;
-}
 
 .btn-more {
   padding: 3px 35px 5px;

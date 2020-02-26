@@ -17,7 +17,7 @@ const DEFAULT_TABS = [
     },
     {
         label: 'common_policy',
-        path: 'policy-us'
+        path: 'policy'
     }
 ];
 

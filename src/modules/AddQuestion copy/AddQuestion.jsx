@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-
 import connect from 'react-redux/es/connect/connect';
 import { useTranslation } from 'react-i18next';
 
+import Tabs from '../../component/Tabs/Tabs';
 import TypeQuestionTab from './TypeQuestion';
 import TagsQuestionTab from './TagsQuestion';
 import TitleQuestionTab from './TitleQuestion';
@@ -19,13 +18,6 @@ import {
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
 import { getTagsRelatingCategory } from '../../services/tags.service';
-
-import QuestionTabs from './QuestionTabs';
-import { DefaultWrapper } from '../../component/Wrappers';
-
-const Wrapper = styled(DefaultWrapper)`
-    min-height: calc(100vh - 180px);
-`;
 
 const AddQuestion = ({
     history,
@@ -45,7 +37,7 @@ const AddQuestion = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, toAuthenticate]);
 
-    const [activeTab, setActiveTab] = React.useState(0);
+    const [currentTab, setCurrentTab] = React.useState('Type');
 
     const [categories, setCategories] = React.useState(null);
     const [tags, setTags] = React.useState(null);
@@ -102,77 +94,59 @@ const AddQuestion = ({
             );
     };
 
-    const toPrevious = () => setActiveTab(state => state -1);
-    const toNext = () => setActiveTab(state => state +1);
+    const isDisabled = !categoryId;
 
-    const getContent = step => {
-        switch (step) {
-            case 0:
-                return (
+    return (
+        <section
+            className="tabs-container pl3 pr3 pt5"
+            style={{ minHeight: 'calc(100vh - 180px)' }}
+        >
+            <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}>
+                <div label="Type">
                     <TypeQuestionTab
                         categories={categories}
                         categoryId={categoryId}
                         setCategoryId={val =>
                             updateQuestion({ categoryId: val })
                         }
-                        next={toNext}
+                        next={() => setCurrentTab('Tags')}
                     />
-                );
-            case 1:
-                return (
+                </div>
+                <div label="Tags" isDisabled={isDisabled}>
                     <TagsQuestionTab
                         tags={tags}
                         tagIds={tagIds}
                         setTagIds={val => updateQuestion({ tagIds: val })}
-                        previous={toPrevious}
-                        next={toNext}
+                        previous={() => setCurrentTab('Type')}
+                        next={() => setCurrentTab('Title')}
                     />
-                );
-            case 2:
-                return (
+                </div>
+                <div label="Title" isDisabled={isDisabled}>
                     <TitleQuestionTab
                         title={title}
                         setTitle={val => updateQuestion({ title: val })}
-                        previous={toPrevious}
-                        next={toNext}
+                        previous={() => setCurrentTab('Tags')}
+                        next={() => setCurrentTab('Description')}
                     />
-                );
-            case 3:
-                return (
+                </div>
+                <div label="Description" isDisabled={isDisabled}>
                     <DescriptionQuestionTab
                         body={body}
                         setBody={val => updateQuestion({ body: val })}
-                        previous={toPrevious}
-                        next={toNext}
+                        previous={() => setCurrentTab('Title')}
+                        next={() => setCurrentTab('Review')}
                     />
-                );
-            case 4:
-                return (
+                </div>
+                <div label="Review" isDisabled={isDisabled}>
                     <ReviewQuestionTab
                         title={title}
                         body={body}
                         tags={tags && tags.filter(t => tagIds.includes(t.id))}
                         postQuestion={postQuestion}
                     />
-                );
-            default:
-                return 'Unknown step';
-        }
-    };
-
-    const Content = getContent(activeTab);
-
-    const isBlockSteps = !categoryId;
-
-    return (
-        <Wrapper>
-            <QuestionTabs
-                isBlock={isBlockSteps}
-                activeTab={activeTab}
-                setActiveTab={setActiveTab}
-            />
-            {Content}
-        </Wrapper>
+                </div>
+            </Tabs>
+        </section>
     );
 };
 
