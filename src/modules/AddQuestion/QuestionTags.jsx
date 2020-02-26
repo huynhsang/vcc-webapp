@@ -1,7 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import Autocomplete from '../../component/Autocomplete/AutoComplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
+
+import Check from '@material-ui/icons/Check';
+import Close from '@material-ui/icons/Close';
+
+const Wrapper = styled.div``;
+
+const ExampleWrapper = styled.div`
+    background-color: #fafafb;
+    padding: 20px;
+    margin: 20px;
+`;
 
 const QuestionTags = ({ tags, tagIds, setTagIds }) => {
     const { t } = useTranslation();
@@ -10,67 +23,49 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
         return <div />;
     }
 
-    const onSelectTag = tag => {
-        setTagIds([...tagIds, tag.id]);
+    const handleTags = (ev, value) => {
+        setTagIds(value ? value.map(val => val.id) : []);
     };
 
-    const onRemoveTag = id => {
-        setTagIds(tagIds.filter(tag => tag.id !== id));
-    };
+    const defaultTags = tags.filter(val => tagIds.includes(val.id));
 
     return (
-        <section className="mt5 mb3">
-            <h3 className="font-size-18 m0">
-                {t('question_what_languages_technologies')}
-            </h3>
-            <h5 className="font-size-14">
-                {t('question_tags_help_the_right_people')}
-            </h5>
-            <div className="module p4 width-100">
+        <Wrapper>
+            <h3>{t('question_what_languages_technologies')}</h3>
+            <h5>{t('question_tags_help_the_right_people')}</h5>
+            <ExampleWrapper>
                 <p className="font-weight-700">
                     {t('question_identify_your_tags')}
                 </p>
                 <p>{t('common_for_exemple')}:</p>
-                <p className="m0">
+                <p>
                     <span>
-                        <i className="fas fa-check" />{' '}
-                        {t('question_include_tags_that')}
+                        <Check /> {t('question_include_tags_that')}
                     </span>
                     <br />
                     <span>
-                        <i className="fas fa-times" />{' '}
-                        {t('question_only_included_in')}
+                        <Close /> {t('question_only_included_in')}
                     </span>
                 </p>
-            </div>
+            </ExampleWrapper>
 
-            <div className="mt3">
-                <p className="font-weight-700 mb2">{t('common_tags')}</p>
-                <div className="tagcloud">
-                    <div className="question-tags">
-                        {tags
-                            .filter(t => tagIds.includes(t.id))
-                            .map((tag, index) => {
-                                return (
-                                    <button
-                                        key={index}
-                                        className="module"
-                                        onClick={() => onRemoveTag(tag.id)}
-                                    >
-                                        {tag.nameEn}{' '}
-                                        <i className="fas fa-times" />
-                                    </button>
-                                );
-                            })}
-                    </div>
-                </div>
-                <Autocomplete
-                    suggestions={tags.filter(tag => !tagIds.includes(tag.id))}
-                    filterBy="nameEn"
-                    onSelected={onSelectTag}
-                />
-            </div>
-        </section>
+            <Autocomplete
+                multiple
+                options={tags}
+                getOptionLabel={tag => tag.nameEn}
+                defaultValue={defaultTags}
+                filterSelectedOptions
+                renderInput={params => (
+                    <TextField
+                        {...params}
+                        variant="outlined"
+                        label={t('common_tags')}
+                        placeholder="Tag"
+                    />
+                )}
+                onChange={handleTags}
+            />
+        </Wrapper>
     );
 };
 

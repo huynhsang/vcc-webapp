@@ -31,6 +31,7 @@ const Wrapper = styled(DefaultWrapper)`
 
 const ButtonsWrapper = styled.div`
     text-align: right;
+    margin-top: 20px;
 
     & button {
         margin: 0 10px;

@@ -23,6 +23,8 @@ import './static/theme/css/sweet-alert.css';
 // Our custom css
 import './static/Scss/styles.scss';
 
+import 'easymde/dist/easymde.min.css';
+
 // Component
 import { App } from './modules/App';
 import { unregister } from './serviceWorker';
