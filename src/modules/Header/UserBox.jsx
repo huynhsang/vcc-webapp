@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -73,8 +73,6 @@ const Authenticate = ({
     const { t } = useTranslation();
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-
-    const [showUserMenu, setShowUserMenu] = React.useState(false);
 
     const { firstName, lastName } = currentUser || {};
     const fullName = `${firstName} ${lastName}`;
@@ -160,12 +158,3 @@ const Authenticate = ({
 };
 
 export default withRouter(Authenticate);
-
-{
-    /* <a //eslint-disable-line jsx-a11y/anchor-is-valid
-className="sign-in-lock mob-sign-in"
-onClick={setToLogin}
->
-<i className="icon-lock" />
-</a> */
-}
