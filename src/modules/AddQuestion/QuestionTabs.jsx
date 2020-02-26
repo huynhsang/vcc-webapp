@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepButton from '@material-ui/core/StepButton';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ADD_QUESTION_TABS = [
-    'common_type',
+    'common_category',
     'common_tags',
     'common_title',
     'common_description',
@@ -33,6 +34,7 @@ export const ADD_QUESTION_TABS = [
 
 const QuestionTabs = ({ isBlock = false, activeTab, setActiveTab }) => {
     const classes = useStyles();
+    const { t } = useTranslation();
 
     const handleStep = step => () => {
         setActiveTab(step);
@@ -44,7 +46,7 @@ const QuestionTabs = ({ isBlock = false, activeTab, setActiveTab }) => {
                 {ADD_QUESTION_TABS.map((label, index) => (
                     <Step key={label} disabled={isBlock}>
                         <StepButton onClick={handleStep(index)}>
-                            {label}
+                            {t(label)}
                         </StepButton>
                     </Step>
                 ))}

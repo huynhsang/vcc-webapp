@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-const TitleQuestion = ({ title, setTitle, next, previous }) => {
+const TitleQuestion = ({ title, setTitle }) => {
   const { t } = useTranslation();
 
   const handleTitle = (ev) => {
@@ -34,14 +34,6 @@ const TitleQuestion = ({ title, setTitle, next, previous }) => {
           autoFocus={true}
           onChange={handleTitle}
         />
-      </div>
-      <div className="mt3 text-right">
-        <button className="btn btn-light mr3" onClick={previous}>
-          {t('common_previous_step')}
-        </button>
-        <button className="btn btn-primary" onClick={next}>
-          {t('common_next')}
-        </button>
       </div>
     </section>
   );

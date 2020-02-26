@@ -85,6 +85,11 @@ export default {
     common_sort_by:'Sắp xếp',
     common_information:'Thông tin',
     common_point_scale: 'Thang điểm',
+    common_category: 'Category',
+    common_tags: 'Tags',
+    common_title: 'Tiêu đề',
+    common_description: 'Mô tả',
+    common_review: 'Xem trước',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

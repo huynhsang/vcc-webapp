@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 
-const TypeQuestion = ({ categories, categoryId, setCategoryId, next }) => {
+const TypeQuestion = ({ categories, categoryId, setCategoryId }) => {
     const { t } = useTranslation();
 
     if (!categories) {
@@ -45,20 +45,12 @@ const TypeQuestion = ({ categories, categoryId, setCategoryId, next }) => {
                     {t('question_we_will_help_you')}
                 </h5>
                 {categoryOptions}
-                <button
-                    className="btn btn-primary mt2"
-                    onClick={next}
-                    disabled={!categoryId}
-                >
-                    {t('common_next')}
-                </button>
             </div>
         </section>
     );
 };
 
 TypeQuestion.propTypes = {
-    next: PropTypes.func.isRequired,
     category: PropTypes.string
 };
 

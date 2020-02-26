@@ -23,8 +23,18 @@ import { getTagsRelatingCategory } from '../../services/tags.service';
 import QuestionTabs from './QuestionTabs';
 import { DefaultWrapper } from '../../component/Wrappers';
 
+import Button from '@material-ui/core/Button';
+
 const Wrapper = styled(DefaultWrapper)`
     min-height: calc(100vh - 180px);
+`;
+
+const ButtonsWrapper = styled.div`
+    text-align: right;
+
+    & button {
+        margin: 0 10px;
+    }
 `;
 
 const AddQuestion = ({
@@ -102,8 +112,8 @@ const AddQuestion = ({
             );
     };
 
-    const toPrevious = () => setActiveTab(state => state -1);
-    const toNext = () => setActiveTab(state => state +1);
+    const toPrevious = () => setActiveTab(state => state - 1);
+    const toNext = () => setActiveTab(state => state + 1);
 
     const getContent = step => {
         switch (step) {
@@ -115,7 +125,6 @@ const AddQuestion = ({
                         setCategoryId={val =>
                             updateQuestion({ categoryId: val })
                         }
-                        next={toNext}
                     />
                 );
             case 1:
@@ -124,8 +133,6 @@ const AddQuestion = ({
                         tags={tags}
                         tagIds={tagIds}
                         setTagIds={val => updateQuestion({ tagIds: val })}
-                        previous={toPrevious}
-                        next={toNext}
                     />
                 );
             case 2:
@@ -133,8 +140,6 @@ const AddQuestion = ({
                     <TitleQuestionTab
                         title={title}
                         setTitle={val => updateQuestion({ title: val })}
-                        previous={toPrevious}
-                        next={toNext}
                     />
                 );
             case 3:
@@ -142,8 +147,6 @@ const AddQuestion = ({
                     <DescriptionQuestionTab
                         body={body}
                         setBody={val => updateQuestion({ body: val })}
-                        previous={toPrevious}
-                        next={toNext}
                     />
                 );
             case 4:
@@ -152,7 +155,6 @@ const AddQuestion = ({
                         title={title}
                         body={body}
                         tags={tags && tags.filter(t => tagIds.includes(t.id))}
-                        postQuestion={postQuestion}
                     />
                 );
             default:
@@ -172,6 +174,31 @@ const AddQuestion = ({
                 setActiveTab={setActiveTab}
             />
             {Content}
+            <ButtonsWrapper>
+                {activeTab >= 1 && (
+                    <Button variant="contained" onClick={toPrevious}>
+                        {t('common_previous_step')}
+                    </Button>
+                )}
+                {activeTab === 4 ? (
+                    <Button
+                        variant="contained"
+                        onClick={postQuestion}
+                        color="primary"
+                    >
+                        {t('question_post_your_question')}
+                    </Button>
+                ) : (
+                    <Button
+                        disabled={isBlockSteps}
+                        variant="contained"
+                        onClick={toNext}
+                        color="primary"
+                    >
+                        {t('common_next')}
+                    </Button>
+                )}
+            </ButtonsWrapper>
         </Wrapper>
     );
 };

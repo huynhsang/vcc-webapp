@@ -70,14 +70,6 @@ const TagsQuestion = ({ tags, tagIds, setTagIds, next, previous }) => {
                     onSelected={onSelectTag}
                 />
             </div>
-            <div className="mt3 text-right">
-                <button className="btn btn-light mr3" onClick={previous}>
-                    {t('common_previous_step')}
-                </button>
-                <button className="btn btn-primary" onClick={next}>
-                    {t('common_next')}
-                </button>
-            </div>
         </section>
     );
 };

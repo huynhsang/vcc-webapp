@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 
-const ReviewQuestion = ({ title, body, tags, postQuestion }) => {
+const ReviewQuestion = ({ title, body, tags }) => {
   const { t } = useTranslation();
   return (
     <section className="mt5 mb3">
@@ -65,11 +65,6 @@ const ReviewQuestion = ({ title, body, tags, postQuestion }) => {
             })}
           </div>
         </div>
-      </div>
-      <div className="text-right mt5">
-        <button className="btn btn-primary" onClick={() => postQuestion()}>
-          {t('question_post_your_question')}
-        </button>
       </div>
     </section>
   );

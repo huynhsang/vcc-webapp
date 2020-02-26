@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import SimpleMDEReact from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 
-const DescriptionQuestion = ({ setBody, body, next, previous }) => {
+const DescriptionQuestion = ({ setBody, body }) => {
   const { t } = useTranslation();
 
   const [questionBody, setQuestionBody] = React.useState(body);
@@ -45,15 +45,6 @@ const DescriptionQuestion = ({ setBody, body, next, previous }) => {
           spellChecker: false,
         }}
       />
-
-      <div className="mt3 text-right">
-        <button className="btn btn-light mr3" onClick={previous}>
-          {t('common_previous_step')}
-        </button>
-        <button className="btn btn-primary" onClick={next}>
-          {t('common_next')}
-        </button>
-      </div>
     </section>
   );
 };
