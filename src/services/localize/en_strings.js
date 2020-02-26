@@ -86,9 +86,6 @@ export default {
     common_information: 'Information',
     common_point_scale: 'Point scale',
     common_category: 'Category',
-    common_tags: 'Tags',
-    common_title: 'Title',
-    common_description: 'Description',
     common_review: 'Review',
 
     pagination_previous: 'Previous',
