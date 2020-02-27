@@ -16,17 +16,19 @@ const RESET_PASSWORD_URL = 'users/reset';
 const SET_NEW_PASSWORD_URL = token =>
     `users/reset-password?access_token=${token}`;
 
-export async function login(data) {
-    const response = await http.post(LOGIN_URL, { realm: REALM.user, ...data });
-
+export const setUserCookie = (tokenId, userId, rememberMe) => {
     const { maxExDay, minExDay, jwtTokenName, userIdKey } = CookieConstant;
-
-    RootScope.token = response.data.id;
-    RootScope.userId = response.data.userId;
-    const exdays = response.data.rememberMe ? maxExDay : minExDay;
+    RootScope.token = tokenId;
+    RootScope.userId = userId;
+    const exdays = rememberMe ? maxExDay : minExDay;
     CookieHelper.setCookie(jwtTokenName, RootScope.token, exdays);
     CookieHelper.setCookie(userIdKey, RootScope.userId, exdays);
+};
 
+export async function login(data) {
+    const response = await http.post(LOGIN_URL, { realm: REALM.user, ...data });
+    const { id, userId, rememberMe } = response.data;
+    setUserCookie(id, userId, rememberMe);
     return response.data;
 }
 

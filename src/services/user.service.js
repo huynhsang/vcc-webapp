@@ -2,6 +2,8 @@ import http from './https';
 import { setUrlWithToken } from '../utils/url';
 import { getIdAndToken } from '../utils/cookie-tools';
 
+import { setUserCookie } from './account.service';
+
 const GET_USER_URL = 'users';
 const GET_USER_BY_LOGIN_TOKEN_URL = token => `users/me?access_token=${token}`;
 const CHANGE_USER_PASSWORD_URL = 'users/change-password';
@@ -41,6 +43,8 @@ export async function getUsers(params) {
 
 export async function getUserByLoginToken(token) {
     const response = await http.get(GET_USER_BY_LOGIN_TOKEN_URL(token));
+    const { id } = response.data;
+    setUserCookie(token, id);
     return response.data;
 }
 
