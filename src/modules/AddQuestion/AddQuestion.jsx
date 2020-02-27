@@ -1,13 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import connect from 'react-redux/es/connect/connect';
 import { useTranslation } from 'react-i18next';
 
-import Tabs from '../../component/Tabs/Tabs';
-import TypeQuestionTab from './TypeQuestion';
-import TagsQuestionTab from './TagsQuestion';
-import TitleQuestionTab from './TitleQuestion';
-import DescriptionQuestionTab from './DescriptionQuestion';
-import ReviewQuestionTab from './ReviewQuestion';
+import QuestionCategory from './QuestionCategory';
+import QuestionTags from './QuestionTags';
+import QuestionTitle from './QuestionTitle';
+import QuestionDescription from './QuestionDescription';
+import QuestionReview from './QuestionReview';
 
 import {
     showSuccessAlertFn,
@@ -18,6 +19,24 @@ import {
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
 import { getTagsRelatingCategory } from '../../services/tags.service';
+
+import QuestionTabs from './QuestionTabs';
+import { DefaultWrapper } from '../../component/Wrappers';
+
+import Button from '@material-ui/core/Button';
+
+const Wrapper = styled(DefaultWrapper)`
+    min-height: calc(100vh - 180px);
+`;
+
+const ButtonsWrapper = styled.div`
+    text-align: right;
+    margin-top: 20px;
+
+    & button {
+        margin: 0 10px;
+    }
+`;
 
 const AddQuestion = ({
     history,
@@ -37,7 +56,7 @@ const AddQuestion = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, toAuthenticate]);
 
-    const [currentTab, setCurrentTab] = React.useState('Type');
+    const [activeTab, setActiveTab] = React.useState(0);
 
     const [categories, setCategories] = React.useState(null);
     const [tags, setTags] = React.useState(null);
@@ -94,59 +113,94 @@ const AddQuestion = ({
             );
     };
 
-    const isDisabled = !categoryId;
+    const toPrevious = () => setActiveTab(state => state - 1);
+    const toNext = () => setActiveTab(state => state + 1);
 
-    return (
-        <section
-            className="tabs-container pl3 pr3 pt5"
-            style={{ minHeight: 'calc(100vh - 180px)' }}
-        >
-            <Tabs currentTab={currentTab} setCurrentTab={setCurrentTab}>
-                <div label="Type">
-                    <TypeQuestionTab
+    const getContent = step => {
+        switch (step) {
+            case 0:
+                return (
+                    <QuestionCategory
                         categories={categories}
                         categoryId={categoryId}
                         setCategoryId={val =>
                             updateQuestion({ categoryId: val })
                         }
-                        next={() => setCurrentTab('Tags')}
                     />
-                </div>
-                <div label="Tags" isDisabled={isDisabled}>
-                    <TagsQuestionTab
+                );
+            case 1:
+                return (
+                    <QuestionTags
                         tags={tags}
                         tagIds={tagIds}
                         setTagIds={val => updateQuestion({ tagIds: val })}
-                        previous={() => setCurrentTab('Type')}
-                        next={() => setCurrentTab('Title')}
                     />
-                </div>
-                <div label="Title" isDisabled={isDisabled}>
-                    <TitleQuestionTab
+                );
+            case 2:
+                return (
+                    <QuestionTitle
                         title={title}
                         setTitle={val => updateQuestion({ title: val })}
-                        previous={() => setCurrentTab('Tags')}
-                        next={() => setCurrentTab('Description')}
                     />
-                </div>
-                <div label="Description" isDisabled={isDisabled}>
-                    <DescriptionQuestionTab
+                );
+            case 3:
+                return (
+                    <QuestionDescription
                         body={body}
                         setBody={val => updateQuestion({ body: val })}
-                        previous={() => setCurrentTab('Title')}
-                        next={() => setCurrentTab('Review')}
                     />
-                </div>
-                <div label="Review" isDisabled={isDisabled}>
-                    <ReviewQuestionTab
+                );
+            case 4:
+                return (
+                    <QuestionReview
                         title={title}
                         body={body}
                         tags={tags && tags.filter(t => tagIds.includes(t.id))}
-                        postQuestion={postQuestion}
                     />
-                </div>
-            </Tabs>
-        </section>
+                );
+            default:
+                return 'Unknown step';
+        }
+    };
+
+    const Content = getContent(activeTab);
+
+    const isBlockSteps = !categoryId;
+
+    return (
+        <Wrapper>
+            <QuestionTabs
+                isBlock={isBlockSteps}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
+            />
+            {Content}
+            <ButtonsWrapper>
+                {activeTab >= 1 && (
+                    <Button variant="contained" onClick={toPrevious}>
+                        {t('common_previous_step')}
+                    </Button>
+                )}
+                {activeTab === 4 ? (
+                    <Button
+                        variant="contained"
+                        onClick={postQuestion}
+                        color="primary"
+                    >
+                        {t('question_post_your_question')}
+                    </Button>
+                ) : (
+                    <Button
+                        disabled={isBlockSteps}
+                        variant="contained"
+                        onClick={toNext}
+                        color="primary"
+                    >
+                        {t('common_next')}
+                    </Button>
+                )}
+            </ButtonsWrapper>
+        </Wrapper>
     );
 };
 

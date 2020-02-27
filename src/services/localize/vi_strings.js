@@ -76,15 +76,18 @@ export default {
     common_invalid_username: 'Tên người dùng không hợp lệ!',
     common_popular_question: 'Câu hỏi phổ biến',
     common_see_all: 'Xem tất cả',
-    common_ask_now:'Đặt ngay một câu hỏi?',
+    common_ask_now: 'Đặt ngay một câu hỏi?',
     common_ask: 'Đặt câu hỏi',
     common_about_us: 'Giới thiệu',
     common_contact_us: 'Liên hệ',
     common_policy: 'Policy',
     common_follow_us: 'Theo dõi chúng tôi',
-    common_sort_by:'Sắp xếp',
-    common_information:'Thông tin',
+    common_sort_by: 'Sắp xếp',
+    common_information: 'Thông tin',
     common_point_scale: 'Thang điểm',
+    common_category: 'Category',
+    common_review: 'Xem trước',
+    common_close: 'Đóng',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -173,7 +176,7 @@ export default {
     question_answer_min_20: 'Vui lòng để lại câu trả lời ít 20 kí tự',
     question_search_question: 'Tìm kiếm câu hỏi',
     question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
-    question_resolved : 'Đã được giải quyết',
+    question_resolved: 'Đã được giải quyết',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -275,19 +278,23 @@ export default {
     workspace_how_does_it_work: 'Hoạt động như thế nào',
     workspace_if_you_are_asking: 'Nếu bạn là người đặt câu hỏi',
     workspace_post_a_question: 'Đặt một câu hỏi',
-    workspace_choose_professionals: 'Chọn người trả lời câu hỏi bạn muốn được kết nối tới',
+    workspace_choose_professionals:
+        'Chọn người trả lời câu hỏi bạn muốn được kết nối tới',
     workspace_receive_answer_from: 'Nhận được câu trả lời bạn cần',
-    workspace_rate_your_experience: 'Đánh giá câu trả lời và nhận được điểm thưởng vào tài khoản',
+    workspace_rate_your_experience:
+        'Đánh giá câu trả lời và nhận được điểm thưởng vào tài khoản',
     workspace_if_you_are_answering: 'Nếu bạn là người trả lời',
-    workspace_get_notification: 'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
+    workspace_get_notification:
+        'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
     workspace_answer_the_assigned: 'Trả lời câu hỏi nhận được trong vòng 24h',
     workspace_get_paid: 'Nhận điểm thưởng sau khi đăng tải câu trả lời',
     workspace_our_support: 'Hỗ trợ',
     workspace_give_instruction_to_ask: 'Giới thiệu những mẫu câu hỏi',
     workspace_give_rule_to_answer: 'Đưa ra các yêu cầu về nội dung cần trả lời',
-    workspace_censorship_content: 'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
+    workspace_censorship_content:
+        'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
 
-    footer_all_right_reserved : 'All rights reserved © 2020',
+    footer_all_right_reserved: 'All rights reserved © 2020',
 
-    answer_added_an_answer_on : 'Trả lời vào ngày',
+    answer_added_an_answer_on: 'Trả lời vào ngày'
 };

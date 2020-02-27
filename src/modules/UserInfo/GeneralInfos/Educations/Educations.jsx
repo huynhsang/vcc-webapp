@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
@@ -22,11 +21,14 @@ const Wrapper = styled.section`
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 15px;
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const EducationInfo = styled(FlexWrapper)`
@@ -44,7 +46,6 @@ const Img = styled.img`
 `;
 
 const Educations = ({
-    location,
     createEducation,
     editEducation,
     userInfos
@@ -91,14 +92,14 @@ const Educations = ({
     const canEdit = currentUserId === userProfile.id;
 
     const educationsRender = Object.values(educations).map(val => (
-        <FlexWrapper key={val.id} className="mt2">
+        <FlexWrapper key={val.id}>
             <Img src={defaultCompanyLogo} alt="" width="100" />
             <EducationInfo>
                 <div>
-                    <h6 className="m0">{val.degree}</h6>
-                    <p className="font-size-14">{val.fieldOfStudy}</p>
-                    <p className="note">{`${val.fromYear} - ${val.toYear}`}</p>
-                    <p className="note pt2">{val.description}</p>
+                    <h5>{val.degree}</h5>
+                    <p>{val.fieldOfStudy}</p>
+                    <p>{`${val.fromYear} - ${val.toYear}`}</p>
+                    <p>{val.description}</p>
                 </div>
                 {canEdit && (
                     <IconButton onClick={() => setEditEducationId(val.id)}>
@@ -110,9 +111,9 @@ const Educations = ({
     ));
 
     return (
-        <Wrapper className="p5 mt3 mb3">
+        <Wrapper>
             <FlexWrapper>
-                <h5 className="title-user m0">{t('common_education')}</h5>
+                <h4>{t('common_education')}</h4>
                 {canEdit && (
                     <IconButton onClick={() => setIsShowingModal(true)}>
                         <AddIcon color="primary" />
@@ -142,4 +143,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(Educations));
+)(Educations);

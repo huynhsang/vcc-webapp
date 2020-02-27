@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
 import {
@@ -23,11 +22,14 @@ const Wrapper = styled.section`
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 15px;
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const ExperienceInfo = styled(FlexWrapper)`
@@ -45,7 +47,6 @@ const Img = styled.img`
 `;
 
 const Experiences = ({
-    location,
     userInfos,
     createExperience,
     editExperience
@@ -92,18 +93,18 @@ const Experiences = ({
     const formatDate = i18n.language === 'en' ? 'mmmm yyyy' : 'mm/yyyy';
 
     const experiencesRender = Object.values(experiences).map(val => (
-        <FlexWrapper key={val.id} className="mt2">
+        <FlexWrapper key={val.id}>
             <Img src={defaultCompanyLogo} alt="" width="100" />
             <ExperienceInfo>
                 <div>
-                    <h6 className="m0 mr6">{val.title}</h6>
-                    <p className="font-size-14">{val.company}</p>
+                    <h5>{val.title}</h5>
+                    <p>{val.company}</p>
                     <p>{` ${dateformat(val.startDate, formatDate)} - ${
                         val.isWorkings
                             ? t('common_present')
                             : dateformat(val.endDate, formatDate)
                     }`}</p>
-                    <p className="note">{val.location}</p>
+                    <p >{val.location}</p>
                     <p>{val.description}</p>
                 </div>
                 {canEdit && (
@@ -116,9 +117,9 @@ const Experiences = ({
     ));
 
     return (
-        <Wrapper className="p5 mt3">
+        <Wrapper>
             <FlexWrapper>
-                <h5 className="title-user m0">{t('common_experience')}</h5>
+                <h4>{t('common_experience')}</h4>
                 {canEdit && (
                     <IconButton onClick={() => setIsShowing(true)}>
                         <AddIcon color="primary" />
@@ -149,4 +150,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(Experiences));
+)(Experiences);

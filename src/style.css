@@ -1,5 +1,6 @@
 html {
     margin-top: 0 !important;
+    font-family: 'Open Sans', Arial, sans-serif;
 }
 
 * html body {
@@ -27,4 +28,8 @@ a {
 
 a:hover {
     text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
 }
