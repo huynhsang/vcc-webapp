@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
@@ -18,26 +18,47 @@ const NoteWrapper = styled.div`
     margin: 20px;
 `;
 
+const FlexWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const iconStyle = css`
+    font-size: 14px !important;
+    margin-right: 3px;
+`;
+
+const CheckIcon = styled(Check)`
+    ${iconStyle}
+    color: green;
+`;
+
+const CloseIcon = styled(Close)`
+    ${iconStyle}
+    color: red;
+`;
+
 const QuestionReview = ({ title, body, tags }) => {
     const { t } = useTranslation();
     return (
         <Wrapper>
             <h3>{t('question_review_question')}</h3>
-            <h5>{t('question_let_one_more_look')}</h5>
+            <h4>{t('question_let_one_more_look')}</h4>
             <NoteWrapper>
                 <p>{t('question_check_for_typos')}.</p>
                 <p>{t('question_for_exemple')}:</p>
-                <p>
-                    <span>
-                        <Check /> {t('question_format_text')}{' '}
-                        <b>{t('common_bold')}</b> {t('common_and')}{' '}
-                        <i>{t('common_italic')}</i>
-                    </span>
-                    <br />
-                    <span>
-                        <Close /> {t('question_donnot_include_slang')}
-                    </span>
-                </p>
+
+                <FlexWrapper>
+                    <CheckIcon />
+                    <div>
+                        {t('question_format_text')} <b>{t('common_bold')}</b>{' '}
+                        {t('common_and')} <i>{t('common_italic')}</i>
+                    </div>
+                </FlexWrapper>
+                <FlexWrapper>
+                    <CloseIcon />
+                    <div>{t('question_donnot_include_slang')}</div>
+                </FlexWrapper>
             </NoteWrapper>
             <p>
                 <b>

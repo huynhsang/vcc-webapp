@@ -7,7 +7,9 @@ import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%'
+        '@media (max-width: 768px)': {
+            padding: '10px 0'
+        }
     },
     button: {
         marginRight: theme.spacing(1)
@@ -41,17 +43,15 @@ const QuestionTabs = ({ isBlock = false, activeTab, setActiveTab }) => {
     };
 
     return (
-        <div className={classes.root}>
-            <Stepper alternativeLabel nonLinear activeStep={activeTab}>
-                {ADD_QUESTION_TABS.map((label, index) => (
-                    <Step key={label} disabled={isBlock}>
-                        <StepButton onClick={handleStep(index)}>
-                            {t(label)}
-                        </StepButton>
-                    </Step>
-                ))}
-            </Stepper>
-        </div>
+        <Stepper className={classes.root} alternativeLabel nonLinear activeStep={activeTab}>
+            {ADD_QUESTION_TABS.map((label, index) => (
+                <Step key={label} disabled={isBlock}>
+                    <StepButton onClick={handleStep(index)}>
+                        {t(label)}
+                    </StepButton>
+                </Step>
+            ))}
+        </Stepper>
     );
 };
 

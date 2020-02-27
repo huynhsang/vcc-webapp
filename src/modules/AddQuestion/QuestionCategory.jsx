@@ -47,12 +47,8 @@ const QuestionCategory = ({ categories, categoryId, setCategoryId }) => {
         <Wrapper>
             <Image src={questionMark} alt="" />
             <RightWrapper>
-                <h3 className="font-size-18 m0">
-                    {t('question_what_category_of_questions')}
-                </h3>
-                <h5 className="font-size-14">
-                    {t('question_we_will_help_you')}
-                </h5>
+                <h3>{t('question_what_category_of_questions')}</h3>
+                <h4>{t('question_we_will_help_you')}</h4>
                 <RadioGroup
                     value={categoryId}
                     onChange={ev => setCategoryId(ev.target.value)}
