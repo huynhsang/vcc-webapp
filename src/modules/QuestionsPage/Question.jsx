@@ -16,6 +16,8 @@ import { QuillText } from '../../component/QuillText';
 import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import DoneAll from '@material-ui/icons/DoneAll';
+import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
+import ModeComment from '@material-ui/icons/ModeComment';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -27,6 +29,7 @@ const Wrapper = styled.div`
     margin: 10px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
     position: relative;
     display: flex;
 
@@ -120,12 +123,19 @@ const BottomWrapper = styled.div`
     `}
 `;
 
-const InfoSpace = styled.span`
+const FlexWrapper = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const InfoSpace = styled(FlexWrapper)`
     background-color: white;
     margin-right: 10px;
     padding: 5px 10px;
-    & i {
+
+    & svg {
         margin-right: 5px;
+        font-size: 15px;
     }
 `;
 
@@ -232,18 +242,16 @@ const Question = ({
                     <div className="row">{tagsRender}</div>
                 )}
                 <BottomWrapper>
-                    <div>
+                    <FlexWrapper>
                         <InfoSpace>
-                            <i className="icon-comment" />
-                            <span>{`${answerCount} ${t(
-                                'common_answer'
-                            )}`}</span>
+                            <ModeComment />
+                            <div>{`${answerCount} ${t('common_answer')}`}</div>
                         </InfoSpace>
                         <InfoSpace>
-                            <i className="icon-eye" />
-                            <span>{`${viewCount} ${t('common_views')}`}</span>
+                            <RemoveRedEye />
+                            <div>{`${viewCount} ${t('common_views')}`}</div>
                         </InfoSpace>
-                    </div>
+                    </FlexWrapper>
                     {!!bestAnswerItem && (
                         <ResolveLabel>
                             <DoneAll />

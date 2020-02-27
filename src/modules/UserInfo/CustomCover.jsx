@@ -1,15 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-
 import { useTranslation } from 'react-i18next';
-import { setToRegistreFn } from '../../actions/app';
-
 import Cover from '../../images/cover.png';
-
 import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
-
 import { DefaultWrapper } from '../../component/Wrappers';
 import DefaultUserLogo from '../../images/default-user-logo.png';
 import { Badge } from '../Badges';
@@ -53,6 +47,9 @@ const ContentWrapper = styled(DefaultWrapper)`
 `;
 
 const LeftContent = styled.div`
+    flex-grow: 1;
+    flex-basis: 0;
+    min-height: 0;
     margin-left: 15px;
     margin-top: 15px;
 `;
@@ -87,7 +84,7 @@ const AskWrapper = styled.div`
 
 const FindOut = styled.div`
     position: relative;
-    margin: 20px 0 0 20px;
+    margin: 20px 10px 0 20px;
     font-size: 17px;
     border: 1px solid #ffff00cc;
     width: 200px;

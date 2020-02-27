@@ -15,6 +15,9 @@ import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
 import DoneAll from '@material-ui/icons/DoneAll';
 
+import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
+import ModeComment from '@material-ui/icons/ModeComment';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -22,6 +25,7 @@ const Wrapper = styled.div`
     width: calc(33.33% - 20px);
     background-color: white;
     padding: 10px 10px 40px 10px;
+    border-radius: 6px;
     margin: 10px;
     user-select: none;
     cursor: pointer;
@@ -81,9 +85,10 @@ const BottomWrapper = styled(FlexWrapper)`
     width: calc(100% - 20px);
     justify-content: flex-end;
 
-    & i {
+    & svg {
         margin-right: 5px;
         margin-left: 15px;
+        font-size: 15px;
     }
 `;
 
@@ -179,10 +184,14 @@ const Question = ({ question, history }) => {
             </DescriptionWrapper>
             {!isEmpty(tagsRender) && <div className="row">{tagsRender}</div>}
             <BottomWrapper>
-                <i className="icon-comment" />
-                <span>{`${answerCount} ${t('common_answer')}`}</span>
-                <i className="icon-eye" />
-                <span>{`${viewCount} ${t('common_views')}`}</span>
+                <FlexWrapper>
+                    <ModeComment />
+                    <div>{`${answerCount} ${t('common_answer')}`}</div>
+                </FlexWrapper>
+                <FlexWrapper>
+                    <RemoveRedEye />
+                    <div>{`${viewCount} ${t('common_views')}`}</div>
+                </FlexWrapper>
             </BottomWrapper>
         </Wrapper>
     );

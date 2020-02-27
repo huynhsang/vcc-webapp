@@ -33,6 +33,8 @@ const StepsWrapper = styled.div`
 `;
 
 const StepWrapper = styled.div`
+    border-radius:6px;
+    overflow: hidden;
     width: calc(50% - 20px);
     margin: 10px;
     ${media.mobileLandscape`
@@ -41,8 +43,8 @@ const StepWrapper = styled.div`
 `;
 
 const SupportWrapper = styled.div`
+    border-radius:6px;
     margin-top: 20px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     padding: 10px;
     background-color: white;
 `;

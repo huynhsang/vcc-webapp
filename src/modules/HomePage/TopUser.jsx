@@ -18,6 +18,7 @@ const Wrapper = styled.div`
     user-select: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
     ${media.tabletLandscape`
         width: calc(50% - 20px);
     `}

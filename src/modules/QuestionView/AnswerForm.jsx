@@ -86,7 +86,7 @@ const AnswerForm = ({
 
     return (
         <FormWrapper>
-            <h5>{t('answer_leave_answer')}</h5>
+            <h3>{t('answer_leave_answer')}</h3>
             <SimpleMDEReact
                 value={answerBody}
                 onChange={handleChangeAnswerBody}
