@@ -17,7 +17,6 @@
         "i18next": "^17.3.1",
         "i18next-browser-languagedetector": "^3.1.1",
         "immer": "^4.0.2",
-        "jquery": "3.4.1",
         "keymirror": "^0.1.1",
         "lodash": "^4.17.15",
         "material-ui": "^0.20.2",
