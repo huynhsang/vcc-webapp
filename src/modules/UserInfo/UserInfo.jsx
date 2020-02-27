@@ -1,33 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import {  withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import UserInfoRouter from './UserInfoRouter';
-import DefaultUserLogo from '../../images/default-user-logo.png';
 
 import {
     getUserProfileFn,
     getExperiencesFn,
     getEducationsFn
 } from '../../actions/userInfos';
-import { PageCover } from '../Header';
+import CustomCover from './CustomCover';
 import { DefaultWrapper } from '../../component/Wrappers';
 
-import { Badge } from '../Badges';
 import UserMenu from './UserMenu';
-
-const UserImage = styled.img`
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-top: 10px;
-`;
-
-const CenterWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-`;
 
 const UserProfile = ({
     userInfos,
@@ -54,17 +39,11 @@ const UserProfile = ({
         return <div />;
     }
 
-    const { firstName, lastName, avatar, points } = userProfile;
 
     return (
         <>
-            <PageCover />
+            <CustomCover userProfile={userProfile}/>
             <UserMenu location={location} history={history} userId={userId} />
-            <CenterWrapper>
-                <UserImage src={avatar || DefaultUserLogo} alt="" />
-                <div>{`${lastName} ${firstName}`}</div>
-                <Badge points={points} />
-            </CenterWrapper>
             <DefaultWrapper>
                 <UserInfoRouter />
             </DefaultWrapper>

@@ -8,16 +8,16 @@ const media = createMediaTemplate();
 const DEFAULT_TABS = [
     {
         label: 'common_about_us',
-        path: 'about-us'
+        path: '/about-us'
     },
     {
         label: 'common_contact_us',
-        path: 'contact-us',
+        path: '/contact-us',
         isContact: true
     },
     {
         label: 'common_policy',
-        path: 'policy'
+        path: '/policy'
     }
 ];
 

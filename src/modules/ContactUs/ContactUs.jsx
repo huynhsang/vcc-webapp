@@ -22,6 +22,13 @@ const VCNC_BLOG_EMAIL = 'vcncblog@gmail.com';
 const VCNC_APP_EMAIL = 'vcnc.app@gmail.com';
 
 const useStyle = makeStyles(() => ({
+    dialog: {
+        '& .MuiDialog-paper': {
+            '@media (max-width: 768px)': {
+                margin: 10
+            }
+        }
+    },
     title: {
         paddingBottom: 0,
         '& > h2': {
@@ -58,7 +65,11 @@ const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
     const { t } = useTranslation();
     const classes = useStyle();
     return (
-        <Dialog open={isOpenContactUs} onClose={() => toggleContactUs(false)}>
+        <Dialog
+            className={classes.dialog}
+            open={isOpenContactUs}
+            onClose={() => toggleContactUs(false)}
+        >
             <DialogTitle className={classes.title}>
                 <Logo src={VCNCLogo} alt="" />
                 <div>{t('common_contact_us')}</div>

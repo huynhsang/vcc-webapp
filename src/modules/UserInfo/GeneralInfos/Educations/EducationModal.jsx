@@ -15,23 +15,34 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 
 const useStyle = makeStyles(() => ({
+    dialog: {
+        '& .MuiDialog-paper': {
+            background: '#fdfdfd',
+            '@media (max-width: 768px)': {
+                margin: 10
+            }
+        }
+    },
     title: {
         paddingBottom: 0,
         '& > h2': {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center'
+        },
+        '@media (max-width: 768px)': {
+            padding: '10px 10px 0'
         }
     },
     content: {
-        paddingBottom: 20
+        paddingBottom: 20,
+        '@media (max-width: 768px)': {
+            padding: 10
+        }
     },
     actions: {
         justifyContent: 'space-between',
         flexDirection: 'row-reverse'
-    },
-    fullWidth: {
-        width: '100%'
     }
 }));
 
@@ -39,6 +50,9 @@ const FlexWrapper = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
+    & > div:first-child{
+        margin-right: 10px;
+    }
 `;
 
 const LoaderWrapper = styled.div`
@@ -107,7 +121,7 @@ const EducationModal = ({
     };
 
     return (
-        <Dialog open={isShowing}>
+        <Dialog className={classes.dialog} open={isShowing}>
             <DialogTitle className={classes.title}>
                 <div>{t('common_education')}</div>
                 <IconButton size="medium" onClick={onClose}>
@@ -122,7 +136,7 @@ const EducationModal = ({
                 ) : (
                     <>
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('form_your_school')}
                             variant="outlined"
                             value={degree}
@@ -135,7 +149,7 @@ const EducationModal = ({
                             margin="dense"
                         />
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('common_field_of_study')}
                             variant="outlined"
                             value={fieldOfStudy}
@@ -149,7 +163,6 @@ const EducationModal = ({
                         />
                         <FlexWrapper>
                             <TextField
-                                className={classes.fullWidth}
                                 type="number"
                                 label={t('common_from_year')}
                                 variant="outlined"
@@ -163,7 +176,6 @@ const EducationModal = ({
                                 margin="dense"
                             />
                             <TextField
-                                className={classes.fullWidth}
                                 type="number"
                                 label={t('common_to_year')}
                                 variant="outlined"
@@ -178,7 +190,7 @@ const EducationModal = ({
                             />
                         </FlexWrapper>
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('common_description')}
                             multiline
                             rows="6"

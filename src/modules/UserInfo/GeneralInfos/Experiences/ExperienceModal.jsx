@@ -19,23 +19,34 @@ import Switch from '@material-ui/core/Switch';
 import dateformat from 'dateformat';
 
 const useStyle = makeStyles(() => ({
+    dialog: {
+        '& .MuiDialog-paper': {
+            background: '#fdfdfd',
+            '@media (max-width: 768px)': {
+                margin: 10
+            }
+        }
+    },
     title: {
         paddingBottom: 0,
         '& > h2': {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center'
+        },
+        '@media (max-width: 768px)': {
+            padding: '10px 10px 0'
         }
     },
     content: {
-        paddingBottom: 20
+        paddingBottom: 20,
+        '@media (max-width: 768px)': {
+            padding: 10
+        }
     },
     actions: {
         justifyContent: 'space-between',
         flexDirection: 'row-reverse'
-    },
-    fullWidth: {
-        width: '100%'
     }
 }));
 
@@ -125,7 +136,7 @@ const ExperienceModal = ({
     };
 
     return (
-        <Dialog open={isShowing}>
+        <Dialog className={classes.dialog} open={isShowing}>
             <DialogTitle className={classes.title}>
                 <div>{t('common_experience')}</div>
                 <IconButton size="medium" onClick={onClose}>
@@ -140,7 +151,7 @@ const ExperienceModal = ({
                 ) : (
                     <>
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('form_your_job')}
                             helperText={t('form_ex_work_manager')}
                             variant="outlined"
@@ -154,7 +165,7 @@ const ExperienceModal = ({
                             margin="dense"
                         />
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('common_company')}
                             variant="outlined"
                             value={company}
@@ -167,7 +178,7 @@ const ExperienceModal = ({
                             margin="dense"
                         />
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('common_location')}
                             variant="outlined"
                             value={location}
@@ -236,7 +247,7 @@ const ExperienceModal = ({
                             )}
                         </FlexWrapper>
                         <TextField
-                            className={classes.fullWidth}
+                            fullWidth
                             label={t('common_description')}
                             multiline
                             rows="6"

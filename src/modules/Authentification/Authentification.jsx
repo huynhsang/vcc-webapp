@@ -29,7 +29,7 @@ const useStyle = makeStyles(() => ({
         '& .MuiDialog-paper': {
             background: '#fdfdfd',
             '@media (max-width: 768px)': {
-                margin: 10
+                margin: '10px 10px 150px'
             }
         }
     },
