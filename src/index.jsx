@@ -10,9 +10,6 @@ import './services/localize';
 
 import './style.css';
 
-// Theme css
-import './static/sweet-alert.css';
-
 import 'easymde/dist/easymde.min.css';
 
 // Component

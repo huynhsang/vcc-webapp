@@ -123,31 +123,3 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
-
-/* <form
-    role="search"
-    className="searchform main-search-form"
-    method="get"
-    action="#"
->
-    <div className="search-wrapper">
-        <input
-            type="search"
-            className="live-search live-search-icon"
-            autoComplete="off"
-            placeholder="Type Search Words"
-            name="search"
-        />
-        <div className="loader_2 search_loader" />
-        <div className="search-results results-empty" />
-        <input
-            type="hidden"
-            name="search_type"
-            className="search_type"
-        />
-        <div className="search-click" />
-        <button type="submit">
-            <i className="icon-search" />
-        </button>
-    </div>
-</form> */

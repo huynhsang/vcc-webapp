@@ -6,11 +6,12 @@ import SweetAlertUI from 'sweetalert-react';
 import { hideAlertAction } from '../../actions/sweetAlert';
 import { setToLoginFn } from '../../actions/app';
 
-import { SweetAlertType } from '../../constants/sweet-alert.constant';
-
 import { TO_LOGIN } from './confirm-name.constant';
 
-const sweetAlertDefault: SweetAlertType = {
+// Theme css
+import './sweet-alert.css';
+
+const sweetAlertDefault = {
     show: false,
     title: '',
     type: null,
