@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { getTags } from '../../services/tags.service';
 import { getNameByLanguage } from '../../utils/multiple-language';
 
+import {RowWrapper} from '../../component/Wrappers';
+
 const Wrapper = styled.div`
     border: 1px solid #b5b5b5;
     border-radius: 4px;
@@ -94,7 +96,7 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     return (
         <Wrapper>
             <Label>{t('common_trending_tags')} </Label>
-            <div className="row">{tagElements}</div>
+            <RowWrapper>{tagElements}</RowWrapper>
         </Wrapper>
     );
 };

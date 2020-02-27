@@ -10,6 +10,8 @@ const SummaryWrapper = styled.section`
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: white;
     border-radius: 2px;
+    padding: 20px;
+    margin-bottom: 15px;
     & p {
         text-align: justify;
         padding: 0 25px;
@@ -28,10 +30,10 @@ const GeneralInfos = ({ userInfos }) => {
 
     return (
         <>
-            <SummaryWrapper className="p5 mt3">
+            <SummaryWrapper>
                 <SignWrapper>“</SignWrapper>
                 <p>{summary}</p>
-                <SignWrapper textAlign="right">”</SignWrapper>
+                <SignWrapper textAlign="right"> ”</SignWrapper>
             </SummaryWrapper>
             <Experiences />
             <Educations />

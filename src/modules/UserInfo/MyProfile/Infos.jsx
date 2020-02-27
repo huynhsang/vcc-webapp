@@ -5,21 +5,37 @@ import COUNTRIES from './countries.constant';
 
 import dateformat from 'dateformat';
 
+import { createMediaTemplate } from '../../../utils/css-tools';
+const media = createMediaTemplate();
+
 const InfoTable = styled.table`
     color: black;
-    box-shadow: 0px 2px 6px 1px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     border: none;
+    width: 100%;
+    padding: 20px;
+    ${media.mobileLandscape`
+        padding: 5px;
+    `}
 `;
 
 const TR = styled.tr`
     & td {
         border: none;
+        padding: 10px 20px;
+        ${media.mobileLandscape`
+            padding: 5px;
+        `}
     }
     & td:first-child {
-        min-width: 20%;
+        width: 20%;
+        min-width: 145px;
         font-weight: 600;
         padding-right: 20px;
+        ${media.mobileLandscape`
+            padding-right: 10px;
+        `}
     }
 `;
 

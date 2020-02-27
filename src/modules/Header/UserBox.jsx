@@ -10,19 +10,21 @@ import CookieConstant from '../../common/constant/CookieConstant';
 import { getIdAndToken } from '../../utils/cookie-tools';
 
 import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import PersonIcon from '@material-ui/icons/Person';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import PersonIcon from '@material-ui/icons/Person';
+import Lock from '@material-ui/icons/Lock';
+
+import DefaultAvatar from '../../images/default-user-logo.png';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
-
-const DefaultAvatar =
-    'https://cdn0.iconfinder.com/data/icons/user-pictures/100/malecostume-512.png';
 
 const { deleteCookie } = CookieHelper;
 const { userIdKey } = CookieConstant;
@@ -37,6 +39,13 @@ const useStyles = makeStyles(() => ({
             color: 'white',
             display: 'flex',
             alignItems: 'center'
+        }
+    },
+    loginButton: {
+        color: 'white',
+        display: 'none',
+        '@media (max-width: 768px)': {
+            display: 'block'
         }
     }
 }));
@@ -74,7 +83,7 @@ const Authenticate = ({
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const { firstName, lastName } = currentUser || {};
+    const { firstName, lastName, avatar } = currentUser || {};
     const fullName = `${firstName} ${lastName}`;
 
     const { id: userId } = getIdAndToken();
@@ -107,7 +116,7 @@ const Authenticate = ({
                     <AvatarImg
                         alt={fullName}
                         title={fullName}
-                        src={DefaultAvatar}
+                        src={avatar || DefaultAvatar}
                     />
                     <ResponsiveHide>
                         <div>
@@ -141,19 +150,28 @@ const Authenticate = ({
     }
 
     return (
-        <div>
-            <Button variant="contained" onClick={setToLogin} color="primary">
-                {t('common_login')}
-            </Button>
-            <Button
-                className={classes.button}
-                variant="contained"
-                onClick={setToRegistre}
-                color="primary"
-            >
-                {t('authentification_sign_up')}
-            </Button>
-        </div>
+        <>
+            <ResponsiveHide>
+                <Button
+                    variant="contained"
+                    onClick={setToLogin}
+                    color="primary"
+                >
+                    {t('common_login')}
+                </Button>
+                <Button
+                    className={classes.button}
+                    variant="contained"
+                    onClick={setToRegistre}
+                    color="primary"
+                >
+                    {t('authentification_sign_up')}
+                </Button>
+            </ResponsiveHide>
+            <IconButton className={classes.loginButton} onClick={setToLogin}>
+                <Lock />
+            </IconButton>
+        </>
     );
 };
 

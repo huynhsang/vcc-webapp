@@ -55,6 +55,7 @@ const FlexWrapper = styled.div`
 
 const Logo = styled.img`
     width: 60px;
+    cursor: pointer;
 `;
 
 const Header = ({

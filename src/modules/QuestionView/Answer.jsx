@@ -143,9 +143,11 @@ const Answer = ({
                 </ContentWrapper>
                 <SpaceBetween>
                     <UserInfos>
-                        <Link to={`/users/${userAnwserId}`}>
-                            <UserName>{`${firstName} ${lastName}`}</UserName>
-                        </Link>
+                        <UserName>
+                            <Link to={`/users/${userAnwserId}`}>
+                                {`${firstName} ${lastName}`}
+                            </Link>
+                        </UserName>
                         <Badge points={points} />
                         <DateWrapper>
                             {t('answer_added_an_answer_on')}{' '}
