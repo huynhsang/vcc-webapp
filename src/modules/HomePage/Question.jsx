@@ -84,6 +84,7 @@ const BottomWrapper = styled(FlexWrapper)`
     bottom: 10px;
     width: calc(100% - 20px);
     justify-content: flex-end;
+    color: #7f7f7f;
 
     & svg {
         margin-right: 5px;

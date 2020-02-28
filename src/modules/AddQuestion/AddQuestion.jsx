@@ -98,7 +98,7 @@ const AddQuestion = ({
 
     if (!isAuthenticated) {
         return (
-            <div>{t('authentification_this_page_need_to_authenticate')}</div>
+            <Wrapper>{t('authentification_this_page_need_to_authenticate')}</Wrapper>
         );
     }
 

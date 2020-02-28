@@ -6,7 +6,7 @@ import RootScope from '../../global/RootScope';
 
 const Wrapper = styled.div`
     margin: 30px;
-    min-height: calc(100vh - 260px);
+    min-height: calc(100vh - 230px);
 `;
 
 const Page404 = () => {
@@ -15,7 +15,7 @@ const Page404 = () => {
     const ErrorImage = RootScope.currentUser ? ErrorImageV2 : ErrorImageV3;
     return (
         <Wrapper>
-            <div id="error-box-inner">
+            <div>
                 <img src={ErrorImage} alt="Have you seen this page?" />
             </div>
             <h1>ERROR 404</h1>

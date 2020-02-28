@@ -19,6 +19,8 @@ import DoneAll from '@material-ui/icons/DoneAll';
 import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import ModeComment from '@material-ui/icons/ModeComment';
 
+import { RowWrapper } from '../../component/Wrappers';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -161,6 +163,10 @@ const ResolveLabel = styled.div`
     `}
 `;
 
+const TagsWrapper = styled(RowWrapper)`
+    margin-bottom: 10px;
+`;
+
 const Question = ({
     question,
     isVoting,
@@ -239,7 +245,7 @@ const Question = ({
                     <QuillText lines={2} content={body} />
                 </DescriptionWrapper>
                 {!isEmpty(tagsRender) && (
-                    <div className="row">{tagsRender}</div>
+                    <TagsWrapper>{tagsRender}</TagsWrapper>
                 )}
                 <BottomWrapper>
                     <FlexWrapper>

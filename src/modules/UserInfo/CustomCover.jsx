@@ -49,7 +49,6 @@ const ContentWrapper = styled(DefaultWrapper)`
 const LeftContent = styled.div`
     flex-grow: 1;
     flex-basis: 0;
-    min-height: 0;
     margin-left: 15px;
     margin-top: 15px;
 `;

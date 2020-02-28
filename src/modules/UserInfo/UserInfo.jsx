@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import UserInfoRouter from './UserInfoRouter';
@@ -12,6 +13,10 @@ import CustomCover from './CustomCover';
 import { DefaultWrapper } from '../../component/Wrappers';
 
 import UserMenu from './UserMenu';
+
+const ContentWrapper = styled(DefaultWrapper)`
+    min-height: calc(100vh - 450px);
+`;
 
 const UserProfile = ({
     userInfos,
@@ -43,9 +48,9 @@ const UserProfile = ({
         <>
             <CustomCover userProfile={userProfile}/>
             <UserMenu location={location} history={history} userId={userId} />
-            <DefaultWrapper>
+            <ContentWrapper>
                 <UserInfoRouter />
-            </DefaultWrapper>
+            </ContentWrapper>
         </>
     );
 };

@@ -24,8 +24,9 @@ const VCNC_APP_EMAIL = 'vcnc.app@gmail.com';
 const useStyle = makeStyles(() => ({
     dialog: {
         '& .MuiDialog-paper': {
+            marginBottom: '150px',
             '@media (max-width: 768px)': {
-                margin: 10
+                margin: '10px'
             }
         }
     },
