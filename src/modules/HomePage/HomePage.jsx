@@ -12,6 +12,7 @@ import { DefaultWrapper } from '../../component/Wrappers';
 
 import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 const FlexWrapper = styled.div`
     display: flex;
@@ -83,6 +84,7 @@ const Home = ({ home, getTopUsers, getPopularQuestions, history }) => {
                     <Button
                         onClick={() => history.push('/questions')}
                         className={classes.linkButton}
+                        endIcon={<ChevronRightIcon/>}
                     >
                         {t('common_see_all')}
                     </Button>

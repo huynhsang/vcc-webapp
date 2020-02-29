@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const Wrapper = styled.div`
     width: 150px;
     min-width: 150px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    ${media.mobileLandscape`
+        width: 110px;
+        min-width: 110px;
+    `}
 `;
 
 const Image = styled.div`
@@ -16,8 +23,8 @@ const Image = styled.div`
     background-repeat: no-repeat;
     background-size: contain;
     background-image: ${p => `url(${p.img})`};
-    border-radius:50%;
-    background-color:black;
+    border-radius: 50%;
+    background-color: black;
 `;
 
 const UserInfo = ({ img, name, role }) => {

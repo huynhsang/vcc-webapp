@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import Question from './Question';
@@ -22,6 +23,15 @@ import AnswerForm from './AnswerForm';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { PageCover } from '../Header';
+import Button from '@material-ui/core/Button';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+
+const useStyles = makeStyles(() => ({
+    linkButton: {
+        color: 'rgba(0, 0, 0, 0.58)',
+        marginBottom: 15
+    }
+}));
 
 const Background = styled.div`
     background-color: #f4f4f4;
@@ -59,6 +69,7 @@ const QuestionView = ({
     approveAnswer
 }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
     const { id: currentUserId } = getIdAndToken();
 
     const {
@@ -115,6 +126,13 @@ const QuestionView = ({
         <Background>
             <PageCover />
             <DefaultWrapper>
+                <Button
+                    onClick={() => history.goBack()}
+                    className={classes.linkButton}
+                    startIcon={<ChevronLeftIcon />}
+                >
+                    {t('common_come_back')}
+                </Button>
                 <Question
                     question={question}
                     history={history}

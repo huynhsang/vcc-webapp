@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { PageCover } from '../Header';
 
 import UserInfoList from './UserInfoList';
+import { DefaultWrapper } from '../../component/Wrappers';
 
 const Wrapper = styled.div`
     color: #4f4f4f;
@@ -42,11 +43,11 @@ const SmallTitle = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    margin-top: 25px;
-    background: white;
-    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
     overflow: hidden;
+    margin-bottom: 25px;
+    background: white;
     display: flex;
     flex-direction: column;
     align-items: ${p => p.alignItem || 'start'};
@@ -77,7 +78,7 @@ const AboutUs = () => {
     return (
         <>
             <PageCover />
-            <Wrapper>
+            <DefaultWrapper>
                 <ContentWrapper>
                     <ContentTitle>{t('about_us_our_story')}</ContentTitle>
                     <Content>{t('about_us_story')}</Content>
@@ -96,7 +97,7 @@ const AboutUs = () => {
                     {t('about_us_our_team')}
                 </SmallTitle>
                 <UserInfoList />
-            </Wrapper>
+            </DefaultWrapper>
             <BottomWrapper>
                 <Title>{t('about_us_VCNC')}</Title>
                 <Sologan>{t('about_us_sologan')}</Sologan>
