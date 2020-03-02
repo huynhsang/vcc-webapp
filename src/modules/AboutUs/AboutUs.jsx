@@ -6,13 +6,6 @@ import { PageCover } from '../Header';
 import UserInfoList from './UserInfoList';
 import { DefaultWrapper } from '../../component/Wrappers';
 
-const Wrapper = styled.div`
-    color: #4f4f4f;
-
-    width: 95%;
-    max-width: 850px;
-    margin: 0 auto;
-`;
 const Title = styled.div`
     color: white;
     font-size: 26px;

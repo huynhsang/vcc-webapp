@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { DefaultWrapper } from '../../component/Wrappers';
-import { getIdAndToken } from '../../utils/cookie-tools';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -32,46 +31,43 @@ function a11yProps(index) {
 
 const TABS = [
     {
-        path: 'my-profile',
-        label: 'common_my_profile'
+        path: 'copyright',
+        label: 'Copyright'
     },
 
     {
-        path: 'general',
-        label: 'common_general_infos'
+        path: 'acceptableUse',
+        label: 'Acceptable Use'
     },
     {
-        path: 'question-asked',
-        label: 'user_info_question_asked'
+        path: 'privacy',
+        label: 'Privacy'
     },
     {
-        path: 'answers-related',
-        label: 'user_info_amswers_related'
+        path: 'termsofservice',
+        label: 'Terms Of Service'
+    },
+    {
+        path: 'trademark',
+        label: 'Trademark'
     }
 ];
 
-const UserMenu = ({ location, history, userId }) => {
+const PolicyMenu = ({ location, history }) => {
     const { t } = useTranslation();
     const { pathname } = location;
 
-    const { id } = getIdAndToken();
-    const isMainUserProfile = id === userId;
-
     const paths = pathname.match(/\/[\w-]+/g);
-    const tabSelected = paths && paths[2] ? paths[2].substring(1) : 'general';
-
-    const tabs = isMainUserProfile
-        ? TABS
-        : TABS.filter((val, key) => key !== 0);
+    const tabSelected = paths && paths[1] ? paths[1].substring(1) : 'copyright';
 
     const handleChange = (event, newValue) => {
-        const { path } = tabs[newValue];
-        history.push(`/users/${userId}/${path}`);
+        const { path } = TABS[newValue];
+        history.push(`/policy/${path}`);
     };
 
-    const activeIndex = tabs.findIndex(val => tabSelected === val.path);
+    const activeIndex = TABS.findIndex(val => tabSelected === val.path);
 
-    const tabsRender = tabs.map((tab, key) => (
+    const tabsRender = TABS.map((tab, key) => (
         <Tab key={`tab-${key}`} label={t(tab.label)} {...a11yProps(key)} />
     ));
 
@@ -94,4 +90,4 @@ const UserMenu = ({ location, history, userId }) => {
     );
 };
 
-export default UserMenu;
+export default PolicyMenu;
