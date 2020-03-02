@@ -67,7 +67,6 @@ const AppRouter = () => {
                 render={props => <ResetPassword {...props} />}
             />
             <Route
-                exact
                 path="/policy"
                 render={props => <Policy {...props} />}
             />
