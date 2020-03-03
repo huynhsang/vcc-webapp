@@ -10,6 +10,11 @@ const Wrapper = styled.div`
         margin: 15px -5px 15px 0;
         user-select: none;
 
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    
+
         & li {
             margin: 0 5px;
             & a {
