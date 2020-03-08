@@ -5,12 +5,23 @@ import VerticalActiveSteps from '../../component/VerticalActiveSteps';
 import { askSteps, answerSteps, supportText } from './workspaceText.constant';
 import AskButton from '../../component/AskButton';
 import { DefaultWrapper } from '../../component/Wrappers';
+import { makeStyles } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const FullWidth = styled.div`
     background-color: #f7f7f7;
+`;
+
+const FlexWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+    font-size: 16px;
 `;
 
 const Title = styled.div`
@@ -33,7 +44,7 @@ const StepsWrapper = styled.div`
 `;
 
 const StepWrapper = styled.div`
-    border-radius:6px;
+    border-radius: 6px;
     overflow: hidden;
     width: calc(50% - 20px);
     margin: 10px;
@@ -43,7 +54,7 @@ const StepWrapper = styled.div`
 `;
 
 const SupportWrapper = styled.div`
-    border-radius:6px;
+    border-radius: 6px;
     margin-top: 20px;
     padding: 10px;
     background-color: white;
@@ -75,8 +86,15 @@ const AskWrapper = styled.div`
     padding-top: 20px;
 `;
 
-const WorkSpace = () => {
+const useStyles = makeStyles(() => ({
+    linkButton: {
+        color: 'rgba(0, 0, 0, 0.58)'
+    }
+}));
+
+const WorkSpace = ({ history }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const askStepsTranslate = askSteps.map(val => ({
         ...val,
@@ -88,10 +106,24 @@ const WorkSpace = () => {
         title: t(val.title)
     }));
 
+    const goTo = () => {
+        window.scrollTo(0, 0);
+        history.push('/information');
+    };
+
     return (
         <FullWidth>
             <DefaultWrapper>
-                <Title>{t('workspace_how_does_it_work')}</Title>
+                <FlexWrapper>
+                    <Title>{t('workspace_how_does_it_work')}</Title>
+                    <Button
+                        onClick={goTo}
+                        className={classes.linkButton}
+                        endIcon={<ChevronRightIcon />}
+                    >
+                        {t('common_more_detail')}
+                    </Button>
+                </FlexWrapper>
                 <StepsWrapper>
                     <StepWrapper>
                         <VerticalActiveSteps

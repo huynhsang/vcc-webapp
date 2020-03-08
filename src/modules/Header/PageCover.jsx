@@ -8,8 +8,6 @@ import { setToRegistreFn } from '../../actions/app';
 
 import Cover from '../../images/cover.png';
 
-import { REGISTRE_MENTOR_FORM_LINK } from '../ContactUs';
-
 import { DefaultWrapper } from '../../component/Wrappers';
 
 import { createMediaTemplate } from '../../utils/css-tools';
@@ -119,13 +117,7 @@ const PageCover = () => {
                         </Link>
                     </AskWrapper>
                     <FindOut>
-                        <a
-                            href={REGISTRE_MENTOR_FORM_LINK}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            {t('home_find_out_how')}
-                        </a>
+                        <Link to="/information">{t('home_find_out_how')}</Link>
                     </FindOut>
                 </LeftContent>
             </ContentWrapper>
