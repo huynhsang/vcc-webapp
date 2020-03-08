@@ -88,6 +88,9 @@ export default {
     common_category: 'Category',
     common_review: 'Xem trước',
     common_close: 'Đóng',
+    common_how_does_it_work: 'Hoạt động như thế nào',
+    common_step: 'Bước',
+    common_more_detail: 'Chi tiết',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -275,7 +278,6 @@ export default {
         'Bạn muốn thêm thu nhập từ việc đưa ra lời khuyên/ý kiến?',
     home_find_out_how: 'Gia nhập VCNC',
 
-    workspace_how_does_it_work: 'Hoạt động như thế nào',
     workspace_if_you_are_asking: 'Nếu bạn là người đặt câu hỏi',
     workspace_post_a_question: 'Đặt một câu hỏi',
     workspace_choose_professionals:
@@ -296,5 +298,17 @@ export default {
 
     footer_all_right_reserved: 'All rights reserved © 2020',
 
-    answer_added_an_answer_on: 'Trả lời vào ngày'
+    answer_added_an_answer_on: 'Trả lời vào ngày',
+
+    infos_what_does_VCNC_do: 'VCNC làm gì?',
+    infos_what_does_VCNC_do_description:
+        'Chúng tôi giúp kết nối bạn với cộng đồng những người có kinh nghiệm từ khắp nơi trên thế giới để giúp bạn tìm được câu trả lời tốt nhất cho vấn đề bạn gặp phải, cũng như những hỗ trợ bạn cần cho sự nghiệp của bạn.',
+    infos_get_started: 'Nhưng làm thế nào để bắt đầu? Cực đơn giản!',
+    infos_new_step1:
+        'Đăng ký một tài khoản với VCNC. Bạn có thể đăng ký bằng email hoặc đơn giản là kết nối trực tiếp với tài khoản google/facebook sẵn có của bạn.',
+    infos_new_step2:
+        'Giờ bạn đã sẵn sàng. Truy cập vào vcnc.app và đặt ngay một câu hỏi nào để kết nối với cộng đồng professionals của VCNC nào!',
+    infos_new_step3:
+        'Đừng quên quay trở lại sau vài ngày để xem câu trả lời cho yêu cầu của bạn. Bạn sẽ nhận được thông báo ngay khi có ai đó vào trả lời. Nếu bạn hài lòng với một câu trả lời nào đó, đừng quên nhấn HÀI LÒNG với câu trả lời đó. Người bạn đã đưa ra câu trả lời sẽ rất biết ơn bạn đấy!',
+    infos_conclusion: 'Cuối cùng, chúng tôi rất vui khi có bạn ở đây!'
 };

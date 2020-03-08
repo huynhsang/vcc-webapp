@@ -84,14 +84,14 @@ const Home = ({ home, getTopUsers, getPopularQuestions, history }) => {
                     <Button
                         onClick={() => history.push('/questions')}
                         className={classes.linkButton}
-                        endIcon={<ChevronRightIcon/>}
+                        endIcon={<ChevronRightIcon />}
                     >
                         {t('common_see_all')}
                     </Button>
                 </FlexWrapper>
                 <SmallWrapper>{renderQuestions}</SmallWrapper>
             </DefaultWrapper>
-            <WorkSpace />
+            <WorkSpace history={history} />
             <DefaultWrapper>
                 <Title>{t('common_top_members')}</Title>
                 <SmallWrapper>{renderUsers}</SmallWrapper>
