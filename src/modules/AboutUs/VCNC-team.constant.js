@@ -1,5 +1,5 @@
 import NguyetImage from '../../images/team/nguyet.png';
-import PhucImage from '../../images/team/phuc.png';
+import PhucImage from '../../images/team/phuc.jpg';
 import SangImage from '../../images/team/sang.png';
 import ToanImage from '../../images/team/toan.png';
 import NguyenImage from '../../images/team/nguyen.png';

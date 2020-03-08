@@ -21,7 +21,7 @@ const Image = styled.div`
     height: 100px;
     background-position: 50%;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-image: ${p => `url(${p.img})`};
     border-radius: 50%;
     background-color: black;
