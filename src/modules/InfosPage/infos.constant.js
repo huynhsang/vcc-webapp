@@ -55,3 +55,18 @@ export const pointScale = [
        
     },
 ]
+
+export const startSteps = [
+    {
+        title: 'common_step',
+        description: 'infos_new_step1'
+    },
+    {
+        title: 'common_step',
+        description: 'infos_new_step2'
+    },
+    {
+        title: 'common_step',
+        description: 'infos_new_step3'
+    },
+];

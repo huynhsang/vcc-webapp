@@ -88,6 +88,9 @@ export default {
     common_category: 'Category',
     common_review: 'Review',
     common_close: 'Close',
+    common_how_does_it_work: 'How does it work',
+    common_step: 'Step',
+    common_more_detail: 'More detail',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -276,7 +279,6 @@ export default {
     home_want_to_get: 'Want to get paid for sharing your knowledge?',
     home_find_out_how: 'Find out how we work',
 
-    workspace_how_does_it_work: 'How does it work',
     workspace_if_you_are_asking: 'If you are asking',
     workspace_post_a_question: 'Post a question',
     workspace_choose_professionals: 'Choose professionals to get matched',
@@ -294,5 +296,16 @@ export default {
 
     footer_all_right_reserved: 'All rights reserved © 2020',
 
-    answer_added_an_answer_on: 'Added an answer on'
+    answer_added_an_answer_on: 'Added an answer on',
+
+    infos_what_does_VCNC_do: 'What does VCNC do?',
+    infos_what_does_VCNC_do_description:
+        'We are here to connect you with professionals around the world that can provide you the best answers for your inquiry as well as the support you need for your career.',
+    infos_get_started: `Don't know how to get started? It's surprisingly simple!`,
+    infos_new_step1:
+        'Register an account with VCNC. You can register with your email or just connect with your existing google/facebook account.',
+    infos_new_step2:
+        'Now you are ready to go. Go to vcnc.app and ask any question to get connected to our professionals network!',
+    infos_new_step3: `Don't forget to come back to get the answer. You will get notifications when someone answers your question. If you are satisfied with an answer, don't forget to APPROVE that answer so your friend can get the credit!`,
+    infos_conclusion: 'Needless to say, we are happy that you are here!'
 };

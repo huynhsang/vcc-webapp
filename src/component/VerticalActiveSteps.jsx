@@ -22,7 +22,7 @@ const Title = styled.div`
 const WorkSpace = ({ title, steps = [] }) => {
     return (
         <Wrapper>
-            <Title>{title}</Title>
+            {Boolean(title) && <Title>{title}</Title>}
             <Stepper orientation="vertical">
                 {steps.map((step, key) => (
                     <Step key={`step-${key}`} active={true}>

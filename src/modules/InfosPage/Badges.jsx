@@ -11,6 +11,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Typography from '@material-ui/core/Typography';
 
+import { DefaultWrapper } from '../../component/Wrappers';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -84,6 +86,11 @@ const RightWrapper = styled.div`
     `}
 `;
 
+const Wrapper = styled(DefaultWrapper)`
+    display: flex;
+    flex-wrap: wrap;
+`;
+
 const Badges = () => {
     const { t } = useTranslation();
     const classes = useStyles();
@@ -100,7 +107,7 @@ const Badges = () => {
     ));
 
     return (
-        <FlexWrapper>
+        <Wrapper>
             <LeftWrapper>
                 <Title>
                     <StyleIcon />
@@ -134,7 +141,7 @@ const Badges = () => {
                     ))}
                 </Stepper>
             </RightWrapper>
-        </FlexWrapper>
+        </Wrapper>
     );
 };
 
