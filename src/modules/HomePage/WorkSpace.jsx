@@ -115,7 +115,7 @@ const WorkSpace = ({ history }) => {
         <FullWidth>
             <DefaultWrapper>
                 <FlexWrapper>
-                    <Title>{t('workspace_how_does_it_work')}</Title>
+                    <Title>{t('common_how_does_it_work')}</Title>
                     <Button
                         onClick={goTo}
                         className={classes.linkButton}
