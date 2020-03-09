@@ -98,7 +98,9 @@ const AddQuestion = ({
 
     if (!isAuthenticated) {
         return (
-            <Wrapper>{t('authentification_this_page_need_to_authenticate')}</Wrapper>
+            <Wrapper>
+                {t('authentification_this_page_need_to_authenticate')}
+            </Wrapper>
         );
     }
 
@@ -151,6 +153,8 @@ const AddQuestion = ({
                     />
                 );
             case 4:
+                return <div />;
+            case 5:
                 return (
                     <QuestionReview
                         title={title}

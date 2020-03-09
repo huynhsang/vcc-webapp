@@ -91,6 +91,7 @@ export default {
     common_how_does_it_work: 'How does it work',
     common_step: 'Step',
     common_more_detail: 'More detail',
+    common_ask_to: 'Ask to',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
