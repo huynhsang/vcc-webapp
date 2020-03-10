@@ -11,6 +11,8 @@ import DefaultUserLogo from '../../../images/default-user-logo.png';
 import { Badge } from '../../Badges';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
+import Tag from '../../../component/Tag';
+import { RowWrapper } from '../../../component/Wrappers';
 
 const media = createMediaTemplate();
 
@@ -51,10 +53,6 @@ const InfoTitle = styled.span`
     margin: 0 5px;
 `;
 
-const TagsWrapper = styled.div`
-    margin-top: 8px;
-`;
-
 const Infos = styled(FlexWrapper)`
     margin-bottom: 10px;
     & .post-author {
@@ -62,30 +60,6 @@ const Infos = styled(FlexWrapper)`
     }
     ${media.tabletLandscape`flex-direction: column; align-items: start;`}
 `;
-
-// const ButtonWrapper = styled.div`
-//     display: flex;
-//     justify-content: end;
-// `;
-
-// const MoreButton = styled.div`
-//     border-radius: 50%;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     margin: 5px 5px 5px 0;
-
-//     height: 35px;
-//     width: 35px;
-
-//     &:hover {
-//         background-color: #dfdfdf;
-//     }
-
-//     & i {
-//         font-size: 30px;
-//     }
-// `;
 
 const AnswersWrapper = styled.div``;
 
@@ -109,18 +83,11 @@ const QuestionRelated = ({ answers, location, history }) => {
     };
 
     const tagsRender = tagList.length > 0 && (
-        <TagsWrapper className="tagcloud">
-            <i className="fas fa-tags" />
-            {tagList.map(tag => {
-                return (
-                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                        key={tag.slug}
-                    >
-                        {getNameByLanguage(tag)}
-                    </a>
-                );
-            })}
-        </TagsWrapper>
+        <RowWrapper>
+            {tagList.map(tag => (
+                <Tag key={tag.id} tag={tag} />
+            ))}
+        </RowWrapper>
     );
 
     const userId = location.pathname.split('/')[2];

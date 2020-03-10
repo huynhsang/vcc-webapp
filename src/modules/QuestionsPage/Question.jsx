@@ -36,6 +36,11 @@ const Wrapper = styled.div`
     display: flex;
 
     cursor: pointer;
+
+    &:hover{
+        transform: translateY(-10px);
+    }
+    
     ${media.tabletLandscape`
         width: calc(100% - 20px);
     `}
@@ -114,6 +119,7 @@ const BottomWrapper = styled.div`
     background-color: #efefefc7;
     width: 100%;
     padding: 15px 10px;
+    color: #585858;
 
     @media (max-width: 1080px) and (min-width: 1025px) {
         flex-direction: column;

@@ -11,7 +11,7 @@ import {
     getEducations,
     editEducation
 } from '../services/education.service';
-import { getQuestions, getNumberQuestions } from '../services/question.service';
+import { getQuestions } from '../services/question.service';
 import { getAnswers, getNumberAnswers } from '../services/answer.service';
 import { getUser } from '../services/user.service';
 
@@ -38,7 +38,6 @@ const {
     GET_ANSWERS_RELATED_SUCCESS,
     GET_USER_PROFILE_SUCCESS,
     GET_NUMBER_ANSWERS_RELATED_SUCCESS,
-    GET_NUMBER_QUESTIONS_ASKED_SUCCESS
 } = actionsNames;
 
 export const getUserProfileSuccess = createAction(GET_USER_PROFILE_SUCCESS);
@@ -177,30 +176,18 @@ export const getQuestionsAskedSuccess = createAction(
     GET_QUESTIONS_ASKED_SUCCESS
 );
 
-export const getNumberQuestionsAskedSuccess = createAction(
-    GET_NUMBER_QUESTIONS_ASKED_SUCCESS
-);
-
 export const getQuestionsAskedFn = (userId, page = 1) => {
-    const where = {
-        ownerId: userId
-    };
     const filter = {
-        where,
+        ownerId: userId,
         order: ['modified DESC', 'created DESC'],
         limit: DEFAULT_GET_LIMIT,
         skip: (page - 1) * DEFAULT_GET_LIMIT
     };
     return dispatch => {
-        getQuestions({ filter })
+        getQuestions({ filter, totalCount : true })
             .then(data => {
+                console.log('test: ', data);
                 dispatch(getQuestionsAskedSuccess(data));
-            })
-            .catch(err => console.log(err));
-
-        getNumberQuestions({ where })
-            .then(data => {
-                dispatch(getNumberQuestionsAskedSuccess(data));
             })
             .catch(err => console.log(err));
     };

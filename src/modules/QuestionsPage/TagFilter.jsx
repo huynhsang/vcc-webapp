@@ -1,10 +1,16 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { getTags } from '../../services/tags.service';
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import {RowWrapper} from '../../component/Wrappers';
+import { RowWrapper } from '../../component/Wrappers';
+import Button from '@material-ui/core/Button';
+
+import { tagStyle } from '../../component/Tag';
+
+const useStyles = makeStyles(() => tagStyle);
 
 const Wrapper = styled.div`
     border: 1px solid #b5b5b5;
@@ -49,6 +55,7 @@ const TagWrapper = styled.div`
 
 const TagFilter = ({ category, tags, onChangeFilter }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
     const [tagsToSelect, setTagsToSelect] = React.useState([]);
 
     React.useEffect(() => {
@@ -81,15 +88,18 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     };
 
     const tagElements = tagsToSelect.map(tag => {
+        const isActive = tagIds.includes(tag.id);
         return (
-            <TagWrapper
+            <Button
                 key={tag.id}
-                isActive={tagIds.includes(tag.id)}
-                tag={tag}
                 onClick={onClickTag(tag.id)}
+                size="small"
+                variant="contained"
+                className={`${classes.button} ${isActive &&
+                    classes.activeButton}`}
             >
                 {getNameByLanguage(tag)}
-            </TagWrapper>
+            </Button>
         );
     });
 

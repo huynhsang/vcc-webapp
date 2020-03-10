@@ -81,7 +81,6 @@ const actionNames = keyMirror({
     GET_ANSWERS_RELATED_SUCCESS: null,
     GET_USER_PROFILE_SUCCESS: null,
     GET_NUMBER_ANSWERS_RELATED_SUCCESS: null,
-    GET_NUMBER_QUESTIONS_ASKED_SUCCESS: null
 });
 
 export default actionNames;
