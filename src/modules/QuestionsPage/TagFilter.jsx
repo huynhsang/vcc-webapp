@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { getTags } from '../../services/tags.service';
+import { getTags, getTagsRelatingCategory } from '../../services/tags.service';
 import { getNameByLanguage } from '../../utils/multiple-language';
 
 import { RowWrapper } from '../../component/Wrappers';
@@ -59,20 +59,23 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     const [tagsToSelect, setTagsToSelect] = React.useState([]);
 
     React.useEffect(() => {
-        const filter = category
-            ? {
-                  where: {
-                      type: category
-                  }
-              }
-            : {};
-        getTags({ filter })
-            .then(data => {
-                setTagsToSelect(data);
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        if (!category) {
+            getTags()
+                .then(data => {
+                    setTagsToSelect(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        } else {
+            getTagsRelatingCategory(category)
+                .then(data => {
+                    setTagsToSelect(data);
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
     }, [category]);
 
     const tagIds = tags ? tags.split(',') : [];
