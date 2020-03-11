@@ -63,8 +63,10 @@ export const setUpQuestionFilter = ({ category, show, page, text, tags }) => {
         filterFixed.text = text;
     }
 
-    filterObj.category = category || '';
-    filterFixed.category = category || '';
+    if(category){
+        filterObj.categorySlug = category || '';
+        filterFixed.category = category || '';
+    }
 
     if (tags) {
         filterObj.tagIds = tags.split(',');
