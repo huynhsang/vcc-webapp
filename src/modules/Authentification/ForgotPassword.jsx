@@ -22,6 +22,7 @@ const useStyle = makeStyles(() => ({
 
 const Wrapper = styled.div`
     padding: 30px 1em 20px;
+    text-align: center;
 `;
 
 const LockIcon = styled(Lock)`
