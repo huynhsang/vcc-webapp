@@ -9,6 +9,7 @@ import QuestionTags from './QuestionTags';
 import QuestionTitle from './QuestionTitle';
 import QuestionDescription from './QuestionDescription';
 import QuestionReview from './QuestionReview';
+import QuestionSituation from './QuestionSituation';
 
 import {
     showSuccessAlertFn,
@@ -18,6 +19,7 @@ import {
 
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
+import { getUsers } from '../../services/user.service';
 import { getTagsRelatingCategory } from '../../services/tags.service';
 
 import QuestionTabs from './QuestionTabs';
@@ -60,15 +62,25 @@ const AddQuestion = ({
 
     const [categories, setCategories] = React.useState(null);
     const [tags, setTags] = React.useState(null);
+    const [usersToMatch, setUsersToMatch] = React.useState(null);
 
     const [question, setQuestion] = React.useState({
         title: '',
         body: '',
         categoryId: null,
-        tagIds: []
+        tagIds: [],
+        isPublic: true,
+        supporterList: []
     });
 
-    const { categoryId, tagIds, title, body } = question;
+    const {
+        categoryId,
+        tagIds,
+        title,
+        body,
+        isPublic,
+        supporterList
+    } = question;
 
     const updateQuestion = obj => setQuestion(state => ({ ...state, ...obj }));
 
@@ -79,6 +91,13 @@ const AddQuestion = ({
                 setCategories(data);
             })
             .catch(err => console.log(err.message));
+
+        getUsers()
+            .then(data => {
+                setUsersToMatch(data);
+            })
+            .catch(err => console.log(err.message));
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -105,7 +124,7 @@ const AddQuestion = ({
     }
 
     const postQuestion = () => {
-        createQuestion({ ...question, isPublic: true })
+        createQuestion(question )
             .then(data => {
                 showSuccessAlert('Success!', 'Created a Question');
                 history.push(`/questions/${data.slug}`);
@@ -153,7 +172,17 @@ const AddQuestion = ({
                     />
                 );
             case 4:
-                return <div />;
+                return (
+                    <QuestionSituation
+                        usersToMatch={usersToMatch}
+                        isPublic={isPublic}
+                        supporterList={supporterList}
+                        setIsPublic={val => updateQuestion({ isPublic: val })}
+                        setSupporterList={val =>
+                            updateQuestion({ supporterList: val })
+                        }
+                    />
+                );
             case 5:
                 return (
                     <QuestionReview
@@ -169,7 +198,8 @@ const AddQuestion = ({
 
     const Content = getContent(activeTab);
 
-    const isBlockSteps = !categoryId;
+    const isBlockSteps =
+        !categoryId || (!isPublic && supporterList.length <= 0);
 
     return (
         <Wrapper>
@@ -185,7 +215,7 @@ const AddQuestion = ({
                         {t('common_previous_step')}
                     </Button>
                 )}
-                {activeTab === 4 ? (
+                {activeTab === 5 ? (
                     <Button
                         variant="contained"
                         onClick={postQuestion}

@@ -93,6 +93,9 @@ export default {
     common_more_detail: 'More detail',
     common_ask_to: 'Ask to',
     common_or: 'Or',
+    common_private: 'Private',
+    common_public: 'Public',
+    common_user: 'User',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -184,6 +187,13 @@ export default {
     question_search_question: 'Search question',
     question_hit_enter_to_search: 'Hit enter to search',
     question_resolved: 'Resolved',
+    question_set_mode: `What is the question's display mode`,
+    question_set_mode_des: `You can set the display mode for your question. It can be public or private. In private mode, it's only shown with people choosen after`,
+    question_support_list: 'Choose the people (maximum 2) who you want to ask?',
+    question_support_list_des: 'We will contact to them to answer your question. {{sub}}',
+    question_support_list_des_sup_empty: `You can let it empty if you don't know who can answer your question`,
+    question_support_list_require: 'Because your question is private, so you have to choose at least one person to answer your question',
+
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',

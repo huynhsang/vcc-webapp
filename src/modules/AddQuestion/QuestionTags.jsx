@@ -67,7 +67,7 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
                 multiple
                 options={tags}
                 getOptionLabel={tag => tag.nameEn}
-                defaultValue={defaultTags}
+                value={defaultTags}
                 filterSelectedOptions
                 renderInput={params => (
                     <TextField

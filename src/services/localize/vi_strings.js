@@ -93,6 +93,9 @@ export default {
     common_more_detail: 'Chi tiết',
     common_ask_to: 'Hỏi đến',
     common_or: 'Hoặc',
+    common_private: 'Riêng tư',
+    common_public: 'Công khai',
+    common_user: 'Người dùng',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -182,6 +185,12 @@ export default {
     question_search_question: 'Tìm kiếm câu hỏi',
     question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
     question_resolved: 'Đã được giải quyết',
+    question_set_mode: 'Chế độ hiển thị của câu hỏi là gì?',
+    question_set_mode_des: 'Bạn có thể đặt chế độ hiển thị cho câu hỏi, nó có thể ở dạng riêng tư hoặc công khai. Nếu ở chế độ riêng tư, thì câu hỏi chỉ giới hạn bạn và những người dùng được chọn phía dưới. ',
+    question_support_list: 'Chọn người (nhiều nhất là 2) sẽ trả lời câu hỏi của bạn?',
+    question_support_list_des: 'Chúng tôi sẽ liên lạc đến họ để trả lời vấn đề của bạn. {{sub}}',
+    question_support_list_des_sup_empty: 'Bạn có thể để nó trống nếu như không biết sẽ gửi câu hỏi đến ai',
+    question_support_list_require: 'Bởi vì bạn chọn câu hỏi ở dang riêng tư, nên bạn phải chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
