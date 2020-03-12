@@ -38,7 +38,7 @@ const QuestionsAsked = ({ userInfos, getQuestionsAsked }) => {
                 <Pagination
                     nbPages={nbPages}
                     activePage={activePage}
-                    onPageChange={setActivePage}
+                    changePage={setActivePage}
                 />
             )}
         </Wrapper>

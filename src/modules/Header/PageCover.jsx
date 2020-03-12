@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
-import { setToRegistreFn } from '../../actions/app';
+import { showConfirmToLoginFn } from '../../actions/sweetAlert';
 
 import Cover from '../../images/cover.png';
 
@@ -65,12 +66,13 @@ const AskWrapper = styled.div`
     margin-bottom: 10px;
     color: white;
 
-    & a {
+    & span {
         color: #ffff00cc;
         border-bottom: 1px solid;
         margin-left: 10px;
         user-select: none;
         white-space: nowrap;
+        cursor: pointer;
 
         &:hover {
             color: yellow;
@@ -102,8 +104,16 @@ const FindOut = styled.div`
     }
 `;
 
-const PageCover = () => {
+const PageCover = ({ showConfirmToLogin, isAuthenticated, history }) => {
     const { t } = useTranslation();
+
+    const onLickAddQuestion = () => {
+        if (isAuthenticated) {
+            history.push('/add-question');
+        } else {
+            showConfirmToLogin();
+        }
+    };
 
     return (
         <CoverWrapper>
@@ -112,9 +122,9 @@ const PageCover = () => {
                 <LeftContent>
                     <AskWrapper>
                         {t('home_ask_verified_professionals')}
-                        <Link to="/add-question">
+                        <span onClick={onLickAddQuestion}>
                             {`+ ${t('home_ask_a_question')}`}
-                        </Link>
+                        </span>
                     </AskWrapper>
                     <FindOut>
                         <Link to="/information">{t('home_find_out_how')}</Link>
@@ -130,7 +140,10 @@ const mapStateToProps = ({ App: { isAuthenticated } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setToRegistre: () => dispatch(setToRegistreFn())
+    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PageCover);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(PageCover));
