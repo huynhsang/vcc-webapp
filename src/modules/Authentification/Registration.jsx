@@ -11,9 +11,7 @@ import { REALM } from '../../constants/constants';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
-
-import { createMediaTemplate } from '../../utils/css-tools';
-const media = createMediaTemplate();
+import SocialLogin from './SocialLogin';
 
 const useStyle = makeStyles(() => ({
     button: {
@@ -26,22 +24,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 const Wrapper = styled.div`
-    padding: 30px 0 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ContentWrapper = styled.div`
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 2px;
-    box-shadow: 0 0 1em #d9d9d9;
-    position: relative;
-    width: 90%;
-    ${media.mobileLandscape`
-        padding: 10px;
-    `}
+    padding: 0px 1em 20px;
 `;
 
 const LoaderWrapper = styled.div`
@@ -106,68 +89,67 @@ const Registration = ({
 
     return (
         <Wrapper>
-            <ContentWrapper>
-                <TextField
-                    fullWidth
-                    label={t('authentification_first_name')}
-                    variant="outlined"
-                    value={firstName}
-                    onChange={ev => setFirstName(ev.target.value)}
-                    margin="normal"
-                />
-                <TextField
-                    fullWidth
-                    label={t('authentification_last_name')}
-                    variant="outlined"
-                    value={lastName}
-                    onChange={ev => setLastName(ev.target.value)}
-                    margin="normal"
-                />
-                <TextField
-                    fullWidth
-                    label={t('common_email')}
-                    variant="outlined"
-                    value={email}
-                    onChange={ev => setEmail(ev.target.value)}
-                    margin="normal"
-                />
-                <TextField
-                    type="password"
-                    fullWidth
-                    label={t('common_password')}
-                    variant="outlined"
-                    value={password}
-                    onChange={ev => setPassword(ev.target.value)}
-                    margin="normal"
-                />
-                <TextField
-                    type="password"
-                    fullWidth
-                    label={t('authentification_confirm_password')}
-                    variant="outlined"
-                    value={confirmPassword}
-                    onChange={ev => setConfirmPassword(ev.target.value)}
-                    margin="normal"
-                />
+            <SocialLogin />
+            <TextField
+                fullWidth
+                label={t('authentification_first_name')}
+                variant="outlined"
+                value={firstName}
+                onChange={ev => setFirstName(ev.target.value)}
+                margin="normal"
+            />
+            <TextField
+                fullWidth
+                label={t('authentification_last_name')}
+                variant="outlined"
+                value={lastName}
+                onChange={ev => setLastName(ev.target.value)}
+                margin="normal"
+            />
+            <TextField
+                fullWidth
+                label={t('common_email')}
+                variant="outlined"
+                value={email}
+                onChange={ev => setEmail(ev.target.value)}
+                margin="normal"
+            />
+            <TextField
+                type="password"
+                fullWidth
+                label={t('common_password')}
+                variant="outlined"
+                value={password}
+                onChange={ev => setPassword(ev.target.value)}
+                margin="normal"
+            />
+            <TextField
+                type="password"
+                fullWidth
+                label={t('authentification_confirm_password')}
+                variant="outlined"
+                value={confirmPassword}
+                onChange={ev => setConfirmPassword(ev.target.value)}
+                margin="normal"
+            />
 
-                <Button
-                    fullWidth
-                    variant="contained"
-                    onClick={onSubmit}
-                    color="primary"
-                    className={classes.submitButton}
-                >
-                    {t('authentification_create_account')}
-                </Button>
-                <Button
-                    color="default"
-                    className={classes.button}
-                    startIcon={<ChevronLeft />}
-                    onClick={setToLogin}
-                >
-                    {t('authentification_back_to_login')}
-                </Button>
-            </ContentWrapper>
+            <Button
+                fullWidth
+                variant="contained"
+                onClick={onSubmit}
+                color="primary"
+                className={classes.submitButton}
+            >
+                {t('authentification_create_account')}
+            </Button>
+            <Button
+                color="default"
+                className={classes.button}
+                startIcon={<ChevronLeft />}
+                onClick={setToLogin}
+            >
+                {t('authentification_back_to_login')}
+            </Button>
         </Wrapper>
     );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import LoginRequestBuilder from '../../global/LoginRequest';
 import { useTranslation } from 'react-i18next';
 import RootScope from '../../global/RootScope';
@@ -12,13 +12,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 
-import Facebook from '@material-ui/icons/Facebook';
-import Mail from '@material-ui/icons/Mail';
-
-import { createMediaTemplate } from '../../utils/css-tools';
-const media = createMediaTemplate();
-
-const { REACT_APP_SOCIAL_LOGIN_API_URL } = process.env;
+import SocialLogin from './SocialLogin';
 
 const useStyle = makeStyles(() => ({
     loginButton: {
@@ -27,34 +21,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 const Wrapper = styled.div`
-    padding: 30px 0 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ContentWrapper = styled.div`
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 2px;
-    box-shadow: 0 0 1em #d9d9d9;
-    position: relative;
-    width: 90%;
-    ${media.mobileLandscape`
-        padding: 10px;
-    `}
-`;
-
-const TopWrapper = styled.div`
-    position: absolute;
-    top: -50px;
-    right: 24px;
-    display: flex;
-    align-items: center;
-    ${media.mobileLandscape`
-        top: -41px;
-        right: 6px;
-    `}
+    padding: 0px 1em 20px;
 `;
 
 const FootWrapper = styled.div`
@@ -62,30 +29,6 @@ const FootWrapper = styled.div`
     padding-top: 15px;
     border-top: 1px solid rgba(180, 180, 180, 0.7);
     text-align: center;
-`;
-
-const iconCss = css`
-    opacity: 0.4;
-    cursor: pointer;
-    &:hover {
-        opacity: 0.9;
-    }
-`;
-
-const FacebookIcon = styled(Facebook)`
-    ${iconCss};
-    font-size: 80px !important;
-    ${media.mobileLandscape`
-        font-size: 60px !important;
-    `}
-`;
-
-const MailIcon = styled(Mail)`
-    ${iconCss};
-    font-size: 87px !important;
-    ${media.mobileLandscape`
-        font-size: 67px !important;
-    `}
 `;
 
 const ClickDiv = styled.strong`
@@ -131,69 +74,58 @@ const Login = ({
         }
     };
 
-    const onAuth = type => () => {
-        window.location = `${REACT_APP_SOCIAL_LOGIN_API_URL}/auth/${type}`;
-    };
-
     return (
         <Wrapper>
-            <ContentWrapper>
-                <TopWrapper>
-                    <FacebookIcon onClick={onAuth('facebook')} />
-                    <MailIcon onClick={onAuth('google')} />
-                </TopWrapper>
+            <SocialLogin />
+            <div>
+                <TextField
+                    fullWidth
+                    label={t('common_email')}
+                    variant="outlined"
+                    value={email}
+                    onChange={ev => setEmail(ev.target.value)}
+                    margin="normal"
+                />
+                <TextField
+                    type="password"
+                    fullWidth
+                    label={t('common_password')}
+                    variant="outlined"
+                    value={password}
+                    onChange={ev => setPassword(ev.target.value)}
+                    margin="normal"
+                />
+                <FormControlLabel
+                    control={
+                        <Switch
+                            checked={rememberMe}
+                            onChange={ev => setRememberMe(ev.target.checked)}
+                            color="primary"
+                        />
+                    }
+                    label={t('authentification_remember_me')}
+                />
+                <Button
+                    fullWidth
+                    variant="contained"
+                    onClick={onSubmit}
+                    color="primary"
+                    className={classes.loginButton}
+                >
+                    {t('common_login')}
+                </Button>
+            </div>
+            <FootWrapper>
                 <div>
-                    <TextField
-                        fullWidth
-                        label={t('common_email')}
-                        variant="outlined"
-                        value={email}
-                        onChange={ev => setEmail(ev.target.value)}
-                        margin="normal"
-                    />
-                    <TextField
-                        type="password"
-                        fullWidth
-                        label={t('common_password')}
-                        variant="outlined"
-                        value={password}
-                        onChange={ev => setPassword(ev.target.value)}
-                        margin="normal"
-                    />
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={rememberMe}
-                                onChange={ev =>
-                                    setRememberMe(ev.target.checked)
-                                }
-                                color="primary"
-                            />
-                        }
-                        label={t('authentification_remember_me')}
-                    />
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        onClick={onSubmit}
-                        color="primary"
-                        className={classes.loginButton}
-                    >
-                        {t('common_login')}
-                    </Button>
-                </div>
-                <FootWrapper>
-                    <div>
-                        {`${t('authentification_donot_have_account')} `}
-                        <ClickDiv onClick={setToRegistre}>
-                            {t('authentification_sign_up')}
-                        </ClickDiv>
-                    </div>
-                    <ClickDiv onClick={setToFindPassword}>
-                        {t('authentification_forgot_your_password')}
+                    {`${t('authentification_donot_have_account')} `}
+                    <ClickDiv onClick={setToRegistre}>
+                        {t('authentification_sign_up')}
                     </ClickDiv>
-                </FootWrapper>
-            </ContentWrapper>
+                </div>
+                <ClickDiv onClick={setToFindPassword}>
+                    {t('authentification_forgot_your_password')}
+                </ClickDiv>
+            </FootWrapper>
         </Wrapper>
     );
 };

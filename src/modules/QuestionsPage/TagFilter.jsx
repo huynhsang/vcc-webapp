@@ -28,31 +28,6 @@ const Label = styled.div`
     padding: 0 5px;
 `;
 
-const TagWrapper = styled.div`
-    transition: border 0.2s linear, color 0.2s linear,
-        background-color 0.2s linear;
-    border-radius: 2px;
-    font-size: 11px;
-    font-weight: 400;
-    margin-bottom: 6px;
-    margin-right: 6px;
-    display: block;
-    float: left;
-    padding: 0 6px;
-    cursor: pointer;
-
-    border: 1px solid;
-    border-color: ${p => (p.isActive ? '#6a758c' : '#e1e3e3')};
-    color: ${p => (p.isActive ? '#fff' : '#7c7f85')};
-    background-color: ${p => p.isActive && '#6a758c'};
-
-    &:hover {
-        border-color: ${p => !p.isActive && '#2d6ff7'};
-        background-color: ${p => !p.isActive && '#2d6ff7'};
-        color: #fff;
-    }
-`;
-
 const TagFilter = ({ category, tags, onChangeFilter }) => {
     const { t } = useTranslation();
     const classes = useStyles();

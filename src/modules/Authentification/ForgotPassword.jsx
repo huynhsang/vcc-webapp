@@ -10,9 +10,6 @@ import Button from '@material-ui/core/Button';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
 import Lock from '@material-ui/icons/Lock';
 
-import { createMediaTemplate } from '../../utils/css-tools';
-const media = createMediaTemplate();
-
 const useStyle = makeStyles(() => ({
     button: {
         fontSize: 12,
@@ -24,23 +21,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 const Wrapper = styled.div`
-    padding: 30px 0 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`;
-
-const ContentWrapper = styled.div`
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.05);
-    border-radius: 2px;
-    box-shadow: 0 0 1em #d9d9d9;
-    position: relative;
-    width: 90%;
-    text-align: center;
-    ${media.mobileLandscape`
-        padding: 10px;
-    `}
+    padding: 30px 1em 20px;
 `;
 
 const LockIcon = styled(Lock)`
@@ -80,37 +61,35 @@ const ForgotPassword = ({
 
     return (
         <Wrapper>
-            <ContentWrapper>
-                <LockIcon />
-                <div>{t('authentification_enter_your_email')}</div>
-                <TextField
-                    fullWidth
-                    label={t('common_email')}
-                    variant="outlined"
-                    value={email}
-                    onChange={ev => setEmail(ev.target.value)}
-                    margin="normal"
-                />
+            <LockIcon />
+            <div>{t('authentification_enter_your_email')}</div>
+            <TextField
+                fullWidth
+                label={t('common_email')}
+                variant="outlined"
+                value={email}
+                onChange={ev => setEmail(ev.target.value)}
+                margin="normal"
+            />
+            <Button
+                fullWidth
+                variant="contained"
+                onClick={onSubmit}
+                color="primary"
+                className={classes.submitButton}
+            >
+                {t('authentification_reset_password')}
+            </Button>
+            <LeftAlign>
                 <Button
-                    fullWidth
-                    variant="contained"
-                    onClick={onSubmit}
-                    color="primary"
-                    className={classes.submitButton}
+                    color="default"
+                    className={classes.button}
+                    startIcon={<ChevronLeft />}
+                    onClick={setToLogin}
                 >
-                    {t('authentification_reset_password')}
+                    {t('authentification_back_to_login')}
                 </Button>
-                <LeftAlign>
-                    <Button
-                        color="default"
-                        className={classes.button}
-                        startIcon={<ChevronLeft />}
-                        onClick={setToLogin}
-                    >
-                        {t('authentification_back_to_login')}
-                    </Button>
-                </LeftAlign>
-            </ContentWrapper>
+            </LeftAlign>
         </Wrapper>
     );
 };
