@@ -66,8 +66,6 @@ const AnswersWrapper = styled.div``;
 const QuestionRelated = ({ answers, location, history }) => {
     const { t } = useTranslation();
 
-    console.log(answers[0].question);
-
     const {
         askedBy,
         categoryItem,

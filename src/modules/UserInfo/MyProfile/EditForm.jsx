@@ -80,8 +80,6 @@ const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
         setUserEditted(currentUser);
     };
 
-    console.log(nationality);
-
     return (
         <Wrapper>
             <TextField
