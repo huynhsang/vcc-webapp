@@ -18,7 +18,6 @@ import {
     getQuestionsAskedSuccess,
     getAnswersRelatedSuccess,
     getNumberAnswersRelatedSuccess,
-    getNumberQuestionsAskedSuccess,
     getUserProfileSuccess
 } from '../actions/userInfos';
 
@@ -99,15 +98,13 @@ const userInfosReducer = createReducer(defaultState, {
     },
     [getQuestionsAskedSuccess]: (state, action) => {
         state.questionsAsked = action.payload.entities.questions || {} ;
+        state.numberQuestionsAsked = action.payload.count;
     },
     [getAnswersRelatedSuccess]: (state, action) => {
         state.answersRelated = action.payload;
     },
     [getNumberAnswersRelatedSuccess]: (state, action) => {
         state.numberAnswersRelated = action.payload.count;
-    },
-    [getNumberQuestionsAskedSuccess] : (state, action) => {
-        state.numberQuestionsAsked = action.payload.count;
     },
 });
 

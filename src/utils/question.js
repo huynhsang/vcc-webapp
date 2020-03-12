@@ -16,25 +16,10 @@ export const questionsFilterGenerator = ({
     order = null,
     skip = 0,
     limit = 6
-    // include = [
-    //     {
-    //         relation: 'askedBy',
-    //         scope: {
-    //             fields: getDefaultFields()
-    //         }
-    //     }
-    // ],
-    // where = {
-    //     created: {
-    //         gt: new Date(Date.now() - ONE_MONTH)
-    //     }
-    // }
 }) => ({
     order,
     skip,
     limit
-    // include,
-    // where
 });
 
 // order
@@ -78,8 +63,10 @@ export const setUpQuestionFilter = ({ category, show, page, text, tags }) => {
         filterFixed.text = text;
     }
 
-    filterObj.category = category || '';
-    filterFixed.category = category || '';
+    if(category){
+        filterObj.categorySlug = category || '';
+        filterFixed.category = category || '';
+    }
 
     if (tags) {
         filterObj.tagIds = tags.split(',');

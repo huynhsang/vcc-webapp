@@ -29,14 +29,18 @@ const QuestionsAsked = ({ userInfos, getQuestionsAsked }) => {
         <QuestionAsked key={question.id} question={question} />
     ));
 
+    const nbPages = Math.ceil(numberQuestionsAsked / 5);
+
     return (
         <Wrapper>
             <QuestionsWrapper>{questionsRender}</QuestionsWrapper>
-            <Pagination
-                nbPages={Math.ceil(numberQuestionsAsked / 5)}
-                activePage={activePage}
-                onPageChange={setActivePage}
-            />
+            {nbPages > 1 && (
+                <Pagination
+                    nbPages={nbPages}
+                    activePage={activePage}
+                    onPageChange={setActivePage}
+                />
+            )}
         </Wrapper>
     );
 };

@@ -79,7 +79,7 @@ const QuestionPage = ({
             getQuestions({ filter, totalCount: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [show, page, text, tags, isAuthenticated]);
+    }, [show, page, text, tags, category, isAuthenticated]);
 
     const onChangeFilter = obj => {
         const url = `/questions?${qs.stringify({
@@ -87,6 +87,7 @@ const QuestionPage = ({
             page,
             text,
             tags,
+            category,
             ...obj
         })}`;
         history.push(url);

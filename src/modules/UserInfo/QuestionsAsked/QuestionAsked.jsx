@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
+import Tag from '../../../component/Tag';
+import { RowWrapper } from '../../../component/Wrappers';
 
 const Wrapper = styled.div`
     background-color: white;
@@ -28,10 +30,6 @@ const InfoTitle = styled.span`
     margin-right: 5px;
 `;
 
-const TagsWrapper = styled.div`
-    margin-top: 8px;
-`;
-
 const Infos = styled(FlexWrapper)`
     display: flex;
     justify-content: space-between;
@@ -44,18 +42,9 @@ const QuestionAsked = ({ question, history }) => {
     const { categoryItem, tagList, title } = question;
 
     const subCategoryRender = tagList.length > 0 && (
-        <TagsWrapper className="tagcloud">
-            <i className="fas fa-tags" />
-            {tagList.map(tag => {
-                return (
-                    <a //eslint-disable-line jsx-a11y/anchor-is-valid
-                        key={tag.slug}
-                    >
-                        {getNameByLanguage(tag)}
-                    </a>
-                );
-            })}
-        </TagsWrapper>
+        <RowWrapper>
+            {tagList.map(tag => <Tag key={tag.id} tag={tag} />)}
+        </RowWrapper>
     );
 
     const handleTitle = () => {

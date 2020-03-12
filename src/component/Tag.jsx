@@ -1,36 +1,45 @@
 import React from 'react';
-import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import qs from 'qs';
 
 import { getNameByLanguage } from '../utils/multiple-language';
 
-const Wrapper = styled.div`
-    transition: border 0.2s linear, color 0.2s linear,
-        background-color 0.2s linear;
-    border-radius: 2px;
-    font-size: 11px;
-    font-weight: 400;
-    margin-bottom: 6px;
-    margin-right: 6px;
-    display: block;
-    float: left;
-    padding: 0 6px;
-    cursor: pointer;
+import Button from '@material-ui/core/Button';
 
-    border: 1px solid;
-    border-color: ${p => (p.isActive ? '#6a758c' : '#e1e3e3')};
-    color: ${p => (p.isActive ? '#fff' : '#7c7f85')};
-    background-color: ${p => p.isActive && '#6a758c'};
-
-    &:hover {
-        border-color: ${p => !p.isActive && '#2d6ff7'};
-        background-color: ${p => !p.isActive && '#2d6ff7'};
-        color: #fff;
+export const tagStyle = {
+    button: {
+        margin: '0 6px 6px 0',
+        padding: '2px',
+        color: 'rgba(0, 0, 0, 0.8)',
+        backgroundColor: 'rgb(241, 241, 241)',
+        boxShadow: '0 1px 2px rgba(0,0,0,0.2)',
+        textTransform: 'none',
+        '&:disabled': {
+            color: 'rgba(0, 0, 0, 0.8) !important'
+        },
+        '&:hover':{
+            boxShadow: '0 1px 2px rgba(0,0,0,0.3)',
+        }
+    },
+    activeButton: {
+        color: 'white',
+        backgroundColor: '#404040',
+        '&:disabled': {
+            color: 'white !important',
+            backgroundColor: '#404040 !important'
+        },
+        '&:hover': {
+            backgroundColor: '#2b2b2b',
+        }
     }
-`;
+};
 
-const Tag = ({ tag, history, location }) => {
+const useStyles = makeStyles(() => tagStyle);
+
+const Tag = ({ tag, history, location, isClickable = false }) => {
+    const classes = useStyles();
+
     const { pathname, search } = location;
     const { show, text, tags } = qs.parse(search.substr(1));
 
@@ -52,10 +61,18 @@ const Tag = ({ tag, history, location }) => {
         history.push(url);
     };
 
+    const isActive = ids.includes(tag.id);
+
     return (
-        <Wrapper isActive={ids.includes(tag.id)} onClick={onClick}>
+        <Button
+            onClick={onClick}
+            size="small"
+            variant="contained"
+            className={`${classes.button} ${isActive && classes.activeButton}`}
+            disabled={!isClickable}
+        >
             {getNameByLanguage(tag)}
-        </Wrapper>
+        </Button>
     );
 };
 

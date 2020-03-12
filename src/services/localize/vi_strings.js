@@ -92,6 +92,7 @@ export default {
     common_step: 'Bước',
     common_more_detail: 'Chi tiết',
     common_ask_to: 'Hỏi đến',
+    common_or: 'Hoặc',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

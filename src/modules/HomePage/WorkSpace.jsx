@@ -68,11 +68,14 @@ const SupportOl = styled.ul`
     flex-wrap: wrap;
     justify-content: space-between;
 
+    padding: 0;
+    margin: 0;
+
     & li {
         margin-left: 20px;
         width: calc(33.33% - 20px);
         line-height: 30px;
-        color: rgba(0, 0, 0, 0.87);
+        color: rgba(0, 0, 0, 0.6);
         ${media.mobileLandscape`
             width: calc(100% - 20px);
         `}

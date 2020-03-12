@@ -92,6 +92,7 @@ export default {
     common_step: 'Step',
     common_more_detail: 'More detail',
     common_ask_to: 'Ask to',
+    common_or: 'Or',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
