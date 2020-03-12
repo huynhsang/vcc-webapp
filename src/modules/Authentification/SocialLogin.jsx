@@ -39,7 +39,7 @@ const iconCss = css`
 
 const FacebookIcon = styled(Facebook)`
     ${iconCss};
-    font-size: 100px !important;
+    font-size: 84px !important;
     ${media.mobileLandscape`
         font-size: 65px !important;
     `}
@@ -47,7 +47,7 @@ const FacebookIcon = styled(Facebook)`
 
 const MailIcon = styled(Mail)`
     ${iconCss};
-    font-size: 114px !important;
+    font-size: 90px !important;
     ${media.mobileLandscape`
         font-size: 72px !important;
     `}
