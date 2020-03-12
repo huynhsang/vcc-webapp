@@ -70,7 +70,7 @@ const AddQuestion = ({
         categoryId: null,
         tagIds: [],
         isPublic: true,
-        supporterList: []
+        supporterIds: []
     });
 
     const {
@@ -79,7 +79,7 @@ const AddQuestion = ({
         title,
         body,
         isPublic,
-        supporterList
+        supporterIds
     } = question;
 
     const updateQuestion = obj => setQuestion(state => ({ ...state, ...obj }));
@@ -176,10 +176,10 @@ const AddQuestion = ({
                     <QuestionSituation
                         usersToMatch={usersToMatch}
                         isPublic={isPublic}
-                        supporterList={supporterList}
+                        supporterIds={supporterIds}
                         setIsPublic={val => updateQuestion({ isPublic: val })}
-                        setSupporterList={val =>
-                            updateQuestion({ supporterList: val })
+                        setSupporterIds={val =>
+                            updateQuestion({ supporterIds: val })
                         }
                     />
                 );
@@ -199,7 +199,7 @@ const AddQuestion = ({
     const Content = getContent(activeTab);
 
     const isBlockSteps =
-        !categoryId || (!isPublic && supporterList.length <= 0);
+        !categoryId || (!isPublic && supporterIds.length <= 0);
 
     return (
         <Wrapper>

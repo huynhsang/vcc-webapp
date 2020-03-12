@@ -37,10 +37,10 @@ const Wrapper = styled.div`
 
     cursor: pointer;
 
-    &:hover{
+    &:hover {
         transform: translateY(-10px);
     }
-    
+
     ${media.tabletLandscape`
         width: calc(100% - 20px);
     `}
@@ -170,7 +170,18 @@ const ResolveLabel = styled.div`
 `;
 
 const TagsWrapper = styled(RowWrapper)`
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+`;
+
+const AsktToWrapper = styled(FlexWrapper)`
+    margin-bottom: 15px;
+`;
+const AskTo = styled.div`
+    color: #7f7f7f;
+`;
+
+const UserAsked = styled.div`
+    padding: 0 5px;
 `;
 
 const Question = ({
@@ -195,7 +206,8 @@ const Question = ({
         tagList,
         upVoteCount,
         downVoteCount,
-        voted
+        voted,
+        supporterList
     } = question;
 
     const { id: currentUserId } = getIdAndToken();
@@ -216,6 +228,10 @@ const Question = ({
         const action = isPositiveVote ? 'up' : 'down';
         voteQuestion(id, action);
     };
+
+    const userAskedList = supporterList.map(val => (
+        <UserAsked key={val.id}>{`${val.lastName} ${val.firstName}`}</UserAsked>
+    ));
 
     return (
         <Wrapper onClick={redirect(`/questions/${slug}`)}>
@@ -252,6 +268,12 @@ const Question = ({
                 </DescriptionWrapper>
                 {!isEmpty(tagsRender) && (
                     <TagsWrapper>{tagsRender}</TagsWrapper>
+                )}
+                {supporterList.length > 0 && (
+                    <AsktToWrapper>
+                        <AskTo>{t('common_ask_to')}:</AskTo>
+                        {userAskedList}
+                    </AsktToWrapper>
                 )}
                 <BottomWrapper>
                     <FlexWrapper>

@@ -11,20 +11,20 @@ const Wrapper = styled.div``;
 const QuestionSituation = ({
     usersToMatch,
     isPublic,
-    supporterList,
+    supporterIds,
     setIsPublic,
-    setSupporterList
+    setSupporterIds
 }) => {
     const { t } = useTranslation();
 
     const handleUsers = (ev, value) => {
         if (value && value.length <= 2) {
-            setSupporterList(value.map(val => val.id));
+            setSupporterIds(value.map(val => val.id));
         }
     };
 
     const defaultUsers = usersToMatch.filter(val =>
-        supporterList.includes(val.id)
+        supporterIds.includes(val.id)
     );
 
     return (
