@@ -91,6 +91,7 @@ export default {
     common_how_does_it_work: 'Hoạt động như thế nào',
     common_step: 'Bước',
     common_more_detail: 'Chi tiết',
+    common_or: 'Hoặc',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
