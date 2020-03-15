@@ -232,13 +232,11 @@ export default {
 
     login_thank_to_login_to_continue: 'Thank to login to continue',
 
-    contact_us_hello: 'Hello',
-    contact_us_if_you_want_to_registre: 'If you wat to registre',
-    contact_us_please_complete_this_formule: 'please complete this formule',
-    contact_us_please_email_to: 'please email to',
-
-    contact_us_if_you_want_to_share: 'If you want to share',
-    contact_us_feedback: 'Others feedback, please tell us via',
+    contact_us_hello: 'We are here to listen to you!',
+    contact_us_if_you_want_to_share: 'If you want to share your story with us, please leave us a message at ',
+    contact_us_reply_soon : ' We will contact you as soon as possible.',
+    contact_us_feedback: 'If you need help with other issues, please email to: ',
+    contact_us_sincerely: 'Sincerely,',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',

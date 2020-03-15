@@ -229,13 +229,11 @@ export default {
 
     login_thank_to_login_to_continue: 'Vui lòng đăng nhập để tiếp tục',
 
-    contact_us_hello: 'Chào bạn',
-    contact_us_if_you_want_to_registre: 'Nếu bạn muốn đăng kí làm',
-    contact_us_please_complete_this_formule: 'vui lòng điền vào mẫu sau',
-    contact_us_please_email_to: 'vui lòng email đến',
-
-    contact_us_if_you_want_to_share: 'Nếu bạn muốn chia sẻ',
-    contact_us_feedback: 'Mọi ý kiến phản hồi khác, xin gởi về ',
+    contact_us_hello: 'VCNC chúc bạn một ngày tốt lành!',
+    contact_us_if_you_want_to_share: 'Nếu bạn muốn chia sẻ câu chuyện của mình trên VCNC blog, vui lòng để lại lời nhắn cho VCNC tại ',
+    contact_us_reply_soon : ' Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.',
+    contact_us_feedback: 'Mọi ý kiến phản hồi khác vui lòng gửi đến :',
+    contact_us_sincerely: 'Chân thành cảm ơn đóng góp của bạn!',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',
