@@ -6,13 +6,19 @@ import Button from '@material-ui/core/Button';
 
 import { showConfirmToLoginFn } from '../actions/sweetAlert';
 
-const AskButton = ({ label, history, isAuthenticated, showConfirmToLogin }) => {
+const AskButton = ({
+    label,
+    toLink = '/add-question',
+    history,
+    isAuthenticated,
+    showConfirmToLogin
+}) => {
     const onClick = () => {
         if (!isAuthenticated) {
             return showConfirmToLogin();
         }
 
-        history.push('/add-question');
+        history.push(toLink);
     };
 
     return (

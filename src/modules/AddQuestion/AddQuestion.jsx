@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import qs from 'qs';
 
 import connect from 'react-redux/es/connect/connect';
 import { useTranslation } from 'react-i18next';
@@ -45,7 +46,8 @@ const AddQuestion = ({
     showSuccessAlert,
     showErrorAlert,
     App,
-    showConfirmToLogin
+    showConfirmToLogin,
+    location
 }) => {
     const { t } = useTranslation();
 
@@ -64,13 +66,15 @@ const AddQuestion = ({
     const [tags, setTags] = React.useState(null);
     const [usersToMatch, setUsersToMatch] = React.useState(null);
 
+    const { userAsked } = qs.parse(location.search.substr(1));
+
     const [question, setQuestion] = React.useState({
         title: '',
         body: '',
         categoryId: null,
         tagIds: [],
         isPublic: true,
-        supporterIds: []
+        supporterIds: userAsked ? [userAsked] : []
     });
 
     const {
@@ -124,7 +128,7 @@ const AddQuestion = ({
     }
 
     const postQuestion = () => {
-        createQuestion(question )
+        createQuestion(question)
             .then(data => {
                 showSuccessAlert('Success!', 'Created a Question');
                 history.push(`/questions/${data.slug}`);
@@ -198,8 +202,7 @@ const AddQuestion = ({
 
     const Content = getContent(activeTab);
 
-    const isBlockSteps =
-        !categoryId || (!isPublic && supporterIds.length <= 0);
+    const isBlockSteps = !categoryId || (!isPublic && supporterIds.length <= 0);
 
     return (
         <Wrapper>

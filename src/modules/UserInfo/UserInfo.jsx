@@ -24,7 +24,8 @@ const UserProfile = ({
     getExperiences,
     getEducations,
     location,
-    history
+    history,
+    currentUser
 }) => {
     const { userProfile } = userInfos;
 
@@ -43,10 +44,14 @@ const UserProfile = ({
         return <div />;
     }
 
+    const isCurrentUser = currentUser && currentUser.id === userId;
 
     return (
         <>
-            <CustomCover userProfile={userProfile}/>
+            <CustomCover
+                userProfile={userProfile}
+                isCurrentUser={isCurrentUser}
+            />
             <UserMenu location={location} history={history} userId={userId} />
             <ContentWrapper>
                 <UserInfoRouter />
@@ -55,7 +60,10 @@ const UserProfile = ({
     );
 };
 
-const mapStateToProps = ({ userInfos }) => ({ userInfos });
+const mapStateToProps = ({ userInfos, App: { currentUser } }) => ({
+    userInfos,
+    currentUser
+});
 
 const mapDispatchToProps = dispatch => ({
     getUserProfile: userId => dispatch(getUserProfileFn(userId)),
