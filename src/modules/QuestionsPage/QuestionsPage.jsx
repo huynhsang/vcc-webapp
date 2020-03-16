@@ -18,11 +18,7 @@ import qs from 'qs';
 import Question from './Question';
 import Pagination from '../../component/Pagination';
 import { voteQuestionFn } from '../../actions/questions';
-import {
-    showErrorAlertFn,
-    showConfirmToLoginFn
-} from '../../actions/sweetAlert';
-import ApplicationUtil from '../../common/util/ApplicationUtil';
+import { showConfirmToLoginFn } from '../../actions/sweetAlert';
 
 const QuestionPageWrapper = styled.div`
     min-height: calc(100vh - 100px);
@@ -158,8 +154,6 @@ const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     getQuestions: params => dispatch(getQuestionsFn(params)),
-    showErrorNotification: data =>
-        dispatch(showErrorAlertFn('Error!', ApplicationUtil.getErrorMsg(data))),
     showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action))

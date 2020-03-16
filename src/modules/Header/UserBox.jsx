@@ -4,8 +4,8 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 
-import CookieHelper from '../../common/util/CookieHelper';
-import CookieConstant from '../../common/constant/CookieConstant';
+import {deleteCookie} from '../../utils/CookieHelper';
+import { USER_ID_KEY, JWT_TOKEN_NAME } from '../../constants/cookie.constant';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 
@@ -25,9 +25,6 @@ import DefaultAvatar from '../../images/default-user-logo.png';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
-
-const { deleteCookie } = CookieHelper;
-const { userIdKey } = CookieConstant;
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -89,8 +86,8 @@ const Authenticate = ({
     const { id: userId } = getIdAndToken();
 
     const logout = () => {
-        deleteCookie(CookieConstant.jwtTokenName);
-        deleteCookie(userIdKey);
+        deleteCookie(JWT_TOKEN_NAME);
+        deleteCookie(USER_ID_KEY);
         setIsAuthenticated(false);
         history.push('/home');
         handleClose();

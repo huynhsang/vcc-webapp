@@ -1,9 +1,14 @@
 import http from './https';
 import { REALM } from '../constants/constants';
 
-import CookieHelper from '../common/util/CookieHelper';
-import CookieConstant from '../common/constant/CookieConstant';
-import RootScope from '../global/RootScope';
+import {
+    JWT_TOKEN_NAME,
+    USER_ID_KEY,
+    MIN_EXDAY,
+    MAX_EXDAY
+} from '../constants/cookie.constant';
+
+import { setCookie } from '../utils/CookieHelper';
 
 const LOGIN_URL = 'users/login';
 const REGISTER_URL = 'users/register';
@@ -17,12 +22,9 @@ const SET_NEW_PASSWORD_URL = token =>
     `users/reset-password?access_token=${token}`;
 
 export const setUserCookie = (tokenId, userId, rememberMe) => {
-    const { maxExDay, minExDay, jwtTokenName, userIdKey } = CookieConstant;
-    RootScope.token = tokenId;
-    RootScope.userId = userId;
-    const exdays = rememberMe ? maxExDay : minExDay;
-    CookieHelper.setCookie(jwtTokenName, RootScope.token, exdays);
-    CookieHelper.setCookie(userIdKey, RootScope.userId, exdays);
+    const exdays = rememberMe ? MAX_EXDAY : MIN_EXDAY;
+    setCookie(JWT_TOKEN_NAME, tokenId, exdays);
+    setCookie(USER_ID_KEY, userId, exdays);
 };
 
 export async function login(data) {

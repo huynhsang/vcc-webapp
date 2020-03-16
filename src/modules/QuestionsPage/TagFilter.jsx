@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { getTags, getTagsRelatingCategory } from '../../services/tags.service';
+import { getTags } from '../../services/tags.service';
 import { getNameByLanguage } from '../../utils/multiple-language';
 
 import { RowWrapper } from '../../component/Wrappers';

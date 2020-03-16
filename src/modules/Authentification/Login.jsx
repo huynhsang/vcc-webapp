@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
-import LoginRequestBuilder from '../../global/LoginRequest';
 import { useTranslation } from 'react-i18next';
-import RootScope from '../../global/RootScope';
 
 import { login } from '../../services/account.service';
 
@@ -13,6 +11,8 @@ import Switch from '@material-ui/core/Switch';
 import Button from '@material-ui/core/Button';
 
 import SocialLogin from './SocialLogin';
+
+import {REALM} from '../../constants/constants'
 
 const useStyle = makeStyles(() => ({
     loginButton: {
@@ -56,7 +56,10 @@ const Login = ({
 
     const onSubmit = event => {
         event.preventDefault();
-        const data = LoginRequestBuilder.build(email, password, rememberMe);
+        const data = {
+            email, password, rememberMe,
+            realm : REALM.user
+        }
 
         if (!email || !password) {
             showErrorAlert(t('authentication_please_enter_email_and_password'));
@@ -68,7 +71,6 @@ const Login = ({
                     hideAuthentification();
                 })
                 .catch(err => {
-                    RootScope.resetAuthValues();
                     showErrorAlert(err.response.data.error.message);
                 });
         }

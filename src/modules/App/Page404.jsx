@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ErrorImageV2 from '../../images/error-404-v2.png';
-import ErrorImageV3 from '../../images/error-404-v3.png';
-import RootScope from '../../global/RootScope';
+// import ErrorImageV3 from '../../images/error-404-v3.png';
 
 const Wrapper = styled.div`
     margin: 30px;
@@ -12,11 +11,10 @@ const Wrapper = styled.div`
 const Page404 = () => {
     //TODO: add button comback
 
-    const ErrorImage = RootScope.currentUser ? ErrorImageV2 : ErrorImageV3;
     return (
         <Wrapper>
             <div>
-                <img src={ErrorImage} alt="Have you seen this page?" />
+                <img src={ErrorImageV2} alt="Have you seen this page?" />
             </div>
             <h1>ERROR 404</h1>
             <p>Page not found.</p>

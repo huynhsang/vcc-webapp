@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import RootScope from '../../global/RootScope';
 import { resetPassword } from '../../services/account.service';
 
 import TextField from '@material-ui/core/TextField';
@@ -55,7 +54,6 @@ const ForgotPassword = ({
                 );
             })
             .catch(err => {
-                RootScope.resetAuthValues();
                 showErrorAlert(err.response.data.error.message);
             });
     };

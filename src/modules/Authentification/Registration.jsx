@@ -59,8 +59,13 @@ const Registration = ({
 
     const onSubmit = event => {
         event.preventDefault();
-        const data = { password, email, firstName, lastName };
-        data.realm = REALM.user;
+        const data = {
+            password,
+            email,
+            firstName,
+            lastName,
+            realm: REALM.user
+        };
 
         setLoader(true);
         register(data)
