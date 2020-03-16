@@ -34,23 +34,14 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     const [tagsToSelect, setTagsToSelect] = React.useState([]);
 
     React.useEffect(() => {
-        if (!category) {
-            getTags()
-                .then(data => {
-                    setTagsToSelect(data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        } else {
-            getTagsRelatingCategory(category)
-                .then(data => {
-                    setTagsToSelect(data);
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        }
+        const filter = category ? { filter: { categorySlug: category } } : {};
+        getTags(filter)
+            .then(data => {
+                setTagsToSelect(data);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }, [category]);
 
     const tagIds = tags ? tags.split(',') : [];
