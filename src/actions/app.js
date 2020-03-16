@@ -55,6 +55,7 @@ export const fetchUserFromCookieFn = (isFirstRender = false) => {
         fetchUserFromCookie()
             .then(data => {
                 dispatch(getCurrentUserSuccess(data));
+                console.log('sdkfbq: ', data);
                 if (isFirstRender) {
                     dispatch(setVerifiedUser(true));
                 }

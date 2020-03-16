@@ -12,7 +12,7 @@ export async function fetchUserFromCookie() {
     const { id, token } = getIdAndToken();
 
     if (id && token) {
-        const url = setUrlWithToken(`${GET_USER_URL}/${id}`);
+        const url = setUrlWithToken(`${GET_USER_URL}/me/`);
         const httpResponse = await http.get(url);
         return httpResponse.data;
     }
