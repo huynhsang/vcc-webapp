@@ -186,7 +186,6 @@ export const getQuestionsAskedFn = (userId, page = 1) => {
     return dispatch => {
         getQuestions({ filter, totalCount : true })
             .then(data => {
-                console.log('test: ', data);
                 dispatch(getQuestionsAskedSuccess(data));
             })
             .catch(err => console.log(err));
