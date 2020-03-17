@@ -13,7 +13,7 @@ import {
 } from '../services/education.service';
 import { getQuestions } from '../services/question.service';
 import { getAnswers, getNumberAnswers } from '../services/answer.service';
-import { getUser } from '../services/user.service';
+import { getUserProfile } from '../services/user.service';
 
 import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
 
@@ -44,7 +44,7 @@ export const getUserProfileSuccess = createAction(GET_USER_PROFILE_SUCCESS);
 
 export const getUserProfileFn = id => {
     return dispatch => {
-        getUser(id)
+        getUserProfile(id)
             .then(data => {
                 dispatch(getUserProfileSuccess(data));
             })

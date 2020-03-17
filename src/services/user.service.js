@@ -5,6 +5,7 @@ import { getIdAndToken } from '../utils/cookie-tools';
 import { setUserCookie } from './account.service';
 
 const GET_USER_URL = 'users';
+const GET_USER_PROFILE_URL = 'users/profile';
 const GET_USER_BY_LOGIN_TOKEN_URL = token => `users/me?access_token=${token}`;
 const CHANGE_USER_PASSWORD_URL = 'users/change-password';
 
@@ -20,8 +21,8 @@ export async function fetchUserFromCookie() {
     throw new Error('Missing id cookie');
 }
 
-export async function getUser(id) {
-    const response = await http.get(`${GET_USER_URL}/${id}`);
+export async function getUserProfile(id) {
+    const response = await http.get(GET_USER_PROFILE_URL, { params: { id } });
     return response.data;
 }
 
