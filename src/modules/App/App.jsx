@@ -6,6 +6,7 @@ import AppRouter from './AppRouter';
 import { Header } from '../Header';
 import { Footer } from '../Footer';
 import { SweetAlert } from '../../component/SweetAlert';
+import { LoginConfirmModal } from '../LoginConfirmModal';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
 
@@ -40,6 +41,7 @@ const App = ({ App, fetchUserFromCookie }) => {
                 <Authentification />
                 <ContactUs />
                 <SweetAlert />
+                <LoginConfirmModal />
                 <AppWrapper>
                     <MobileAside />
                     <Header />

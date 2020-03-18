@@ -1,8 +1,7 @@
 import { createReducer } from 'redux-starter-kit';
 import { hideAlertAction, showAlertAction } from '../actions/sweetAlert';
-import { SweetAlertType } from '../constants/sweet-alert.constant';
 
-const sweetAlertDefault: SweetAlertType = {
+const sweetAlertDefault = {
     show: false,
     title: '',
     type: null,

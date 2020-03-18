@@ -96,6 +96,8 @@ export default {
     common_private: 'Private',
     common_public: 'Public',
     common_user: 'User',
+    common_ok: 'Ok',
+    common_cancel: 'Cancel',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

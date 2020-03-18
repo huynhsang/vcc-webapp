@@ -9,6 +9,9 @@ const actionNames = keyMirror({
     SHOW_ALERT: null,
     HIDE_ALERT: null,
 
+    //Alert confirm
+    SHOW_LOGIN_CONFIRM: null,
+
     TOGGLE_MOBILE_ASIDE: null,
 
     TOGGLE_CONTACT_US: null,

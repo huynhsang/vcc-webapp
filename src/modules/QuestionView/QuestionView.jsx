@@ -10,10 +10,8 @@ import {
     voteQuestionFn,
     approveAnswerFn
 } from '../../actions/questionDetail';
-import {
-    showConfirmToLoginFn,
-    showErrorAlertFn
-} from '../../actions/sweetAlert';
+import { showErrorAlertFn } from '../../actions/sweetAlert';
+import { showLoginConfirmFn } from '../../actions/alertConfirm';
 import { createAnswerFn } from '../../actions/questionDetail';
 
 import { DefaultWrapper } from '../../component/Wrappers';
@@ -61,7 +59,7 @@ const QuestionView = ({
     questionDetail,
     getQuestion,
     history,
-    showConfirmToLogin,
+    showLoginConfirm,
     voteQuestion,
     voteAnswer,
     showErrorNotification,
@@ -114,7 +112,7 @@ const QuestionView = ({
                 answer={a}
                 isVoting={votingAnswerId === a.id}
                 isAuthenticated={isAuthenticated}
-                showConfirmToLogin={showConfirmToLogin}
+                showLoginConfirm={showLoginConfirm}
                 voteAnswer={voteAnswer}
                 approveAnswer={approveAnswerInner}
                 isBestAnswer={bestAnswerItem && bestAnswerItem.id === a.id}
@@ -137,7 +135,7 @@ const QuestionView = ({
                     question={question}
                     history={history}
                     isAuthenticated={isAuthenticated}
-                    showConfirmToLogin={showConfirmToLogin}
+                    showLoginConfirm={showLoginConfirm}
                     voteQuestion={voteQuestion}
                     isVoting={isVotingQuestion}
                 />
@@ -154,7 +152,7 @@ const QuestionView = ({
                     isAuthenticated={isAuthenticated}
                     createAnswer={createAnswer}
                     showErrorNotification={showErrorNotification}
-                    showConfirmToLogin={showConfirmToLogin}
+                    showLoginConfirm={showLoginConfirm}
                     isCreatingAnswer={isCreatingAnswer}
                     isFetchingError={isFetchingError}
                 />
@@ -170,7 +168,7 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     getQuestion: slug => dispatch(getQuestionFn(slug)),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
+    showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action)),
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),

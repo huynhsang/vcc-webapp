@@ -3,10 +3,6 @@ import actionsNames from '../constants/action-names.constant';
 
 import { SweetType } from '../constants/sweet-alert.constant';
 
-import { TO_LOGIN } from '../component/SweetAlert';
-
-import i18n from 'i18next';
-
 const { SHOW_ALERT, HIDE_ALERT } = actionsNames;
 
 export const showAlertAction = createAction(SHOW_ALERT);
@@ -60,14 +56,3 @@ export const showWarningConfirmAlertFn = showGeneralConfirmAlert(
 );
 
 export const showInfoConfirmAlertFn = showGeneralConfirmAlert(SweetType.INFO);
-
-export const showConfirmToLoginFn = () => dispatch => {
-    dispatch(
-        showInfoConfirmAlertFn(
-            i18n.t('common_login'),
-            i18n.t('login_thank_to_login_to_continue'),
-            'OK',
-            TO_LOGIN
-        )
-    );
-};

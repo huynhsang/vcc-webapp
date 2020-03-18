@@ -18,7 +18,7 @@ import qs from 'qs';
 import Question from './Question';
 import Pagination from '../../component/Pagination';
 import { voteQuestionFn } from '../../actions/questions';
-import { showConfirmToLoginFn } from '../../actions/sweetAlert';
+import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
 const QuestionPageWrapper = styled.div`
     min-height: calc(100vh - 100px);
@@ -43,7 +43,7 @@ const QuestionPage = ({
     location,
     history,
     isAuthenticated,
-    showConfirmToLogin,
+    showLoginConfirm,
     voteQuestion
 }) => {
     const { t } = useTranslation();
@@ -96,7 +96,7 @@ const QuestionPage = ({
             history={history}
             isVoting={votingQuestionId === question.id}
             isAuthenticated={isAuthenticated}
-            showConfirmToLogin={showConfirmToLogin}
+            showLoginConfirm={showLoginConfirm}
             voteQuestion={voteQuestion}
         />
     ));
@@ -154,7 +154,7 @@ const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
 
 const mapDispatchToProps = dispatch => ({
     getQuestions: params => dispatch(getQuestionsFn(params)),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn()),
+    showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action))
 });

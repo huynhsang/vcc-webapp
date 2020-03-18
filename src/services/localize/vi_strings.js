@@ -96,6 +96,8 @@ export default {
     common_private: 'Riêng tư',
     common_public: 'Công khai',
     common_user: 'Người dùng',
+    common_ok: 'Đồng ý',
+    common_cancel: 'Huỷ',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

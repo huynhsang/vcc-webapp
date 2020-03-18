@@ -26,7 +26,7 @@ const AnswerForm = ({
     isAuthenticated,
     createAnswer,
     showErrorNotification,
-    showConfirmToLogin,
+    showLoginConfirm,
     isCreatingAnswer,
     isFetchingError
 }) => {
@@ -52,7 +52,7 @@ const AnswerForm = ({
 
     const leaveAnswerValidation = () => {
         if (!isAuthenticated) {
-            return showConfirmToLogin();
+            return showLoginConfirm();
         }
         setLeaveAnswer(true);
     };

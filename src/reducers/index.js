@@ -8,6 +8,7 @@ import home from './home';
 import questionDetail from './questionDetail';
 import questionsReducer from './questions';
 import userInfos from './userInfos';
+import alertConfirm from './alertConfirm';
 
 const reducers = {
     App,
@@ -15,7 +16,8 @@ const reducers = {
     home,
     questionDetail,
     questionsReducer,
-    userInfos
+    userInfos,
+    alertConfirm
 };
 
 export default reducers;

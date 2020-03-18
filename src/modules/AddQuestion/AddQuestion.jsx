@@ -15,8 +15,8 @@ import QuestionSituation from './QuestionSituation';
 import {
     showSuccessAlertFn,
     showErrorAlertFn,
-    showConfirmToLoginFn
 } from '../../actions/sweetAlert';
+import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
@@ -46,7 +46,7 @@ const AddQuestion = ({
     showSuccessAlert,
     showErrorAlert,
     App,
-    showConfirmToLogin,
+    showLoginConfirm,
     location
 }) => {
     const { t } = useTranslation();
@@ -55,7 +55,7 @@ const AddQuestion = ({
 
     React.useEffect(() => {
         if (!isAuthenticated && !toAuthenticate) {
-            showConfirmToLogin();
+            showLoginConfirm();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, toAuthenticate]);
@@ -249,7 +249,7 @@ const mapDispatchToProp = dispatch => ({
     showSuccessAlert: (title, text) =>
         dispatch(showSuccessAlertFn(title, text)),
     showErrorAlert: message => dispatch(showErrorAlertFn('Error!', message)),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
+    showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 
 export default connect(mapStateToProps, mapDispatchToProp)(AddQuestion);
