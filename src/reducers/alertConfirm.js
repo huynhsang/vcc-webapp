@@ -1,8 +1,13 @@
 import { createReducer } from 'redux-starter-kit';
-import { showLoginConfirmFn } from '../actions/alertConfirm';
+import { showLoginConfirmFn, setAlertFn } from '../actions/alertConfirm';
 
 const defaultState = {
-    isShownConfirmLogin: false
+    isShownConfirmLogin: false,
+    alert: {
+        severity: '',
+        title: '',
+        open: false
+    }
 };
 
 const alertConfirm = createReducer(defaultState, {
@@ -10,6 +15,9 @@ const alertConfirm = createReducer(defaultState, {
         console.log(action.payload);
         state.isShownConfirmLogin =
             action.payload === undefined ? true : action.payload;
+    },
+    [setAlertFn]: (state, action) => {
+        state.alert = action.payload;
     }
 });
 

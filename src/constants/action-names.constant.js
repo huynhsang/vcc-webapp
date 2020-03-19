@@ -11,9 +11,10 @@ const actionNames = keyMirror({
 
     //Alert confirm
     SHOW_LOGIN_CONFIRM: null,
+    SET_ALERT_SNACKBAR: null,
 
+    //
     TOGGLE_MOBILE_ASIDE: null,
-
     TOGGLE_CONTACT_US: null,
 
     //APP

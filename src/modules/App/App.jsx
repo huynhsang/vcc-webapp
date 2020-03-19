@@ -9,14 +9,15 @@ import { SweetAlert } from '../../component/SweetAlert';
 import { LoginConfirmModal } from '../LoginConfirmModal';
 import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
+import { CustomizedSnackbars } from '../CustomizedSnackbars';
 
 import { Authentification } from '../Authentification';
-
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 import { withTranslation } from 'react-i18next';
+
 const AppWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -42,6 +43,7 @@ const App = ({ App, fetchUserFromCookie }) => {
                 <ContactUs />
                 <SweetAlert />
                 <LoginConfirmModal />
+                <CustomizedSnackbars />
                 <AppWrapper>
                     <MobileAside />
                     <Header />
