@@ -13,10 +13,10 @@ import QuestionReview from './QuestionReview';
 import QuestionSituation from './QuestionSituation';
 
 import {
-    showSuccessAlertFn,
-    showErrorAlertFn,
-    showConfirmToLoginFn
-} from '../../actions/sweetAlert';
+    showLoginConfirmFn,
+    errorAlertFn,
+    successAlertFn
+} from '../../actions/alertConfirm';
 
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
@@ -43,10 +43,10 @@ const ButtonsWrapper = styled.div`
 
 const AddQuestion = ({
     history,
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     App,
-    showConfirmToLogin,
+    showLoginConfirm,
     location
 }) => {
     const { t } = useTranslation();
@@ -55,7 +55,7 @@ const AddQuestion = ({
 
     React.useEffect(() => {
         if (!isAuthenticated && !toAuthenticate) {
-            showConfirmToLogin();
+            showLoginConfirm();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuthenticated, toAuthenticate]);
@@ -130,11 +130,11 @@ const AddQuestion = ({
     const postQuestion = () => {
         createQuestion(question)
             .then(data => {
-                showSuccessAlert('Success!', 'Created a Question');
+                successAlert(t('question_created_a_question'));
                 history.push(`/questions/${data.slug}`);
             })
             .catch(response =>
-                showErrorAlert(response.response.data.error.message)
+                errorAlert(response.response.data.error.message)
             );
     };
 
@@ -246,10 +246,9 @@ const mapStateToProps = ({ App }) => ({
 });
 
 const mapDispatchToProp = dispatch => ({
-    showSuccessAlert: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: message => dispatch(showErrorAlertFn('Error!', message)),
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
+    successAlert: text => dispatch(successAlertFn(text)),
+    errorAlert: text => dispatch(errorAlertFn(text)),
+    showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 
 export default connect(mapStateToProps, mapDispatchToProp)(AddQuestion);

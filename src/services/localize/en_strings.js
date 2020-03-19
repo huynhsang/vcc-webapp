@@ -96,6 +96,9 @@ export default {
     common_private: 'Private',
     common_public: 'Public',
     common_user: 'User',
+    common_ok: 'Ok',
+    common_cancel: 'Cancel',
+    common_logged_in: 'Logged in!',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -114,6 +117,8 @@ export default {
     authentification_donot_have_account: `Don't have an account?`,
     authentification_this_page_need_to_authenticate:
         'This page need to authentificate to continue',
+    authentification_check_your_email:
+        'Check your email to complete the registration!',
     authentification_: '',
 
     header_home: 'Home',
@@ -190,10 +195,15 @@ export default {
     question_set_mode: `What is the question's display mode`,
     question_set_mode_des: `You can set the display mode for your question. It can be public or private. In private mode, it's only shown with people choosen after`,
     question_support_list: 'Choose the people (maximum 2) who you want to ask?',
-    question_support_list_des: 'We will contact to them to answer your question. {{sub}}',
+    question_support_list_des:
+        'We will contact to them to answer your question. {{sub}}',
     question_support_list_des_sup_empty: `You can let it empty if you don't know who can answer your question`,
-    question_support_list_require: 'Because your question is private, so you have to choose at least one person to answer your question',
+    question_support_list_require:
+        'Because your question is private, so you have to choose at least one person to answer your question',
 
+    question_leaved_an_answer: 'Leaved an answer',
+    question_approved_this_answer: 'Approved this answer',
+    question_created_a_question: 'Created a question',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',
@@ -233,9 +243,11 @@ export default {
     login_thank_to_login_to_continue: 'Thank to login to continue',
 
     contact_us_hello: 'We are here to listen to you!',
-    contact_us_if_you_want_to_share: 'If you want to share your story with us, please leave us a message at ',
-    contact_us_reply_soon : ' We will contact you as soon as possible.',
-    contact_us_feedback: 'If you need help with other issues, please email to: ',
+    contact_us_if_you_want_to_share:
+        'If you want to share your story with us, please leave us a message at ',
+    contact_us_reply_soon: ' We will contact you as soon as possible.',
+    contact_us_feedback:
+        'If you need help with other issues, please email to: ',
     contact_us_sincerely: 'Sincerely,',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
@@ -283,6 +295,10 @@ export default {
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',
     user_info_added_an_answer: 'Added an answer on',
+    user_info_experience_created: 'Experience created!',
+    user_info_experience_updated: 'Experience updated!',
+    user_info_education_created: 'Education created!',
+    user_info_education_updated: 'Education updated!',
 
     home_ask_verified_professionals:
         'Ask verified professionals for career advices, interview training, resume review and company insights...',

@@ -4,18 +4,18 @@ import { withRouter } from 'react-router-dom';
 
 import Button from '@material-ui/core/Button';
 
-import { showConfirmToLoginFn } from '../actions/sweetAlert';
+import { showLoginConfirmFn } from '../actions/alertConfirm';
 
 const AskButton = ({
     label,
     toLink = '/add-question',
     history,
     isAuthenticated,
-    showConfirmToLogin
+    showLoginConfirm
 }) => {
     const onClick = () => {
         if (!isAuthenticated) {
-            return showConfirmToLogin();
+            return showLoginConfirm();
         }
 
         history.push(toLink);
@@ -38,7 +38,7 @@ const mapStateToProps = ({ App: { isAuthenticated } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
+    showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 
 export default connect(

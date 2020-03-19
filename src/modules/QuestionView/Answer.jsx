@@ -96,7 +96,7 @@ const Answer = ({
     answer,
     isVoting,
     isAuthenticated,
-    showConfirmToLogin,
+    showLoginConfirm,
     voteAnswer,
     approveAnswer,
     isBestAnswer
@@ -117,7 +117,7 @@ const Answer = ({
 
     const handleVoteAnswer = isPositiveVote => {
         if (!isAuthenticated) {
-            return showConfirmToLogin();
+            return showLoginConfirm();
         }
         const action = isPositiveVote ? 'up' : 'down';
         voteAnswer(answer.id, action);

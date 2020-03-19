@@ -37,7 +37,7 @@ const ButtonsWrapper = styled.div`
     }
 `;
 
-const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
+const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -68,7 +68,7 @@ const EditForm = ({ currentUser, updateCurrentUser, showErrorAlert }) => {
 
     const onSubmit = () => {
         if (!USERNAME_REGEX.test(username)) {
-            return showErrorAlert('common_invalid_username');
+            return errorAlert(t('common_invalid_username'));
         }
         updateCurrentUser({
             ...userEditted,

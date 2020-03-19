@@ -35,7 +35,7 @@ const QuestionSort = ({ show, onChangeFilter }) => {
 
     const onChange = ev => {
         const { value } = ev.target;
-        onChangeFilter({ show: value === 'all' ? '' : value });
+        onChangeFilter({ show: value});
     };
 
     return (
@@ -43,7 +43,7 @@ const QuestionSort = ({ show, onChangeFilter }) => {
             <InputLabel ref={inputLabel}>{t('common_sort_by')}</InputLabel>
             <Select
                 labelWidth={labelWidth}
-                value={show || 'all'}
+                value={show || ''}
                 onChange={onChange}
             >
                 {sortElements}

@@ -122,7 +122,7 @@ const Question = ({
     isVoting,
     isAuthenticated,
     voteQuestion,
-    showConfirmToLogin,
+    showLoginConfirm,
     history
 }) => {
     const { t } = useTranslation();
@@ -154,7 +154,7 @@ const Question = ({
 
     const handleVoteQuestion = isPositiveVote => {
         if (!isAuthenticated) {
-            return showConfirmToLogin();
+            return showLoginConfirm();
         }
         const action = isPositiveVote ? 'up' : 'down';
         voteQuestion(id, action);

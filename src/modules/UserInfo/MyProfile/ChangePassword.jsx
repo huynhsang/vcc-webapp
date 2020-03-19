@@ -8,10 +8,7 @@ import passwordValidator from 'password-validator';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
-import {
-    showSuccessAlertFn,
-    showErrorAlertFn
-} from '../../../actions/sweetAlert';
+import { errorAlertFn, successAlertFn } from '../../../actions/alertConfirm';
 
 import { changeUserPassword } from '../../../services/user.service';
 
@@ -55,7 +52,7 @@ const ButtonsWrapper = styled.div`
     }
 `;
 
-const ChangePassword = ({ showErrorNotification, showSuccessNotification }) => {
+const ChangePassword = ({ errorAlert, successAlert }) => {
     const classes = useStyles();
     const { t } = useTranslation();
 
@@ -65,20 +62,18 @@ const ChangePassword = ({ showErrorNotification, showSuccessNotification }) => {
 
     const onSubmit = () => {
         if (!newPassword || !confirmNewPassword || !oldPassword) {
-            showErrorNotification(t('my_profile_please_complete_all_fields'));
+            errorAlert(t('my_profile_please_complete_all_fields'));
         } else if (newPassword !== confirmNewPassword) {
-            showErrorNotification(t('my_profile_passwords_not_identique'));
+            errorAlert(t('my_profile_passwords_not_identique'));
         } else if (!schema.validate(newPassword)) {
-            showErrorNotification(t('my_profile_passwords_contrain'));
+            errorAlert(t('my_profile_passwords_contrain'));
         } else {
             changeUserPassword({ oldPassword, newPassword })
                 .then(() => {
-                    showSuccessNotification(
-                        t('my_profile_change_password_success')
-                    );
+                    successAlert(t('my_profile_change_password_success'));
                 })
                 .catch(err => {
-                    showErrorNotification(err.response.data.error.message);
+                    errorAlert(err.response.data.error.message);
                 });
         }
     };
@@ -143,10 +138,8 @@ const ChangePassword = ({ showErrorNotification, showSuccessNotification }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    showErrorNotification: message =>
-        dispatch(showErrorAlertFn('Error!', message)),
-    showSuccessNotification: message =>
-        dispatch(showSuccessAlertFn('Success!', message))
+    successAlert: message => dispatch(successAlertFn(message)),
+    errorAlert: message => dispatch(errorAlertFn(message))
 });
 
 export default connect(null, mapDispatchToProps)(ChangePassword);

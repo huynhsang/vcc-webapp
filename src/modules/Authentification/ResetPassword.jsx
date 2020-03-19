@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
+import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
 
 import { setNewPassword } from '../../services/account.service';
 
@@ -48,12 +48,7 @@ const LockIcon = styled(Lock)`
     font-size: 120px !important;
 `;
 
-const ResetPassword = ({
-    location,
-    history,
-    showSuccessAlert,
-    showErrorAlert
-}) => {
+const ResetPassword = ({ location, history, successAlert, errorAlert }) => {
     const { t } = useTranslation();
     const classes = useStyle();
 
@@ -64,10 +59,7 @@ const ResetPassword = ({
         event.preventDefault();
 
         if (password !== confirmPassword) {
-            return showErrorAlert(
-                'Error!',
-                t('authentification_invalid_comfirm_password')
-            );
+            return errorAlert(t('authentification_invalid_comfirm_password'));
         }
 
         const urlParams = new URLSearchParams(location.search);
@@ -75,17 +67,13 @@ const ResetPassword = ({
 
         setNewPassword(token, password)
             .then(() => {
-                showSuccessAlert(
-                    'Success!',
+                successAlert(
                     t('authentification_your_password_has_been_reset')
                 );
                 history.push('/questions');
             })
             .catch(err => {
-                showErrorAlert(
-                    'Error!',
-                    showErrorAlert(err.response.data.error.message)
-                );
+                errorAlert(err.response.data.error.message);
             });
     };
 
@@ -128,9 +116,8 @@ const ResetPassword = ({
 };
 
 const mapDispatchToProp = dispatch => ({
-    showSuccessAlert: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: (title, text) => dispatch(showErrorAlertFn(title, text))
+    successAlert: text => dispatch(successAlertFn(text)),
+    errorAlert: text => dispatch(errorAlertFn(text))
 });
 
 export default connect(null, mapDispatchToProp)(withRouter(ResetPassword));

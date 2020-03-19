@@ -41,8 +41,8 @@ const LoaderWrapper = styled.div`
 
 const Registration = ({
     history,
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     setToLogin,
     hideAuthentification
 }) => {
@@ -71,16 +71,13 @@ const Registration = ({
         register(data)
             .then(() => {
                 setLoader(false);
-                showSuccessAlert(
-                    'Success!',
-                    'Check your email to complete the registration!'
-                );
+                successAlert(t('authentification_check_your_email'));
                 hideAuthentification();
                 history.push('/home');
             })
             .catch(err => {
                 setLoader(false);
-                showErrorAlert(err.response.data.error.message);
+                errorAlert(err.response.data.error.message);
             });
     };
 

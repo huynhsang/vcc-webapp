@@ -25,8 +25,8 @@ const AnswerForm = ({
     reloadQuestion,
     isAuthenticated,
     createAnswer,
-    showErrorNotification,
-    showConfirmToLogin,
+    errorAlert,
+    showLoginConfirm,
     isCreatingAnswer,
     isFetchingError
 }) => {
@@ -52,14 +52,14 @@ const AnswerForm = ({
 
     const leaveAnswerValidation = () => {
         if (!isAuthenticated) {
-            return showConfirmToLogin();
+            return showLoginConfirm();
         }
         setLeaveAnswer(true);
     };
 
     const onSubmit = () => {
         if (answerBody.length < 20) {
-            return showErrorNotification(t('question_answer_min_20'));
+            return errorAlert(t('question_answer_min_20'));
         }
         createAnswer(questionId, answerBody);
     };

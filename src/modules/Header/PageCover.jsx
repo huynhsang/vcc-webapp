@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 
 import { useTranslation } from 'react-i18next';
-import { showConfirmToLoginFn } from '../../actions/sweetAlert';
+import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
 import Cover from '../../images/cover.png';
 
@@ -104,14 +104,14 @@ const FindOut = styled.div`
     }
 `;
 
-const PageCover = ({ showConfirmToLogin, isAuthenticated, history }) => {
+const PageCover = ({ showLoginConfirm, isAuthenticated, history }) => {
     const { t } = useTranslation();
 
     const onLickAddQuestion = () => {
         if (isAuthenticated) {
             history.push('/add-question');
         } else {
-            showConfirmToLogin();
+            showLoginConfirm();
         }
     };
 
@@ -140,7 +140,7 @@ const mapStateToProps = ({ App: { isAuthenticated } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    showConfirmToLogin: () => dispatch(showConfirmToLoginFn())
+    showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 
 export default connect(

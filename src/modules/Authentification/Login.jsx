@@ -40,8 +40,8 @@ const ClickDiv = styled.strong`
 `;
 
 const Login = ({
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     setToFindPassword,
     setToRegistre,
     hideAuthentification,
@@ -62,16 +62,16 @@ const Login = ({
         }
 
         if (!email || !password) {
-            showErrorAlert(t('authentication_please_enter_email_and_password'));
+            errorAlert(t('authentication_please_enter_email_and_password'));
         } else {
             login(data)
                 .then(data => {
-                    showSuccessAlert('Success!', 'Logged in');
+                    successAlert(t('common_logged_in'));
                     fetchUserFromCookie();
                     hideAuthentification();
                 })
                 .catch(err => {
-                    showErrorAlert(err.response.data.error.message);
+                    errorAlert(err.response.data.error.message);
                 });
         }
     };

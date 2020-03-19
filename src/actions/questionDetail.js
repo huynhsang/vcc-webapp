@@ -1,5 +1,6 @@
 import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
+import i18n from 'i18next';
 import {
     getQuestionWithSlug,
     voteQuestion,
@@ -8,7 +9,7 @@ import {
 
 import { voteAnswer, createAnswer } from '../services/answer.service';
 
-import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
+import { errorAlertFn, successAlertFn } from './alertConfirm';
 
 const {
     GET_QUESTION_REQUEST,
@@ -95,11 +96,11 @@ export const createAnswerFn = (questionId, answerBody) => {
         dispatch(createAnswerRequest());
         createAnswer(questionId, answerBody)
             .then(() => {
-                dispatch(showSuccessAlertFn('Success!', 'Leaved an answer'));
+                dispatch(successAlertFn(i18n.t('question_leaved_an_answer')));
                 dispatch(createAnswerSuccess());
             })
             .catch(err => {
-                showErrorAlertFn('Error!', err.response.data.error.message);
+                errorAlertFn(err.response.data.error.message);
                 dispatch(createAnswerFailure());
                 console.log(err.message);
             });
@@ -113,14 +114,13 @@ export const approveAnswerFn = (questionId, answerId) => {
         approveAnswer(questionId, answerId)
             .then(data => {
                 dispatch(
-                    showSuccessAlertFn('Success!', 'Approved this answer')
+                    successAlertFn(i18n.t('question_approved_this_answer'))
                 );
                 dispatch(approveAnswerSuccess(data));
             })
             .catch(err => {
-                showErrorAlertFn('Error!', err.response.data.error.message);
+                errorAlertFn(err.response.data.error.message);
                 dispatch(createAnswerFailure());
-                console.log(err.message);
             });
     };
 };

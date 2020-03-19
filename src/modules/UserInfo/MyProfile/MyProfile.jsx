@@ -8,7 +8,7 @@ import EditForm from './EditForm';
 import { useTranslation } from 'react-i18next';
 
 import { updateCurrentUserFn } from '../../../actions/app';
-import { showErrorAlertFn } from '../../../actions/sweetAlert';
+import { errorAlertFn } from '../../../actions/alertConfirm';
 
 import { makeStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
@@ -46,7 +46,7 @@ const ITEMS = [
     { label: 'my_profile_change_password' }
 ];
 
-const MyProfile = ({ location, App, updateCurrentUser, showErrorAlert }) => {
+const MyProfile = ({ location, App, updateCurrentUser, errorAlert }) => {
     const { t } = useTranslation();
 
     const { currentUser, isAuthenticated } = App;
@@ -75,7 +75,7 @@ const MyProfile = ({ location, App, updateCurrentUser, showErrorAlert }) => {
                 <EditForm
                     currentUser={currentUser}
                     updateCurrentUser={updateCurrentUser}
-                    showErrorAlert={showErrorAlert}
+                    errorAlert={errorAlert}
                 />
             )}
             {value === 2 && <ChangePassword />}
@@ -101,7 +101,7 @@ const mapStateToProps = ({ App }) => ({
 
 const mapDispatchToProps = dispatch => ({
     updateCurrentUser: data => dispatch(updateCurrentUserFn(data)),
-    showErrorAlert: text => dispatch(showErrorAlertFn('ERROR!', text))
+    errorAlert: text => dispatch(errorAlertFn(text))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyProfile);
