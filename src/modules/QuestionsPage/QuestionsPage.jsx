@@ -54,9 +54,17 @@ const QuestionPage = ({
         votingQuestionId
     } = questionsReducer;
 
-    const { category, show, page, text, tags } = qs.parse(
-        location.search.substr(1)
-    );
+    const filterParse = qs.parse(location.search.substr(1));
+    const {
+        category,
+        show,
+        page,
+        text,
+        tags,
+        askme,
+        mime,
+        noanswer
+    } = filterParse;
 
     //Set Filter when change route
     React.useEffect(() => {
@@ -65,7 +73,10 @@ const QuestionPage = ({
             page,
             text,
             tags,
-            category
+            category,
+            askme,
+            mime,
+            noanswer
         });
 
         if (filterFixed) {
@@ -75,15 +86,28 @@ const QuestionPage = ({
             getQuestions({ filter, totalCount: true });
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [show, page, text, tags, category, isAuthenticated]);
+    }, [
+        show,
+        page,
+        text,
+        tags,
+        category,
+        isAuthenticated,
+        askme,
+        mime,
+        noanswer
+    ]);
 
     const onChangeFilter = obj => {
         const url = `/questions?${qs.stringify({
             show,
-            page,
+            page: 1,
             text,
             tags,
             category,
+            askme,
+            mime,
+            noanswer,
             ...obj
         })}`;
         history.push(url);
@@ -105,11 +129,15 @@ const QuestionPage = ({
         <QuestionPageWrapper>
             <PageCover />
             <QuestionFilter
+                isAuthenticated={isAuthenticated}
                 category={category}
                 show={show}
                 page={page}
                 text={text}
                 tags={tags}
+                askme={askme}
+                mime={mime}
+                noanswer={noanswer}
                 onChangeFilter={onChangeFilter}
             />
             {isFetching ? (

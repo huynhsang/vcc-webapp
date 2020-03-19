@@ -237,9 +237,12 @@ export default {
     mainpage_most_answerd: 'Trả lời nhiều',
     mainpage_most_visited: 'Xem nhiều',
     mainpage_most_voted: 'Vote nhiều nhất',
-    mainpage_no_answers: 'Không có câu trả lời',
     mainpage_danang_vietnam: 'Đà Nẵng, Việt Nam',
     mainpage_load_more_questions: 'Xem thêm câu trả lời',
+
+    questions_no_answers: 'Không có câu trả lời',
+    questions_my_questions: 'Câu hỏi của tôi',
+    questions_ask_me: 'Hỏi tôi',
 
     login_thank_to_login_to_continue: 'Vui lòng đăng nhập để tiếp tục',
 

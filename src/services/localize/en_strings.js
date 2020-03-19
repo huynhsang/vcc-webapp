@@ -236,9 +236,12 @@ export default {
     mainpage_most_answerd: 'Most Answered',
     mainpage_most_visited: 'Most Visited',
     mainpage_most_voted: 'Most Voted',
-    mainpage_no_answers: 'No Answers',
     mainpage_danang_vietnam: 'Da nang, Viet Nam',
     mainpage_load_more_questions: 'Load More Questions',
+    
+    questions_no_answers: 'No Answers',
+    questions_my_questions: 'My questions',
+    questions_ask_me: 'Ask me',
 
     login_thank_to_login_to_continue: 'Thank to login to continue',
 

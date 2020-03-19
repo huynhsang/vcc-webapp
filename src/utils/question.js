@@ -1,3 +1,4 @@
+import { getIdAndToken } from '../utils/cookie-tools';
 // const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;
 
 export const getDefaultFields = () => [
@@ -36,10 +37,37 @@ const orderMaps = {
     'no-answers': 'noAnswers'
 };
 
-export const setUpQuestionFilter = ({ category, show, page, text, tags }) => {
+export const setUpQuestionFilter = ({
+    category,
+    show,
+    page,
+    text,
+    tags,
+    askme,
+    mime,
+    noanswer
+}) => {
     const filterObj = {};
     const filterFixed = {};
     let hasError = false;
+
+    const { id } = getIdAndToken();
+
+    if (id && askme === 'true' && mime === 'true') {
+        filterFixed.askme = false;
+        filterFixed.mime = false;
+        hasError = true;
+    } else {
+        if (id && mime === 'true') {
+            filterObj.ownerId = id;
+        } else if (id && askme === 'true') {
+            filterObj.askedToMe = true;
+        }
+    }
+
+    if (noanswer === 'true') {
+        filterObj.answered = false;
+    }
 
     if (orderMaps[show]) {
         filterObj.sort = orderMaps[show];
@@ -63,7 +91,7 @@ export const setUpQuestionFilter = ({ category, show, page, text, tags }) => {
         filterFixed.text = text;
     }
 
-    if(category){
+    if (category) {
         filterObj.categorySlug = category || '';
         filterFixed.category = category || '';
     }

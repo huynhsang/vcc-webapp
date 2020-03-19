@@ -13,6 +13,8 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
+import { SwitchInput } from '../../component/Inputs';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -21,6 +23,14 @@ const FlexWrapper = styled.div`
     ${media.mobileLandscape`
         display: block;
     `}
+`;
+
+const Wrapper = styled(DefaultWrapper)`
+    padding-bottom: 10px;
+`;
+
+const FlexMargin = styled(FlexWrapper)`
+    margin-top: 10px;
 `;
 
 const useStyles = makeStyles(() => ({
@@ -36,12 +46,16 @@ const useStyles = makeStyles(() => ({
 }));
 
 const QuestionFilter = ({
+    isAuthenticated,
     category,
     show,
     tags,
     text,
     history,
-    onChangeFilter
+    onChangeFilter,
+    askme,
+    mime,
+    noanswer
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
@@ -58,10 +72,16 @@ const QuestionFilter = ({
         }
     };
 
+    const onAskmeAndMimeChange = name => val => {
+        const obj = val ? { mime: false, askme: false } : {};
+        obj[name] = val;
+        onChangeFilter(obj);
+    };
+
     return (
         <>
             <CategoryFilter category={category} history={history} />
-            <DefaultWrapper>
+            <Wrapper>
                 <TagFilter
                     category={category}
                     tags={tags}
@@ -91,7 +111,28 @@ const QuestionFilter = ({
                         }}
                     />
                 </FlexWrapper>
-            </DefaultWrapper>
+                <FlexMargin>
+                    <SwitchInput
+                        label={t('questions_no_answers')}
+                        isChecked={noanswer === 'true'}
+                        handleChange={val => onChangeFilter({ noanswer: val })}
+                    />
+                    {isAuthenticated && (
+                        <>
+                            <SwitchInput
+                                label={t('questions_my_questions')}
+                                isChecked={mime === 'true'}
+                                handleChange={onAskmeAndMimeChange('mime')}
+                            />
+                            <SwitchInput
+                                label={t('questions_ask_me')}
+                                isChecked={askme === 'true'}
+                                handleChange={onAskmeAndMimeChange('askme')}
+                            />
+                        </>
+                    )}
+                </FlexMargin>
+            </Wrapper>
         </>
     );
 };
