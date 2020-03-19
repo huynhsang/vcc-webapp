@@ -10,8 +10,7 @@ import {
     voteQuestionFn,
     approveAnswerFn
 } from '../../actions/questionDetail';
-import { showErrorAlertFn } from '../../actions/sweetAlert';
-import { showLoginConfirmFn } from '../../actions/alertConfirm';
+import { showLoginConfirmFn, errorAlertFn } from '../../actions/alertConfirm';
 import { createAnswerFn } from '../../actions/questionDetail';
 
 import { DefaultWrapper } from '../../component/Wrappers';
@@ -62,7 +61,7 @@ const QuestionView = ({
     showLoginConfirm,
     voteQuestion,
     voteAnswer,
-    showErrorNotification,
+    errorAlert,
     createAnswer,
     approveAnswer
 }) => {
@@ -151,7 +150,7 @@ const QuestionView = ({
                     reloadQuestion={fetchQuestion}
                     isAuthenticated={isAuthenticated}
                     createAnswer={createAnswer}
-                    showErrorNotification={showErrorNotification}
+                    errorAlert={errorAlert}
                     showLoginConfirm={showLoginConfirm}
                     isCreatingAnswer={isCreatingAnswer}
                     isFetchingError={isFetchingError}
@@ -172,7 +171,7 @@ const mapDispatchToProps = dispatch => ({
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action)),
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
-    showErrorNotification: text => dispatch(showErrorAlertFn('Error!', text)),
+    errorAlert: text => dispatch(errorAlertFn(text)),
     createAnswer: (questionId, answerBody) =>
         dispatch(createAnswerFn(questionId, answerBody)),
     approveAnswer: (questionId, answerId) =>

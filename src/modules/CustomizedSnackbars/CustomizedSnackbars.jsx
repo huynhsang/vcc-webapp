@@ -9,13 +9,13 @@ const CustomizedSnackbars = ({ alert, showAlert }) => {
     const { severity = 'success', title, open = false } = alert;
 
     const handleClose = () => {
-        showAlert({ open: false });
+        showAlert({ open: false, severity = 'success' });
     };
 
     return (
         <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
             <MuiAlert
-                elevation={6}
+                elevation={2}
                 variant="filled"
                 onClose={handleClose}
                 severity={severity}

@@ -5,10 +5,6 @@ const actionNames = keyMirror({
     SET_IS_AUTHENTICATED: null,
     SET_TO_AUTHENTICATE: null,
 
-    //SWEET ALERT
-    SHOW_ALERT: null,
-    HIDE_ALERT: null,
-
     //Alert confirm
     SHOW_LOGIN_CONFIRM: null,
     SET_ALERT_SNACKBAR: null,

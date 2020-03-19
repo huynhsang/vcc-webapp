@@ -25,7 +25,7 @@ const AnswerForm = ({
     reloadQuestion,
     isAuthenticated,
     createAnswer,
-    showErrorNotification,
+    errorAlert,
     showLoginConfirm,
     isCreatingAnswer,
     isFetchingError
@@ -59,7 +59,7 @@ const AnswerForm = ({
 
     const onSubmit = () => {
         if (answerBody.length < 20) {
-            return showErrorNotification(t('question_answer_min_20'));
+            return errorAlert(t('question_answer_min_20'));
         }
         createAnswer(questionId, answerBody);
     };

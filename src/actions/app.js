@@ -8,8 +8,7 @@ import {
     getUserByLoginToken
 } from '../services/user.service';
 
-import { showErrorAlertFn, showSuccessAlertFn } from './sweetAlert';
-
+import { errorAlertFn, successAlertFn } from './alertConfirm';
 import { getUserProfileFn } from './userInfos';
 
 const {
@@ -85,16 +84,13 @@ export const updateCurrentUserFn = payload => {
             .then(data => {
                 dispatch(updateCurrentUserSuccess(data));
                 dispatch(
-                    showSuccessAlertFn(
-                        'Success!',
-                        i18n.t('my_profile_user_info_updated')
-                    )
+                    successAlertFn(i18n.t('my_profile_user_info_updated'))
                 );
                 dispatch(getUserProfileFn(data.id));
             })
             .catch(err => {
                 dispatch(updateCurrentUserFailure());
-                dispatch(showErrorAlertFn('Error!', err.message));
+                dispatch(errorAlertFn(err.response.data.error.message));
             });
     };
 };

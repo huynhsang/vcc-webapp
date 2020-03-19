@@ -34,8 +34,8 @@ const LeftAlign = styled.div`
 
 const ForgotPassword = ({
     setToLogin,
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     hideAuthentification
 }) => {
     const { t } = useTranslation();
@@ -48,13 +48,10 @@ const ForgotPassword = ({
         resetPassword(email)
             .then(() => {
                 hideAuthentification();
-                showSuccessAlert(
-                    'Success!',
-                    t('forgot_password_please_verify_your_email')
-                );
+                successAlert(t('forgot_password_please_verify_your_email'));
             })
             .catch(err => {
-                showErrorAlert(err.response.data.error.message);
+                errorAlert(err.response.data.error.message);
             });
     };
 

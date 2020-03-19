@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { showSuccessAlertFn, showErrorAlertFn } from '../../actions/sweetAlert';
+import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
 
 import Login from './Login';
 import Registration from './Registration';
@@ -56,8 +56,8 @@ const Authentication = ({
     setToFindPassword,
     setToRegistre,
     setToAuthenticate,
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     App,
     fetchUserFromCookie
 }) => {
@@ -109,8 +109,8 @@ const Authentication = ({
             <DialogContent className={classes.content}>
                 {toAuthenticate === 'login' && (
                     <Login
-                        showSuccessAlert={showSuccessAlert}
-                        showErrorAlert={showErrorAlert}
+                        successAlert={successAlert}
+                        errorAlert={errorAlert}
                         setToFindPassword={setToFindPassword}
                         setToRegistre={setToRegistre}
                         hideAuthentification={hideAuthentification}
@@ -120,8 +120,8 @@ const Authentication = ({
                 {toAuthenticate === 'registre' && (
                     <Registration
                         history={history}
-                        showSuccessAlert={showSuccessAlert}
-                        showErrorAlert={showErrorAlert}
+                        successAlert={successAlert}
+                        errorAlert={errorAlert}
                         setToLogin={setToLogin}
                         hideAuthentification={hideAuthentification}
                     />
@@ -130,8 +130,8 @@ const Authentication = ({
                     <ForgotPassword
                         setToLogin={setToLogin}
                         history={history}
-                        showSuccessAlert={showSuccessAlert}
-                        showErrorAlert={showErrorAlert}
+                        successAlert={successAlert}
+                        errorAlert={errorAlert}
                         hideAuthentification={hideAuthentification}
                     />
                 )}
@@ -149,9 +149,8 @@ const mapDispatchToProp = dispatch => ({
     setToFindPassword: val => dispatch(setToFindPasswordFn(val)),
     setToRegistre: () => dispatch(setToRegistreFn()),
     setToAuthenticate: () => dispatch(setToAuthenticateFn()),
-    showSuccessAlert: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: message => dispatch(showErrorAlertFn('Error!', message)),
+    successAlert: text => dispatch(successAlertFn(text)),
+    errorAlert: message => dispatch(errorAlertFn(message)),
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn())
 });
 

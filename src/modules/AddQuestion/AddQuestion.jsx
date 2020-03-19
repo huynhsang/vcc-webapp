@@ -13,10 +13,10 @@ import QuestionReview from './QuestionReview';
 import QuestionSituation from './QuestionSituation';
 
 import {
-    showSuccessAlertFn,
-    showErrorAlertFn,
-} from '../../actions/sweetAlert';
-import { showLoginConfirmFn } from '../../actions/alertConfirm';
+    showLoginConfirmFn,
+    errorAlertFn,
+    successAlertFn
+} from '../../actions/alertConfirm';
 
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
@@ -43,8 +43,8 @@ const ButtonsWrapper = styled.div`
 
 const AddQuestion = ({
     history,
-    showSuccessAlert,
-    showErrorAlert,
+    successAlert,
+    errorAlert,
     App,
     showLoginConfirm,
     location
@@ -130,11 +130,11 @@ const AddQuestion = ({
     const postQuestion = () => {
         createQuestion(question)
             .then(data => {
-                showSuccessAlert('Success!', 'Created a Question');
+                successAlert(t('question_created_a_question'));
                 history.push(`/questions/${data.slug}`);
             })
             .catch(response =>
-                showErrorAlert(response.response.data.error.message)
+                errorAlert(response.response.data.error.message)
             );
     };
 
@@ -246,9 +246,8 @@ const mapStateToProps = ({ App }) => ({
 });
 
 const mapDispatchToProp = dispatch => ({
-    showSuccessAlert: (title, text) =>
-        dispatch(showSuccessAlertFn(title, text)),
-    showErrorAlert: message => dispatch(showErrorAlertFn('Error!', message)),
+    successAlert: text => dispatch(successAlertFn(text)),
+    errorAlert: text => dispatch(errorAlertFn(text)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 

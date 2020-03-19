@@ -1,4 +1,5 @@
 import { createAction } from 'redux-starter-kit';
+import i18n from 'i18next';
 import actionsNames from '../constants/action-names.constant';
 
 import {
@@ -15,7 +16,7 @@ import { getQuestions } from '../services/question.service';
 import { getAnswers, getNumberAnswers } from '../services/answer.service';
 import { getUserProfile } from '../services/user.service';
 
-import { showSuccessAlertFn, showErrorAlertFn } from './sweetAlert';
+import { errorAlertFn, successAlertFn } from './alertConfirm';
 
 const DEFAULT_GET_LIMIT = 5;
 
@@ -37,7 +38,7 @@ const {
     GET_QUESTIONS_ASKED_SUCCESS,
     GET_ANSWERS_RELATED_SUCCESS,
     GET_USER_PROFILE_SUCCESS,
-    GET_NUMBER_ANSWERS_RELATED_SUCCESS,
+    GET_NUMBER_ANSWERS_RELATED_SUCCESS
 } = actionsNames;
 
 export const getUserProfileSuccess = createAction(GET_USER_PROFILE_SUCCESS);
@@ -80,13 +81,13 @@ export const createExperienceFn = data => {
         createExperience(data)
             .then(responseData => {
                 dispatch(createExperienceSuccess(responseData));
-                dispatch(showSuccessAlertFn('Success!', 'Experience created!'));
+                dispatch(
+                    successAlertFn(i18n.t('user_info_experience_created'))
+                );
             })
             .catch(err => {
                 dispatch(createExperienceFailure());
-                dispatch(
-                    showErrorAlertFn('Error!', err.response.data.error.message)
-                );
+                dispatch(errorAlertFn(err.response.data.error.message));
             });
     };
 };
@@ -101,13 +102,13 @@ export const editExperienceFn = data => {
         editExperience(data)
             .then(responseData => {
                 dispatch(editExperienceSuccess(responseData));
-                dispatch(showSuccessAlertFn('Success!', 'Experience updated!'));
+                dispatch(
+                    successAlertFn(i18n.t('user_info_experience_updated'))
+                );
             })
             .catch(err => {
                 dispatch(editExperienceFailure());
-                dispatch(
-                    showErrorAlertFn('Error!', err.response.data.error.message)
-                );
+                dispatch(errorAlertFn(err.response.data.error.message));
             });
     };
 };
@@ -140,13 +141,11 @@ export const createEducationFn = data => {
         createEducation(data)
             .then(responseData => {
                 dispatch(createEducationSuccess(responseData));
-                dispatch(showSuccessAlertFn('Success!', 'Education created!'));
+                dispatch(successAlertFn(i18n.t('user_info_education_created')));
             })
             .catch(err => {
                 dispatch(createEducationFailure());
-                dispatch(
-                    showErrorAlertFn('Error!', err.response.data.error.message)
-                );
+                dispatch(errorAlertFn(err.response.data.error.message));
             });
     };
 };
@@ -161,13 +160,11 @@ export const editEducationFn = data => {
         editEducation(data)
             .then(responseData => {
                 dispatch(editEducationSuccess(responseData));
-                dispatch(showSuccessAlertFn('Success!', 'Experience updated!'));
+                dispatch(successAlertFn(i18n.t('user_info_education_updated')));
             })
             .catch(err => {
                 dispatch(editEducationFailure());
-                dispatch(
-                    showErrorAlertFn('Error!', err.response.data.error.message)
-                );
+                dispatch(errorAlertFn(err.response.data.error.message));
             });
     };
 };
@@ -184,7 +181,7 @@ export const getQuestionsAskedFn = (userId, page = 1) => {
         skip: (page - 1) * DEFAULT_GET_LIMIT
     };
     return dispatch => {
-        getQuestions({ filter, totalCount : true })
+        getQuestions({ filter, totalCount: true })
             .then(data => {
                 dispatch(getQuestionsAskedSuccess(data));
             })
