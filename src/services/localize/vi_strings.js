@@ -98,6 +98,7 @@ export default {
     common_user: 'Người dùng',
     common_ok: 'Đồng ý',
     common_cancel: 'Huỷ',
+    common_logged_in: 'Đăng nhập thành công!',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -115,6 +116,8 @@ export default {
     authentification_donot_have_account: `Bạn chưa có tài khoản`,
     authentification_this_page_need_to_authenticate:
         'Vui lòng đăng nhập để tiếp tuc',
+    authentification_check_your_email:
+        'Vui lòng kiểm tra email để hoàn thành đăng kí!',
     authentification_: '',
 
     header_home: 'Trang chủ',
@@ -188,11 +191,20 @@ export default {
     question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
     question_resolved: 'Đã được giải quyết',
     question_set_mode: 'Chế độ hiển thị của câu hỏi là gì?',
-    question_set_mode_des: 'Bạn có thể đặt chế độ hiển thị cho câu hỏi, nó có thể ở dạng riêng tư hoặc công khai. Nếu ở chế độ riêng tư, thì câu hỏi chỉ giới hạn bạn và những người dùng được chọn phía dưới. ',
-    question_support_list: 'Chọn người (nhiều nhất là 2) sẽ trả lời câu hỏi của bạn?',
-    question_support_list_des: 'Chúng tôi sẽ liên lạc đến họ để trả lời vấn đề của bạn. {{sub}}',
-    question_support_list_des_sup_empty: 'Bạn có thể để nó trống nếu như không biết sẽ gửi câu hỏi đến ai',
-    question_support_list_require: 'Bởi vì bạn chọn câu hỏi ở dang riêng tư, nên bạn phải chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
+    question_set_mode_des:
+        'Bạn có thể đặt chế độ hiển thị cho câu hỏi, nó có thể ở dạng riêng tư hoặc công khai. Nếu ở chế độ riêng tư, thì câu hỏi chỉ giới hạn bạn và những người dùng được chọn phía dưới. ',
+    question_support_list:
+        'Chọn người (nhiều nhất là 2) sẽ trả lời câu hỏi của bạn?',
+    question_support_list_des:
+        'Chúng tôi sẽ liên lạc đến họ để trả lời vấn đề của bạn. {{sub}}',
+    question_support_list_des_sup_empty:
+        'Bạn có thể để nó trống nếu như không biết sẽ gửi câu hỏi đến ai',
+    question_support_list_require:
+        'Bởi vì bạn chọn câu hỏi ở dang riêng tư, nên bạn phải chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
+
+    question_leaved_an_answer: 'Câu trả lời đã được thêm',
+    question_approved_this_answer: 'Câu trả lời đã được chấp nhận',
+    question_created_a_question: 'Đã tạo mới câu hỏi',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -232,8 +244,10 @@ export default {
     login_thank_to_login_to_continue: 'Vui lòng đăng nhập để tiếp tục',
 
     contact_us_hello: 'VCNC chúc bạn một ngày tốt lành!',
-    contact_us_if_you_want_to_share: 'Nếu bạn muốn chia sẻ câu chuyện của mình trên VCNC blog, vui lòng để lại lời nhắn cho VCNC tại ',
-    contact_us_reply_soon : ' Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.',
+    contact_us_if_you_want_to_share:
+        'Nếu bạn muốn chia sẻ câu chuyện của mình trên VCNC blog, vui lòng để lại lời nhắn cho VCNC tại ',
+    contact_us_reply_soon:
+        ' Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.',
     contact_us_feedback: 'Mọi ý kiến phản hồi khác vui lòng gửi đến :',
     contact_us_sincerely: 'Chân thành cảm ơn đóng góp của bạn!',
 
@@ -282,6 +296,10 @@ export default {
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',
     user_info_added_an_answer: 'Được trả lời vào ngày',
+    user_info_experience_created: 'Kinh nghiệm đã được thêm!',
+    user_info_experience_updated: 'Kinh nghiệm đã được chỉnh sửa!',
+    user_info_education_created: 'Giáo dục đã được thêm!',
+    user_info_education_updated: 'Giáo dục đã chỉnh sửa!',
 
     home_ask_verified_professionals:
         'Xin lời khuyên về định hướng nghề nghiệp, kinh nghiệm phỏng vấn, thông tin về công ty từ các chuyên gia từ các công ty lớn hàng đầu...',
