@@ -6,14 +6,25 @@ import MuiAlert from '@material-ui/lab/Alert';
 import { showAlertFn } from '../../actions/alertConfirm';
 
 const CustomizedSnackbars = ({ alert, showAlert }) => {
-    const { severity = 'success', title, open = false } = alert;
+    const {
+        severity = 'success',
+        title,
+        open = false,
+        vertical,
+        horizontal
+    } = alert;
 
     const handleClose = () => {
-        showAlert({ open: false, severity = 'success' });
+        showAlert({ ...alert, open: false });
     };
 
     return (
-        <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+        <Snackbar
+            anchorOrigin={{ vertical, horizontal }}
+            open={open}
+            autoHideDuration={2000}
+            onClose={handleClose}
+        >
             <MuiAlert
                 elevation={2}
                 variant="filled"

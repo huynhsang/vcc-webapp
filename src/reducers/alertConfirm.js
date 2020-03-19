@@ -6,7 +6,9 @@ const defaultState = {
     alert: {
         severity: '',
         title: '',
-        open: false
+        open: false,
+        vertical: 'bottom',
+        horizontal: 'left'
     }
 };
 

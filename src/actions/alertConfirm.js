@@ -7,12 +7,20 @@ export const showLoginConfirmFn = createAction(SHOW_LOGIN_CONFIRM);
 
 export const setAlertFn = createAction(SET_ALERT_SNACKBAR);
 
-export const showAlertFn = ({ title = '', severity = '' }) => dispatch => {
+export const showAlertFn = ({
+    title = '',
+    severity = '',
+    open = true,
+    vertical = 'bottom',
+    horizontal = 'left'
+}) => dispatch => {
     dispatch(
         setAlertFn({
-            open: true,
+            open,
             title,
-            severity
+            severity,
+            vertical,
+            horizontal
         })
     );
 };
