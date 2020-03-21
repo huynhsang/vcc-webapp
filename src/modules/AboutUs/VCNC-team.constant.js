@@ -1,34 +1,43 @@
-import NguyetImage from '../../images/team/nguyet.png';
-import PhucImage from '../../images/team/phuc.jpg';
-import SangImage from '../../images/team/sang.png';
-import ToanImage from '../../images/team/toan.png';
-import NguyenImage from '../../images/team/nguyen.png';
+import NguyetImage from '../../images/team/nguyet.jpg';
+import PhucImage from '../../images/team/phuc.JPG';
+import SangImage from '../../images/team/sang.jpg';
+import ToanImage from '../../images/team/toan.jpg';
+import NguyenImage from '../../images/team/nguyen.jpg';
 
 export const team = [
     {
         img: NguyetImage,
-        name: 'Nguyet',
-        role: 'Business'
+        name: 'Nguyet Le',
+        role: 'about_us_nguyet_role',
+        experience: 'about_us_nguyet_experience',
+        gmail: 'nguyet.t.t.le@gmail.com'
     },
     {
         img: PhucImage,
-        name: 'Phuc',
-        role: 'Dev'
+        name: 'Phuc Le',
+        role: 'about_us_phuc_role',
+        experience: 'about_us_phuc_experience',
+        gmail: 'vanphuc1195@gmail.com'
     },
     {
         img: SangImage,
-        name: 'Sang',
-        role: 'Dev'
+        name: 'Sang Huynh',
+        role: 'about_us_sang_role',
+        experience: 'about_us_sang_experience',
+        gmail: 'thanhsangqn3@gmail.com'
     },
     {
         img: ToanImage,
-        name: 'Toan',
-        role: 'Data'
+        name: 'Toan Ngo',
+        role: 'about_us_toan_role',
+        experience: 'about_us_toan_experience',
+        gmail: 'toanngosy@gmail.com'
     },
     {
         img: NguyenImage,
-        name: 'Nguyen',
-        role: 'Makerter'
-    },
-
+        name: 'Nguyen Nguyen',
+        role: 'about_us_nguyen_role',
+        experience: 'about_us_nguyen_experience',
+        gmail: 'npnguyen0102@gmail.com'
+    }
 ];

@@ -99,6 +99,7 @@ export default {
     common_ok: 'Đồng ý',
     common_cancel: 'Huỷ',
     common_logged_in: 'Đăng nhập thành công!',
+    common_contact: 'Liên hệ',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -256,16 +257,23 @@ export default {
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',
-    about_us_our_story: 'Câu chuyện của chúng tôi',
-    about_us_story: `Team sáng lập của VCNC gồm những cựu học sinh của THPT chuyên Lê Quý Đôn, Đà Nẵng đang học tập và làm việc ở nước ngoài. Khi đặt chân đến một đất nước xa lạ, chúng tôi nhận ra sự cần thiết của việc tập hợp người Việt Nam lại với nhau để giúp đỡ nhau đi lên. Đó là lý do chúng tôi tạo ra một nền tảng nơi mọi người có thể nhận được những lời khuyên và hỗ trợ từ những người có kinh nghiệm cho sự nghiệp của mình.`,
-    about_us_our_mission: 'Mục tiêu',
-    about_us_mission:
-        'Chúng tôi hướng đến tham vọng xây dựng một cộng đồng lớn nhất và ‘ngầu’ nhất Việt Nam nơi mọi thành viên nhận được sự hỗ trợ tốt nhất trên con đường sự nghiệp.',
-    about_us_what_we_do: 'Cụ thể, chúng tôi làm gì?',
+    about_us_our_story: 'Câu chuyện của VCNC',
+    about_us_story: `Chúng tôi là một nhóm các bạn trẻ Việt Nam với mong muốn xây dựng một cộng đồng lớn nhất và năng động nhất Việt Nam nơi mọi thành viên nhận được lời khuyên và sự hỗ trợ tốt nhất trên con đường sự nghiệp.`,
+    about_us_what_we_do: 'Cụ thể, chúng tôi làm gì?',
     about_us_do:
-        'Chúng tôi xây dựng một trang web để mọi người đặt câu hỏi và nhận được những câu trả lời đáng tin cậy từ người có kinh nghiệm ở khắp nơi trên thế giới thông qua các thuật toán cấp cao. Bên cạnh đó, chúng tôi đưa ra những gói dịch vụ tư vấn kết nối bạn trực tiếp với một chuyên gia trong ngành. Hệ thống của chúng tôi sẽ giúp bạn nhận được những hỗ trợ cũng như những mối quan hệ bạn cần trong sự nghiệp của bạn.',
-    about_us_our_team: 'Các thành viên',
-
+        'Chúng tôi xây dựng một trang web để mọi người đặt câu hỏi và nhận được những câu trả lời đáng tin cậy từ người có kinh nghiệm ở khắp nơi trên thế giới. Bên cạnh đó, chúng tôi đưa ra những gói dịch vụ tư vấn kết nối bạn trực tiếp với một chuyên gia trong ngành bạn đang quan tâm. Cộng đồng của chúng tôi sẽ giúp bạn nhận được những hỗ trợ cũng như những mối quan hệ cần thiết cho sự nghiệp của bạn.',
+    about_us_our_team: 'Các thành viên của VCNC',
+    about_us_nguyet_role: 'Đồng sáng lập - CEO',
+    about_us_nguyet_experience: 'Nghiên cứu sinh tiến sĩ tại University of Southern California',
+    about_us_phuc_role: 'Đồng sáng lập - COO',
+    about_us_phuc_experience: 'Lập trình viên tại Kumullus.',
+    about_us_sang_role: 'Đồng sáng lập - CTO',
+    about_us_sang_experience: 'Lập trình viên tại Peddler.',
+    about_us_toan_role: 'Chief Scientist',
+    about_us_toan_experience: 'Kỹ sư khoa học dữ liệu tại Berkeley Lab',
+    about_us_nguyen_role: 'Chief Marketing Officer',
+    about_us_nguyen_experience: 'Marketing Executive tại Advosights',
+    
     forgot_password_please_verify_your_email:
         'Vui lòng kiểm tra email của bạn để tạo lại mật khẩu mới',
     authentification_enter_new_password: 'Vui lòng nhập mật khẩu mới',

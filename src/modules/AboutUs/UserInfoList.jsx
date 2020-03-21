@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 
 import { team } from './VCNC-team.constant';
 
@@ -9,29 +10,27 @@ const media = createMediaTemplate();
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-    margin-top: 10px;
+    margin: 10px -20px 0;
 `;
 
 const UserInfo = styled.div`
-    width: 150px;
+    width: calc(33% - 40px);
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 10px 20px;
+    margin: 20px;
+    text-align: center;
+    color: #3c3c3c;
     ${media.mobileLandscape`
-        width: 110px;
-        margin: 10px;
-    `}
-    ${media.mobile`
-        margin: 10px 0;
+        width: calc(50% - 40px);
     `}
 `;
 
 const Image = styled.div`
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: cover;
@@ -40,12 +39,37 @@ const Image = styled.div`
     background-color: black;
 `;
 
+const Thumbnail = styled.div`
+    width: 100%;
+    height: calc(50vw - 45px);
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+    border: 1px solid #3c3c3c;
+    padding: 5px;
+    ${media.mobile`
+        padding: 3px;
+    `}
+`;
+
+const Name = styled.div`
+    font-size: 17px;
+    font-weight: 600;
+    margin-top: 10px;
+`;
+
 const UserInfoList = () => {
-    const userInfos = team.map(({ name, img, role }) => (
+    const { t } = useTranslation();
+
+    const userInfos = team.map(({ name, img, role, experience, gmail }) => (
         <UserInfo key={name}>
-            <Image img={img} alt="" />
-            <div>{name}</div>
-            <div>{role}</div>
+            <Thumbnail>
+                <Image img={img} alt="" />
+            </Thumbnail>
+            <Name>{name}</Name>
+            <div>{t(role)}</div>
+            <div>{t(experience)}</div>
+            <div>{`${t('common_contact')}: ${gmail}`}</div>
         </UserInfo>
     ));
 

@@ -99,6 +99,7 @@ export default {
     common_ok: 'Ok',
     common_cancel: 'Cancel',
     common_logged_in: 'Logged in!',
+    common_contact: 'Contact',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -256,14 +257,21 @@ export default {
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
     about_us_sologan: 'Get people connected',
     about_us_our_story: 'Our story',
-    about_us_story: `VCNC's founders were students of Le Quy Don high school, Danang, Vietnam who are living and working overseas. When we first came to another country, we recognized a huge potential of unifying Vietnamese professionals to move forward together. That is why we built a platform where people can get advice or support from other professionals to have a clear vision in their careers.`,
-    about_us_our_mission: 'Our mission',
-    about_us_mission:
-        'We aim to become the biggest and coolest professional network in Vietnam where our members can get benefits from and benefit each other.',
+    about_us_story: `We are a group of passionate Vietnamese students with an ambition to create the biggest and coolest professionals network for talented people to get advice and support for their career.`,
     about_us_what_we_do: 'What we do',
     about_us_do:
-        'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that you can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your dream.',
-    about_us_our_team: 'Our team',
+        'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that our mentees can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your biggest dreams.',
+    about_us_our_team: 'Meet our team',
+    about_us_nguyet_role: 'Co-founder - CEO',
+    about_us_nguyet_experience: 'PhD student at University of Southern California',
+    about_us_phuc_role: 'Co-founder - COO',
+    about_us_phuc_experience: 'Full-stack developer at Kumullus',
+    about_us_sang_role: 'Co-founder - CTO',
+    about_us_sang_experience: 'Senior developer at Peddler',
+    about_us_toan_role: 'Chief Scientist',
+    about_us_toan_experience: 'Senior Research Engineer at Berkeley Lab',
+    about_us_nguyen_role: 'Chief Marketing Officer',
+    about_us_nguyen_experience: 'Marketing Executive at Advosights',
 
     forgot_password_please_verify_your_email:
         'Please verify your email to reset password',

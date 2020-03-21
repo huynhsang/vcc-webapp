@@ -5,64 +5,92 @@ import { PageCover } from '../Header';
 
 import UserInfoList from './UserInfoList';
 import { DefaultWrapper } from '../../component/Wrappers';
+import backg from './back.svg';
+
+import LogoImage from '../../images/logo.png';
+import communicationImage from '../../images/communicationImage.png';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
+const Wrapper = styled(DefaultWrapper)`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    ${media.mobileLandscape`
+        flex-direction: ${p => p.isResponsiveReserve && 'column-reverse'};
+    `}
+`;
 
 const Title = styled.div`
-    color: white;
     font-size: 26px;
     text-align: center;
     font-weight: 600;
 `;
 
 const Sologan = styled.div`
-    color: white;
     font-size: 18px;
     text-align: center;
     margin-top: 5px;
 `;
 
-const SmallTitle = styled.div`
-    background-color: #272930;
-    color: white;
-    padding: 5px;
-    border-radius: 5px;
-    font-size: 18px;
-    text-align: ${p => p.textAlign};
-    font-weight: 600;
-    margin-top: 25px;
-
-    & .pi {
-        font-size: 16px;
-    }
-`;
-
-const ContentWrapper = styled.div`
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: 25px;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    align-items: ${p => p.alignItem || 'start'};
-`;
-
 const ContentTitle = styled.div`
     font-weight: 600;
-    border-radius: ${p => p.borderRadius || '0 0 2px 0'};
-    font-size: 18px;
-    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
-    background-color: white;
-    padding: 5px 15px;
+    font-size: 19px;
+    margin-bottom: 10px;
+    ${media.mobileLandscape`
+        margin-top: ${p => p.responsiveTop && '10px'};
+    `}
 `;
 
 const Content = styled.div`
     text-align: justify;
-    padding: 10px 15px;
 `;
 
 const BottomWrapper = styled.div`
-    background-color: #171717;
+    background-color: #f5f5f5;
+    color: #424242;
     padding: 20px;
+`;
+
+const Background = styled.div`
+    background: url('${backg}');
+    background-size: cover;
+    padding-top: 50px;
+`;
+
+const WidthWrapper = styled.div`
+    width: ${p => p.width}%;
+    padding: ${p => p.isCenter && '50px 0'};
+    ${p=> p.isCenter && `
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    `}
+    ${media.mobileLandscape`
+        width: 100%;
+     padding: ${p => p.isCenter && '30px 0'};
+    `}
+`;
+
+const NetworkImg = styled.img`
+    max-width: 160px;
+    width: 90%;
+    ${media.mobileLandscape`
+        max-width: 120px;
+        margin-top: 15px;
+    `}
+`;
+
+const CommunicationImg = styled.img`
+    max-width: 400px;
+    width: 90%;
+`;
+
+const Vcnc = styled.div`
+    font-size: 17px;
+    font-weight: 500;
 `;
 
 const AboutUs = () => {
@@ -71,24 +99,31 @@ const AboutUs = () => {
     return (
         <>
             <PageCover />
-            <DefaultWrapper>
-                <ContentWrapper>
-                    <ContentTitle>{t('about_us_our_story')}</ContentTitle>
-                    <Content>{t('about_us_story')}</Content>
-                </ContentWrapper>
-                <ContentWrapper alignItem="start">
-                    <ContentTitle borderRadius="0 0 2px 2px">
-                        {t('about_us_our_mission')}
+            <Wrapper>
+                <WidthWrapper width="40">
+                    <ContentTitle responsiveTop>
+                        {t('about_us_our_story')}
                     </ContentTitle>
-                    <Content>{t('about_us_mission')}</Content>
-                </ContentWrapper>
-                <ContentWrapper>
-                    <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
-                    <Content>{t('about_us_do')}</Content>
-                </ContentWrapper>
-                <SmallTitle textAlign="center">
-                    {t('about_us_our_team')}
-                </SmallTitle>
+                    <Content>{t('about_us_story')}</Content>
+                </WidthWrapper>
+                <WidthWrapper width="60" isCenter>
+                    <NetworkImg src={LogoImage} alt="" />
+                    <Vcnc>Vietnamese Counselling and Connecting</Vcnc>
+                </WidthWrapper>
+            </Wrapper>
+            <Background>
+                <Wrapper isResponsiveReserve>
+                    <WidthWrapper width="45" isCenter>
+                        <CommunicationImg src={communicationImage} alt="" />
+                    </WidthWrapper>
+                    <WidthWrapper width="55">
+                        <ContentTitle>{t('about_us_what_we_do')}</ContentTitle>
+                        <Content>{t('about_us_do')}</Content>
+                    </WidthWrapper>
+                </Wrapper>
+            </Background>
+            <DefaultWrapper>
+                <ContentTitle>{t('about_us_our_team')}</ContentTitle>
                 <UserInfoList />
             </DefaultWrapper>
             <BottomWrapper>
