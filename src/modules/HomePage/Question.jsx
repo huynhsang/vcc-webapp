@@ -51,14 +51,14 @@ const FlexWrapper = styled.div`
 
 const Title = styled.div`
     font-weight: 600;
-    font-size: 17px;
+    font-size: 1.1rem;
     margin-bottom: 10px;
     min-height: 45px;
 `;
 
 const InfosSup = styled.div`
     margin: 5px 0;
-    font-size: 12px;
+    font-size: 0.9rem;
 
     & span {
         color: #7f7f7f;
@@ -72,7 +72,6 @@ const InfosSup = styled.div`
 const UserName = styled.span`
     color: #009fff;
     margin-right: 10px;
-    font-size: 15px;
 
     &:hover {
         color: #0570b1;
@@ -95,8 +94,9 @@ const BottomWrapper = styled(FlexWrapper)`
 
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
-    font-size: 15px;
+    font-size: 1.1rem;
     min-height: 50px;
+    overflow: hidden;
 `;
 
 const TopWrapper = styled(FlexWrapper)`

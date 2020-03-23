@@ -53,7 +53,7 @@ const Thumbnail = styled.div`
 `;
 
 const Name = styled.div`
-    font-size: 17px;
+    font-size: 1.1rem;
     font-weight: 600;
     margin-top: 10px;
 `;

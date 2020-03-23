@@ -38,7 +38,7 @@ const FlexWrapper = styled.div`
 
 const InfosSup = styled.div`
     margin: 5px 0;
-    font-size: 12px;
+    font-size: 0.9rem;
 
     & span {
         color: #7f7f7f;
@@ -49,12 +49,10 @@ const InfosSup = styled.div`
 const UserName = styled.span`
     color: #009fff;
     margin-right: 10px;
-    font-size: 15px;
 `;
 
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
-    font-size: 15px;
     min-height: 45px;
 `;
 

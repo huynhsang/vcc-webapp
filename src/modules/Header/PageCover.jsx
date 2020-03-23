@@ -61,7 +61,7 @@ const LeftContent = styled.div`
 `;
 
 const AskWrapper = styled.div`
-    font-size: 17px;
+    font-size: 1.1rem;
     line-height: 30px;
     margin-bottom: 10px;
     color: white;
@@ -83,7 +83,7 @@ const AskWrapper = styled.div`
 const FindOut = styled.div`
     position: relative;
     margin: 20px 0 0 20px;
-    font-size: 17px;
+    font-size: 1.1rem;
     border: 1px solid #ffff00cc;
     width: 200px;
     height: 30px;

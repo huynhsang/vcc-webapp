@@ -329,10 +329,10 @@ export default {
         'Chọn người trả lời câu hỏi bạn muốn được kết nối tới',
     workspace_receive_answer_from: 'Nhận được câu trả lời bạn cần',
     workspace_rate_your_experience:
-        'Đánh giá câu trả lời và nhận được điểm thưởng vào tài khoản',
+        'Đánh giá câu trả lời và nhận được điểm thưởng vào tài khoản',
     workspace_if_you_are_answering: 'Nếu bạn là người trả lời',
     workspace_get_notification:
-        'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
+        'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
     workspace_answer_the_assigned: 'Trả lời câu hỏi nhận được trong vòng 24h',
     workspace_get_paid: 'Nhận điểm thưởng sau khi đăng tải câu trả lời',
     workspace_our_support: 'Hỗ trợ',

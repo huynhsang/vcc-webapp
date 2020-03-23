@@ -51,7 +51,7 @@ const AddQuestion = ({
 }) => {
     const { t } = useTranslation();
 
-    const { isAuthenticated, toAuthenticate } = App;
+    const { isAuthenticated, toAuthenticate, currentUser } = App;
 
     React.useEffect(() => {
         if (!isAuthenticated && !toAuthenticate) {
@@ -98,7 +98,7 @@ const AddQuestion = ({
 
         getUsers()
             .then(data => {
-                setUsersToMatch(data);
+                setUsersToMatch(data.filter(val => val.id !== currentUser.id));
             })
             .catch(err => console.log(err.message));
 

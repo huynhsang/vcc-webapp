@@ -15,7 +15,7 @@ const FlexWrapper = styled.div`
 `;
 
 const SchoolIcon = styled(School)`
-     font-size: 14px !important;
+    font-size: 14px !important;
     margin-right: 3px;
 `;
 

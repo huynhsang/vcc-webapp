@@ -82,8 +82,9 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin: 10px 0;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     min-height: 50px;
+    overflow: hidden;
 `;
 
 const LeftWrapper = styled.div`

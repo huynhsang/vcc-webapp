@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 
 const DateWrapper = styled.div`
     text-align: right;
-    font-size: 13px;
+    font-size: 0.9rem;
 `;
 
 const DateTitle = styled.span`

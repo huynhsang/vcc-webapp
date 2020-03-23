@@ -21,18 +21,17 @@ const FlexWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    font-size: 16px;
 `;
 
 const Title = styled.div`
-    font-size: 18px;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 15px;
 `;
 
 const SmallTitle = styled.div`
     text-align: center;
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: bold;
     padding: 15px 0;
 `;
@@ -62,7 +61,6 @@ const SupportWrapper = styled.div`
 
 const SupportOl = styled.ul`
     list-style: initial;
-    font-size: 14px;
     font-weight: 600;
     display: flex;
     flex-wrap: wrap;

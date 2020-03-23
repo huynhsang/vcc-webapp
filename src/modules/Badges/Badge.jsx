@@ -8,7 +8,7 @@ const Wrapper = styled.span`
     color: white;
     border-radius: 2px;
     padding: 2px 5px;
-    font-size: 11px;
+    font-size: 0.8rem;
     text-align: center;
 `;
 

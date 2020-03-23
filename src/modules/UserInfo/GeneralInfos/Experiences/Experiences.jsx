@@ -17,13 +17,21 @@ import dateformat from 'dateformat';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
+import Work from '@material-ui/icons/Work';
+import { createMediaTemplate } from '../../../../utils/css-tools';
+const media = createMediaTemplate();
 
 const Wrapper = styled.section`
+    width: calc(50% - 10px);
+    margin-right: 10px;
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
-    padding: 20px;
-    margin-bottom: 15px;
+    padding: 10px 20px 20px;
+    ${media.mobileLandscape`
+        width: 100%; 
+        margin: 0;
+    `}
 `;
 
 const FlexWrapper = styled.div`
@@ -32,25 +40,36 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
+const TopWrapper = styled(FlexWrapper)`
+    padding-bottom: 5px;
+`;
+
 const ExperienceInfo = styled(FlexWrapper)`
-    border-top: 1px solid #707885;
-    width: 80%;
+    border-top: 1px solid #cacaca;
     padding-top: 10px;
+    line-height: 26px;
 `;
 
-const Img = styled.img`
-    object-fit: contain;
-    width: 14%;
-    max-height: 90%;
-    height: auto;
-    margin-left: 1.5%;
+const Title = styled.div`
+    font-size: 1.2rem;
+    font-weight: bold;
 `;
 
-const Experiences = ({
-    userInfos,
-    createExperience,
-    editExperience
-}) => {
+const JobName = styled.div`
+    font-size: 1.1rem;
+    font-weight: bold;
+`;
+
+const GrayWrapper = styled.div`
+    color: #828282;
+`;
+
+const WorkIcon = styled(Work)`
+    font-size: 2rem !important;
+    margin-right: 10px;
+`;
+
+const Experiences = ({ userInfos, createExperience, editExperience }) => {
     const { t } = useTranslation();
 
     const {
@@ -93,40 +112,39 @@ const Experiences = ({
     const formatDate = i18n.language === 'en' ? 'mmmm yyyy' : 'mm/yyyy';
 
     const experiencesRender = Object.values(experiences).map(val => (
-        <FlexWrapper key={val.id}>
-            <Img src={defaultCompanyLogo} alt="" width="100" />
-            <ExperienceInfo>
-                <div>
-                    <h5>{val.title}</h5>
-                    <p>{val.company}</p>
-                    <p>{` ${dateformat(val.startDate, formatDate)} - ${
-                        val.isWorkings
-                            ? t('common_present')
-                            : dateformat(val.endDate, formatDate)
-                    }`}</p>
-                    <p >{val.location}</p>
-                    <p>{val.description}</p>
-                </div>
-                {canEdit && (
-                    <IconButton onClick={() => setEditExperienceId(val.id)}>
-                        <EditIcon />
-                    </IconButton>
-                )}
-            </ExperienceInfo>
-        </FlexWrapper>
+        <ExperienceInfo key={val.id}>
+            <div>
+                <JobName>{val.title}</JobName>
+                <div>{val.company}</div>
+                <GrayWrapper>{` ${dateformat(val.startDate, formatDate)} - ${
+                    val.isWorkings
+                        ? t('common_present')
+                        : dateformat(val.endDate, formatDate)
+                }`}</GrayWrapper>
+                <GrayWrapper>{val.location}</GrayWrapper>
+                <div>{val.description}</div>
+            </div>
+            {canEdit && (
+                <IconButton onClick={() => setEditExperienceId(val.id)}>
+                    <EditIcon />
+                </IconButton>
+            )}
+        </ExperienceInfo>
     ));
 
     return (
         <Wrapper>
-            <FlexWrapper>
-                <h4>{t('common_experience')}</h4>
+            <TopWrapper>
+                <FlexWrapper>
+                    <WorkIcon />
+                    <Title>{t('common_experience')}</Title>
+                </FlexWrapper>
                 {canEdit && (
                     <IconButton onClick={() => setIsShowing(true)}>
                         <AddIcon color="primary" />
                     </IconButton>
                 )}
-            </FlexWrapper>
-
+            </TopWrapper>
             {experiencesRender}
             <ExperienceModal
                 submit={onSubmit}
@@ -147,7 +165,4 @@ const mapDispatchToProps = dispatch => ({
     editExperience: data => dispatch(editExperienceFn(data))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Experiences);
+export default connect(mapStateToProps, mapDispatchToProps)(Experiences);

@@ -23,20 +23,20 @@ const Wrapper = styled(DefaultWrapper)`
 `;
 
 const Title = styled.div`
-    font-size: 26px;
+    font-size: 1.9rem;
     text-align: center;
     font-weight: 600;
 `;
 
 const Sologan = styled.div`
-    font-size: 18px;
+    font-size: 1.2rem;
     text-align: center;
     margin-top: 5px;
 `;
 
 const ContentTitle = styled.div`
     font-weight: 600;
-    font-size: 19px;
+    font-size: 1.2rem;
     margin-bottom: 10px;
     ${media.mobileLandscape`
         margin-top: ${p => p.responsiveTop && '10px'};
@@ -89,7 +89,7 @@ const CommunicationImg = styled.img`
 `;
 
 const Vcnc = styled.div`
-    font-size: 17px;
+    font-size: 1.1rem;
     font-weight: 500;
 `;
 

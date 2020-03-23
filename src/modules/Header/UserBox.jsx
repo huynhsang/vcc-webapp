@@ -57,7 +57,7 @@ const AvatarImg = styled.img`
 `;
 
 const Welcome = styled.div`
-    font-size: 10px;
+    font-size: 0.8rem;
 `;
 
 const ResponsiveHide = styled.div`

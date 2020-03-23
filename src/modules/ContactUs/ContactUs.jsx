@@ -45,7 +45,7 @@ const useStyle = makeStyles(() => ({
 
 const HelloWrapper = styled.div`
     text-align: center;
-    font-size: 20px;
+    font-size: 1.3rem;
     font-weight: 600;
     margin-bottom: 20px;
 `;

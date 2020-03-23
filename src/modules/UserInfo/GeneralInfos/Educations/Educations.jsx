@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
 import EducationModal from './EducationModal';
 
@@ -16,13 +15,21 @@ import { getIdAndToken } from '../../../../utils/cookie-tools';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/AddCircle';
 import EditIcon from '@material-ui/icons/Edit';
+import School from '@material-ui/icons/School';
+import { createMediaTemplate } from '../../../../utils/css-tools';
+const media = createMediaTemplate();
 
 const Wrapper = styled.section`
+    width: calc(50% - 10px);
+    margin-left: 10px;
     box-shadow: 0px 2px 6px 1px rgba(0, 0, 0, 0.2);
     background: #fff;
     border-radius: 2px;
-    padding: 20px;
-    margin-bottom: 15px;
+    padding: 10px 20px 20px;
+    ${media.mobileLandscape`
+        width: 100%; 
+        margin: 0;
+    `}
 `;
 
 const FlexWrapper = styled.div`
@@ -31,25 +38,36 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
+const TopWrapper = styled(FlexWrapper)`
+    padding-bottom: 5px;
+`;
+
 const EducationInfo = styled(FlexWrapper)`
-    border-top: 1px solid #707885;
-    width: 80%;
+    border-top: 1px solid #cacaca;
     padding-top: 10px;
+    line-height: 26px;
 `;
 
-const Img = styled.img`
-    object-fit: contain;
-    width: 14%;
-    max-height: 90%;
-    height: auto;
-    margin-left: 1.5%;
+const Title = styled.div`
+    font-size: 1.2rem;
+    font-weight: bold;
 `;
 
-const Educations = ({
-    createEducation,
-    editEducation,
-    userInfos
-}) => {
+const SchoolName = styled.div`
+    font-size: 1.1rem;
+    font-weight: bold;
+`;
+
+const YearsWrapper = styled.div`
+    color: #828282;
+`;
+
+const SchoolIcon = styled(School)`
+    font-size: 2rem !important;
+    margin-right: 10px;
+`;
+
+const Educations = ({ createEducation, editEducation, userInfos }) => {
     const { t } = useTranslation();
 
     const {
@@ -92,34 +110,34 @@ const Educations = ({
     const canEdit = currentUserId === userProfile.id;
 
     const educationsRender = Object.values(educations).map(val => (
-        <FlexWrapper key={val.id}>
-            <Img src={defaultCompanyLogo} alt="" width="100" />
-            <EducationInfo>
-                <div>
-                    <h5>{val.degree}</h5>
-                    <p>{val.fieldOfStudy}</p>
-                    <p>{`${val.fromYear} - ${val.toYear}`}</p>
-                    <p>{val.description}</p>
-                </div>
-                {canEdit && (
-                    <IconButton onClick={() => setEditEducationId(val.id)}>
-                        <EditIcon />
-                    </IconButton>
-                )}
-            </EducationInfo>
-        </FlexWrapper>
+        <EducationInfo key={val.id}>
+            <div>
+                <SchoolName>{val.degree}</SchoolName>
+                <div>{val.fieldOfStudy}</div>
+                <YearsWrapper>{`${val.fromYear} - ${val.toYear}`}</YearsWrapper>
+                <div>{val.description}</div>
+            </div>
+            {canEdit && (
+                <IconButton onClick={() => setEditEducationId(val.id)}>
+                    <EditIcon />
+                </IconButton>
+            )}
+        </EducationInfo>
     ));
 
     return (
         <Wrapper>
-            <FlexWrapper>
-                <h4>{t('common_education')}</h4>
+            <TopWrapper>
+                <FlexWrapper>
+                    <SchoolIcon />
+                    <Title>{t('common_education')}</Title>
+                </FlexWrapper>
                 {canEdit && (
                     <IconButton onClick={() => setIsShowingModal(true)}>
                         <AddIcon color="primary" />
                     </IconButton>
                 )}
-            </FlexWrapper>
+            </TopWrapper>
             {educationsRender}
             <EducationModal
                 submit={onSubmit}
@@ -140,7 +158,4 @@ const mapDispatchToProps = dispatch => ({
     editEducation: data => dispatch(editEducationFn(data))
 });
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Educations);
+export default connect(mapStateToProps, mapDispatchToProps)(Educations);

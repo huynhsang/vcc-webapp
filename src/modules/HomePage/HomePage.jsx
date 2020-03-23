@@ -19,11 +19,11 @@ const FlexWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    font-size: 16px;
+    font-size: 1.2rem;
 `;
 
 const Title = styled.div`
-    font-size: 18px;
+    font-size: 1.1em;
     font-weight: 600;
 `;
 
@@ -45,7 +45,7 @@ const ToAskWrapper = styled(DefaultWrapper)`
 `;
 
 const Ask = styled.div`
-    font-size: 18px;
+    font-size: 1.2rem;
     margin-bottom: 10px;
 `;
 
