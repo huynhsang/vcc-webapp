@@ -100,6 +100,7 @@ export default {
     common_cancel: 'Huỷ',
     common_logged_in: 'Đăng nhập thành công!',
     common_contact: 'Liên hệ',
+    common_agree : 'Đồng ý',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -119,6 +120,10 @@ export default {
         'Vui lòng đăng nhập để tiếp tuc',
     authentification_check_your_email:
         'Vui lòng kiểm tra email để hoàn thành đăng kí!',
+    authentication_i_agree: 'Tôi đồng ý với ',
+    authentication_terms_and_condition:'Điều khoản và chính sách ',
+    authentication_of_VCNC: 'của VCNC',
+    authentication_please_agree_with_our_terms: 'Vui lòng đồng ý với điều khoản và chính sách của chúng tôi',
     authentification_: '',
 
     header_home: 'Trang chủ',
@@ -350,5 +355,8 @@ export default {
         'Giờ bạn đã sẵn sàng. Truy cập vào vcnc.app và đặt ngay một câu hỏi nào để kết nối với cộng đồng professionals của VCNC nào!',
     infos_new_step3:
         'Đừng quên quay trở lại sau vài ngày để xem câu trả lời cho yêu cầu của bạn. Bạn sẽ nhận được thông báo ngay khi có ai đó vào trả lời. Nếu bạn hài lòng với một câu trả lời nào đó, đừng quên nhấn HÀI LÒNG với câu trả lời đó. Người bạn đã đưa ra câu trả lời sẽ rất biết ơn bạn đấy!',
-    infos_conclusion: 'Cuối cùng, chúng tôi rất vui khi có bạn ở đây!'
+    infos_conclusion: 'Cuối cùng, chúng tôi rất vui khi có bạn ở đây!',
+
+    cookie_banner_info1: 'Để VCNC có thể hoạt động, chúng tôi phải lưu thông tin của bạn. Với việc sử dụng VCNC, bạn đồng ý với ',
+    cookie_banner_info2: ' của chúng tôi, bao gồm ',
 };

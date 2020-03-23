@@ -22,11 +22,11 @@ const CustomizedSnackbars = ({ alert, showAlert }) => {
         <Snackbar
             anchorOrigin={{ vertical, horizontal }}
             open={open}
-            autoHideDuration={2000}
+            autoHideDuration={3000}
             onClose={handleClose}
         >
             <MuiAlert
-                elevation={2}
+                elevation={3}
                 variant="filled"
                 onClose={handleClose}
                 severity={severity}

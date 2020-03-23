@@ -10,6 +10,7 @@ import { MobileAside } from '../MobileAside';
 import { ContactUs } from '../ContactUs';
 import { CustomizedSnackbars } from '../CustomizedSnackbars';
 
+import { CookieBanner } from '../CookieBanner';
 import { Authentification } from '../Authentification';
 import { ConnectedRouter } from 'connected-react-router';
 import { history } from '../../configureStore';
@@ -42,6 +43,7 @@ const App = ({ App, fetchUserFromCookie }) => {
                 <ContactUs />
                 <LoginConfirmModal />
                 <CustomizedSnackbars />
+                <CookieBanner />
                 <AppWrapper>
                     <MobileAside />
                     <Header />

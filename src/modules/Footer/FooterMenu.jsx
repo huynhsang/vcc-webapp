@@ -47,6 +47,7 @@ const FooterMenu = ({ history, toggleContactUs }) => {
         if (isContact) {
             return toggleContactUs(true);
         }
+        window.scrollTo(0,0);
         history.push(url);
     };
     const renderTabs = DEFAULT_TABS.map(tab => (

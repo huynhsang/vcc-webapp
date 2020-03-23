@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import { login } from '../../services/account.service';
+import { Checkbox } from '../../component/Inputs';
 
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,7 +13,7 @@ import Button from '@material-ui/core/Button';
 
 import SocialLogin from './SocialLogin';
 
-import {REALM} from '../../constants/constants'
+import { REALM } from '../../constants/constants';
 
 const useStyle = makeStyles(() => ({
     loginButton: {
@@ -39,6 +40,11 @@ const ClickDiv = styled.strong`
     }
 `;
 
+const TermsSpan = styled.span`
+    cursor: pointer;
+    text-decoration: underline;
+`;
+
 const Login = ({
     successAlert,
     errorAlert,
@@ -50,29 +56,49 @@ const Login = ({
     const { t } = useTranslation();
     const classes = useStyle();
 
+    const [agree, setAgree] = React.useState(false);
+
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [rememberMe, setRememberMe] = React.useState(false);
 
-    const onSubmit = event => {
-        event.preventDefault();
+    const onSubmit = () => {
         const data = {
-            email, password, rememberMe,
-            realm : REALM.user
-        }
+            email,
+            password,
+            rememberMe,
+            realm: REALM.user
+        };
 
         if (!email || !password) {
-            errorAlert(t('authentication_please_enter_email_and_password'));
-        } else {
-            login(data)
-                .then(data => {
-                    successAlert(t('common_logged_in'));
-                    fetchUserFromCookie();
-                    hideAuthentification();
-                })
-                .catch(err => {
-                    errorAlert(err.response.data.error.message);
-                });
+            return errorAlert(
+                t('authentication_please_enter_email_and_password')
+            );
+        }
+
+        if (!agree) {
+            return errorAlert(t('authentication_please_agree_with_our_terms'));
+        }
+
+        login(data)
+            .then(data => {
+                successAlert(t('common_logged_in'));
+                fetchUserFromCookie();
+                hideAuthentification();
+            })
+            .catch(err => {
+                errorAlert(err.response.data.error.message);
+            });
+    };
+
+    const goToTerms = () => {
+        const { REACT_APP_DOMAIN_NAME } = process.env;
+        window.open(`${REACT_APP_DOMAIN_NAME}/policy/termsofservice`, '_blank');
+    };
+
+    const passHandleKey = ev => {
+        if (ev.keyCode === 13) {
+            onSubmit();
         }
     };
 
@@ -95,7 +121,21 @@ const Login = ({
                     variant="outlined"
                     value={password}
                     onChange={ev => setPassword(ev.target.value)}
+                    onKeyDown={passHandleKey}
                     margin="normal"
+                />
+                <Checkbox
+                    label={
+                        <>
+                            {t('authentication_i_agree')}
+                            <TermsSpan onClick={goToTerms}>
+                                {t('authentication_terms_and_condition')}
+                            </TermsSpan>
+                            {t('authentication_of_VCNC')}
+                        </>
+                    }
+                    isChecked={agree}
+                    handleChange={val => setAgree(val)}
                 />
                 <FormControlLabel
                     control={

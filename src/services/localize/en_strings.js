@@ -100,6 +100,7 @@ export default {
     common_cancel: 'Cancel',
     common_logged_in: 'Logged in!',
     common_contact: 'Contact',
+    common_agree : 'Agree',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -120,6 +121,10 @@ export default {
         'This page need to authentificate to continue',
     authentification_check_your_email:
         'Check your email to complete the registration!',
+    authentication_i_agree: 'I agree to ',
+    authentication_terms_and_condition:'Terms and Conditions ',
+    authentication_of_VCNC: 'of VCNC',
+    authentication_please_agree_with_our_terms: 'Please agree with our terms and condition',
     authentification_: '',
 
     header_home: 'Home',
@@ -344,5 +349,8 @@ export default {
     infos_new_step2:
         'Now you are ready to go. Go to vcnc.app and ask any question to get connected to our professionals network!',
     infos_new_step3: `Don't forget to come back to get the answer. You will get notifications when someone answers your question. If you are satisfied with an answer, don't forget to APPROVE that answer so your friend can get the credit!`,
-    infos_conclusion: 'Needless to say, we are happy that you are here!'
+    infos_conclusion: 'Needless to say, we are happy that you are here!',
+
+    cookie_banner_info1: 'To make VCNC work, we log user data. By using VCNC, you agree to our ',
+    cookie_banner_info2: ', including ',
 };
