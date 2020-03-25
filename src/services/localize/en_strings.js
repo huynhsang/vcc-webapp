@@ -100,7 +100,7 @@ export default {
     common_cancel: 'Cancel',
     common_logged_in: 'Logged in!',
     common_contact: 'Contact',
-    common_agree : 'Agree',
+    common_agree: 'Agree',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -122,9 +122,10 @@ export default {
     authentification_check_your_email:
         'Check your email to complete the registration!',
     authentication_i_agree: 'I agree to ',
-    authentication_terms_and_condition:'Terms and Conditions ',
+    authentication_terms_and_condition: 'Terms and Conditions ',
     authentication_of_VCNC: 'of VCNC',
-    authentication_please_agree_with_our_terms: 'Please agree with our terms and condition',
+    authentication_please_agree_with_our_terms:
+        'Please agree with our terms and condition',
     authentification_: '',
 
     header_home: 'Home',
@@ -231,12 +232,26 @@ export default {
     badges_badges_system: 'Badges System',
     badges_pundit: 'Pundit',
     badges_explainer: 'Explainer',
-    badges_professional: 'Professional',
     badges_enlightened: 'Enlightened',
     badges_you_must_have: 'You must have a total score of',
     badges_in_at_least: 'in at least',
     badges_non_community_wiki:
         'non-community wiki answers to achieve this badge. Highest scoring answer that outscored an accepted answer with score of more than',
+    badges_beginner: 'Beginner',
+    badges_professional: 'Professional {{level}}',
+    badges_intermidiate: 'Intermidiate {{level}}',
+    badges_expert: 'Expert',
+
+    badges_profile_compeleted: 'Complete your profile.',
+    badges_answer_approved: 'Points for an answer approved.',
+    badges_ask_a_question: 'Points for an question asked.',
+    badges_up_vote_on_question_or_answer:
+        'Points for every up vote of your question or answer.',
+    badges_down_vote_on_question_or_answer:
+        'Negative points for every up vote of your question or answer.',
+    badges_share_question_or_answer: 'Points for every share.',
+    badges_login: 'Point for login.',
+    badges_points_limit: 'It has limit of {{points}} points per day.',
 
     mainpage_recent_question: 'Recent Questions',
     mainpage_most_answerd: 'Most Answered',
@@ -244,7 +259,7 @@ export default {
     mainpage_most_voted: 'Most Voted',
     mainpage_danang_vietnam: 'Da nang, Viet Nam',
     mainpage_load_more_questions: 'Load More Questions',
-    
+
     questions_no_answers: 'No Answers',
     questions_my_questions: 'My questions',
     questions_ask_me: 'Ask me',
@@ -268,7 +283,8 @@ export default {
         'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that our mentees can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your biggest dreams.',
     about_us_our_team: 'Meet our team',
     about_us_nguyet_role: 'Co-founder - CEO',
-    about_us_nguyet_experience: 'PhD student at University of Southern California',
+    about_us_nguyet_experience:
+        'PhD student at University of Southern California',
     about_us_phuc_role: 'Co-founder - COO',
     about_us_phuc_experience: 'Full-stack developer at Kumullus',
     about_us_sang_role: 'Co-founder - CTO',
@@ -351,6 +367,7 @@ export default {
     infos_new_step3: `Don't forget to come back to get the answer. You will get notifications when someone answers your question. If you are satisfied with an answer, don't forget to APPROVE that answer so your friend can get the credit!`,
     infos_conclusion: 'Needless to say, we are happy that you are here!',
 
-    cookie_banner_info1: 'To make VCNC work, we log user data. By using VCNC, you agree to our ',
-    cookie_banner_info2: ', including ',
+    cookie_banner_info1:
+        'To make VCNC work, we log user data. By using VCNC, you agree to our ',
+    cookie_banner_info2: ', including '
 };

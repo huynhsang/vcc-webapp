@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import { Badge } from '../Badges';
+import { Badge } from '../../component/Badge';
 
 import Tag from '../../component/Tag';
 import Vote from '../../component/Vote';
@@ -69,7 +69,6 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin: 15px 0;
-    font-size: 1.1em;
     color: #464646;
 `;
 

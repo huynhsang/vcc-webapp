@@ -5,7 +5,7 @@ import Cover from '../../images/cover.png';
 import { DefaultWrapper } from '../../component/Wrappers';
 import AskButton from '../../component/AskButton';
 import DefaultUserLogo from '../../images/default-user-logo.png';
-import { Badge } from '../Badges';
+import { Badge } from '../../component/Badge';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();

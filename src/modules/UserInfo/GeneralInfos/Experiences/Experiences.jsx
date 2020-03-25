@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import i18n from 'i18next';
 import ExperienceModal from './ExperienceModal';
 import { connect } from 'react-redux';
-import defaultCompanyLogo from '../../../../images/defaultCompanyLogo.jpg';
 
 import {
     createExperienceFn,

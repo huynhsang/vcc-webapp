@@ -1,60 +1,48 @@
+import { badges } from '../../component/Badge';
+
 export const calculations = [
     {
-        point: 20,
+        point: 10,
         description: 'badges_points_for_a_new'
     },
     {
         point: 5,
-        description: 'badges_choosing_the_best'
+        description: 'badges_profile_compeleted'
     },
-
+    {
+        point: 15,
+        description: 'badges_answer_approved'
+    },
+    {
+        point: 2,
+        description: 'badges_ask_a_question'
+    },
     {
         point: 2,
         description: 'badges_add_an_answer'
     },
     {
         point: 1,
-        description: 'badges_voting_a_question'
+        description: 'badges_up_vote_on_question_or_answer',
+        limit: 5,
+    },
+    {
+        point: -1,
+        description: 'badges_down_vote_on_question_or_answer',
+        limit: -5,
     },
     {
         point: 1,
-        description: 'badges_following_a_user'
+        description: 'badges_share_question_or_answer'
     },
     {
         point: 1,
-        description: 'badges_voting_an_answer'
+        description: 'badges_login',
+        limit: 1,
     }
 ];
 
-export const pointScale = [
-    {
-        start: 10,
-        value: 'common_beginner'
-    },
-    {
-        start: 50,
-        value: 'common_teacher'
-    },
-    {
-        start: 100,
-        value: 'badges_pundit'
-    },
-    {
-        start: 150,
-        value: 'badges_explainer'
-    },
-    {
-        start: 200,
-        value: 'badges_professional'
-    },
-    {
-        start: 250,
-        value: 'badges_enlightened'
-    },
-    {
-       
-    },
-]
+export const pointScale = [...badges].reverse();
 
 export const startSteps = [
     {
@@ -68,5 +56,5 @@ export const startSteps = [
     {
         title: 'common_step',
         description: 'infos_new_step3'
-    },
+    }
 ];

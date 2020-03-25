@@ -8,7 +8,7 @@ import Answer from './Answer';
 
 import { createMediaTemplate } from '../../../utils/css-tools';
 import DefaultUserLogo from '../../../images/default-user-logo.png';
-import { Badge } from '../../Badges';
+import { Badge } from '../../../component/Badge';
 
 import { getNameByLanguage } from '../../../utils/multiple-language';
 import Tag from '../../../component/Tag';

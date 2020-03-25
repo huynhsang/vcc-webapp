@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import UserLogo from '../../component/UserLogo';
 import TruncateMarkup from 'react-truncate-markup';
 
-import { Badge } from '../Badges';
+import { Badge } from '../../component/Badge';
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
