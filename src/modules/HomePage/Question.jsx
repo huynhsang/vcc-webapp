@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import { Badge } from '../Badges';
+import { Badge } from '../../component/Badge';
 
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';

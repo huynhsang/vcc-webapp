@@ -8,7 +8,7 @@ import isEmpty from 'lodash/isEmpty';
 
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import { Badge } from '../Badges';
+import { Badge } from '../../component/Badge';
 
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
@@ -50,7 +50,8 @@ const InfosWrapper = styled.div`
     margin: 5px 0;
 `;
 
-const InfosSup = styled.span`
+const InfosSup = styled.div`
+    display: inline-block;
     margin-left: 10px;
     font-size: 0.9em;
 
@@ -61,6 +62,9 @@ const InfosSup = styled.span`
     & time {
         margin-right: 10px;
     }
+    ${media.mobile`
+        margin-left: 0;
+    `}
 `;
 
 const Title = styled.div`
@@ -82,7 +86,6 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin: 10px 0;
-    font-size: 1.1rem;
     min-height: 50px;
     overflow: hidden;
 `;
@@ -105,6 +108,8 @@ const RightWrapper = styled.div`
     ${media.mobileLandscape`
         padding-bottom: 80px;
     `}
+
+    max-width: calc(100% - 50px);
 
     @media (max-width: 1080px)  and (min-width: 1025px) {
         padding-bottom: 80px;

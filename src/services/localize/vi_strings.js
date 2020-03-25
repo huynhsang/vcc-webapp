@@ -232,12 +232,27 @@ export default {
     badges_badges_system: 'Hệ thống tính điểm',
     badges_pundit: 'Học giả',
     badges_explainer: 'Người hướng dẫn',
-    badges_professional: 'Professional',
     badges_enlightened: 'Người khai sáng',
     badges_you_must_have: 'Tổng điểm của bạn ít nhất là',
     badges_in_at_least: 'ít nhất',
     badges_non_community_wiki:
         'câu trả lời wiki ngoài cộng đồng để đạt được huy hiệu này. Câu trả lời cho điểm cao nhất vượt qua câu trả lời được chấp nhận với số điểm cao hơn',
+    badges_beginner: 'Beginner',
+    badges_professional: 'Professional {{level}}',
+    badges_intermidiate: 'Intermidiate {{level}}',
+    badges_expert: 'Expert',
+
+    badges_profile_compeleted: 'Hoàn thành bảng thông tin cá nhân.',
+    badges_answer_approved: 'Điểm cho câu trả lời được chấp nhận.',
+    badges_ask_a_question: 'Điểm cho mỗi câu hỏi.',
+    badges_up_vote_on_question_or_answer:
+        'Điểm cho mỗi bình chọn tích cực trên câu hỏi hoặc câu trả lời của bạn.',
+    badges_down_vote_on_question_or_answer:
+        'Điểm trừ cho mỗi bình chọn tiêu cực trên câu hỏi hoặc câu trả lời của bạn.',
+    badges_share_question_or_answer: 'Điểm cho mỗi chia sẻ.',
+    badges_login: 'Điểm cho mỗi lượt đăng nhập.',
+    badges_points_limit: 'Bị giới hạn {{points}} điểm mỗi ngày.',
+
 
     mainpage_recent_question: 'Câu hỏi gần đây',
     mainpage_most_answerd: 'Trả lời nhiều',

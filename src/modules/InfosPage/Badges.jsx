@@ -9,9 +9,9 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
-import Typography from '@material-ui/core/Typography';
 
 import { DefaultWrapper } from '../../component/Wrappers';
+import { Badge } from '../../component/Badge';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { createMediaTemplate } from '../../utils/css-tools';
@@ -63,8 +63,9 @@ const FlexWrapper = styled.div`
 `;
 
 const Point = styled.div`
-    font-size: 1.2em;
-    margin: 0 5px;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 0 5px 0 10px;
     color: black;
 `;
 
@@ -102,7 +103,11 @@ const Badges = () => {
                 <Point>{cal.point}</Point>
                 {t('common_points')}
             </FlexWrapper>
-            <div>{t(cal.description)}</div>
+            <div>
+                {t(cal.description)}
+                {!!cal.limit &&
+                    ` (${t('badges_points_limit', { points: cal.limit })})`}
+            </div>
         </Bloc>
     ));
 
@@ -125,20 +130,17 @@ const Badges = () => {
                     {t('common_point_scale')}
                 </Title>
                 <Stepper orientation="vertical" className={classes.scaleBar}>
-                    {pointScale.map((step, index) => (
-                        <Step key={`step-${index}`} active={true}>
-                            <StepLabel
-                                icon={
-                                    !index ? '0' : pointScale[index - 1].start
-                                }
-                            >
-                                {step.title}
-                            </StepLabel>
-                            <StepContent>
-                                <Typography>{t(step.value)}</Typography>
-                            </StepContent>
-                        </Step>
-                    ))}
+                    {pointScale.map((step, index) => {
+                        const point = index ? pointScale[index - 1].max + 1 : 0;
+                        return (
+                            <Step key={`step-${index}`} active={true}>
+                                <StepLabel icon={!index ? '0' : point} />
+                                <StepContent>
+                                    <Badge points={point} />
+                                </StepContent>
+                            </Step>
+                        );
+                    })}
                 </Stepper>
             </RightWrapper>
         </Wrapper>
