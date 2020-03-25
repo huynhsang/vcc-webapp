@@ -42,7 +42,8 @@ const Wrapper = styled.div`
     }
 
     ${media.tabletLandscape`
-        width: calc(100% - 20px);
+        margin: 5px;
+        width: calc(100% - 10px);
     `}
 `;
 
@@ -61,6 +62,7 @@ const InfosSup = styled.div`
 
     & time {
         margin-right: 10px;
+        color: #5a5a5a;
     }
     ${media.mobile`
         margin-left: 0;
@@ -70,7 +72,7 @@ const InfosSup = styled.div`
 const Title = styled.div`
     font-weight: 600;
     font-size: 1.2em;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     min-height: 45px;
 `;
 
@@ -111,7 +113,7 @@ const RightWrapper = styled.div`
 
     max-width: calc(100% - 50px);
 
-    @media (max-width: 1080px)  and (min-width: 1025px) {
+    @media (max-width: 1080px) and (min-width: 1025px) {
         padding-bottom: 80px;
     }
 `;
@@ -126,6 +128,7 @@ const BottomWrapper = styled.div`
     width: 100%;
     padding: 15px 10px;
     color: #585858;
+    font-size: 0.9rem;
 
     @media (max-width: 1080px) and (min-width: 1025px) {
         flex-direction: column;

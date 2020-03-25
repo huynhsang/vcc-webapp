@@ -51,13 +51,11 @@ const FlexWrapper = styled.div`
 
 const Title = styled.div`
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     min-height: 45px;
 `;
 
 const InfosSup = styled.div`
-    margin: 5px 0;
     font-size: 0.9rem;
 
     & span {
@@ -66,6 +64,7 @@ const InfosSup = styled.div`
 
     & time {
         margin-right: 10px;
+        color: #5a5a5a;
     }
 `;
 
@@ -84,6 +83,7 @@ const BottomWrapper = styled(FlexWrapper)`
     width: calc(100% - 20px);
     justify-content: flex-end;
     color: #7f7f7f;
+    font-size: 0.9rem;
 
     & svg {
         margin-right: 5px;
@@ -93,8 +93,7 @@ const BottomWrapper = styled(FlexWrapper)`
 `;
 
 const DescriptionWrapper = styled.div`
-    margin-top: 5px;
-    font-size: 1.1rem;
+    margin-top:5px;
     min-height: 50px;
     overflow: hidden;
 `;
@@ -120,7 +119,7 @@ const ResolveLabel = styled.div`
 const CategoryWrapper = styled.div`
     border: 1px solid #b5b5b5;
     border-radius: 6px;
-    padding: 3px 5px;
+    padding: 0 5px;
 `;
 
 const Question = ({ question, history }) => {

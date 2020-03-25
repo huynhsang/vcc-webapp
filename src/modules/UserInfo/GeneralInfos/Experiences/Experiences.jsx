@@ -29,7 +29,7 @@ const Wrapper = styled.section`
     padding: 10px 20px 20px;
     ${media.mobileLandscape`
         width: 100%; 
-        margin: 0;
+        margin: 0 0 10px 0;
     `}
 `;
 

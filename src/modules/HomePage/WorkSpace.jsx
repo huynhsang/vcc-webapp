@@ -61,10 +61,11 @@ const SupportWrapper = styled.div`
 
 const SupportOl = styled.ul`
     list-style: initial;
-    font-weight: 600;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    font-size: 0.9rem;
+    color: black;
 
     padding: 0;
     margin: 0;
@@ -73,7 +74,6 @@ const SupportOl = styled.ul`
         margin-left: 20px;
         width: calc(33.33% - 20px);
         line-height: 30px;
-        color: rgba(0, 0, 0, 0.6);
         ${media.mobileLandscape`
             width: calc(100% - 20px);
         `}
