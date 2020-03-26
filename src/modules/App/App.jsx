@@ -18,11 +18,30 @@ import { history } from '../../configureStore';
 import { fetchUserFromCookieFn } from '../../actions/app';
 import { withTranslation } from 'react-i18next';
 
+import {
+    createMuiTheme,
+    ThemeProvider,
+    responsiveFontSizes
+} from '@material-ui/core/styles';
+
 const AppWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 `;
+
+let muiTheme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#035290'
+        },
+        secondary: {
+            main: '#bc0e0e'
+        }
+    }
+});
+
+muiTheme = responsiveFontSizes(muiTheme,{factor: 3});
 
 const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
@@ -39,17 +58,19 @@ const App = ({ App, fetchUserFromCookie }) => {
     return (
         <ConnectedRouter history={history}>
             <Router>
-                <Authentification />
-                <ContactUs />
-                <LoginConfirmModal />
-                <CustomizedSnackbars />
-                <CookieBanner />
-                <AppWrapper>
-                    <MobileAside />
-                    <Header />
-                    <AppRouter />
-                    <Footer />
-                </AppWrapper>
+                <ThemeProvider theme={muiTheme}>
+                    <Authentification />
+                    <ContactUs />
+                    <LoginConfirmModal />
+                    <CustomizedSnackbars />
+                    <CookieBanner />
+                    <AppWrapper>
+                        <MobileAside />
+                        <Header />
+                        <AppRouter />
+                        <Footer />
+                    </AppWrapper>
+                </ThemeProvider>
             </Router>
         </ConnectedRouter>
     );

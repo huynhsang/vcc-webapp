@@ -47,7 +47,7 @@ const TopWrapper = styled(FlexWrapper)`
 
 const RightWrapper = styled.div`
     width: 70%;
-    padding-left: 20px;
+    padding-left: 12px;
     ${media.mobileLandscape`
         width: 100%;
         padding: 0;
@@ -74,7 +74,7 @@ const Title = styled.div`
 
 const TopUsersWrapper = styled.div`
     padding: 10px 0 1px 20px;
-    border-left: 4px solid #4caf50;
+    border-left: 4px solid #0869b5;
     background-color: white;
     border-radius: 0 6px 6px 0;
     ${media.mobileLandscape`

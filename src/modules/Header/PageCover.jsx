@@ -24,16 +24,16 @@ const CoverWrapper = styled.section`
     background-position: center right;
 
     width : 100%;
-    height: 170px;
+    height: 160px;
     position: relative;
     color: white;
 
     ${media.mobileLandscape`
-        height: 200px;
+        height: 150px;
     `}
 
     ${media.mobile`
-        height: 250px;
+        height: 180px;
     `}
 `;
 
@@ -55,6 +55,7 @@ const ContentWrapper = styled(DefaultWrapper)`
 
 const LeftContent = styled.div`
     width: 70%;
+    max-width: 550px;
     ${media.mobileLandscape`
         width: 90%;
     `}

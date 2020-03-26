@@ -55,7 +55,7 @@ const InfosSup = styled.div`
 
 const Title = styled.div`
     font-weight: 600;
-    font-size: 1.2em;
+    font-size: 1.1rem;
 `;
 
 const UserName = styled.span`
@@ -68,6 +68,7 @@ const UserName = styled.span`
 `;
 
 const DescriptionWrapper = styled.div`
+    line-height:18px;
     margin: 15px 0;
     color: #464646;
 `;

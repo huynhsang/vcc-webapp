@@ -137,6 +137,7 @@ const Login = ({
                     isChecked={agree}
                     handleChange={val => setAgree(val)}
                 />
+                <br/>
                 <FormControlLabel
                     control={
                         <Switch

@@ -44,6 +44,7 @@ const FlexWrapper = styled.div`
 const Title = styled.div`
     font-weight: 600;
     margin-bottom: 5px;
+    line-height: 18px;
 `;
 
 const InfosSup = styled.div`
@@ -59,7 +60,7 @@ const InfosSup = styled.div`
 `;
 
 const UserName = styled.span`
-    color: #009fff;
+    color: #0869b5;
     margin-right: 10px;
 
     &:hover {

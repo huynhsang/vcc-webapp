@@ -67,9 +67,8 @@ const SupportOl = styled.ul`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    font-size: 0.9rem;
     color: black;
-
+    font-weight: 400;
     padding: 0;
     margin: 0;
 

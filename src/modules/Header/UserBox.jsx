@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 
-import {deleteCookie} from '../../utils/CookieHelper';
+import { deleteCookie } from '../../utils/CookieHelper';
 import { USER_ID_KEY, JWT_TOKEN_NAME } from '../../constants/cookie.constant';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
@@ -38,12 +38,15 @@ const useStyles = makeStyles(() => ({
             alignItems: 'center'
         }
     },
-    loginButton: {
+    loginIconButton: {
         color: 'white',
         display: 'none',
         '@media (max-width: 768px)': {
             display: 'block'
         }
+    },
+    loginButton: {
+        color: 'white'
     }
 }));
 
@@ -149,11 +152,7 @@ const Authenticate = ({
     return (
         <>
             <ResponsiveHide>
-                <Button
-                    variant="contained"
-                    onClick={setToLogin}
-                    color="primary"
-                >
+                <Button className={classes.loginButton} onClick={setToLogin}>
                     {t('common_login')}
                 </Button>
                 <Button
@@ -165,7 +164,10 @@ const Authenticate = ({
                     {t('authentification_sign_up')}
                 </Button>
             </ResponsiveHide>
-            <IconButton className={classes.loginButton} onClick={setToLogin}>
+            <IconButton
+                className={classes.loginIconButton}
+                onClick={setToLogin}
+            >
                 <Lock />
             </IconButton>
         </>
