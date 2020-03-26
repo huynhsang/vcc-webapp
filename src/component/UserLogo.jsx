@@ -4,6 +4,9 @@ import styled from 'styled-components';
 
 import DefaultUserLogo from '../images/default-user-logo.png';
 
+import { createMediaTemplate } from '../utils/css-tools';
+const media = createMediaTemplate();
+
 const LogoWrapper = styled.div`
     width: 42px;
     height: 42px;
@@ -14,6 +17,16 @@ const LogoWrapper = styled.div`
     &:hover {
         border-color: black;
     }
+
+    ${media.mobileLandscape`
+        width: 35px;
+        height: 35px;
+    `}
+
+    ${media.mobile`
+        width: 30px;
+        height: 30px;
+    `}
 `;
 
 const Img = styled.img`

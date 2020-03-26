@@ -27,7 +27,7 @@ const media = createMediaTemplate();
 const Wrapper = styled.div`
     width: calc(50% - 20px);
     background-color: white;
-    padding: 10px 10px;
+    padding: 10px;
     margin: 10px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -38,12 +38,13 @@ const Wrapper = styled.div`
     cursor: pointer;
 
     &:hover {
-        transform: translateY(-10px);
+        background-color: #f4f4f46b;
     }
 
     ${media.tabletLandscape`
         margin: 5px;
         width: calc(100% - 10px);
+        padding: 5px;
     `}
 `;
 

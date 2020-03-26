@@ -77,7 +77,8 @@ export default {
     common_popular_question: 'Câu hỏi phổ biến',
     common_see_all: 'Xem tất cả',
     common_ask_now: 'Đặt ngay một câu hỏi?',
-    common_ask: 'Đặt câu hỏi',
+    common_ask: 'Hỏi',
+    common_ask_a_question: 'Đặt câu hỏi',
     common_about_us: 'Giới thiệu',
     common_contact_us: 'Liên hệ',
     common_policy: 'Policy',
@@ -337,6 +338,7 @@ export default {
     home_want_to_get:
         'Bạn muốn thêm thu nhập từ việc đưa ra lời khuyên/ý kiến?',
     home_find_out_how: 'Gia nhập VCNC',
+    home_do_you_have_a_question: 'Bạn đang có một câu hỏi?',
 
     workspace_if_you_are_asking: 'Nếu bạn là người đặt câu hỏi',
     workspace_post_a_question: 'Đặt một câu hỏi',

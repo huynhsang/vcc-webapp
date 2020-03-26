@@ -26,7 +26,6 @@ const FlexWrapper = styled.div`
 const Title = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
-    margin-bottom: 15px;
 `;
 
 const SmallTitle = styled.div`
@@ -40,6 +39,9 @@ const StepsWrapper = styled.div`
     margin: 0 -10px;
     display: flex;
     flex-wrap: wrap;
+    ${media.mobileLandscape`
+        margin: 0;
+    `}
 `;
 
 const StepWrapper = styled.div`
@@ -48,7 +50,8 @@ const StepWrapper = styled.div`
     width: calc(50% - 20px);
     margin: 10px;
     ${media.mobileLandscape`
-        width: calc(100% - 20px);
+        width: 100%;
+        margin: 10px 0;
     `}
 `;
 
@@ -148,7 +151,7 @@ const WorkSpace = ({ history }) => {
                     </SupportOl>
                 </SupportWrapper>
                 <AskWrapper>
-                    <AskButton label={t('common_ask')} />
+                    <AskButton label={t('common_ask_a_question')} />
                 </AskWrapper>
             </DefaultWrapper>
         </FullWidth>

@@ -22,22 +22,14 @@ import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
-    width: calc(33.33% - 20px);
     background-color: white;
-    padding: 10px 10px 40px 10px;
+    padding: 10px;
     border-radius: 6px;
-    margin: 10px;
+    margin-bottom: 15px;
     user-select: none;
     cursor: pointer;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     position: relative;
-
-    ${media.tabletLandscape`
-        width: calc(50% - 20px);
-    `}
-    ${media.mobileLandscape`
-        width: calc(100% - 20px);
-    `}
 `;
 
 const InfosWrapper = styled.div`
@@ -52,7 +44,6 @@ const FlexWrapper = styled.div`
 const Title = styled.div`
     font-weight: 600;
     margin-bottom: 5px;
-    min-height: 45px;
 `;
 
 const InfosSup = styled.div`
@@ -63,7 +54,6 @@ const InfosSup = styled.div`
     }
 
     & time {
-        margin-right: 10px;
         color: #5a5a5a;
     }
 `;
@@ -78,23 +68,14 @@ const UserName = styled.span`
 `;
 
 const BottomWrapper = styled(FlexWrapper)`
-    position: absolute;
-    bottom: 10px;
-    width: calc(100% - 20px);
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: flex-end;
     color: #7f7f7f;
     font-size: 0.9rem;
-
-    & svg {
-        margin-right: 5px;
-        margin-left: 15px;
-        font-size: 15px;
-    }
 `;
 
 const DescriptionWrapper = styled.div`
-    margin-top:5px;
-    min-height: 50px;
+    margin-bottom: 10px;
     overflow: hidden;
 `;
 
@@ -120,6 +101,21 @@ const CategoryWrapper = styled.div`
     border: 1px solid #b5b5b5;
     border-radius: 6px;
     padding: 0 5px;
+`;
+
+const TagsWrapper = styled.div`
+    margin-bottom: 5px;
+`;
+
+const ModeCommentIcon = styled(ModeComment)`
+    margin-right: 5px;
+    font-size: 15px !important;
+`;
+
+const RemoveRedEyeIcon = styled(RemoveRedEye)`
+    margin-right: 5px;
+    margin-left: 15px;
+    font-size: 15px !important;
 `;
 
 const Question = ({ question, history }) => {
@@ -162,35 +158,39 @@ const Question = ({ question, history }) => {
             <TruncateMarkup lines={2}>
                 <Title>{question.title}</Title>
             </TruncateMarkup>
-            <FlexWrapper>
-                <UserLogo user={askedBy} />
-                <InfosWrapper>
-                    <div>
-                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {`${askedBy.firstName} ${askedBy.lastName}`}
-                        </UserName>
-                        <Badge points={askedBy.points} />
-                    </div>
-                    <InfosSup>
-                        <span>{`${t('common_asked')}: `}</span>
-                        <time dateTime={created}>
-                            {` ${new Date(created).toDateString()}`}
-                        </time>
-                    </InfosSup>
-                </InfosWrapper>
-            </FlexWrapper>
             <DescriptionWrapper>
                 <QuillText lines={2} content={body} />
             </DescriptionWrapper>
-            {!isEmpty(tagsRender) && <div className="row">{tagsRender}</div>}
+            {!isEmpty(tagsRender) && <TagsWrapper>{tagsRender}</TagsWrapper>}
             <BottomWrapper>
                 <FlexWrapper>
-                    <ModeComment />
-                    <div>{`${answerCount} ${t('common_answer')}`}</div>
+                    <FlexWrapper>
+                        <ModeCommentIcon />
+                        <div>{`${answerCount} ${t('common_answer')}`}</div>
+                    </FlexWrapper>
+                    <FlexWrapper>
+                        <RemoveRedEyeIcon />
+                        <div>{`${viewCount} ${t('common_views')}`}</div>
+                    </FlexWrapper>
                 </FlexWrapper>
                 <FlexWrapper>
-                    <RemoveRedEye />
-                    <div>{`${viewCount} ${t('common_views')}`}</div>
+                    <UserLogo user={askedBy} />
+                    <InfosWrapper>
+                        <div>
+                            <UserName
+                                onClick={redirect(`/users/${askedBy.id}`)}
+                            >
+                                {`${askedBy.firstName} ${askedBy.lastName}`}
+                            </UserName>
+                            <Badge points={askedBy.points} />
+                        </div>
+                        <InfosSup>
+                            <span>{`${t('common_asked')}: `}</span>
+                            <time dateTime={created}>
+                                {` ${new Date(created).toDateString()}`}
+                            </time>
+                        </InfosSup>
+                    </InfosWrapper>
                 </FlexWrapper>
             </BottomWrapper>
         </Wrapper>

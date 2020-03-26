@@ -78,6 +78,7 @@ export default {
     common_see_all: 'See all',
     common_ask_now: 'Ask a question now?',
     common_ask: 'Ask',
+    common_ask_a_question: 'Ask a question',
     common_about_us: 'About Us',
     common_contact_us: 'Contact Us',
     common_policy: 'Policy',
@@ -336,6 +337,7 @@ export default {
         'Ask verified professionals for career advices, interview training, resume review and company insights...',
     home_want_to_get: 'Want to get paid for sharing your knowledge?',
     home_find_out_how: 'Find out how we work',
+    home_do_you_have_a_question: 'Do you have a question?',
 
     workspace_if_you_are_asking: 'If you are asking',
     workspace_post_a_question: 'Post a question',

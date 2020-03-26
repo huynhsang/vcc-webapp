@@ -11,6 +11,9 @@ export const defaultWrapperCss = css`
     ${media.mobileLandscape`
         padding: 10px;
     `}
+    ${media.mobile`
+        padding: 5px;
+    `}
 `;
 
 export const DefaultWrapper = styled.div`

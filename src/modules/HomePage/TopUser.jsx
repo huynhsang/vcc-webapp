@@ -11,19 +11,12 @@ import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
-    width: calc(33.33% - 20px);
-    background-color: white;
-    padding: 10px;
-    margin: 10px;
+    margin: 10px 0 35px;
     user-select: none;
     cursor: pointer;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    ${media.tabletLandscape`
-        width: calc(50% - 20px);
-    `}
-    ${media.mobile`
-        width: calc(100% - 20px);
+
+    ${media.mobileLandscape`
+        margin: 10px 0 25px;
     `}
 `;
 
@@ -37,7 +30,6 @@ const FlexWrapper = styled.div`
 `;
 
 const InfosSup = styled.div`
-    margin: 5px 0;
     font-size: 0.9rem;
 
     & span {
@@ -53,7 +45,6 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin-top: 5px;
-    min-height: 45px;
 `;
 
 const TopUser = ({ user, history }) => {
