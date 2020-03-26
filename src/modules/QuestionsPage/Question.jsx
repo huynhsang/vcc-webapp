@@ -19,21 +19,24 @@ import DoneAll from '@material-ui/icons/DoneAll';
 import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import ModeComment from '@material-ui/icons/ModeComment';
 
+import LabelIcon from '@material-ui/icons/Label';
+
 import { RowWrapper } from '../../component/Wrappers';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
-    width: calc(50% - 20px);
+    width: 100%;
+    overflow: hidden;
     background-color: white;
-    padding: 10px;
-    margin: 10px;
+    padding: 20px 20px 0;
+    margin: 10px 0 20px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     border-radius: 6px;
     position: relative;
-    display: flex;
+    overflow: hidden;
 
     cursor: pointer;
 
@@ -41,20 +44,16 @@ const Wrapper = styled.div`
         background-color: #f4f4f46b;
     }
 
+    border-left: ${p => p.hasLeftBorder && '4px solid #1ea01e'};
+
     ${media.tabletLandscape`
-        margin: 5px;
-        width: calc(100% - 10px);
-        padding: 5px;
+        margin: 10px 0;
+        padding: 10px 10px 0;
+        border: none;
     `}
 `;
 
-const InfosWrapper = styled.div`
-    margin: 5px 0;
-`;
-
 const InfosSup = styled.div`
-    display: inline-block;
-    margin-left: 10px;
     font-size: 0.9em;
 
     & span {
@@ -62,7 +61,6 @@ const InfosSup = styled.div`
     }
 
     & time {
-        margin-right: 10px;
         color: #5a5a5a;
     }
     ${media.mobile`
@@ -73,8 +71,10 @@ const InfosSup = styled.div`
 const Title = styled.div`
     font-weight: 600;
     font-size: 1.2em;
-    margin-bottom: 5px;
-    min-height: 45px;
+
+    flex-grow: 1;
+    flex-basis: 0;
+    min-height: 0;
 `;
 
 const UserName = styled.span`
@@ -89,56 +89,16 @@ const UserName = styled.span`
 
 const DescriptionWrapper = styled.div`
     margin: 10px 0;
-    min-height: 50px;
     overflow: hidden;
 `;
 
-const LeftWrapper = styled.div`
-    padding-right: 10px;
-    display: flex;
-    flex-direction: column;
-    ${media.mobileLandscape`
-        padding-right: 5px;
-    `}
-`;
-
-const RightWrapper = styled.div`
-    position: relative;
-    padding-bottom: 55px;
-    flex-grow: 1;
-    flex-basis: 0;
-    min-height: 0;
-    ${media.mobileLandscape`
-        padding-bottom: 80px;
-    `}
-
-    max-width: calc(100% - 50px);
-
-    @media (max-width: 1080px) and (min-width: 1025px) {
-        padding-bottom: 80px;
-    }
-`;
-
 const BottomWrapper = styled.div`
-    position: absolute;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    bottom: 0;
-    background-color: #efefefc7;
-    width: 100%;
-    padding: 15px 10px;
+    border-top: 1px solid #cecece;
     color: #585858;
     font-size: 0.9rem;
-
-    @media (max-width: 1080px) and (min-width: 1025px) {
-        flex-direction: column;
-    }
-
-    ${media.mobileLandscape`
-        flex-direction: column;
-        padding: 10px 5px;
-    `}
 `;
 
 const FlexWrapper = styled.div`
@@ -146,10 +106,16 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
+const UserWrapper = styled(FlexWrapper)`
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 5px 0 10px;
+`;
+
 const InfoSpace = styled(FlexWrapper)`
-    background-color: white;
-    margin-right: 10px;
-    padding: 5px 10px;
+    color: #7f7f7f;
+    margin-left: 10px;
 
     & svg {
         margin-right: 5px;
@@ -165,17 +131,15 @@ const ResolveLabel = styled.div`
     padding: 3px 5px;
     white-space: nowrap;
     border-radius: 3px;
+    margin: -10px -10px 0 0;
 
     & svg {
         margin-right: 5px;
     }
 
-    @media (max-width: 1080px) and (min-width: 1025px) {
-        margin-top: 10px;
-    }
-
-    ${media.mobileLandscape`
-        margin-top: 10px;
+    ${media.tabletLandscape`
+        width: 100%;
+        margin: 0 0 5px 0;
     `}
 `;
 
@@ -183,15 +147,47 @@ const TagsWrapper = styled(RowWrapper)`
     margin-bottom: 5px;
 `;
 
-const AsktToWrapper = styled(FlexWrapper)`
-    margin-bottom: 15px;
-`;
 const AskTo = styled.div`
     color: #7f7f7f;
 `;
 
 const UserAsked = styled.div`
     padding: 0 5px;
+`;
+
+const UserAsk = styled.div`
+    display: flex;
+    align-items: center;
+
+    ${media.mobileLandscape`
+        width:100%;
+        justify-content:flex-end;
+    `}
+`;
+
+const UserInfos = styled.div`
+    margin-left: 10px;
+`;
+
+const CategoryWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+
+    & svg {
+        margin-right: 5px;
+        color: #616161;
+    }
+`;
+
+const TopWrapper = styled(FlexWrapper)`
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
 `;
 
 const Question = ({
@@ -244,66 +240,79 @@ const Question = ({
     ));
 
     return (
-        <Wrapper onClick={redirect(`/questions/${slug}`)}>
-            <LeftWrapper>
-                <UserLogo user={askedBy} />
-                <Vote
-                    points={upVoteCount - downVoteCount}
-                    disableVote={currentUserId === askedBy.id}
-                    voted={voted}
-                    isLoading={isVoting}
-                    handleVote={handleVoteQuestion}
-                />
-            </LeftWrapper>
-            <RightWrapper>
+        <Wrapper
+            hasLeftBorder={!!bestAnswerItem}
+            onClick={redirect(`/questions/${slug}`)}
+        >
+            <TopWrapper>
+                {!!bestAnswerItem && (
+                    <ResolveLabel>
+                        <DoneAll />
+                        {t('question_resolved')}
+                    </ResolveLabel>
+                )}
                 <TruncateMarkup lines={2}>
                     <Title>{question.title}</Title>
                 </TruncateMarkup>
-                <InfosWrapper>
-                    <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                        {`${askedBy.firstName} ${askedBy.lastName}`}
-                    </UserName>
-                    <Badge points={askedBy.points} />
-                    <InfosSup>
-                        <span>{`${t('common_asked')}: `}</span>
-                        <time dateTime={created}>
-                            {` ${new Date(created).toDateString()}`}
-                        </time>
-                        <span>{`${t('common_in')}: `}</span>
-                        {getNameByLanguage(categoryItem)}
-                    </InfosSup>
-                </InfosWrapper>
-                <DescriptionWrapper>
-                    <QuillText lines={2} content={body} />
-                </DescriptionWrapper>
-                {!isEmpty(tagsRender) && (
-                    <TagsWrapper>{tagsRender}</TagsWrapper>
-                )}
-                {supporterList.length > 0 && (
-                    <AsktToWrapper>
-                        <AskTo>{t('common_ask_to')}:</AskTo>
-                        {userAskedList}
-                    </AsktToWrapper>
-                )}
-                <BottomWrapper>
-                    <FlexWrapper>
-                        <InfoSpace>
-                            <ModeComment />
-                            <div>{`${answerCount} ${t('common_answer')}`}</div>
-                        </InfoSpace>
-                        <InfoSpace>
-                            <RemoveRedEye />
-                            <div>{`${viewCount} ${t('common_views')}`}</div>
-                        </InfoSpace>
-                    </FlexWrapper>
-                    {!!bestAnswerItem && (
-                        <ResolveLabel>
-                            <DoneAll />
-                            {t('question_resolved')}
-                        </ResolveLabel>
+            </TopWrapper>
+
+            <DescriptionWrapper>
+                <QuillText lines={2} content={body} />
+            </DescriptionWrapper>
+            <CategoryWrapper>
+                <LabelIcon />
+                {getNameByLanguage(categoryItem)}
+            </CategoryWrapper>
+            {!isEmpty(tagsRender) && <TagsWrapper>{tagsRender}</TagsWrapper>}
+            <UserWrapper>
+                <FlexWrapper>
+                    {supporterList.length > 0 && (
+                        <>
+                            <AskTo>{t('common_ask_to')}:</AskTo>
+                            {userAskedList}
+                        </>
                     )}
-                </BottomWrapper>
-            </RightWrapper>
+                </FlexWrapper>
+                <UserAsk>
+                    <UserLogo user={askedBy} />
+                    <UserInfos>
+                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
+                            {`${askedBy.firstName} ${askedBy.lastName}`}
+                        </UserName>
+                        <Badge points={askedBy.points} />
+                        <InfosSup>
+                            <span>{`${t('common_asked')}: `}</span>
+                            <time dateTime={created}>
+                                {` ${new Date(created).toDateString()}`}
+                            </time>
+                        </InfosSup>
+                    </UserInfos>
+                </UserAsk>
+            </UserWrapper>
+
+            <BottomWrapper>
+                <FlexWrapper>
+                    <div>Vote : </div>
+                    <Vote
+                        isColumn={false}
+                        points={upVoteCount - downVoteCount}
+                        disableVote={currentUserId === askedBy.id}
+                        voted={voted}
+                        isLoading={isVoting}
+                        handleVote={handleVoteQuestion}
+                    />
+                </FlexWrapper>
+                <FlexWrapper>
+                    <InfoSpace>
+                        <ModeComment />
+                        <div>{`${answerCount} ${t('common_answer')}`}</div>
+                    </InfoSpace>
+                    <InfoSpace>
+                        <RemoveRedEye />
+                        <div>{`${viewCount} ${t('common_views')}`}</div>
+                    </InfoSpace>
+                </FlexWrapper>
+            </BottomWrapper>
         </Wrapper>
     );
 };

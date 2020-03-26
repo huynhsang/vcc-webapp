@@ -3,11 +3,7 @@ import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import TextField from '@material-ui/core/TextField';
-import { DefaultWrapper } from '../../component/Wrappers';
-import CategoryFilter from './CategoryFilter';
 import QuestionSort from './QuestionSort';
-import TagFilter from './TagFilter';
-import { withRouter } from 'react-router-dom';
 
 import InputAdornment from '@material-ui/core/InputAdornment';
 import IconButton from '@material-ui/core/IconButton';
@@ -23,10 +19,6 @@ const FlexWrapper = styled.div`
     ${media.mobileLandscape`
         display: block;
     `}
-`;
-
-const Wrapper = styled(DefaultWrapper)`
-    padding-bottom: 10px;
 `;
 
 const FlexMargin = styled(FlexWrapper)`
@@ -47,11 +39,8 @@ const useStyles = makeStyles(() => ({
 
 const QuestionFilter = ({
     isAuthenticated,
-    category,
     show,
-    tags,
     text,
-    history,
     onChangeFilter,
     askme,
     mime,
@@ -80,61 +69,53 @@ const QuestionFilter = ({
 
     return (
         <>
-            <CategoryFilter category={category} history={history} />
-            <Wrapper>
-                <TagFilter
-                    category={category}
-                    tags={tags}
-                    onChangeFilter={onChangeFilter}
+            <FlexWrapper>
+                <QuestionSort show={show} onChangeFilter={onChangeFilter} />
+                <TextField
+                    className={classes.searchInput}
+                    label={t('question_search_question')}
+                    variant="outlined"
+                    value={searchText}
+                    onChange={ev => setSearchText(ev.target.value)}
+                    onKeyUp={onTextKeyUp}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    size="small"
+                                    onClick={search}
+                                    edge="end"
+                                >
+                                    <SearchIcon />
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
                 />
-                <FlexWrapper>
-                    <QuestionSort show={show} onChangeFilter={onChangeFilter} />
-                    <TextField
-                        className={classes.searchInput}
-                        label={t('question_search_question')}
-                        variant="outlined"
-                        value={searchText}
-                        onChange={ev => setSearchText(ev.target.value)}
-                        onKeyUp={onTextKeyUp}
-                        InputProps={{
-                            endAdornment: (
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        size="small"
-                                        onClick={search}
-                                        edge="end"
-                                    >
-                                        <SearchIcon />
-                                    </IconButton>
-                                </InputAdornment>
-                            )
-                        }}
-                    />
-                </FlexWrapper>
-                <FlexMargin>
-                    <SwitchInput
-                        label={t('questions_no_answers')}
-                        isChecked={noanswer === 'true'}
-                        handleChange={val => onChangeFilter({ noanswer: val })}
-                    />
-                    {isAuthenticated && (
-                        <>
-                            <SwitchInput
-                                label={t('questions_my_questions')}
-                                isChecked={mime === 'true'}
-                                handleChange={onAskmeAndMimeChange('mime')}
-                            />
-                            <SwitchInput
-                                label={t('questions_ask_me')}
-                                isChecked={askme === 'true'}
-                                handleChange={onAskmeAndMimeChange('askme')}
-                            />
-                        </>
-                    )}
-                </FlexMargin>
-            </Wrapper>
+            </FlexWrapper>
+            <FlexMargin>
+                <SwitchInput
+                    label={t('questions_no_answers')}
+                    isChecked={noanswer === 'true'}
+                    handleChange={val => onChangeFilter({ noanswer: val })}
+                />
+                {isAuthenticated && (
+                    <>
+                        <SwitchInput
+                            label={t('questions_my_questions')}
+                            isChecked={mime === 'true'}
+                            handleChange={onAskmeAndMimeChange('mime')}
+                        />
+                        <SwitchInput
+                            label={t('questions_ask_me')}
+                            isChecked={askme === 'true'}
+                            handleChange={onAskmeAndMimeChange('askme')}
+                        />
+                    </>
+                )}
+            </FlexMargin>
         </>
     );
 };
 
-export default withRouter(QuestionFilter);
+export default QuestionFilter;

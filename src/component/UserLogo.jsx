@@ -8,8 +8,8 @@ import { createMediaTemplate } from '../utils/css-tools';
 const media = createMediaTemplate();
 
 const LogoWrapper = styled.div`
-    width: 42px;
-    height: 42px;
+    width: 35px;
+    height: 35px;
     border: 1px solid black;
     border-radius: 50%;
     overflow: hidden;
@@ -19,8 +19,8 @@ const LogoWrapper = styled.div`
     }
 
     ${media.mobileLandscape`
-        width: 35px;
-        height: 35px;
+        width: 30px;
+        height: 30px;
     `}
 
     ${media.mobile`

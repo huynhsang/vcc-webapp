@@ -22,6 +22,8 @@ import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Wrapper = styled.div`
+    width: 100%;
+    overflow: hidden;
     background-color: white;
     padding: 10px;
     border-radius: 6px;
@@ -34,6 +36,9 @@ const Wrapper = styled.div`
 
 const InfosWrapper = styled.div`
     margin-left: 10px;
+    ${media.mobile`
+        margin-left: 3px;
+    `}
 `;
 
 const FlexWrapper = styled.div`
@@ -69,6 +74,7 @@ const UserName = styled.span`
 `;
 
 const BottomWrapper = styled(FlexWrapper)`
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: flex-end;
     color: #7f7f7f;
@@ -111,12 +117,19 @@ const TagsWrapper = styled.div`
 const ModeCommentIcon = styled(ModeComment)`
     margin-right: 5px;
     font-size: 15px !important;
+    ${media.mobile`
+        margin-right: 2px;
+    `}
 `;
 
 const RemoveRedEyeIcon = styled(RemoveRedEye)`
     margin-right: 5px;
     margin-left: 15px;
     font-size: 15px !important;
+    ${media.mobile`
+        margin-left: 8px;
+        margin-right: 2px;
+    `}
 `;
 
 const Question = ({ question, history }) => {

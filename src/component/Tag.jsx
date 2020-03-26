@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 
 export const tagStyle = {
     button: {
-        margin: '0 6px 6px 0',
+        margin: '0 15px 10px 0',
         padding: '2px',
         color: 'rgba(0, 0, 0, 0.8)',
         backgroundColor: 'rgb(241, 241, 241)',

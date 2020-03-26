@@ -20,21 +20,42 @@ import Pagination from '../../component/Pagination';
 import { voteQuestionFn } from '../../actions/questions';
 import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
+import CategoryFilter from './CategoryFilter';
+import TagFilter from './TagFilter';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const QuestionPageWrapper = styled.div`
     min-height: calc(100vh - 100px);
 `;
 
-const QuestionsWrapper = styled(DefaultWrapper)`
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 10px;
-`;
+const QuestionsWrapper = styled.div``;
 
 const LoaderWrapper = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 50px;
+`;
+
+const Wrapper = styled(DefaultWrapper)`
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+`;
+
+const LeftWrapper = styled.div`
+    width: 70%;
+    padding-right: 20px;
+
+    ${media.tabletLandscape`
+        width: 100%;
+        padding: 0;
+        margin-top: 10px;
+    `}
 `;
 
 const QuestionPage = ({
@@ -128,49 +149,59 @@ const QuestionPage = ({
     return (
         <QuestionPageWrapper>
             <PageCover />
-            <QuestionFilter
-                isAuthenticated={isAuthenticated}
-                category={category}
-                show={show}
-                page={page}
-                text={text}
-                tags={tags}
-                askme={askme}
-                mime={mime}
-                noanswer={noanswer}
-                onChangeFilter={onChangeFilter}
-            />
-            {isFetching ? (
-                <LoaderWrapper>
-                    <CircularProgress />
-                </LoaderWrapper>
-            ) : (
-                <>
-                    <QuestionsWrapper>{questionElements}</QuestionsWrapper>
-                    <DefaultWrapper>
-                        {numberQuestions > 0 ? (
-                            <Pagination
-                                nbPages={Math.ceil(
-                                    numberQuestions / DEFAULT_LIMIT
+            <CategoryFilter category={category} history={history} />
+            <Wrapper>
+                <TagFilter
+                    category={category}
+                    tags={tags}
+                    onChangeFilter={onChangeFilter}
+                />
+                <LeftWrapper>
+                    <QuestionFilter
+                        isAuthenticated={isAuthenticated}
+                        show={show}
+                        page={page}
+                        text={text}
+                        askme={askme}
+                        mime={mime}
+                        noanswer={noanswer}
+                        onChangeFilter={onChangeFilter}
+                    />
+                    {isFetching ? (
+                        <LoaderWrapper>
+                            <CircularProgress />
+                        </LoaderWrapper>
+                    ) : (
+                        <>
+                            <QuestionsWrapper>
+                                {questionElements}
+                            </QuestionsWrapper>
+                            <DefaultWrapper>
+                                {numberQuestions > 0 ? (
+                                    <Pagination
+                                        nbPages={Math.ceil(
+                                            numberQuestions / DEFAULT_LIMIT
+                                        )}
+                                        activePage={page}
+                                        changePage={newPage =>
+                                            onChangeFilter({ page: newPage })
+                                        }
+                                        justifyContent="center"
+                                        color="#37424a"
+                                    />
+                                ) : (
+                                    <div>
+                                        {`${t('common_no_result')} `}
+                                        <Link to={`/questions?page=1`}>
+                                            {t('common_come_back')}
+                                        </Link>
+                                    </div>
                                 )}
-                                activePage={page}
-                                changePage={newPage =>
-                                    onChangeFilter({ page: newPage })
-                                }
-                                justifyContent="center"
-                                color="#37424a"
-                            />
-                        ) : (
-                            <div>
-                                {`${t('common_no_result')} `}
-                                <Link to={`/questions?page=1`}>
-                                    {t('common_come_back')}
-                                </Link>
-                            </div>
-                        )}
-                    </DefaultWrapper>
-                </>
-            )}
+                            </DefaultWrapper>
+                        </>
+                    )}
+                </LeftWrapper>
+            </Wrapper>
         </QuestionPageWrapper>
     );
 };

@@ -10,14 +10,24 @@ import Button from '@material-ui/core/Button';
 
 import { tagStyle } from '../../component/Tag';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const useStyles = makeStyles(() => tagStyle);
 
 const Wrapper = styled.div`
+    width: 30%;
+    min-height: 100px;
     border: 1px solid #b5b5b5;
     border-radius: 4px;
     padding: 20px 10px 10px;
-    margin: 5px 0 15px;
     position: relative;
+
+    ${media.mobileLandscape`
+        width: 100%;
+        min-height: 0;
+        margin-top: 15px;
+    `}
 `;
 
 const Label = styled.div`
