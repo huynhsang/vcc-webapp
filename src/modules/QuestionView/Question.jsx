@@ -174,6 +174,7 @@ const Question = ({
                     </ResolveLabel>
                 )}
             </TopWrapper>
+            <DescriptionWrapper>{body}</DescriptionWrapper>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>
@@ -184,7 +185,6 @@ const Question = ({
                     <Badge points={askedBy.points} />
                 </InfosWrapper>
             </FlexWrapper>
-            <DescriptionWrapper>{body}</DescriptionWrapper>
             <InfosSup>
                 <span>{`${t('common_asked')}: `}</span>
                 <time dateTime={created}>

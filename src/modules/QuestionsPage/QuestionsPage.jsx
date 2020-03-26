@@ -51,7 +51,7 @@ const LeftWrapper = styled.div`
     width: 70%;
     padding-right: 20px;
 
-    ${media.tabletLandscape`
+    ${media.mobileLandscape`
         width: 100%;
         padding: 0;
         margin-top: 10px;
