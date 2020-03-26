@@ -76,6 +76,7 @@ const TopUsersWrapper = styled.div`
     padding: 10px 0 1px 20px;
     border-left: 4px solid #4caf50;
     background-color: white;
+    border-radius: 0 6px 6px 0;
     ${media.mobileLandscape`
         padding-left: 15px;
     `}
