@@ -12,7 +12,6 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    margin: 10px -20px 0;
 `;
 
 const UserInfo = styled.div`

@@ -10,10 +10,6 @@ export const calculations = [
         description: 'badges_profile_compeleted'
     },
     {
-        point: 15,
-        description: 'badges_answer_approved'
-    },
-    {
         point: 2,
         description: 'badges_ask_a_question'
     },
@@ -24,12 +20,16 @@ export const calculations = [
     {
         point: 1,
         description: 'badges_up_vote_on_question_or_answer',
-        limit: 5,
+        limit: 5
     },
     {
         point: -1,
         description: 'badges_down_vote_on_question_or_answer',
-        limit: -5,
+        limit: -5
+    },
+    {
+        point: 15,
+        description: 'badges_answer_approved'
     },
     {
         point: 1,
@@ -38,7 +38,7 @@ export const calculations = [
     {
         point: 1,
         description: 'badges_login',
-        limit: 1,
+        limit: 1
     }
 ];
 

@@ -70,7 +70,7 @@ const WidthWrapper = styled.div`
     `}
     ${media.mobileLandscape`
         width: 100%;
-     padding: ${p => p.isCenter && '30px 0'};
+        padding: ${p => p.isCenter && '30px 0'};
     `}
 `;
 

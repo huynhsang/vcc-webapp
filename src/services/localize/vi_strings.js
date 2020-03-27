@@ -252,7 +252,7 @@ export default {
         'Điểm trừ cho mỗi bình chọn tiêu cực trên câu hỏi hoặc câu trả lời của bạn.',
     badges_share_question_or_answer: 'Điểm cho mỗi chia sẻ.',
     badges_login: 'Điểm cho mỗi lượt đăng nhập.',
-    badges_points_limit: 'Bị giới hạn {{points}} điểm mỗi ngày.',
+    badges_points_limit: 'Bị giới hạn {{points}} điểm mỗi ngày',
 
 
     mainpage_recent_question: 'Câu hỏi gần đây',

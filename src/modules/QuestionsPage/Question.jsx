@@ -174,8 +174,8 @@ const CategoryWrapper = styled.div`
     align-items: center;
     flex-wrap: wrap;
     margin-bottom: 5px;
-    text-transform: uppercase;
     font-size: 0.9rem;
+    font-weight: 600;
 
     & svg {
         margin-right: 5px;

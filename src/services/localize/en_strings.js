@@ -252,7 +252,7 @@ export default {
         'Negative points for every up vote of your question or answer.',
     badges_share_question_or_answer: 'Points for every share.',
     badges_login: 'Point for login.',
-    badges_points_limit: 'It has limit of {{points}} points per day.',
+    badges_points_limit: 'It has limit of {{points}} points per day',
 
     mainpage_recent_question: 'Recent Questions',
     mainpage_most_answerd: 'Most Answered',

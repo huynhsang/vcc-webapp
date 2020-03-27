@@ -74,7 +74,7 @@ const Title = styled.div`
 
 const TopUsersWrapper = styled.div`
     padding: 10px 0 1px 20px;
-    border-left: 4px solid #0869b5;
+    border-left: 4px solid rgba(0, 0, 0, 0.8);
     background-color: white;
     border-radius: 0 6px 6px 0;
     ${media.mobileLandscape`

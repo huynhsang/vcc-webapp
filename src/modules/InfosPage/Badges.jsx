@@ -19,6 +19,7 @@ const media = createMediaTemplate();
 
 const useStyles = makeStyles(() => ({
     scaleBar: {
+        padding: 0,
         '& .Mui-disabled .MuiStepConnector-lineVertical': {
             minHeight: 0
         },
@@ -29,7 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Title = styled.div`
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 600;
     display: flex;
     justify-content: flex-start;
@@ -55,6 +56,12 @@ const Bloc = styled.div`
     & svg {
         color: #ff6935;
     }
+
+    ${media.mobileLandscape`
+        width: 100%;
+        margin: 5px 0;
+        padding: 5px 10px;
+    `}
 `;
 
 const FlexWrapper = styled.div`
@@ -71,25 +78,21 @@ const Point = styled.div`
 
 const LeftWrapper = styled.div`
     width: 65%;
-    ${media.mobile`
-        width: 100%;
-    `}
 `;
 
 const RightWrapper = styled.div`
     width: 35%;
+    padding-left:10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     ${media.mobile`
-        width: 100%;
         align-items: flex-start;
     `}
 `;
 
 const Wrapper = styled(DefaultWrapper)`
     display: flex;
-    flex-wrap: wrap;
 `;
 
 const Badges = () => {
