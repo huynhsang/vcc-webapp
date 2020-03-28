@@ -1,21 +1,19 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
-import { Link } from 'react-router-dom';
-
+import styled from 'styled-components';
+import isEmpty from 'lodash/isEmpty';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-
-import Check from '@material-ui/icons/Check';
-import Close from '@material-ui/icons/Close';
-import School from '@material-ui/icons/School';
 import Tag from '../../component/Tag';
+import { getNameByLanguage } from '../../utils/multiple-language';
+import LabelIcon from '@material-ui/icons/Label';
+import LockIcon from '@material-ui/icons/Lock';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-const Wrapper = styled.div``;
-
-const NoteWrapper = styled.div`
-    background-color: #fafafb;
-    padding: 20px;
-    margin: 20px;
+const Wrapper = styled.div`
+    & svg {
+        font-size: 16px;
+        margin-right: 5px;
+    }
 `;
 
 const FlexWrapper = styled.div`
@@ -23,67 +21,83 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
-const iconStyle = css`
-    font-size: 14px !important;
-    margin-right: 3px;
+const TagsWrapper = styled.div`
+    margin-bottom: 10px;
 `;
 
-const CheckIcon = styled(Check)`
-    ${iconStyle}
-    color: green;
+const ContentBox = styled.div`
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    padding: 10px;
 `;
 
-const CloseIcon = styled(Close)`
-    ${iconStyle}
-    color: red;
+const Title = styled.div`
+    font-weight: 600;
+    font-size: 1.1rem;
 `;
 
-const QuestionReview = ({ title, body, tags }) => {
+const CategoryWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    font-weight: 600;
+
+    & svg {
+        margin-right: 5px;
+        color: #616161;
+    }
+`;
+
+const AskTo = styled.div`
+    color: #7f7f7f;
+`;
+
+const UserAsked = styled.div`
+    padding: 0 5px;
+`;
+
+const QuestionReview = ({
+    title,
+    body,
+    tags,
+    category,
+    supporters,
+    isPublic
+}) => {
     const { t } = useTranslation();
+
+    const tagsRender = (tags || []).map(tag => <Tag key={tag.id} tag={tag} />);
+
+    const userAskedList = (supporters || []).map(val => (
+        <UserAsked key={val.id}>{`${val.lastName} ${val.firstName}`}</UserAsked>
+    ));
+
     return (
         <Wrapper>
             <h3>{t('question_review_question')}</h3>
             <h4>{t('question_let_one_more_look')}</h4>
-            <NoteWrapper>
-                <p>{t('question_check_for_typos')}.</p>
-                <p>{t('question_for_exemple')}:</p>
-
-                <FlexWrapper>
-                    <CheckIcon />
-                    <div>
-                        {t('question_format_text')} <b>{t('common_bold')}</b>{' '}
-                        {t('common_and')} <i>{t('common_italic')}</i>
-                    </div>
-                </FlexWrapper>
-                <FlexWrapper>
-                    <CloseIcon />
-                    <div>{t('question_donnot_include_slang')}</div>
-                </FlexWrapper>
-            </NoteWrapper>
-            <p>
-                <b>
-                    <School /> {t('question_want_more_help')}?{' '}
-                </b>
-                {t('common_check_out')}
-                <Link to="/" target="_blank">
-                    {' '}
-                    {t('question_these_tips_for_editing')}{' '}
-                </Link>
-                {t('question_for_guidance')}.
-            </p>
-            <div>
-                <p>{t('common_title')}:</p>
-                <div>{title}</div>
-            </div>
-            <ReactMarkdown className="question-body" source={body} />
-            <div>
-                <p>{t('common_tags')}</p>
-                <div>
-                    {tags.map(tag => {
-                        return <Tag key={tag.id} tag={tag} />;
-                    })}
-                </div>
-            </div>
+            <ContentBox>
+                <Title>{title}</Title>
+                <ReactMarkdown source={body} />
+                <CategoryWrapper>
+                    <LabelIcon />
+                    {getNameByLanguage(category)}
+                </CategoryWrapper>
+                {!isEmpty(tagsRender) && (
+                    <TagsWrapper>{tagsRender}</TagsWrapper>
+                )}
+                {!isEmpty(supporters) && (
+                    <FlexWrapper>
+                        <AskTo>{t('common_ask_to')}:</AskTo>
+                        {userAskedList}
+                    </FlexWrapper>
+                )}
+            </ContentBox>
+            <FlexWrapper>
+                {isPublic ? <LockOpenIcon /> : <LockIcon />}
+                <p>{t(isPublic ? 'question_public' : 'question_private')}</p>
+            </FlexWrapper>
         </Wrapper>
     );
 };

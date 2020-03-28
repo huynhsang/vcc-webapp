@@ -13,11 +13,12 @@ const Wrapper = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10px;
 `;
 
 const Image = styled.img`
     width: 30%;
-    max-width: 250px;
+    max-width: 190px;
 `;
 
 const RightWrapper = styled.div`
@@ -48,7 +49,6 @@ const QuestionCategory = ({ categories, categoryId, setCategoryId }) => {
             <Image src={questionMark} alt="" />
             <RightWrapper>
                 <h3>{t('question_what_category_of_questions')}</h3>
-                <h4>{t('question_we_will_help_you')}</h4>
                 <RadioGroup
                     value={categoryId}
                     onChange={ev => setCategoryId(ev.target.value)}

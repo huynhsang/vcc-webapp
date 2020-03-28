@@ -1,21 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
 import UserLogo from '../../component/UserLogo';
-
 import isEmpty from 'lodash/isEmpty';
-
 import { getNameByLanguage } from '../../utils/multiple-language';
-
 import { Badge } from '../../component/Badge';
-
 import Tag from '../../component/Tag';
 import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { rowCss } from '../../component/Wrappers';
-
 import SocialNetwork from '../../component/SocialNetwork';
+import ReactMarkdown from 'react-markdown';
 
 import {
     FACEBOOK_SHARE_URL,
@@ -68,7 +63,7 @@ const UserName = styled.span`
 `;
 
 const DescriptionWrapper = styled.div`
-    line-height:18px;
+    line-height: 18px;
     margin: 15px 0;
     color: #464646;
 `;
@@ -174,7 +169,9 @@ const Question = ({
                     </ResolveLabel>
                 )}
             </TopWrapper>
-            <DescriptionWrapper>{body}</DescriptionWrapper>
+            <DescriptionWrapper>
+                <ReactMarkdown source={body} />
+            </DescriptionWrapper>
             <FlexWrapper>
                 <UserLogo user={askedBy} />
                 <InfosWrapper>

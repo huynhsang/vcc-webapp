@@ -31,7 +31,7 @@ export const ADD_QUESTION_TABS = [
     'common_tags',
     'common_title',
     'common_description',
-    'common_ask_to',
+    'common_status',
     'common_review'
 ];
 

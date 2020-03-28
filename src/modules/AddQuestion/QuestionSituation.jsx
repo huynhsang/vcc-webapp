@@ -30,7 +30,7 @@ const QuestionSituation = ({
     return (
         <Wrapper>
             <h3>{t('question_set_mode')}</h3>
-            <h4>{t('question_set_mode_des')}</h4>
+            <p>{t('question_set_mode_des')}</p>
             <FormControlLabel
                 control={
                     <Switch
@@ -42,14 +42,14 @@ const QuestionSituation = ({
                 label={t(isPublic ? 'common_public' : 'common_private')}
             />
             <h3>{t('question_support_list')}</h3>
-            <h4>
-                {t('question_support_list_des', {
-                    sub: isPublic
-                        ? t('question_support_list_des_sup_empty')
-                        : ''
-                })}
-            </h4>
-            {!isPublic && <p>{t('question_support_list_require')}</p>}
+            <p>{t('question_support_list_des')}</p>
+            <p>
+                {t(
+                    isPublic
+                        ? 'question_support_list_des_sup_empty'
+                        : 'question_support_list_require'
+                )}
+            </p>
             <Autocomplete
                 multiple
                 options={usersToMatch}

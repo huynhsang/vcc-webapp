@@ -102,6 +102,9 @@ export default {
     common_logged_in: 'Logged in!',
     common_contact: 'Contact',
     common_agree: 'Agree',
+    common_example: 'Example',
+    common_status: 'Status',
+    common_coming_soon:'coming soon',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -165,24 +168,16 @@ export default {
         'Check out these examples of great question descriptions',
     question_want_more_help: 'Want more help',
     question_review_question: 'Review your question',
-    question_let_one_more_look: `Almost there! Let’s give your question one more look. And don’t worry—you can edit your question after it’s posted, too.`,
-    question_check_for_typos:
-        'Check for typos, slang, and text formatting issues',
+    question_let_one_more_look: `Almost there! Let's take one more look before submitting your question.`,
     question_for_exemple: 'For example',
     question_format_text: 'Format your text with',
     question_donnot_include_slang: ` Don’t include slang or shorthand: “u can’t bc it's mine”`,
     question_these_tips_for_editing: 'these tips for editing with Markdown',
     question_for_guidance: 'for guidance',
-    question_post_your_question: 'Post Your Question',
+    question_post_your_question: 'Submit Your Question',
     question_what_your_programming: `What's your programming question? Be specific.`,
-    question_what_languages_technologies:
-        'What frameworks is your question about?',
     question_tags_help_the_right_people:
-        'Tags help the right people find and answer your question.',
-    question_identify_your_tags: `Identify your tags by completing the sentence, “My question is about…”`,
-    question_include_tags_that:
-        'Include tags that are crucial to your question only, like europe, us,...',
-    question_only_included_in: 'Only included in the proposed scope',
+        'To help readers navigate your question easily, you can add some tags related to your question (optional).',
     question_your_title_help:
         'Your title helps people quickly understand what your question is about so they can answer it.',
     question_imagine_you: `Imagine you’re asking a question to another developer.`,
@@ -190,9 +185,7 @@ export default {
     question_please_help_with_R: `“Please help with R”`,
     quetion_what_is_your_title: 'What’s your question title?',
     question_what_category_of_questions:
-        'What category of questions do you want to ask?',
-    question_we_will_help_you:
-        "We'll help you find the best way to get your answer.",
+        'Please choose a category for your question:',
     question_i_have_a_question_about: 'I have a question about studying',
     question_i_nedd_help_with: 'I need help with a working problem',
     question_i_nedd_to_troubleshoot: 'I need to troubleshoot some immigration',
@@ -200,18 +193,21 @@ export default {
     question_search_question: 'Search question',
     question_hit_enter_to_search: 'Hit enter to search',
     question_resolved: 'Resolved',
-    question_set_mode: `What is the question's display mode`,
-    question_set_mode_des: `You can set the display mode for your question. It can be public or private. In private mode, it's only shown with people choosen after`,
-    question_support_list: 'Choose the people (maximum 2) who you want to ask?',
+    question_set_mode: 'Do you want to publish your question?',
+    question_set_mode_des: 'If you choose to publish, everyone can give you an answer. If you choose not to, your question will be visible only to people you want to get answer from.',
+    question_support_list: 'Who do you want to get answer from? (optional)',
     question_support_list_des:
-        'We will contact to them to answer your question. {{sub}}',
-    question_support_list_des_sup_empty: `You can let it empty if you don't know who can answer your question`,
+        'We will send a notification to these people.',
+    question_support_list_des_sup_empty: `You can choose up to 2 people.`,
     question_support_list_require:
-        'Because your question is private, so you have to choose at least one person to answer your question',
+        'Your question is private, please choose at least one person to answer your question',
 
-    question_leaved_an_answer: 'Leaved an answer',
+    question_leaved_an_answer: 'Thanks for submitting your answer',
     question_approved_this_answer: 'Approved this answer',
     question_created_a_question: 'Created a question',
+
+    question_tags_developer_life:'How is the work life balance of a Google software developer?',
+    question_tags_example:'Google, work life balance',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',
@@ -264,6 +260,11 @@ export default {
     questions_no_answers: 'No Answers',
     questions_my_questions: 'My questions',
     questions_ask_me: 'Ask me',
+
+    question_public: 'Public question',
+    question_private: 'Private question',
+    question_created_title_limit: 'Title must have minimum 20 characters',
+    question_created_body_limit: 'Description must have minimum 20 characters',
 
     login_thank_to_login_to_continue: 'Thank to login to continue',
 
@@ -349,10 +350,11 @@ export default {
         'Get notification if you are requested to answer a question',
     workspace_answer_the_assigned: 'Answer the assigned question in 24h',
     workspace_get_paid: 'Get bonus after submitting your answer',
+    
     workspace_our_support: 'Our support',
-    workspace_give_instruction_to_ask: 'Give instruction to ask',
-    workspace_give_rule_to_answer: 'Give rule to answer',
-    workspace_censorship_content: 'Censorship content (question and answer)',
+    workspace_how_to_ask:'How to ask a question?',
+    workspace_how_to_find_mentor:'How to find a mentor?',
+    workspace_how_to_get_customer_support: 'How to get customer support?',
 
     footer_all_right_reserved: 'All rights reserved © 2020',
 

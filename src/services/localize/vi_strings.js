@@ -101,7 +101,10 @@ export default {
     common_cancel: 'Huỷ',
     common_logged_in: 'Đăng nhập thành công!',
     common_contact: 'Liên hệ',
-    common_agree : 'Đồng ý',
+    common_agree: 'Đồng ý',
+    common_example: 'Ví dụ',
+    common_status: 'Trạng thái',
+    common_coming_soon:'coming soon',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -122,9 +125,10 @@ export default {
     authentification_check_your_email:
         'Vui lòng kiểm tra email để hoàn thành đăng kí!',
     authentication_i_agree: 'Tôi đồng ý với ',
-    authentication_terms_and_condition:'Điều khoản và chính sách ',
+    authentication_terms_and_condition: 'Điều khoản và chính sách ',
     authentication_of_VCNC: 'của VCNC',
-    authentication_please_agree_with_our_terms: 'Vui lòng đồng ý với điều khoản và chính sách của chúng tôi',
+    authentication_please_agree_with_our_terms:
+        'Vui lòng đồng ý với điều khoản và chính sách của chúng tôi',
     authentification_: '',
 
     header_home: 'Trang chủ',
@@ -155,15 +159,14 @@ export default {
     nav_best_answers: 'Câu trả lời hay',
     nav_top_members: 'Người dùng nổi bật',
 
-    question_tell_us_your_questions: 'Hãy nói thêm về câu hỏi của bạn',
+    question_tell_us_your_questions: 'Thêm mô tả chi tiết cho câu hỏi của bạn',
     question_your_description:
-        'Mô tả của bạn giúp người đọc có đầy đủ thông tin để trả lời câu hỏi của bạn.',
+        'Mô tả của bạn giúp người đọc có đầy đủ thông tin để trả lời câu hỏi.',
     question_check_out_these_examples:
-        'Hãy xem các ví dụ tuyệt vời về mô tả câu hỏi',
+        'Hãy xem',
     question_want_more_help: 'Cần trợ giúp thêm',
     question_review_question: 'Xem lại câu hỏi',
-    question_let_one_more_look: `Gần xong rồi! Hãy xem lại câu hỏi của bạn một lần nữa trước khi đăng. Đừng lo lắng, bạn có thể thay đổi nó sau khi đã đăng.`,
-    question_check_for_typos: 'Kiểm tra lỗi chính tả, từ lóng.',
+    question_let_one_more_look: 'Sắp xong rồi, xem lại một lần nữa trước khi đăng',
     question_for_exemple: 'Ví dụ',
     question_format_text: 'Tùy biến văn bản với',
     question_donnot_include_slang: ` Không nên viết tắt hay dùng từ lóng: “b ko thể vì nó là of m.“`,
@@ -171,14 +174,8 @@ export default {
     question_for_guidance: 'hướng dẫn',
     question_post_your_question: 'Đăng câu hỏi',
     question_what_your_programming: `Câu hỏi lập trình của bạn là gì? Bạn cần cụ thể nó.`,
-    question_what_languages_technologies:
-        'Framework trong câu hỏi của bạn là gì?',
     question_tags_help_the_right_people:
-        'Gắn tags để giúp mọi người tìm thấy câu hỏi của bạn dễ dàng hơn.',
-    question_identify_your_tags: `Tìm tags của bạn bằng cách hoàn thành câu hỏi: “Câu hỏi của mình là về…”`,
-    question_include_tags_that:
-        'Chỉ gán những tags liên quan đến câu hỏi của bạn, ví dụ như europe, us,...',
-    question_only_included_in: 'chỉ bao gồm trong phạm vi đã đặt ra',
+        'Để giúp người xem dễ dàng định vị câu hỏi, bạn có thể thêm tags liên quan tới câu hỏi của bạn (ko bắt buộc)',
     question_your_title_help:
         'Tiêu đề của câu hỏi sẽ giúp người trả lời hiểu nhanh về vấn đề của bạn',
     question_imagine_you:
@@ -187,9 +184,7 @@ export default {
         'Có hay không một hàm trong R để tìm chỉ số của một phần tử trong một vector',
     question_please_help_with_R: 'Cần giúp đỡ với R language',
     quetion_what_is_your_title: 'Đặt tiêu đề cho câu hỏi của bạn',
-    question_what_category_of_questions: 'Chọn lĩnh vực bạn muốn hỏi',
-    question_we_will_help_you:
-        'Chúng tôi sẽ tìm cho bạn câu trả lời phù hợp nhất',
+    question_what_category_of_questions: 'Chọn lĩnh vực bạn muốn hỏi:',
     question_i_have_a_question_about: 'Tôi có một câu hỏi về học tập',
     question_i_need_help_with: 'Tôi cần giải quyết vấn đề về việc làm',
     question_i_nedd_to_troubleshoot: 'Tôi cần giải quyết vấn đề về định cư',
@@ -197,21 +192,30 @@ export default {
     question_search_question: 'Tìm kiếm câu hỏi',
     question_hit_enter_to_search: 'Nhấn enter để tìm kiếm',
     question_resolved: 'Đã được giải quyết',
-    question_set_mode: 'Chế độ hiển thị của câu hỏi là gì?',
+    question_set_mode: 'Bạn có muốn công khai câu hỏi của mình?',
     question_set_mode_des:
-        'Bạn có thể đặt chế độ hiển thị cho câu hỏi, nó có thể ở dạng riêng tư hoặc công khai. Nếu ở chế độ riêng tư, thì câu hỏi chỉ giới hạn bạn và những người dùng được chọn phía dưới. ',
+        'Nếu bạn chọn chế độ công khai, mọi người đều có thể trả lời câu hỏi của bạn. Ngược lại, câu hỏi của bạn chỉ hiển thị cho những người xem bạn chọn',
     question_support_list:
-        'Chọn người (nhiều nhất là 2) sẽ trả lời câu hỏi của bạn?',
+        'Bạn muốn ai trả lời câu hỏi này? (không bắt buộc)',
     question_support_list_des:
-        'Chúng tôi sẽ liên lạc đến họ để trả lời vấn đề của bạn. {{sub}}',
+        'Chúng tôi sẽ thông báo đến người bạn chọn để trả lời câu hỏi của bạn. ',
     question_support_list_des_sup_empty:
-        'Bạn có thể để nó trống nếu như không biết sẽ gửi câu hỏi đến ai',
+        'Bạn có thể chọn tối đa 2 người.',
     question_support_list_require:
-        'Bởi vì bạn chọn câu hỏi ở dang riêng tư, nên bạn phải chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
+        'Câu hỏi đang ở trạng thái riêng tư, vui lòng chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
 
-    question_leaved_an_answer: 'Câu trả lời đã được thêm',
+    question_leaved_an_answer: 'Cảm ơn câu trả lời của bạn',
     question_approved_this_answer: 'Câu trả lời đã được chấp nhận',
     question_created_a_question: 'Đã tạo mới câu hỏi',
+
+    question_tags_developer_life:
+        'Cuộc sống của một kỹ sư phần mềm ở Google như thế nào?',
+    question_tags_example: 'Google, kỹ sư phần mềm',
+
+    question_public: 'Câu hỏi ở chế độ công khai',
+    question_private: 'Câu hỏi ở chế độ riêng tư',
+    question_created_title_limit: 'Tiêu đề phải có ít nhất 20 kí tự',
+    question_created_body_limit: 'Mô tả câu hỏi phải có ít nhất 20 kí tự',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -254,7 +258,6 @@ export default {
     badges_login: 'Điểm cho mỗi lượt đăng nhập.',
     badges_points_limit: 'Bị giới hạn {{points}} điểm mỗi ngày',
 
-
     mainpage_recent_question: 'Câu hỏi gần đây',
     mainpage_most_answerd: 'Trả lời nhiều',
     mainpage_most_visited: 'Xem nhiều',
@@ -285,7 +288,8 @@ export default {
         'Chúng tôi xây dựng một trang web để mọi người đặt câu hỏi và nhận được những câu trả lời đáng tin cậy từ người có kinh nghiệm ở khắp nơi trên thế giới. Bên cạnh đó, chúng tôi đưa ra những gói dịch vụ tư vấn kết nối bạn trực tiếp với một chuyên gia trong ngành bạn đang quan tâm. Cộng đồng của chúng tôi sẽ giúp bạn nhận được những hỗ trợ cũng như những mối quan hệ cần thiết cho sự nghiệp của bạn.',
     about_us_our_team: 'Các thành viên của VCNC',
     about_us_nguyet_role: 'Đồng sáng lập - CEO',
-    about_us_nguyet_experience: 'Nghiên cứu sinh tiến sĩ tại University of Southern California',
+    about_us_nguyet_experience:
+        'Nghiên cứu sinh tiến sĩ tại University of Southern California',
     about_us_phuc_role: 'Đồng sáng lập - COO',
     about_us_phuc_experience: 'Lập trình viên tại Kumullus.',
     about_us_sang_role: 'Đồng sáng lập - CTO',
@@ -294,7 +298,7 @@ export default {
     about_us_toan_experience: 'Kỹ sư khoa học dữ liệu tại Berkeley Lab',
     about_us_nguyen_role: 'Chief Marketing Officer',
     about_us_nguyen_experience: 'Marketing Executive tại Advosights',
-    
+
     forgot_password_please_verify_your_email:
         'Vui lòng kiểm tra email của bạn để tạo lại mật khẩu mới',
     authentification_enter_new_password: 'Vui lòng nhập mật khẩu mới',
@@ -352,12 +356,12 @@ export default {
         'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
     workspace_answer_the_assigned: 'Trả lời câu hỏi nhận được trong vòng 24h',
     workspace_get_paid: 'Nhận điểm thưởng sau khi đăng tải câu trả lời',
+    
     workspace_our_support: 'Hỗ trợ',
-    workspace_give_instruction_to_ask: 'Giới thiệu những mẫu câu hỏi',
-    workspace_give_rule_to_answer: 'Đưa ra các yêu cầu về nội dung cần trả lời',
-    workspace_censorship_content:
-        'Kiểm duyệt nội dung (câu hỏi và câu trả lời)',
-
+    workspace_how_to_ask:'Làm sao để đặt một câu hỏi?',
+    workspace_how_to_find_mentor:'Làm sao để tìm mentor?',
+    workspace_how_to_get_customer_support: 'Hỗ trợ chăm sóc khách hàng',
+    
     footer_all_right_reserved: 'All rights reserved © 2020',
 
     answer_added_an_answer_on: 'Trả lời vào ngày',
@@ -374,6 +378,7 @@ export default {
         'Đừng quên quay trở lại sau vài ngày để xem câu trả lời cho yêu cầu của bạn. Bạn sẽ nhận được thông báo ngay khi có ai đó vào trả lời. Nếu bạn hài lòng với một câu trả lời nào đó, đừng quên nhấn HÀI LÒNG với câu trả lời đó. Người bạn đã đưa ra câu trả lời sẽ rất biết ơn bạn đấy!',
     infos_conclusion: 'Cuối cùng, chúng tôi rất vui khi có bạn ở đây!',
 
-    cookie_banner_info1: 'Để VCNC có thể hoạt động, chúng tôi phải lưu thông tin của bạn. Với việc sử dụng VCNC, bạn đồng ý với ',
-    cookie_banner_info2: ' của chúng tôi, bao gồm ',
+    cookie_banner_info1:
+        'Để VCNC có thể hoạt động, chúng tôi phải lưu thông tin của bạn. Với việc sử dụng VCNC, bạn đồng ý với ',
+    cookie_banner_info2: ' của chúng tôi, bao gồm '
 };

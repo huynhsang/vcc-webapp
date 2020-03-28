@@ -33,7 +33,12 @@ export const answerSteps = [
 ];
 
 export const supportText = [
-    'workspace_give_instruction_to_ask',
-    'workspace_give_rule_to_answer',
-    'workspace_censorship_content'
+    {
+        title: 'workspace_how_to_ask',
+        link: '/information'
+    },
+    {
+        title: 'workspace_how_to_find_mentor'
+    },
+    { title: 'workspace_how_to_get_customer_support', isContactUs: true }
 ];

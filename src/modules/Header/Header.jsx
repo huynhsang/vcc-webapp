@@ -41,8 +41,8 @@ const HeaderWrapper = styled.header`
 `;
 
 const ContentWrapper = styled(DefaultWrapper)`
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
     display: flex;
     justify-content: space-between;
     align-items: center;

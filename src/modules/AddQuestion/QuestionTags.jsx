@@ -6,19 +6,27 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 
 import Check from '@material-ui/icons/Check';
-import Close from '@material-ui/icons/Close';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
 
 const Wrapper = styled.div``;
 
 const ExampleWrapper = styled.div`
     background-color: #fafafb;
     padding: 20px;
-    margin: 20px;
+    margin: 20px 10px;
+
+    ${media.mobileLandscape`
+        padding: 10px;
+        margin: 0 0 10px 0;
+    `}
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 10px;
 `;
 
 const iconStyle = css`
@@ -29,11 +37,6 @@ const iconStyle = css`
 const CheckIcon = styled(Check)`
     ${iconStyle}
     color: green;
-`;
-
-const CloseIcon = styled(Close)`
-    ${iconStyle}
-    color: red;
 `;
 
 const QuestionTags = ({ tags, tagIds, setTagIds }) => {
@@ -51,16 +54,17 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
 
     return (
         <Wrapper>
-            <h3>{t('question_what_languages_technologies')}</h3>
-            <h4>{t('question_tags_help_the_right_people')}</h4>
+            <h3>{t('question_tags_help_the_right_people')}</h3>
             <ExampleWrapper>
-                <p>{t('question_identify_your_tags')}</p>
-                <p>{t('common_for_exemple')}:</p>
+                <div>
+                    <b>{`${t('common_for_exemple')}: `}</b>
+                    {t('question_tags_developer_life')}
+                </div>
                 <FlexWrapper>
-                    <CheckIcon /> <div>{t('question_include_tags_that')}</div>
-                </FlexWrapper>
-                <FlexWrapper>
-                    <CloseIcon /> <div>{t('question_only_included_in')}</div>
+                    <CheckIcon />{' '}
+                    <div>
+                        {`${t('common_tags')}: `} {t('question_tags_example')}
+                    </div>
                 </FlexWrapper>
             </ExampleWrapper>
             <Autocomplete

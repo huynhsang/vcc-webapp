@@ -16,19 +16,19 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import PersonAskImage from '../../images/personAsk.png';
 import { showLoginConfirmFn } from '../../actions/alertConfirm';
+import { toggleContactUsFn } from '../../actions/app';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
 const Background = styled.div`
     background-color: #f7f7f7;
-    padding-top: 20px;
 `;
 
 const Wrapper = styled(DefaultWrapper)`
     display: flex;
     padding-bottom: 0;
-    padding-top: 0;
+    padding-top: 10px;
     flex-wrap: wrap;
     flex-direction: row-reverse;
 `;
@@ -97,7 +97,7 @@ const ImageWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction:column;
+    flex-direction: column;
 
     flex-grow: 1;
     flex-basis: 0;
@@ -107,7 +107,7 @@ const ImageWrapper = styled.div`
         cursor: pointer;
     }
 
-    & div{
+    & div {
         margin-top: 10px;
     }
 
@@ -128,6 +128,7 @@ const Home = ({
     showLoginConfirm,
     getTopUsers,
     getPopularQuestions,
+    toggleContactUs,
     history
 }) => {
     const { t } = useTranslation();
@@ -195,7 +196,7 @@ const Home = ({
                 <Ask>{t('common_ask_now')}</Ask>
                 <AskButton label={t('common_ask')} />
             </ToAskWrapper>
-            <WorkSpace history={history} />
+            <WorkSpace history={history} toggleContactUs={toggleContactUs} />
         </>
     );
 };
@@ -208,7 +209,8 @@ const mapStateToProps = ({ home, App: { isAuthenticated } }) => ({
 const mapDispatchToProps = dispatch => ({
     showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     getTopUsers: () => dispatch(getTopUsersFn()),
-    getPopularQuestions: () => dispatch(getPopularQuestionsFn())
+    getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
+    toggleContactUs: val => dispatch(toggleContactUsFn(val))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

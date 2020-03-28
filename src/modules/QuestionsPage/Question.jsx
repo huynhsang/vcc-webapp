@@ -47,7 +47,7 @@ const Wrapper = styled.div`
     border-left: ${p => p.hasLeftBorder && '4px solid #1ea01e'};
 
     ${media.tabletLandscape`
-        margin: 10px 0;
+        margin: 15px 0;
         padding: 10px 10px 0;
         border: none;
     `}
@@ -255,7 +255,6 @@ const Question = ({
                     <Title>{question.title}</Title>
                 </TruncateMarkup>
             </TopWrapper>
-
             <DescriptionWrapper>
                 <QuillText lines={2} content={body} />
             </DescriptionWrapper>
@@ -289,7 +288,6 @@ const Question = ({
                     </UserInfos>
                 </UserAsk>
             </UserWrapper>
-
             <BottomWrapper>
                 <FlexWrapper>
                     <div>Vote : </div>

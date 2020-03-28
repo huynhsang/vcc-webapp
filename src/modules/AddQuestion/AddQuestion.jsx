@@ -22,14 +22,19 @@ import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
 import { getUsers } from '../../services/user.service';
 import { getTagsRelatingCategory } from '../../services/tags.service';
-
 import QuestionTabs from './QuestionTabs';
 import { DefaultWrapper } from '../../component/Wrappers';
-
 import Button from '@material-ui/core/Button';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const Wrapper = styled(DefaultWrapper)`
-    min-height: calc(100vh - 180px);
+    min-height: calc(100vh - 165px);
+
+    ${media.tabletLandscape`
+        min-height: calc(100vh - 368px);
+    `}
 `;
 
 const ButtonsWrapper = styled.div`
@@ -128,6 +133,12 @@ const AddQuestion = ({
     }
 
     const postQuestion = () => {
+        if(title.length < 20 ){
+            return errorAlert(t('question_created_title_limit'));
+        }
+        if(body.length < 20 ){
+            return errorAlert(t('question_created_body_limit'));
+        }
         createQuestion(question)
             .then(data => {
                 successAlert(t('question_created_a_question'));
@@ -192,7 +203,12 @@ const AddQuestion = ({
                     <QuestionReview
                         title={title}
                         body={body}
+                        category={categories.find(cat => cat.id === categoryId)}
                         tags={tags && tags.filter(t => tagIds.includes(t.id))}
+                        supporters={usersToMatch.filter(u =>
+                            supporterIds.includes(u.id)
+                        )}
+                        isPublic={isPublic}
                     />
                 );
             default:

@@ -73,6 +73,7 @@ const SupportOl = styled.ul`
     margin: 0;
 
     & li {
+        cursor: pointer;
         margin-left: 20px;
         width: calc(33.33% - 20px);
         line-height: 30px;
@@ -95,7 +96,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const WorkSpace = ({ history }) => {
+const WorkSpace = ({ history, toggleContactUs }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -113,6 +114,26 @@ const WorkSpace = ({ history }) => {
         window.scrollTo(0, 0);
         history.push('/information');
     };
+
+    const supportRender = supportText.map(
+        ({ title, link, isContactUs }, key) => (
+            <li
+                key={key}
+                onClick={() => {
+                    if (isContactUs) {
+                        toggleContactUs(true);
+                    } else if (link) {
+                        window.scrollTo(0, 0);
+                        history.push(link);
+                    }
+                }}
+            >
+                {`${t(title)} ${
+                    !isContactUs && !link ? `(${t('common_coming_soon')})` : ''
+                }`}
+            </li>
+        )
+    );
 
     return (
         <FullWidth>
@@ -143,11 +164,7 @@ const WorkSpace = ({ history }) => {
                 </StepsWrapper>
                 <SupportWrapper>
                     <SmallTitle>{t('workspace_our_support')}</SmallTitle>
-                    <SupportOl>
-                        {supportText.map((text, key) => (
-                            <li key={key}>{t(text)}</li>
-                        ))}
-                    </SupportOl>
+                    <SupportOl>{supportRender}</SupportOl>
                 </SupportWrapper>
                 <AskWrapper>
                     <AskButton label={t('common_ask_a_question')} />

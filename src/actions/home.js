@@ -32,13 +32,7 @@ export const getTopUsersFn = () => {
         const params = {
             filter: {
                 skip: 0,
-                limit: 6,
-                where: {
-                    realm: {
-                        neq: 'admin_app'
-                    },
-                    emailVerified: true
-                }
+                limit: 6
             }
         };
         getUsers(params)

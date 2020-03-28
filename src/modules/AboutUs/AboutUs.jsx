@@ -23,7 +23,7 @@ const Wrapper = styled(DefaultWrapper)`
 `;
 
 const Title = styled.div`
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     text-align: center;
     font-weight: 600;
 `;

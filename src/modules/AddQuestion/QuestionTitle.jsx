@@ -6,17 +6,26 @@ import TextField from '@material-ui/core/TextField';
 import Check from '@material-ui/icons/Check';
 import Close from '@material-ui/icons/Close';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const Wrapper = styled.div``;
 
 const ExampleWrapper = styled.div`
     background-color: #fafafb;
     padding: 20px;
-    margin: 20px;
+    margin: 20px 10px;
+
+    ${media.mobileLandscape`
+        padding: 10px;
+        margin: 0 0 10px 0;
+    `}
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 5px;
 `;
 
 const iconStyle = css`
@@ -45,10 +54,9 @@ const QuestionTitle = ({ title, setTitle }) => {
     return (
         <Wrapper>
             <h3>{t('quetion_what_is_your_title')}</h3>
-            <h5>{t('question_your_title_help')}</h5>
+            <h4>{t('question_your_title_help')}</h4>
             <ExampleWrapper>
-                <p>{t('question_imagine_you')}</p>
-                <p>{t('common_for_exemple')}</p>
+                <div><b>{`${t('common_for_exemple')}: `}</b> {t('question_imagine_you')}</div>
                 <FlexWrapper>
                     <CheckIcon /> <div>{t('question_is_there_an_R')}</div>
                 </FlexWrapper>
