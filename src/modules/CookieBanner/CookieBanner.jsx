@@ -36,18 +36,11 @@ const saveConsentCookie = (key, value, expiringDays = 365) => {
     expireDate.setTime(
         expireDate.getTime() + expiringDays * 24 * 60 * 60 * 1000
     );
-
-    const options = {
-        path: '/'
-    };
-
+    
     if (value) {
-        setCookie(key, true, {
-            ...options,
-            expires: expireDate
-        });
+        setCookie(key, true, expiringDays);
     } else {
-        deleteCookie(key, options);
+        deleteCookie(key);
     }
 };
 
