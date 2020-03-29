@@ -17,13 +17,9 @@ import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 import { withTranslation } from 'react-i18next';
-import runCrisp from '../../utils/run-crisp';
+import { runCrisp, setCrispUserInfos } from '../../utils/run-crisp';
 
-import {
-    createMuiTheme,
-    ThemeProvider,
-    responsiveFontSizes
-} from '@material-ui/core/styles';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const AppWrapper = styled.div`
     display: flex;
@@ -42,8 +38,6 @@ let muiTheme = createMuiTheme({
     }
 });
 
-muiTheme = responsiveFontSizes(muiTheme,{factor: 3});
-
 const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
         runCrisp();
@@ -51,7 +45,12 @@ const App = ({ App, fetchUserFromCookie }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { isVerifiedUser } = App;
+    const { isVerifiedUser, currentUser } = App;
+
+    React.useEffect(() => {
+        setCrispUserInfos(currentUser);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [currentUser]);
 
     if (!isVerifiedUser) {
         return <div />;
