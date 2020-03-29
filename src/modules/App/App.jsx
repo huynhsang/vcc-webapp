@@ -17,6 +17,7 @@ import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 import { withTranslation } from 'react-i18next';
+import runCrisp from '../../utils/run-crisp';
 
 import {
     createMuiTheme,
@@ -45,6 +46,7 @@ muiTheme = responsiveFontSizes(muiTheme,{factor: 3});
 
 const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
+        runCrisp();
         fetchUserFromCookie();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

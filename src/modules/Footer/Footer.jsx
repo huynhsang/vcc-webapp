@@ -49,6 +49,10 @@ const ContentWrapper = styled(ResponsiveFlexWrapper)`
     margin: 0 auto;
     padding: 10px;
     justify-content: space-between;
+
+    @media (max-width: 1420px) and (min-width: 1024px) {
+        padding-right: 90px;
+    }
 `;
 
 const Logo = styled.img`
