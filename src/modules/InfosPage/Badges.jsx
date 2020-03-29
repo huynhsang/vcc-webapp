@@ -20,6 +20,7 @@ const media = createMediaTemplate();
 const useStyles = makeStyles(() => ({
     scaleBar: {
         padding: 0,
+        marginTop: '5px',
         '& .Mui-disabled .MuiStepConnector-lineVertical': {
             minHeight: 0
         },
@@ -44,7 +45,7 @@ const Title = styled.div`
 `;
 
 const Description = styled.div`
-    margin-top: 20px;
+    margin-top: 10px;
 `;
 
 const Bloc = styled.div`

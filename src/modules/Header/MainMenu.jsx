@@ -58,14 +58,6 @@ const MainMenu = ({ location, history }) => {
                     {t(val.label)}
                 </Button>
             ))}
-            <Button
-                className={classes.button}
-                onClick={() => {
-                    window.location = 'https://vcncblog.site/';
-                }}
-            >
-                {t('header_blog')}
-            </Button>
         </Wrapper>
     );
 };

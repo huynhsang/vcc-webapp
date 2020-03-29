@@ -32,11 +32,6 @@ const PrivacySpan = styled.span`
 `;
 
 const saveConsentCookie = (key, value, expiringDays = 365) => {
-    const expireDate = new Date();
-    expireDate.setTime(
-        expireDate.getTime() + expiringDays * 24 * 60 * 60 * 1000
-    );
-    
     if (value) {
         setCookie(key, true, expiringDays);
     } else {
