@@ -14,8 +14,6 @@ import { makeStyles } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
-import PersonAskImage from '../../images/personAsk.png';
-import { showLoginConfirmFn } from '../../actions/alertConfirm';
 import { toggleContactUsFn } from '../../actions/app';
 
 import { createMediaTemplate } from '../../utils/css-tools';
@@ -93,29 +91,6 @@ const Ask = styled.div`
     margin-bottom: 10px;
 `;
 
-const ImageWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-
-    flex-grow: 1;
-    flex-basis: 0;
-
-    & img {
-        width: 50%;
-        cursor: pointer;
-    }
-
-    & div {
-        margin-top: 10px;
-    }
-
-    ${media.mobileLandscape`
-        display: none;
-    `}
-`;
-
 const useStyles = makeStyles(() => ({
     linkButton: {
         color: 'rgba(0, 0, 0, 0.58)'
@@ -124,8 +99,6 @@ const useStyles = makeStyles(() => ({
 
 const Home = ({
     home,
-    isAuthenticated,
-    showLoginConfirm,
     getTopUsers,
     getPopularQuestions,
     toggleContactUs,
@@ -150,14 +123,6 @@ const Home = ({
         <TopUser key={u.id} user={u} />
     ));
 
-    const onClickAskImage = () => {
-        if (!isAuthenticated) {
-            return showLoginConfirm();
-        }
-
-        history.push('/add-question');
-    };
-
     return (
         <>
             <PageCover />
@@ -181,14 +146,6 @@ const Home = ({
                             <Title>{t('common_top_members')}</Title>
                         </TopWrapper>
                         <TopUsersWrapper>{renderUsers}</TopUsersWrapper>
-                        <ImageWrapper>
-                            <img
-                                onClick={onClickAskImage}
-                                alt="ask"
-                                src={PersonAskImage}
-                            />
-                            <div>{t('home_do_you_have_a_question')}</div>
-                        </ImageWrapper>
                     </LeftWrapper>
                 </Wrapper>
             </Background>
@@ -201,13 +158,11 @@ const Home = ({
     );
 };
 
-const mapStateToProps = ({ home, App: { isAuthenticated } }) => ({
+const mapStateToProps = ({ home }) => ({
     home,
-    isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => ({
-    showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     getTopUsers: () => dispatch(getTopUsersFn()),
     getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
     toggleContactUs: val => dispatch(toggleContactUsFn(val))

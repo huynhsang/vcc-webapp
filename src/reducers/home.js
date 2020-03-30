@@ -7,12 +7,6 @@ import {
   getPopularQuestionsRequest,
   getPopularQuestionsSuccess,
   getPopularQuestionsFailure,
-  getQuestionsTopAnsweredRequest,
-  getQuestionsTopAnsweredSuccess,
-  getQuestionsTopAnsweredFailure,
-  getTrendingTagsRequest,
-  getTrendingTagsSuccess,
-  getTrendingTagsFailure
 } from '../actions/home';
 
 const defaultState = {
@@ -49,28 +43,6 @@ const homeReducer = createReducer(defaultState, {
   [getPopularQuestionsFailure]: state => {
     state.isGettingPopularQuestions = false;
   },
-  [getQuestionsTopAnsweredRequest]: state => {
-    state.isGettingQuestionsTopAnswered = true;
-  },
-  [getQuestionsTopAnsweredSuccess]: (state, action) => {
-    state.isGettingQuestionsTopAnswered = false;
-    const { questions } = action.payload.entities;
-    state.questionsTopAnswered = questions;
-  },
-  [getQuestionsTopAnsweredFailure]: state => {
-    state.isGettingQuestionsTopAnswered = false;
-  },
-  [getTrendingTagsRequest]: state => {
-    state.isGettingTrendingTags = true;
-  },
-  [getTrendingTagsSuccess]: (state, action) => {
-    state.isGettingTrendingTags = false;
-    const { payload } = action;
-    state.trendingTags = payload;
-  },
-  [getTrendingTagsFailure]: state => {
-    state.isGettingTrendingTags = false;
-  }
 });
 
 export default homeReducer;

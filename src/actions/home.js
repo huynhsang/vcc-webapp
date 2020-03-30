@@ -2,7 +2,6 @@ import { createAction } from 'redux-starter-kit';
 import actionsNames from '../constants/action-names.constant';
 
 import { getUsers } from '../services/user.service';
-import { getTrendingTags } from '../services/tags.service';
 import { getQuestions } from '../services/question.service';
 
 import { questionsFilterGenerator } from '../utils/question';
@@ -14,12 +13,6 @@ const {
     GET_POPULAR_QUESTIONS_REQUEST,
     GET_POPULAR_QUESTIONS_SUCCESS,
     GET_POPULAR_QUESTIONS_FAILURE,
-    GET_QUESTIONS_TOP_ANSWERED_REQUEST,
-    GET_QUESTIONS_TOP_ANSWERED_SUCCESS,
-    GET_QUESTIONS_TOP_ANSWERED_FAILURE,
-    GET_TRENDING_TAGS_REQUEST,
-    GET_TRENDING_TAGS_SUCCESS,
-    GET_TRENDING_TAGS_FAILURE
 } = actionsNames;
 
 export const getTopUsersRequest = createAction(GET_TOP_USERS_REQUEST);
@@ -32,7 +25,7 @@ export const getTopUsersFn = () => {
         const params = {
             filter: {
                 skip: 0,
-                limit: 6
+                limit: 10
             }
         };
         getUsers(params)
@@ -69,57 +62,6 @@ export const getPopularQuestionsFn = () => {
             .catch(err => {
                 console.log(err.message);
                 dispatch(getPopularQuestionsFailure());
-            });
-    };
-};
-
-export const getQuestionsTopAnsweredRequest = createAction(
-    GET_QUESTIONS_TOP_ANSWERED_REQUEST
-);
-export const getQuestionsTopAnsweredSuccess = createAction(
-    GET_QUESTIONS_TOP_ANSWERED_SUCCESS
-);
-export const getQuestionsTopAnsweredFailure = createAction(
-    GET_QUESTIONS_TOP_ANSWERED_FAILURE
-);
-
-export const getQuestionsTopAnsweredFn = () => {
-    return dispatch => {
-        dispatch(getQuestionsTopAnsweredRequest());
-        const params = {
-            filter: questionsFilterGenerator({ order: 'answerCount DESC' })
-        };
-        getQuestions(params)
-            .then(data => {
-                dispatch(getQuestionsTopAnsweredSuccess(data));
-            })
-            .catch(err => {
-                console.log(err.message);
-                dispatch(getQuestionsTopAnsweredFailure());
-            });
-    };
-};
-
-export const getTrendingTagsRequest = createAction(GET_TRENDING_TAGS_REQUEST);
-export const getTrendingTagsSuccess = createAction(GET_TRENDING_TAGS_SUCCESS);
-export const getTrendingTagsFailure = createAction(GET_TRENDING_TAGS_FAILURE);
-
-export const getTrendingTagsFn = () => {
-    return dispatch => {
-        dispatch(getTrendingTagsRequest());
-        // const params = {
-        //     filter: {
-        //         skip: 0,
-        //         limit: 5
-        //     }
-        // };
-        getTrendingTags()
-            .then(data => {
-                dispatch(getTrendingTagsSuccess(data));
-            })
-            .catch(err => {
-                console.log(err);
-                dispatch(getTrendingTagsFailure());
             });
     };
 };
