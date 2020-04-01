@@ -106,6 +106,12 @@ export default {
     common_status: 'Trạng thái',
     common_coming_soon:'coming soon',
     common_posts: 'Bài viết',
+    common_add_post:'Thêm bài viết mới',
+    common_main_character:'Nhân vật chính',
+    common_user_name: 'Người dùng',
+    common_cover_image: 'Hình chủ đề',
+    common_resume: 'Tóm tắt',
+    common_submit: 'Đăng',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

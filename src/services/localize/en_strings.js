@@ -106,6 +106,12 @@ export default {
     common_status: 'Status',
     common_coming_soon:'coming soon',
     common_posts: 'Posts',
+    common_add_post:'Add new post',
+    common_main_character:'Main character',
+    common_user_name: 'User name',
+    common_cover_image: 'Cover Image',
+    common_resume: 'Resume',
+    common_submit: 'Submit',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

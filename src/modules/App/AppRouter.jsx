@@ -12,6 +12,7 @@ import { HomePage } from '../HomePage';
 import { QuestionsPage } from '../QuestionsPage';
 import { QuestionView } from '../QuestionView';
 import { PostsPage } from '../PostsPage';
+import { AddPost } from '../AddPost';
 
 import {
     EmailVerification,
@@ -43,6 +44,11 @@ const AppRouter = () => {
                 path="/posts"
                 exact
                 render={props => <PostsPage {...props} />}
+            />
+            <Route
+                path="/posts/add"
+                exact
+                render={props => <AddPost {...props} />}
             />
             <Route
                 path="/information"

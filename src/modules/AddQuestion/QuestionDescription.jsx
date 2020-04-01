@@ -8,10 +8,7 @@ const Wrapper = styled.div``;
 const QuestionDescription = ({ setBody, body }) => {
     const { t } = useTranslation();
 
-    const [questionBody, setQuestionBody] = React.useState(body);
-
     const onChangeHandler = value => {
-        setQuestionBody(value);
         setBody(value);
     };
 
@@ -20,7 +17,7 @@ const QuestionDescription = ({ setBody, body }) => {
             <h3>{t('question_tell_us_your_questions')}</h3>
             <h4>{t('question_your_description')}</h4>
             <SimpleMDEReact
-                value={questionBody}
+                value={body}
                 onChange={onChangeHandler}
                 options={{
                     autofocus: true,
