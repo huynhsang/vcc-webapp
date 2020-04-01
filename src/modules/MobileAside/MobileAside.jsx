@@ -74,14 +74,6 @@ const MobileAside = ({
                         <ListItemText primary={t(label)} />
                     </ListItem>
                 ))}
-                <ListItem
-                    className={classes.listItem}
-                    onClick={() => {
-                        window.location = 'https://vcncblog.site/';
-                    }}
-                >
-                    <ListItemText primary="Blog" />
-                </ListItem>
             </List>
         </Drawer>
     );

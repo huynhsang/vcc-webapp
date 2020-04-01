@@ -105,6 +105,7 @@ export default {
     common_example: 'Example',
     common_status: 'Status',
     common_coming_soon:'coming soon',
+    common_posts: 'Posts',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
