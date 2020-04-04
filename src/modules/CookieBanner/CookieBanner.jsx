@@ -43,7 +43,7 @@ const CookieBanner = ({ history }) => {
     const { t } = useTranslation();
     const classes = useStyle();
 
-    const [isShownCookieBanner, setBanner] = React.useState(true);
+    const [isShownCookieBanner, setBanner] = React.useState(false);
 
     const isConsentRequired = getCookie(CONSENT_REQUIRED_COOKIE_KEY) === 'true';
 
