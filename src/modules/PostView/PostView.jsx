@@ -75,6 +75,7 @@ const Background = styled.div`
 const PostsRelated = styled(FlexWrapper)`
     margin: 0 -10px;
     margin-top: 5px;
+    flex-wrap: wrap;
 `;
 
 const PageTitle = styled.div`
@@ -83,6 +84,10 @@ const PageTitle = styled.div`
     padding-bottom: 5px;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+const FlexEnd = styled(FlexWrapper)`
+    justify-content: flex-end;
 `;
 
 const PostView = ({ history }) => {
@@ -144,12 +149,14 @@ const PostView = ({ history }) => {
                 {!isEmpty(tagsRender) && (
                     <TagsWrapper>{tagsRender}</TagsWrapper>
                 )}
-                <SocialNetwork
-                    isBig
-                    fbLink={`${FACEBOOK_SHARE_URL}`}
-                    twitterLink={`${TWITTER_SHARE_URL}`}
-                    linkedInLink={`${LINKEDIN_SHARE_URL}`}
-                />
+                <FlexEnd>
+                    <SocialNetwork
+                        isBig
+                        fbLink={`${FACEBOOK_SHARE_URL}`}
+                        twitterLink={`${TWITTER_SHARE_URL}`}
+                        linkedInLink={`${LINKEDIN_SHARE_URL}`}
+                    />
+                </FlexEnd>
             </Wrapper>
             <Background>
                 <DefaultWrapper>

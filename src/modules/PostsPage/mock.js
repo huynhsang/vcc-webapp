@@ -51,7 +51,8 @@ export const postMock = {
         }
     ],
     coverImage: 'https://www.amazeelabs.com/sites/default/files/styles/leading_image/public/pexels-photo.jpg?h=f7d9296c&itok=LzenSsG8',
-    created: new Date()
+    created: new Date(),
+    viewCount : 10,
 };
 
 export const postsMock = (number) =>

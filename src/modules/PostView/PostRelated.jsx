@@ -3,9 +3,20 @@ import styled from 'styled-components';
 import { Badge } from '../../component/Badge';
 import UserLogo from '../../component/UserLogo';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const Wrapper = styled.div`
     width: calc(33.33% - 20px);
     margin: 0 10px;
+
+    ${media.tabletLandscape`
+        width: calc(50% - 20px);
+        margin-bottom: 15px;
+    `}
+    ${media.mobileLandscape`
+        width: calc(100% - 20px);
+    `}
 `;
 
 const Title = styled.div`
@@ -46,12 +57,7 @@ const Time = styled.time`
 `;
 
 const PostRelated = ({ post, history }) => {
-    const {
-        title,
-        coverImage,
-        mainCharacter,
-        created
-    } = post;
+    const { title, coverImage, mainCharacter, created } = post;
 
     const redirect = (url) => (ev) => {
         ev.stopPropagation();
