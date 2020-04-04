@@ -70,7 +70,7 @@ const CookieBanner = ({ history }) => {
             className={classes.banner}
             open={isShownCookieBanner}
             anchorOrigin={{
-                vertical: 'bottom',
+                vertical: 'top',
                 horizontal: 'center'
             }}
             message={
