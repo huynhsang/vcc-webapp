@@ -77,7 +77,7 @@ const PostsRelated = styled(FlexWrapper)`
     margin-top: 5px;
 `;
 
-const PageTitle= styled.div`
+const PageTitle = styled.div`
     font-size: 1.2rem;
     font-weight: bold;
     padding-bottom: 5px;
@@ -133,6 +133,7 @@ const PostView = ({ history }) => {
                         </UserInfos>
                     </FlexWrapper>
                     <SocialNetwork
+                        isBig
                         fbLink={`${FACEBOOK_SHARE_URL}`}
                         twitterLink={`${TWITTER_SHARE_URL}`}
                         linkedInLink={`${LINKEDIN_SHARE_URL}`}
@@ -144,6 +145,7 @@ const PostView = ({ history }) => {
                     <TagsWrapper>{tagsRender}</TagsWrapper>
                 )}
                 <SocialNetwork
+                    isBig
                     fbLink={`${FACEBOOK_SHARE_URL}`}
                     twitterLink={`${TWITTER_SHARE_URL}`}
                     linkedInLink={`${LINKEDIN_SHARE_URL}`}

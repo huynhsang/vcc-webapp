@@ -8,6 +8,7 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 const Wrapper = styled.div`
     display: flex;
     & svg {
+        font-size: ${(p) => p.isBig && '30px'};
         margin-right: 10px;
         color: #7078857d;
         cursor: pointer;
@@ -21,9 +22,10 @@ const Wrapper = styled.div`
 const SocialNetwork = ({
     fbLink = '',
     twitterLink = '',
-    linkedInLink = ''
+    linkedInLink = '',
+    isBig = false
 }) => {
-    const onClick = type => () => {
+    const onClick = (type) => () => {
         let link = '';
         switch (type) {
             case 'facebook':
@@ -41,7 +43,7 @@ const SocialNetwork = ({
         window.open(link, '_blank');
     };
     return (
-        <Wrapper>
+        <Wrapper isBig={isBig}>
             <FacebookIcon onClick={onClick('facebook')} />
             <TwitterIcon onClick={onClick('twitter')} />
             <LinkedInIcon onClick={onClick('linkedIn')} />
