@@ -64,12 +64,13 @@ const InfosSup = styled.div`
     }
 `;
 
-const UserName = styled.span`
+const UserName = styled.div`
     color: #0869b5;
     margin-right: 10px;
-
+    display: inline-block;
+    
     &:hover {
-        color: #0570b1;
+        transform: scale(1.1) translateZ(0);
     }
 `;
 

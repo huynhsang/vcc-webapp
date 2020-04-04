@@ -22,7 +22,7 @@ const useStyle = makeStyles(() => ({
 }));
 
 const Wrapper = styled.div`
-    padding: 0px 1em 20px;
+    padding-bottom: 20px;
 `;
 
 const FootWrapper = styled.div`
