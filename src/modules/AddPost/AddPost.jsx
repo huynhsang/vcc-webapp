@@ -9,7 +9,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import SimpleMDEReact from 'react-simplemde-editor';
 import { getTags } from '../../services/tags.service';
 import { getUsers } from '../../services/user.service';
-import ReactMarkdown from 'react-markdown';
 
 const useStyles = makeStyles(() => ({
     marginBottom: {

@@ -8,7 +8,6 @@ import { Badge } from '../../component/Badge';
 import Tag from '../../component/Tag';
 import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
-import { rowCss } from '../../component/Wrappers';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
 
@@ -102,7 +101,6 @@ const ResolveLabel = styled.div`
 `;
 
 const TagsWrapper = styled.div`
-    ${rowCss};
     margin-bottom: 10px;
 `;
 

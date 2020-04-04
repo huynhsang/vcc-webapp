@@ -26,7 +26,7 @@ const RightWrapper = styled.div``;
 const PostsPage = () => {
     const { t } = useTranslation();
 
-    const postsRender = postsMock.map(val => <Post key={val.key} post={val} />);
+    const postsRender = postsMock(5).map(val => <Post key={val.id} post={val} />);
     return (
         <Wrapper>
             <PageCover />

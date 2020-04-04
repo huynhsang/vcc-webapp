@@ -13,6 +13,7 @@ import { QuestionsPage } from '../QuestionsPage';
 import { QuestionView } from '../QuestionView';
 import { PostsPage } from '../PostsPage';
 import { AddPost } from '../AddPost';
+import { PostView } from '../PostView';
 
 import {
     EmailVerification,
@@ -51,6 +52,11 @@ const AppRouter = () => {
                 render={props => <AddPost {...props} />}
             />
             <Route
+                path="/posts/:slug"
+                exact
+                render={props => <PostView {...props} />}
+            />
+            <Route
                 path="/information"
                 render={props => <InfosPage {...props} />}
             />
@@ -78,10 +84,7 @@ const AppRouter = () => {
                 path="/reset-password"
                 render={props => <ResetPassword {...props} />}
             />
-            <Route
-                path="/policy"
-                render={props => <Policy {...props} />}
-            />
+            <Route path="/policy" render={props => <Policy {...props} />} />
             <Route
                 exact
                 path="/social-login"

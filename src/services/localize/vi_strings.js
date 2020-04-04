@@ -224,6 +224,8 @@ export default {
     question_created_title_limit: 'Tiêu đề phải có ít nhất 20 kí tự',
     question_created_body_limit: 'Mô tả câu hỏi phải có ít nhất 20 kí tự',
 
+    post_more_from_VCNC: 'Xem thêm',
+
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
 

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DefaultWrapper } from '../../component/Wrappers';
-import { PageCover } from '../Header';
 import { useTranslation } from 'react-i18next';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
