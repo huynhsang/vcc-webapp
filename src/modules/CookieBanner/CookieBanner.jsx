@@ -43,7 +43,7 @@ const CookieBanner = ({ history }) => {
     const { t } = useTranslation();
     const classes = useStyle();
 
-    const [isShownCookieBanner, setBanner] = React.useState(false);
+    const [isShownCookieBanner, setBanner] = React.useState(true);
 
     const isConsentRequired = getCookie(CONSENT_REQUIRED_COOKIE_KEY) === 'true';
 
@@ -70,7 +70,7 @@ const CookieBanner = ({ history }) => {
             className={classes.banner}
             open={isShownCookieBanner}
             anchorOrigin={{
-                vertical: 'bottom',
+                vertical: 'top',
                 horizontal: 'center'
             }}
             message={
