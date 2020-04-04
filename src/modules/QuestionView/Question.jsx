@@ -52,12 +52,13 @@ const Title = styled.div`
     font-size: 1.1rem;
 `;
 
-const UserName = styled.span`
+const UserName = styled.div`
     color: #009fff;
     font-size: 1.1em;
+    display: inline-block;
 
     &:hover {
-        color: #0570b1;
+        transform: scale(1.1) translateZ(0);
     }
 `;
 

@@ -67,16 +67,21 @@ const AskWrapper = styled.div`
     margin-bottom: 10px;
     color: white;
 
-    & span {
+    & div {
         color: #ffff00cc;
         border-bottom: 1px solid;
-        margin-left: 10px;
+        margin-left: 15px;
         user-select: none;
         white-space: nowrap;
         cursor: pointer;
+        font-weight: 600;
+        display: inline-block;
+        line-height: 20px;
+        padding-right: 2px;
 
         &:hover {
             color: yellow;
+            transform: scale(1.1);
         }
     }
 `;
@@ -123,9 +128,9 @@ const PageCover = ({ showLoginConfirm, isAuthenticated, history }) => {
                 <LeftContent>
                     <AskWrapper>
                         {t('home_ask_verified_professionals')}
-                        <span onClick={onLickAddQuestion}>
+                        <div onClick={onLickAddQuestion}>
                             {`+ ${t('home_ask_a_question')}`}
-                        </span>
+                        </div>
                     </AskWrapper>
                     <FindOut>
                         <Link to="/information">{t('home_find_out_how')}</Link>

@@ -15,7 +15,7 @@ const LogoWrapper = styled.div`
     overflow: hidden;
     padding: 1px;
     &:hover {
-        border-color: black;
+        transform: scale(1.1) translateZ(0);
     }
 
     ${media.mobileLandscape`

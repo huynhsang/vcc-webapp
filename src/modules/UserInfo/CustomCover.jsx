@@ -129,7 +129,7 @@ const CustomCover = ({ userProfile, isCurrentUser = false }) => {
                     {!isCurrentUser && (
                         <AlginRight>
                             <AskButton
-                                label={t('common_ask')}
+                                label={t('common_ask_a_question')}
                                 toLink={`/add-question?userAsked=${id}`}
                             />
                         </AlginRight>

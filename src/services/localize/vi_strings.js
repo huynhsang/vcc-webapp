@@ -285,7 +285,7 @@ export default {
         'Nếu bạn muốn chia sẻ câu chuyện của mình trên VCNC blog, vui lòng để lại lời nhắn cho VCNC tại ',
     contact_us_reply_soon:
         ' Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.',
-    contact_us_feedback: 'Mọi ý kiến phản hồi khác vui lòng gửi đến :',
+    contact_us_feedback: 'Mọi ý kiến phản hồi khác vui lòng gửi đến: ',
     contact_us_sincerely: 'Chân thành cảm ơn đóng góp của bạn!',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
