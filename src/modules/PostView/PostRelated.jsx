@@ -28,7 +28,7 @@ const CoverImage = styled.div`
     height: 200px;
     background-position: center;
     background-color: black;
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
     background-image: url('${(p) => p.src}');
 `;

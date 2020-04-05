@@ -3,6 +3,13 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
+import UserLogo from '../../component/UserLogo';
+
+const FlexWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+`;
 
 const Wrapper = styled.div`
     display: flex;
@@ -19,9 +26,10 @@ const ContentWrapper = styled.div`
 
 const ImgCover = styled.div`
     background-position: center;
-    background-repeat: none;
-    background-size: cover;
-    background-image: url('${p => p.img}');
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-image: url('${(p) => p.img}');
     width: 150px;
 `;
 
@@ -35,12 +43,14 @@ const Resume = styled.div`
     color: #636363;
 `;
 
-const MainCharacter = styled.div`
-    margin-top: 5px;
-`;
+const MainCharacter = styled.div``;
 
 const Time = styled.time`
     color: #979797;
+`;
+
+const Infos = styled.div`
+    margin-left: 10px;
 `;
 
 const Post = ({ post }) => {
@@ -63,10 +73,15 @@ const Post = ({ post }) => {
             <ContentWrapper>
                 <Title>{title}</Title>
                 <Resume>{resume}</Resume>
-                <MainCharacter>{characterName}</MainCharacter>
-                <Time dateTime={created}>
-                    {` ${new Date(created).toDateString()}`}
-                </Time>
+                <FlexWrapper>
+                    <UserLogo user={{ avatar: '' }} />
+                    <Infos>
+                        <MainCharacter>{characterName}</MainCharacter>
+                        <Time dateTime={created}>
+                            {` ${new Date(created).toDateString()}`}
+                        </Time>
+                    </Infos>
+                </FlexWrapper>
             </ContentWrapper>
             <ImgCover img={coverImage || VCNCLogo} alt="" />
         </Wrapper>

@@ -2,32 +2,22 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import { getTags } from '../../services/tags.service';
-import { getNameByLanguage } from '../../utils/multiple-language';
+import { getTags } from '../services/tags.service';
+import { getNameByLanguage } from '../utils/multiple-language';
 
-import { RowWrapper } from '../../component/Wrappers';
+import { RowWrapper } from './Wrappers';
 import Button from '@material-ui/core/Button';
 
-import { tagStyle } from '../../component/Tag';
-
-import { createMediaTemplate } from '../../utils/css-tools';
-const media = createMediaTemplate();
+import { tagStyle } from './Tag';
 
 const useStyles = makeStyles(() => tagStyle);
 
 const Wrapper = styled.div`
-    width: 30%;
     min-height: 100px;
     border: 1px solid #b5b5b5;
     border-radius: 4px;
     padding: 20px 10px 10px;
     position: relative;
-
-    ${media.mobileLandscape`
-        width: 100%;
-        min-height: 0;
-        margin-top: 15px;
-    `}
 `;
 
 const Label = styled.div`

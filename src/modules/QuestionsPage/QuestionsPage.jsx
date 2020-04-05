@@ -21,7 +21,7 @@ import { voteQuestionFn } from '../../actions/questions';
 import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
 import CategoryFilter from './CategoryFilter';
-import TagFilter from './TagFilter';
+import TagFilter from '../../component/TagFilter';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -55,6 +55,16 @@ const LeftWrapper = styled.div`
         width: 100%;
         padding: 0;
         margin-top: 10px;
+    `}
+`;
+
+const RightWrapper = styled.div`
+    width: 30%;
+    
+    ${media.mobileLandscape`
+        width: 100%;
+        min-height: 0;
+        margin-top: 15px;
     `}
 `;
 
@@ -119,7 +129,7 @@ const QuestionPage = ({
         noanswer
     ]);
 
-    const onChangeFilter = obj => {
+    const onChangeFilter = (obj) => {
         const url = `/questions?${qs.stringify({
             show,
             page: 1,
@@ -151,11 +161,13 @@ const QuestionPage = ({
             <PageCover />
             <CategoryFilter category={category} history={history} />
             <Wrapper>
-                <TagFilter
-                    category={category}
-                    tags={tags}
-                    onChangeFilter={onChangeFilter}
-                />
+                <RightWrapper>
+                    <TagFilter
+                        category={category}
+                        tags={tags}
+                        onChangeFilter={onChangeFilter}
+                    />
+                </RightWrapper>
                 <LeftWrapper>
                     <QuestionFilter
                         isAuthenticated={isAuthenticated}
@@ -183,7 +195,7 @@ const QuestionPage = ({
                                             numberQuestions / DEFAULT_LIMIT
                                         )}
                                         activePage={page}
-                                        changePage={newPage =>
+                                        changePage={(newPage) =>
                                             onChangeFilter({ page: newPage })
                                         }
                                         justifyContent="center"
@@ -211,8 +223,8 @@ const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
     isAuthenticated
 });
 
-const mapDispatchToProps = dispatch => ({
-    getQuestions: params => dispatch(getQuestionsFn(params)),
+const mapDispatchToProps = (dispatch) => ({
+    getQuestions: (params) => dispatch(getQuestionsFn(params)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action))
