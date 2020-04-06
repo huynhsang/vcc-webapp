@@ -32,11 +32,11 @@ const Wrapper = styled.div`
 `;
 
 const InfosWrapper = styled.div`
-    margin-left: 10px;
+    margin: 0 0 5px 10px;
 `;
 
 const InfosSup = styled.div`
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     font-size: 0.9em;
     & span {
         color: #7f7f7f;
@@ -81,6 +81,7 @@ const FlexWrapper = styled.div`
 
 const FlexSpaceBetween = styled(FlexWrapper)`
     justify-content: space-between;
+    align-items: flex-end;
 `;
 
 const TopWrapper = styled(FlexSpaceBetween)`
@@ -102,13 +103,15 @@ const ResolveLabel = styled.div`
 `;
 
 const TagsWrapper = styled.div`
-    margin-bottom: 10px;
 `;
 
-const SocialWrapper = styled.div`
+const BottomWrapper = styled.div`
     border-top: 1px solid #eaeaea;
     padding-top: 10px;
-    margin-top: 10px;
+    margin-top: 5px;
+
+    display: flex;
+    justify-content: space-between;
 `;
 
 const Question = ({
@@ -137,16 +140,16 @@ const Question = ({
 
     const { id: currentUserId } = getIdAndToken();
 
-    const tagsRender = (tagList || []).map(tag => (
+    const tagsRender = (tagList || []).map((tag) => (
         <Tag key={tag.id} tag={tag} />
     ));
 
-    const redirect = url => ev => {
+    const redirect = (url) => (ev) => {
         ev.stopPropagation();
         history.push(url);
     };
 
-    const handleVoteQuestion = isPositiveVote => {
+    const handleVoteQuestion = (isPositiveVote) => {
         if (!isAuthenticated) {
             return showLoginConfirm();
         }
@@ -171,16 +174,6 @@ const Question = ({
             <DescriptionWrapper>
                 <ReactMarkdown source={body} />
             </DescriptionWrapper>
-            <FlexWrapper>
-                <UserLogo user={askedBy} />
-                <InfosWrapper>
-                    <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                        {`${askedBy.firstName} ${askedBy.lastName}`}
-                    </UserName>
-                    <br />
-                    <Badge points={askedBy.points} />
-                </InfosWrapper>
-            </FlexWrapper>
             <InfosSup>
                 <span>{`${t('common_asked')}: `}</span>
                 <time dateTime={created}>
@@ -202,18 +195,28 @@ const Question = ({
                         handleVote={handleVoteQuestion}
                     />
                 </FlexWrapper>
-                <InfoSpace>
-                    <i className="icon-eye" />
-                    <span>{`${viewCount} ${t('common_views')}`}</span>
-                </InfoSpace>
+                <FlexWrapper>
+                    <UserLogo user={askedBy} />
+                    <InfosWrapper>
+                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
+                            {`${askedBy.firstName} ${askedBy.lastName}`}
+                        </UserName>
+                        <br />
+                        <Badge points={askedBy.points} />
+                    </InfosWrapper>
+                </FlexWrapper>
             </FlexSpaceBetween>
-            <SocialWrapper>
+            <BottomWrapper>
                 <SocialNetwork
                     fbLink={`${FACEBOOK_SHARE_URL}${url}`}
                     twitterLink={`${TWITTER_SHARE_URL}${url}`}
                     linkedInLink={`${LINKEDIN_SHARE_URL}${url}`}
                 />
-            </SocialWrapper>
+                <InfoSpace>
+                    <i className="icon-eye" />
+                    <span>{`${viewCount} ${t('common_views')}`}</span>
+                </InfoSpace>
+            </BottomWrapper>
         </Wrapper>
     );
 };

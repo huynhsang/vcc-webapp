@@ -55,6 +55,7 @@ const TagLabel = styled.div`
     top: -10px;
     left: 10px;
     padding: 0 2px;
+    font-size: 12px;
 `;
 
 const QuestionTags = ({ tags, tagIds, setTagIds }) => {
@@ -66,9 +67,6 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
     }
 
     const onClickTag = tagId => () => {
-        console.log(tagIds);
-        console.log(tagId);
-        console.log(tagIds.includes(tagId));
         if (tagIds.includes(tagId)) {
             setTagIds(tagIds.filter(val => val !== tagId))
         } else {
