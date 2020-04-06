@@ -19,11 +19,11 @@ const QuestionSituation = ({
 
     const handleUsers = (ev, value) => {
         if (value && value.length <= 2) {
-            setSupporterIds(value.map(val => val.id));
+            setSupporterIds(value.map((val) => val.id));
         }
     };
 
-    const defaultUsers = usersToMatch.filter(val =>
+    const defaultUsers = usersToMatch.filter((val) =>
         supporterIds.includes(val.id)
     );
 
@@ -35,7 +35,7 @@ const QuestionSituation = ({
                 control={
                     <Switch
                         checked={isPublic}
-                        onChange={ev => setIsPublic(ev.target.checked)}
+                        onChange={(ev) => setIsPublic(ev.target.checked)}
                         color="primary"
                     />
                 }
@@ -44,19 +44,17 @@ const QuestionSituation = ({
             <h3>{t('question_support_list')}</h3>
             <p>{t('question_support_list_des')}</p>
             <p>
-                {t(
-                    isPublic
-                        ? 'question_support_list_des_sup_empty'
-                        : 'question_support_list_require'
-                )}
+                {`${t('question_support_list_des_sup_empty')} ${
+                    isPublic ? t('question_support_list_require') : ''
+                }`}
             </p>
             <Autocomplete
                 multiple
                 options={usersToMatch}
-                getOptionLabel={user => `${user.lastName} ${user.firstName}`}
+                getOptionLabel={(user) => `${user.lastName} ${user.firstName}`}
                 value={defaultUsers || []}
                 filterSelectedOptions
-                renderInput={params => (
+                renderInput={(params) => (
                     <TextField
                         {...params}
                         variant="outlined"

@@ -56,7 +56,7 @@ const Login = ({
     const { t } = useTranslation();
     const classes = useStyle();
 
-    const [agree, setAgree] = React.useState(false);
+    const [agree, setAgree] = React.useState(true);
 
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
