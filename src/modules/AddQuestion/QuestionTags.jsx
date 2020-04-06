@@ -1,14 +1,16 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-
+import { getNameByLanguage } from '../../utils/multiple-language';
 import Check from '@material-ui/icons/Check';
+import Button from '@material-ui/core/Button';
+import { tagStyle } from '../../component/Tag';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
+
+const useStyles = makeStyles(() => tagStyle);
 
 const Wrapper = styled.div``;
 
@@ -39,18 +41,56 @@ const CheckIcon = styled(Check)`
     color: green;
 `;
 
+const TagsWrapper = styled.div`
+    position: relative;
+    border: 1px solid #7d7d7d;
+    border-radius: 3px;
+    min-height: 50px;
+    padding: 15px 10px 5px;
+`;
+
+const TagLabel = styled.div`
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    left: 10px;
+    padding: 0 2px;
+`;
+
 const QuestionTags = ({ tags, tagIds, setTagIds }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     if (!tags) {
         return <div />;
     }
 
-    const handleTags = (ev, value) => {
-        setTagIds(value ? value.map(val => val.id) : []);
+    const onClickTag = tagId => () => {
+        console.log(tagIds);
+        console.log(tagId);
+        console.log(tagIds.includes(tagId));
+        if (tagIds.includes(tagId)) {
+            setTagIds(tagIds.filter(val => val !== tagId))
+        } else {
+            setTagIds([...tagIds, tagId])
+        }
     };
 
-    const defaultTags = tags.filter(val => tagIds.includes(val.id));
+    const tagElements = tags.map(tag => {
+        const isActive = tagIds.includes(tag.id);
+        return (
+            <Button
+                key={tag.id}
+                onClick={onClickTag(tag.id)}
+                size="small"
+                variant="contained"
+                className={`${classes.button} ${isActive &&
+                    classes.activeButton}`}
+            >
+                {getNameByLanguage(tag)}
+            </Button>
+        );
+    });
 
     return (
         <Wrapper>
@@ -67,22 +107,10 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
                     </div>
                 </FlexWrapper>
             </ExampleWrapper>
-            <Autocomplete
-                multiple
-                options={tags}
-                getOptionLabel={tag => tag.nameEn}
-                value={defaultTags}
-                filterSelectedOptions
-                renderInput={params => (
-                    <TextField
-                        {...params}
-                        variant="outlined"
-                        label={t('common_tags')}
-                        placeholder="Tag"
-                    />
-                )}
-                onChange={handleTags}
-            />
+            <TagsWrapper>
+                <TagLabel>{t('common_tags')}</TagLabel>
+                {tagElements}
+            </TagsWrapper>
         </Wrapper>
     );
 };

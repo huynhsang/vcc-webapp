@@ -31,6 +31,7 @@ const CheckBox = ({
       }
       control={
         <Checkbox
+          color='primary'
           className={leftMargin ? classes.leftMargin : ''}
           checked={isChecked}
           onChange={(ev) => handleChange(ev.target.checked)}
