@@ -24,19 +24,19 @@ export const badges = [
     {
         max: 549,
         level: 3,
-        label: 'badges_intermidiate',
+        label: 'badges_intermediate',
         labelColor: 'rgba(60, 153, 61, 0.99)'
     },
     {
         max: 299,
         level: 2,
-        label: 'badges_intermidiate',
+        label: 'badges_intermediate',
         labelColor: 'rgba(60, 153, 61, 0.99)'
     },
     {
         max: 149,
         level: 1,
-        label: 'badges_intermidiate',
+        label: 'badges_intermediate',
         labelColor: 'rgba(60, 153, 61, 0.99)'
     },
     {

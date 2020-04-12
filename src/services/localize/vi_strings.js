@@ -85,7 +85,7 @@ export default {
     common_follow_us: 'Theo dõi chúng tôi',
     common_sort_by: 'Sắp xếp',
     common_information: 'Thông tin',
-    common_point_scale: 'Thang điểm',
+    common_points_scale: 'Thang điểm',
     common_category: 'Category',
     common_review: 'Xem trước',
     common_close: 'Đóng',
@@ -244,7 +244,7 @@ export default {
         'câu trả lời wiki ngoài cộng đồng để đạt được huy hiệu này. Câu trả lời cho điểm cao nhất vượt qua câu trả lời được chấp nhận với số điểm cao hơn',
     badges_beginner: 'Beginner',
     badges_professional: 'Professional {{level}}',
-    badges_intermidiate: 'Intermidiate {{level}}',
+    badges_intermediate: 'Intermediate {{level}}',
     badges_expert: 'Expert',
 
     badges_profile_compeleted: 'Hoàn thành bảng thông tin cá nhân.',
