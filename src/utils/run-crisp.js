@@ -17,3 +17,9 @@ export const setCrispUserInfos = userInfos => {
         window.$crisp.push(["do", "session:reset"]);
     }
 }
+
+export const openCrisp = () => {
+    if(window.$crisp){
+        window.$crisp.push(['do', 'chat:open']);
+    }
+}

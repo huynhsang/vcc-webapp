@@ -270,10 +270,9 @@ export default {
 
     contact_us_hello: 'We are here to listen to you!',
     contact_us_if_you_want_to_share:
-        'If you want to share your story with us, please leave us a message at ',
+        'If you want to share your story on VCNC blog or need other support, please email to ',
     contact_us_reply_soon: ' We will contact you as soon as possible.',
-    contact_us_feedback:
-        'If you need help with other issues, please email to: ',
+    contact_us_get_live_support: 'Get live support',
     contact_us_sincerely: 'Sincerely,',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',

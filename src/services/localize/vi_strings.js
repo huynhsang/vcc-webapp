@@ -273,10 +273,10 @@ export default {
 
     contact_us_hello: 'VCNC chúc bạn một ngày tốt lành!',
     contact_us_if_you_want_to_share:
-        'Nếu bạn muốn chia sẻ câu chuyện của mình trên VCNC blog, vui lòng để lại lời nhắn cho VCNC tại ',
+        'Nếu bạn muốn chia sẻ câu chuyện của bạn trên VCNC blog hoặc cần hỗ trợ, vui lòng email đến ',
     contact_us_reply_soon:
         ' Chúng tôi sẽ liên hệ bạn trong thời gian sớm nhất.',
-    contact_us_feedback: 'Mọi ý kiến phản hồi khác vui lòng gửi đến: ',
+    contact_us_get_live_support: 'Hỗ trợ trực tuyến',
     contact_us_sincerely: 'Chân thành cảm ơn đóng góp của bạn!',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
