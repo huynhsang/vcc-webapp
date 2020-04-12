@@ -31,6 +31,7 @@ const CoverImage = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('${(p) => p.src}');
+    border: 5px solid black;
 `;
 
 const FlexWrapper = styled.div`

@@ -31,6 +31,7 @@ const ImgCover = styled.div`
     background-size: contain;
     background-image: url('${(p) => p.img}');
     width: 150px;
+    border: 2px solid black;
 `;
 
 const Title = styled.div`
