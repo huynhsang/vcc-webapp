@@ -25,14 +25,6 @@ const actionNames = keyMirror({
 
     GET_USER_BY_LOGIN_TOKEN_SUCCESS: null,
 
-    //HOME
-    GET_TOP_USERS_REQUEST: null,
-    GET_TOP_USERS_SUCCESS: null,
-    GET_TOP_USERS_FAILURE: null,
-    GET_POPULAR_QUESTIONS_REQUEST: null,
-    GET_POPULAR_QUESTIONS_SUCCESS: null,
-    GET_POPULAR_QUESTIONS_FAILURE: null,
-
     //Questions
     GET_QUESTIONS_REQUEST: null,
     GET_QUESTIONS_SUCCESS: null,
