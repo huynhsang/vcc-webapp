@@ -6,11 +6,13 @@ import isEmpty from 'lodash/isEmpty';
 import { getNameByLanguage } from '../../utils/multiple-language';
 import { Badge } from '../../component/Badge';
 import Tag from '../../component/Tag';
-import Vote from '../../component/Vote';
+import LikeBox from '../../component/LikeBox';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { rowCss } from '../../component/Wrappers';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
+
+import EyeIcon from '@material-ui/icons/RemoveRedEye';
 
 import {
     FACEBOOK_SHARE_URL,
@@ -24,7 +26,7 @@ const media = createMediaTemplate();
 
 const Wrapper = styled.div`
     background-color: white;
-    padding: 20px 20px 10px;
+    padding: 15px 20px 10px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     ${media.mobileLandscape`
@@ -37,7 +39,6 @@ const InfosWrapper = styled.div`
 `;
 
 const InfosSup = styled.div`
-    margin-bottom: 10px;
     font-size: 0.9em;
     & span {
         color: #7f7f7f;
@@ -55,8 +56,9 @@ const Title = styled.div`
 
 const UserName = styled.div`
     color: #009fff;
-    font-size: 1.1em;
+    font-size: 0.9rem;
     display: inline-block;
+    line-height: 1rem;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -65,27 +67,20 @@ const UserName = styled.div`
 
 const DescriptionWrapper = styled.div`
     line-height: 18px;
-    margin: 15px 0;
+    margin: 10px 0;
     color: #464646;
-`;
-
-const InfoSpace = styled.span`
-    & i {
-        margin-right: 5px;
-    }
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: ${(p) => p.alignItems || 'center'};
+    justify-content: ${(p) => p.justifyContent};
+    flex-wrap: wrap;
 `;
 
-const FlexSpaceBetween = styled(FlexWrapper)`
-    justify-content: space-between;
-`;
-
-const TopWrapper = styled(FlexSpaceBetween)`
+const TopWrapper = styled(FlexWrapper)`
     margin-bottom: 15px;
+    justify-content: space-between;
 `;
 
 const ResolveLabel = styled.div`
@@ -104,18 +99,36 @@ const ResolveLabel = styled.div`
 
 const TagsWrapper = styled.div`
     ${rowCss};
-    margin-bottom: 10px;
 `;
 
 const SocialWrapper = styled.div`
     border-top: 1px solid #eaeaea;
     padding-top: 10px;
     margin-top: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const View = styled(FlexWrapper)`
+    margin-left: 8px;
+    font-size: 0.9rem;
+    color: #000000b3;
+    & svg {
+        margin-right: 2px;
+        font-size: 1.1rem;
+    }
+
+    ${media.mobile`
+        & svg {
+            display: none;
+        }
+    `}
 `;
 
 const Question = ({
     question,
-    isVoting,
     isAuthenticated,
     voteQuestion,
     showLoginConfirm,
@@ -139,16 +152,16 @@ const Question = ({
 
     const { id: currentUserId } = getIdAndToken();
 
-    const tagsRender = (tagList || []).map(tag => (
+    const tagsRender = (tagList || []).map((tag) => (
         <Tag key={tag.id} tag={tag} />
     ));
 
-    const redirect = url => ev => {
+    const redirect = (url) => (ev) => {
         ev.stopPropagation();
         history.push(url);
     };
 
-    const handleVoteQuestion = isPositiveVote => {
+    const handleVoteQuestion = (isPositiveVote) => {
         if (!isAuthenticated) {
             return showLoginConfirm();
         }
@@ -173,43 +186,41 @@ const Question = ({
             <DescriptionWrapper>
                 <ReactMarkdown source={body} />
             </DescriptionWrapper>
-            <FlexWrapper>
-                <UserLogo user={askedBy} />
-                <InfosWrapper>
-                    <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                        {`${askedBy.firstName} ${askedBy.lastName}`}
-                    </UserName>
-                    <br />
-                    <Badge points={askedBy.points} />
-                </InfosWrapper>
-            </FlexWrapper>
-            <InfosSup>
-                <span>{`${t('common_asked')}: `}</span>
-                <time dateTime={created}>
-                    {` ${new Date(created).toDateString()}`}
-                </time>
-                <span>{`${t('common_in')}: `}</span>
-                {getNameByLanguage(categoryItem)}
-            </InfosSup>
             {!isEmpty(tagsRender) && <TagsWrapper>{tagsRender}</TagsWrapper>}
-            <FlexSpaceBetween>
+            <FlexWrapper alignItems="flex-end" justifyContent="space-between">
+                <InfosSup>
+                    <span>{`${t('common_asked')}: `}</span>
+                    <time dateTime={created}>
+                        {` ${new Date(created).toDateString()}`}
+                    </time>
+                    <span>{`${t('common_in')}: `}</span>
+                    {getNameByLanguage(categoryItem)}
+                </InfosSup>
                 <FlexWrapper>
-                    <div>Vote : </div>
-                    <Vote
-                        isColumn={false}
-                        points={upVoteCount - downVoteCount}
-                        disableVote={currentUserId === askedBy.id}
-                        voted={voted}
-                        isLoading={isVoting}
-                        handleVote={handleVoteQuestion}
-                    />
+                    <UserLogo user={askedBy} />
+                    <InfosWrapper>
+                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
+                            {`${askedBy.firstName} ${askedBy.lastName}`}
+                        </UserName>
+                        <br />
+                        <Badge points={askedBy.points} />
+                    </InfosWrapper>
                 </FlexWrapper>
-                <InfoSpace>
-                    <i className="icon-eye" />
-                    <span>{`${viewCount} ${t('common_views')}`}</span>
-                </InfoSpace>
-            </FlexSpaceBetween>
+            </FlexWrapper>
             <SocialWrapper>
+                <FlexWrapper>
+                    <LikeBox
+                        upVoteCount={upVoteCount}
+                        downVoteCount={downVoteCount}
+                        voted={voted}
+                        handleVote={handleVoteQuestion}
+                        disabled={currentUserId === askedBy.id}
+                    />
+                    <View>
+                        <EyeIcon />
+                        <span>{`${viewCount} ${t('common_views')}`}</span>
+                    </View>
+                </FlexWrapper>
                 <SocialNetwork
                     fbLink={`${FACEBOOK_SHARE_URL}${url}`}
                     twitterLink={`${TWITTER_SHARE_URL}${url}`}

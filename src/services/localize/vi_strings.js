@@ -105,6 +105,8 @@ export default {
     common_example: 'Ví dụ',
     common_status: 'Trạng thái',
     common_coming_soon:'coming soon',
+    common_like: 'Thích',
+    common_unlike: 'Không thích',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',

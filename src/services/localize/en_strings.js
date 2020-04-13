@@ -105,6 +105,8 @@ export default {
     common_example: 'Example',
     common_status: 'Status',
     common_coming_soon:'coming soon',
+    common_like: 'Like',
+    common_unlike: 'Unlike',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -357,7 +359,7 @@ export default {
 
     footer_all_right_reserved: 'All rights reserved © 2020',
 
-    answer_added_an_answer_on: 'Added an answer on',
+    answer_added_an_answer_on: 'Added on',
 
     infos_what_does_VCNC_do: 'What does VCNC do?',
     infos_what_does_VCNC_do_description:

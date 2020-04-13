@@ -6,12 +6,12 @@ import { badges } from './badge.constant';
 
 const Wrapper = styled.div`
     color: white;
-    border-radius: 3px;
-    padding: 0 5px;
+    border-radius: 0.2rem;
+    padding: 0 0.3rem;
+    line-height: 1.3rem;
     font-size: 0.8rem;
     text-align: center;
     display: inline-block;
-    line-height:22px;
 `;
 
 const Badge = ({ points = 0 }) => {

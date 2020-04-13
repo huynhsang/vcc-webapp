@@ -1,19 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-
 import UserLogo from '../../component/UserLogo';
-
 import isEmpty from 'lodash/isEmpty';
-
 import { getNameByLanguage } from '../../utils/multiple-language';
+import LikeBox from '../../component/LikeBox';
 
 import { Badge } from '../../component/Badge';
 
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
-import Vote from '../../component/Vote';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import DoneAll from '@material-ui/icons/DoneAll';
 import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
@@ -44,7 +41,7 @@ const Wrapper = styled.div`
         background-color: #f4f4f46b;
     }
 
-    border-left: ${p => p.hasLeftBorder && '4px solid #1ea01e'};
+    border-left: ${(p) => p.hasLeftBorder && '4px solid #1ea01e'};
 
     ${media.tabletLandscape`
         margin: 15px 0;
@@ -80,8 +77,9 @@ const Title = styled.div`
 const UserName = styled.div`
     color: #009fff;
     margin-right: 10px;
-    font-size: 1.1em;
+    font-size: 0.9em;
     display: inline-block;
+    line-height: 1rem;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -100,6 +98,7 @@ const BottomWrapper = styled.div`
     border-top: 1px solid #cecece;
     color: #585858;
     font-size: 0.9rem;
+    padding: 0.6rem 0;
 `;
 
 const FlexWrapper = styled.div`
@@ -219,16 +218,16 @@ const Question = ({
 
     const { id: currentUserId } = getIdAndToken();
 
-    const tagsRender = (tagList || []).map(tag => (
+    const tagsRender = (tagList || []).map((tag) => (
         <Tag key={tag.id} tag={tag} />
     ));
 
-    const redirect = url => ev => {
+    const redirect = (url) => (ev) => {
         ev.stopPropagation();
         history.push(url);
     };
 
-    const handleVoteQuestion = isPositiveVote => {
+    const handleVoteQuestion = (isPositiveVote) => {
         if (!isAuthenticated) {
             return showLoginConfirm();
         }
@@ -236,7 +235,7 @@ const Question = ({
         voteQuestion(id, action);
     };
 
-    const userAskedList = supporterList.map(val => (
+    const userAskedList = supporterList.map((val) => (
         <UserAsked key={val.id}>{`${val.lastName} ${val.firstName}`}</UserAsked>
     ));
 
@@ -290,17 +289,13 @@ const Question = ({
                 </UserAsk>
             </UserWrapper>
             <BottomWrapper>
-                <FlexWrapper>
-                    <div>Vote : </div>
-                    <Vote
-                        isColumn={false}
-                        points={upVoteCount - downVoteCount}
-                        disableVote={currentUserId === askedBy.id}
-                        voted={voted}
-                        isLoading={isVoting}
-                        handleVote={handleVoteQuestion}
-                    />
-                </FlexWrapper>
+                <LikeBox
+                    upVoteCount={upVoteCount}
+                    downVoteCount={downVoteCount}
+                    voted={voted}
+                    handleVote={handleVoteQuestion}
+                    disabled={currentUserId === askedBy.id}
+                />
                 <FlexWrapper>
                     <InfoSpace>
                         <ModeComment />

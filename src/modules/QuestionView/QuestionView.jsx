@@ -23,6 +23,9 @@ import { PageCover } from '../Header';
 import Button from '@material-ui/core/Button';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
+
 const useStyles = makeStyles(() => ({
     linkButton: {
         color: 'rgba(0, 0, 0, 0.58)',
@@ -41,6 +44,9 @@ const AnswerWrapper = styled.div`
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     margin-top: 20px;
+    ${media.mobileLandscape`
+        padding: 10px;
+    `}
 `;
 
 const AnswerCount = styled.div`
@@ -71,7 +77,6 @@ const QuestionView = ({
 
     const {
         question,
-        isVotingQuestion,
         votingAnswerId,
         isCreatingAnswer,
         isFetchingError
@@ -115,6 +120,7 @@ const QuestionView = ({
                 voteAnswer={voteAnswer}
                 approveAnswer={approveAnswerInner}
                 isBestAnswer={bestAnswerItem && bestAnswerItem.id === a.id}
+                history={history}
             />
         );
     });
@@ -136,7 +142,6 @@ const QuestionView = ({
                     isAuthenticated={isAuthenticated}
                     showLoginConfirm={showLoginConfirm}
                     voteQuestion={voteQuestion}
-                    isVoting={isVotingQuestion}
                 />
                 <AnswerWrapper>
                     <AnswerCount>
