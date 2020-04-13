@@ -6,7 +6,7 @@ import { Badge } from '../../component/Badge';
 import { useTranslation } from 'react-i18next';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import Button from '@material-ui/core/Button';
-import DoneOutline from '@material-ui/icons/DoneOutline';
+import CheckCircle from '@material-ui/icons/CheckCircle';
 import { createMediaTemplate } from '../../utils/css-tools';
 import LikeBox from '../../component/LikeBox';
 import UserLogo from '../../component/UserLogo';
@@ -33,8 +33,8 @@ const FlexWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eaeaea;
+    margin-top: 10px;
+    border-top: 1px solid #eaeaea;
 `;
 
 const DateWrapper = styled.div`
@@ -46,14 +46,13 @@ const DateWrapper = styled.div`
 `;
 
 const UserName = styled.div`
-    margin-right: 10px;
     font-size: 0.9rem;
     line-height: 1rem;
 `;
 
-const DoneOutlineIcon = styled(DoneOutline)`
+const CheckCircleIcon = styled(CheckCircle)`
     color: #1ea01e;
-    font-size: 1.8rem !important;
+    font-size: 1.6rem !important;
     margin-right: 5px;
 `;
 
@@ -69,7 +68,6 @@ const InfosWrapper = styled.div`
 
 const Answer = ({
     answer,
-    isVoting,
     isAuthenticated,
     showLoginConfirm,
     voteAnswer,
@@ -123,7 +121,7 @@ const Answer = ({
                 </FlexWrapper>
             </FlexWrapper>
             <BottomWrapper>
-                {isBestAnswer && <DoneOutlineIcon />}
+                {isBestAnswer && <CheckCircleIcon />}
                 {!!approveAnswer && (
                     <Button
                         variant="contained"

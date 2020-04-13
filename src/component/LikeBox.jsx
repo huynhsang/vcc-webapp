@@ -4,16 +4,19 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button';
-import LikeIcon from '@material-ui/icons/ThumbUp';
-import UnlikeIcon from '@material-ui/icons/ThumbDown';
+import LikeIcon from '@material-ui/icons/ThumbUpOutlined';
+import UnlikeIcon from '@material-ui/icons/ThumbDownOutlined';
+import ActiveLikeIcon from '@material-ui/icons/ThumbUp';
+import ActiveUnlikeIcon from '@material-ui/icons/ThumbDown';
 
 const Flex = styled.div`
     display: flex;
 `;
 
 const button = {
-    fontSize: '0.8rem',
+    fontSize: '0.9rem',
     padding: '2px 5px',
+    textTransform: 'none',
 };
 
 const useStyles = makeStyles(() => ({
@@ -35,33 +38,46 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const LikeBox = ({ upVoteCount = 0, downVoteCount = 0, handleVote, voted, disabled }) => {
+const LikeBox = ({
+    upVoteCount = 0,
+    downVoteCount = 0,
+    handleVote,
+    voted,
+    disabled
+}) => {
     const classes = useStyles();
     const { t } = useTranslation();
 
+    const isActiveUp = voted === 'up';
+    const isActiveDown = voted === 'down';
+
     const toVote = (value) => (ev) => {
         ev.stopPropagation();
+        if((isActiveUp && value) || (isActiveDown && !value)){
+            return;
+        }
         handleVote(value);
     };
+
+    const LiveIconImpl = isActiveUp ? ActiveLikeIcon : LikeIcon;
+    const UnliveIconImpl = isActiveDown ? ActiveUnlikeIcon : UnlikeIcon;
 
     return (
         <Flex>
             <Button
-                variant="contained"
-                color="primary"
-                startIcon={<LikeIcon className={classes.icon} />}
+                color={isActiveUp ? 'primary' : 'default'}
+                startIcon={<LiveIconImpl className={classes.icon} />}
                 className={classes.leftButton}
-                disabled={disabled || voted === 'up'}
+                disabled={disabled}
                 onClick={toVote(true)}
             >
                 {`${upVoteCount} ${t('common_like')}`}
             </Button>
             <Button
-                variant="contained"
-                color="secondary"
-                startIcon={<UnlikeIcon className={classes.icon} />}
+                color={isActiveDown ? 'secondary' : 'default'}
+                startIcon={<UnliveIconImpl className={classes.icon} />}
                 className={classes.rightButton}
-                disabled={disabled || voted === 'down'}
+                disabled={disabled}
                 onClick={toVote(false)}
             >
                 {`${downVoteCount} ${t('common_unlike')}`}

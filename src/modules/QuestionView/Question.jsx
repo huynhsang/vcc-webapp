@@ -12,8 +12,6 @@ import { rowCss } from '../../component/Wrappers';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
 
-import EyeIcon from '@material-ui/icons/RemoveRedEye';
-
 import {
     FACEBOOK_SHARE_URL,
     TWITTER_SHARE_URL,
@@ -111,22 +109,6 @@ const SocialWrapper = styled.div`
     align-items: center;
 `;
 
-const View = styled(FlexWrapper)`
-    margin-left: 8px;
-    font-size: 0.9rem;
-    color: #000000b3;
-    & svg {
-        margin-right: 2px;
-        font-size: 1.1rem;
-    }
-
-    ${media.mobile`
-        & svg {
-            display: none;
-        }
-    `}
-`;
-
 const Question = ({
     question,
     isAuthenticated,
@@ -142,7 +124,6 @@ const Question = ({
         categoryItem,
         bestAnswerItem,
         created,
-        viewCount,
         slug,
         tagList,
         upVoteCount,
@@ -216,10 +197,6 @@ const Question = ({
                         handleVote={handleVoteQuestion}
                         disabled={currentUserId === askedBy.id}
                     />
-                    <View>
-                        <EyeIcon />
-                        <span>{`${viewCount} ${t('common_views')}`}</span>
-                    </View>
                 </FlexWrapper>
                 <SocialNetwork
                     fbLink={`${FACEBOOK_SHARE_URL}${url}`}
