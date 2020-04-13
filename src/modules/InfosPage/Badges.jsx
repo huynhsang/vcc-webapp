@@ -131,7 +131,7 @@ const Badges = () => {
             <RightWrapper>
                 <Title>
                     <StyleIcon />
-                    {t('common_point_scale')}
+                    {t('common_points_scale')}
                 </Title>
                 <Stepper orientation="vertical" className={classes.scaleBar}>
                     {pointScale.map((step, index) => {

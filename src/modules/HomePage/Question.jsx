@@ -67,7 +67,9 @@ const InfosSup = styled.div`
 const UserName = styled.div`
     color: #0869b5;
     margin-right: 10px;
+    font-size: 0.9rem;
     display: inline-block;
+    line-height: 1rem;
     
     &:hover {
         transform: scale(1.1) translateZ(0);

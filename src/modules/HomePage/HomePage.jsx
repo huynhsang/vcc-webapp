@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { getTopUsersFn, getPopularQuestionsFn } from '../../actions/home';
 import { PageCover } from '../Header';
 import Question from './Question';
 import TopUser from './TopUser';
@@ -15,6 +14,9 @@ import Button from '@material-ui/core/Button';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { toggleContactUsFn } from '../../actions/app';
+
+import { getUsers } from '../../services/user.service';
+import { getQuestions } from '../../services/question.service';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -58,10 +60,12 @@ const LeftWrapper = styled.div`
 
     display: flex;
     flex-direction: column;
+    padding-bottom: 15px;
 
     ${media.mobileLandscape`
         width: 100%;
         margin: 0;
+        padding: 0;
     `}
 `;
 
@@ -75,6 +79,10 @@ const TopUsersWrapper = styled.div`
     border-left: 4px solid rgba(0, 0, 0, 0.8);
     background-color: white;
     border-radius: 0 6px 6px 0;
+
+    flex-grow: 1;
+    flex-basis: 0;
+
     ${media.mobileLandscape`
         padding-left: 15px;
     `}
@@ -98,28 +106,48 @@ const useStyles = makeStyles(() => ({
 }));
 
 const Home = ({
-    home,
-    getTopUsers,
-    getPopularQuestions,
     toggleContactUs,
     history
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
+    const [users, setUsers] = React.useState([]);
+    const [questions, setQuestions] = React.useState([]);
+
     React.useEffect(() => {
-        getTopUsers();
-        getPopularQuestions();
+        //GET Top users
+        getUsers({
+            filter: {
+                skip: 0,
+                limit: 10
+            }
+        })
+            .then((data) => {
+                setUsers(data);
+            })
+            .catch((err) => console.log(err.message));
+
+        //GET Popular questions
+        getQuestions({
+            filter: {
+                order: 'viewCount DESC',
+                limit: 5
+            }
+        })
+            .then((data) => {
+                setQuestions(data.entities.questions);
+            })
+            .catch((err) => console.log(err.message));
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { topUsers, popularQuestions } = home;
-
-    const renderQuestions = Object.values(popularQuestions || {}).map(q => (
+    const renderQuestions = Object.values(questions || {}).map((q) => (
         <Question key={q.id} question={q} history={history} />
     ));
 
-    const renderUsers = Object.values(topUsers).map(u => (
+    const renderUsers = Object.values(users).map((u) => (
         <TopUser key={u.id} user={u} />
     ));
 
@@ -158,14 +186,8 @@ const Home = ({
     );
 };
 
-const mapStateToProps = ({ home }) => ({
-    home,
+const mapDispatchToProps = (dispatch) => ({
+    toggleContactUs: (val) => dispatch(toggleContactUsFn(val))
 });
 
-const mapDispatchToProps = dispatch => ({
-    getTopUsers: () => dispatch(getTopUsersFn()),
-    getPopularQuestions: () => dispatch(getPopularQuestionsFn()),
-    toggleContactUs: val => dispatch(toggleContactUsFn(val))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);

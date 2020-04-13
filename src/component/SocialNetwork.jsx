@@ -8,14 +8,18 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 const Wrapper = styled.div`
     display: flex;
     & svg {
-        font-size: ${(p) => p.isBig && '30px'};
-        margin-right: 10px;
+        font-size: ${(p) => p.isBig ? '2rem' : '1.7rem'};
+        margin-right: 0.4rem;
         color: #7078857d;
         cursor: pointer;
 
         &:hover {
             color: #707885;
         }
+    }
+
+    & svg:last-child{
+        margin: 0;
     }
 `;
 

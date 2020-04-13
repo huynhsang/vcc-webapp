@@ -1,28 +1,6 @@
 import { getIdAndToken } from '../utils/cookie-tools';
 // const ONE_MONTH = 30 * 24 * 60 * 60 * 1000;
 
-export const getDefaultFields = () => [
-    'id',
-    'avatar',
-    'firstName',
-    'lastName',
-    'numberOfQuestions',
-    'answerCount',
-    'numberOfBestAnswers',
-    'points',
-    'level'
-];
-
-export const questionsFilterGenerator = ({
-    order = null,
-    skip = 0,
-    limit = 6
-}) => ({
-    order,
-    skip,
-    limit
-});
-
 // order
 // numberOfViews DESC
 // numberOfAnswers DESC

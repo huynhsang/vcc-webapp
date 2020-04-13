@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { getNameByLanguage } from '../../utils/multiple-language';
 import { Badge } from '../../component/Badge';
 import Tag from '../../component/Tag';
-import Vote from '../../component/Vote';
+import LikeBox from '../../component/LikeBox';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
@@ -23,7 +23,7 @@ const media = createMediaTemplate();
 
 const Wrapper = styled.div`
     background-color: white;
-    padding: 20px 20px 10px;
+    padding: 15px 20px 10px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     ${media.mobileLandscape`
@@ -54,8 +54,9 @@ const Title = styled.div`
 
 const UserName = styled.div`
     color: #009fff;
-    font-size: 1.1em;
+    font-size: 0.9rem;
     display: inline-block;
+    line-height: 1rem;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -64,28 +65,20 @@ const UserName = styled.div`
 
 const DescriptionWrapper = styled.div`
     line-height: 18px;
-    margin: 15px 0;
+    margin: 10px 0;
     color: #464646;
-`;
-
-const InfoSpace = styled.span`
-    & i {
-        margin-right: 5px;
-    }
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: ${(p) => p.alignItems || 'center'};
+    justify-content: ${(p) => p.justifyContent};
+    flex-wrap: wrap;
 `;
 
-const FlexSpaceBetween = styled(FlexWrapper)`
-    justify-content: space-between;
-    align-items: flex-end;
-`;
-
-const TopWrapper = styled(FlexSpaceBetween)`
+const TopWrapper = styled(FlexWrapper)`
     margin-bottom: 15px;
+    justify-content: space-between;
 `;
 
 const ResolveLabel = styled.div`
@@ -102,21 +95,20 @@ const ResolveLabel = styled.div`
     }
 `;
 
-const TagsWrapper = styled.div`
-`;
+const TagsWrapper = styled.div``;
 
 const BottomWrapper = styled.div`
     border-top: 1px solid #eaeaea;
     padding-top: 10px;
-    margin-top: 5px;
+    margin-top: 10px;
 
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `;
 
 const Question = ({
     question,
-    isVoting,
     isAuthenticated,
     voteQuestion,
     showLoginConfirm,
@@ -130,7 +122,6 @@ const Question = ({
         categoryItem,
         bestAnswerItem,
         created,
-        viewCount,
         slug,
         tagList,
         upVoteCount,
@@ -174,27 +165,16 @@ const Question = ({
             <DescriptionWrapper>
                 <ReactMarkdown source={body} />
             </DescriptionWrapper>
-            <InfosSup>
-                <span>{`${t('common_asked')}: `}</span>
-                <time dateTime={created}>
-                    {` ${new Date(created).toDateString()}`}
-                </time>
-                <span>{`${t('common_in')}: `}</span>
-                {getNameByLanguage(categoryItem)}
-            </InfosSup>
             {!isEmpty(tagsRender) && <TagsWrapper>{tagsRender}</TagsWrapper>}
-            <FlexSpaceBetween>
-                <FlexWrapper>
-                    <div>Vote : </div>
-                    <Vote
-                        isColumn={false}
-                        points={upVoteCount - downVoteCount}
-                        disableVote={currentUserId === askedBy.id}
-                        voted={voted}
-                        isLoading={isVoting}
-                        handleVote={handleVoteQuestion}
-                    />
-                </FlexWrapper>
+            <FlexWrapper alignItems="flex-end" justifyContent="space-between">
+                <InfosSup>
+                    <span>{`${t('common_asked')}: `}</span>
+                    <time dateTime={created}>
+                        {` ${new Date(created).toDateString()}`}
+                    </time>
+                    <span>{`${t('common_in')}: `}</span>
+                    {getNameByLanguage(categoryItem)}
+                </InfosSup>
                 <FlexWrapper>
                     <UserLogo user={askedBy} />
                     <InfosWrapper>
@@ -205,17 +185,20 @@ const Question = ({
                         <Badge points={askedBy.points} />
                     </InfosWrapper>
                 </FlexWrapper>
-            </FlexSpaceBetween>
+            </FlexWrapper>
             <BottomWrapper>
+                <LikeBox
+                    upVoteCount={upVoteCount}
+                    downVoteCount={downVoteCount}
+                    voted={voted}
+                    handleVote={handleVoteQuestion}
+                    disabled={currentUserId === askedBy.id}
+                />
                 <SocialNetwork
                     fbLink={`${FACEBOOK_SHARE_URL}${url}`}
                     twitterLink={`${TWITTER_SHARE_URL}${url}`}
                     linkedInLink={`${LINKEDIN_SHARE_URL}${url}`}
                 />
-                <InfoSpace>
-                    <i className="icon-eye" />
-                    <span>{`${viewCount} ${t('common_views')}`}</span>
-                </InfoSpace>
             </BottomWrapper>
         </Wrapper>
     );

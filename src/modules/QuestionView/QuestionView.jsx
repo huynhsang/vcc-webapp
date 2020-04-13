@@ -22,11 +22,15 @@ import { getIdAndToken } from '../../utils/cookie-tools';
 import { PageCover } from '../Header';
 import Button from '@material-ui/core/Button';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import EyeIcon from '@material-ui/icons/RemoveRedEye';
+
+import { createMediaTemplate } from '../../utils/css-tools';
+const media = createMediaTemplate();
 
 const useStyles = makeStyles(() => ({
     linkButton: {
         color: 'rgba(0, 0, 0, 0.58)',
-        marginBottom: 15
+        marginBottom: 10
     }
 }));
 
@@ -37,18 +41,41 @@ const Background = styled.div`
 
 const AnswerWrapper = styled.div`
     background-color: white;
-    padding: 20px;
+    padding: 10px 20px;
     user-select: none;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
     margin-top: 20px;
+    ${media.mobileLandscape`
+        padding: 5px 10px;
+        margin-top: 10px;
+    `}
+`;
+
+const QuestionInfos = styled.div`
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
 `;
 
 const AnswerCount = styled.div`
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 10px;
     & span {
-        color: black;
-        margin-right: 10px;
+        color: red;
+        margin-right: 5px;
+    }
+`;
+
+const Wrapper =styled(DefaultWrapper)`
+    padding: 10px 20px;
+`;
+
+const View = styled.div`
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+    color: #000000b3;
+    & svg {
+        margin-right: 5px;
+        font-size: 1.1rem;
     }
 `;
 
@@ -71,8 +98,6 @@ const QuestionView = ({
 
     const {
         question,
-        isVotingQuestion,
-        votingAnswerId,
         isCreatingAnswer,
         isFetchingError
     } = questionDetail;
@@ -94,11 +119,17 @@ const QuestionView = ({
         return null;
     }
 
-    const { answerCount, answers, askedBy, bestAnswerItem } = question;
+    const {
+        answerCount,
+        answers,
+        askedBy,
+        bestAnswerItem,
+        viewCount
+    } = question;
 
     const isQuestionOwner = askedBy.id === currentUserId;
 
-    const answersRender = answers.map(a => {
+    const answersRender = answers.map((a) => {
         const isAnswerOwner = a.answerBy && a.answerBy.id === currentUserId;
         const approveAnswerInner =
             !bestAnswerItem && isQuestionOwner && !isAnswerOwner
@@ -109,12 +140,12 @@ const QuestionView = ({
             <Answer
                 key={a.id}
                 answer={a}
-                isVoting={votingAnswerId === a.id}
                 isAuthenticated={isAuthenticated}
                 showLoginConfirm={showLoginConfirm}
                 voteAnswer={voteAnswer}
                 approveAnswer={approveAnswerInner}
                 isBestAnswer={bestAnswerItem && bestAnswerItem.id === a.id}
+                history={history}
             />
         );
     });
@@ -122,7 +153,7 @@ const QuestionView = ({
     return (
         <Background>
             <PageCover />
-            <DefaultWrapper>
+            <Wrapper>
                 <Button
                     onClick={() => history.goBack()}
                     className={classes.linkButton}
@@ -136,13 +167,18 @@ const QuestionView = ({
                     isAuthenticated={isAuthenticated}
                     showLoginConfirm={showLoginConfirm}
                     voteQuestion={voteQuestion}
-                    isVoting={isVotingQuestion}
                 />
                 <AnswerWrapper>
-                    <AnswerCount>
-                        <span>{answerCount}</span>
-                        {t('common_answer')}
-                    </AnswerCount>
+                    <QuestionInfos>
+                        <AnswerCount>
+                            <span>{answerCount}</span>
+                            {t('common_answer')}
+                        </AnswerCount>
+                        <View>
+                            <EyeIcon />
+                            <span>{`${viewCount} ${t('common_views')}`}</span>
+                        </View>
+                    </QuestionInfos>
                     {answersRender}
                 </AnswerWrapper>
                 <AnswerForm
@@ -155,7 +191,7 @@ const QuestionView = ({
                     isCreatingAnswer={isCreatingAnswer}
                     isFetchingError={isFetchingError}
                 />
-            </DefaultWrapper>
+            </Wrapper>
         </Background>
     );
 };
@@ -165,13 +201,13 @@ const mapStateToProps = ({ questionDetail, App: { isAuthenticated } }) => ({
     isAuthenticated
 });
 
-const mapDispatchToProps = dispatch => ({
-    getQuestion: slug => dispatch(getQuestionFn(slug)),
+const mapDispatchToProps = (dispatch) => ({
+    getQuestion: (slug) => dispatch(getQuestionFn(slug)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action)),
     voteAnswer: (answerId, action) => dispatch(voteAnswerFn(answerId, action)),
-    errorAlert: text => dispatch(errorAlertFn(text)),
+    errorAlert: (text) => dispatch(errorAlertFn(text)),
     createAnswer: (questionId, answerBody) =>
         dispatch(createAnswerFn(questionId, answerBody)),
     approveAnswer: (questionId, answerId) =>

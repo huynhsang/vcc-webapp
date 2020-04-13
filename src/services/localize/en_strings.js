@@ -85,7 +85,7 @@ export default {
     common_follow_us: 'Follow us',
     common_sort_by: 'Sort by',
     common_information: 'Information',
-    common_point_scale: 'Point scale',
+    common_points_scale: 'Points scale',
     common_category: 'Category',
     common_review: 'Review',
     common_close: 'Close',
@@ -112,6 +112,8 @@ export default {
     common_cover_image: 'Cover Image',
     common_resume: 'Resume',
     common_submit: 'Submit',
+    common_like: 'Like',
+    common_unlike: 'Unlike',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -227,11 +229,11 @@ export default {
 
     badges_point_system: 'Points System',
     badges_beside_gaining_reputation:
-        'Besides gaining reputation with your questions and answers, you receive badges for being especially helpful.',
-    badges_shown: 'Badges appears on your profile page, questions & answers.',
-    badges_points_for_a_new: 'Points for a new user in the community.',
+        'At VCNC, we value your contribution no matter how big or small. You will get a new badge every time you reach a new level.',
+    badges_shown: 'Badges will appear besides your name every time you ask a question or leave an answer.',
+    badges_points_for_a_new: 'awarded to every new user of the community.',
     badges_choosing_the_best: 'Choosing the best answer for a question.',
-    badges_add_an_answer: 'Add an answer in the community.',
+    badges_add_an_answer: 'awarded for any answer.',
     badges_voting_a_question: 'Voting a question in the community.',
     badges_following_a_user: 'Following a user in the community.',
     badges_voting_an_answer: 'Voting an answer in the community.',
@@ -245,18 +247,18 @@ export default {
         'non-community wiki answers to achieve this badge. Highest scoring answer that outscored an accepted answer with score of more than',
     badges_beginner: 'Beginner',
     badges_professional: 'Professional {{level}}',
-    badges_intermidiate: 'Intermidiate {{level}}',
+    badges_intermediate: 'Intermediate {{level}}',
     badges_expert: 'Expert',
 
-    badges_profile_compeleted: 'Complete your profile.',
-    badges_answer_approved: 'Points for an answer approved.',
-    badges_ask_a_question: 'Points for an question asked.',
+    badges_profile_compeleted: 'awarded if you complete your profile.',
+    badges_answer_approved: 'awarded for any approved answer.',
+    badges_ask_a_question: 'awarded for any question.',
     badges_up_vote_on_question_or_answer:
-        'Points for every up vote of your question or answer.',
+        'awarded for every upvote for your question or answer.',
     badges_down_vote_on_question_or_answer:
-        'Negative points for every up vote of your question or answer.',
-    badges_share_question_or_answer: 'Points for every share.',
-    badges_login: 'Point for login.',
+        'negative point for every down vote for your question or answer.',
+    badges_share_question_or_answer: 'bonus point for sharing a question or answer on social media (facebook/twitter/linkedin).',
+    badges_login: 'bonus point for daily check-in.',
     badges_points_limit: 'It has limit of {{points}} points per day',
 
     mainpage_recent_question: 'Recent Questions',
@@ -279,10 +281,9 @@ export default {
 
     contact_us_hello: 'We are here to listen to you!',
     contact_us_if_you_want_to_share:
-        'If you want to share your story with us, please leave us a message at ',
+        'If you want to share your story on VCNC blog or need other support, please email to ',
     contact_us_reply_soon: ' We will contact you as soon as possible.',
-    contact_us_feedback:
-        'If you need help with other issues, please email to: ',
+    contact_us_get_live_support: 'Get live support',
     contact_us_sincerely: 'Sincerely,',
 
     about_us_VCNC: 'Vietnamese Counselling and Connecting',
@@ -367,7 +368,7 @@ export default {
 
     footer_all_right_reserved: 'All rights reserved © 2020',
 
-    answer_added_an_answer_on: 'Added an answer on',
+    answer_added_an_answer_on: 'Added on',
 
     infos_what_does_VCNC_do: 'What does VCNC do?',
     infos_what_does_VCNC_do_description:
