@@ -106,7 +106,7 @@ export default {
     common_status: 'Trạng thái',
     common_coming_soon:'coming soon',
     common_like: 'Thích',
-    common_unlike: 'Không thích',
+    common_unlike: 'Gạch',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
