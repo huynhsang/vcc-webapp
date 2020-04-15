@@ -121,6 +121,11 @@ const InfoSpace = styled(FlexWrapper)`
         margin-right: 5px;
         font-size: 15px;
     }
+
+    @media (max-width: 395px) {
+        margin-left: 5px;
+        display: ${(p) => p.hideInMobile && 'none'};
+    }
 `;
 
 const ResolveLabel = styled.div`
@@ -167,6 +172,9 @@ const UserAsk = styled.div`
 
 const UserInfos = styled.div`
     margin-left: 10px;
+    ${media.tabletLandscape`
+        margin-left: 5px;
+    `}
 `;
 
 const CategoryWrapper = styled.div`
@@ -192,7 +200,6 @@ const TopWrapper = styled(FlexWrapper)`
 
 const Question = ({
     question,
-    isVoting,
     isAuthenticated,
     voteQuestion,
     showLoginConfirm,
@@ -301,7 +308,7 @@ const Question = ({
                         <ModeComment />
                         <div>{`${answerCount} ${t('common_answer')}`}</div>
                     </InfoSpace>
-                    <InfoSpace>
+                    <InfoSpace hideInMobile>
                         <RemoveRedEye />
                         <div>{`${viewCount} ${t('common_views')}`}</div>
                     </InfoSpace>

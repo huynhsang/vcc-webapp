@@ -25,7 +25,10 @@ const useStyles = makeStyles(() => ({
         '& .MuiButton-startIcon': {
             margin: '-1px 5px 0 0'
         },
-        ...button
+        ...button,
+        '@media (max-width: 400px)': {
+            margin: '0',
+        }
     },
     rightButton: {
         '& .MuiButton-startIcon': {
