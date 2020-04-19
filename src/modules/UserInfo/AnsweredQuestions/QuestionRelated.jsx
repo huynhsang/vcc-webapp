@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 
 import Answer from './Answer';
 
-import { createMediaTemplate } from '../../../utils/css-tools';
 import { getNameByLanguage } from '../../../utils/multiple-language';
 import Tag from '../../../component/Tag';
 import { RowWrapper } from '../../../component/Wrappers';
