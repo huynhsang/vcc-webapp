@@ -47,7 +47,7 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
         const filter = category ? { filter: { categorySlug: category } } : {};
         getTags(filter)
             .then(data => {
-                setTagsToSelect(data);
+                setTagsToSelect(data.filter(Boolean));
             })
             .catch(err => {
                 console.log(err);
@@ -84,7 +84,7 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
 
     return (
         <Wrapper>
-            <Label>{t('common_trending_tags')} </Label>
+            <Label>{t('common_tags')} </Label>
             <RowWrapper>{tagElements}</RowWrapper>
         </Wrapper>
     );

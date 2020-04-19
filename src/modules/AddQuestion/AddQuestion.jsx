@@ -21,7 +21,7 @@ import {
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
 import { getUsers } from '../../services/user.service';
-import { getTagsRelatingCategory } from '../../services/tags.service';
+import { getTags } from '../../services/tags.service';
 import QuestionTabs from './QuestionTabs';
 import { DefaultWrapper } from '../../component/Wrappers';
 import Button from '@material-ui/core/Button';
@@ -115,9 +115,10 @@ const AddQuestion = ({
         if (categoryId) {
             setTags(null);
             const category = categories.find(cat => cat.id === categoryId);
-            getTagsRelatingCategory(category.slug)
+            const filter = category.slug ? { filter: { categorySlug: category.slug } } : {};
+            getTags(filter)
                 .then(data => {
-                    setTags(data);
+                    setTags(data.filter(Boolean));
                 })
                 .catch(err => console.log(err.message));
         }
