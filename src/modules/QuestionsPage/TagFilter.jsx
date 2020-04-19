@@ -44,20 +44,28 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     const [tagsToSelect, setTagsToSelect] = React.useState([]);
 
     React.useEffect(() => {
-        const filter = category ? { filter: { categorySlug: category } } : {};
-        getTags(filter)
-            .then(data => {
+        const params = {
+            filter: {
+                used: 'question'
+            }
+        };
+        if (category) {
+            params.filter.categorySlug = category;
+        }
+
+        getTags(params)
+            .then((data) => {
                 setTagsToSelect(data.filter(Boolean));
             })
-            .catch(err => {
+            .catch((err) => {
                 console.log(err);
             });
     }, [category]);
 
     const tagIds = tags ? tags.split(',') : [];
 
-    const onClickTag = tagId => () => {
-        const index = tagIds.findIndex(id => id === tagId);
+    const onClickTag = (tagId) => () => {
+        const index = tagIds.findIndex((id) => id === tagId);
         if (index !== -1) {
             tagIds.splice(index, 1);
         } else {
@@ -66,7 +74,7 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
         onChangeFilter({ tags: tagIds.join(',') });
     };
 
-    const tagElements = tagsToSelect.map(tag => {
+    const tagElements = tagsToSelect.map((tag) => {
         const isActive = tagIds.includes(tag.id);
         return (
             <Button
@@ -74,8 +82,9 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
                 onClick={onClickTag(tag.id)}
                 size="small"
                 variant="contained"
-                className={`${classes.button} ${isActive &&
-                    classes.activeButton}`}
+                className={`${classes.button} ${
+                    isActive && classes.activeButton
+                }`}
             >
                 {getNameByLanguage(tag)}
             </Button>
