@@ -4,11 +4,9 @@ import {useTranslation} from 'react-i18next';
 
 const Wrapper = styled.div`
     padding: 5px 10px;
-    margin: 10px 0;
+    margin-top: 5px; 
     background-color: white;
-    width: 90%;
-    margin-left: 10%;
-    border-radius: 6px 0 0 6px;
+    border-top: 1px solid #eaeaea;
 `;
 
 const DateWrapper = styled.div`
