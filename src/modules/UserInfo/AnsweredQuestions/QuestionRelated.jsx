@@ -63,7 +63,7 @@ const Infos = styled(FlexWrapper)`
 
 const AnswersWrapper = styled.div``;
 
-const QuestionRelated = ({ answers, location, history }) => {
+const QuestionRelated = ({ question, location, history }) => {
     const { t } = useTranslation();
 
     const {
@@ -73,8 +73,9 @@ const QuestionRelated = ({ answers, location, history }) => {
         title,
         created,
         body,
-        slug
-    } = answers[0].question;
+        slug,
+        answers
+    } = question;
 
     const handleTitle = () => {
         history.push(`/questions/${slug}`);

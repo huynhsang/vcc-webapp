@@ -13,7 +13,6 @@ import {
     editEducation
 } from '../services/education.service';
 import { getQuestions } from '../services/question.service';
-import { getAnswers, getNumberAnswers } from '../services/answer.service';
 import { getUserProfile } from '../services/user.service';
 
 import { errorAlertFn, successAlertFn } from './alertConfirm';
@@ -36,27 +35,26 @@ const {
     EDIT_EDUCATION_SUCCESS,
     EDIT_EDUCATION_FAILURE,
     GET_QUESTIONS_ASKED_SUCCESS,
-    GET_ANSWERS_RELATED_SUCCESS,
     GET_USER_PROFILE_SUCCESS,
-    GET_NUMBER_ANSWERS_RELATED_SUCCESS
+    GET_ANSWRED_QUESTIONS_SUCCESS
 } = actionsNames;
 
 export const getUserProfileSuccess = createAction(GET_USER_PROFILE_SUCCESS);
 
-export const getUserProfileFn = id => {
-    return dispatch => {
+export const getUserProfileFn = (id) => {
+    return (dispatch) => {
         getUserProfile(id)
-            .then(data => {
+            .then((data) => {
                 dispatch(getUserProfileSuccess(data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
 
 export const getExperiencesSuccess = createAction(GET_EXPERIENCES_SUCCESS);
 
-export const getExperiencesFn = userId => {
-    return dispatch => {
+export const getExperiencesFn = (userId) => {
+    return (dispatch) => {
         getExperiences({
             filter: {
                 where: {
@@ -64,10 +62,10 @@ export const getExperiencesFn = userId => {
                 }
             }
         })
-            .then(data => {
+            .then((data) => {
                 dispatch(getExperiencesSuccess(data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
 
@@ -75,17 +73,17 @@ export const createExperienceRequest = createAction(CREATE_EXPERIENCE_REQUEST);
 export const createExperienceSuccess = createAction(CREATE_EXPERIENCE_SUCCESS);
 export const createExperienceFailure = createAction(CREATE_EXPERIENCE_FAILURE);
 
-export const createExperienceFn = data => {
-    return dispatch => {
+export const createExperienceFn = (data) => {
+    return (dispatch) => {
         dispatch(createExperienceRequest());
         createExperience(data)
-            .then(responseData => {
+            .then((responseData) => {
                 dispatch(createExperienceSuccess(responseData));
                 dispatch(
                     successAlertFn(i18n.t('user_info_experience_created'))
                 );
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(createExperienceFailure());
                 dispatch(errorAlertFn(err.response.data.error.message));
             });
@@ -96,17 +94,17 @@ export const editExperienceRequest = createAction(EDIT_EXPERIENCE_REQUEST);
 export const editExperienceSuccess = createAction(EDIT_EXPERIENCE_SUCCESS);
 export const editExperienceFailure = createAction(EDIT_EXPERIENCE_FAILURE);
 
-export const editExperienceFn = data => {
-    return dispatch => {
+export const editExperienceFn = (data) => {
+    return (dispatch) => {
         dispatch(editExperienceRequest());
         editExperience(data)
-            .then(responseData => {
+            .then((responseData) => {
                 dispatch(editExperienceSuccess(responseData));
                 dispatch(
                     successAlertFn(i18n.t('user_info_experience_updated'))
                 );
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(editExperienceFailure());
                 dispatch(errorAlertFn(err.response.data.error.message));
             });
@@ -115,8 +113,8 @@ export const editExperienceFn = data => {
 
 export const getEducationsSuccess = createAction(GET_EDUCATIONS_SUCCESS);
 
-export const getEducationsFn = userId => {
-    return dispatch => {
+export const getEducationsFn = (userId) => {
+    return (dispatch) => {
         getEducations({
             filter: {
                 where: {
@@ -124,10 +122,10 @@ export const getEducationsFn = userId => {
                 }
             }
         })
-            .then(data => {
+            .then((data) => {
                 dispatch(getEducationsSuccess(data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
 
@@ -135,15 +133,15 @@ export const createEducationRequest = createAction(CREATE_EDUCATION_REQUEST);
 export const createEducationSuccess = createAction(CREATE_EDUCATION_SUCCESS);
 export const createEducationFailure = createAction(CREATE_EDUCATION_FAILURE);
 
-export const createEducationFn = data => {
-    return dispatch => {
+export const createEducationFn = (data) => {
+    return (dispatch) => {
         dispatch(createEducationRequest());
         createEducation(data)
-            .then(responseData => {
+            .then((responseData) => {
                 dispatch(createEducationSuccess(responseData));
                 dispatch(successAlertFn(i18n.t('user_info_education_created')));
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(createEducationFailure());
                 dispatch(errorAlertFn(err.response.data.error.message));
             });
@@ -154,15 +152,15 @@ export const editEducationRequest = createAction(EDIT_EDUCATION_REQUEST);
 export const editEducationSuccess = createAction(EDIT_EDUCATION_SUCCESS);
 export const editEducationFailure = createAction(EDIT_EDUCATION_FAILURE);
 
-export const editEducationFn = data => {
-    return dispatch => {
+export const editEducationFn = (data) => {
+    return (dispatch) => {
         dispatch(editEducationRequest());
         editEducation(data)
-            .then(responseData => {
+            .then((responseData) => {
                 dispatch(editEducationSuccess(responseData));
                 dispatch(successAlertFn(i18n.t('user_info_education_updated')));
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(editEducationFailure());
                 dispatch(errorAlertFn(err.response.data.error.message));
             });
@@ -180,62 +178,32 @@ export const getQuestionsAskedFn = (userId, page = 1) => {
         limit: DEFAULT_GET_LIMIT,
         skip: (page - 1) * DEFAULT_GET_LIMIT
     };
-    return dispatch => {
+    return (dispatch) => {
         getQuestions({ filter, totalCount: true })
-            .then(data => {
+            .then((data) => {
                 dispatch(getQuestionsAskedSuccess(data));
             })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
 
-export const getAnswersRelatedSuccess = createAction(
-    GET_ANSWERS_RELATED_SUCCESS
+export const getAnsweredQuestionsSuccess = createAction(
+    GET_ANSWRED_QUESTIONS_SUCCESS
 );
 
-export const getNumberAnswersRelatedSuccess = createAction(
-    GET_NUMBER_ANSWERS_RELATED_SUCCESS
-);
-
-export const getAnswersRelatedFn = userId => {
-    const where = {
-        ownerId: userId
-    };
+export const getAnsweredQuestionsFn = (userId, page = 1) => {
     const filter = {
-        where,
-        include: [
-            {
-                relation: 'question',
-                scope: {
-                    include: {
-                        relation: 'askedBy',
-                        scope: {
-                            fields: [
-                                'id',
-                                'avatar',
-                                'firstName',
-                                'lastName',
-                                'points'
-                            ]
-                        }
-                    }
-                }
-            }
-        ],
-        order: ['modified DESC', 'created DESC']
+        respondentId: userId,
+        order: ['modified DESC', 'created DESC'],
+        limit: DEFAULT_GET_LIMIT,
+        skip: (page - 1) * DEFAULT_GET_LIMIT
     };
 
-    return dispatch => {
-        getAnswers({ filter })
-            .then(data => {
-                dispatch(getAnswersRelatedSuccess(data));
+    return (dispatch) => {
+        getQuestions({ filter, totalCount: true })
+            .then((data) => {
+                dispatch(getAnsweredQuestionsSuccess(data));
             })
-            .catch(err => console.log(err));
-
-        getNumberAnswers({ where })
-            .then(data => {
-                dispatch(getNumberAnswersRelatedSuccess(data));
-            })
-            .catch(err => console.log(err));
+            .catch((err) => console.log(err));
     };
 };
