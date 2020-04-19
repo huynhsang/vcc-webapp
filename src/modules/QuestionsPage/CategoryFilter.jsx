@@ -17,7 +17,10 @@ const useStyles = makeStyles({
         '& .MuiTabs-flexContainer': {
             justifyContent: 'flex-start'
         }
-    }
+    },
+    tab: {
+        minWidth: 95,
+      }
 });
 
 const CategoryFilter = ({ category, history }) => {
@@ -35,6 +38,10 @@ const CategoryFilter = ({ category, history }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    if(!categories.length){
+        return null;
+    }
+
     const categoriesAdded = [
         { slug: '', nameVi: 'Tất cả', nameEn: 'All' },
         ...categories
@@ -43,6 +50,7 @@ const CategoryFilter = ({ category, history }) => {
     const categoryElements = categoriesAdded.map(ele => (
         <Tab
             key={ele.slug}
+            className={classes.tab}
             label={ele[
                 i18n.language === 'vi' ? 'nameVi' : 'nameEn'
             ].toUpperCase()}
@@ -55,7 +63,7 @@ const CategoryFilter = ({ category, history }) => {
     };
 
     const value = categoriesAdded.findIndex(cat => cat.slug === (category || ''));
-
+    
     return (
         <Paper className={classes.root}>
             <Tabs
@@ -64,7 +72,8 @@ const CategoryFilter = ({ category, history }) => {
                 className={classes.tabs}
                 indicatorColor="primary"
                 textColor="primary"
-                centered
+                scrollButtons="auto"
+                variant="scrollable"
             >
                 {categoryElements}
             </Tabs>
