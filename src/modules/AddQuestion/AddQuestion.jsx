@@ -119,6 +119,7 @@ const AddQuestion = ({
     React.useEffect(() => {
         if (categoryId) {
             setTags(null);
+            updateQuestion({ tagIds: [] });
             const category = categories.find((cat) => cat.id === categoryId);
             const filter = {
                 limit: 100
