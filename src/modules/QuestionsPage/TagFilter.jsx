@@ -46,7 +46,8 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     React.useEffect(() => {
         const params = {
             filter: {
-                used: 'question'
+                used: 'question',
+                limit: 100
             }
         };
         if (category) {

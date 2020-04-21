@@ -104,9 +104,10 @@ export default {
     common_agree: 'Agree',
     common_example: 'Example',
     common_status: 'Status',
-    common_coming_soon:'coming soon',
+    common_coming_soon: 'coming soon',
     common_like: 'Like',
     common_unlike: 'Unlike',
+    common_filter: 'Filter',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -196,10 +197,10 @@ export default {
     question_hit_enter_to_search: 'Hit enter to search',
     question_resolved: 'Resolved',
     question_set_mode: 'Do you want to publish your question?',
-    question_set_mode_des: 'If you choose to publish, everyone can give you an answer. If you choose not to, your question will be visible only to people you want to get answer from.',
+    question_set_mode_des:
+        'If you choose to publish, everyone can give you an answer. If you choose not to, your question will be visible only to people you want to get answer from.',
     question_support_list: 'Who do you want to get answer from? (optional)',
-    question_support_list_des:
-        'We will send a notification to these people.',
+    question_support_list_des: 'We will send a notification to these people.',
     question_support_list_des_sup_empty: `You can choose up to 2 people.`,
     question_support_list_require:
         'Your question is private, please choose at least one person to answer your question',
@@ -208,8 +209,9 @@ export default {
     question_approved_this_answer: 'Approved this answer',
     question_created_a_question: 'Created a question',
 
-    question_tags_developer_life:'How is the work life balance of a Google software developer?',
-    question_tags_example:'Google, work life balance',
+    question_tags_developer_life:
+        'How is the work life balance of a Google software developer?',
+    question_tags_example: 'Google, work life balance',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',
@@ -221,7 +223,8 @@ export default {
     badges_point_system: 'Points System',
     badges_beside_gaining_reputation:
         'At VCNC, we value your contribution no matter how big or small. You will get a new badge every time you reach a new level.',
-    badges_shown: 'Badges will appear besides your name every time you ask a question or leave an answer.',
+    badges_shown:
+        'Badges will appear besides your name every time you ask a question or leave an answer.',
     badges_points_for_a_new: 'awarded to every new user of the community.',
     badges_choosing_the_best: 'Choosing the best answer for a question.',
     badges_add_an_answer: 'awarded for any answer.',
@@ -248,7 +251,8 @@ export default {
         'awarded for every upvote for your question or answer.',
     badges_down_vote_on_question_or_answer:
         'negative point for every down vote for your question or answer.',
-    badges_share_question_or_answer: 'bonus point for sharing a question or answer on social media (facebook/twitter/linkedin).',
+    badges_share_question_or_answer:
+        'bonus point for sharing a question or answer on social media (facebook/twitter/linkedin).',
     badges_login: 'bonus point for daily check-in.',
     badges_points_limit: 'It has limit of {{points}} points per day',
 
@@ -351,10 +355,10 @@ export default {
         'Get notification if you are requested to answer a question',
     workspace_answer_the_assigned: 'Answer the assigned question in 24h',
     workspace_get_paid: 'Get bonus after submitting your answer',
-    
+
     workspace_our_support: 'Our support',
-    workspace_how_to_ask:'How to ask a question?',
-    workspace_how_to_find_mentor:'How to find a mentor?',
+    workspace_how_to_ask: 'How to ask a question?',
+    workspace_how_to_find_mentor: 'How to find a mentor?',
     workspace_how_to_get_customer_support: 'How to get customer support?',
 
     footer_all_right_reserved: 'All rights reserved © 2020',
