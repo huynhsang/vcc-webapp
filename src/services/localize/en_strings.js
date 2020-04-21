@@ -212,6 +212,7 @@ export default {
     question_tags_developer_life:
         'How is the work life balance of a Google software developer?',
     question_tags_example: 'Google, work life balance',
+    add_question_max_number_tag: 'We limit {{number}} tags',
 
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',

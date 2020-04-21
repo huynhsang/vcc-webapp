@@ -63,7 +63,7 @@ const TagLabel = styled.div`
     padding: 0 2px;
 `;
 
-const QuestionTags = ({ tags, tagIds, setTagIds }) => {
+const QuestionTags = ({ tags, tagIds, setTagIds, infoAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -77,7 +77,11 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
         if (tagIds.includes(tagId)) {
             setTagIds(tagIds.filter((val) => val !== tagId));
         } else {
-            setTagIds([...tagIds, tagId]);
+            if (tagIds.length >= 5) {
+                infoAlert(t('add_question_max_number_tag', { number: 5 }));
+            } else {
+                setTagIds([...tagIds, tagId]);
+            }
         }
     };
 

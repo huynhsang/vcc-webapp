@@ -15,7 +15,8 @@ import QuestionSituation from './QuestionSituation';
 import {
     showLoginConfirmFn,
     errorAlertFn,
-    successAlertFn
+    successAlertFn,
+    infoAlertFn
 } from '../../actions/alertConfirm';
 
 import { createQuestion } from '../../services/question.service';
@@ -50,6 +51,7 @@ const AddQuestion = ({
     history,
     successAlert,
     errorAlert,
+    infoAlert,
     App,
     showLoginConfirm,
     location
@@ -179,6 +181,7 @@ const AddQuestion = ({
                         tags={tags}
                         tagIds={tagIds}
                         setTagIds={(val) => updateQuestion({ tagIds: val })}
+                        infoAlert={infoAlert}
                     />
                 );
             case 2:
@@ -273,6 +276,7 @@ const mapStateToProps = ({ App }) => ({
 });
 
 const mapDispatchToProp = (dispatch) => ({
+    infoAlert: (text) => dispatch(infoAlertFn(text)),
     successAlert: (text) => dispatch(successAlertFn(text)),
     errorAlert: (text) => dispatch(errorAlertFn(text)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn())
