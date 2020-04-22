@@ -156,6 +156,8 @@ const QuestionPage = ({
         />
     ));
 
+    const nbPages = Math.ceil(numberQuestions / DEFAULT_LIMIT);
+
     return (
         <QuestionPageWrapper>
             <PageCover />
@@ -189,11 +191,9 @@ const QuestionPage = ({
                                 {questionElements}
                             </QuestionsWrapper>
                             <DefaultWrapper>
-                                {numberQuestions > 0 ? (
+                                {nbPages > 1 ? (
                                     <Pagination
-                                        nbPages={Math.ceil(
-                                            numberQuestions / DEFAULT_LIMIT
-                                        )}
+                                        nbPages={nbPages}
                                         activePage={page}
                                         changePage={(newPage) =>
                                             onChangeFilter({ page: newPage })

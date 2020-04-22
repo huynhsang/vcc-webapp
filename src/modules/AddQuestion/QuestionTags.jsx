@@ -6,11 +6,17 @@ import { getNameByLanguage } from '../../utils/multiple-language';
 import Check from '@material-ui/icons/Check';
 import Button from '@material-ui/core/Button';
 import { tagStyle } from '../../component/Tag';
+import TextField from '@material-ui/core/TextField';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
-const useStyles = makeStyles(() => tagStyle);
+const useStyles = makeStyles(() => ({
+    ...tagStyle,
+    filterText: {
+        marginBottom: '10px'
+    }
+}));
 
 const Wrapper = styled.div``;
 
@@ -58,37 +64,66 @@ const TagLabel = styled.div`
     font-size: 12px;
 `;
 
-const QuestionTags = ({ tags, tagIds, setTagIds }) => {
+const QuestionTags = ({ tags, tagIds, setTagIds, infoAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
+
+    const [filterText, setFilterText] = React.useState('');
 
     if (!tags) {
         return <div />;
     }
 
-    const onClickTag = tagId => () => {
+    const onClickTag = (tagId) => () => {
         if (tagIds.includes(tagId)) {
-            setTagIds(tagIds.filter(val => val !== tagId))
+            setTagIds(tagIds.filter((val) => val !== tagId));
         } else {
-            setTagIds([...tagIds, tagId])
+            if (tagIds.length >= 5) {
+                infoAlert(t('add_question_max_number_tag', { number: 5 }));
+            } else {
+                setTagIds([...tagIds, tagId]);
+            }
         }
     };
 
-    const tagElements = tags.map(tag => {
-        const isActive = tagIds.includes(tag.id);
-        return (
-            <Button
-                key={tag.id}
-                onClick={onClickTag(tag.id)}
-                size="small"
-                variant="contained"
-                className={`${classes.button} ${isActive &&
-                    classes.activeButton}`}
-            >
-                {getNameByLanguage(tag)}
-            </Button>
-        );
-    });
+    const activeTags = tags
+        .filter((tag) => tagIds.includes(tag.id))
+        .map((tag) => {
+            return (
+                <Button
+                    key={tag.id}
+                    onClick={onClickTag(tag.id)}
+                    size="small"
+                    variant="contained"
+                    className={`${classes.button} ${classes.activeButton}`}
+                >
+                    {getNameByLanguage(tag)}
+                </Button>
+            );
+        });
+
+    const tagElements = tags
+        .filter((tag) => {
+            const isActive = tagIds.includes(tag.id);
+            return (
+                !isActive &&
+                (tag.nameEn.includes(filterText) ||
+                    tag.nameVi.includes(filterText))
+            );
+        })
+        .map((tag) => {
+            return (
+                <Button
+                    key={tag.id}
+                    onClick={onClickTag(tag.id)}
+                    size="small"
+                    variant="contained"
+                    className={classes.button}
+                >
+                    {getNameByLanguage(tag)}
+                </Button>
+            );
+        });
 
     return (
         <Wrapper>
@@ -107,6 +142,16 @@ const QuestionTags = ({ tags, tagIds, setTagIds }) => {
             </ExampleWrapper>
             <TagsWrapper>
                 <TagLabel>{t('common_tags')}</TagLabel>
+                <TextField
+                    label={t('common_filter')}
+                    variant="filled"
+                    size="small"
+                    fullWidth
+                    className={classes.filterText}
+                    value={filterText}
+                    onChange={(ev) => setFilterText(ev.target.value)}
+                />
+                {activeTags}
                 {tagElements}
             </TagsWrapper>
         </Wrapper>

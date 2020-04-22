@@ -15,13 +15,14 @@ import QuestionSituation from './QuestionSituation';
 import {
     showLoginConfirmFn,
     errorAlertFn,
-    successAlertFn
+    successAlertFn,
+    infoAlertFn
 } from '../../actions/alertConfirm';
 
 import { createQuestion } from '../../services/question.service';
 import { getCategories } from '../../services/category.service';
 import { getUsers } from '../../services/user.service';
-import { getTagsRelatingCategory } from '../../services/tags.service';
+import { getTags } from '../../services/tags.service';
 import QuestionTabs from './QuestionTabs';
 import { DefaultWrapper } from '../../component/Wrappers';
 import Button from '@material-ui/core/Button';
@@ -50,6 +51,7 @@ const AddQuestion = ({
     history,
     successAlert,
     errorAlert,
+    infoAlert,
     App,
     showLoginConfirm,
     location
@@ -91,21 +93,24 @@ const AddQuestion = ({
         supporterIds
     } = question;
 
-    const updateQuestion = obj => setQuestion(state => ({ ...state, ...obj }));
+    const updateQuestion = (obj) =>
+        setQuestion((state) => ({ ...state, ...obj }));
 
     // Fetch categories
     React.useEffect(() => {
         getCategories()
-            .then(data => {
+            .then((data) => {
                 setCategories(data);
             })
-            .catch(err => console.log(err.message));
+            .catch((err) => console.log(err.message));
 
         getUsers()
-            .then(data => {
-                setUsersToMatch(data.filter(val => val.id !== currentUser.id));
+            .then((data) => {
+                setUsersToMatch(
+                    data.filter((val) => val.id !== currentUser.id)
+                );
             })
-            .catch(err => console.log(err.message));
+            .catch((err) => console.log(err.message));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -114,12 +119,19 @@ const AddQuestion = ({
     React.useEffect(() => {
         if (categoryId) {
             setTags(null);
-            const category = categories.find(cat => cat.id === categoryId);
-            getTagsRelatingCategory(category.slug)
-                .then(data => {
-                    setTags(data);
+            updateQuestion({ tagIds: [] });
+            const category = categories.find((cat) => cat.id === categoryId);
+            const filter = {
+                limit: 100
+            };
+            if (category.slug) {
+                filter.categorySlug = category.slug;
+            }
+            getTags({ filter })
+                .then((data) => {
+                    setTags(data.filter(Boolean));
                 })
-                .catch(err => console.log(err.message));
+                .catch((err) => console.log(err.message));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [categoryId]);
@@ -133,33 +145,33 @@ const AddQuestion = ({
     }
 
     const postQuestion = () => {
-        if(title.length < 20 ){
+        if (title.length < 20) {
             return errorAlert(t('question_created_title_limit'));
         }
-        if(body.length < 20 ){
+        if (body.length < 20) {
             return errorAlert(t('question_created_body_limit'));
         }
         createQuestion(question)
-            .then(data => {
+            .then((data) => {
                 successAlert(t('question_created_a_question'));
                 history.push(`/questions/${data.slug}`);
             })
-            .catch(response =>
+            .catch((response) =>
                 errorAlert(response.response.data.error.message)
             );
     };
 
-    const toPrevious = () => setActiveTab(state => state - 1);
-    const toNext = () => setActiveTab(state => state + 1);
+    const toPrevious = () => setActiveTab((state) => state - 1);
+    const toNext = () => setActiveTab((state) => state + 1);
 
-    const getContent = step => {
+    const getContent = (step) => {
         switch (step) {
             case 0:
                 return (
                     <QuestionCategory
                         categories={categories}
                         categoryId={categoryId}
-                        setCategoryId={val =>
+                        setCategoryId={(val) =>
                             updateQuestion({ categoryId: val })
                         }
                     />
@@ -169,21 +181,22 @@ const AddQuestion = ({
                     <QuestionTags
                         tags={tags}
                         tagIds={tagIds}
-                        setTagIds={val => updateQuestion({ tagIds: val })}
+                        setTagIds={(val) => updateQuestion({ tagIds: val })}
+                        infoAlert={infoAlert}
                     />
                 );
             case 2:
                 return (
                     <QuestionTitle
                         title={title}
-                        setTitle={val => updateQuestion({ title: val })}
+                        setTitle={(val) => updateQuestion({ title: val })}
                     />
                 );
             case 3:
                 return (
                     <QuestionDescription
                         body={body}
-                        setBody={val => updateQuestion({ body: val })}
+                        setBody={(val) => updateQuestion({ body: val })}
                     />
                 );
             case 4:
@@ -192,8 +205,8 @@ const AddQuestion = ({
                         usersToMatch={usersToMatch}
                         isPublic={isPublic}
                         supporterIds={supporterIds}
-                        setIsPublic={val => updateQuestion({ isPublic: val })}
-                        setSupporterIds={val =>
+                        setIsPublic={(val) => updateQuestion({ isPublic: val })}
+                        setSupporterIds={(val) =>
                             updateQuestion({ supporterIds: val })
                         }
                     />
@@ -203,9 +216,11 @@ const AddQuestion = ({
                     <QuestionReview
                         title={title}
                         body={body}
-                        category={categories.find(cat => cat.id === categoryId)}
-                        tags={tags && tags.filter(t => tagIds.includes(t.id))}
-                        supporters={usersToMatch.filter(u =>
+                        category={categories.find(
+                            (cat) => cat.id === categoryId
+                        )}
+                        tags={tags && tags.filter((t) => tagIds.includes(t.id))}
+                        supporters={usersToMatch.filter((u) =>
                             supporterIds.includes(u.id)
                         )}
                         isPublic={isPublic}
@@ -261,9 +276,10 @@ const mapStateToProps = ({ App }) => ({
     App
 });
 
-const mapDispatchToProp = dispatch => ({
-    successAlert: text => dispatch(successAlertFn(text)),
-    errorAlert: text => dispatch(errorAlertFn(text)),
+const mapDispatchToProp = (dispatch) => ({
+    infoAlert: (text) => dispatch(infoAlertFn(text)),
+    successAlert: (text) => dispatch(successAlertFn(text)),
+    errorAlert: (text) => dispatch(errorAlertFn(text)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn())
 });
 

@@ -114,6 +114,7 @@ export default {
     common_submit: 'Đăng',
     common_like: 'Thích',
     common_unlike: 'Không thích',
+    common_filter: 'Lọc',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -225,6 +226,7 @@ export default {
     question_private: 'Câu hỏi ở chế độ riêng tư',
     question_created_title_limit: 'Tiêu đề phải có ít nhất 20 kí tự',
     question_created_body_limit: 'Mô tả câu hỏi phải có ít nhất 20 kí tự',
+    add_question_max_number_tag: 'Chúng tôi giới hạn {{number}} tags',
 
     post_more_from_VCNC: 'Xem thêm',
 
