@@ -119,7 +119,7 @@ const QuestionPage = ({
         noanswer
     ]);
 
-    const onChangeFilter = obj => {
+    const onChangeFilter = (obj) => {
         const url = `/questions?${qs.stringify({
             show,
             page: 1,
@@ -145,6 +145,8 @@ const QuestionPage = ({
             voteQuestion={voteQuestion}
         />
     ));
+
+    const nbPages = Math.ceil(numberQuestions / DEFAULT_LIMIT);
 
     return (
         <QuestionPageWrapper>
@@ -177,13 +179,11 @@ const QuestionPage = ({
                                 {questionElements}
                             </QuestionsWrapper>
                             <DefaultWrapper>
-                                {numberQuestions > 0 ? (
+                                {nbPages > 1 ? (
                                     <Pagination
-                                        nbPages={Math.ceil(
-                                            numberQuestions / DEFAULT_LIMIT
-                                        )}
+                                        nbPages={nbPages}
                                         activePage={page}
-                                        changePage={newPage =>
+                                        changePage={(newPage) =>
                                             onChangeFilter({ page: newPage })
                                         }
                                         justifyContent="center"
@@ -211,8 +211,8 @@ const mapStateToProps = ({ questionsReducer, App: { isAuthenticated } }) => ({
     isAuthenticated
 });
 
-const mapDispatchToProps = dispatch => ({
-    getQuestions: params => dispatch(getQuestionsFn(params)),
+const mapDispatchToProps = (dispatch) => ({
+    getQuestions: (params) => dispatch(getQuestionsFn(params)),
     showLoginConfirm: () => dispatch(showLoginConfirmFn()),
     voteQuestion: (questionId, action) =>
         dispatch(voteQuestionFn(questionId, action))
