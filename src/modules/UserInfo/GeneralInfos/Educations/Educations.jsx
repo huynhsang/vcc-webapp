@@ -58,13 +58,18 @@ const SchoolName = styled.div`
     font-weight: bold;
 `;
 
-const YearsWrapper = styled.div`
+const YearsWrapper = styled.span`
     color: #828282;
 `;
 
 const SchoolIcon = styled(School)`
     font-size: 2rem !important;
     margin-right: 10px;
+`;
+
+const DegreesWrapper = styled.ul`
+    padding-left: 18px;
+    margin: 5px 0;
 `;
 
 const Educations = ({ createEducation, editEducation, userInfos }) => {
@@ -87,7 +92,7 @@ const Educations = ({ createEducation, editEducation, userInfos }) => {
         }
     }, [editEducationId]);
 
-    const onSubmit = data => {
+    const onSubmit = (data) => {
         delete data.modified;
         delete data.created;
         if (data.id) {
@@ -109,13 +114,21 @@ const Educations = ({ createEducation, editEducation, userInfos }) => {
 
     const canEdit = currentUserId === userProfile.id;
 
-    const educationsRender = Object.values(educations).map(val => (
+    const educationsRender = Object.values(educations).map((val) => (
         <EducationInfo key={val.id}>
             <div>
                 <SchoolName>{val.degree}</SchoolName>
                 <div>{val.fieldOfStudy}</div>
-                <YearsWrapper>{`${val.fromYear} - ${val.toYear}`}</YearsWrapper>
+                <div>
+                    {val.school}
+                    <YearsWrapper>{` (${val.fromYear} - ${val.toYear})`}</YearsWrapper>
+                </div>
                 <div>{val.description}</div>
+                <DegreesWrapper>
+                    {val.degrees.map((val, key) => (
+                        <li key={`degree-${key}`}>{val}</li>
+                    ))}
+                </DegreesWrapper>
             </div>
             {canEdit && (
                 <IconButton onClick={() => setEditEducationId(val.id)}>
@@ -153,9 +166,9 @@ const Educations = ({ createEducation, editEducation, userInfos }) => {
 
 const mapStateToProps = ({ userInfos }) => ({ userInfos });
 
-const mapDispatchToProps = dispatch => ({
-    createEducation: data => dispatch(createEducationFn(data)),
-    editEducation: data => dispatch(editEducationFn(data))
+const mapDispatchToProps = (dispatch) => ({
+    createEducation: (data) => dispatch(createEducationFn(data)),
+    editEducation: (data) => dispatch(editEducationFn(data))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Educations);

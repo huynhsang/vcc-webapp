@@ -108,6 +108,8 @@ export default {
     common_like: 'Thích',
     common_unlike: 'Không thích',
     common_filter: 'Lọc',
+    common_add: 'Thêm',
+    common_degrees: 'Bằng cấp',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -340,6 +342,7 @@ export default {
     user_info_experience_updated: 'Kinh nghiệm đã được chỉnh sửa!',
     user_info_education_created: 'Giáo dục đã được thêm!',
     user_info_education_updated: 'Giáo dục đã chỉnh sửa!',
+    education_add_degree: 'Thêm bằng cấp',
 
     home_ask_verified_professionals:
         'Xin lời khuyên về định hướng nghề nghiệp, kinh nghiệm phỏng vấn, thông tin về công ty từ các chuyên gia từ các công ty lớn hàng đầu...',
