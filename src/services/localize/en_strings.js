@@ -115,6 +115,8 @@ export default {
     common_like: 'Like',
     common_unlike: 'Unlike',
     common_filter: 'Filter',
+    common_add: 'Add',
+    common_degrees: 'Degrees',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -348,6 +350,7 @@ export default {
     user_info_experience_updated: 'Experience updated!',
     user_info_education_created: 'Education created!',
     user_info_education_updated: 'Education updated!',
+    education_add_degree:'Thêm bằng cấp',
 
     home_ask_verified_professionals:
         'Ask verified professionals for career advices, interview training, resume review and company insights...',
