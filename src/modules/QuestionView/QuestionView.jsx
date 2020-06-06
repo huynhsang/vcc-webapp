@@ -232,7 +232,7 @@ const QuestionView = ({
             </Background>
             <ConfirmModal
                 isOpen={isOpenDeleteModal}
-                action={() => deleteQuestion(question.id)}
+                action={() => deleteQuestion(question.id, history)}
                 title={t('question_do_you_want_to_delete_this_question')}
                 cancel={() => setIsOpenDeleteModal(false)}
             />
