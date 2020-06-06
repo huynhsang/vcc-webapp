@@ -11,6 +11,12 @@ import { createMediaTemplate } from '../../utils/css-tools';
 import LikeBox from '../../component/LikeBox';
 import UserLogo from '../../component/UserLogo';
 
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
+import { ConfirmModal } from '../ConfirmModal';
+
+import { ROLES } from '../../constants/constants';
+
 const media = createMediaTemplate();
 
 const useStyles = makeStyles(() => ({
@@ -23,6 +29,9 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             backgroundColor: '#0e8a12'
         }
+    },
+    deleteButton: {
+        margin: '5px 0 0 5px'
     }
 }));
 
@@ -73,11 +82,13 @@ const Answer = ({
     voteAnswer,
     approveAnswer,
     isBestAnswer,
-    history
+    history,
+    removeAnswer
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
-    const { id: currentUserId } = getIdAndToken();
+    const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
+    const { id: currentUserId, role: userRole } = getIdAndToken();
 
     const {
         voted,
@@ -88,6 +99,10 @@ const Answer = ({
         created
     } = answer;
     const { id: userAnwserId, firstName, lastName, points } = answerBy;
+
+    const deleteAnswerFn = () => {
+        setIsOpenDeleteModal(true);
+    };
 
     const handleVoteAnswer = (isPositiveVote) => {
         if (!isAuthenticated) {
@@ -102,44 +117,73 @@ const Answer = ({
         history.push(url);
     };
 
+    const isAdmin = ROLES.ADMIN === userRole;
+
     return (
-        <Wrapper>
-            <ReactMarkdown source={body} />
-            <FlexWrapper alginItems="flex-end" justifyContent="space-between">
-                <DateWrapper>
-                    {t('answer_added_an_answer_on')}{' '}
-                    {new Date(created).toDateString()}
-                </DateWrapper>
-                <FlexWrapper>
-                    <UserLogo user={answerBy} />
-                    <InfosWrapper>
-                        <UserName onClick={redirect(`/users/${userAnwserId}`)}>
-                            {`${firstName} ${lastName}`}
-                        </UserName>
-                        <Badge points={points} />
-                    </InfosWrapper>
+        <>
+            <Wrapper>
+                <FlexWrapper
+                    justifyContent="space-between"
+                    alginItems="flex-start"
+                >
+                    <ReactMarkdown source={body} />
+                    {isAdmin && (
+                        <IconButton
+                            color="secondary"
+                            className={classes.deleteButton}
+                            onClick={deleteAnswerFn}
+                        >
+                            <DeleteIcon />
+                        </IconButton>
+                    )}
                 </FlexWrapper>
-            </FlexWrapper>
-            <BottomWrapper>
-                {isBestAnswer && <CheckCircleIcon />}
-                {!!approveAnswer && (
-                    <Button
-                        variant="contained"
-                        onClick={approveAnswer}
-                        className={classes.approveButton}
-                    >
-                        Approve
-                    </Button>
-                )}
-                <LikeBox
-                    upVoteCount={upVoteCount}
-                    downVoteCount={downVoteCount}
-                    voted={voted}
-                    handleVote={handleVoteAnswer}
-                    disabled={currentUserId === userAnwserId}
-                />
-            </BottomWrapper>
-        </Wrapper>
+                <FlexWrapper
+                    alginItems="flex-end"
+                    justifyContent="space-between"
+                >
+                    <DateWrapper>
+                        {t('answer_added_an_answer_on')}{' '}
+                        {new Date(created).toDateString()}
+                    </DateWrapper>
+                    <FlexWrapper>
+                        <UserLogo user={answerBy} />
+                        <InfosWrapper>
+                            <UserName
+                                onClick={redirect(`/users/${userAnwserId}`)}
+                            >
+                                {`${firstName} ${lastName}`}
+                            </UserName>
+                            <Badge points={points} />
+                        </InfosWrapper>
+                    </FlexWrapper>
+                </FlexWrapper>
+                <BottomWrapper>
+                    {isBestAnswer && <CheckCircleIcon />}
+                    {!!approveAnswer && (
+                        <Button
+                            variant="contained"
+                            onClick={approveAnswer}
+                            className={classes.approveButton}
+                        >
+                            Approve
+                        </Button>
+                    )}
+                    <LikeBox
+                        upVoteCount={upVoteCount}
+                        downVoteCount={downVoteCount}
+                        voted={voted}
+                        handleVote={handleVoteAnswer}
+                        disabled={currentUserId === userAnwserId}
+                    />
+                </BottomWrapper>
+            </Wrapper>
+            <ConfirmModal
+                isOpen={isOpenDeleteModal}
+                action={() => removeAnswer(answer.id)}
+                title={t('question_do_you_want_to_delete_this_answer')}
+                cancel={() => setIsOpenDeleteModal(false)}
+            />
+        </>
     );
 };
 

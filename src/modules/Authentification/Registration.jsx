@@ -6,7 +6,6 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { useTranslation } from 'react-i18next';
 
 import { register } from '../../services/account.service';
-import { REALM } from '../../constants/constants';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -64,7 +63,6 @@ const Registration = ({
             email,
             firstName,
             lastName,
-            realm: REALM.user
         };
 
         setLoader(true);

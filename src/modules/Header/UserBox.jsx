@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { deleteCookie } from '../../utils/CookieHelper';
-import { USER_ID_KEY, JWT_TOKEN_NAME } from '../../constants/cookie.constant';
+import { USER_ID_KEY, JWT_TOKEN_NAME, USER_ROLE_KEY } from '../../constants/cookie.constant';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
 
@@ -91,6 +91,7 @@ const Authenticate = ({
     const logout = () => {
         deleteCookie(JWT_TOKEN_NAME);
         deleteCookie(USER_ID_KEY);
+        deleteCookie(USER_ROLE_KEY);
         setIsAuthenticated(false);
         history.push('/home');
         handleClose();

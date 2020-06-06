@@ -104,7 +104,7 @@ export default {
     common_agree: 'Đồng ý',
     common_example: 'Ví dụ',
     common_status: 'Trạng thái',
-    common_coming_soon:'coming soon',
+    common_coming_soon: 'coming soon',
     common_like: 'Thích',
     common_unlike: 'Không thích',
     common_filter: 'Lọc',
@@ -167,11 +167,11 @@ export default {
     question_tell_us_your_questions: 'Thêm mô tả chi tiết cho câu hỏi của bạn',
     question_your_description:
         'Mô tả của bạn giúp người đọc có đầy đủ thông tin để trả lời câu hỏi.',
-    question_check_out_these_examples:
-        'Hãy xem',
+    question_check_out_these_examples: 'Hãy xem',
     question_want_more_help: 'Cần trợ giúp thêm',
     question_review_question: 'Xem lại câu hỏi',
-    question_let_one_more_look: 'Sắp xong rồi, xem lại một lần nữa trước khi đăng',
+    question_let_one_more_look:
+        'Sắp xong rồi, xem lại một lần nữa trước khi đăng',
     question_for_exemple: 'Ví dụ',
     question_format_text: 'Tùy biến văn bản với',
     question_donnot_include_slang: ` Không nên viết tắt hay dùng từ lóng: “b ko thể vì nó là of m.“`,
@@ -200,12 +200,10 @@ export default {
     question_set_mode: 'Bạn có muốn công khai câu hỏi của mình?',
     question_set_mode_des:
         'Nếu bạn chọn chế độ công khai, mọi người đều có thể trả lời câu hỏi của bạn. Ngược lại, câu hỏi của bạn chỉ hiển thị cho những người xem bạn chọn',
-    question_support_list:
-        'Bạn muốn ai trả lời câu hỏi này? (không bắt buộc)',
+    question_support_list: 'Bạn muốn ai trả lời câu hỏi này? (không bắt buộc)',
     question_support_list_des:
         'Chúng tôi sẽ thông báo đến người bạn chọn để trả lời câu hỏi của bạn. ',
-    question_support_list_des_sup_empty:
-        'Bạn có thể chọn tối đa 2 người.',
+    question_support_list_des_sup_empty: 'Bạn có thể chọn tối đa 2 người.',
     question_support_list_require:
         'Câu hỏi đang ở trạng thái riêng tư, vui lòng chọn ít nhất 1 người để trả lời câu hỏi của bạn.',
 
@@ -221,6 +219,11 @@ export default {
     question_private: 'Câu hỏi ở chế độ riêng tư',
     question_created_title_limit: 'Tiêu đề phải có ít nhất 20 kí tự',
     question_created_body_limit: 'Mô tả câu hỏi phải có ít nhất 20 kí tự',
+    question_do_you_want_to_delete_this_question:
+        'Bạn thật sự muốn xoá câu hỏi này?',
+    question_do_you_want_to_delete_this_answer:
+        'Bạn thật sự muốn xoá câu trả lời này?',
+
     add_question_max_number_tag: 'Chúng tôi giới hạn {{number}} tags',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
@@ -363,12 +366,12 @@ export default {
         'Nhận thông báo từ VCNC nếu bạn được ai đó yêu cầu trả lời một câu hỏi',
     workspace_answer_the_assigned: 'Trả lời câu hỏi nhận được trong vòng 24h',
     workspace_get_paid: 'Nhận điểm thưởng sau khi đăng tải câu trả lời',
-    
+
     workspace_our_support: 'Hỗ trợ',
-    workspace_how_to_ask:'Làm sao để đặt một câu hỏi?',
-    workspace_how_to_find_mentor:'Làm sao để tìm mentor?',
+    workspace_how_to_ask: 'Làm sao để đặt một câu hỏi?',
+    workspace_how_to_find_mentor: 'Làm sao để tìm mentor?',
     workspace_how_to_get_customer_support: 'Hỗ trợ chăm sóc khách hàng',
-    
+
     footer_all_right_reserved: 'All rights reserved © 2020',
 
     answer_added_an_answer_on: 'Trả lời vào ngày',

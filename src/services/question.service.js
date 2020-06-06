@@ -4,13 +4,14 @@ import { setUrlWithToken } from '../utils/url';
 import { questionsEntity } from '../constants/schemas';
 
 const QUESTION_URL = 'questions';
-const VOTE_QUESTION_URL = id => `questions/${id}/vote`;
+const ANSWER_URL = 'answers';
+const VOTE_QUESTION_URL = (id) => `questions/${id}/vote`;
 
 export async function getQuestions(params) {
     const url = setUrlWithToken(QUESTION_URL);
     const response = await http.get(url, { params });
     const objReturn = normalize(response.data, questionsEntity);
-    if(params && params.totalCount){
+    if (params && params.totalCount) {
         objReturn.count = parseInt(response.headers['x-total-count'], 10) || 0;
     }
     return objReturn;
@@ -57,5 +58,17 @@ export async function getNumberQuestions(params) {
     const response = await http.get(`${QUESTION_URL}/count`, {
         params
     });
+    return response.data;
+}
+
+export async function deleteQuestion(id) {
+    const url = setUrlWithToken(`${QUESTION_URL}/${id}`);
+    const response = await http.delete(url);
+    return response.data;
+}
+
+export async function deleteAnswer(id) {
+    const url = setUrlWithToken(`${ANSWER_URL}/${id}`);
+    const response = await http.delete(url);
     return response.data;
 }

@@ -3,6 +3,12 @@ import { setUrlWithToken } from '../utils/url';
 import { getIdAndToken } from '../utils/cookie-tools';
 
 import { setUserCookie } from './account.service';
+import {
+    USER_ROLE_KEY,
+    MAX_EXDAY
+} from '../constants/cookie.constant';
+
+import { setCookie } from '../utils/CookieHelper';
 
 const GET_USER_URL = 'users';
 const GET_USER_PROFILE_URL = 'users/profile';
@@ -15,6 +21,10 @@ export async function fetchUserFromCookie() {
     if (id && token) {
         const url = setUrlWithToken(`${GET_USER_URL}/me/`);
         const httpResponse = await http.get(url);
+
+        const { roles = [] } = httpResponse.data;
+        setCookie(USER_ROLE_KEY, roles[0], MAX_EXDAY);
+
         return httpResponse.data;
     }
 

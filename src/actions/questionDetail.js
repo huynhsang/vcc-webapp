@@ -4,7 +4,8 @@ import i18n from 'i18next';
 import {
     getQuestionWithSlug,
     voteQuestion,
-    approveAnswer
+    approveAnswer,
+    deleteAnswer
 } from '../services/question.service';
 
 import { voteAnswer, createAnswer } from '../services/answer.service';
@@ -31,14 +32,14 @@ export const getQuestionRequest = createAction(GET_QUESTION_REQUEST);
 export const getQuestionSuccess = createAction(GET_QUESTION_SUCCESS);
 export const getQuestionFailure = createAction(GET_QUESTION_FAILURE);
 
-export const getQuestionFn = slug => {
-    return dispatch => {
+export const getQuestionFn = (slug) => {
+    return (dispatch) => {
         dispatch(getQuestionRequest());
         getQuestionWithSlug(slug)
-            .then(data => {
+            .then((data) => {
                 dispatch(getQuestionSuccess(data));
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(getQuestionFailure());
                 console.log(err.message);
             });
@@ -56,13 +57,13 @@ export const voteQuestionDetailFailure = createAction(
 );
 
 export const voteQuestionFn = (questionId, action) => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(voteQuestionDetailRequest());
         voteQuestion(questionId, action)
-            .then(data => {
+            .then((data) => {
                 dispatch(voteQuestionDetailSuccess(data));
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(voteQuestionDetailFailure());
                 console.log(err.message);
             });
@@ -74,13 +75,13 @@ export const voteAnswerSuccess = createAction(VOTE_ANSWER_SUCCESS);
 export const voteAnswerFailure = createAction(VOTE_ANSWER_FAILURE);
 
 export const voteAnswerFn = (answerId, action) => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(voteAnswerRequest(answerId));
         voteAnswer(answerId, action)
-            .then(data => {
+            .then((data) => {
                 dispatch(voteAnswerSuccess(data));
             })
-            .catch(err => {
+            .catch((err) => {
                 dispatch(voteAnswerFailure());
                 console.log(err.message);
             });
@@ -92,14 +93,14 @@ export const createAnswerSuccess = createAction(CREATE_ANSWER_SUCCESS);
 export const createAnswerFailure = createAction(CREATE_ANSWER_FAILURE);
 
 export const createAnswerFn = (questionId, answerBody) => {
-    return dispatch => {
+    return (dispatch) => {
         dispatch(createAnswerRequest());
         createAnswer(questionId, answerBody)
             .then(() => {
                 dispatch(successAlertFn(i18n.t('question_leaved_an_answer')));
                 dispatch(createAnswerSuccess());
             })
-            .catch(err => {
+            .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
                 dispatch(createAnswerFailure());
                 console.log(err.message);
@@ -110,15 +111,33 @@ export const createAnswerFn = (questionId, answerBody) => {
 export const approveAnswerSuccess = createAction(APPROVE_ANSWER_SUCCESS);
 
 export const approveAnswerFn = (questionId, answerId) => {
-    return dispatch => {
+    return (dispatch) => {
         approveAnswer(questionId, answerId)
-            .then(data => {
+            .then((data) => {
                 dispatch(
                     successAlertFn(i18n.t('question_approved_this_answer'))
                 );
                 dispatch(approveAnswerSuccess(data));
             })
-            .catch(err => {
+            .catch((err) => {
+                errorAlertFn(err.response.data.error.message);
+                dispatch(createAnswerFailure());
+            });
+    };
+};
+
+export const removeAnswerFn = (id) => {
+    return (dispatch, getState) => {
+        deleteAnswer(id)
+            .then(() => {
+                const {
+                    questionDetail: {
+                        question: { slug }
+                    }
+                } = getState();
+                dispatch(getQuestionFn(slug));
+            })
+            .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
                 dispatch(createAnswerFailure());
             });
