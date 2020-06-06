@@ -13,8 +13,6 @@ import Button from '@material-ui/core/Button';
 
 import SocialLogin from './SocialLogin';
 
-import { REALM } from '../../constants/constants';
-
 const useStyle = makeStyles(() => ({
     loginButton: {
         marginTop: 10
@@ -67,7 +65,6 @@ const Login = ({
             email,
             password,
             rememberMe,
-            realm: REALM.user
         };
 
         if (!email || !password) {

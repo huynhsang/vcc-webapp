@@ -37,44 +37,44 @@ function voteQuestionFn(state, action) {
 function voteAnswerFn(state, action) {
     const { action: voteAction, modelId } = action.payload;
     const { answers } = state.question;
-    const answer = answers.find(answer => answer.id === modelId);
+    const answer = answers.find((answer) => answer.id === modelId);
     updateEntityVoted(answer, voteAction);
     state.votingAnswerId = null;
 }
 
 const questionDetailReducer = createReducer(defaultState, {
-    [getQuestionRequest]: state => {
+    [getQuestionRequest]: (state) => {
         state.isFetching = true;
     },
     [getQuestionSuccess]: (state, action) => {
         state.question = action.payload;
         state.isFetching = false;
     },
-    [getQuestionFailure]: state => {
+    [getQuestionFailure]: (state) => {
         state.isFetching = false;
     },
-    [voteQuestionDetailRequest]: state => {
+    [voteQuestionDetailRequest]: (state) => {
         state.isVotingQuestion = true;
     },
     [voteQuestionDetailSuccess]: voteQuestionFn,
-    [voteQuestionDetailFailure]: state => {
+    [voteQuestionDetailFailure]: (state) => {
         state.isVotingQuestion = false;
     },
     [voteAnswerRequest]: (state, action) => {
         state.votingAnswerId = action.payload;
     },
     [voteAnswerSuccess]: voteAnswerFn,
-    [voteAnswerFailure]: state => {
+    [voteAnswerFailure]: (state) => {
         state.votingAnswerId = null;
     },
-    [createAnswerRequest]: state => {
+    [createAnswerRequest]: (state) => {
         state.isCreatingAnswer = true;
         state.isFetchingError = false;
     },
-    [createAnswerSuccess]: state => {
+    [createAnswerSuccess]: (state) => {
         state.isCreatingAnswer = false;
     },
-    [createAnswerFailure]: state => {
+    [createAnswerFailure]: (state) => {
         state.isFetchingError = true;
         state.isCreatingAnswer = false;
     },

@@ -214,6 +214,11 @@ export default {
     question_tags_developer_life:
         'How is the work life balance of a Google software developer?',
     question_tags_example: 'Google, work life balance',
+    question_do_you_want_to_delete_this_question:
+        'Do you want to delete this question?',
+    question_do_you_want_to_delete_this_answer:
+        'Do you want to delete this answer?',
+
     add_question_max_number_tag: 'We limit {{number}} tags',
 
     answer_best_answers: 'Best Answers',
@@ -341,7 +346,7 @@ export default {
     user_info_experience_updated: 'Experience updated!',
     user_info_education_created: 'Education created!',
     user_info_education_updated: 'Education updated!',
-    education_add_degree:'Thêm bằng cấp',
+    education_add_degree: 'Thêm bằng cấp',
 
     home_ask_verified_professionals:
         'Ask verified professionals for career advices, interview training, resume review and company insights...',

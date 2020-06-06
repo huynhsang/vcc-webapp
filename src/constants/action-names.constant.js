@@ -65,7 +65,7 @@ const actionNames = keyMirror({
     EDIT_EDUCATION_FAILURE: null,
     GET_QUESTIONS_ASKED_SUCCESS: null,
     GET_USER_PROFILE_SUCCESS: null,
-    GET_ANSWRED_QUESTIONS_SUCCESS: null,
+    GET_ANSWRED_QUESTIONS_SUCCESS: null
 });
 
 export default actionNames;
