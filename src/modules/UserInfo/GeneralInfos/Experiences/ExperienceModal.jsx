@@ -95,7 +95,10 @@ const ExperienceModal = ({
     }, []);
 
     React.useEffect(() => {
-        const newObj = experienceToEdit ? { ...experienceToEdit } : {};
+        const defaultObj = { startDate: new Date(), endDate: new Date() };
+        const newObj = experienceToEdit
+            ? { ...defaultObj, ...experienceToEdit }
+            : { ...defaultObj };
         setExperienceEditted(newObj);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [experienceToEdit]);
@@ -113,16 +116,17 @@ const ExperienceModal = ({
         location = '',
         isWorking = false,
         startDate,
-        endDate = new Date(),
+        endDate,
         description = ''
     } = experienceEditted;
 
-    const updateExperienceEditted = obj => {
+    const updateExperienceEditted = (obj) => {
         setIsShownError(false);
         setExperienceEditted({ ...experienceEditted, ...obj });
     };
 
     const onSubmit = () => {
+        console.log(startDate);
         if (
             !title ||
             !location ||
@@ -156,7 +160,7 @@ const ExperienceModal = ({
                             helperText={t('form_ex_work_manager')}
                             variant="outlined"
                             value={title}
-                            onChange={ev =>
+                            onChange={(ev) =>
                                 updateExperienceEditted({
                                     title: ev.target.value
                                 })
@@ -169,7 +173,7 @@ const ExperienceModal = ({
                             label={t('common_company')}
                             variant="outlined"
                             value={company}
-                            onChange={ev =>
+                            onChange={(ev) =>
                                 updateExperienceEditted({
                                     company: ev.target.value
                                 })
@@ -182,7 +186,7 @@ const ExperienceModal = ({
                             label={t('common_location')}
                             variant="outlined"
                             value={location}
-                            onChange={ev =>
+                            onChange={(ev) =>
                                 updateExperienceEditted({
                                     location: ev.target.value
                                 })
@@ -194,7 +198,7 @@ const ExperienceModal = ({
                             control={
                                 <Switch
                                     checked={isWorking}
-                                    onChange={ev =>
+                                    onChange={(ev) =>
                                         updateExperienceEditted({
                                             isWorking: ev.target.checked
                                         })
@@ -216,7 +220,7 @@ const ExperienceModal = ({
                                 InputLabelProps={{
                                     shrink: true
                                 }}
-                                onChange={ev =>
+                                onChange={(ev) =>
                                     updateExperienceEditted({
                                         startDate: ev.target.value
                                     })
@@ -238,7 +242,7 @@ const ExperienceModal = ({
                                     InputLabelProps={{
                                         shrink: true
                                     }}
-                                    onChange={ev =>
+                                    onChange={(ev) =>
                                         updateExperienceEditted({
                                             endDate: ev.target.value
                                         })
@@ -253,7 +257,7 @@ const ExperienceModal = ({
                             rows="6"
                             value={description}
                             variant="outlined"
-                            onChange={ev =>
+                            onChange={(ev) =>
                                 updateExperienceEditted({
                                     description: ev.target.value
                                 })
