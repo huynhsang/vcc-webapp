@@ -125,7 +125,7 @@ const Educations = ({ createEducation, editEducation, userInfos }) => {
                 </div>
                 <div>{val.description}</div>
                 <DegreesWrapper>
-                    {val.degrees.map((val, key) => (
+                    {(val.degrees || []).map((val, key) => (
                         <li key={`degree-${key}`}>{val}</li>
                     ))}
                 </DegreesWrapper>
