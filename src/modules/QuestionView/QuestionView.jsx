@@ -117,13 +117,6 @@ const QuestionView = ({
     const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
 
     const { question, isCreatingAnswer, isFetchingError } = questionDetail;
-    const {
-        answerCount,
-        answers,
-        askedBy,
-        bestAnswerItem,
-        viewCount
-    } = question;
 
     const slug = match && match.params && match.params.slug;
 
@@ -141,6 +134,14 @@ const QuestionView = ({
     if (!question) {
         return null;
     }
+
+    const {
+        answerCount,
+        answers,
+        askedBy,
+        bestAnswerItem,
+        viewCount
+    } = question;
 
     const deleteQuestionFn = () => {
         setIsOpenDeleteModal(true);
