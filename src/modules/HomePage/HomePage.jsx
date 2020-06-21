@@ -116,6 +116,7 @@ const Home = ({ toggleContactUs, history }) => {
         //GET Top users
         getUsers({
             filter: {
+                sort: 'point',
                 skip: 0,
                 limit: 10
             }
