@@ -117,6 +117,13 @@ const QuestionView = ({
     const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
 
     const { question, isCreatingAnswer, isFetchingError } = questionDetail;
+    const {
+        answerCount,
+        answers,
+        askedBy,
+        bestAnswerItem,
+        viewCount
+    } = question;
 
     const slug = match && match.params && match.params.slug;
 
@@ -138,14 +145,6 @@ const QuestionView = ({
     const deleteQuestionFn = () => {
         setIsOpenDeleteModal(true);
     };
-
-    const {
-        answerCount,
-        answers,
-        askedBy,
-        bestAnswerItem,
-        viewCount
-    } = question;
 
     const isQuestionOwner = askedBy.id === currentUserId;
 
@@ -186,7 +185,7 @@ const QuestionView = ({
                         >
                             {t('common_come_back')}
                         </Button>
-                        {isAdmin && (
+                        {(isAdmin || isQuestionOwner) && (
                             <IconButton
                                 className={classes.deleteButton}
                                 color="secondary"

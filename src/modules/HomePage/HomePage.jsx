@@ -105,10 +105,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Home = ({
-    toggleContactUs,
-    history
-}) => {
+const Home = ({ toggleContactUs, history }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -132,7 +129,7 @@ const Home = ({
         getQuestions({
             filter: {
                 order: 'viewCount DESC',
-                limit: 5
+                limit: 10
             }
         })
             .then((data) => {
