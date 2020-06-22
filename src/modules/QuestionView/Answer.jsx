@@ -31,7 +31,8 @@ const useStyles = makeStyles(() => ({
         }
     },
     deleteButton: {
-        margin: '5px 0 0 5px'
+        margin: '0 0 0 5px',
+        padding: '2px'
     }
 }));
 
@@ -67,12 +68,17 @@ const CheckCircleIcon = styled(CheckCircle)`
 
 const BottomWrapper = styled.div`
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: space-between;
     margin-top: 5px;
 `;
 
 const InfosWrapper = styled.div`
-    margin-left: 10px;
+    margin-left: 5px;
+`;
+
+const AnswerWrapper = styled.div`
+    overflow: hidden;
 `;
 
 const Answer = ({
@@ -117,26 +123,15 @@ const Answer = ({
         history.push(url);
     };
 
+    const isAnswerOwner = userAnwserId === currentUserId;
     const isAdmin = ROLES.ADMIN === userRole;
 
     return (
         <>
             <Wrapper>
-                <FlexWrapper
-                    justifyContent="space-between"
-                    alginItems="flex-start"
-                >
+                <AnswerWrapper>
                     <ReactMarkdown source={body} />
-                    {isAdmin && (
-                        <IconButton
-                            color="secondary"
-                            className={classes.deleteButton}
-                            onClick={deleteAnswerFn}
-                        >
-                            <DeleteIcon />
-                        </IconButton>
-                    )}
-                </FlexWrapper>
+                </AnswerWrapper>
                 <FlexWrapper
                     alginItems="flex-end"
                     justifyContent="space-between"
@@ -158,23 +153,35 @@ const Answer = ({
                     </FlexWrapper>
                 </FlexWrapper>
                 <BottomWrapper>
-                    {isBestAnswer && <CheckCircleIcon />}
-                    {!!approveAnswer && (
-                        <Button
-                            variant="contained"
-                            onClick={approveAnswer}
-                            className={classes.approveButton}
-                        >
-                            Approve
-                        </Button>
-                    )}
-                    <LikeBox
-                        upVoteCount={upVoteCount}
-                        downVoteCount={downVoteCount}
-                        voted={voted}
-                        handleVote={handleVoteAnswer}
-                        disabled={currentUserId === userAnwserId}
-                    />
+                    <FlexWrapper justifyContent="space-between">
+                        {isBestAnswer && <CheckCircleIcon />}
+                        {!!approveAnswer && (
+                            <Button
+                                variant="contained"
+                                onClick={approveAnswer}
+                                className={classes.approveButton}
+                            >
+                                Approve
+                            </Button>
+                        )}
+                        <LikeBox
+                            upVoteCount={upVoteCount}
+                            downVoteCount={downVoteCount}
+                            voted={voted}
+                            handleVote={handleVoteAnswer}
+                            disabled={currentUserId === userAnwserId}
+                        />
+                    </FlexWrapper>
+                    {isAdmin ||
+                        (isAnswerOwner && (
+                            <IconButton
+                                color="secondary"
+                                className={classes.deleteButton}
+                                onClick={deleteAnswerFn}
+                            >
+                                <DeleteIcon />
+                            </IconButton>
+                        ))}
                 </BottomWrapper>
             </Wrapper>
             <ConfirmModal
