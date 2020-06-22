@@ -32,6 +32,7 @@ import IconButton from '@material-ui/core/IconButton';
 import { ROLES } from '../../constants/constants';
 
 import { ConfirmModal } from '../ConfirmModal';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -97,6 +98,13 @@ const FlexWrapper = styled.div`
     justify-content: space-between;
 `;
 
+const LoaderWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+`;
+
 const QuestionView = ({
     match,
     isAuthenticated,
@@ -117,7 +125,12 @@ const QuestionView = ({
 
     const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
 
-    const { question, isCreatingAnswer, isFetchingError } = questionDetail;
+    const {
+        question,
+        isCreatingAnswer,
+        isFetchingError,
+        isFetching
+    } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
 
@@ -131,6 +144,17 @@ const QuestionView = ({
         fetchQuestion();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slug, isAuthenticated]);
+
+    if (isFetching) {
+        return (
+            <Background>
+                <PageCover />
+                <LoaderWrapper>
+                    <CircularProgress />
+                </LoaderWrapper>
+            </Background>
+        );
+    }
 
     if (!question) {
         return null;
