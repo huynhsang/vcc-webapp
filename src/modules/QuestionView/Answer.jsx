@@ -43,7 +43,7 @@ const FlexWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    margin-top: 10px;
+    margin-top: 5px;
     border-top: 1px solid #eaeaea;
 `;
 
@@ -70,7 +70,7 @@ const BottomWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 5px;
+    margin-top: 10px;
 `;
 
 const InfosWrapper = styled.div`

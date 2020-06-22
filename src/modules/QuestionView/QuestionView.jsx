@@ -67,6 +67,7 @@ const QuestionInfos = styled.div`
     display: flex;
     justify-content: space-between;
     font-size: 0.9rem;
+    padding-bottom: 5px;
 `;
 
 const AnswerCount = styled.div`
