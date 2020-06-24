@@ -17,89 +17,66 @@ import {
 import { errorAlertFn, successAlertFn } from './alertConfirm';
 
 const {
-    GET_QUESTION_REQUEST,
     GET_QUESTION_SUCCESS,
-    GET_QUESTION_FAILURE,
-    VOTE_QUESTION_DETAIL_REQUEST,
     VOTE_QUESTION_DETAIL_SUCCESS,
-    VOTE_QUESTION_DETAIL_FAILURE,
-    VOTE_ANSWER_REQUEST,
     VOTE_ANSWER_SUCCESS,
-    VOTE_ANSWER_FAILURE,
-    CREATE_ANSWER_REQUEST,
     CREATE_ANSWER_SUCCESS,
-    CREATE_ANSWER_FAILURE,
     APPROVE_ANSWER_SUCCESS,
-    EDIT_ANSWER_SUCCESS
+    EDIT_ANSWER_SUCCESS,
+    SET_QUESTION_PAGE_LOADING,
+    REMOVE_ANSWER_SUCCESS
 } = actionsNames;
 
-export const getQuestionRequest = createAction(GET_QUESTION_REQUEST);
-export const getQuestionSuccess = createAction(GET_QUESTION_SUCCESS);
-export const getQuestionFailure = createAction(GET_QUESTION_FAILURE);
+export const setQuestionPageLoading = createAction(SET_QUESTION_PAGE_LOADING);
 
-export const getQuestionFn = (slug) => {
+export const getQuestionSuccess = createAction(GET_QUESTION_SUCCESS);
+export const getQuestionFn = (slug, setLoading = true) => {
     return (dispatch) => {
-        dispatch(getQuestionRequest());
+        if(setLoading){
+            dispatch(setQuestionPageLoading(true));
+        }
         getQuestionWithSlug(slug)
             .then((data) => {
                 dispatch(getQuestionSuccess(data));
             })
             .catch((err) => {
-                dispatch(getQuestionFailure());
+                dispatch(setQuestionPageLoading(false));
                 console.log(err.message);
             });
     };
 };
 
-export const voteQuestionDetailRequest = createAction(
-    VOTE_QUESTION_DETAIL_REQUEST
-);
 export const voteQuestionDetailSuccess = createAction(
     VOTE_QUESTION_DETAIL_SUCCESS
 );
-export const voteQuestionDetailFailure = createAction(
-    VOTE_QUESTION_DETAIL_FAILURE
-);
-
 export const voteQuestionFn = (questionId, action) => {
     return (dispatch) => {
-        dispatch(voteQuestionDetailRequest());
         voteQuestion(questionId, action)
             .then((data) => {
                 dispatch(voteQuestionDetailSuccess(data));
             })
             .catch((err) => {
-                dispatch(voteQuestionDetailFailure());
                 console.log(err.message);
             });
     };
 };
 
-export const voteAnswerRequest = createAction(VOTE_ANSWER_REQUEST);
 export const voteAnswerSuccess = createAction(VOTE_ANSWER_SUCCESS);
-export const voteAnswerFailure = createAction(VOTE_ANSWER_FAILURE);
-
 export const voteAnswerFn = (answerId, action) => {
     return (dispatch) => {
-        dispatch(voteAnswerRequest(answerId));
         voteAnswer(answerId, action)
             .then((data) => {
                 dispatch(voteAnswerSuccess(data));
             })
             .catch((err) => {
-                dispatch(voteAnswerFailure());
                 console.log(err.message);
             });
     };
 };
 
-export const createAnswerRequest = createAction(CREATE_ANSWER_REQUEST);
 export const createAnswerSuccess = createAction(CREATE_ANSWER_SUCCESS);
-export const createAnswerFailure = createAction(CREATE_ANSWER_FAILURE);
-
 export const createAnswerFn = (questionId, answerBody) => {
     return (dispatch, getState) => {
-        dispatch(createAnswerRequest());
         createAnswer(questionId, answerBody)
             .then(() => {
                 dispatch(successAlertFn(i18n.t('question_leaved_an_answer')));
@@ -109,18 +86,15 @@ export const createAnswerFn = (questionId, answerBody) => {
                         question: { slug }
                     }
                 } = getState();
-                dispatch(getQuestionFn(slug));
+                dispatch(getQuestionFn(slug, false));
             })
             .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
-                dispatch(createAnswerFailure());
-                console.log(err.message);
             });
     };
 };
 
 export const approveAnswerSuccess = createAction(APPROVE_ANSWER_SUCCESS);
-
 export const approveAnswerFn = (questionId, answerId) => {
     return (dispatch) => {
         approveAnswer(questionId, answerId)
@@ -132,28 +106,22 @@ export const approveAnswerFn = (questionId, answerId) => {
             })
             .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
-                dispatch(createAnswerFailure());
             });
     };
 };
 
+export const removeAnswerSuccess = createAction(REMOVE_ANSWER_SUCCESS);
 export const removeAnswerFn = (id) => {
-    return (dispatch, getState) => {
+    return (dispatch) => {
         deleteAnswer(id)
             .then(() => {
-                const {
-                    questionDetail: {
-                        question: { slug }
-                    }
-                } = getState();
-                dispatch(getQuestionFn(slug));
+                dispatch(removeAnswerSuccess(id));
                 dispatch(
                     successAlertFn(i18n.t('question_remove_answer_success'))
                 );
             })
             .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
-                dispatch(createAnswerFailure());
             });
     };
 };
@@ -161,13 +129,15 @@ export const removeAnswerFn = (id) => {
 export const editAnswerSuccess = createAction(EDIT_ANSWER_SUCCESS);
 export const editAnswerFn = (data) => {
     return (dispatch) => {
-        editAnswer(data).then((responseData)=>{
-            dispatch(editAnswerSuccess(responseData));
-            dispatch(
-                successAlertFn(i18n.t('question_edit_answer_success'))
-            );
-        }).catch((err)=>{
-            errorAlertFn(err.response.data.error.message);
-        })
+        editAnswer(data)
+            .then((responseData) => {
+                dispatch(editAnswerSuccess(responseData));
+                dispatch(
+                    successAlertFn(i18n.t('question_edit_answer_success'))
+                );
+            })
+            .catch((err) => {
+                errorAlertFn(err.response.data.error.message);
+            });
     };
 };

@@ -137,7 +137,7 @@ const QuestionView = ({
     const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
     const [leaveAnswer, setLeaveAnswer] = React.useState(false);
 
-    const { question, isFetching } = questionDetail;
+    const { question, isLoading } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
 
@@ -152,7 +152,7 @@ const QuestionView = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [slug, isAuthenticated]);
 
-    if (isFetching) {
+    if (isLoading) {
         return (
             <Background>
                 <PageCover />
@@ -214,6 +214,7 @@ const QuestionView = ({
     const createNewAnswer = (data) => {
         createAnswer(question.id, data);
         setLeaveAnswer(false);
+        window.scrollTo(0,0);
     };
 
     const isAdmin = ROLES.ADMIN === userRole;

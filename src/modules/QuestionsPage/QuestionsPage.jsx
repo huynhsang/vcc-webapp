@@ -179,7 +179,7 @@ const QuestionPage = ({
                                 {questionElements}
                             </QuestionsWrapper>
                             <DefaultWrapper>
-                                {nbPages > 1 ? (
+                                {nbPages > 1 && (
                                     <Pagination
                                         nbPages={nbPages}
                                         activePage={page}
@@ -189,7 +189,8 @@ const QuestionPage = ({
                                         justifyContent="center"
                                         color="#37424a"
                                     />
-                                ) : (
+                                )}
+                                {numberQuestions <= 0 && (
                                     <div>
                                         {`${t('common_no_result')} `}
                                         <Link to={`/questions?page=1`}>
