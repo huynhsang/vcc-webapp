@@ -47,7 +47,8 @@ const actionNames = keyMirror({
     CREATE_ANSWER_SUCCESS: null,
     CREATE_ANSWER_FAILURE: null,
     APPROVE_ANSWER_SUCCESS: null,
-
+    EDIT_ANSWER_SUCCESS: null,
+    
     //User Infos,
     GET_EXPERIENCES_SUCCESS: null,
     CREATE_EXPERIENCE_REQUEST: null,

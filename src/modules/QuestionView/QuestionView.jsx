@@ -9,7 +9,8 @@ import {
     voteAnswerFn,
     voteQuestionFn,
     approveAnswerFn,
-    removeAnswerFn
+    removeAnswerFn,
+    editAnswerFn
 } from '../../actions/questionDetail';
 import { showLoginConfirmFn, errorAlertFn } from '../../actions/alertConfirm';
 import { createAnswerFn } from '../../actions/questionDetail';
@@ -105,6 +106,15 @@ const LoaderWrapper = styled.div`
     margin-top: 50px;
 `;
 
+const CenterWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+    & button {
+        margin: 0 10px;
+    }
+`;
+
 const QuestionView = ({
     match,
     isAuthenticated,
@@ -117,20 +127,17 @@ const QuestionView = ({
     errorAlert,
     createAnswer,
     approveAnswer,
-    removeAnswer
+    removeAnswer,
+    editAnswer
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
     const { id: currentUserId, role: userRole } = getIdAndToken();
 
     const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
+    const [leaveAnswer, setLeaveAnswer] = React.useState(false);
 
-    const {
-        question,
-        isCreatingAnswer,
-        isFetchingError,
-        isFetching
-    } = questionDetail;
+    const { question, isFetching } = questionDetail;
 
     const slug = match && match.params && match.params.slug;
 
@@ -192,9 +199,22 @@ const QuestionView = ({
                 isBestAnswer={bestAnswerItem && bestAnswerItem.id === a.id}
                 history={history}
                 removeAnswer={removeAnswer}
+                editAnswer={editAnswer}
             />
         );
     });
+
+    const leaveAnswerValidation = () => {
+        if (!isAuthenticated) {
+            return showLoginConfirm();
+        }
+        setLeaveAnswer(true);
+    };
+
+    const createNewAnswer = (data) => {
+        createAnswer(question.id, data);
+        setLeaveAnswer(false);
+    };
 
     const isAdmin = ROLES.ADMIN === userRole;
 
@@ -243,16 +263,26 @@ const QuestionView = ({
                         </QuestionInfos>
                         {answersRender}
                     </AnswerWrapper>
-                    <AnswerForm
-                        questionId={question.id}
-                        reloadQuestion={fetchQuestion}
-                        isAuthenticated={isAuthenticated}
-                        createAnswer={createAnswer}
-                        errorAlert={errorAlert}
-                        showLoginConfirm={showLoginConfirm}
-                        isCreatingAnswer={isCreatingAnswer}
-                        isFetchingError={isFetchingError}
-                    />
+                    {!leaveAnswer ? (
+                        <CenterWrapper>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={leaveAnswerValidation}
+                            >
+                                {t('answer_leave_answer')}
+                            </Button>
+                        </CenterWrapper>
+                    ) : (
+                        <>
+                            <h3>{t('answer_leave_answer')}</h3>
+                            <AnswerForm
+                                submit={createNewAnswer}
+                                errorAlert={errorAlert}
+                                cancel={() => setLeaveAnswer(false)}
+                            />
+                        </>
+                    )}
                 </Wrapper>
             </Background>
             <ConfirmModal
@@ -281,7 +311,8 @@ const mapDispatchToProps = (dispatch) => ({
         dispatch(createAnswerFn(questionId, answerBody)),
     approveAnswer: (questionId, answerId) =>
         dispatch(approveAnswerFn(questionId, answerId)),
-    removeAnswer: (id) => dispatch(removeAnswerFn(id))
+    removeAnswer: (id) => dispatch(removeAnswerFn(id)),
+    editAnswer: (id) => dispatch(editAnswerFn(id))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuestionView);

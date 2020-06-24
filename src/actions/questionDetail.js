@@ -8,7 +8,11 @@ import {
     deleteAnswer
 } from '../services/question.service';
 
-import { voteAnswer, createAnswer } from '../services/answer.service';
+import {
+    voteAnswer,
+    createAnswer,
+    editAnswer
+} from '../services/answer.service';
 
 import { errorAlertFn, successAlertFn } from './alertConfirm';
 
@@ -25,7 +29,8 @@ const {
     CREATE_ANSWER_REQUEST,
     CREATE_ANSWER_SUCCESS,
     CREATE_ANSWER_FAILURE,
-    APPROVE_ANSWER_SUCCESS
+    APPROVE_ANSWER_SUCCESS,
+    EDIT_ANSWER_SUCCESS
 } = actionsNames;
 
 export const getQuestionRequest = createAction(GET_QUESTION_REQUEST);
@@ -93,12 +98,18 @@ export const createAnswerSuccess = createAction(CREATE_ANSWER_SUCCESS);
 export const createAnswerFailure = createAction(CREATE_ANSWER_FAILURE);
 
 export const createAnswerFn = (questionId, answerBody) => {
-    return (dispatch) => {
+    return (dispatch, getState) => {
         dispatch(createAnswerRequest());
         createAnswer(questionId, answerBody)
             .then(() => {
                 dispatch(successAlertFn(i18n.t('question_leaved_an_answer')));
                 dispatch(createAnswerSuccess());
+                const {
+                    questionDetail: {
+                        question: { slug }
+                    }
+                } = getState();
+                dispatch(getQuestionFn(slug));
             })
             .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
@@ -136,10 +147,27 @@ export const removeAnswerFn = (id) => {
                     }
                 } = getState();
                 dispatch(getQuestionFn(slug));
+                dispatch(
+                    successAlertFn(i18n.t('question_remove_answer_success'))
+                );
             })
             .catch((err) => {
                 errorAlertFn(err.response.data.error.message);
                 dispatch(createAnswerFailure());
             });
+    };
+};
+
+export const editAnswerSuccess = createAction(EDIT_ANSWER_SUCCESS);
+export const editAnswerFn = (data) => {
+    return (dispatch) => {
+        editAnswer(data).then((responseData)=>{
+            dispatch(editAnswerSuccess(responseData));
+            dispatch(
+                successAlertFn(i18n.t('question_edit_answer_success'))
+            );
+        }).catch((err)=>{
+            errorAlertFn(err.response.data.error.message);
+        })
     };
 };

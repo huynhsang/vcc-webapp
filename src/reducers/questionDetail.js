@@ -13,7 +13,8 @@ import {
     createAnswerRequest,
     createAnswerSuccess,
     createAnswerFailure,
-    approveAnswerSuccess
+    approveAnswerSuccess,
+    editAnswerSuccess
 } from '../actions/questionDetail';
 
 import { updateEntityVoted } from '../utils/update-voted';
@@ -80,6 +81,13 @@ const questionDetailReducer = createReducer(defaultState, {
     },
     [approveAnswerSuccess]: (state, action) => {
         state.question.bestAnswerItem = action.payload;
+    },
+    [editAnswerSuccess]: (state, action) => {
+        const { payload } = action;
+        const answerFound = state.question.answers.find(val => val.id === payload.id);
+        if(answerFound){
+            answerFound.body = payload.body
+        }
     }
 });
 

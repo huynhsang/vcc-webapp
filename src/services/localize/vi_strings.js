@@ -110,6 +110,7 @@ export default {
     common_filter: 'Lọc',
     common_add: 'Thêm',
     common_degrees: 'Bằng cấp',
+    common_delete: 'Xoá',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -223,6 +224,8 @@ export default {
         'Bạn thật sự muốn xoá câu hỏi này?',
     question_do_you_want_to_delete_this_answer:
         'Bạn thật sự muốn xoá câu trả lời này?',
+    question_remove_answer_success: 'Câu trả lời đã được xoá',
+    question_edit_answer_success: 'Câu trả lời đã được thay đổi',
 
     add_question_max_number_tag: 'Chúng tôi giới hạn {{number}} tags',
 

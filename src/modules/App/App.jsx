@@ -21,9 +21,8 @@ import { runCrisp, setCrispUserInfos } from '../../utils/run-crisp';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
-
 import { deleteCookie } from '../../utils/CookieHelper';
-import { USER_ID_KEY, JWT_TOKEN_NAME, USER_ROLE_KEY } from '../../constants/cookie.constant';
+import { USER_ROLE_KEY } from '../../constants/cookie.constant';
 
 const AppWrapper = styled.div`
     display: flex;
@@ -87,7 +86,7 @@ const mapStateToProps = ({ App }) => ({
     App
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 

@@ -11,11 +11,10 @@ import { createMediaTemplate } from '../../utils/css-tools';
 import LikeBox from '../../component/LikeBox';
 import UserLogo from '../../component/UserLogo';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
-import { ConfirmModal } from '../ConfirmModal';
-
 import { ROLES } from '../../constants/constants';
+
+import AnswerMenu from './AnswerMenu';
+import AnswerForm from './AnswerForm';
 
 const media = createMediaTemplate();
 
@@ -89,12 +88,13 @@ const Answer = ({
     approveAnswer,
     isBestAnswer,
     history,
-    removeAnswer
+    removeAnswer,
+    editAnswer
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
-    const [isOpenDeleteModal, setIsOpenDeleteModal] = React.useState(false);
     const { id: currentUserId, role: userRole } = getIdAndToken();
+    const [isEdit, setIsEdit] = React.useState(false);
 
     const {
         voted,
@@ -105,10 +105,6 @@ const Answer = ({
         created
     } = answer;
     const { id: userAnwserId, firstName, lastName, points } = answerBy;
-
-    const deleteAnswerFn = () => {
-        setIsOpenDeleteModal(true);
-    };
 
     const handleVoteAnswer = (isPositiveVote) => {
         if (!isAuthenticated) {
@@ -126,71 +122,72 @@ const Answer = ({
     const isAnswerOwner = userAnwserId === currentUserId;
     const isAdmin = ROLES.ADMIN === userRole;
 
+    const submitEdit = (val) => {
+        editAnswer({
+            id: answer.id,
+            body: val
+        });
+        setIsEdit(false);
+    };
+
     return (
-        <>
-            <Wrapper>
+        <Wrapper>
+            {isEdit ? (
+                <AnswerForm
+                    defaultValue={body}
+                    cancel={() => setIsEdit(false)}
+                    submit={submitEdit}
+                />
+            ) : (
                 <AnswerWrapper>
                     <ReactMarkdown source={body} />
                 </AnswerWrapper>
-                <FlexWrapper
-                    alginItems="flex-end"
-                    justifyContent="space-between"
-                >
-                    <DateWrapper>
-                        {t('answer_added_an_answer_on')}{' '}
-                        {new Date(created).toDateString()}
-                    </DateWrapper>
-                    <FlexWrapper>
-                        <UserLogo user={answerBy} />
-                        <InfosWrapper>
-                            <UserName
-                                onClick={redirect(`/users/${userAnwserId}`)}
-                            >
-                                {`${firstName} ${lastName}`}
-                            </UserName>
-                            <Badge points={points} />
-                        </InfosWrapper>
-                    </FlexWrapper>
+            )}
+            <FlexWrapper alginItems="flex-end" justifyContent="space-between">
+                <DateWrapper>
+                    {t('answer_added_an_answer_on')}{' '}
+                    {new Date(created).toDateString()}
+                </DateWrapper>
+                <FlexWrapper>
+                    <UserLogo user={answerBy} />
+                    <InfosWrapper>
+                        <UserName onClick={redirect(`/users/${userAnwserId}`)}>
+                            {`${firstName} ${lastName}`}
+                        </UserName>
+                        <Badge points={points} />
+                    </InfosWrapper>
                 </FlexWrapper>
-                <BottomWrapper>
-                    <FlexWrapper justifyContent="space-between">
-                        {isBestAnswer && <CheckCircleIcon />}
-                        {!!approveAnswer && (
-                            <Button
-                                variant="contained"
-                                onClick={approveAnswer}
-                                className={classes.approveButton}
-                            >
-                                Approve
-                            </Button>
-                        )}
-                        <LikeBox
-                            upVoteCount={upVoteCount}
-                            downVoteCount={downVoteCount}
-                            voted={voted}
-                            handleVote={handleVoteAnswer}
-                            disabled={currentUserId === userAnwserId}
+            </FlexWrapper>
+            <BottomWrapper>
+                <FlexWrapper justifyContent="space-between">
+                    {isBestAnswer && <CheckCircleIcon />}
+                    {!!approveAnswer && (
+                        <Button
+                            variant="contained"
+                            onClick={approveAnswer}
+                            className={classes.approveButton}
+                        >
+                            Approve
+                        </Button>
+                    )}
+                    <LikeBox
+                        upVoteCount={upVoteCount}
+                        downVoteCount={downVoteCount}
+                        voted={voted}
+                        handleVote={handleVoteAnswer}
+                        disabled={currentUserId === userAnwserId}
+                    />
+                </FlexWrapper>
+                {isAdmin ||
+                    (isAnswerOwner && (
+                        <AnswerMenu
+                            answerId={answer.id}
+                            removeAnswer={removeAnswer}
+                            onEdit={() => setIsEdit(true)}
                         />
-                    </FlexWrapper>
-                    {isAdmin ||
-                        (isAnswerOwner && (
-                            <IconButton
-                                color="secondary"
-                                className={classes.deleteButton}
-                                onClick={deleteAnswerFn}
-                            >
-                                <DeleteIcon />
-                            </IconButton>
-                        ))}
-                </BottomWrapper>
-            </Wrapper>
-            <ConfirmModal
-                isOpen={isOpenDeleteModal}
-                action={() => removeAnswer(answer.id)}
-                title={t('question_do_you_want_to_delete_this_answer')}
-                cancel={() => setIsOpenDeleteModal(false)}
-            />
-        </>
+                    ))}
+            </BottomWrapper>
+        </Wrapper>
     );
 };
 

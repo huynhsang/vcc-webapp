@@ -110,6 +110,7 @@ export default {
     common_filter: 'Filter',
     common_add: 'Add',
     common_degrees: 'Degrees',
+    common_delete: 'Delete',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -218,6 +219,8 @@ export default {
         'Do you want to delete this question?',
     question_do_you_want_to_delete_this_answer:
         'Do you want to delete this answer?',
+    question_remove_answer_success : 'Answer has been removed',
+    question_edit_answer_success : 'Answer has been updated',
 
     add_question_max_number_tag: 'We limit {{number}} tags',
 
