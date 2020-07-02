@@ -15,7 +15,7 @@ import { DefaultWrapper } from '../../component/Wrappers';
 import UserMenu from './UserMenu';
 
 const ContentWrapper = styled(DefaultWrapper)`
-    min-height: calc(100vh - 450px);
+    min-height: calc(100vh - 430px);
 `;
 
 const UserProfile = ({
@@ -40,7 +40,7 @@ const UserProfile = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [userId]);
 
-    if (!userProfile) {
+    if (!userProfile || userProfile.id !== userId) {
         return <div />;
     }
 

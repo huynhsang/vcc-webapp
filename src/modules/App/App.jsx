@@ -21,6 +21,9 @@ import { runCrisp, setCrispUserInfos } from '../../utils/run-crisp';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
+import { deleteCookie } from '../../utils/CookieHelper';
+import { USER_ROLE_KEY } from '../../constants/cookie.constant';
+
 const AppWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -40,6 +43,7 @@ let muiTheme = createMuiTheme({
 
 const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
+        deleteCookie(USER_ROLE_KEY);
         runCrisp();
         fetchUserFromCookie();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -82,7 +86,7 @@ const mapStateToProps = ({ App }) => ({
     App
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
     fetchUserFromCookie: () => dispatch(fetchUserFromCookieFn(true))
 });
 

@@ -1,5 +1,4 @@
 import http from './https';
-import { REALM } from '../constants/constants';
 
 import {
     JWT_TOKEN_NAME,
@@ -28,7 +27,7 @@ export const setUserCookie = (tokenId, userId, rememberMe) => {
 };
 
 export async function login(data) {
-    const response = await http.post(LOGIN_URL, { realm: REALM.user, ...data });
+    const response = await http.post(LOGIN_URL, data);
     const { id, userId, rememberMe } = response.data;
     setUserCookie(id, userId, rememberMe);
     return response.data;

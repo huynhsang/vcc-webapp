@@ -105,10 +105,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const Home = ({
-    toggleContactUs,
-    history
-}) => {
+const Home = ({ toggleContactUs, history }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -119,6 +116,7 @@ const Home = ({
         //GET Top users
         getUsers({
             filter: {
+                sort: 'point',
                 skip: 0,
                 limit: 10
             }
@@ -132,7 +130,7 @@ const Home = ({
         getQuestions({
             filter: {
                 order: 'viewCount DESC',
-                limit: 5
+                limit: 10
             }
         })
             .then((data) => {

@@ -11,6 +11,11 @@ import { createMediaTemplate } from '../../utils/css-tools';
 import LikeBox from '../../component/LikeBox';
 import UserLogo from '../../component/UserLogo';
 
+import { ROLES } from '../../constants/constants';
+
+import AnswerMenu from './AnswerMenu';
+import AnswerForm from './AnswerForm';
+
 const media = createMediaTemplate();
 
 const useStyles = makeStyles(() => ({
@@ -23,6 +28,10 @@ const useStyles = makeStyles(() => ({
         '&:hover': {
             backgroundColor: '#0e8a12'
         }
+    },
+    deleteButton: {
+        margin: '0 0 0 5px',
+        padding: '2px'
     }
 }));
 
@@ -33,7 +42,7 @@ const FlexWrapper = styled.div`
 `;
 
 const Wrapper = styled.div`
-    margin-top: 10px;
+    margin-top: 5px;
     border-top: 1px solid #eaeaea;
 `;
 
@@ -58,12 +67,17 @@ const CheckCircleIcon = styled(CheckCircle)`
 
 const BottomWrapper = styled.div`
     display: flex;
-    align-items: flex-end;
-    margin-top: 5px;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
 `;
 
 const InfosWrapper = styled.div`
-    margin-left: 10px;
+    margin-left: 5px;
+`;
+
+const AnswerWrapper = styled.div`
+    overflow: hidden;
 `;
 
 const Answer = ({
@@ -73,11 +87,14 @@ const Answer = ({
     voteAnswer,
     approveAnswer,
     isBestAnswer,
-    history
+    history,
+    removeAnswer,
+    editAnswer
 }) => {
     const { t } = useTranslation();
     const classes = useStyles();
-    const { id: currentUserId } = getIdAndToken();
+    const { id: currentUserId, role: userRole } = getIdAndToken();
+    const [isEdit, setIsEdit] = React.useState(false);
 
     const {
         voted,
@@ -102,9 +119,30 @@ const Answer = ({
         history.push(url);
     };
 
+    const isAnswerOwner = userAnwserId === currentUserId;
+    const isAdmin = ROLES.ADMIN === userRole;
+
+    const submitEdit = (val) => {
+        editAnswer({
+            id: answer.id,
+            body: val
+        });
+        setIsEdit(false);
+    };
+
     return (
         <Wrapper>
-            <ReactMarkdown source={body} />
+            {isEdit ? (
+                <AnswerForm
+                    defaultValue={body}
+                    cancel={() => setIsEdit(false)}
+                    submit={submitEdit}
+                />
+            ) : (
+                <AnswerWrapper>
+                    <ReactMarkdown source={body} />
+                </AnswerWrapper>
+            )}
             <FlexWrapper alginItems="flex-end" justifyContent="space-between">
                 <DateWrapper>
                     {t('answer_added_an_answer_on')}{' '}
@@ -121,23 +159,33 @@ const Answer = ({
                 </FlexWrapper>
             </FlexWrapper>
             <BottomWrapper>
-                {isBestAnswer && <CheckCircleIcon />}
-                {!!approveAnswer && (
-                    <Button
-                        variant="contained"
-                        onClick={approveAnswer}
-                        className={classes.approveButton}
-                    >
-                        Approve
-                    </Button>
-                )}
-                <LikeBox
-                    upVoteCount={upVoteCount}
-                    downVoteCount={downVoteCount}
-                    voted={voted}
-                    handleVote={handleVoteAnswer}
-                    disabled={currentUserId === userAnwserId}
-                />
+                <FlexWrapper justifyContent="space-between">
+                    {isBestAnswer && <CheckCircleIcon />}
+                    {!!approveAnswer && (
+                        <Button
+                            variant="contained"
+                            onClick={approveAnswer}
+                            className={classes.approveButton}
+                        >
+                            Approve
+                        </Button>
+                    )}
+                    <LikeBox
+                        upVoteCount={upVoteCount}
+                        downVoteCount={downVoteCount}
+                        voted={voted}
+                        handleVote={handleVoteAnswer}
+                        disabled={currentUserId === userAnwserId}
+                    />
+                </FlexWrapper>
+                {isAdmin ||
+                    (isAnswerOwner && (
+                        <AnswerMenu
+                            answerId={answer.id}
+                            removeAnswer={removeAnswer}
+                            onEdit={() => setIsEdit(true)}
+                        />
+                    ))}
             </BottomWrapper>
         </Wrapper>
     );

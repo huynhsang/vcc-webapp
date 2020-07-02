@@ -104,7 +104,12 @@ const AddQuestion = ({
             })
             .catch((err) => console.log(err.message));
 
-        getUsers()
+        getUsers({
+            filter: {
+                skip: 0,
+                limit: 1000
+            }
+        })
             .then((data) => {
                 setUsersToMatch(
                     data.filter((val) => val.id !== currentUser.id)

@@ -41,7 +41,8 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const [userEditted, setUserEditted] = React.useState(currentUser);
+    const {roles,...data} = currentUser;
+    const [userEditted, setUserEditted] = React.useState(data);
 
     const [birthDayEditted, setBirthDayEditted] = React.useState(null);
 

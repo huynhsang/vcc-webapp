@@ -21,15 +21,3 @@ export async function voteAnswer(id, action) {
     const response = await http.post(url, { action });
     return response.data;
 }
-
-// export async function getAnswers(params) {
-//     const response = await http.get(ANSWER_URL, { params });
-//     return response.data;
-// }
-
-// export async function getNumberAnswers(params) {
-//     const response = await http.get(`${ANSWER_URL}/count`, {
-//         params
-//     });
-//     return response.data;
-// }

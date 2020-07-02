@@ -50,6 +50,8 @@ const InfosSup = styled.div`
 const Title = styled.div`
     font-weight: 600;
     font-size: 1.1rem;
+    overflow: hidden;
+    margin-right: 5px;
 `;
 
 const UserName = styled.div`
@@ -67,6 +69,7 @@ const DescriptionWrapper = styled.div`
     line-height: 18px;
     margin: 10px 0;
     color: #464646;
+    overflow: hidden;
 `;
 
 const FlexWrapper = styled.div`
@@ -87,7 +90,6 @@ const ResolveLabel = styled.div`
     display: flex;
     align-items: center;
     padding: 3px 5px;
-    margin-left: 5px;
     border-radius: 3px;
 
     & svg {
