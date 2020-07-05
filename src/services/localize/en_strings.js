@@ -219,8 +219,8 @@ export default {
         'Do you want to delete this question?',
     question_do_you_want_to_delete_this_answer:
         'Do you want to delete this answer?',
-    question_remove_answer_success : 'Answer has been removed',
-    question_edit_answer_success : 'Answer has been updated',
+    question_remove_answer_success: 'Answer has been removed',
+    question_edit_answer_success: 'Answer has been updated',
 
     add_question_max_number_tag: 'We limit {{number}} tags',
 
@@ -300,16 +300,16 @@ export default {
     about_us_do:
         'We build a platform where people can ask questions and receive trustworthy answers from professionals all over the world using advanced matching algorithms. Besides that, we offer mentorship packages that our mentees can get connected directly with influential people. Our network will help you get access to the support and connections you need in your way to achieve your biggest dreams.',
     about_us_our_team: 'Meet our team',
-    about_us_nguyet_role: 'Co-founder - CEO',
+    about_us_nguyet_role: 'Co-founder - Business dedicator',
     about_us_nguyet_experience:
         'PhD student at University of Southern California',
-    about_us_phuc_role: 'Co-founder - COO',
+    about_us_phuc_role: 'Co-founder - Iron Dev',
     about_us_phuc_experience: 'Full-stack developer at Kumullus',
-    about_us_sang_role: 'Co-founder - CTO',
+    about_us_sang_role: 'Co-founder - Dev boss',
     about_us_sang_experience: 'Senior developer at Peddler',
-    about_us_toan_role: 'Chief Scientist',
+    about_us_toan_role: 'Hulk data',
     about_us_toan_experience: 'Senior Research Engineer at Berkeley Lab',
-    about_us_nguyen_role: 'Chief Marketing Officer',
+    about_us_nguyen_role: 'Marketing Servant',
     about_us_nguyen_experience: 'Marketing Executive at Advosights',
 
     forgot_password_please_verify_your_email:

@@ -299,16 +299,16 @@ export default {
     about_us_do:
         'Chúng tôi xây dựng một trang web để mọi người đặt câu hỏi và nhận được những câu trả lời đáng tin cậy từ người có kinh nghiệm ở khắp nơi trên thế giới. Bên cạnh đó, chúng tôi đưa ra những gói dịch vụ tư vấn kết nối bạn trực tiếp với một chuyên gia trong ngành bạn đang quan tâm. Cộng đồng của chúng tôi sẽ giúp bạn nhận được những hỗ trợ cũng như những mối quan hệ cần thiết cho sự nghiệp của bạn.',
     about_us_our_team: 'Các thành viên của VCNC',
-    about_us_nguyet_role: 'Đồng sáng lập - CEO',
+    about_us_nguyet_role: 'Đồng sáng lập - Business dedicator',
     about_us_nguyet_experience:
         'Nghiên cứu sinh tiến sĩ tại University of Southern California',
-    about_us_phuc_role: 'Đồng sáng lập - COO',
+    about_us_phuc_role: 'Đồng sáng lập - Iron Dev',
     about_us_phuc_experience: 'Lập trình viên tại Kumullus.',
-    about_us_sang_role: 'Đồng sáng lập - CTO',
+    about_us_sang_role: 'Đồng sáng lập - Dev boss',
     about_us_sang_experience: 'Lập trình viên tại Peddler.',
-    about_us_toan_role: 'Chief Scientist',
+    about_us_toan_role: 'Hulk data',
     about_us_toan_experience: 'Kỹ sư khoa học dữ liệu tại Berkeley Lab',
-    about_us_nguyen_role: 'Chief Marketing Officer',
+    about_us_nguyen_role: 'Marketing Servant',
     about_us_nguyen_experience: 'Marketing Executive tại Advosights',
 
     forgot_password_please_verify_your_email:
