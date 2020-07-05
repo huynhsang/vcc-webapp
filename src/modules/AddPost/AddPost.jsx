@@ -14,6 +14,8 @@ import { tagStyle } from '../../component/Tag';
 import { getTagsRelatingCategory } from '../../services/tags.service';
 import isEmpty from 'lodash/isEmpty';
 
+import {createPost} from '../../services/post.service';
+
 const useStyles = makeStyles(() => ({
     ...tagStyle,
     marginBottom: {
@@ -182,6 +184,10 @@ const AddPost = () => {
         setActiveCatSlug(categorySlug);
     };
 
+    const submitPost = () => {
+        createPost(post)
+    }
+
     const categoriesRender = !isEmpty(categories)
         ? categories.map((val, key) => (
               <Category
@@ -258,7 +264,7 @@ const AddPost = () => {
                 }}
             />
             <ButtonWrapper>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={submitPost}>
                     {t('common_submit')}
                 </Button>
             </ButtonWrapper>

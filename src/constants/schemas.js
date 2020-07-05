@@ -39,3 +39,13 @@ export const answerEntity = new schema.Entity(
 );
 
 export const answersEntity = [answerEntity];
+
+export const postEntity = new schema.Entity(
+    'posts',
+    {},
+    {
+        idAttribute: 'id'
+    }
+);
+
+export const postsEntity = [postEntity];
