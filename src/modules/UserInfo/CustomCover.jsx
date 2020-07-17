@@ -107,7 +107,7 @@ const UserName = styled.div`
 const CustomCover = ({ userProfile, isCurrentUser = false }) => {
     const { t } = useTranslation();
 
-    const { firstName, lastName, avatar, points, summary, id } = userProfile;
+    const { username, avatar, points, summary, id } = userProfile;
 
     return (
         <CoverWrapper>
@@ -116,7 +116,7 @@ const CustomCover = ({ userProfile, isCurrentUser = false }) => {
                 <UserImage src={avatar || DefaultUserLogo} alt="" />
                 <CenterContent>
                     <div>
-                        <UserName>{`${lastName} ${firstName}`}</UserName>
+                        <UserName>{username}</UserName>
                         <Badge points={points} />
                     </div>
                     {Boolean(summary) && (

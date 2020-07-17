@@ -67,10 +67,12 @@ const QuestionReview = ({
 }) => {
     const { t } = useTranslation();
 
-    const tagsRender = (tags || []).map(tag => <Tag key={tag.id} tag={tag} />);
+    const tagsRender = (tags || []).map((tag) => (
+        <Tag key={tag.id} tag={tag} />
+    ));
 
-    const userAskedList = (supporters || []).map(val => (
-        <UserAsked key={val.id}>{`${val.lastName} ${val.firstName}`}</UserAsked>
+    const userAskedList = (supporters || []).map((val) => (
+        <UserAsked key={val.id}>{val.username}</UserAsked>
     ));
 
     return (

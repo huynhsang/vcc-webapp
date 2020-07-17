@@ -283,7 +283,7 @@ const Question = ({
                     <UserLogo user={askedBy} />
                     <UserInfos>
                         <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {`${askedBy.firstName} ${askedBy.lastName}`}
+                            {askedBy.username}
                         </UserName>
                         <Badge points={askedBy.points} />
                         <InfosSup>

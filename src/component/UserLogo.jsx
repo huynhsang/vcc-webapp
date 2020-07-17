@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import DefaultUserLogo from '../images/default-user-logo.png';
+import FaceIcon from '@material-ui/icons/Face';
 
 import { createMediaTemplate } from '../utils/css-tools';
 const media = createMediaTemplate();
@@ -18,14 +19,29 @@ const LogoWrapper = styled.div`
         transform: scale(1.1) translateZ(0);
     }
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & svg {
+        font-size: 30px;
+        color: black;
+    }
+
     ${media.mobileLandscape`
         width: 30px;
         height: 30px;
+        & svg{
+            font-size: 26px;
+        }
     `}
 
     ${media.mobile`
         width: 30px;
         height: 30px;
+        & svg{
+            font-size: 26px;
+        }
     `}
 `;
 
@@ -38,9 +54,13 @@ const Img = styled.img`
 
 const UserLogo = ({ user }) => {
     return (
-        <Link to={`/users/${user.id}`} onClick={ev => ev.stopPropagation()}>
+        <Link to={`/users/${user.id}`} onClick={(ev) => ev.stopPropagation()}>
             <LogoWrapper>
-                <Img alt="" src={user.avatar || DefaultUserLogo} />
+                {user.avatar ? (
+                    <Img alt="" src={user.avatar || DefaultUserLogo} />
+                ) : (
+                    <FaceIcon />
+                )}
             </LogoWrapper>
         </Link>
     );

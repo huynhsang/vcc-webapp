@@ -52,8 +52,7 @@ const TopUser = ({ user, history }) => {
 
     const {
         id,
-        firstName,
-        lastName,
+        username,
         points,
         summary,
         questionCount,
@@ -71,7 +70,7 @@ const TopUser = ({ user, history }) => {
                 <UserLogo user={user} />
                 <InfosWrapper>
                     <div>
-                        <UserName>{`${firstName} ${lastName}`}</UserName>
+                        <UserName>{username}</UserName>
                         <Badge points={points} />
                     </div>
                     <InfosSup>
