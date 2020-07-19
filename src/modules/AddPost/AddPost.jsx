@@ -14,7 +14,7 @@ import { tagStyle } from '../../component/Tag';
 import { getTagsRelatingCategory } from '../../services/tags.service';
 import isEmpty from 'lodash/isEmpty';
 
-import {createPost} from '../../services/post.service';
+import { createPost } from '../../services/post.service';
 
 const useStyles = makeStyles(() => ({
     ...tagStyle,
@@ -126,7 +126,7 @@ const AddPost = () => {
         coverImage: '',
         resume: '',
         tagIds: [],
-        mainCharacter: '',
+        characterList: [],
         body: ''
     });
 
@@ -146,14 +146,13 @@ const AddPost = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeCatSlug]);
 
-    const { title, resume, body, tagIds, coverImage, mainCharacter } = post;
+    const { title, resume, body, tagIds, coverImage, characterList } = post;
 
     const handleUsers = (ev, value) => {
-        updatePost({ mainCharacter: value ? value.pop().id : '' });
+        updatePost({ characterList: value ? value.map((val) => val.id) : [] });
     };
 
-    const userFound = users.find((val) => val.id === mainCharacter);
-    const defaultUsers = userFound ? [userFound] : [];
+    const defaultUsers = users.filter((val) => characterList.includes(val.id));
 
     const onClickTag = (tagId) => () => {
         if (tagIds.includes(tagId)) {
@@ -185,8 +184,8 @@ const AddPost = () => {
     };
 
     const submitPost = () => {
-        createPost(post)
-    }
+        createPost(post);
+    };
 
     const categoriesRender = !isEmpty(categories)
         ? categories.map((val, key) => (
@@ -264,7 +263,11 @@ const AddPost = () => {
                 }}
             />
             <ButtonWrapper>
-                <Button variant="contained" color="primary" onClick={submitPost}>
+                <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={submitPost}
+                >
                     {t('common_submit')}
                 </Button>
             </ButtonWrapper>
