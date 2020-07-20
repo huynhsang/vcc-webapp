@@ -75,7 +75,7 @@ const Title = styled.div`
 `;
 
 const UserName = styled.div`
-    color: #009fff;
+    color: #053d68;
     margin-right: 10px;
     font-size: 0.9em;
     display: inline-block;
@@ -283,7 +283,7 @@ const Question = ({
                     <UserLogo user={askedBy} />
                     <UserInfos>
                         <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {`${askedBy.firstName} ${askedBy.lastName}`}
+                            {askedBy.username}
                         </UserName>
                         <Badge points={askedBy.points} />
                         <InfosSup>

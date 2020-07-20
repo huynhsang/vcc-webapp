@@ -21,7 +21,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PersonIcon from '@material-ui/icons/Person';
 import Lock from '@material-ui/icons/Lock';
 
-import DefaultAvatar from '../../images/default-user-logo.png';
+import { AVATARS } from '../../constants/constants';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -83,8 +83,7 @@ const Authenticate = ({
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const { firstName, lastName, avatar } = currentUser || {};
-    const fullName = `${firstName} ${lastName}`;
+    const { username, avatarIndex = 0  } = currentUser || {};
 
     const { id: userId } = getIdAndToken();
 
@@ -115,14 +114,14 @@ const Authenticate = ({
             <Wrapper>
                 <Button className={classes.nameButton} onClick={handleClick}>
                     <AvatarImg
-                        alt={fullName}
-                        title={fullName}
-                        src={avatar || DefaultAvatar}
+                        alt={username}
+                        title={username}
+                        src={AVATARS[avatarIndex].image}
                     />
                     <ResponsiveHide>
                         <div>
                             <Welcome>Welcome</Welcome>
-                            <div>{fullName}</div>
+                            <div>{username}</div>
                         </div>
                         <ArrowDropDown />
                     </ResponsiveHide>

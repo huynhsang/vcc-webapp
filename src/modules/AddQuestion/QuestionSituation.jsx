@@ -51,7 +51,7 @@ const QuestionSituation = ({
             <Autocomplete
                 multiple
                 options={usersToMatch}
-                getOptionLabel={(user) => `${user.lastName} ${user.firstName}`}
+                getOptionLabel={(user) => user.username}
                 value={defaultUsers || []}
                 filterSelectedOptions
                 renderInput={(params) => (

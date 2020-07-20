@@ -340,6 +340,7 @@ export default {
     my_profile_please_complete_all_fields: 'Vui lòng điền đầy đủ thông tin',
     my_profile_passwords_contrain:
         'Mật khẩu phải chứa ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
+    my_profile_custom_avatar: 'Chọn ảnh đại diện của bạn',
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',

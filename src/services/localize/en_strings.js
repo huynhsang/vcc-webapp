@@ -341,6 +341,7 @@ export default {
     my_profile_please_complete_all_fields: 'Please complete all fields',
     my_profile_passwords_contrain:
         'Your password must have at least 8 character, 1 uppercase letter, 1 lowercase letter, 1 digit ',
+    my_profile_custom_avatar: 'Please choose your avatar',
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',
