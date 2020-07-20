@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import UserInfoRouter from './UserInfoRouter';
+import { updateCurrentUserFn } from '../../actions/app';
 
 import {
     getUserProfileFn,
@@ -25,7 +26,8 @@ const UserProfile = ({
     getEducations,
     location,
     history,
-    currentUser
+    currentUser,
+    updateCurrentUser
 }) => {
     const { userProfile } = userInfos;
 
@@ -51,6 +53,7 @@ const UserProfile = ({
             <CustomCover
                 userProfile={userProfile}
                 isCurrentUser={isCurrentUser}
+                updateCurrentUser={updateCurrentUser}
             />
             <UserMenu location={location} history={history} userId={userId} />
             <ContentWrapper>
@@ -66,6 +69,7 @@ const mapStateToProps = ({ userInfos, App: { currentUser } }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    updateCurrentUser: data => dispatch(updateCurrentUserFn(data)),
     getUserProfile: userId => dispatch(getUserProfileFn(userId)),
     getExperiences: userId => dispatch(getExperiencesFn(userId)),
     getEducations: userId => dispatch(getEducationsFn(userId))

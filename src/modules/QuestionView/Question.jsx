@@ -55,7 +55,7 @@ const Title = styled.div`
 `;
 
 const UserName = styled.div`
-    color: #009fff;
+    color: #053d68;
     font-size: 0.9rem;
     display: inline-block;
     line-height: 1rem;

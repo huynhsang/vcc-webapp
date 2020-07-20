@@ -39,7 +39,7 @@ const InfosSup = styled.div`
 `;
 
 const UserName = styled.span`
-    color: #0869b5;
+    color: #053d68;
     margin-right: 10px;
 `;
 

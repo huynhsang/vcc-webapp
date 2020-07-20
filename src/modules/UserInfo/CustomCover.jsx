@@ -4,8 +4,11 @@ import { useTranslation } from 'react-i18next';
 import Cover from '../../images/cover.png';
 import { DefaultWrapper } from '../../component/Wrappers';
 import AskButton from '../../component/AskButton';
-import DefaultUserLogo from '../../images/default-user-logo.png';
 import { Badge } from '../../component/Badge';
+
+import CustomAvatar from './CustomAvatar';
+
+import { AVATARS } from '../../constants/constants';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -84,7 +87,7 @@ const SummaryWrapper = styled.div`
 `;
 
 const SignWrapper = styled.div`
-    text-align: ${p => p.textAlign};
+    text-align: ${(p) => p.textAlign};
     font-size: 40px;
 `;
 
@@ -104,16 +107,34 @@ const UserName = styled.div`
     font-weight: bold;
 `;
 
-const CustomCover = ({ userProfile, isCurrentUser = false }) => {
+const AvatarWrapper = styled.div`
+    position: relative;
+`;
+
+const CustomCover = ({
+    userProfile,
+    isCurrentUser = false,
+    updateCurrentUser
+}) => {
     const { t } = useTranslation();
 
-    const { username, avatar, points, summary, id } = userProfile;
+    const { username, points, summary, id, avatarIndex = 0 } = userProfile;
+
+    const setAvatarIndex = (newIndex) => {
+        updateCurrentUser({ avatarIndex: newIndex });
+    };
 
     return (
         <CoverWrapper>
             <Glass />
             <ContentWrapper>
-                <UserImage src={avatar || DefaultUserLogo} alt="" />
+                <AvatarWrapper>
+                    <UserImage src={AVATARS[avatarIndex].image} alt="" />
+                    <CustomAvatar
+                        avatarIndex={avatarIndex}
+                        setAvatarIndex={setAvatarIndex}
+                    />
+                </AvatarWrapper>
                 <CenterContent>
                     <div>
                         <UserName>{username}</UserName>
