@@ -65,12 +65,12 @@ const InfosSup = styled.div`
 `;
 
 const UserName = styled.div`
-    color: #0869b5;
+    color: #053d68;
     margin-right: 10px;
     font-size: 0.9rem;
     display: inline-block;
     line-height: 1rem;
-    
+
     &:hover {
         transform: scale(1.1) translateZ(0);
     }
@@ -150,11 +150,11 @@ const Question = ({ question, history }) => {
         tagList
     } = question;
 
-    const tagsRender = (tagList || []).map(tag => (
+    const tagsRender = (tagList || []).map((tag) => (
         <Tag key={tag.id} tag={tag} />
     ));
 
-    const redirect = url => ev => {
+    const redirect = (url) => (ev) => {
         ev.stopPropagation();
         history.push(url);
     };
@@ -197,7 +197,7 @@ const Question = ({ question, history }) => {
                             <UserName
                                 onClick={redirect(`/users/${askedBy.id}`)}
                             >
-                                {`${askedBy.firstName} ${askedBy.lastName}`}
+                                {askedBy.username}
                             </UserName>
                             <Badge points={askedBy.points} />
                         </div>
