@@ -1,19 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useTranslation } from 'react-i18next';
-
-import VCNCLogo from '../../images/VCNC-logo.png';
-import UserLogo from '../../component/UserLogo';
-
-const FlexWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-`;
+import LabelIcon from '@material-ui/icons/Label';
+import i18n from 'i18next';
 
 const Wrapper = styled.div`
     display: flex;
-    padding: 10px 0;
+    padding: 20px 0;
     justify-content: space-between;
 `;
 
@@ -22,6 +14,7 @@ const ContentWrapper = styled.div`
     flex-basis: 0;
     min-height: 0;
     padding-right: 10px;
+    cursor: pointer;
 `;
 
 const ImgCover = styled.div`
@@ -36,8 +29,9 @@ const ImgCover = styled.div`
 
 const Title = styled.div`
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 1.3em;
     margin-bottom: 5px;
+    cursor: pointer;
 `;
 
 const Resume = styled.div`
@@ -50,41 +44,79 @@ const Time = styled.time`
     color: #979797;
 `;
 
-const Infos = styled.div`
-    margin-left: 10px;
+const CharacterInfos = styled.div``;
+
+const TagsWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    margin: 3px 0;
+    & svg {
+        margin-right: 5px;
+        font-size: 16px;
+    }
 `;
 
-const Post = ({ post }) => {
-    const { t } = useTranslation();
-
+const Post = ({ post, viewPost }) => {
     const {
         title,
         resume,
-        coverImage,
-        mainCharacter: { firstName, lastName, company },
-        created
+        imageList,
+        characterList = [],
+        created,
+        tagList
     } = post;
 
-    const characterName = `${lastName} ${firstName} ${
-        company ? `${t('common_in')} ${company}` : ''
-    }`;
+    const coverImage = (imageList || [])[0];
+    const imageUrl = coverImage ? coverImage.lrg : '';
+
+    const characterNames = React.useMemo(
+        () =>
+            characterList
+                .map(({ lastName, firstName, experiences = [] }) => {
+                    let experience;
+
+                    experiences.forEach((val, key) => {
+                        if (key === 0 || val.isWorking) {
+                            experience = val;
+                        } else if (
+                            new Date(val.startDate).getTime() <
+                            new Date(experience).getTime()
+                        ) {
+                            experience = val;
+                        }
+                    });
+
+                    return `${lastName} ${firstName} ${
+                        experience ? `(${experience.company})` : ''
+                    }`;
+                })
+                .join(', '),
+        [characterList]
+    );
+
+    const tagsRender = tagList
+        .map((val) =>
+            val ? val[i18n.language === 'vi' ? 'nameVi' : 'nameEn'] : ''
+        )
+        .join(', ');
 
     return (
         <Wrapper>
             <ContentWrapper>
-                <Title>{title}</Title>
-                <Resume>{resume}</Resume>
-                <FlexWrapper>
-                    <UserLogo user={{ avatar: '' }} />
-                    <Infos>
-                        <MainCharacter>{characterName}</MainCharacter>
-                        <Time dateTime={created}>
-                            {` ${new Date(created).toDateString()}`}
-                        </Time>
-                    </Infos>
-                </FlexWrapper>
+                <Title onClick={viewPost}>{title}</Title>
+                <Resume onClick={viewPost}>{resume}</Resume>
+                {tagsRender && <TagsWrapper>
+                    <LabelIcon />
+                    {tagsRender}
+                </TagsWrapper>}
+                <CharacterInfos>
+                    <MainCharacter>{characterNames}</MainCharacter>
+                    <Time dateTime={created}>
+                        {` ${new Date(created).toDateString()}`}
+                    </Time>
+                </CharacterInfos>
             </ContentWrapper>
-            <ImgCover img={coverImage || VCNCLogo} alt="" />
+            {imageUrl && <ImgCover img={imageUrl} alt="" />}
         </Wrapper>
     );
 };

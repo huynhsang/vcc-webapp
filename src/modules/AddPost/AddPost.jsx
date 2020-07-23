@@ -126,7 +126,7 @@ const AddPost = () => {
         coverImage: '',
         resume: '',
         tagIds: [],
-        characterList: [],
+        characterIds: [],
         body: ''
     });
 
@@ -146,13 +146,13 @@ const AddPost = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeCatSlug]);
 
-    const { title, resume, body, tagIds, coverImage, characterList } = post;
+    const { title, resume, body, tagIds, coverImage, characterIds } = post;
 
     const handleUsers = (ev, value) => {
-        updatePost({ characterList: value ? value.map((val) => val.id) : [] });
+        updatePost({ characterIds: value ? value.map((val) => val.id) : [] });
     };
 
-    const defaultUsers = users.filter((val) => characterList.includes(val.id));
+    const defaultUsers = users.filter((val) => characterIds.includes(val.id));
 
     const onClickTag = (tagId) => () => {
         if (tagIds.includes(tagId)) {

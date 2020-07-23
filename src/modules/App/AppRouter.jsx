@@ -52,7 +52,7 @@ const AppRouter = () => {
                 render={props => <AddPost {...props} />}
             />
             <Route
-                path="/posts/:slug"
+                path="/posts/:postId"
                 exact
                 render={props => <PostView {...props} />}
             />

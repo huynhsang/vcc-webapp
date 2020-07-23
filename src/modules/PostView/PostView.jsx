@@ -1,15 +1,13 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core';
 import styled from 'styled-components';
+import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import { DefaultWrapper } from '../../component/Wrappers';
 import ReactMarkdown from 'react-markdown';
-
-import { postMock, postsMock } from '../PostsPage/mock';
-import Tag from '../../component/Tag';
-import UserLogo from '../../component/UserLogo';
+import Button from '@material-ui/core/Button';
 import isEmpty from 'lodash/isEmpty';
-import { Badge } from '../../component/Badge';
-import PostRelated from './PostRelated';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import SocialNetwork from '../../component/SocialNetwork';
 
@@ -18,6 +16,15 @@ import {
     TWITTER_SHARE_URL,
     LINKEDIN_SHARE_URL
 } from '../../constants/share.constant';
+
+import { getPost } from '../../services/post.service';
+
+const useStyles = makeStyles(() => ({
+    linkButton: {
+        color: 'rgba(0, 0, 0, 0.58)',
+        marginBottom: 10
+    },
+}));
 
 const Wrapper = styled(DefaultWrapper)`
     min-height: calc(100vh - 100px);
@@ -41,18 +48,14 @@ const FlexWrapper = styled.div`
     align-items: center;
 `;
 
-const UserInfos = styled.div`
-    margin-left: 10px;
-`;
-
-const UserName = styled.span`
+const UserName = styled.div`
     color: #009fff;
     font-size: 1.1em;
     margin-right: 5px;
 
-    &:hover {
+    /* &:hover {
         color: #0570b1;
-    }
+    } */
 `;
 
 const CoverImage = styled.img`
@@ -68,53 +71,93 @@ const InfosWrapper = styled(FlexWrapper)`
     margin: 15px 0;
 `;
 
-const Background = styled.div`
-    background-color: rgba(0, 0, 0, 0.02);
-`;
+// const Background = styled.div`
+//     background-color: rgba(0, 0, 0, 0.02);
+// `;
 
-const PostsRelated = styled(FlexWrapper)`
-    margin: 0 -10px;
-    margin-top: 5px;
-    flex-wrap: wrap;
-`;
+// const PostsRelated = styled(FlexWrapper)`
+//     margin: 0 -10px;
+//     margin-top: 5px;
+//     flex-wrap: wrap;
+// `;
 
-const PageTitle = styled.div`
-    font-size: 1.2rem;
-    font-weight: bold;
-    padding-bottom: 5px;
-    margin-bottom: 10px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-`;
+// const PageTitle = styled.div`
+//     font-size: 1.2rem;
+//     font-weight: bold;
+//     padding-bottom: 5px;
+//     margin-bottom: 10px;
+//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+// `;
 
 const FlexEnd = styled(FlexWrapper)`
     justify-content: flex-end;
 `;
 
-const PostView = ({ history }) => {
+const CharacterInfos = styled.div``;
+
+const PostView = ({ history, match }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
-    const {
-        title,
-        body,
-        resume,
-        coverImage,
-        tagList,
-        mainCharacter,
-        created
-    } = postMock;
+    const [post, setPost] = React.useState(null);
 
-    const redirect = (url) => (ev) => {
-        ev.stopPropagation();
-        history.push(url);
-    };
+    const postId = match && match.params && match.params.postId;
 
-    const tagsRender = (tagList || []).map((tag) => (
-        <Tag key={tag.id} tag={tag} />
-    ));
+    React.useEffect(() => {
+        getPost(postId)
+            .then((data) => setPost(data))
+            .catch((err) => console.error(err));
+    }, [postId]);
 
-    const postsRelatedRender = postsMock(3).map((val) => (
-        <PostRelated key={val.id} post={val} history={history} />
-    ));
+    const characterNames = React.useMemo(() => {
+        if (!post || !post.characterList) {
+            return null;
+        }
+        return post.characterList
+            .map(({ lastName, firstName, experiences = [] }) => {
+                let experience;
+
+                experiences.forEach((val, key) => {
+                    if (key === 0 || val.isWorking) {
+                        experience = val;
+                    } else if (
+                        new Date(val.startDate).getTime() <
+                        new Date(experience).getTime()
+                    ) {
+                        experience = val;
+                    }
+                });
+
+                return `${lastName} ${firstName} ${
+                    experience ? `(${experience.company})` : ''
+                }`;
+            })
+            .join(', ');
+    }, [post]);
+
+    if (!post) {
+        return <div />;
+    }
+
+    const { title, resume, imageList, created, tagList, body } = post;
+
+    // const redirect = (url) => (ev) => {
+    //     ev.stopPropagation();
+    //     history.push(url);
+    // };
+
+    const tagsRender = tagList
+        .map((val) =>
+            val ? val[i18n.language === 'vi' ? 'nameVi' : 'nameEn'] : ''
+        )
+        .join(', ');
+
+    // const postsRelatedRender = postsMock(3).map((val) => (
+    //     <PostRelated key={val.id} post={val} history={history} />
+    // ));
+
+    const coverImage = (imageList || [])[0];
+    const imageUrl = coverImage ? coverImage.lrg : '';
 
     return (
         <>
@@ -122,21 +165,12 @@ const PostView = ({ history }) => {
                 <Title>{title}</Title>
                 <Resume>{resume}</Resume>
                 <InfosWrapper>
-                    <FlexWrapper>
-                        <UserLogo user={mainCharacter} />
-                        <UserInfos>
-                            <UserName
-                                onClick={redirect(`/users/${mainCharacter.id}`)}
-                            >
-                                {`${mainCharacter.firstName} ${mainCharacter.lastName}`}
-                            </UserName>
-                            <Badge points={mainCharacter.points} />
-                            <br />
-                            <Time dateTime={created}>
-                                {` ${new Date(created).toDateString()}`}
-                            </Time>
-                        </UserInfos>
-                    </FlexWrapper>
+                    <CharacterInfos>
+                        <UserName>{characterNames}</UserName>
+                        <Time dateTime={created}>
+                            {` ${new Date(created).toDateString()}`}
+                        </Time>
+                    </CharacterInfos>
                     <SocialNetwork
                         isBig
                         fbLink={`${FACEBOOK_SHARE_URL}`}
@@ -144,7 +178,7 @@ const PostView = ({ history }) => {
                         linkedInLink={`${LINKEDIN_SHARE_URL}`}
                     />
                 </InfosWrapper>
-                {!!coverImage && <CoverImage src={coverImage} alt=" " />}
+                {!!imageUrl && <CoverImage src={imageUrl} alt=" " />}
                 <ReactMarkdown source={body} />
                 {!isEmpty(tagsRender) && (
                     <TagsWrapper>{tagsRender}</TagsWrapper>
@@ -157,13 +191,20 @@ const PostView = ({ history }) => {
                         linkedInLink={`${LINKEDIN_SHARE_URL}`}
                     />
                 </FlexEnd>
+                <Button
+                    onClick={() => history.goBack()}
+                    className={classes.linkButton}
+                    startIcon={<ChevronLeftIcon />}
+                >
+                    {t('common_come_back')}
+                </Button>
             </Wrapper>
-            <Background>
+            {/* <Background>
                 <DefaultWrapper>
                     <PageTitle>{t('post_more_from_VCNC')}</PageTitle>
                     <PostsRelated>{postsRelatedRender}</PostsRelated>
                 </DefaultWrapper>
-            </Background>
+            </Background> */}
         </>
     );
 };

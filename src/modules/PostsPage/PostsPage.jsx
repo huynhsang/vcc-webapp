@@ -7,60 +7,56 @@ import { PageCover } from '../Header';
 import { SearchText } from '../../component/Inputs';
 import TagFilter from '../../component/TagFilter';
 import Post from './Post';
-import { postsMock } from './mock';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import { ROLES } from '../../constants/constants';
+import qs from 'qs';
 
 import Button from '@material-ui/core/Button';
 
-import { createMediaTemplate } from '../../utils/css-tools';
-const media = createMediaTemplate();
+import { getPosts } from '../../services/post.service';
 
 const Wrapper = styled.div`
     min-height: calc(100vh - 100px);
 `;
 
-const ContentWrapper = styled(DefaultWrapper)`
-    display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap;
-`;
+const ContentWrapper = styled(DefaultWrapper)``;
 
 const PostsWrapper = styled.div``;
 
-const LeftWrapper = styled.div`
-    width: 75%;
-    padding-right: 20px;
-
-    ${media.mobileLandscape`
-        width: 100%;
-        padding: 0;
-        margin-top: 10px;
-    `}
-`;
-
-const RightWrapper = styled.div`
-    width: 25%;
-
-    ${media.mobileLandscape`
-        width: 100%;
-        min-height: 0;
-        margin-top: 15px;
-    `}
+const TagsWrapper = styled.div`
+    width: 100%;
+    margin-bottom: 10px;
 `;
 
 const useStyles = makeStyles(() => ({
     addButton: {
-        margin: '10px 0'
+        marginBottom: '20px'
     }
 }));
 
-const PostsPage = ({ history }) => {
+const PostsPage = ({ history, location }) => {
     const classes = useStyles();
     const { t } = useTranslation();
 
-    const postsRender = postsMock(5).map((val) => (
-        <Post key={val.id} post={val} />
+    const [posts, setPosts] = React.useState([]);
+
+    const filterParse = qs.parse(location.search.substr(1));
+    const { tags } = filterParse;
+
+    React.useEffect(() => {
+        getPosts()
+            .then((data) => {
+                setPosts(data);
+            })
+            .catch((err) => console.log(err));
+    }, []);
+
+    const viewPost = (postId) => () => {
+        history.push(`/posts/${postId}`);
+    };
+
+    const postsRender = posts.map((val) => (
+        <Post key={val.id} post={val} viewPost={viewPost(val.id)} />
     ));
 
     const goToAdd = () => {
@@ -74,31 +70,30 @@ const PostsPage = ({ history }) => {
         <Wrapper>
             <PageCover />
             <ContentWrapper>
-                <RightWrapper>
+                {isAdmin && (
+                    <Button
+                        variant="contained"
+                        onClick={goToAdd}
+                        color="primary"
+                        className={classes.addButton}
+                    >
+                        {t('common_add')}
+                    </Button>
+                )}
+                <TagsWrapper>
                     <TagFilter
                         category={''}
                         tags={''}
                         onChangeFilter={() => {}}
                     />
-                </RightWrapper>
-                <LeftWrapper>
-                    <SearchText
-                        text={''}
-                        setText={() => {}}
-                        label={t('question_search_question')}
-                    />
-                    {isAdmin && (
-                        <Button
-                            variant="contained"
-                            onClick={goToAdd}
-                            color="primary"
-                            className={classes.addButton}
-                        >
-                            {t('common_add')}
-                        </Button>
-                    )}
-                    <PostsWrapper>{postsRender}</PostsWrapper>
-                </LeftWrapper>
+                </TagsWrapper>
+                <SearchText
+                    text={''}
+                    setText={() => {}}
+                    label={t('question_search_question')}
+                />
+
+                <PostsWrapper>{postsRender}</PostsWrapper>
             </ContentWrapper>
         </Wrapper>
     );
