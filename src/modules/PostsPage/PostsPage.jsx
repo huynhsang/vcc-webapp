@@ -41,15 +41,25 @@ const PostsPage = ({ history, location }) => {
     const [posts, setPosts] = React.useState([]);
 
     const filterParse = qs.parse(location.search.substr(1));
-    const { tags } = filterParse;
+    const { tags, text } = filterParse;
 
     React.useEffect(() => {
+        // {
+        //     filter: {
+        //         where: {
+        //             title: text,
+        //             tagList: {
+        //                 elemMatch: {}
+        //             }
+        //         }
+        //     }
+        // }
         getPosts()
             .then((data) => {
                 setPosts(data);
             })
             .catch((err) => console.log(err));
-    }, []);
+    }, [tags, text]);
 
     const viewPost = (postId) => () => {
         history.push(`/posts/${postId}`);
@@ -80,7 +90,7 @@ const PostsPage = ({ history, location }) => {
                         {t('common_add')}
                     </Button>
                 )}
-                <TagsWrapper>
+                {/* <TagsWrapper>
                     <TagFilter
                         category={''}
                         tags={''}
@@ -91,8 +101,7 @@ const PostsPage = ({ history, location }) => {
                     text={''}
                     setText={() => {}}
                     label={t('question_search_question')}
-                />
-
+                /> */}
                 <PostsWrapper>{postsRender}</PostsWrapper>
             </ContentWrapper>
         </Wrapper>

@@ -400,5 +400,7 @@ export default {
 
     cookie_banner_info1:
         'To make VCNC work, we log user data. By using VCNC, you agree to our ',
-    cookie_banner_info2: ', including '
+    cookie_banner_info2: ', including ',
+
+    posts_create_success: 'Your post is created successfully.'
 };

@@ -13,8 +13,11 @@ import { getNameByLanguage } from '../../utils/multiple-language';
 import { tagStyle } from '../../component/Tag';
 import { getTagsRelatingCategory } from '../../services/tags.service';
 import isEmpty from 'lodash/isEmpty';
+import { connect } from 'react-redux';
 
 import { createPost } from '../../services/post.service';
+
+import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
 
 const useStyles = makeStyles(() => ({
     ...tagStyle,
@@ -90,7 +93,7 @@ const Category = styled.div`
     }
 `;
 
-const AddPost = () => {
+const AddPost = ({ errorAlert, successAlert, history }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -184,7 +187,12 @@ const AddPost = () => {
     };
 
     const submitPost = () => {
-        createPost(post);
+        createPost(post)
+            .then(() => {
+                successAlert(t('posts_create_success'));
+                history.push('/posts');
+            })
+            .catch((err) => errorAlert(err.response.data.error.message));
     };
 
     const categoriesRender = !isEmpty(categories)
@@ -275,4 +283,9 @@ const AddPost = () => {
     );
 };
 
-export default AddPost;
+const mapDispatchToProps = (dispatch) => ({
+    errorAlert: (text) => dispatch(errorAlertFn(text)),
+    successAlert: (text) => dispatch(successAlertFn(text))
+});
+
+export default connect(null, mapDispatchToProps)(AddPost);
