@@ -61,6 +61,7 @@ const TagLabel = styled.div`
     top: -10px;
     left: 10px;
     padding: 0 2px;
+    font-size: 12px;
 `;
 
 const QuestionTags = ({ tags, tagIds, setTagIds, infoAlert }) => {

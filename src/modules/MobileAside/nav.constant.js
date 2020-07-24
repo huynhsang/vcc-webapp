@@ -1,6 +1,7 @@
 import HomeIcon from '@material-ui/icons/Home';
 import MenuBook from '@material-ui/icons/MenuBook';
 import Info from '@material-ui/icons/Info';
+import ChromeReaderMode from '@material-ui/icons/ChromeReaderMode';
 
 export const leftNavTabs = [
     {
@@ -17,5 +18,10 @@ export const leftNavTabs = [
         path: '/information',
         label: 'common_information',
         Icon: Info
+    },
+    {
+        label: 'common_posts',
+        path: '/posts',
+        Icon: ChromeReaderMode
     }
 ];

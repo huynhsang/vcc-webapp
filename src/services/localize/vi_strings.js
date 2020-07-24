@@ -104,7 +104,14 @@ export default {
     common_agree: 'Đồng ý',
     common_example: 'Ví dụ',
     common_status: 'Trạng thái',
-    common_coming_soon: 'coming soon',
+    common_coming_soon:'coming soon',
+    common_posts: 'Bài viết',
+    common_add_post:'Thêm bài viết mới',
+    common_main_character:'Nhân vật chính',
+    common_user_name: 'Người dùng',
+    common_cover_image: 'Hình chủ đề',
+    common_resume: 'Tóm tắt',
+    common_submit: 'Đăng',
     common_like: 'Thích',
     common_unlike: 'Không thích',
     common_filter: 'Lọc',
@@ -228,6 +235,8 @@ export default {
     question_edit_answer_success: 'Câu trả lời đã được thay đổi',
 
     add_question_max_number_tag: 'Chúng tôi giới hạn {{number}} tags',
+
+    post_more_from_VCNC: 'Xem thêm',
 
     answer_best_answers: 'Câu trả lời tốt nhất',
     answer_leave_answer: 'Để lại một câu trả lời',
@@ -394,5 +403,8 @@ export default {
 
     cookie_banner_info1:
         'Để VCNC có thể hoạt động, chúng tôi phải lưu thông tin của bạn. Với việc sử dụng VCNC, bạn đồng ý với ',
-    cookie_banner_info2: ' của chúng tôi, bao gồm '
+    cookie_banner_info2: ' của chúng tôi, bao gồm ',
+
+    posts_create_success: 'Bạn đã tạo thành công bài viết.'
+
 };

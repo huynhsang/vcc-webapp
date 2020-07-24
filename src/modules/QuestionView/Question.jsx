@@ -8,7 +8,6 @@ import { Badge } from '../../component/Badge';
 import Tag from '../../component/Tag';
 import LikeBox from '../../component/LikeBox';
 import { getIdAndToken } from '../../utils/cookie-tools';
-import { rowCss } from '../../component/Wrappers';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
 
@@ -33,10 +32,11 @@ const Wrapper = styled.div`
 `;
 
 const InfosWrapper = styled.div`
-    margin-left: 10px;
+    margin: 0 0 5px 10px;
 `;
 
 const InfosSup = styled.div`
+    margin-bottom: 5px;
     font-size: 0.9em;
     & span {
         color: #7f7f7f;
@@ -97,11 +97,9 @@ const ResolveLabel = styled.div`
     }
 `;
 
-const TagsWrapper = styled.div`
-    ${rowCss};
-`;
+const TagsWrapper = styled.div``;
 
-const SocialWrapper = styled.div`
+const BottomWrapper = styled.div`
     border-top: 1px solid #eaeaea;
     padding-top: 10px;
     margin-top: 10px;
@@ -190,22 +188,20 @@ const Question = ({
                     </InfosWrapper>
                 </FlexWrapper>
             </FlexWrapper>
-            <SocialWrapper>
-                <FlexWrapper>
-                    <LikeBox
-                        upVoteCount={upVoteCount}
-                        downVoteCount={downVoteCount}
-                        voted={voted}
-                        handleVote={handleVoteQuestion}
-                        disabled={currentUserId === askedBy.id}
-                    />
-                </FlexWrapper>
+            <BottomWrapper>
+                <LikeBox
+                    upVoteCount={upVoteCount}
+                    downVoteCount={downVoteCount}
+                    voted={voted}
+                    handleVote={handleVoteQuestion}
+                    disabled={currentUserId === askedBy.id}
+                />
                 <SocialNetwork
                     fbLink={`${FACEBOOK_SHARE_URL}${url}`}
                     twitterLink={`${TWITTER_SHARE_URL}${url}`}
                     linkedInLink={`${LINKEDIN_SHARE_URL}${url}`}
                 />
-            </SocialWrapper>
+            </BottomWrapper>
         </Wrapper>
     );
 };

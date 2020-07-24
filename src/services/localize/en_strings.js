@@ -104,7 +104,14 @@ export default {
     common_agree: 'Agree',
     common_example: 'Example',
     common_status: 'Status',
-    common_coming_soon: 'coming soon',
+    common_coming_soon:'coming soon',
+    common_posts: 'Posts',
+    common_add_post:'Add new post',
+    common_main_character:'Main character',
+    common_user_name: 'User name',
+    common_cover_image: 'Cover Image',
+    common_resume: 'Resume',
+    common_submit: 'Submit',
     common_like: 'Like',
     common_unlike: 'Unlike',
     common_filter: 'Filter',
@@ -224,6 +231,8 @@ export default {
 
     add_question_max_number_tag: 'We limit {{number}} tags',
 
+    post_more_from_VCNC: 'More from VCNC',
+    
     answer_best_answers: 'Best Answers',
     answer_leave_answer: 'Leave an answer',
 
@@ -391,5 +400,7 @@ export default {
 
     cookie_banner_info1:
         'To make VCNC work, we log user data. By using VCNC, you agree to our ',
-    cookie_banner_info2: ', including '
+    cookie_banner_info2: ', including ',
+
+    posts_create_success: 'Your post is created successfully.'
 };

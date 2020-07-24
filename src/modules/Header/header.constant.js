@@ -11,5 +11,9 @@ export const headerTabs = [
     {
         label: 'common_information',
         path: 'information'
+    },
+    {
+        label: 'common_posts',
+        path: 'posts'
     }
 ];

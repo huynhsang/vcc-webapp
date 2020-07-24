@@ -21,7 +21,7 @@ import { voteQuestionFn } from '../../actions/questions';
 import { showLoginConfirmFn } from '../../actions/alertConfirm';
 
 import CategoryFilter from './CategoryFilter';
-import TagFilter from './TagFilter';
+import TagFilter from '../../component/TagFilter';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -55,6 +55,16 @@ const LeftWrapper = styled.div`
         width: 100%;
         padding: 0;
         margin-top: 10px;
+    `}
+`;
+
+const RightWrapper = styled.div`
+    width: 30%;
+    
+    ${media.mobileLandscape`
+        width: 100%;
+        min-height: 0;
+        margin-top: 15px;
     `}
 `;
 
@@ -153,11 +163,13 @@ const QuestionPage = ({
             <PageCover />
             <CategoryFilter category={category} history={history} />
             <Wrapper>
-                <TagFilter
-                    category={category}
-                    tags={tags}
-                    onChangeFilter={onChangeFilter}
-                />
+                <RightWrapper>
+                    <TagFilter
+                        category={category}
+                        tags={tags}
+                        onChangeFilter={onChangeFilter}
+                    />
+                </RightWrapper>
                 <LeftWrapper>
                     <QuestionFilter
                         isAuthenticated={isAuthenticated}

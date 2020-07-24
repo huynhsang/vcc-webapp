@@ -1,15 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { makeStyles } from '@material-ui/core/styles';
 import { useTranslation } from 'react-i18next';
-import TextField from '@material-ui/core/TextField';
 import QuestionSort from './QuestionSort';
-
-import InputAdornment from '@material-ui/core/InputAdornment';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
-
-import { SwitchInput } from '../../component/Inputs';
+import { SwitchInput, SearchText } from '../../component/Inputs';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -25,17 +18,15 @@ const FlexMargin = styled(FlexWrapper)`
     margin-top: 10px;
 `;
 
-const useStyles = makeStyles(() => ({
-    searchInput: {
-        flexGrow: 1,
-        flexBasis: 0,
-        minHeight: 0,
-        '@media (max-width: 768px)': {
-            width: '100%',
-            marginTop: '15px'
-        }
-    }
-}));
+const SearchTextWrapper = styled.div`
+    flex-grow: 1;
+    flex-basis: 0;
+    min-height: 0;
+    ${media.mobileLandscape`
+        width: 100%;
+        margin-top: 15px;
+    `}
+`;
 
 const QuestionFilter = ({
     isAuthenticated,
@@ -47,19 +38,6 @@ const QuestionFilter = ({
     noanswer
 }) => {
     const { t } = useTranslation();
-    const classes = useStyles();
-
-    const [searchText, setSearchText] = React.useState(text || '');
-
-    const search = () => {
-        onChangeFilter({ text: searchText });
-    };
-
-    const onTextKeyUp = ev => {
-        if (ev.which === 13) {
-            search();
-        }
-    };
 
     const onAskmeAndMimeChange = name => val => {
         const obj = val ? { mime: false, askme: false } : {};
@@ -71,27 +49,13 @@ const QuestionFilter = ({
         <>
             <FlexWrapper>
                 <QuestionSort show={show} onChangeFilter={onChangeFilter} />
-                <TextField
-                    className={classes.searchInput}
-                    label={t('question_search_question')}
-                    variant="outlined"
-                    value={searchText}
-                    onChange={ev => setSearchText(ev.target.value)}
-                    onKeyUp={onTextKeyUp}
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    size="small"
-                                    onClick={search}
-                                    edge="end"
-                                >
-                                    <SearchIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        )
-                    }}
-                />
+                <SearchTextWrapper>
+                    <SearchText
+                        text={text}
+                        setText={val => onChangeFilter({ text: val })}
+                        label={t('question_search_question')}
+                    />
+                </SearchTextWrapper>
             </FlexWrapper>
             <FlexMargin>
                 <SwitchInput
