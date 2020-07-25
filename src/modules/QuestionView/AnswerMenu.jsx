@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const AnswerMenu = ({ answerId, removeAnswer, onEdit }) => {
+const AnswerMenu = ({ answerId, removeAnswer, allowEdit = false, onEdit }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
@@ -62,13 +62,15 @@ const AnswerMenu = ({ answerId, removeAnswer, onEdit }) => {
                         }
                     }}
                 >
-                    <MenuItem
-                        key="edit"
-                        onClick={edit}
-                        style={{ minHeight: '35px' }}
-                    >
-                        {t('common_edit')}
-                    </MenuItem>
+                    {allowEdit && (
+                        <MenuItem
+                            key="edit"
+                            onClick={edit}
+                            style={{ minHeight: '35px' }}
+                        >
+                            {t('common_edit')}
+                        </MenuItem>
+                    )}
                     <MenuItem
                         key="delete"
                         onClick={deleteAnswerFn}

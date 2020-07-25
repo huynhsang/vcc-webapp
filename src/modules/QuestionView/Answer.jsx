@@ -178,14 +178,14 @@ const Answer = ({
                         disabled={currentUserId === userAnwserId}
                     />
                 </FlexWrapper>
-                {isAdmin ||
-                    (isAnswerOwner && (
-                        <AnswerMenu
-                            answerId={answer.id}
-                            removeAnswer={removeAnswer}
-                            onEdit={() => setIsEdit(true)}
-                        />
-                    ))}
+                {(isAdmin || isAnswerOwner) && (
+                    <AnswerMenu
+                        answerId={answer.id}
+                        removeAnswer={removeAnswer}
+                        onEdit={() => setIsEdit(true)}
+                        allowEdit={isAnswerOwner}
+                    />
+                )}
             </BottomWrapper>
         </Wrapper>
     );
