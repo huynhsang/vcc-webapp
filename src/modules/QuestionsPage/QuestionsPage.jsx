@@ -60,7 +60,7 @@ const LeftWrapper = styled.div`
 
 const RightWrapper = styled.div`
     width: 30%;
-    
+
     ${media.mobileLandscape`
         width: 100%;
         min-height: 0;
@@ -166,8 +166,10 @@ const QuestionPage = ({
                 <RightWrapper>
                     <TagFilter
                         category={category}
-                        tags={tags}
-                        onChangeFilter={onChangeFilter}
+                        tagsString={tags}
+                        tagField="id"
+                        onChange={(val) => onChangeFilter({ tags: val })}
+                        usedIn="question"
                     />
                 </RightWrapper>
                 <LeftWrapper>

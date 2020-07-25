@@ -402,5 +402,6 @@ export default {
         'To make VCNC work, we log user data. By using VCNC, you agree to our ',
     cookie_banner_info2: ', including ',
 
-    posts_create_success: 'Your post is created successfully.'
+    posts_create_success: 'Your post is created successfully.',
+    posts_search_post: 'Search post',
 };

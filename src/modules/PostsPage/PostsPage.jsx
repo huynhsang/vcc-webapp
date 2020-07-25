@@ -41,25 +41,37 @@ const PostsPage = ({ history, location }) => {
     const [posts, setPosts] = React.useState([]);
 
     const filterParse = qs.parse(location.search.substr(1));
-    const { tags, text } = filterParse;
+    const { tags, title } = filterParse;
 
     React.useEffect(() => {
-        // {
-        //     filter: {
-        //         where: {
-        //             title: text,
-        //             tagList: {
-        //                 elemMatch: {}
-        //             }
-        //         }
-        //     }
-        // }
-        getPosts()
+        const filter = { where: {} };
+
+        if (title) {
+            filter.where.title = { like: `${title}*`, options: 'i' };
+        }
+
+        if (tags) {
+            const tagIds = tags.split(',');
+            filter.where['tagList.slug'] = { in: tagIds };
+        }
+
+        getPosts({
+            filter
+        })
             .then((data) => {
                 setPosts(data);
             })
             .catch((err) => console.log(err));
-    }, [tags, text]);
+    }, [tags, title]);
+
+    const onChangeFilter = (obj) => {
+        const url = `/posts?${qs.stringify({
+            title,
+            tags,
+            ...obj
+        })}`;
+        history.push(url);
+    };
 
     const viewPost = (postId) => () => {
         history.push(`/posts/${postId}`);
@@ -90,18 +102,20 @@ const PostsPage = ({ history, location }) => {
                         {t('common_add')}
                     </Button>
                 )}
-                {/* <TagsWrapper>
+                <TagsWrapper>
                     <TagFilter
                         category={''}
-                        tags={''}
-                        onChangeFilter={() => {}}
+                        tagsString={tags}
+                        tagField="slug"
+                        onChange={(val) => onChangeFilter({ tags: val })}
+                        usedIn=""
                     />
                 </TagsWrapper>
                 <SearchText
-                    text={''}
-                    setText={() => {}}
-                    label={t('question_search_question')}
-                /> */}
+                    text={title}
+                    setText={(val) => onChangeFilter({ title: val })}
+                    label={t('posts_search_post')}
+                />
                 <PostsWrapper>{postsRender}</PostsWrapper>
             </ContentWrapper>
         </Wrapper>

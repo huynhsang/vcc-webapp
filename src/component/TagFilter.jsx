@@ -28,7 +28,13 @@ const Label = styled.div`
     padding: 0 5px;
 `;
 
-const TagFilter = ({ category, tags, onChangeFilter }) => {
+const TagFilter = ({
+    category,
+    tagsString,
+    tagField= 'id',
+    usedIn = '',
+    onChange
+}) => {
     const { t } = useTranslation();
     const classes = useStyles();
     const [tagsToSelect, setTagsToSelect] = React.useState([]);
@@ -36,10 +42,14 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
     React.useEffect(() => {
         const params = {
             filter: {
-                used: 'question',
                 limit: 100
             }
         };
+
+        if (usedIn) {
+            params.filter.used = usedIn;
+        }
+
         if (category) {
             params.filter.categorySlug = category;
         }
@@ -51,26 +61,26 @@ const TagFilter = ({ category, tags, onChangeFilter }) => {
             .catch((err) => {
                 console.log(err);
             });
-    }, [category]);
+    }, [category, usedIn]);
 
-    const tagIds = tags ? tags.split(',') : [];
+    const tagsArray = tagsString ? tagsString.split(',') : [];
 
-    const onClickTag = (tagId) => () => {
-        const index = tagIds.findIndex((id) => id === tagId);
-        if (index !== -1) {
-            tagIds.splice(index, 1);
+    const onClickTag = (tag) => () => {
+        const index = tagsArray.findIndex((id) => id === tag[tagField]);
+        if (tagsArray.includes(tag[tagField]) ) {
+            tagsArray.splice(index, 1);
         } else {
-            tagIds.push(tagId);
+            tagsArray.push(tag[tagField]);
         }
-        onChangeFilter({ tags: tagIds.join(',') });
+        onChange(tagsArray.join(','));
     };
 
     const tagElements = tagsToSelect.map((tag) => {
-        const isActive = tagIds.includes(tag.id);
+        const isActive = tagsArray.includes(tag[tagField]);
         return (
             <Button
                 key={tag.id}
-                onClick={onClickTag(tag.id)}
+                onClick={onClickTag(tag)}
                 size="small"
                 variant="contained"
                 className={`${classes.button} ${
