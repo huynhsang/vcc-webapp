@@ -405,6 +405,6 @@ export default {
         'Để VCNC có thể hoạt động, chúng tôi phải lưu thông tin của bạn. Với việc sử dụng VCNC, bạn đồng ý với ',
     cookie_banner_info2: ' của chúng tôi, bao gồm ',
 
-    posts_create_success: 'Bạn đã tạo thành công bài viết.'
-
+    posts_create_success: 'Bạn đã tạo thành công bài viết.',
+    posts_search_post: 'Tìm kiếm bài viết',
 };

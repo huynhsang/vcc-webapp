@@ -8,8 +8,10 @@ import ReactMarkdown from 'react-markdown';
 import Button from '@material-ui/core/Button';
 import isEmpty from 'lodash/isEmpty';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { PageCover } from '../Header';
 
 import SocialNetwork from '../../component/SocialNetwork';
+import PostRelated from './PostRelated';
 
 import {
     FACEBOOK_SHARE_URL,
@@ -17,17 +19,16 @@ import {
     LINKEDIN_SHARE_URL
 } from '../../constants/share.constant';
 
-import { getPost } from '../../services/post.service';
+import { getPost, getPosts } from '../../services/post.service';
 
 const useStyles = makeStyles(() => ({
     linkButton: {
         color: 'rgba(0, 0, 0, 0.58)',
         marginBottom: 10
-    },
+    }
 }));
 
 const Wrapper = styled(DefaultWrapper)`
-    min-height: calc(100vh - 100px);
     max-width: 900px;
 `;
 
@@ -71,23 +72,24 @@ const InfosWrapper = styled(FlexWrapper)`
     margin: 15px 0;
 `;
 
-// const Background = styled.div`
-//     background-color: rgba(0, 0, 0, 0.02);
-// `;
+const Background = styled.div`
+    background-color: rgba(0, 0, 0, 0.02);
+`;
 
-// const PostsRelated = styled(FlexWrapper)`
-//     margin: 0 -10px;
-//     margin-top: 5px;
-//     flex-wrap: wrap;
-// `;
+const PostsRelated = styled(FlexWrapper)`
+    margin: 0 -10px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+`;
 
-// const PageTitle = styled.div`
-//     font-size: 1.2rem;
-//     font-weight: bold;
-//     padding-bottom: 5px;
-//     margin-bottom: 10px;
-//     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-// `;
+const PageTitle = styled.div`
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+`;
 
 const FlexEnd = styled(FlexWrapper)`
     justify-content: flex-end;
@@ -100,6 +102,7 @@ const PostView = ({ history, match }) => {
     const classes = useStyles();
 
     const [post, setPost] = React.useState(null);
+    const [relatedPosts, setRelatedPosts] = React.useState([]);
 
     const postId = match && match.params && match.params.postId;
 
@@ -108,6 +111,28 @@ const PostView = ({ history, match }) => {
             .then((data) => setPost(data))
             .catch((err) => console.error(err));
     }, [postId]);
+
+    React.useEffect(() => {
+        if (post && post.tagList) {
+            getPosts({
+                filter: {
+                    where: {
+                        'tagList.slug': {
+                            in: post.tagList.map((val) => val.slug)
+                        }
+                    },
+                    skip: 0,
+                    limit: 4
+                }
+            })
+                .then((data) => {
+                    setRelatedPosts(
+                        data.filter((val) => val.id !== match.params.postId)
+                    );
+                })
+                .catch((err) => console.log(err));
+        }
+    }, [post && post.tagList]);
 
     const characterNames = React.useMemo(() => {
         if (!post || !post.characterList) {
@@ -141,26 +166,22 @@ const PostView = ({ history, match }) => {
 
     const { title, resume, imageList, created, tagList, body } = post;
 
-    // const redirect = (url) => (ev) => {
-    //     ev.stopPropagation();
-    //     history.push(url);
-    // };
-
     const tagsRender = tagList
         .map((val) =>
             val ? val[i18n.language === 'vi' ? 'nameVi' : 'nameEn'] : ''
         )
         .join(', ');
 
-    // const postsRelatedRender = postsMock(3).map((val) => (
-    //     <PostRelated key={val.id} post={val} history={history} />
-    // ));
+    const postsRelatedRender = relatedPosts.map((val) => (
+        <PostRelated key={val.id} post={val} history={history} />
+    ));
 
     const coverImage = (imageList || [])[0];
     const imageUrl = coverImage ? coverImage.lrg : '';
 
     return (
         <>
+            <PageCover />
             <Wrapper>
                 <Title>{title}</Title>
                 <Resume>{resume}</Resume>
@@ -199,12 +220,14 @@ const PostView = ({ history, match }) => {
                     {t('common_come_back')}
                 </Button>
             </Wrapper>
-            {/* <Background>
-                <DefaultWrapper>
-                    <PageTitle>{t('post_more_from_VCNC')}</PageTitle>
-                    <PostsRelated>{postsRelatedRender}</PostsRelated>
-                </DefaultWrapper>
-            </Background> */}
+            {postsRelatedRender.length > 0 && (
+                <Background>
+                    <DefaultWrapper>
+                        <PageTitle>{t('post_more_from_VCNC')}</PageTitle>
+                        <PostsRelated>{postsRelatedRender}</PostsRelated>
+                    </DefaultWrapper>
+                </Background>
+            )}
         </>
     );
 };

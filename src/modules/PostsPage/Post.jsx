@@ -14,7 +14,6 @@ const ContentWrapper = styled.div`
     flex-basis: 0;
     min-height: 0;
     padding-right: 10px;
-    cursor: pointer;
 `;
 
 const ImgCover = styled.div`
@@ -25,6 +24,7 @@ const ImgCover = styled.div`
     background-image: url('${(p) => p.img}');
     width: 150px;
     border: 2px solid black;
+    cursor: pointer;
 `;
 
 const Title = styled.div`
@@ -36,6 +36,7 @@ const Title = styled.div`
 
 const Resume = styled.div`
     color: #636363;
+    cursor: pointer;
 `;
 
 const MainCharacter = styled.div``;
@@ -116,7 +117,7 @@ const Post = ({ post, viewPost }) => {
                     </Time>
                 </CharacterInfos>
             </ContentWrapper>
-            {imageUrl && <ImgCover img={imageUrl} alt="" />}
+            {imageUrl && <ImgCover onClick={viewPost} img={imageUrl} alt="" />}
         </Wrapper>
     );
 };

@@ -1,7 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Badge } from '../../component/Badge';
-import UserLogo from '../../component/UserLogo';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -22,6 +20,10 @@ const Wrapper = styled.div`
 const Title = styled.div`
     margin-top: 5px;
     font-size: 1.1rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
 `;
 
 const CoverImage = styled.div`
@@ -31,26 +33,13 @@ const CoverImage = styled.div`
     background-size: contain;
     background-repeat: no-repeat;
     background-image: url('${(p) => p.src}');
-    border: 5px solid black;
+    border: 1px solid black;
+    cursor:pointer;
 `;
 
-const FlexWrapper = styled.div`
-    display: flex;
-    align-items: center;
-`;
-
-const UserInfos = styled.div`
-    margin-left: 10px;
-`;
-
-const UserName = styled.span`
-    color: #009fff;
+const UserName = styled.div`
     font-size: 1.1em;
     margin-right: 5px;
-
-    &:hover {
-        color: #0570b1;
-    }
 `;
 
 const Time = styled.time`
@@ -58,30 +47,49 @@ const Time = styled.time`
 `;
 
 const PostRelated = ({ post, history }) => {
-    const { title, coverImage, mainCharacter, created } = post;
+    const { title, imageList, created } = post;
 
-    const redirect = (url) => (ev) => {
-        ev.stopPropagation();
-        history.push(url);
+    const characterNames = React.useMemo(() => {
+        if (!post || !post.characterList) {
+            return null;
+        }
+        return post.characterList
+            .map(({ lastName, firstName, experiences = [] }) => {
+                let experience;
+
+                experiences.forEach((val, key) => {
+                    if (key === 0 || val.isWorking) {
+                        experience = val;
+                    } else if (
+                        new Date(val.startDate).getTime() <
+                        new Date(experience).getTime()
+                    ) {
+                        experience = val;
+                    }
+                });
+
+                return `${lastName} ${firstName} ${
+                    experience ? `(${experience.company})` : ''
+                }`;
+            })
+            .join(', ');
+    }, [post]);
+
+    const redirect = () => {
+        history.push(`/posts/${post.id}`);
     };
+
+    const coverImage = (imageList || [])[0];
+    const imageUrl = coverImage ? coverImage.lrg : '';
 
     return (
         <Wrapper>
-            <CoverImage src={coverImage} />
-            <Title>{title}</Title>
-            <FlexWrapper>
-                <UserLogo user={mainCharacter} />
-                <UserInfos>
-                    <UserName onClick={redirect(`/users/${mainCharacter.id}`)}>
-                        {`${mainCharacter.firstName} ${mainCharacter.lastName}`}
-                    </UserName>
-                    <Badge points={mainCharacter.points} />
-                    <br />
-                    <Time dateTime={created}>
-                        {` ${new Date(created).toDateString()}`}
-                    </Time>
-                </UserInfos>
-            </FlexWrapper>
+            {imageUrl && <CoverImage onClick={redirect} src={imageUrl} />}
+            <Title onClick={redirect}>{title}</Title>
+            <UserName>{characterNames}</UserName>
+            <Time dateTime={created}>
+                {` ${new Date(created).toDateString()}`}
+            </Time>
         </Wrapper>
     );
 };
