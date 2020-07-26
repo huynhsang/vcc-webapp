@@ -118,6 +118,8 @@ export default {
     common_add: 'Add',
     common_degrees: 'Degrees',
     common_delete: 'Delete',
+    common_add_news: 'Add breaking news',
+    common_breaking_news: 'Breaking news',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',

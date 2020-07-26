@@ -15,8 +15,11 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { toggleContactUsFn } from '../../actions/app';
 
+import BreakingNews from './BreakingNews';
+
 import { getUsers } from '../../services/user.service';
 import { getQuestions } from '../../services/question.service';
+import { getNews } from '../../services/news.service';
 
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
@@ -30,7 +33,6 @@ const Wrapper = styled(DefaultWrapper)`
     padding-bottom: 0;
     padding-top: 10px;
     flex-wrap: wrap;
-    flex-direction: row-reverse;
 `;
 
 const FlexWrapper = styled.div`
@@ -62,6 +64,8 @@ const LeftWrapper = styled.div`
     flex-direction: column;
     padding-bottom: 15px;
 
+    justify-content: space-between;
+
     ${media.mobileLandscape`
         width: 100%;
         margin: 0;
@@ -75,13 +79,10 @@ const Title = styled.div`
 `;
 
 const TopUsersWrapper = styled.div`
-    padding: 10px 0 1px 20px;
+    padding: 10px 0 1px 15px;
     border-left: 4px solid rgba(0, 0, 0, 0.8);
     background-color: white;
     border-radius: 0 6px 6px 0;
-
-    flex-grow: 1;
-    flex-basis: 0;
 
     ${media.mobileLandscape`
         padding-left: 15px;
@@ -99,6 +100,29 @@ const Ask = styled.div`
     margin-bottom: 10px;
 `;
 
+const BreakingNewsWrapper = styled.div`
+    padding: 10px 5px 1px 15px;
+    border-left: 4px solid rgba(0, 0, 0, 0.8);
+    background-color: white;
+    border-radius: 0 6px 6px 0;
+
+    flex-grow: 1;
+    flex-basis: 0;
+
+    min-height: 400px;
+    max-height: 790px;
+    overflow: auto;
+
+    margin-bottom: 15px;
+
+    ${media.tabletLandscape`
+        padding-left: 15px;
+        min-height: unset;
+        flex-grow: unset;
+        flex-basis: unset;
+    `}
+`;
+
 const useStyles = makeStyles(() => ({
     linkButton: {
         color: 'rgba(0, 0, 0, 0.58)'
@@ -111,6 +135,7 @@ const Home = ({ toggleContactUs, history }) => {
 
     const [users, setUsers] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
+    const [newses, setNewses] = React.useState([]);
 
     React.useEffect(() => {
         //GET Top users
@@ -130,13 +155,17 @@ const Home = ({ toggleContactUs, history }) => {
         getQuestions({
             filter: {
                 order: 'viewCount DESC',
-                limit: 10
+                limit: 8
             }
         })
             .then((data) => {
                 setQuestions(data.entities.questions);
             })
             .catch((err) => console.log(err.message));
+
+        getNews()
+            .then((data) => setNewses(data))
+            .catch((err) => console.log(err.response.data.error.message));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -149,11 +178,29 @@ const Home = ({ toggleContactUs, history }) => {
         <TopUser key={u.id} user={u} />
     ));
 
+    const breakingNewsRender = newses.map((val) => (
+        <BreakingNews key={val.id} news={val} />
+    ));
+
     return (
         <>
             <PageCover />
             <Background>
                 <Wrapper>
+                    <LeftWrapper>
+                        <BreakingNewsWrapper>
+                            <TopWrapper>
+                                <Title>{t('common_breaking_news')}</Title>
+                            </TopWrapper>
+                            {breakingNewsRender}
+                        </BreakingNewsWrapper>
+                        <TopUsersWrapper>
+                            <TopWrapper>
+                                <Title>{t('common_top_members')}</Title>
+                            </TopWrapper>
+                            {renderUsers}
+                        </TopUsersWrapper>
+                    </LeftWrapper>
                     <RightWrapper>
                         <TopWrapper>
                             <Title>{t('common_popular_question')}</Title>
@@ -167,12 +214,6 @@ const Home = ({ toggleContactUs, history }) => {
                         </TopWrapper>
                         <div>{renderQuestions}</div>
                     </RightWrapper>
-                    <LeftWrapper>
-                        <TopWrapper>
-                            <Title>{t('common_top_members')}</Title>
-                        </TopWrapper>
-                        <TopUsersWrapper>{renderUsers}</TopUsersWrapper>
-                    </LeftWrapper>
                 </Wrapper>
             </Background>
             <ToAskWrapper>

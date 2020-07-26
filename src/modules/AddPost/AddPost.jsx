@@ -144,7 +144,7 @@ const AddPost = ({ errorAlert, successAlert, history }) => {
                 .then((data) => {
                     setTags(data);
                 })
-                .catch((err) => console.log(err.response.data.error.message));
+                .catch((err) => errorAlert(err.response.data.error.message));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [activeCatSlug]);

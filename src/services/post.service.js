@@ -4,8 +4,6 @@ import { setUrlWithToken } from '../utils/url';
 const POST_URL = 'posts';
 
 export async function getPosts(params) {
-    console.log(params);
-
     const url = setUrlWithToken(POST_URL);
     const response = await http.get(url, { params: {...params, totalCount: true} });
     return response.data;

@@ -118,6 +118,8 @@ export default {
     common_add: 'Thêm',
     common_degrees: 'Bằng cấp',
     common_delete: 'Xoá',
+    common_add_news: 'Thêm tin tức mới',
+    common_breaking_news: 'Tin tức mới',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
