@@ -44,7 +44,7 @@ const PostsPage = ({ history, location }) => {
     const { tags, title } = filterParse;
 
     React.useEffect(() => {
-        const filter = { where: {} };
+        const filter = { where: {}, skip: 0, limit: 1000};
 
         if (title) {
             filter.where.title = { like: `${title}*`, options: 'i' };

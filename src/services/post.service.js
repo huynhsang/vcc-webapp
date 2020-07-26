@@ -7,7 +7,7 @@ export async function getPosts(params) {
     console.log(params);
 
     const url = setUrlWithToken(POST_URL);
-    const response = await http.get(url, { params });
+    const response = await http.get(url, { params: {...params, totalCount: true} });
     return response.data;
 }
 

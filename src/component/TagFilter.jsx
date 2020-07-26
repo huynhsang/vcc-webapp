@@ -31,7 +31,7 @@ const Label = styled.div`
 const TagFilter = ({
     category,
     tagsString,
-    tagField= 'id',
+    tagField = 'id',
     usedIn = '',
     onChange
 }) => {
@@ -63,11 +63,19 @@ const TagFilter = ({
             });
     }, [category, usedIn]);
 
-    const tagsArray = tagsString ? tagsString.split(',') : [];
+    const tagsArray = React.useMemo(() => {
+        return tagsString
+            ? tagsString
+                  .split(',')
+                  .filter((val) =>
+                      tagsToSelect.find((ele) => ele[tagField] === val)
+                  )
+            : [];
+    }, [tagsString, tagField, tagsToSelect]);
 
     const onClickTag = (tag) => () => {
         const index = tagsArray.findIndex((id) => id === tag[tagField]);
-        if (tagsArray.includes(tag[tagField]) ) {
+        if (tagsArray.includes(tag[tagField])) {
             tagsArray.splice(index, 1);
         } else {
             tagsArray.push(tag[tagField]);
