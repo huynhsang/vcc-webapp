@@ -21,6 +21,12 @@ import { getUsers } from '../../services/user.service';
 import { getQuestions } from '../../services/question.service';
 import { getNews } from '../../services/news.service';
 
+import { getIdAndToken } from '../../utils/cookie-tools';
+import { ROLES } from '../../constants/constants';
+
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/AddCircleOutline';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -133,6 +139,9 @@ const Home = ({ toggleContactUs, history }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
+    const { role: userRole } = getIdAndToken();
+    const isAdmin = ROLES.ADMIN === userRole;
+
     const [users, setUsers] = React.useState([]);
     const [questions, setQuestions] = React.useState([]);
     const [newses, setNewses] = React.useState([]);
@@ -191,6 +200,13 @@ const Home = ({ toggleContactUs, history }) => {
                         <BreakingNewsWrapper>
                             <TopWrapper>
                                 <Title>{t('common_breaking_news')}</Title>
+                                {isAdmin && <IconButton>
+                                    <AddIcon
+                                        onClick={() =>
+                                            history.push('/news/add')
+                                        }
+                                    />
+                                </IconButton>}
                             </TopWrapper>
                             {breakingNewsRender}
                         </BreakingNewsWrapper>

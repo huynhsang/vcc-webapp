@@ -409,4 +409,6 @@ export default {
 
     posts_create_success: 'Bạn đã tạo thành công bài viết.',
     posts_search_post: 'Tìm kiếm bài viết',
+
+    news_create_success: 'Bạn đã tạo thành công tin tức mới.',
 };

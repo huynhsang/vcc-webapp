@@ -406,4 +406,6 @@ export default {
 
     posts_create_success: 'Your post is created successfully.',
     posts_search_post: 'Search post',
+
+    news_create_success: 'Your news is created successfully.',
 };

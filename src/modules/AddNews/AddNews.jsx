@@ -51,7 +51,6 @@ const AddNews = ({ errorAlert, successAlert }) => {
         getUsers()
             .then((data) => {
                 setUsers(data || []);
-                successAlert(t('news_create_success'));
                 setNews({
                     title: '',
                     description: '',
@@ -69,7 +68,11 @@ const AddNews = ({ errorAlert, successAlert }) => {
     };
 
     const onSubmit = () => {
-        createNews(news);
+        createNews(news)
+            .then(() => {
+                successAlert(t('news_create_success'));
+            })
+            .catch((err) => errorAlert(err.response.data.error.message));
     };
 
     const handleUsers = (ev, value) => {
