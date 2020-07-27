@@ -142,11 +142,11 @@ const TopLeftWrapper = styled.div`
 
     margin-bottom: 15px;
 
-    ${media.tabletLandscape`
+    ${media.mobileLandscape`
         min-height: unset;
         flex-grow: unset;
         flex-basis: unset;
-        max-height: 400px;
+        max-height: unset;
     `}
 `;
 
@@ -155,6 +155,10 @@ const BreakingNewsWrapper = styled.div`
     overflow-y: auto;
     overflow-x: hidden;
     padding: 5px 10px 0 15px;
+
+    ${media.mobileLandscape`
+        overflow-y: unset;
+    `}
 `;
 
 const useStyles = makeStyles(() => ({
