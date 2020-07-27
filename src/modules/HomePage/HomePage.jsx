@@ -117,10 +117,6 @@ const TopUsersWrapper = styled.div`
     border-left: 4px solid rgba(0, 0, 0, 0.8);
     background-color: white;
     border-radius: 0 6px 6px 0;
-
-    ${media.mobileLandscape`
-        padding-left: 15px;
-    `}
 `;
 
 const ToAskWrapper = styled(DefaultWrapper)`
@@ -147,17 +143,18 @@ const TopLeftWrapper = styled.div`
     margin-bottom: 15px;
 
     ${media.tabletLandscape`
-        padding-left: 15px;
         min-height: unset;
         flex-grow: unset;
         flex-basis: unset;
+        max-height: 400px;
     `}
 `;
 
 const BreakingNewsWrapper = styled.div`
     height: calc(100% - 60px);
-    overflow: auto;
-    padding: 10px 5px 1px 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 5px 10px 0 15px;
 `;
 
 const useStyles = makeStyles(() => ({
