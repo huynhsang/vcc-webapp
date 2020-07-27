@@ -27,6 +27,10 @@ import { ROLES } from '../../constants/constants';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/AddCircleOutline';
 
+import FlareIcon from '@material-ui/icons/Flare';
+import LabelImportantIcon from '@material-ui/icons/LabelImportant';
+import { zoomInOut } from '../../utils/animation-keyframes';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -51,6 +55,16 @@ const TopWrapper = styled(FlexWrapper)`
     margin-bottom: 10px;
     font-size: 1.2rem;
     line-height: 35px;
+`;
+
+const TitleWrapper = styled(FlexWrapper)`
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    line-height: 35px;
+    border-left: 4px solid rgba(0, 0, 0, 0.8);
+    padding: 0 5px 0px 15px;
 `;
 
 const RightWrapper = styled.div`
@@ -82,6 +96,20 @@ const LeftWrapper = styled.div`
 const Title = styled.div`
     font-size: 1.2rem;
     font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    & svg {
+        font-size: 15px;
+        margin-right: 5px;
+    }
+`;
+
+const NewsTitle = styled(Title)`
+    & svg {
+        margin-top: -2px;
+        animation: ${zoomInOut} 2s infinite linear;
+    }
 `;
 
 const TopUsersWrapper = styled.div`
@@ -106,9 +134,7 @@ const Ask = styled.div`
     margin-bottom: 10px;
 `;
 
-const BreakingNewsWrapper = styled.div`
-    padding: 10px 5px 1px 15px;
-    border-left: 4px solid rgba(0, 0, 0, 0.8);
+const TopLeftWrapper = styled.div`
     background-color: white;
     border-radius: 0 6px 6px 0;
 
@@ -117,7 +143,6 @@ const BreakingNewsWrapper = styled.div`
 
     min-height: 400px;
     max-height: 790px;
-    overflow: auto;
 
     margin-bottom: 15px;
 
@@ -127,6 +152,12 @@ const BreakingNewsWrapper = styled.div`
         flex-grow: unset;
         flex-basis: unset;
     `}
+`;
+
+const BreakingNewsWrapper = styled.div`
+    height: calc(100% - 60px);
+    overflow: auto;
+    padding: 10px 5px 1px 15px;
 `;
 
 const useStyles = makeStyles(() => ({
@@ -197,22 +228,32 @@ const Home = ({ toggleContactUs, history }) => {
             <Background>
                 <Wrapper>
                     <LeftWrapper>
-                        <BreakingNewsWrapper>
-                            <TopWrapper>
-                                <Title>{t('common_breaking_news')}</Title>
-                                {isAdmin && <IconButton>
-                                    <AddIcon
-                                        onClick={() =>
-                                            history.push('/news/add')
-                                        }
-                                    />
-                                </IconButton>}
-                            </TopWrapper>
-                            {breakingNewsRender}
-                        </BreakingNewsWrapper>
+                        <TopLeftWrapper>
+                            <TitleWrapper>
+                                <NewsTitle>
+                                    <FlareIcon />
+                                    {t('common_breaking_news')}
+                                </NewsTitle>
+                                {isAdmin && (
+                                    <IconButton>
+                                        <AddIcon
+                                            onClick={() =>
+                                                history.push('/news/add')
+                                            }
+                                        />
+                                    </IconButton>
+                                )}
+                            </TitleWrapper>
+                            <BreakingNewsWrapper>
+                                {breakingNewsRender}
+                            </BreakingNewsWrapper>
+                        </TopLeftWrapper>
                         <TopUsersWrapper>
                             <TopWrapper>
-                                <Title>{t('common_top_members')}</Title>
+                                <Title>
+                                    <LabelImportantIcon />
+                                    {t('common_top_members')}
+                                </Title>
                             </TopWrapper>
                             {renderUsers}
                         </TopUsersWrapper>
