@@ -5,8 +5,13 @@ const POST_URL = 'posts';
 
 export async function getPosts(params) {
     const url = setUrlWithToken(POST_URL);
-    const response = await http.get(url, { params: {...params, totalCount: true} });
-    return response.data;
+    const response = await http.get(url, {
+        params: { ...params, totalCount: true }
+    });
+    return {
+        data: response.data,
+        count: parseInt(response.headers['x-total-count'], 10) || 0
+    };
 }
 
 export async function getPost(id) {

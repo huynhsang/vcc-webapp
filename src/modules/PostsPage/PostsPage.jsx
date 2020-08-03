@@ -14,6 +14,9 @@ import qs from 'qs';
 import Button from '@material-ui/core/Button';
 
 import { getPosts } from '../../services/post.service';
+import Pagination from '../../component/Pagination';
+
+const DEFAULT_LIMIT = 6;
 
 const Wrapper = styled.div`
     min-height: calc(100vh - 100px);
@@ -28,6 +31,10 @@ const TagsWrapper = styled.div`
     margin-bottom: 10px;
 `;
 
+const PaginationWrapper = styled.div`
+    margin-top: 10px;
+`;
+
 const useStyles = makeStyles(() => ({
     addButton: {
         marginBottom: '20px'
@@ -39,12 +46,18 @@ const PostsPage = ({ history, location }) => {
     const { t } = useTranslation();
 
     const [posts, setPosts] = React.useState([]);
+    const [postNumber, setPostNumber] = React.useState(0);
 
     const filterParse = qs.parse(location.search.substr(1));
-    const { tags, title } = filterParse;
+    const { tags, title, page } = filterParse;
 
     React.useEffect(() => {
-        const filter = { where: {}, skip: 0, limit: 1000};
+        const pageNumber = page * 1 || 1;
+        const filter = {
+            where: {},
+            skip: (pageNumber - 1) * DEFAULT_LIMIT,
+            limit: DEFAULT_LIMIT
+        };
 
         if (title) {
             filter.where.title = { like: `${title}*`, options: 'i' };
@@ -58,11 +71,12 @@ const PostsPage = ({ history, location }) => {
         getPosts({
             filter
         })
-            .then((data) => {
+            .then(({ data, count }) => {
                 setPosts(data);
+                setPostNumber(count);
             })
             .catch((err) => console.log(err));
-    }, [tags, title]);
+    }, [tags, title, page]);
 
     const onChangeFilter = (obj) => {
         const url = `/posts?${qs.stringify({
@@ -87,6 +101,8 @@ const PostsPage = ({ history, location }) => {
 
     const { role: userRole } = getIdAndToken();
     const isAdmin = ROLES.ADMIN === userRole;
+
+    const nbPages = Math.ceil(postNumber / DEFAULT_LIMIT);
 
     return (
         <Wrapper>
@@ -117,6 +133,19 @@ const PostsPage = ({ history, location }) => {
                     label={t('posts_search_post')}
                 />
                 <PostsWrapper>{postsRender}</PostsWrapper>
+                {nbPages > 1 && (
+                    <PaginationWrapper>
+                        <Pagination
+                            nbPages={nbPages}
+                            activePage={page}
+                            changePage={(newPage) =>
+                                onChangeFilter({ page: newPage })
+                            }
+                            justifyContent="center"
+                            color="#37424a"
+                        />
+                    </PaginationWrapper>
+                )}
             </ContentWrapper>
         </Wrapper>
     );

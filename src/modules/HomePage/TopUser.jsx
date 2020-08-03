@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import UserLogo from '../../component/UserLogo';
 import TruncateMarkup from 'react-truncate-markup';
 
-import { Badge } from '../../component/Badge';
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -50,16 +49,9 @@ const DescriptionWrapper = styled.div`
 const TopUser = ({ user, history }) => {
     const { t } = useTranslation();
 
-    const {
-        id,
-        username,
-        points,
-        summary,
-        questionCount,
-        answerCount
-    } = user;
+    const { id, username, points, summary, questionCount, answerCount } = user;
 
-    const redirect = url => ev => {
+    const redirect = (url) => (ev) => {
         ev.stopPropagation();
         history.push(url);
     };
@@ -69,10 +61,7 @@ const TopUser = ({ user, history }) => {
             <FlexWrapper>
                 <UserLogo user={user} />
                 <InfosWrapper>
-                    <div>
-                        <UserName>{username}</UserName>
-                        <Badge points={points} />
-                    </div>
+                    <UserName>{username}</UserName>
                     <InfosSup>
                         {questionCount}
                         <span>{` ${t('common_questions')} `}</span>

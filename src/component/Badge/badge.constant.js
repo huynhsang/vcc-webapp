@@ -45,3 +45,12 @@ export const badges = [
         labelColor: 'rgb(13, 14, 17, 0.99)'
     }
 ];
+
+export const getBadge = (points) => {
+    const index = badges.findIndex((badge) => points > badge.max);
+
+    const badgeIndex =
+        index === 0 ? 0 : index !== -1 ? index - 1 : badges.length - 1;
+
+    return badges[badgeIndex];
+};

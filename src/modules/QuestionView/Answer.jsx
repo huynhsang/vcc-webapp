@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import ReactMarkdown from 'react-markdown';
-import { Badge } from '../../component/Badge';
 import { useTranslation } from 'react-i18next';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import Button from '@material-ui/core/Button';
@@ -57,6 +56,7 @@ const DateWrapper = styled.div`
 const UserName = styled.div`
     font-size: 0.9rem;
     line-height: 1rem;
+    margin-right: 5px;
 `;
 
 const CheckCircleIcon = styled(CheckCircle)`
@@ -70,10 +70,6 @@ const BottomWrapper = styled.div`
     align-items: center;
     justify-content: space-between;
     margin-top: 10px;
-`;
-
-const InfosWrapper = styled.div`
-    margin-left: 5px;
 `;
 
 const AnswerWrapper = styled.div`
@@ -148,14 +144,11 @@ const Answer = ({
                     {t('answer_added_an_answer_on')}{' '}
                     {new Date(created).toDateString()}
                 </DateWrapper>
-                <FlexWrapper>
+                <FlexWrapper alginItems="flex-end">
+                    <UserName onClick={redirect(`/users/${userAnwserId}`)}>
+                        {`${firstName} ${lastName}`}
+                    </UserName>
                     <UserLogo user={answerBy} />
-                    <InfosWrapper>
-                        <UserName onClick={redirect(`/users/${userAnwserId}`)}>
-                            {`${firstName} ${lastName}`}
-                        </UserName>
-                        <Badge points={points} />
-                    </InfosWrapper>
                 </FlexWrapper>
             </FlexWrapper>
             <BottomWrapper>

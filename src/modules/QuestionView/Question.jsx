@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import UserLogo from '../../component/UserLogo';
 import isEmpty from 'lodash/isEmpty';
 import { getNameByLanguage } from '../../utils/multiple-language';
-import { Badge } from '../../component/Badge';
 import Tag from '../../component/Tag';
 import LikeBox from '../../component/LikeBox';
 import { getIdAndToken } from '../../utils/cookie-tools';
@@ -31,10 +30,6 @@ const Wrapper = styled.div`
     `}
 `;
 
-const InfosWrapper = styled.div`
-    margin: 0 0 5px 10px;
-`;
-
 const InfosSup = styled.div`
     margin-bottom: 5px;
     font-size: 0.9em;
@@ -57,8 +52,8 @@ const Title = styled.div`
 const UserName = styled.div`
     color: #053d68;
     font-size: 0.9rem;
-    display: inline-block;
     line-height: 1rem;
+    margin-right: 10px ;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -177,15 +172,11 @@ const Question = ({
                     <span>{`${t('common_in')}: `}</span>
                     {getNameByLanguage(categoryItem)}
                 </InfosSup>
-                <FlexWrapper>
+                <FlexWrapper alignItems="flex-end">
+                    <UserName onClick={redirect(`/users/${askedBy.id}`)}>
+                        {askedBy.username}
+                    </UserName>
                     <UserLogo user={askedBy} />
-                    <InfosWrapper>
-                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {askedBy.username}
-                        </UserName>
-                        <br />
-                        <Badge points={askedBy.points} />
-                    </InfosWrapper>
                 </FlexWrapper>
             </FlexWrapper>
             <BottomWrapper>

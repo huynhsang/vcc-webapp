@@ -8,8 +8,6 @@ import isEmpty from 'lodash/isEmpty';
 
 import { getNameByLanguage } from '../../utils/multiple-language';
 
-import { Badge } from '../../component/Badge';
-
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
@@ -35,15 +33,15 @@ const Wrapper = styled.div`
 `;
 
 const InfosWrapper = styled.div`
-    margin-left: 10px;
+    margin-right: 10px;
     ${media.mobile`
-        margin-left: 3px;
+        margin-right: 3px;
     `}
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
-    align-items: center;
+    align-items: ${p=> p.alignItem || 'center'};
 `;
 
 const Title = styled.div`
@@ -54,6 +52,7 @@ const Title = styled.div`
 
 const InfosSup = styled.div`
     font-size: 0.9rem;
+    line-height: 0.9rem;
 
     & span {
         color: #7f7f7f;
@@ -66,10 +65,9 @@ const InfosSup = styled.div`
 
 const UserName = styled.div`
     color: #053d68;
-    margin-right: 10px;
     font-size: 0.9rem;
-    display: inline-block;
-    line-height: 1rem;
+    text-align: right;
+    margin-bottom: 3px;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -190,17 +188,11 @@ const Question = ({ question, history }) => {
                         <div>{`${viewCount} ${t('common_views')}`}</div>
                     </FlexWrapper>
                 </FlexWrapper>
-                <FlexWrapper>
-                    <UserLogo user={askedBy} />
+                <FlexWrapper alignItem='flex-end'>
                     <InfosWrapper>
-                        <div>
-                            <UserName
-                                onClick={redirect(`/users/${askedBy.id}`)}
-                            >
-                                {askedBy.username}
-                            </UserName>
-                            <Badge points={askedBy.points} />
-                        </div>
+                        <UserName onClick={redirect(`/users/${askedBy.id}`)}>
+                            {askedBy.username}
+                        </UserName>
                         <InfosSup>
                             <span>{`${t('common_asked')}: `}</span>
                             <time dateTime={created}>
@@ -208,6 +200,7 @@ const Question = ({ question, history }) => {
                             </time>
                         </InfosSup>
                     </InfosWrapper>
+                    <UserLogo user={askedBy} />
                 </FlexWrapper>
             </BottomWrapper>
         </Wrapper>

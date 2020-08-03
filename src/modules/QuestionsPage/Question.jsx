@@ -6,8 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 import { getNameByLanguage } from '../../utils/multiple-language';
 import LikeBox from '../../component/LikeBox';
 
-import { Badge } from '../../component/Badge';
-
 import Tag from '../../component/Tag';
 import TruncateMarkup from 'react-truncate-markup';
 import { QuillText } from '../../component/QuillText';
@@ -52,6 +50,7 @@ const Wrapper = styled.div`
 
 const InfosSup = styled.div`
     font-size: 0.9em;
+    line-height: 0.9em;
 
     & span {
         color: #7f7f7f;
@@ -77,6 +76,7 @@ const Title = styled.div`
 const UserName = styled.div`
     color: #053d68;
     margin-right: 10px;
+    margin-bottom: 3px;
     font-size: 0.9em;
     display: inline-block;
     line-height: 1rem;
@@ -162,7 +162,7 @@ const UserAsked = styled.div`
 
 const UserAsk = styled.div`
     display: flex;
-    align-items: center;
+    align-items: flex-end;
 
     ${media.mobileLandscape`
         width:100%;
@@ -171,9 +171,10 @@ const UserAsk = styled.div`
 `;
 
 const UserInfos = styled.div`
-    margin-left: 10px;
+    text-align: right;
+    margin-right: 10px;
     ${media.tabletLandscape`
-        margin-left: 5px;
+        margin-right: 5px;
     `}
 `;
 
@@ -280,12 +281,10 @@ const Question = ({
                     )}
                 </FlexWrapper>
                 <UserAsk>
-                    <UserLogo user={askedBy} />
                     <UserInfos>
                         <UserName onClick={redirect(`/users/${askedBy.id}`)}>
                             {askedBy.username}
                         </UserName>
-                        <Badge points={askedBy.points} />
                         <InfosSup>
                             <span>{`${t('common_asked')}: `}</span>
                             <time dateTime={created}>
@@ -293,6 +292,7 @@ const Question = ({
                             </time>
                         </InfosSup>
                     </UserInfos>
+                    <UserLogo user={askedBy} />
                 </UserAsk>
             </UserWrapper>
             <BottomWrapper>

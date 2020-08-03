@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { badges } from './badge.constant';
+import { getBadge } from './badge.constant';
 
 const Wrapper = styled.div`
     color: white;
@@ -16,12 +16,8 @@ const Wrapper = styled.div`
 
 const Badge = ({ points = 0 }) => {
     const { t } = useTranslation();
-    const index = badges.findIndex(badge => points > badge.max);
 
-    const badgeIndex =
-        index === 0 ? 0 : index !== -1 ? index - 1 : badges.length - 1;
-
-    const badge = badges[badgeIndex];
+    const badge = getBadge(points);
 
     const { labelColor, label, level } = badge;
 

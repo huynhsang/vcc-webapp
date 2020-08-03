@@ -48,7 +48,6 @@ const Content = styled.div`
 `;
 
 const BottomWrapper = styled.div`
-    background-color: #f5f5f5;
     color: #424242;
     padding: 20px;
 `;
@@ -122,10 +121,10 @@ const AboutUs = () => {
                     </WidthWrapper>
                 </Wrapper>
             </Background>
-            <DefaultWrapper>
+            {/* <DefaultWrapper>
                 <ContentTitle>{t('about_us_our_team')}</ContentTitle>
                 <UserInfoList />
-            </DefaultWrapper>
+            </DefaultWrapper> */}
             <BottomWrapper>
                 <Title>{t('about_us_VCNC')}</Title>
                 <Sologan>{t('about_us_sologan')}</Sologan>
