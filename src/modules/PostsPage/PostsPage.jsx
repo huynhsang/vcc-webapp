@@ -56,7 +56,8 @@ const PostsPage = ({ history, location }) => {
         const filter = {
             where: {},
             skip: (pageNumber - 1) * DEFAULT_LIMIT,
-            limit: DEFAULT_LIMIT
+            limit: DEFAULT_LIMIT,
+            order: ['modified DESC', 'created DESC'],
         };
 
         if (title) {
@@ -124,7 +125,7 @@ const PostsPage = ({ history, location }) => {
                         tagsString={tags}
                         tagField="slug"
                         onChange={(val) => onChangeFilter({ tags: val })}
-                        usedIn=""
+                        usedIn="post"
                     />
                 </TagsWrapper>
                 <SearchText

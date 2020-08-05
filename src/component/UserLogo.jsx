@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-    border: 1px dashed ${(p) => p.borderColor};
+    border: 1.5px dashed ${(p) => p.borderColor};
     border-bottom: none;
     display: flex;
     justify-content: center;
@@ -45,7 +45,9 @@ const Img = styled.img`
 const Badge = styled.div`
     background-color: ${(p) => p.backgroundColor};
     color: white;
-    padding: 0 3px;
+    padding: 0 0.3rem;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
 `;
 
 const UserLogo = ({ user, history }) => {
