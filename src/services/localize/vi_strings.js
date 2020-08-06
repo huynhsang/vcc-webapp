@@ -72,7 +72,7 @@ export default {
     common_experience: 'Kinh nghiệm',
     common_no_result: 'Không tìm thấy kết quả',
     common_come_back: 'Quay lại',
-    common_userName: 'Tên người dùng',
+    common_userName: 'Username',
     common_invalid_username: 'Tên người dùng không hợp lệ!',
     common_popular_question: 'Câu hỏi phổ biến',
     common_see_all: 'Xem tất cả',
@@ -120,6 +120,12 @@ export default {
     common_delete: 'Xoá',
     common_add_news: 'Thêm tin tức mới',
     common_breaking_news: 'Tin tức mới',
+    common_topic: 'Chủ đề',
+    common_gender: 'Giới tính',
+    common_male: 'Nam',
+    common_female: 'Nữ',
+    common_yes:'Có',
+    common_no: 'Không',
 
     pagination_previous: 'Trước',
     pagination_next: 'Sau',
@@ -352,6 +358,7 @@ export default {
     my_profile_passwords_contrain:
         'Mật khẩu phải chứa ít nhất 8 kí tự, 1 chữ hoa, 1 chữ thường và 1 số',
     my_profile_custom_avatar: 'Chọn ảnh đại diện của bạn',
+    my_profile_show_real_name:'Hiện tên của tôi',
 
     user_info_question_asked: 'Câu hỏi đã hỏi',
     user_info_amswers_related: 'Những câu trả lời',

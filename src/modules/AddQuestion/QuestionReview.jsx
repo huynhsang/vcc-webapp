@@ -9,6 +9,8 @@ import LabelIcon from '@material-ui/icons/Label';
 import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
+import { getUserName } from '../../utils/get-user-name';
+
 const Wrapper = styled.div`
     & svg {
         font-size: 16px;
@@ -72,7 +74,7 @@ const QuestionReview = ({
     ));
 
     const userAskedList = (supporters || []).map((val) => (
-        <UserAsked key={val.id}>{val.username}</UserAsked>
+        <UserAsked key={val.id}>{getUserName(val)}</UserAsked>
     ));
 
     return (

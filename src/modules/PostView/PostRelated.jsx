@@ -1,4 +1,5 @@
 import React from 'react';
+import { getUserName } from '../../utils/get-user-name';
 import styled from 'styled-components';
 
 import { createMediaTemplate } from '../../utils/css-tools';
@@ -54,7 +55,8 @@ const PostRelated = ({ post, history }) => {
             return null;
         }
         return post.characterList
-            .map(({ lastName, firstName, experiences = [] }) => {
+            .map((u) => {
+                const { experiences = [] } = u;
                 let experience;
 
                 experiences.forEach((val, key) => {
@@ -68,7 +70,7 @@ const PostRelated = ({ post, history }) => {
                     }
                 });
 
-                return `${lastName} ${firstName} ${
+                return `${getUserName(u)} ${
                     experience ? `(${experience.company})` : ''
                 }`;
             })

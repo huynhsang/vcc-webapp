@@ -33,12 +33,12 @@ const AppRouter = () => {
                 render={(props) => <HomePage {...props} />}
             />
             <Route
-                path="/questions"
+                path="/topics"
                 exact
                 render={(props) => <QuestionsPage {...props} />}
             />
             <Route
-                path="/questions/:slug"
+                path="/topics/:slug"
                 exact
                 render={(props) => <QuestionView {...props} />}
             />
@@ -96,7 +96,6 @@ const AppRouter = () => {
                 path="/social-login"
                 render={(props) => <SSOLogin {...props} />}
             />
-            {/* <Redirect exact from="/" to="/home/questions" /> */}
             <Route component={Page404} />
         </Switch>
     );

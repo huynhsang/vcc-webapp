@@ -263,7 +263,7 @@ const Home = ({ toggleContactUs, history }) => {
                         <TopWrapper>
                             <Title>{t('common_popular_question')}</Title>
                             <Button
-                                onClick={() => history.push('/questions')}
+                                onClick={() => history.push('/topics')}
                                 className={classes.linkButton}
                                 endIcon={<ChevronRightIcon />}
                             >

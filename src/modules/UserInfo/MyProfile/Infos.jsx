@@ -46,6 +46,8 @@ const Tab = ({ label, value }) => (
     </TR>
 );
 
+const GENDERS = ['', 'common_male', 'common_female'];
+
 const Infos = ({ currentUser }) => {
     const { t } = useTranslation();
     const {
@@ -55,10 +57,12 @@ const Infos = ({ currentUser }) => {
         nationality,
         dateOfBirth,
         summary,
-        username
+        username,
+        gender,
+        showRealName
     } = currentUser;
 
-    const country = COUNTRIES.find(val => val.value === nationality);
+    const country = COUNTRIES.find((val) => val.value === nationality);
     const countryName = country ? country.label : '';
 
     return (
@@ -67,6 +71,11 @@ const Infos = ({ currentUser }) => {
                 <Tab label={t('common_userName')} value={username} />
                 <Tab label={t('common_lastname')} value={lastName} />
                 <Tab label={t('common_firstname')} value={firstName} />
+                <Tab label={t('common_gender')} value={t(GENDERS[gender])} />
+                <Tab
+                    label={t('my_profile_show_real_name')}
+                    value={t(showRealName ? 'common_yes' : 'common_no')}
+                />
                 <Tab label={t('common_email')} value={email} />
                 <Tab
                     label={t('my_profile_you_come_from')}

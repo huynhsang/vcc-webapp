@@ -91,7 +91,7 @@ const SubCategory = () => {
                                         <div className="cat-sections-follow">
                                             <div className="cat-sections">
                                                 <Link
-                                                    to={`/questions?page=1&tags=${item.id}`}
+                                                    to={`/topics?page=1&tags=${item.id}`}
                                                 >
                                                     <i className="icon-tag" />
                                                     {getNameByLanguage(item)}

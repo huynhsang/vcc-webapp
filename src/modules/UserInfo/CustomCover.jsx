@@ -5,6 +5,7 @@ import Cover from '../../images/cover.png';
 import { DefaultWrapper } from '../../component/Wrappers';
 import AskButton from '../../component/AskButton';
 import { Badge } from '../../component/Badge';
+import { getUserName } from '../../utils/get-user-name';
 
 import CustomAvatar from './CustomAvatar';
 
@@ -118,7 +119,7 @@ const CustomCover = ({
 }) => {
     const { t } = useTranslation();
 
-    const { username, points, summary, id, avatarIndex = 0 } = userProfile;
+    const { points, summary, id, avatarIndex = 0 } = userProfile;
 
     const setAvatarIndex = (newIndex) => {
         updateCurrentUser({ avatarIndex: newIndex });
@@ -137,7 +138,7 @@ const CustomCover = ({
                 </AvatarWrapper>
                 <CenterContent>
                     <div>
-                        <UserName>{username}</UserName>
+                        <UserName>{getUserName(userProfile)}</UserName>
                         <Badge points={points} />
                     </div>
                     {Boolean(summary) && (

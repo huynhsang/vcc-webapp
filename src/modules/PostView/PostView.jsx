@@ -20,6 +20,7 @@ import {
 } from '../../constants/share.constant';
 
 import { getPost, getPosts } from '../../services/post.service';
+import { getUserName } from '../../utils/get-user-name';
 
 const useStyles = makeStyles(() => ({
     linkButton: {
@@ -139,7 +140,8 @@ const PostView = ({ history, match }) => {
             return null;
         }
         return post.characterList
-            .map(({ lastName, firstName, experiences = [] }) => {
+            .map((u) => {
+                const { experiences = [] } = u;
                 let experience;
 
                 experiences.forEach((val, key) => {
@@ -153,7 +155,7 @@ const PostView = ({ history, match }) => {
                     }
                 });
 
-                return `${lastName} ${firstName} ${
+                return `${getUserName(u)} ${
                     experience ? `(${experience.company})` : ''
                 }`;
             })

@@ -159,7 +159,7 @@ const AddQuestion = ({
         createQuestion(question)
             .then((data) => {
                 successAlert(t('question_created_a_question'));
-                history.push(`/questions/${data.slug}`);
+                history.push(`/topics/${data.slug}`);
             })
             .catch((response) =>
                 errorAlert(response.response.data.error.message)

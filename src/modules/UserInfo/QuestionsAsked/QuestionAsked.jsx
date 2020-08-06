@@ -48,7 +48,7 @@ const QuestionAsked = ({ question, history }) => {
     );
 
     const handleTitle = () => {
-        history.push(`/questions/${question.slug}`);
+        history.push(`/topics/${question.slug}`);
     };
 
     return (

@@ -12,6 +12,7 @@ import { getUsers } from '../../services/user.service';
 import { createNews } from '../../services/news.service';
 import { DefaultWrapper } from '../../component/Wrappers';
 import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
+import { getUserName } from '../../utils/get-user-name';
 
 const useStyles = makeStyles(() => ({
     marginBottom: {
@@ -95,7 +96,7 @@ const AddNews = ({ errorAlert, successAlert }) => {
             <Autocomplete
                 className={classes.marginBottom}
                 options={users}
-                getOptionLabel={(u) => `${u.lastName} ${u.firstName}`}
+                getOptionLabel={(u) => getUserName(u)}
                 value={defaultUser}
                 filterSelectedOptions
                 renderInput={(params) => (

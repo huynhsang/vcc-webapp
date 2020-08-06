@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import LabelIcon from '@material-ui/icons/Label';
 import i18n from 'i18next';
+import { getUserName } from '../../utils/get-user-name';
 
 const Wrapper = styled.div`
     display: flex;
@@ -73,7 +74,8 @@ const Post = ({ post, viewPost }) => {
     const characterNames = React.useMemo(
         () =>
             characterList
-                .map(({ lastName, firstName, experiences = [] }) => {
+                .map((u) => {
+                    const { experiences = [] } = u;
                     let experience;
 
                     experiences.forEach((val, key) => {
@@ -87,7 +89,7 @@ const Post = ({ post, viewPost }) => {
                         }
                     });
 
-                    return `${lastName} ${firstName} ${
+                    return `${getUserName(u)} ${
                         experience ? `(${experience.company})` : ''
                     }`;
                 })
@@ -106,10 +108,12 @@ const Post = ({ post, viewPost }) => {
             <ContentWrapper>
                 <Title onClick={viewPost}>{title}</Title>
                 <Resume onClick={viewPost}>{resume}</Resume>
-                {tagsRender && <TagsWrapper>
-                    <LabelIcon />
-                    {tagsRender}
-                </TagsWrapper>}
+                {tagsRender && (
+                    <TagsWrapper>
+                        <LabelIcon />
+                        {tagsRender}
+                    </TagsWrapper>
+                )}
                 <CharacterInfos>
                     <MainCharacter>{characterNames}</MainCharacter>
                     <Time dateTime={created}>

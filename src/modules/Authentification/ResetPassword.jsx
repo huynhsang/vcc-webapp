@@ -70,7 +70,7 @@ const ResetPassword = ({ location, history, successAlert, errorAlert }) => {
                 successAlert(
                     t('authentification_your_password_has_been_reset')
                 );
-                history.push('/questions');
+                history.push('/topics');
             })
             .catch(err => {
                 errorAlert(err.response.data.error.message);

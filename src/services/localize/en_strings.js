@@ -120,6 +120,12 @@ export default {
     common_delete: 'Delete',
     common_add_news: 'Add breaking news',
     common_breaking_news: 'Breaking news',
+    common_topic: 'Topic',
+    common_gender: 'Gender',
+    common_male: 'Male',
+    common_female: 'Female',
+    common_yes:'Yes',
+    common_no: 'No',
 
     pagination_previous: 'Previous',
     pagination_next: 'Next',
@@ -353,6 +359,7 @@ export default {
     my_profile_passwords_contrain:
         'Your password must have at least 8 character, 1 uppercase letter, 1 lowercase letter, 1 digit ',
     my_profile_custom_avatar: 'Please choose your avatar',
+    my_profile_show_real_name:'Show real name',
 
     user_info_question_asked: 'Question asked',
     user_info_amswers_related: 'Answers related',

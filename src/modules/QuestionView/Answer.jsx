@@ -9,6 +9,7 @@ import CheckCircle from '@material-ui/icons/CheckCircle';
 import { createMediaTemplate } from '../../utils/css-tools';
 import LikeBox from '../../component/LikeBox';
 import UserLogo from '../../component/UserLogo';
+import { getUserName } from '../../utils/get-user-name';
 
 import { ROLES } from '../../constants/constants';
 
@@ -100,7 +101,7 @@ const Answer = ({
         body,
         created
     } = answer;
-    const { id: userAnwserId, firstName, lastName, points } = answerBy;
+    const { id: userAnwserId, points } = answerBy;
 
     const handleVoteAnswer = (isPositiveVote) => {
         if (!isAuthenticated) {
@@ -146,7 +147,7 @@ const Answer = ({
                 </DateWrapper>
                 <FlexWrapper alginItems="flex-end">
                     <UserName onClick={redirect(`/users/${userAnwserId}`)}>
-                        {`${firstName} ${lastName}`}
+                        {getUserName(answerBy)}
                     </UserName>
                     <UserLogo user={answerBy} />
                 </FlexWrapper>

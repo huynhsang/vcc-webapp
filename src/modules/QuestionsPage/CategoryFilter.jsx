@@ -59,7 +59,7 @@ const CategoryFilter = ({ category, history }) => {
 
     const handleChange = (event, newValue) => {
         const newCat = categoriesAdded[newValue];
-        history.push(`/questions?category=${newCat.slug}&page=1`);
+        history.push(`/topics?category=${newCat.slug}&page=1`);
     };
 
     const value = categoriesAdded.findIndex(cat => cat.slug === (category || ''));

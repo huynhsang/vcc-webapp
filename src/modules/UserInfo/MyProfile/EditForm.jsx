@@ -10,6 +10,7 @@ import TextField from '@material-ui/core/TextField';
 import { SelectInput } from '../../../component/Inputs';
 
 import Button from '@material-ui/core/Button';
+import { Checkbox } from '../../../component/Inputs';
 
 const useStyles = makeStyles(() => ({
     textInput: {
@@ -41,7 +42,7 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const {roles,...data} = currentUser;
+    const { roles, ...data } = currentUser;
     const [userEditted, setUserEditted] = React.useState(data);
 
     const [birthDayEditted, setBirthDayEditted] = React.useState(null);
@@ -52,7 +53,9 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
         firstName,
         nationality,
         dateOfBirth,
-        summary
+        summary,
+        showRealName,
+        gender
     } = userEditted;
 
     React.useEffect(() => {
@@ -88,7 +91,7 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
                 className={classes.textInput}
                 value={username}
                 label={t('common_userName')}
-                onChange={e => handleEvent('username', e)}
+                onChange={(e) => handleEvent('username', e)}
                 margin="dense"
             />
             <TextField
@@ -96,7 +99,7 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
                 className={classes.textInput}
                 value={lastName}
                 label={t('common_lastname')}
-                onChange={e => handleEvent('lastName', e)}
+                onChange={(e) => handleEvent('lastName', e)}
                 margin="dense"
             />
             <TextField
@@ -104,8 +107,23 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
                 className={classes.textInput}
                 value={firstName}
                 label={t('common_firstname')}
-                onChange={e => handleEvent('firstName', e)}
+                onChange={(e) => handleEvent('firstName', e)}
                 margin="dense"
+            />
+            <Checkbox
+                label={t('my_profile_show_real_name')}
+                isChecked={showRealName}
+                handleChange={(val) => updateUser('showRealName', val)}
+            />
+            <SelectInput
+                title={t('common_gender')}
+                value={gender}
+                options={[
+                    { value: 0, label: '' },
+                    { value: 1, label: t('common_male') },
+                    { value: 2, label: t('common_female') }
+                ]}
+                handleValue={(value) => updateUser('gender', value)}
             />
             <TextField
                 className={classes.textInput}
@@ -117,13 +135,13 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
                     shrink: true
                 }}
                 margin="dense"
-                onChange={e => setBirthDayEditted(e.target.value)}
+                onChange={(e) => setBirthDayEditted(e.target.value)}
             />
             <SelectInput
                 title={t('my_profile_you_come_from')}
                 value={nationality}
                 options={COUNTRIES}
-                handleValue={value => updateUser('nationality', value)}
+                handleValue={(value) => updateUser('nationality', value)}
             />
             <TextField
                 className={classes.textInput}
@@ -132,7 +150,7 @@ const EditForm = ({ currentUser, updateCurrentUser, errorAlert }) => {
                 rows="5"
                 value={summary}
                 variant="outlined"
-                onChange={e => handleEvent('summary', e)}
+                onChange={(e) => handleEvent('summary', e)}
             />
             <ButtonsWrapper>
                 <Button

@@ -18,6 +18,7 @@ import { connect } from 'react-redux';
 import { createPost } from '../../services/post.service';
 
 import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
+import { getUserName } from '../../utils/get-user-name';
 
 const useStyles = makeStyles(() => ({
     ...tagStyle,
@@ -223,7 +224,7 @@ const AddPost = ({ errorAlert, successAlert, history }) => {
                 multiple
                 className={classes.marginBottom}
                 options={users}
-                getOptionLabel={(u) => `${u.lastName} ${u.firstName}`}
+                getOptionLabel={(u) => getUserName(u)}
                 value={defaultUsers}
                 filterSelectedOptions
                 renderInput={(params) => (

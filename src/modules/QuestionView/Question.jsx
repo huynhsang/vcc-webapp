@@ -9,6 +9,7 @@ import LikeBox from '../../component/LikeBox';
 import { getIdAndToken } from '../../utils/cookie-tools';
 import SocialNetwork from '../../component/SocialNetwork';
 import ReactMarkdown from 'react-markdown';
+import { getUserName } from '../../utils/get-user-name';
 
 import {
     FACEBOOK_SHARE_URL,
@@ -53,7 +54,7 @@ const UserName = styled.div`
     color: #053d68;
     font-size: 0.9rem;
     line-height: 1rem;
-    margin-right: 10px ;
+    margin-right: 10px;
 
     &:hover {
         transform: scale(1.1) translateZ(0);
@@ -146,7 +147,7 @@ const Question = ({
     };
 
     const { REACT_APP_DOMAIN_NAME } = process.env;
-    const url = `${REACT_APP_DOMAIN_NAME}/questions/${slug}`;
+    const url = `${REACT_APP_DOMAIN_NAME}/topics/${slug}`;
 
     return (
         <Wrapper>
@@ -174,7 +175,7 @@ const Question = ({
                 </InfosSup>
                 <FlexWrapper alignItems="flex-end">
                     <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                        {askedBy.username}
+                        {getUserName(askedBy)}
                     </UserName>
                     <UserLogo user={askedBy} />
                 </FlexWrapper>

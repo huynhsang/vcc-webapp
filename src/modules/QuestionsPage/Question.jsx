@@ -15,6 +15,7 @@ import RemoveRedEye from '@material-ui/icons/RemoveRedEye';
 import ModeComment from '@material-ui/icons/ModeComment';
 
 import LabelIcon from '@material-ui/icons/Label';
+import { getUserName } from '../../utils/get-user-name';
 
 import { RowWrapper } from '../../component/Wrappers';
 
@@ -244,13 +245,13 @@ const Question = ({
     };
 
     const userAskedList = supporterList.map((val) => (
-        <UserAsked key={val.id}>{`${val.lastName} ${val.firstName}`}</UserAsked>
+        <UserAsked key={val.id}>{getUserName(val)}</UserAsked>
     ));
 
     return (
         <Wrapper
             hasLeftBorder={!!bestAnswerItem}
-            onClick={redirect(`/questions/${slug}`)}
+            onClick={redirect(`/topics/${slug}`)}
         >
             <TopWrapper>
                 {!!bestAnswerItem && (
@@ -283,7 +284,7 @@ const Question = ({
                 <UserAsk>
                     <UserInfos>
                         <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {askedBy.username}
+                            {getUserName(askedBy)}
                         </UserName>
                         <InfosSup>
                             <span>{`${t('common_asked')}: `}</span>

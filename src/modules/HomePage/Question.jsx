@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
 import UserLogo from '../../component/UserLogo';
+import { getUserName } from '../../utils/get-user-name';
 
 import isEmpty from 'lodash/isEmpty';
 
@@ -41,7 +42,7 @@ const InfosWrapper = styled.div`
 
 const FlexWrapper = styled.div`
     display: flex;
-    align-items: ${p=> p.alignItem || 'center'};
+    align-items: ${(p) => p.alignItem || 'center'};
 `;
 
 const Title = styled.div`
@@ -158,7 +159,7 @@ const Question = ({ question, history }) => {
     };
 
     return (
-        <Wrapper onClick={redirect(`/questions/${slug}`)}>
+        <Wrapper onClick={redirect(`/topics/${slug}`)}>
             <TopWrapper>
                 <CategoryWrapper>
                     {getNameByLanguage(categoryItem)}
@@ -188,10 +189,10 @@ const Question = ({ question, history }) => {
                         <div>{`${viewCount} ${t('common_views')}`}</div>
                     </FlexWrapper>
                 </FlexWrapper>
-                <FlexWrapper alignItem='flex-end'>
+                <FlexWrapper alignItem="flex-end">
                     <InfosWrapper>
                         <UserName onClick={redirect(`/users/${askedBy.id}`)}>
-                            {askedBy.username}
+                            {getUserName(askedBy)}
                         </UserName>
                         <InfosSup>
                             <span>{`${t('common_asked')}: `}</span>

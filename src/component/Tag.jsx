@@ -47,7 +47,7 @@ const Tag = ({ tag, history, location, isClickable = false }) => {
 
     const onClick = () => {
         const params = { page: 1 };
-        if (/questions/.test(pathname)) {
+        if (/topics/.test(pathname)) {
             Object.assign(params, { show, text });
             const index = ids.findIndex(id => id === tag.id);
             if (index !== -1) {
@@ -57,7 +57,7 @@ const Tag = ({ tag, history, location, isClickable = false }) => {
             }
         }
         params.tags = ids.join(',');
-        const url = `/questions?${qs.stringify(params)}`;
+        const url = `/topics?${qs.stringify(params)}`;
         history.push(url);
     };
 

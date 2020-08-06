@@ -111,7 +111,7 @@ const QuestionPage = ({
         });
 
         if (filterFixed) {
-            const url = `/questions?${qs.stringify(filterFixed)}`;
+            const url = `/topics?${qs.stringify(filterFixed)}`;
             history.replace(url);
         } else {
             getQuestions({ filter, totalCount: true });
@@ -130,7 +130,7 @@ const QuestionPage = ({
     ]);
 
     const onChangeFilter = (obj) => {
-        const url = `/questions?${qs.stringify({
+        const url = `/topics?${qs.stringify({
             show,
             page: 1,
             text,
@@ -207,7 +207,7 @@ const QuestionPage = ({
                                 {numberQuestions <= 0 && (
                                     <div>
                                         {`${t('common_no_result')} `}
-                                        <Link to={`/questions?page=1`}>
+                                        <Link to={`/topics?page=1`}>
                                             {t('common_come_back')}
                                         </Link>
                                     </div>

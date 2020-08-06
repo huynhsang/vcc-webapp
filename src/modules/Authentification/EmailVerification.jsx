@@ -43,7 +43,7 @@ const EmailVerification = ({ location, history }) => {
         const uid = search.get('uid');
         const token = search.get('token');
         if (!uid || !token) {
-            history.push('/questions');
+            history.push('/topics');
         } else {
             verifyEmail(uid, token)
                 .then(() => {

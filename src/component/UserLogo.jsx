@@ -16,8 +16,6 @@ const Wrapper = styled.div`
 `;
 
 const LogoWrapper = styled.div`
-    border: 1.5px dashed ${(p) => p.borderColor};
-    border-bottom: none;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,12 +26,12 @@ const Img = styled.img`
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
 
     ${media.mobileLandscape`
-        width: 30px;
-        height: 30px;
+        width: 33px;
+        height: 33px;
     `}
 
     ${media.mobile`

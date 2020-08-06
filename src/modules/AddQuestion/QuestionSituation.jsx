@@ -5,6 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import { getUserName } from '../../utils/get-user-name';
 
 const Wrapper = styled.div``;
 
@@ -51,7 +52,7 @@ const QuestionSituation = ({
             <Autocomplete
                 multiple
                 options={usersToMatch}
-                getOptionLabel={(user) => user.username}
+                getOptionLabel={(user) => getUserName(user)}
                 value={defaultUsers || []}
                 filterSelectedOptions
                 renderInput={(params) => (

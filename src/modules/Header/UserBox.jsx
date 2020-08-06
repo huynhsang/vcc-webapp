@@ -5,9 +5,14 @@ import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { deleteCookie } from '../../utils/CookieHelper';
-import { USER_ID_KEY, JWT_TOKEN_NAME, USER_ROLE_KEY } from '../../constants/cookie.constant';
+import {
+    USER_ID_KEY,
+    JWT_TOKEN_NAME,
+    USER_ROLE_KEY
+} from '../../constants/cookie.constant';
 
 import { getIdAndToken } from '../../utils/cookie-tools';
+import { getUserName } from '../../utils/get-user-name';
 
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
@@ -83,7 +88,7 @@ const Authenticate = ({
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const { username, avatarIndex = 0  } = currentUser || {};
+    const { avatarIndex = 0 } = currentUser || {};
 
     const { id: userId } = getIdAndToken();
 
@@ -96,7 +101,7 @@ const Authenticate = ({
         handleClose();
     };
 
-    const handleClick = event => {
+    const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -110,18 +115,19 @@ const Authenticate = ({
     };
 
     if (isAuthenticated) {
+        const name = getUserName(currentUser);
         return (
             <Wrapper>
                 <Button className={classes.nameButton} onClick={handleClick}>
                     <AvatarImg
-                        alt={username}
-                        title={username}
+                        alt={name}
+                        title={name}
                         src={AVATARS[avatarIndex].image}
                     />
                     <ResponsiveHide>
                         <div>
                             <Welcome>Welcome</Welcome>
-                            <div>{username}</div>
+                            <div>{name}</div>
                         </div>
                         <ArrowDropDown />
                     </ResponsiveHide>

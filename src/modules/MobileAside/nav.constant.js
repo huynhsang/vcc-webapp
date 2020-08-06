@@ -10,7 +10,7 @@ export const leftNavTabs = [
         Icon: HomeIcon
     },
     {
-        path: '/questions',
+        path: '/topics',
         label: 'nav_questions',
         Icon: MenuBook
     },

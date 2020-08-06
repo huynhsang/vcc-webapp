@@ -52,7 +52,7 @@ const QuestionRelated = ({ question, location, history }) => {
     const { categoryItem, tagList, title, body, slug, answers } = question;
 
     const handleTitle = () => {
-        history.push(`/questions/${slug}`);
+        history.push(`/topics/${slug}`);
     };
 
     const tagsRender = tagList.length > 0 && (

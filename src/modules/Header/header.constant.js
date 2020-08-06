@@ -5,15 +5,16 @@ export const headerTabs = [
         path: 'home'
     },
     {
-        label: 'common_questions',
-        path: 'questions'
+        label: 'common_topic',
+        path: 'topics'
+    },
+    {
+        label: 'common_posts',
+        path: 'posts'
     },
     {
         label: 'common_information',
         path: 'information'
     },
-    {
-        label: 'common_posts',
-        path: 'posts'
-    }
+
 ];

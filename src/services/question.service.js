@@ -64,7 +64,7 @@ export async function getNumberQuestions(params) {
 export async function deleteQuestion(id, history) {
     const url = setUrlWithToken(`${QUESTION_URL}/${id}`);
     const response = await http.delete(url);
-    history.push('/questions');
+    history.push('/topics');
     return response.data;
 }
 
