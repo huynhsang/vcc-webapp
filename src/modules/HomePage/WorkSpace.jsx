@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import VerticalActiveSteps from '../../component/VerticalActiveSteps';
-import { askSteps, answerSteps, supportText } from './workspaceText.constant';
+import {
+    askSteps,
+    answerSteps /* supportText */
+} from './workspaceText.constant';
 import AskButton from '../../component/AskButton';
 import { DefaultWrapper } from '../../component/Wrappers';
 import { makeStyles } from '@material-ui/core';
@@ -28,12 +31,12 @@ const Title = styled.div`
     font-weight: 600;
 `;
 
-const SmallTitle = styled.div`
-    text-align: center;
-    font-size: 1.1rem;
-    font-weight: bold;
-    padding: 15px 0;
-`;
+// const SmallTitle = styled.div`
+//     text-align: center;
+//     font-size: 1.1rem;
+//     font-weight: bold;
+//     padding: 15px 0;
+// `;
 
 const StepsWrapper = styled.div`
     margin: 0 -10px;
@@ -55,33 +58,33 @@ const StepWrapper = styled.div`
     `}
 `;
 
-const SupportWrapper = styled.div`
-    border-radius: 6px;
-    margin-top: 20px;
-    padding: 10px;
-    background-color: white;
-`;
+// const SupportWrapper = styled.div`
+//     border-radius: 6px;
+//     margin-top: 20px;
+//     padding: 10px;
+//     background-color: white;
+// `;
 
-const SupportOl = styled.ul`
-    list-style: initial;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    color: black;
-    font-weight: 400;
-    padding: 0;
-    margin: 0;
+// const SupportOl = styled.ul`
+//     list-style: initial;
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     color: black;
+//     font-weight: 400;
+//     padding: 0;
+//     margin: 0;
 
-    & li {
-        cursor: pointer;
-        margin-left: 20px;
-        width: calc(33.33% - 20px);
-        line-height: 30px;
-        ${media.mobileLandscape`
-            width: calc(100% - 20px);
-        `}
-    }
-`;
+//     & li {
+//         cursor: pointer;
+//         margin-left: 20px;
+//         width: calc(33.33% - 20px);
+//         line-height: 30px;
+//         ${media.mobileLandscape`
+//             width: calc(100% - 20px);
+//         `}
+//     }
+// `;
 
 const AskWrapper = styled.div`
     display: flex;
@@ -96,16 +99,16 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-const WorkSpace = ({ history, toggleContactUs }) => {
+const WorkSpace = ({ history /**toggleContactUs**/ }) => {
     const { t } = useTranslation();
     const classes = useStyles();
 
-    const askStepsTranslate = askSteps.map(val => ({
+    const askStepsTranslate = askSteps.map((val) => ({
         ...val,
         title: t(val.title)
     }));
 
-    const answerStepsTranslate = answerSteps.map(val => ({
+    const answerStepsTranslate = answerSteps.map((val) => ({
         ...val,
         title: t(val.title)
     }));
@@ -115,25 +118,25 @@ const WorkSpace = ({ history, toggleContactUs }) => {
         history.push('/information');
     };
 
-    const supportRender = supportText.map(
-        ({ title, link, isContactUs }, key) => (
-            <li
-                key={key}
-                onClick={() => {
-                    if (isContactUs) {
-                        toggleContactUs(true);
-                    } else if (link) {
-                        window.scrollTo(0, 0);
-                        history.push(link);
-                    }
-                }}
-            >
-                {`${t(title)} ${
-                    !isContactUs && !link ? `(${t('common_coming_soon')})` : ''
-                }`}
-            </li>
-        )
-    );
+    // const supportRender = supportText.map(
+    //     ({ title, link, isContactUs }, key) => (
+    //         <li
+    //             key={key}
+    //             onClick={() => {
+    //                 if (isContactUs) {
+    //                     toggleContactUs(true);
+    //                 } else if (link) {
+    //                     window.scrollTo(0, 0);
+    //                     history.push(link);
+    //                 }
+    //             }}
+    //         >
+    //             {`${t(title)} ${
+    //                 !isContactUs && !link ? `(${t('common_coming_soon')})` : ''
+    //             }`}
+    //         </li>
+    //     )
+    // );
 
     return (
         <FullWidth>
@@ -162,10 +165,10 @@ const WorkSpace = ({ history, toggleContactUs }) => {
                         />
                     </StepWrapper>
                 </StepsWrapper>
-                <SupportWrapper>
+                {/* <SupportWrapper>
                     <SmallTitle>{t('workspace_our_support')}</SmallTitle>
                     <SupportOl>{supportRender}</SupportOl>
-                </SupportWrapper>
+                </SupportWrapper> */}
                 <AskWrapper>
                     <AskButton label={t('common_ask_a_question')} />
                 </AskWrapper>

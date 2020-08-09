@@ -60,6 +60,7 @@ const AddNews = ({ errorAlert, successAlert }) => {
                 });
             })
             .catch((err) => errorAlert(err.response.data.error.message));
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const { title, description, expireOn, userId } = news;

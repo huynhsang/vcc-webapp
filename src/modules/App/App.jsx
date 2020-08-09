@@ -17,7 +17,7 @@ import { history } from '../../configureStore';
 
 import { fetchUserFromCookieFn } from '../../actions/app';
 import { withTranslation } from 'react-i18next';
-import { runCrisp, setCrispUserInfos } from '../../utils/run-crisp';
+// import { runCrisp, setCrispUserInfos } from '../../utils/run-crisp';
 
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
@@ -44,17 +44,19 @@ let muiTheme = createMuiTheme({
 const App = ({ App, fetchUserFromCookie }) => {
     React.useEffect(() => {
         deleteCookie(USER_ROLE_KEY);
-        runCrisp();
         fetchUserFromCookie();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const { isVerifiedUser, currentUser } = App;
+    const { isVerifiedUser } = App;
 
-    React.useEffect(() => {
-        setCrispUserInfos(currentUser);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [currentUser]);
+    // React.useEffect(() => {
+    //     if (currentUser) {
+    //         runCrisp();
+    //         setCrispUserInfos(currentUser);
+    //     }
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [currentUser]);
 
     if (!isVerifiedUser) {
         return <div />;

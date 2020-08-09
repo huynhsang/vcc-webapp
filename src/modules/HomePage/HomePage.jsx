@@ -156,6 +156,16 @@ const BreakingNewsWrapper = styled.div`
     overflow-x: hidden;
     padding: 5px 10px 0 15px;
 
+    scrollbar-width: thin;
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+        border-radius: 15px;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
+
     ${media.mobileLandscape`
         overflow-y: unset;
     `}

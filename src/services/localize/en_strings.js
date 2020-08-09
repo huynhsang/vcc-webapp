@@ -74,7 +74,7 @@ export default {
     common_come_back: 'Come back',
     common_userName: 'User name',
     common_invalid_username: 'Invalid user name!',
-    common_popular_question: 'Popular question',
+    common_popular_question: 'Hot topic',
     common_see_all: 'See all',
     common_ask_now: 'Ask a question now?',
     common_ask: 'Ask',

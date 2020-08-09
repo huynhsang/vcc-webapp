@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { PageCover } from '../Header';
 
-import UserInfoList from './UserInfoList';
+// import UserInfoList from './UserInfoList';
 import { DefaultWrapper } from '../../component/Wrappers';
 import backg from './back.svg';
 

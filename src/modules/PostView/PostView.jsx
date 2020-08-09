@@ -133,6 +133,7 @@ const PostView = ({ history, match }) => {
                 })
                 .catch((err) => console.log(err));
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [post && post.tagList]);
 
     const characterNames = React.useMemo(() => {

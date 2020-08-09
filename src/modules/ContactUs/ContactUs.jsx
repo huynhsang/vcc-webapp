@@ -7,7 +7,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { toggleContactUsFn } from '../../actions/app';
 
 import VCNCLogo from '../../images/VCNC-logo.png';
-import crispIcon from '../../images/crispIcon.png';
+// import crispIcon from '../../images/crispIcon.png';
 
 import Dialog from '@material-ui/core/Dialog';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,7 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 
-import { openCrisp } from '../../utils/run-crisp';
+// import { openCrisp } from '../../utils/run-crisp';
 
 export const REGISTRE_MENTOR_FORM_LINK =
     'https://docs.google.com/forms/d/e/1FAIpQLSd8OGWo4yevWotalne-vQjCgWmXiogr374rR8QuCRHbK0rEAw/viewform?usp=pp_url';
@@ -61,28 +61,28 @@ const InfoWrapper = styled.div`
     margin-top: 10px;
 `;
 
-const FlexWrapper = styled.div`
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-`;
+// const FlexWrapper = styled.div`
+//     margin-top: 10px;
+//     display: flex;
+//     align-items: center;
+// `;
 
-const CrispImg = styled.img`
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin: -3px 0 0 5px;
-    cursor: pointer;
-`;
+// const CrispImg = styled.img`
+//     width: 20px;
+//     height: 20px;
+//     border-radius: 50%;
+//     margin: -3px 0 0 5px;
+//     cursor: pointer;
+// `;
 
 const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
     const { t } = useTranslation();
     const classes = useStyle();
 
-    const toggleCrisp = () => {
-        toggleContactUs(false);
-        openCrisp();
-    };
+    // const toggleCrisp = () => {
+    //     toggleContactUs(false);
+    //     openCrisp();
+    // };
 
     return (
         <Dialog
@@ -104,14 +104,14 @@ const ContactUs = ({ isOpenContactUs, toggleContactUs }) => {
                     <a href={`mailto:${VCNC_BLOG_EMAIL}`}>{VCNC_APP_EMAIL}</a>.
                     {t('contact_us_reply_soon')}
                 </InfoWrapper>
-                <FlexWrapper>
+                {/* <FlexWrapper>
                     {t('contact_us_get_live_support')}:
                     <CrispImg
                         onClick={toggleCrisp}
                         src={crispIcon}
                         alt="crisp"
                     />
-                </FlexWrapper>
+                </FlexWrapper> */}
                 <InfoWrapper>{t('contact_us_sincerely')}</InfoWrapper>
                 <div>VCNC team.</div>
             </DialogContent>

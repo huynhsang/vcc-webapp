@@ -101,7 +101,7 @@ const Answer = ({
         body,
         created
     } = answer;
-    const { id: userAnwserId, points } = answerBy;
+    const { id: userAnwserId } = answerBy;
 
     const handleVoteAnswer = (isPositiveVote) => {
         if (!isAuthenticated) {
