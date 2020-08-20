@@ -31,6 +31,8 @@ import FlareIcon from '@material-ui/icons/Flare';
 import LabelImportantIcon from '@material-ui/icons/LabelImportant';
 import { zoomInOut } from '../../utils/animation-keyframes';
 
+import TrendingTags from './TrendingTags';
+
 import { createMediaTemplate } from '../../utils/css-tools';
 const media = createMediaTemplate();
 
@@ -270,6 +272,7 @@ const Home = ({ toggleContactUs, history }) => {
                         </TopUsersWrapper>
                     </LeftWrapper>
                     <RightWrapper>
+                        <TrendingTags history={history}/>
                         <TopWrapper>
                             <Title>{t('common_popular_question')}</Title>
                             <Button
