@@ -58,18 +58,18 @@ export const borderTop = keyframes`
     width: 0;
   }
   38% {
-    width: calc(100% + 3px);
+    width: calc(100% + 2px);
   }
   50% {
   }
   62% {
   }
   75% {
-    width: calc(100% + 3px);
+    width: calc(100% + 2px);
   }
   88% {
     left: auto;
-    right: -3px;
+    right: -2px;
     width: 0;
   }
 `;
@@ -79,18 +79,18 @@ export const borderRight = keyframes`
     height: 0;
   }
   50% {
-    height: calc(103%);
+    height: calc(100% + 2px );
   }
   62% {
   }
   75% {
   }
   88% {
-    height: calc(103%);
+    height: calc(100% + 2px);
   }
   100% {
     top: auto;
-    bottom: -3px;
+    bottom: -2px;
     height: 0;
   }
 `;
@@ -100,17 +100,17 @@ export const borderBottom = keyframes`
     width: 0;
   }
   12% {
-    width: calc(100% + 3px);
+    width: calc(100% + 2px);
   }
   25% {
   }
   38% {
   }
   50% {
-    width: calc(100% + 3px);
+    width: calc(100% + 2px);
   }
   62% {
-    left: -3px;
+    left: -2px;
     width: 0;
   }
   75% {
@@ -121,17 +121,17 @@ export const borderLeft = keyframes`
     height: 0;
   }
   25% {
-    height: calc(100% + 3px);
+    height: calc(100% + 2px);
   }
   38% {
   }
   50% {
   }
   62% {
-    height: calc(100% + 3px);
+    height: calc(100% + 2px);
   }
   75% {
-    top: -3px;
+    top: -2px;
     height: 0;
   }
   88% {

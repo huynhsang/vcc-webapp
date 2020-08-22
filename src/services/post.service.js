@@ -26,7 +26,14 @@ export async function createPost(data) {
     return response.data;
 }
 
-export async function editPost(data) {
-    const response = await http.put(POST_URL, data);
+export async function editPost(postId, data) {
+    const url = setUrlWithToken(`${POST_URL}/${postId}`);
+    const response = await http.patch(url, data);
+    return response.data;
+}
+
+export async function deletePost(id) {
+    const url = setUrlWithToken(`${POST_URL}/${id}`);
+    const response = await http.delete(url);
     return response.data;
 }

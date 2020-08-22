@@ -57,7 +57,7 @@ const PostsPage = ({ history, location }) => {
             where: {},
             skip: (pageNumber - 1) * DEFAULT_LIMIT,
             limit: DEFAULT_LIMIT,
-            order: ['modified DESC', 'created DESC'],
+            order: ['modified DESC', 'created DESC']
         };
 
         if (title) {
@@ -92,16 +92,22 @@ const PostsPage = ({ history, location }) => {
         history.push(`/posts/${postId}`);
     };
 
+    const { role: userRole } = getIdAndToken();
+    const isAdmin = ROLES.ADMIN === userRole;
+
     const postsRender = posts.map((val) => (
-        <Post key={val.id} post={val} viewPost={viewPost(val.id)} />
+        <Post
+            key={val.id}
+            post={val}
+            viewPost={viewPost(val.id)}
+            isAdmin={isAdmin}
+            history={history}
+        />
     ));
 
     const goToAdd = () => {
         history.push('/posts/add');
     };
-
-    const { role: userRole } = getIdAndToken();
-    const isAdmin = ROLES.ADMIN === userRole;
 
     const nbPages = Math.ceil(postNumber / DEFAULT_LIMIT);
 

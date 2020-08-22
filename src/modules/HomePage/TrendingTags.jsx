@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { getTags } from '../../services/tags.service';
 import { getNameByLanguage } from '../../utils/multiple-language';
@@ -67,36 +67,36 @@ const BorderWrapper = styled.div`
 
 const BorderTop = styled.div`
     position: absolute;
-    top: -3px;
-    left: -3px;
-    height: 3px;
+    top: -2px;
+    left: -2px;
+    height: 2px;
     animation: ${borderTop} 8s linear infinite;
     background: #6d6743;
 `;
 
 const BorderRight = styled.div`
     position: absolute;
-    top: -3px;
-    right: -3px;
-    width: 3px;
+    top: -2px;
+    right: -2px;
+    width: 2px;
     animation: ${borderRight} 8s linear infinite;
     background: #6d6743;
 `;
 
 const BorderBottom = styled.div`
     position: absolute;
-    bottom: -3px;
-    right: -3px;
-    height: 3px;
+    bottom: -2px;
+    right: -2px;
+    height: 2px;
     animation: ${borderBottom} 8s linear infinite;
     background: #6d6743;
 `;
 
 const BorderLeft = styled.div`
     position: absolute;
-    bottom: -3px;
-    left: -3px;
-    width: 3px;
+    bottom: -2px;
+    left: -2px;
+    width: 2px;
     animation: ${borderLeft} 8s linear infinite;
     background: #6d6743;
 `;

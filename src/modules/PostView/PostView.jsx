@@ -21,6 +21,14 @@ import {
 
 import { getPost, getPosts } from '../../services/post.service';
 import { getUserName } from '../../utils/get-user-name';
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { getIdAndToken } from '../../utils/cookie-tools';
+import { ROLES } from '../../constants/constants';
+import { deletePost } from '../../services/post.service';
+import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles(() => ({
     linkButton: {
@@ -98,9 +106,19 @@ const FlexEnd = styled(FlexWrapper)`
 
 const CharacterInfos = styled.div``;
 
-const PostView = ({ history, match }) => {
+const ButtonsWrapper = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: 10px;
+`;
+
+const PostView = ({ history, match, errorAlert, successAlert }) => {
     const { t } = useTranslation();
     const classes = useStyles();
+
+    const { role: userRole } = getIdAndToken();
+    const isAdmin = ROLES.ADMIN === userRole;
 
     const [post, setPost] = React.useState(null);
     const [relatedPosts, setRelatedPosts] = React.useState([]);
@@ -126,9 +144,9 @@ const PostView = ({ history, match }) => {
                     limit: 4
                 }
             })
-                .then((data) => {
+                .then((response) => {
                     setRelatedPosts(
-                        data.filter((val) => val.id !== match.params.postId)
+                        response.data.filter((val) => val.id !== match.params.postId)
                     );
                 })
                 .catch((err) => console.log(err));
@@ -182,10 +200,33 @@ const PostView = ({ history, match }) => {
     const coverImage = (imageList || [])[0];
     const imageUrl = coverImage ? coverImage.lrg : '';
 
+    const gotoEditPost = () => {
+        history.push(`/posts/${post.id}/edit`);
+    };
+
+    const deletePostClick = () => {
+        deletePost(post)
+            .then(() => {
+                successAlert(t('posts_delete_success'));
+                history.push('/posts');
+            })
+            .catch((err) => errorAlert(err.response.data.error.message));
+    };
+
     return (
         <>
             <PageCover />
             <Wrapper>
+                {isAdmin && (
+                    <ButtonsWrapper>
+                        <IconButton onClick={gotoEditPost}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton color="secondary" onClick={deletePostClick}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </ButtonsWrapper>
+                )}
                 <Title>{title}</Title>
                 <Resume>{resume}</Resume>
                 <InfosWrapper>
@@ -235,4 +276,9 @@ const PostView = ({ history, match }) => {
     );
 };
 
-export default PostView;
+const mapDispatchToProps = (dispatch) => ({
+    errorAlert: (text) => dispatch(errorAlertFn(text)),
+    successAlert: (text) => dispatch(successAlertFn(text))
+});
+
+export default connect(null, mapDispatchToProps)(PostView);

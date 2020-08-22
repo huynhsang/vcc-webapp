@@ -15,6 +15,7 @@ import { PostsPage } from '../PostsPage';
 import { AddPost } from '../AddPost';
 import { AddNews } from '../AddNews';
 import { PostView } from '../PostView';
+import { EditPost } from '../EditPost';
 
 import {
     EmailVerification,
@@ -56,6 +57,11 @@ const AppRouter = () => {
                 path="/posts/:postId"
                 exact
                 render={(props) => <PostView {...props} />}
+            />
+            <Route
+                path="/posts/:postId/edit"
+                exact
+                render={(props) => <EditPost {...props} />}
             />
             <Route
                 path="/news/add"

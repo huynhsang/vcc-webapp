@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import LabelIcon from '@material-ui/icons/Label';
 import i18n from 'i18next';
 import { getUserName } from '../../utils/get-user-name';
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+import { errorAlertFn, successAlertFn } from '../../actions/alertConfirm';
+import { deletePost } from '../../services/post.service';
+import { useTranslation } from 'react-i18next';
 
 const Wrapper = styled.div`
     display: flex;
@@ -58,7 +65,23 @@ const TagsWrapper = styled.div`
     }
 `;
 
-const Post = ({ post, viewPost }) => {
+const ButtonsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 10px;
+`;
+
+const Post = ({
+    errorAlert,
+    successAlert,
+    post,
+    viewPost,
+    isAdmin,
+    history
+}) => {
+    const {t} = useTranslation();
     const {
         title,
         resume,
@@ -103,6 +126,19 @@ const Post = ({ post, viewPost }) => {
         )
         .join(', ');
 
+    const gotoEditPost = () => {
+        history.push(`/posts/${post.id}/edit`);
+    };
+
+    const deletePostClick = () => {
+        deletePost(post)
+            .then(() => {
+                successAlert(t('posts_delete_success'));
+                history.push('/posts');
+            })
+            .catch((err) => errorAlert(err.response.data.error.message));
+    };
+
     return (
         <Wrapper>
             <ContentWrapper>
@@ -122,8 +158,23 @@ const Post = ({ post, viewPost }) => {
                 </CharacterInfos>
             </ContentWrapper>
             {imageUrl && <ImgCover onClick={viewPost} img={imageUrl} alt="" />}
+            {isAdmin && (
+                <ButtonsWrapper>
+                    <IconButton onClick={gotoEditPost}>
+                        <EditIcon />
+                    </IconButton>
+                    <IconButton color="secondary" onClick={deletePostClick}>
+                        <DeleteIcon />
+                    </IconButton>
+                </ButtonsWrapper>
+            )}
         </Wrapper>
     );
 };
 
-export default Post;
+const mapDispatchToProps = (dispatch) => ({
+    errorAlert: (text) => dispatch(errorAlertFn(text)),
+    successAlert: (text) => dispatch(successAlertFn(text))
+});
+
+export default connect(null, mapDispatchToProps)(Post);
