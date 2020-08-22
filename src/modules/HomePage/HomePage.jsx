@@ -218,7 +218,7 @@ const Home = ({ toggleContactUs, history }) => {
 
         getNews()
             .then((data) => setNewses(data))
-            .catch((err) => console.log(err.response.data.error.message));
+            .catch((err) => console.log(err));
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -272,7 +272,7 @@ const Home = ({ toggleContactUs, history }) => {
                         </TopUsersWrapper>
                     </LeftWrapper>
                     <RightWrapper>
-                        <TrendingTags history={history}/>
+                        <TrendingTags history={history} />
                         <TopWrapper>
                             <Title>{t('common_popular_question')}</Title>
                             <Button
