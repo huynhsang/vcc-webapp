@@ -49,9 +49,11 @@ const PostsPage = ({ history, location }) => {
     const [postNumber, setPostNumber] = React.useState(0);
 
     const filterParse = qs.parse(location.search.substr(1));
-    const { tags, title, page } = filterParse;
+    const tags = filterParse.tags || '';
+    const title = filterParse.title || '';
+    const page = filterParse.page || 1;
 
-    React.useEffect(() => {
+    const getPostsFromApi = () => {
         const pageNumber = page * 1 || 1;
         const filter = {
             where: {},
@@ -77,6 +79,10 @@ const PostsPage = ({ history, location }) => {
                 setPostNumber(count);
             })
             .catch((err) => console.log(err));
+    };
+
+    React.useEffect(() => {
+        getPostsFromApi();
     }, [tags, title, page]);
 
     const onChangeFilter = (obj) => {
@@ -102,6 +108,7 @@ const PostsPage = ({ history, location }) => {
             viewPost={viewPost(val.id)}
             isAdmin={isAdmin}
             history={history}
+            reload={getPostsFromApi}
         />
     ));
 

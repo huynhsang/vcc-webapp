@@ -51,8 +51,7 @@ const EditPost = ({ errorAlert, successAlert, history, match }) => {
     }
 
     const submitPost = (post) => {
-        const { id, ...data } = post;
-        editPost(id, data)
+        editPost(post)
             .then(() => {
                 successAlert(t('posts_create_success'));
                 history.push('/posts');

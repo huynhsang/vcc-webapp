@@ -26,9 +26,9 @@ export async function createPost(data) {
     return response.data;
 }
 
-export async function editPost(postId, data) {
-    const url = setUrlWithToken(`${POST_URL}/${postId}`);
-    const response = await http.patch(url, data);
+export async function editPost(data) {
+    const url = setUrlWithToken(`Posts`);
+    const response = await http.put(url, data);
     return response.data;
 }
 

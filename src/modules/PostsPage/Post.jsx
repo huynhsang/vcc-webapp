@@ -79,7 +79,8 @@ const Post = ({
     post,
     viewPost,
     isAdmin,
-    history
+    history,
+    reload
 }) => {
     const {t} = useTranslation();
     const {
@@ -131,10 +132,10 @@ const Post = ({
     };
 
     const deletePostClick = () => {
-        deletePost(post)
+        deletePost(post.id)
             .then(() => {
                 successAlert(t('posts_delete_success'));
-                history.push('/posts');
+                reload();
             })
             .catch((err) => errorAlert(err.response.data.error.message));
     };
